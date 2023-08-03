@@ -21,7 +21,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
@@ -33,18 +33,29 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
   },
   "include": [
     ".projenrc.js",
     "pages/**/*.ts",
     "test/**/*.ts",
+    "process.d.ts",
+    "next-env.d.ts",
+    "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],
   "exclude": [
+    "node_modules",
     "node_modules"
   ]
 }

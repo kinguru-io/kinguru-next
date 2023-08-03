@@ -30,11 +30,18 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+.env
+prisma/sqlite
 !/.projenrc.js
 !/.github/workflows/build.yml
+/dist/changelog.md
+/dist/version.txt
+!/.github/workflows/release.yml
 !/.mergify.yml
-!/.github/workflows/upgrade.yml
+!/.github/workflows/upgrade-main.yml
 !/.github/pull_request_template.md
+!/.prettierignore
+!/.prettierrc.json
 !/.npmrc
 !/test/
 !/tsconfig.json
@@ -42,6 +49,7 @@ jspm_packages/
 !/pages/
 /lib
 /dist/
+!/.eslintrc.json
 !/tailwind.config.json
 !/postcss.config.json
 /.next/

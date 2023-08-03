@@ -1,8 +1,20 @@
 {
   "dependencies": [
     {
+      "name": "@faker-js/faker",
+      "type": "build"
+    },
+    {
+      "name": "@next/eslint-plugin-next",
+      "type": "build"
+    },
+    {
+      "name": "@types/cookie",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
-      "version": "^12",
+      "version": "20",
       "type": "build"
     },
     {
@@ -14,12 +26,64 @@
       "type": "build"
     },
     {
+      "name": "@typescript-eslint/eslint-plugin",
+      "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "eslint-config-prettier",
+      "type": "build"
+    },
+    {
+      "name": "eslint-import-resolver-node",
+      "type": "build"
+    },
+    {
+      "name": "eslint-import-resolver-typescript",
+      "type": "build"
+    },
+    {
+      "name": "eslint-plugin-import",
+      "type": "build"
+    },
+    {
+      "name": "eslint-plugin-prettier",
+      "type": "build"
+    },
+    {
+      "name": "eslint",
+      "version": "^8",
+      "type": "build"
+    },
+    {
       "name": "npm-check-updates",
       "version": "^16",
       "type": "build"
     },
     {
+      "name": "prettier",
+      "type": "build"
+    },
+    {
+      "name": "prisma",
+      "type": "build"
+    },
+    {
+      "name": "prisma-trpc-generator",
+      "type": "build"
+    },
+    {
       "name": "projen",
+      "type": "build"
+    },
+    {
+      "name": "standard-version",
+      "version": "^9",
       "type": "build"
     },
     {
@@ -31,11 +95,47 @@
       "type": "build"
     },
     {
+      "name": "@auth/prisma-adapter",
+      "type": "runtime"
+    },
+    {
+      "name": "@prisma/client",
+      "type": "runtime"
+    },
+    {
+      "name": "@tanstack/react-query",
+      "type": "runtime"
+    },
+    {
+      "name": "@tanstack/react-query-devtools",
+      "type": "runtime"
+    },
+    {
+      "name": "@trpc/client",
+      "type": "runtime"
+    },
+    {
+      "name": "@trpc/next",
+      "type": "runtime"
+    },
+    {
+      "name": "@trpc/react-query",
+      "type": "runtime"
+    },
+    {
+      "name": "@trpc/server",
+      "type": "runtime"
+    },
+    {
       "name": "autoprefixer",
       "type": "runtime"
     },
     {
       "name": "next",
+      "type": "runtime"
+    },
+    {
+      "name": "next-auth",
       "type": "runtime"
     },
     {
@@ -51,7 +151,15 @@
       "type": "runtime"
     },
     {
+      "name": "superjson",
+      "type": "runtime"
+    },
+    {
       "name": "tailwindcss",
+      "type": "runtime"
+    },
+    {
+      "name": "zod",
       "type": "runtime"
     }
   ],

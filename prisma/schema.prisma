@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator trpc {
+  provider       = "prisma-trpc-generator"
+  withZod        = true
+  withMiddleware = true
+  withShield     = true
+  contextPath    = "../server/context"
+  output         = "../server/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  email         String?        @unique
+  emailVerified DateTime?
+  image         String?
+  confirmed     Boolean        @default(false)
+  firstname     String?
+  lastname      String?
+  phoneNumber   String?
+  description   String?
+  gender        UserGender?    @default(notSpecified)
+  birthdate     DateTime?      @db.Date
+  country       String?
+  city          String?
+  position      String?
+  company       String?
+  interests     String[]
+  vk            String?
+  facebook      String?
+  instagram     String?
+  linkedin      String?
+  website       String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  events        Event[]
+  participant   UsersOnEvent[]
+  places        Place[]
+  speaker       Speaker?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+enum UserGender {
+  male
+  female
+  notSpecified
+}
+
+model Account {
+  id                String  @id @unique @default(cuid())
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            Int
+  type              String
+  provider          String  @unique
+  providerAccountId String  @unique
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int
+  sessionToken String   @unique
+  expires      DateTime
+}
+
+model VerificationRequest {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Speaker {
+  id          Int               @id @default(autoincrement())
+  user        User              @relation(fields: [userId], references: [id])
+  userId      Int               @unique
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  participant SpeakersOnEvent[]
+}
+
+model Event {
+  id              Int               @id @default(autoincrement())
+  topic           String
+  description     String
+  status          EventStatus       @default(unmoderated)
+  initiator       User              @relation(fields: [initiatorId], references: [id])
+  initiatorId     Int
+  place           Place             @relation(fields: [placeId], references: [id])
+  placeId         Int
+  starts          DateTime          @db.Date
+  duration        DateTime?         @db.Time
+  price           Float?            @default(0.00)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  eventResources  EventResource[]
+  usersOnEvent    UsersOnEvent[]
+  speakersOnEvent SpeakersOnEvent[]
+}
+
+enum EventStatus {
+  unmoderated
+  active
+  private
+}
+
+model EventResource {
+  id        Int      @id @default(autoincrement())
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int
+  link      String
+  isPoster  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UsersOnEvent {
+  event    Event    @relation(fields: [eventId], references: [id])
+  eventId  Int
+  user     User     @relation(fields: [userId], references: [id])
+  userId   Int
+  joinedAt DateTime @default(now())
+
+  @@id([userId, eventId])
+}
+
+model SpeakersOnEvent {
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int
+  speaker   Speaker  @relation(fields: [speakerId], references: [id])
+  speakerId Int
+  joinedAt  DateTime @default(now())
+
+  @@id([speakerId, eventId])
+}
+
+model Place {
+  id             Int           @id @default(autoincrement())
+  owner          User          @relation(fields: [ownerId], references: [id])
+  ownerId        Int
+  private        Boolean?      @default(true)
+  tel            String?       @db.VarChar(255)
+  location       String        @db.VarChar(255)
+  locationLat    Float         @db.Real
+  locationLng    Float         @db.Real
+  Event          Event[]
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId Int?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Organization {
+  id     Int     @id @default(autoincrement())
+  name   String
+  places Place[]
+}
