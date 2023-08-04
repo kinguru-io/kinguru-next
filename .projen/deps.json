@@ -9,10 +9,6 @@
       "type": "build"
     },
     {
-      "name": "@types/cookie",
-      "type": "build"
-    },
-    {
       "name": "@types/node",
       "version": "20",
       "type": "build"
@@ -33,6 +29,10 @@
     {
       "name": "@typescript-eslint/parser",
       "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "autoprefixer",
       "type": "build"
     },
     {
@@ -66,7 +66,19 @@
       "type": "build"
     },
     {
+      "name": "postcss",
+      "type": "build"
+    },
+    {
+      "name": "postcss-import",
+      "type": "build"
+    },
+    {
       "name": "prettier",
+      "type": "build"
+    },
+    {
+      "name": "prettier-plugin-tailwindcss",
       "type": "build"
     },
     {
@@ -74,7 +86,7 @@
       "type": "build"
     },
     {
-      "name": "prisma-trpc-generator",
+      "name": "prisma-zod-generator",
       "type": "build"
     },
     {
@@ -99,7 +111,19 @@
       "type": "runtime"
     },
     {
+      "name": "@headlessui/react",
+      "type": "runtime"
+    },
+    {
+      "name": "@heroicons/react",
+      "type": "runtime"
+    },
+    {
       "name": "@prisma/client",
+      "type": "runtime"
+    },
+    {
+      "name": "@tailwindcss/aspect-ratio",
       "type": "runtime"
     },
     {
@@ -127,7 +151,7 @@
       "type": "runtime"
     },
     {
-      "name": "autoprefixer",
+      "name": "i18next",
       "type": "runtime"
     },
     {
@@ -139,7 +163,7 @@
       "type": "runtime"
     },
     {
-      "name": "postcss",
+      "name": "next-i18next",
       "type": "runtime"
     },
     {
@@ -151,11 +175,23 @@
       "type": "runtime"
     },
     {
+      "name": "react-i18next",
+      "type": "runtime"
+    },
+    {
       "name": "superjson",
       "type": "runtime"
     },
     {
+      "name": "tailwind-fontawesome",
+      "type": "runtime"
+    },
+    {
       "name": "tailwindcss",
+      "type": "runtime"
+    },
+    {
+      "name": "trpc-shield",
       "type": "runtime"
     },
     {

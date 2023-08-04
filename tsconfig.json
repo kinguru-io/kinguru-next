@@ -52,6 +52,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "server/generated"
   ]
 }

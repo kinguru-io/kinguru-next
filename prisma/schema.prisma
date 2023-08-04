@@ -3,12 +3,10 @@ generator client {
 }
 
 generator trpc {
-  provider       = "prisma-trpc-generator"
-  withZod        = true
-  withMiddleware = true
-  withShield     = true
-  contextPath    = "../server/context"
-  output         = "../server/generated"
+  provider          = "prisma-zod-generator"
+  isGenerateSelect  = true
+  isGenerateInclude = true
+  output            = "../server/generated"
 }
 
 datasource db {
@@ -17,9 +15,9 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  name          String         @unique
-  email         String?        @unique
+  id            String         @id @default(cuid())
+  name          String?        @unique
+  email         String         @unique
   emailVerified DateTime?
   image         String?
   confirmed     Boolean        @default(false)
@@ -56,27 +54,33 @@ enum UserGender {
 }
 
 model Account {
-  id                String  @id @unique @default(cuid())
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            Int
-  type              String
-  provider          String  @unique
-  providerAccountId String  @unique
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  id                String       @id @unique @default(cuid())
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  type              ProviderType
+  provider          String
+  providerAccountId String
+  refresh_token     String?      @db.Text
+  access_token      String?      @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?      @db.Text
   session_state     String?
 
   @@unique([provider, providerAccountId])
 }
 
+enum ProviderType {
+  oauth
+  email
+  credentials
+}
+
 model Session {
   id           String   @id @default(cuid())
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       Int
+  userId       String
   sessionToken String   @unique
   expires      DateTime
 }
@@ -90,28 +94,30 @@ model VerificationRequest {
 }
 
 model Speaker {
-  id          Int               @id @default(autoincrement())
+  id          String            @id @default(cuid())
   user        User              @relation(fields: [userId], references: [id])
-  userId      Int               @unique
+  userId      String            @unique
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   participant SpeakersOnEvent[]
 }
 
 model Event {
-  id              Int               @id @default(autoincrement())
+  id              String            @id @default(cuid())
   topic           String
   description     String
   status          EventStatus       @default(unmoderated)
   initiator       User              @relation(fields: [initiatorId], references: [id])
-  initiatorId     Int
+  initiatorId     String
   place           Place             @relation(fields: [placeId], references: [id])
-  placeId         Int
+  placeId         String
   starts          DateTime          @db.Date
   duration        DateTime?         @db.Time
+  poster          String?
   price           Float?            @default(0.00)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
+  tags            String[]
   eventResources  EventResource[]
   usersOnEvent    UsersOnEvent[]
   speakersOnEvent SpeakersOnEvent[]
@@ -124,9 +130,9 @@ enum EventStatus {
 }
 
 model EventResource {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   event     Event    @relation(fields: [eventId], references: [id])
-  eventId   Int
+  eventId   String
   link      String
   isPoster  Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -135,9 +141,9 @@ model EventResource {
 
 model UsersOnEvent {
   event    Event    @relation(fields: [eventId], references: [id])
-  eventId  Int
+  eventId  String
   user     User     @relation(fields: [userId], references: [id])
-  userId   Int
+  userId   String
   joinedAt DateTime @default(now())
 
   @@id([userId, eventId])
@@ -145,18 +151,18 @@ model UsersOnEvent {
 
 model SpeakersOnEvent {
   event     Event    @relation(fields: [eventId], references: [id])
-  eventId   Int
+  eventId   String
   speaker   Speaker  @relation(fields: [speakerId], references: [id])
-  speakerId Int
+  speakerId String
   joinedAt  DateTime @default(now())
 
   @@id([speakerId, eventId])
 }
 
 model Place {
-  id             Int           @id @default(autoincrement())
+  id             String        @id @default(cuid())
   owner          User          @relation(fields: [ownerId], references: [id])
-  ownerId        Int
+  ownerId        String
   private        Boolean?      @default(true)
   tel            String?       @db.VarChar(255)
   location       String        @db.VarChar(255)
@@ -164,13 +170,13 @@ model Place {
   locationLng    Float         @db.Real
   Event          Event[]
   organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId Int?
+  organizationId String?
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 }
 
 model Organization {
-  id     Int     @id @default(autoincrement())
+  id     String  @id @default(cuid())
   name   String
   places Place[]
 }

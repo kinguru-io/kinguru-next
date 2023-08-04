@@ -50,6 +50,4 @@ prisma/sqlite
 /lib
 /dist/
 !/.eslintrc.json
-!/tailwind.config.json
-!/postcss.config.json
 /.next/

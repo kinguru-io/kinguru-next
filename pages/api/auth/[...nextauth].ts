@@ -1,9 +1,6 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth from "next-auth";
-// eslint-disable-next-line no-duplicate-imports
-import type { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
-import { Adapter } from "next-auth/src/adapters";
+import { PrismaAdapter } from "@/server/adapters/auth-prisma";
 import prisma from "@/server/prisma";
 
 export const authOptions: NextAuthOptions = {
@@ -14,6 +11,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: PrismaAdapter(prisma),
 };
 export default NextAuth(authOptions);

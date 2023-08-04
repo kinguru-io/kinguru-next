@@ -11,7 +11,7 @@ const project = new web.NextJsTypeScriptProject({
   release: true,
 
   projenrcTs: true,
-  tailwind: true,
+  tailwind: false,
   eslint: true,
   prettier: true,
   tsconfig: {
@@ -39,11 +39,11 @@ const project = new web.NextJsTypeScriptProject({
       "**/*.ts",
       "**/*.tsx",
     ],
-    exclude: ["node_modules"],
+    exclude: ["server/generated"],
   },
   gitignore: [".env", "prisma/sqlite"],
 
-  minNodeVersion: "20.4.0",
+  minNodeVersion: "18.16.0",
   packageManager: NodePackageManager.NPM,
   deps: [
     "@auth/prisma-adapter",
@@ -57,17 +57,34 @@ const project = new web.NextJsTypeScriptProject({
     "@tanstack/react-query-devtools",
     "zod",
     "superjson",
+    "trpc-shield",
+    "@heroicons/react",
+    "@headlessui/react",
+    "next-i18next",
+    "react-i18next",
+    "i18next",
+    "@tailwindcss/aspect-ratio",
+    "tailwind-fontawesome",
+    "tailwindcss",
   ],
   devDeps: [
     "prisma",
-    "prisma-trpc-generator",
+    "prisma-zod-generator",
     "@faker-js/faker",
-    "@types/node@18",
-    "@types/cookie",
+    "@types/node@20",
     "@next/eslint-plugin-next",
+    "postcss",
+    "autoprefixer",
+    "prettier-plugin-tailwindcss",
+    "postcss-import",
   ],
 });
 
+if (!project.prettier?.settings.plugins) {
+  // @ts-ignore
+  project.prettier?.settings.plugins = [];
+}
+project.prettier?.settings.plugins.push("prettier-plugin-tailwindcss");
 project.package.addDevDeps("@types/node@20");
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();

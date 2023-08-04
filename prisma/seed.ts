@@ -5,7 +5,8 @@ const prisma = new PrismaClient();
 
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
-  name: faker.person.firstName(),
+  name: faker.person.fullName(),
+  image: faker.image.avatar(),
   confirmed: Math.random() > 0.5,
   firstname: faker.person.firstName(),
   lastname: faker.person.lastName(),
@@ -36,12 +37,14 @@ async function main() {
     .map(
       () =>
         ({
-          topic: faker.lorem.slug(),
+          topic: faker.commerce.productName(),
           description: faker.lorem.paragraph(),
           status: "active",
           starts: faker.date.future(),
           duration: faker.date.future(),
+          poster: faker.image.urlLoremFlickr(),
           price: parseFloat(faker.finance.amount(1, 20)),
+          tags: faker.lorem.words().split(" "),
           initiator: {
             create: userSchema(),
           },
