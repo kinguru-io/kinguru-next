@@ -167,6 +167,10 @@
       "type": "runtime"
     },
     {
+      "name": "nodemailer",
+      "type": "runtime"
+    },
+    {
       "name": "react",
       "type": "runtime"
     },

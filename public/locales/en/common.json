@@ -24,5 +24,9 @@
     "recent_events": "Recent events",
     "more_about": "More about",
     "not_found": "No events found"
+  },
+  "invite": {
+    "title": "Let me invite you to a suitable table",
+    "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in"
   }
 }

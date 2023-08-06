@@ -21,6 +21,9 @@ export const eventRouter = t.router({
         orderBy: {
           starts: "asc",
         },
+        include: {
+          place: true,
+        },
         take: input.limit,
       });
     }),
@@ -42,6 +45,9 @@ export const eventRouter = t.router({
         },
         orderBy: {
           starts: "desc",
+        },
+        include: {
+          place: true,
         },
         take: input.limit,
       });

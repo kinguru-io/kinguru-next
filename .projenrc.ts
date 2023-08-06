@@ -66,6 +66,7 @@ const project = new web.NextJsTypeScriptProject({
     "@tailwindcss/aspect-ratio",
     "tailwind-fontawesome",
     "tailwindcss",
+    "nodemailer",
   ],
   devDeps: [
     "prisma",
