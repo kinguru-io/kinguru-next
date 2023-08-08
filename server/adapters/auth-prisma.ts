@@ -70,7 +70,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     createVerificationToken: (data) => p.verificationRequest.create({ data }),
     async useVerificationToken(identifier_token) {
       try {
-        return await p.verificationRequest.delete({
+        return p.verificationRequest.delete({
           where: { identifier_token },
         });
       } catch (error) {

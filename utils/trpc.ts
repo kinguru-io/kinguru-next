@@ -21,7 +21,7 @@ function getBaseUrl() {
 }
 
 export const trpc = createTRPCNext<typeof appRouter>({
-  config(_) {
+  config({ ctx }) {
     return {
       transformer: SuperJSON,
       links: [
@@ -33,9 +33,12 @@ export const trpc = createTRPCNext<typeof appRouter>({
           url: `${getBaseUrl()}/api/trpc`,
 
           // You can pass any HTTP headers you wish here
-          async headers() {
+          headers() {
+            if (!ctx?.req?.headers) {
+              return {};
+            }
             return {
-              // authorization: getAuthCookie(),
+              cookie: ctx.req.headers.cookie,
             };
           },
         }),
@@ -45,5 +48,5 @@ export const trpc = createTRPCNext<typeof appRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    **/
-  ssr: false,
+  ssr: true,
 });

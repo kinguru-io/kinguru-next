@@ -1,5 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { faker } from "@faker-js/faker";
-import { PrismaClient, Prisma } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -32,7 +33,7 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
 };
 
 async function main() {
-  const events = new Array(25)
+  const events = new Array(1000)
     .fill({})
     .map(
       () =>

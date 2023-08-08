@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Stripes } from "@/components/common/stripes";
-import { useFetchCurrentUser } from "@/utils/use-fetch-current-user";
 import { useLocale } from "@/utils/use-locale";
 
 export const HeroContent = () => {
   const { t } = useLocale();
-  const { user, status } = useFetchCurrentUser();
+  const { status } = useSession();
   if (status === "loading") {
     return <>Loading...</>;
   }
@@ -33,7 +32,7 @@ export const HeroContent = () => {
               </p>
             </figcaption>
             <figcaption className="mt-20 flex">
-              {user ? (
+              {status === "authenticated" ? (
                 <Link
                   href="/events"
                   className="m-auto block rounded-full bg-primary px-12 py-4 text-xl font-semibold uppercase text-gray-700 shadow-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"

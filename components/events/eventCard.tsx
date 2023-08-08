@@ -57,7 +57,7 @@ export const EventCard = ({
             />
           </svg>
           <p className="text-gray-500">
-            <Link href={`/place/${event.place.id}`}>
+            <Link href={`/places/${event.place.id}`}>
               {event.place.location}
             </Link>
           </p>

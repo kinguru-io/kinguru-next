@@ -3,6 +3,7 @@ import { Events } from "@/components/events";
 import { HeroContent } from "@/components/hero";
 import { InviteSection } from "@/components/invite";
 import { Navbar } from "@/components/navbar";
+import { HowItWorks } from "@/components/works";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroContent />
       <Events />
       <InviteSection />
+      <HowItWorks />
     </>
   );
 }

@@ -20,7 +20,44 @@ export const InviteSection = () => {
             <Stripes />
             <p>{t("invite.description")}</p>
           </div>
-          <div className="group relative">{t("invite.title")}</div>
+          <div className="group relative">
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-100"
+              >
+                {t("invite.telephone")}
+              </label>
+              <div className="mt-2">
+                <input
+                  id="tel"
+                  name="tel"
+                  type="tel"
+                  autoComplete="tel"
+                  className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-100 placeholder:text-gray-100 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mt-3 sm:col-span-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-100"
+              >
+                {t("invite.email")}
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-100 placeholder:text-gray-100 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                />
+              </div>
+              <button className="m-auto mt-7 block rounded-full bg-primary px-12 py-4 text-xl font-semibold uppercase text-gray-700 shadow-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                {t("invite.subscribe")}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -67,6 +67,7 @@ const project = new web.NextJsTypeScriptProject({
     "tailwind-fontawesome",
     "tailwindcss",
     "nodemailer",
+    "classnames",
   ],
   devDeps: [
     "prisma",

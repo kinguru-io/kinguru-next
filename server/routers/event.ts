@@ -52,4 +52,27 @@ export const eventRouter = t.router({
         take: input.limit,
       });
     }),
+  all: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).default(10),
+        cursor: z.string().nullish(),
+      }),
+    )
+    .query(async ({ ctx, input: { cursor, limit } }) => {
+      const items = await ctx.prisma.event.findMany({
+        skip: cursor ? 1 : 0,
+        take: limit,
+        cursor: cursor
+          ? {
+              id: cursor,
+            }
+          : undefined,
+      });
+
+      return {
+        items,
+        nextCursor: items.length > 0 ? items[items.length - 1].id : undefined,
+      };
+    }),
 });

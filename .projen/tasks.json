@@ -263,7 +263,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @faker-js/faker @next/eslint-plugin-next @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser autoprefixer eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates postcss postcss-import prettier prettier-plugin-tailwindcss prisma prisma-zod-generator projen standard-version ts-node typescript @auth/prisma-adapter @headlessui/react @heroicons/react @prisma/client @tailwindcss/aspect-ratio @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server i18next next next-auth next-i18next nodemailer react react-dom react-i18next superjson tailwind-fontawesome tailwindcss trpc-shield zod"
+          "exec": "npm update @faker-js/faker @next/eslint-plugin-next @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser autoprefixer eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates postcss postcss-import prettier prettier-plugin-tailwindcss prisma prisma-zod-generator projen standard-version ts-node typescript @auth/prisma-adapter @headlessui/react @heroicons/react @prisma/client @tailwindcss/aspect-ratio @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server classnames i18next next next-auth next-i18next nodemailer react react-dom react-i18next superjson tailwind-fontawesome tailwindcss trpc-shield zod"
         },
         {
           "exec": "npx projen"

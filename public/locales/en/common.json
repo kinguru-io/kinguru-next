@@ -27,6 +27,24 @@
   },
   "invite": {
     "title": "Let me invite you to a suitable table",
-    "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in"
+    "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in",
+    "subscribe": "Subscribe to events",
+    "email": "Email",
+    "telephone": "Telephone"
+  },
+  "works": {
+    "how_it_works": "How it works",
+    "speakers": "Speakers",
+    "places": "Places",
+    "visitors": "Visitors",
+    "target_audience": "New target audience",
+    "compliment_pr": "Competent PR",
+    "potential_clients": "Potential clients",
+    "regular_visitors": "Regular visitors",
+    "no_dead_lock": "No dead clock",
+    "mentions": "Mentions in social networks, posters and thematic sites",
+    "useful_time": "Useful pastime",
+    "participate_in_dialogue": "Engaging in dialogue with the speaker rather than \"listening\"",
+    "networking": "Networking"
   }
 }
