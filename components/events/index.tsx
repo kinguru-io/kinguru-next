@@ -10,8 +10,11 @@ export const Events = () => {
   const { data: recentEvents } = trpc.event.recent.useQuery();
   return (
     <>
-      <Section className="mt-16">
-        <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900">
+      <Section id="events" className="mt-16">
+        <h2
+          id="upcoming_events"
+          className="text-center text-4xl font-bold tracking-tight text-gray-900"
+        >
           {t("events.upcoming_events")}
         </h2>
         <Stripes />
@@ -26,7 +29,10 @@ export const Events = () => {
         )}
       </Section>
       <Section>
-        <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900">
+        <h2
+          id="recent_events"
+          className="text-center text-4xl font-bold tracking-tight text-gray-900"
+        >
           {t("events.recent_events")}
         </h2>
         <Stripes />

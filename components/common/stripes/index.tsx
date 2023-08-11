@@ -1,4 +1,16 @@
-export const Stripes = () => {
+export const Stripes = (props: {
+  color?: string;
+  mt?: string;
+  mb?: string;
+}) => {
+  const { color, mt, mb } = Object.assign(
+    {
+      color: "#ffd800",
+      mt: "32px",
+      mb: "62px",
+    },
+    props,
+  );
   return (
     <svg
       width="142px"
@@ -7,14 +19,14 @@ export const Stripes = () => {
       preserveAspectRatio="xMinYMid slice"
       style={{
         display: "block",
-        marginTop: "32px",
-        marginBottom: "62px",
+        marginTop: mt,
+        marginBottom: mb,
         marginRight: "auto",
         marginLeft: "auto",
         overflow: "hidden",
         verticalAlign: "middle",
         strokeWidth: "3px",
-        stroke: "#ffd800",
+        stroke: color,
         fill: "none",
       }}
     >

@@ -12,7 +12,10 @@ export const HowItWorks = () => {
   const { t } = useLocale();
   const [tab, setTab] = useState<Tabs>(tabsAvailable[0]);
   return (
-    <Section className="mt-10">
+    <Section
+      id="how_it_works"
+      className="bg-[url('/img/parallax-horn.png')] bg-cover bg-fixed bg-bottom bg-no-repeat py-20"
+    >
       <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900">
         {t("works.how_it_works")}
       </h2>
@@ -20,6 +23,7 @@ export const HowItWorks = () => {
       <div className="mx-auto w-4/6 lg:flex lg:justify-around">
         {tabsAvailable.map((text) => (
           <button
+            key={text}
             onClick={() => setTab(text)}
             className={classNames({
               "text-2xl": true,
@@ -50,14 +54,18 @@ export const HowItWorks = () => {
               { title: t("works.target_audience"), image: "/img/1.svg" },
               { title: t("works.compliment_pr"), image: "/img/2.svg" },
               { title: t("works.potential_clients"), image: "/img/3.svg" },
-            ].map(WorksItem)
+            ].map(({ title, image }) => (
+              <WorksItem key={title} title={title} image={image} />
+            ))
           : null}
         {tab === "places"
           ? [
               { title: t("works.regular_visitors"), image: "/img/4.svg" },
               { title: t("works.no_dead_lock"), image: "/img/5.svg" },
               { title: t("works.mentions"), image: "/img/6.svg" },
-            ].map(WorksItem)
+            ].map(({ title, image }) => (
+              <WorksItem key={title} title={title} image={image} />
+            ))
           : null}
         {tab === "visitors"
           ? [
@@ -67,7 +75,9 @@ export const HowItWorks = () => {
                 image: "/img/8.svg",
               },
               { title: t("works.networking"), image: "/img/9.svg" },
-            ].map(WorksItem)
+            ].map(({ title, image }) => (
+              <WorksItem key={title} title={title} image={image} />
+            ))
           : null}
       </div>
     </Section>

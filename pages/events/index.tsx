@@ -1,3 +1,4 @@
+import { Navbar } from "@/components/navbar";
 import { trpc } from "@/utils/trpc";
 
 export default function Events() {
@@ -13,6 +14,7 @@ export default function Events() {
   );
   return (
     <>
+      <Navbar />
       {events?.pages.map((page) =>
         page.items.map((event) => {
           return <li>{event.topic}</li>;

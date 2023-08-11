@@ -37,6 +37,7 @@ model User {
   instagram     String?
   linkedin      String?
   website       String?
+  role          UserRole       @default(user)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   events        Event[]
@@ -45,6 +46,11 @@ model User {
   speaker       Speaker?
   accounts      Account[]
   sessions      Session[]
+}
+
+enum UserRole {
+  user
+  admin
 }
 
 enum UserGender {

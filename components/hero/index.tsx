@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
+import { Spinner } from "@/components/common/spinner";
 import { Stripes } from "@/components/common/stripes";
 import { useLocale } from "@/utils/use-locale";
 
@@ -7,11 +8,11 @@ export const HeroContent = () => {
   const { t } = useLocale();
   const { status } = useSession();
   if (status === "loading") {
-    return <>Loading...</>;
+    return <Spinner />;
   }
   return (
     <div
-      className="h-screen"
+      className="h-3/4 lg:h-screen"
       style={{
         background:
           "url(/img/parallax-1.png) no-repeat center center, url(/img/main.jpg) no-repeat center center",

@@ -3,6 +3,7 @@ import { BellIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Fragment } from "react";
+import { Spinner } from "@/components/common/spinner";
 import { classNames } from "@/utils/class-names";
 import { useLocale } from "@/utils/use-locale";
 
@@ -10,7 +11,7 @@ export const Login = () => {
   const { t } = useLocale();
   const { data: session, status } = useSession();
   if (status === "loading") {
-    return <>Loading...</>;
+    return <Spinner />;
   }
 
   const userNavigation = [
@@ -27,7 +28,7 @@ export const Login = () => {
             className="relative rounded-full bg-gray-100 p-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
           >
             <span className="absolute -inset-1.5" />
-            <span className="sr-only">{t("view_notifications")}</span>
+            <span className="sr-only">{t("navbar.view_notifications")}</span>
             <BellIcon className="h-6 w-6" aria-hidden="true" />
           </button>
           <Menu as="div" className="relative ml-3">

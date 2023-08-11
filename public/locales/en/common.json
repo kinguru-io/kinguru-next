@@ -46,5 +46,20 @@
     "useful_time": "Useful pastime",
     "participate_in_dialogue": "Engaging in dialogue with the speaker rather than \"listening\"",
     "networking": "Networking"
+  },
+  "best_speakers": {
+    "title": "Best speakers"
+  },
+  "company_statistics": {
+    "events_held": "events held",
+    "speakers": "speakers",
+    "connected_establishments": "connected establishments"
+  },
+  "footer": {
+    "upcoming_events": "Upcoming events",
+    "how_it_works": "How it works",
+    "reviews": "Reviews",
+    "photo_reports": "Photo reports",
+    "contacts": "Contacts"
   }
 }

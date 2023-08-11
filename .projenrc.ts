@@ -68,6 +68,9 @@ const project = new web.NextJsTypeScriptProject({
     "tailwindcss",
     "nodemailer",
     "classnames",
+    "react-icons",
+    "flowbite",
+    "flowbite-react",
   ],
   devDeps: [
     "prisma",
