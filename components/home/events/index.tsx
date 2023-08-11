@@ -1,6 +1,6 @@
 import { Section } from "@/components/common/section";
 import { Stripes } from "@/components/common/stripes";
-import { EventCard } from "@/components/events/eventCard";
+import { EventCard } from "@/components/home/events/eventCard";
 import { trpc } from "@/utils/trpc";
 import { useLocale } from "@/utils/use-locale";
 

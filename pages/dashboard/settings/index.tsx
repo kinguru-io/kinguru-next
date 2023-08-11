@@ -1,12 +1,12 @@
 import "tailwindcss/tailwind.css";
-import { BestSpeakersSection } from "@/components/bestSpeakers";
-import { CompanyStatisticsSection } from "@/components/companyStatistics";
-import { Events } from "@/components/events";
 import { FooterSection } from "@/components/footer";
-import { HeroContent } from "@/components/hero";
-import { InviteSection } from "@/components/invite";
 import { Navbar } from "@/components/navbar";
-import { HowItWorks } from "@/components/works";
+import { BestSpeakersSection } from "components/home/bestSpeakers";
+import { CompanyStatisticsSection } from "components/home/companyStatistics";
+import { Events } from "components/home/events";
+import { HeroContent } from "components/home/hero";
+import { InviteSection } from "components/home/invite";
+import { HowItWorks } from "components/home/works";
 
 export default function Home() {
   return (

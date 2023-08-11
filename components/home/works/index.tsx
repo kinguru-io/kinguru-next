@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useState } from "react";
 import { Section } from "@/components/common/section";
 import { Stripes } from "@/components/common/stripes";
-import { WorksItem } from "@/components/works/woksItem";
+import { WorksItem } from "@/components/home/works/woksItem";
 import { useLocale } from "@/utils/use-locale";
 
 const tabsAvailable = ["speakers", "places", "visitors"] as const;

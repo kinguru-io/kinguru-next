@@ -15,7 +15,7 @@ export const Login = () => {
   }
 
   const userNavigation = [
-    { name: t("navbar.your_profile"), href: "#" },
+    { name: t("navbar.your_profile"), href: "/dashboard" },
     { name: t("navbar.settings"), href: "#" },
   ];
 

@@ -1,6 +1,6 @@
-import { SpeakerCard } from "@/components/bestSpeakers/speakerCard";
 import { Section } from "@/components/common/section";
 import { Stripes } from "@/components/common/stripes";
+import { SpeakerCard } from "@/components/home/bestSpeakers/speakerCard";
 import { trpc } from "@/utils/trpc";
 import { useLocale } from "@/utils/use-locale";
 
