@@ -1,8 +1,10 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation, SSRConfig } from "next-i18next";
 import { ComponentProps } from "react";
+import { theme } from "@/pages/theme";
 import { trpc } from "@/utils/trpc";
 
 const I18nextAdapter = appWithTranslation<
@@ -32,7 +34,9 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <I18nProvider {...pageProps}>
       <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
         <ReactQueryDevtools initialIsOpen />
       </SessionProvider>
     </I18nProvider>

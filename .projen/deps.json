@@ -32,7 +32,7 @@
       "type": "build"
     },
     {
-      "name": "autoprefixer",
+      "name": "classnames",
       "type": "build"
     },
     {
@@ -66,19 +66,7 @@
       "type": "build"
     },
     {
-      "name": "postcss",
-      "type": "build"
-    },
-    {
-      "name": "postcss-import",
-      "type": "build"
-    },
-    {
       "name": "prettier",
-      "type": "build"
-    },
-    {
-      "name": "prettier-plugin-tailwindcss",
       "type": "build"
     },
     {
@@ -107,23 +95,27 @@
       "type": "build"
     },
     {
-      "name": "@auth/prisma-adapter",
+      "name": "@chakra-ui/icons",
       "type": "runtime"
     },
     {
-      "name": "@headlessui/react",
+      "name": "@chakra-ui/next-js",
       "type": "runtime"
     },
     {
-      "name": "@heroicons/react",
+      "name": "@chakra-ui/react",
+      "type": "runtime"
+    },
+    {
+      "name": "@emotion/react",
+      "type": "runtime"
+    },
+    {
+      "name": "@emotion/styled",
       "type": "runtime"
     },
     {
       "name": "@prisma/client",
-      "type": "runtime"
-    },
-    {
-      "name": "@tailwindcss/aspect-ratio",
       "type": "runtime"
     },
     {
@@ -151,15 +143,11 @@
       "type": "runtime"
     },
     {
-      "name": "classnames",
+      "name": "formik",
       "type": "runtime"
     },
     {
-      "name": "flowbite",
-      "type": "runtime"
-    },
-    {
-      "name": "flowbite-react",
+      "name": "framer-motion",
       "type": "runtime"
     },
     {
@@ -203,19 +191,15 @@
       "type": "runtime"
     },
     {
-      "name": "tailwind-fontawesome",
-      "type": "runtime"
-    },
-    {
-      "name": "tailwindcss",
-      "type": "runtime"
-    },
-    {
       "name": "trpc-shield",
       "type": "runtime"
     },
     {
       "name": "zod",
+      "type": "runtime"
+    },
+    {
+      "name": "zod-formik-adapter",
       "type": "runtime"
     }
   ],

@@ -46,7 +46,6 @@ const project = new web.NextJsTypeScriptProject({
   minNodeVersion: "18.16.0",
   packageManager: NodePackageManager.NPM,
   deps: [
-    "@auth/prisma-adapter",
     "@prisma/client",
     "@trpc/client",
     "@trpc/server",
@@ -58,19 +57,19 @@ const project = new web.NextJsTypeScriptProject({
     "zod",
     "superjson",
     "trpc-shield",
-    "@heroicons/react",
-    "@headlessui/react",
     "next-i18next",
     "react-i18next",
     "i18next",
-    "@tailwindcss/aspect-ratio",
-    "tailwind-fontawesome",
-    "tailwindcss",
     "nodemailer",
-    "classnames",
+    "@chakra-ui/react",
+    "@chakra-ui/next-js",
+    "@chakra-ui/icons",
+    "@emotion/react",
+    "@emotion/styled",
+    "framer-motion",
+    "formik",
+    "zod-formik-adapter",
     "react-icons",
-    "flowbite",
-    "flowbite-react",
   ],
   devDeps: [
     "prisma",
@@ -78,18 +77,10 @@ const project = new web.NextJsTypeScriptProject({
     "@faker-js/faker",
     "@types/node@20",
     "@next/eslint-plugin-next",
-    "postcss",
-    "autoprefixer",
-    "prettier-plugin-tailwindcss",
-    "postcss-import",
+    "classnames",
   ],
 });
 
-if (!project.prettier?.settings.plugins) {
-  // @ts-ignore
-  project.prettier?.settings.plugins = [];
-}
-project.prettier?.settings.plugins.push("prettier-plugin-tailwindcss");
 project.package.addDevDeps("@types/node@20");
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();

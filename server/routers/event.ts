@@ -23,6 +23,7 @@ export const eventRouter = t.router({
         },
         include: {
           place: true,
+          initiator: true,
         },
         take: input.limit,
       });
@@ -48,6 +49,7 @@ export const eventRouter = t.router({
         },
         include: {
           place: true,
+          initiator: true,
         },
         take: input.limit,
       });

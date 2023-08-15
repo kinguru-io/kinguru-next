@@ -1,4 +1,3 @@
-import "tailwindcss/tailwind.css";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { BestSpeakersSection } from "components/home/bestSpeakers";

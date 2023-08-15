@@ -263,7 +263,7 @@
           "exec": "npm install"
         },
         {
-          "exec": "npm update @faker-js/faker @next/eslint-plugin-next @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser autoprefixer eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates postcss postcss-import prettier prettier-plugin-tailwindcss prisma prisma-zod-generator projen standard-version ts-node typescript @auth/prisma-adapter @headlessui/react @heroicons/react @prisma/client @tailwindcss/aspect-ratio @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server classnames flowbite flowbite-react i18next next next-auth next-i18next nodemailer react react-dom react-i18next react-icons superjson tailwind-fontawesome tailwindcss trpc-shield zod"
+          "exec": "npm update @faker-js/faker @next/eslint-plugin-next @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser classnames eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates prettier prisma prisma-zod-generator projen standard-version ts-node typescript @chakra-ui/icons @chakra-ui/next-js @chakra-ui/react @emotion/react @emotion/styled @prisma/client @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server formik framer-motion i18next next next-auth next-i18next nodemailer react react-dom react-i18next react-icons superjson trpc-shield zod zod-formik-adapter"
         },
         {
           "exec": "npx projen"

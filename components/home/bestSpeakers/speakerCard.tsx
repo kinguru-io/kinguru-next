@@ -1,8 +1,19 @@
+import {
+  Heading,
+  Avatar,
+  Box,
+  Center,
+  Image,
+  Flex,
+  Text,
+  Stack,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import Link from "next/link";
 
 export const SpeakerCard = ({
   speaker,
-  className,
 }: {
   speaker: {
     id: string;
@@ -13,27 +24,73 @@ export const SpeakerCard = ({
       company: string | null;
     };
   };
-  className: string;
 }) => {
   return (
-    <div className={`group relative pb-8 shadow-xl ${className} text-center`}>
-      <div className="p-5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={speaker.user.image ?? "/img/girl.png"}
-          alt={speaker.user.name ?? "Speaker"}
-          className="h-full w-full rounded-full object-cover object-center"
-        />
-      </div>
-      <p className="text-base font-semibold text-gray-900">
-        <Link href={`/speakers/${speaker.id}`}>{speaker.user.name}</Link>
-      </p>
-      <p className="mt-2 line-clamp-3 break-words px-5 text-sm text-gray-500">
-        {speaker.user.position}
-      </p>
-      <p className="line-clamp-3 break-words px-5 text-sm text-gray-500">
-        {speaker.user.company}
-      </p>
-    </div>
+    <>
+      <Center py={6}>
+        <Box
+          w={"full"}
+          bg={useColorModeValue("white", "gray.800")}
+          boxShadow={"2xl"}
+          rounded={"md"}
+          overflow={"hidden"}
+        >
+          <Image
+            h={"120px"}
+            w={"full"}
+            src={
+              "https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            }
+            objectFit="cover"
+            alt={speaker.user.name ?? "Speaker"}
+          />
+          <Flex justify={"center"} mt={-12}>
+            <Avatar
+              size={"xl"}
+              src={speaker.user.image ?? undefined}
+              css={{
+                border: "2px solid white",
+              }}
+            />
+          </Flex>
+
+          <Box p={6}>
+            <Stack spacing={0} align={"center"} mb={5}>
+              <Heading
+                as={Link}
+                fontSize={"2xl"}
+                mb={5}
+                fontWeight={500}
+                fontFamily={"body"}
+                href={`/speakers/${speaker.id}`}
+              >
+                {speaker.user.name}
+              </Heading>
+              <Text color={"gray.500"}>{speaker.user.position}</Text>
+              <Text color={"gray.500"}>{speaker.user.company}</Text>
+            </Stack>
+
+            <Stack direction={"row"} justify={"center"} spacing={6}>
+              <Stack spacing={0} align={"center"}>
+                <Text fontWeight={600}>23k</Text>
+                <Text fontSize={"sm"} color={"gray.500"}>
+                  Followers
+                </Text>
+              </Stack>
+              <Stack spacing={0} align={"center"}>
+                <Text fontWeight={600}>23k</Text>
+                <Text fontSize={"sm"} color={"gray.500"}>
+                  Followers
+                </Text>
+              </Stack>
+            </Stack>
+
+            <Button w={"full"} mt={8} variant={"primary"}>
+              Follow
+            </Button>
+          </Box>
+        </Box>
+      </Center>
+    </>
   );
 };

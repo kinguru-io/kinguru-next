@@ -1,4 +1,4 @@
-import "tailwindcss/tailwind.css";
+import { Navbar } from "@/components/navbar";
 import { FooterSection } from "components/footer";
 import {
   BestSpeakersSection,
@@ -8,7 +8,6 @@ import {
   InviteSection,
   HowItWorks,
 } from "components/home";
-import { Navbar } from "components/navbar";
 
 export default function Home() {
   return (

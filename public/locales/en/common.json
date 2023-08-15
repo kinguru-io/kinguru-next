@@ -17,7 +17,8 @@
     "slug": "Never eat alone!",
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
-    "view_events": "View events"
+    "view_events": "View events",
+    "go_to_dashboard": "Go to dashboard"
   },
   "events": {
     "upcoming_events": "Upcoming events",
