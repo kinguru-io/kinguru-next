@@ -16,7 +16,7 @@ import { Login } from "@/components/navbar/login";
 import { NavLink } from "@/components/navbar/navlink";
 import { useLocale } from "@/utils/use-locale";
 
-export function Navbar() {
+export function Navbar({ full }: { full?: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useLocale();
   const navigation = [
@@ -37,7 +37,7 @@ export function Navbar() {
       >
         <Flex
           h={16}
-          maxWidth={"4xl"}
+          maxWidth={full ? "full" : "4xl"}
           marginX={"auto"}
           alignItems={"center"}
           justifyContent={"space-between"}

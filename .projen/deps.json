@@ -107,6 +107,10 @@
       "type": "runtime"
     },
     {
+      "name": "@chakra-ui/theme-tools",
+      "type": "runtime"
+    },
+    {
       "name": "@emotion/react",
       "type": "runtime"
     },
@@ -115,7 +119,39 @@
       "type": "runtime"
     },
     {
+      "name": "@opentelemetry/exporter-trace-otlp-http",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/instrumentation",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/resources",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/sdk-node",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/sdk-trace-base",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/sdk-trace-node",
+      "type": "runtime"
+    },
+    {
+      "name": "@opentelemetry/semantic-conventions",
+      "type": "runtime"
+    },
+    {
       "name": "@prisma/client",
+      "type": "runtime"
+    },
+    {
+      "name": "@prisma/instrumentation",
       "type": "runtime"
     },
     {
@@ -163,6 +199,10 @@
       "type": "runtime"
     },
     {
+      "name": "next-build-id",
+      "type": "runtime"
+    },
+    {
       "name": "next-i18next",
       "type": "runtime"
     },
@@ -187,11 +227,19 @@
       "type": "runtime"
     },
     {
+      "name": "react-infinite-scroll-component",
+      "type": "runtime"
+    },
+    {
       "name": "superjson",
       "type": "runtime"
     },
     {
       "name": "trpc-shield",
+      "type": "runtime"
+    },
+    {
+      "name": "ts-node",
       "type": "runtime"
     },
     {

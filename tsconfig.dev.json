@@ -34,6 +34,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "rootDir": ".",
     "paths": {

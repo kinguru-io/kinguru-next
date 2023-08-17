@@ -4,7 +4,7 @@ import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation, SSRConfig } from "next-i18next";
 import { ComponentProps } from "react";
-import { theme } from "@/pages/theme";
+import { theme } from "@/components/theme";
 import { trpc } from "@/utils/trpc";
 
 const I18nextAdapter = appWithTranslation<
