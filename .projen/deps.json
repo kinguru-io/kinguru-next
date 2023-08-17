@@ -231,15 +231,15 @@
       "type": "runtime"
     },
     {
+      "name": "sharp",
+      "type": "runtime"
+    },
+    {
       "name": "superjson",
       "type": "runtime"
     },
     {
       "name": "trpc-shield",
-      "type": "runtime"
-    },
-    {
-      "name": "ts-node",
       "type": "runtime"
     },
     {
