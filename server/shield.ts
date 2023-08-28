@@ -11,5 +11,7 @@ export const isAdmin = rule<Context>()(async (ctx) => {
 
 export const permissions = shield<Context>({
   query: {},
-  mutation: {},
+  mutation: {
+    attendTheEvent: isAuthenticated,
+  },
 });

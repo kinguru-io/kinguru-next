@@ -9,4 +9,3 @@ export const t = trpc.initTRPC.context<Context>().create({
 
 export const permissionsMiddleware = t.middleware(permissions);
 export const publicProcedure = t.procedure.use(permissionsMiddleware);
-export const shieldedProcedure = t.procedure.use(permissionsMiddleware);

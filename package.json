@@ -77,6 +77,7 @@
     "formik": "^2.4.3",
     "framer-motion": "^10.15.1",
     "i18next": "^23.4.1",
+    "moment": "^2.29.4",
     "next": "^13.4.12",
     "next-auth": "^4.22.3",
     "next-build-id": "^3.0.0",

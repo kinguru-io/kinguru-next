@@ -75,6 +75,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-icons",
     "react-infinite-scroll-component",
     "sharp",
+    "moment",
 
     "@prisma/instrumentation",
     "@opentelemetry/sdk-node",

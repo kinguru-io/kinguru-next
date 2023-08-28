@@ -24,7 +24,9 @@
     "upcoming_events": "Upcoming events",
     "recent_events": "Recent events",
     "more_about": "More about",
-    "not_found": "No events found"
+    "not_found": "No events found",
+    "join": "Join",
+    "cancel": "Cancel"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",

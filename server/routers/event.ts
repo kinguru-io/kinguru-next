@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import { z } from "zod";
 import { publicProcedure, t } from "../trpc";
 
@@ -11,22 +12,33 @@ export const eventRouter = t.router({
         .default({ limit: 3 }),
     )
     .query(({ ctx, input }) => {
-      return ctx.prisma.event.findMany({
-        where: {
-          starts: {
-            gt: new Date(),
+      return ctx.prisma.event
+        .findMany({
+          where: {
+            starts: {
+              gt: new Date(),
+            },
+            status: "active",
           },
-          status: "active",
-        },
-        orderBy: {
-          starts: "asc",
-        },
-        include: {
-          place: true,
-          initiator: true,
-        },
-        take: input.limit,
-      });
+          orderBy: {
+            starts: "asc",
+          },
+          include: {
+            place: true,
+            initiator: true,
+          },
+          take: input.limit,
+        })
+        .then((items) =>
+          items.map((item) =>
+            Object.assign(
+              {
+                takenPlace: moment(item.starts).isBefore(),
+              },
+              item,
+            ),
+          ),
+        );
     }),
   recent: publicProcedure
     .input(
@@ -37,22 +49,33 @@ export const eventRouter = t.router({
         .default({ limit: 3 }),
     )
     .query(({ ctx, input }) => {
-      return ctx.prisma.event.findMany({
-        where: {
-          starts: {
-            lt: new Date(),
+      return ctx.prisma.event
+        .findMany({
+          where: {
+            starts: {
+              lt: new Date(),
+            },
+            status: "active",
           },
-          status: "active",
-        },
-        orderBy: {
-          starts: "desc",
-        },
-        include: {
-          place: true,
-          initiator: true,
-        },
-        take: input.limit,
-      });
+          orderBy: {
+            starts: "desc",
+          },
+          include: {
+            place: true,
+            initiator: true,
+          },
+          take: input.limit,
+        })
+        .then((items) =>
+          items.map((item) =>
+            Object.assign(
+              {
+                takenPlace: moment(item.starts).isBefore(),
+              },
+              item,
+            ),
+          ),
+        );
     }),
   all: publicProcedure
     .input(
@@ -70,11 +93,181 @@ export const eventRouter = t.router({
               id: cursor,
             }
           : undefined,
+        include: {
+          place: true,
+          initiator: true,
+        },
+      });
+
+      return {
+        items: items.map((item) =>
+          Object.assign(
+            {
+              takenPlace: moment(item.starts).isBefore(),
+            },
+            item,
+          ),
+        ),
+        nextCursor: items.length > 0 ? items[items.length - 1].id : undefined,
+      };
+    }),
+  usersOnEvent: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+        limit: z.number().min(1).max(100).default(10),
+        cursor: z.string().nullish(),
+      }),
+    )
+    .query(async ({ ctx, input: { eventId, cursor, limit } }) => {
+      const items = await ctx.prisma.usersOnEvent.findMany({
+        skip: cursor ? 1 : 0,
+        take: limit,
+        where: {
+          eventId,
+        },
+        cursor: cursor
+          ? {
+              userId_eventId: {
+                userId: cursor,
+                eventId,
+              },
+            }
+          : undefined,
+        include: {
+          user: true,
+        },
       });
 
       return {
         items,
-        nextCursor: items.length > 0 ? items[items.length - 1].id : undefined,
+        nextCursor:
+          items.length > 0 ? items[items.length - 1].userId : undefined,
       };
+    }),
+  attendTheEvent: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input: { eventId } }) => {
+      if (!ctx.session?.user?.id) {
+        throw new Error("KR1001");
+      }
+      const alreadyAttend = await ctx.prisma.usersOnEvent.findUnique({
+        where: {
+          userId_eventId: {
+            eventId,
+            userId: ctx.session?.user?.id,
+          },
+        },
+      });
+
+      if (alreadyAttend) {
+        return alreadyAttend;
+      }
+
+      const event = await ctx.prisma.event.findUnique({
+        where: {
+          id: eventId,
+        },
+      });
+
+      if (moment(event?.starts).isBefore()) {
+        throw new Error("outdated event");
+      }
+
+      return ctx.prisma.usersOnEvent.create({
+        data: {
+          eventId,
+          userId: ctx.session?.user?.id,
+        },
+      });
+    }),
+  cancelEventRegistration: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input: { eventId } }) => {
+      if (!ctx.session?.user?.id) {
+        throw new Error("KR1001");
+      }
+
+      const present = await ctx.prisma.usersOnEvent.findUnique({
+        where: {
+          userId_eventId: {
+            eventId,
+            userId: ctx.session?.user?.id,
+          },
+        },
+      });
+
+      if (!present) return {};
+
+      return ctx.prisma.usersOnEvent.delete({
+        where: {
+          userId_eventId: {
+            eventId,
+            userId: ctx.session?.user?.id,
+          },
+        },
+      });
+    }),
+  isPresentOnEvent: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input: { eventId } }) => {
+      if (!ctx.session?.user?.id) {
+        throw new Error("KR1001");
+      }
+
+      const userOnEvent = await ctx.prisma.usersOnEvent.findUnique({
+        where: {
+          userId_eventId: {
+            eventId,
+            userId: ctx.session?.user?.id,
+          },
+        },
+      });
+
+      return userOnEvent != null;
+    }),
+  canJoinTheEvent: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input: { eventId } }) => {
+      if (!ctx.session?.user?.id) {
+        throw new Error("KR1001");
+      }
+
+      const userOnEvent = await ctx.prisma.usersOnEvent.findUnique({
+        where: {
+          userId_eventId: {
+            eventId,
+            userId: ctx.session?.user?.id,
+          },
+        },
+      });
+
+      if (userOnEvent != null) {
+        return null;
+      }
+
+      const event = await ctx.prisma.event.findUnique({
+        where: {
+          id: eventId,
+        },
+      });
+
+      return moment(event?.starts).isAfter();
     }),
 });
