@@ -126,6 +126,9 @@ export const eventRouter = t.router({
         where: {
           eventId,
         },
+        orderBy: {
+          joinedAt: "desc",
+        },
         cursor: cursor
           ? {
               userId_eventId: {

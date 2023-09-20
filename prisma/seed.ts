@@ -44,7 +44,7 @@ async function main() {
           starts: faker.date.future(),
           duration: faker.date.future(),
           poster: faker.image.urlLoremFlickr(),
-          price: parseFloat(faker.finance.amount(1, 20)),
+          price: parseFloat(faker.finance.amount(0, 20)),
           tags: faker.lorem.words().split(" "),
           initiator: {
             create: userSchema(),
@@ -53,8 +53,8 @@ async function main() {
             create: {
               tel: faker.phone.number(),
               location: faker.location.city(),
-              locationLat: faker.location.latitude(),
-              locationLng: faker.location.longitude(),
+              coordsLat: faker.location.latitude(),
+              coordsLng: faker.location.longitude(),
               owner: {
                 create: userSchema(),
               },
@@ -71,14 +71,19 @@ async function main() {
               create: {
                 tel: faker.phone.number(),
                 location: faker.location.city(),
-                locationLat: faker.location.latitude(),
-                locationLng: faker.location.longitude(),
+                coordsLat: faker.location.latitude(),
+                coordsLng: faker.location.longitude(),
                 owner: {
                   create: userSchema(),
                 },
                 organization: {
                   create: {
                     name: faker.company.name(),
+                  },
+                },
+                resources: {
+                  create: {
+                    url: faker.image.url({ width: 200, height: 100 }),
                   },
                 },
               },
@@ -88,7 +93,9 @@ async function main() {
 
   const eventsCreated = (
     await Promise.allSettled(
-      events.map((event) => prisma.event.create({ data: event })),
+      events.map((event) =>
+        prisma.event.create({ data: event, include: { place: true } }),
+      ),
     )
   )
     .map((result) => {
@@ -98,6 +105,10 @@ async function main() {
       return null;
     })
     .filter((result) => result !== null);
+
+  const placesCreated = eventsCreated
+    .filter((eventCreated) => eventCreated != null)
+    .map((eventCreated) => eventCreated?.place);
 
   const users = new Array(20)
     .fill({})
@@ -142,6 +153,41 @@ async function main() {
                   })),
                 },
               },
+            },
+          } as Prisma.UserCreateInput)
+        : user;
+    })
+    .map((user) => {
+      return Math.random() > 0.7
+        ? ({
+            ...user,
+            eventComments: {
+              create: pickUniqueValues(
+                eventsCreated,
+                Math.round(Math.random() * eventsCreated.length),
+              ).map((unique) => ({
+                event: {
+                  connect: {
+                    id: unique?.id,
+                  },
+                },
+                message: faker.lorem.paragraph(),
+                rating: faker.number.float({ max: 5 }),
+              })),
+            },
+            placeComments: {
+              create: pickUniqueValues(
+                placesCreated,
+                Math.round(Math.random() * placesCreated.length),
+              ).map((unique) => ({
+                place: {
+                  connect: {
+                    id: unique?.id,
+                  },
+                },
+                message: faker.lorem.paragraph(),
+                rating: faker.number.float({ max: 5 }),
+              })),
             },
           } as Prisma.UserCreateInput)
         : user;

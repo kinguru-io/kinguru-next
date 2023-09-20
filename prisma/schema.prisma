@@ -16,37 +16,40 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?        @unique
-  email         String         @unique
-  emailVerified DateTime?
-  image         String?
-  confirmed     Boolean        @default(false)
-  firstname     String?
-  lastname      String?
-  phoneNumber   String?
-  description   String?
-  gender        UserGender?    @default(notSpecified)
-  birthdate     DateTime?      @db.Date
-  country       String?
-  city          String?
-  position      String?
-  company       String?
-  interests     String[]
-  vk            String?
-  facebook      String?
-  instagram     String?
-  linkedin      String?
-  website       String?
-  role          UserRole       @default(user)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  events        Event[]
-  participant   UsersOnEvent[]
-  places        Place[]
-  speaker       Speaker?
-  accounts      Account[]
-  sessions      Session[]
+  id              String           @id @default(cuid())
+  name            String?          @unique
+  email           String           @unique
+  emailVerified   DateTime?
+  image           String?
+  confirmed       Boolean          @default(false)
+  firstname       String?
+  lastname        String?
+  phoneNumber     String?
+  description     String?
+  gender          UserGender?      @default(notSpecified)
+  birthdate       DateTime?        @db.Date
+  country         String?
+  city            String?
+  position        String?
+  company         String?
+  interests       String[]
+  vk              String?
+  facebook        String?
+  instagram       String?
+  linkedin        String?
+  website         String?
+  role            UserRole         @default(user)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  events          Event[]
+  participant     UsersOnEvent[]
+  places          Place[]
+  speaker         Speaker?
+  accounts        Account[]
+  sessions        Session[]
+  eventComments   EventComment[]
+  placeComments   PlaceComment[]
+  speakerComments SpeakerComment[]
 }
 
 enum UserRole {
@@ -107,6 +110,17 @@ model Speaker {
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
   participant SpeakersOnEvent[]
+  comments    SpeakerComment[]
+}
+
+model SpeakerComment {
+  id        String  @id @default(cuid())
+  speaker   Speaker @relation(fields: [speakerId], references: [id])
+  speakerId String
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  rating    Float   @default(0.00)
+  message   String
 }
 
 model Event {
@@ -118,14 +132,15 @@ model Event {
   initiatorId     String
   place           Place             @relation(fields: [placeId], references: [id])
   placeId         String
-  starts          DateTime          @db.Date
+  starts          DateTime          @db.Timestamp
   duration        DateTime?         @db.Time
   poster          String?
-  price           Float?            @default(0.00)
+  price           Decimal?          @db.Money
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   tags            String[]
-  eventResources  EventResource[]
+  resources       EventResource[]
+  comments        EventComment[]
   usersOnEvent    UsersOnEvent[]
   speakersOnEvent SpeakersOnEvent[]
 }
@@ -136,11 +151,23 @@ enum EventStatus {
   private
 }
 
+model EventComment {
+  id      String @id @default(cuid())
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  rating  Float  @default(0.00)
+  message String
+}
+
 model EventResource {
   id        String   @id @default(cuid())
   event     Event    @relation(fields: [eventId], references: [id])
   eventId   String
-  link      String
+  height    Int      @default(200)
+  width     Int      @default(100)
+  url       String
   isPoster  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -167,19 +194,42 @@ model SpeakersOnEvent {
 }
 
 model Place {
-  id             String        @id @default(cuid())
-  owner          User          @relation(fields: [ownerId], references: [id])
+  id             String          @id @default(cuid())
+  owner          User            @relation(fields: [ownerId], references: [id])
   ownerId        String
-  private        Boolean?      @default(true)
-  tel            String?       @db.VarChar(255)
-  location       String        @db.VarChar(255)
-  locationLat    Float         @db.Real
-  locationLng    Float         @db.Real
+  private        Boolean?        @default(true)
+  tel            String?         @db.VarChar(255)
+  location       String          @db.VarChar(255)
+  coordsLat      Float           @db.Real
+  coordsLng      Float           @db.Real
   Event          Event[]
-  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organization   Organization?   @relation(fields: [organizationId], references: [id])
   organizationId String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  resources      PlaceResource[]
+  comments       PlaceComment[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model PlaceComment {
+  id      String @id @default(cuid())
+  place   Place  @relation(fields: [placeId], references: [id])
+  placeId String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  rating  Float  @default(0.00)
+  message String
+}
+
+model PlaceResource {
+  id        String   @id @default(cuid())
+  place     Place    @relation(fields: [placeId], references: [id])
+  placeId   String
+  height    Int      @default(200)
+  width     Int      @default(100)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Organization {

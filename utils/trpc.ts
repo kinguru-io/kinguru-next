@@ -31,6 +31,7 @@ export const trpc = createTRPCNext<typeof appRouter>({
            * @link https://trpc.io/docs/ssr
            **/
           url: `${getBaseUrl()}/api/trpc`,
+          maxURLLength: 5000,
 
           // You can pass any HTTP headers you wish here
           headers() {

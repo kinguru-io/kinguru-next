@@ -87,6 +87,17 @@ CREATE TABLE "Speaker" (
 );
 
 -- CreateTable
+CREATE TABLE "SpeakerComment" (
+    "id" TEXT NOT NULL,
+    "speakerId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0.00,
+    "message" TEXT NOT NULL,
+
+    CONSTRAINT "SpeakerComment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Event" (
     "id" TEXT NOT NULL,
     "topic" TEXT NOT NULL,
@@ -94,10 +105,10 @@ CREATE TABLE "Event" (
     "status" "EventStatus" NOT NULL DEFAULT 'unmoderated',
     "initiatorId" TEXT NOT NULL,
     "placeId" TEXT NOT NULL,
-    "starts" DATE NOT NULL,
+    "starts" TIMESTAMP NOT NULL,
     "duration" TIME,
     "poster" TEXT,
-    "price" DOUBLE PRECISION DEFAULT 0.00,
+    "price" MONEY,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "tags" TEXT[],
@@ -106,10 +117,23 @@ CREATE TABLE "Event" (
 );
 
 -- CreateTable
+CREATE TABLE "EventComment" (
+    "id" TEXT NOT NULL,
+    "eventId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0.00,
+    "message" TEXT NOT NULL,
+
+    CONSTRAINT "EventComment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "EventResource" (
     "id" TEXT NOT NULL,
     "eventId" TEXT NOT NULL,
-    "link" TEXT NOT NULL,
+    "height" INTEGER NOT NULL DEFAULT 200,
+    "width" INTEGER NOT NULL DEFAULT 100,
+    "url" TEXT NOT NULL,
     "isPoster" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -142,13 +166,37 @@ CREATE TABLE "Place" (
     "private" BOOLEAN DEFAULT true,
     "tel" VARCHAR(255),
     "location" VARCHAR(255) NOT NULL,
-    "locationLat" REAL NOT NULL,
-    "locationLng" REAL NOT NULL,
+    "coordsLat" REAL NOT NULL,
+    "coordsLng" REAL NOT NULL,
     "organizationId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Place_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PlaceComment" (
+    "id" TEXT NOT NULL,
+    "placeId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL DEFAULT 0.00,
+    "message" TEXT NOT NULL,
+
+    CONSTRAINT "PlaceComment_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PlaceResource" (
+    "id" TEXT NOT NULL,
+    "placeId" TEXT NOT NULL,
+    "height" INTEGER NOT NULL DEFAULT 200,
+    "width" INTEGER NOT NULL DEFAULT 100,
+    "url" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "PlaceResource_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -193,10 +241,22 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Speaker" ADD CONSTRAINT "Speaker_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "SpeakerComment" ADD CONSTRAINT "SpeakerComment_speakerId_fkey" FOREIGN KEY ("speakerId") REFERENCES "Speaker"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SpeakerComment" ADD CONSTRAINT "SpeakerComment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_initiatorId_fkey" FOREIGN KEY ("initiatorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_placeId_fkey" FOREIGN KEY ("placeId") REFERENCES "Place"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EventComment" ADD CONSTRAINT "EventComment_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EventComment" ADD CONSTRAINT "EventComment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EventResource" ADD CONSTRAINT "EventResource_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -218,3 +278,12 @@ ALTER TABLE "Place" ADD CONSTRAINT "Place_ownerId_fkey" FOREIGN KEY ("ownerId") 
 
 -- AddForeignKey
 ALTER TABLE "Place" ADD CONSTRAINT "Place_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PlaceComment" ADD CONSTRAINT "PlaceComment_placeId_fkey" FOREIGN KEY ("placeId") REFERENCES "Place"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PlaceComment" ADD CONSTRAINT "PlaceComment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PlaceResource" ADD CONSTRAINT "PlaceResource_placeId_fkey" FOREIGN KEY ("placeId") REFERENCES "Place"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
