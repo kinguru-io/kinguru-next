@@ -1,43 +1,84 @@
-import { SimpleGrid } from "@chakra-ui/react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { FooterSection } from "@/components/footer";
-import { EventCard } from "@/components/home/events/eventCard.tsx";
-import SidebarWithHeader from "@/components/sidebarHeader";
-import { trpc } from "@/utils/trpc.ts";
+import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
+import moment from "moment/moment";
+import { Search } from "@/components/events/search";
+import {
+  buildFacetConfigFromConfig,
+  buildSearchOptionsFromConfig,
+} from "@/utils/elasticsearch/config-helper.js";
+import { useNextRouting } from "@/utils/elasticsearch/useNextRouting.tsx";
+import { useLocale } from "@/utils/use-locale.ts";
 
 export default function Events() {
-  const {
-    data: events,
-    fetchNextPage,
-    hasNextPage,
-  } = trpc.event.all.useInfiniteQuery(
-    { limit: 10 },
+  const { t } = useLocale();
+  const connector = new ElasticsearchAPIConnector({
+    host: "http://localhost:9200",
+    index: "kinguru.public.event",
+  });
+  const combinedConfig = useNextRouting(
     {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      searchQuery: {
+        facets: {
+          ...buildFacetConfigFromConfig(),
+          starts: {
+            type: "range",
+            ranges: [
+              {
+                from: moment().diff(moment(0), "milliseconds") * 1000,
+                to:
+                  moment().add(1, "days").diff(moment(0), "milliseconds") *
+                  1000,
+                name: t("events.start_today_or_tomorrow"),
+              },
+              {
+                from: moment().diff(moment(0), "milliseconds") * 1000,
+                to:
+                  moment().add(7, "days").diff(moment(0), "milliseconds") *
+                  1000,
+                name: t("events.start_this_week"),
+              },
+              {
+                from: moment().diff(moment(0), "milliseconds") * 1000,
+                to:
+                  moment().add(30, "days").diff(moment(0), "milliseconds") *
+                  1000,
+                name: t("events.start_this_month"),
+              },
+              {
+                from: moment().diff(moment(0), "milliseconds") * 1000,
+                to:
+                  moment().add(365, "days").diff(moment(0), "milliseconds") *
+                  1000,
+                name: t("events.start_this_year"),
+              },
+            ],
+          },
+          price: {
+            type: "range",
+            ranges: [
+              {
+                from: 0.0,
+                to: 0.001,
+                name: t("events.free"),
+              },
+              {
+                from: 0.01,
+                to: 5,
+                name: t("events.up_to_5_zl"),
+              },
+              {
+                from: 5,
+                to: 10,
+                name: t("events.from_5_to_10_zl"),
+              },
+            ],
+          },
+        },
+        ...buildSearchOptionsFromConfig(),
+      },
+      apiConnector: connector,
+      alwaysSearchOnInitialLoad: true,
     },
+    "/events",
   );
-  return (
-    <>
-      <SidebarWithHeader>
-        <InfiniteScroll
-          dataLength={
-            events?.pages.reduce(
-              (total, page) => total + page.items.length,
-              0,
-            ) || 0
-          }
-          next={fetchNextPage}
-          hasMore={hasNextPage || false}
-          loader={<h4>Loading...</h4>}
-          endMessage={<FooterSection />}
-        >
-          <SimpleGrid columns={[1, 2, 2, 3, 3, 4]} spacingY={5}>
-            {events?.pages.map((page) =>
-              page.items.map((event) => <EventCard event={event} />),
-            )}
-          </SimpleGrid>
-        </InfiniteScroll>
-      </SidebarWithHeader>
-    </>
-  );
+  return <Search config={combinedConfig} />;
 }

@@ -6,7 +6,63 @@
     "places": "Places",
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
-    "login": "Login",
-    "view_notifications": "View notifications"
+    "sign_in": "Sign in",
+    "view_notifications": "View notifications",
+    "your_profile": "Your profile",
+    "sign_out": "Sign out",
+    "settings": "Settings",
+    "open_user_manu": "Open user menu"
+  },
+  "hero": {
+    "slug": "Never eat alone!",
+    "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
+    "sign_up": "Sign up",
+    "view_events": "View events",
+    "go_to_dashboard": "Go to dashboard"
+  },
+  "events": {
+    "upcoming_events": "Upcoming events",
+    "recent_events": "Recent events",
+    "more_about": "More about",
+    "not_found": "No events found",
+    "join": "Join",
+    "cancel": "Cancel"
+  },
+  "invite": {
+    "title": "Let me invite you to a suitable table",
+    "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in",
+    "subscribe": "Subscribe to events",
+    "email": "Email",
+    "telephone": "Telephone"
+  },
+  "works": {
+    "how_it_works": "How it works",
+    "speakers": "Speakers",
+    "places": "Places",
+    "visitors": "Visitors",
+    "target_audience": "New target audience",
+    "compliment_pr": "Competent PR",
+    "potential_clients": "Potential clients",
+    "regular_visitors": "Regular visitors",
+    "no_dead_lock": "No dead clock",
+    "mentions": "Mentions in social networks, posters and thematic sites",
+    "useful_time": "Useful pastime",
+    "participate_in_dialogue": "Engaging in dialogue with the speaker rather than \"listening\"",
+    "networking": "Networking"
+  },
+  "best_speakers": {
+    "title": "Best speakers"
+  },
+  "company_statistics": {
+    "events_held": "events held",
+    "speakers": "speakers",
+    "connected_establishments": "connected establishments"
+  },
+  "footer": {
+    "upcoming_events": "Upcoming events",
+    "how_it_works": "How it works",
+    "reviews": "Reviews",
+    "photo_reports": "Photo reports",
+    "contacts": "Contacts"
   }
 }

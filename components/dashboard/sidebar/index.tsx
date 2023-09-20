@@ -1,3 +1,3 @@
 export const DashboardSidebar = () => {
-  return <>Hehe</>;
+  return <>Dashboard section</>;
 };

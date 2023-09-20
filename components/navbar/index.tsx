@@ -28,7 +28,9 @@ export function Navbar({ full }: { full?: boolean }) {
   return (
     <>
       <Box
-        bg={useColorModeValue("gray.100", "gray.900")}
+        bg={useColorModeValue("white", "gray.900")}
+        borderBottom={"1px"}
+        borderBottomColor={"gray.200"}
         position={"fixed"}
         w={"100vw"}
         px={4}

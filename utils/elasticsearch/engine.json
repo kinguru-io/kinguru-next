@@ -1,0 +1,22 @@
+{
+  "endpointBase": "https://search-ui-sandbox.ent.us-central1.gcp.cloud.es.io",
+  "engineName": "national-parks",
+  "searchKey": "search-nyxkw1fuqex9qjhfvatbqfmw",
+  "searchFields": ["topic", "description"],
+  "resultFields": [
+    "id",
+    "topic",
+    "description",
+    "poster",
+    "price",
+    "tags",
+    "starts",
+    "createdAt"
+  ],
+  "querySuggestFields": ["description"],
+  "titleField": "topic",
+  "urlField": "id",
+  "thumbnailField": "poster",
+  "sortFields": ["starts.keyword"],
+  "facets": ["createdAt.keyword", "tags.keyword", "price.keyword"]
+}

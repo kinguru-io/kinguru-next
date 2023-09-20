@@ -32,15 +32,6 @@ export function EventCard({
     poster: string | null;
     starts: Date;
     takenPlace: boolean;
-    place: {
-      id: string;
-      location: string;
-    };
-    initiator: {
-      id: string;
-      name: string | null;
-      image: string | null;
-    };
   };
 }) {
   const { t } = useLocale();
@@ -98,6 +89,7 @@ export function EventCard({
               {event.topic}
             </LinkOverlay>
           </Heading>
+          <Text>{event.starts.toLocaleDateString()}</Text>
           <Text color={"gray.500"} mt={2} textAlign={"left"}>
             {event.description}
           </Text>

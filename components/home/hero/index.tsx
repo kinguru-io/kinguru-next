@@ -44,12 +44,7 @@ export function HeroContent() {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
           >
-            <Highlight
-              query={t("company")}
-              styles={{ px: "2", py: "1", rounded: "full", bg: "red.100" }}
-            >
-              {t("hero.slug")}
-            </Highlight>
+            {t("hero.slug")}
           </Text>
           <Stripes />
           <Text
@@ -59,9 +54,14 @@ export function HeroContent() {
             lineHeight={1.2}
             fontSize={useBreakpointValue({ base: "xl", md: "2xl" })}
           >
-            {t("hero.description")}
+            <Highlight
+              query={t("company")}
+              styles={{ color: "brand.primary", fontWeight: "bold" }}
+            >
+              {t("hero.description")}
+            </Highlight>
           </Text>
-          <Skeleton isLoaded={status !== "loading"} marginX={"auto"}>
+          <Skeleton isLoaded={status !== "loading"} my={10} marginX={"auto"}>
             <SimpleGrid columns={[1, 2]} spacing={5}>
               <Button as={Link} variant={"primary"} href={"/events"}>
                 {t("hero.view_events")}

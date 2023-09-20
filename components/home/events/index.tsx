@@ -6,8 +6,8 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { EventCard } from "@/components/common/cards/eventCard";
 import { Stripes } from "@/components/common/stripes";
-import { EventCard } from "@/components/home/events/eventCard";
 import { trpc } from "@/utils/trpc";
 import { useLocale } from "@/utils/use-locale";
 

@@ -12,11 +12,11 @@ import {
   MenuItem,
   MenuList,
   Text,
-  useColorModeValue,
   VStack,
   Skeleton,
+  Input,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import { SearchBox } from "@elastic/react-search-ui";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { FiChevronDown, FiMenu } from "react-icons/fi";
@@ -46,7 +46,7 @@ export const NavSidebar = ({ onOpen, ...rest }: MobileProps) => {
       w={["100%", "calc(100% - var(--chakra-space-60))"]}
       height="20"
       alignItems="center"
-      justifyContent={{ base: "space-between", md: "flex-end" }}
+      justifyContent={{ base: "space-between", md: "space-between" }}
       {...rest}
     >
       <IconButton
@@ -56,19 +56,18 @@ export const NavSidebar = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-      <Box
-        as={Link}
-        display={{ base: "flex", md: "none" }}
-        mx={"auto"}
-        href={"/"}
-      >
-        <Image
-          src={"/img/logo_header.png"}
-          width={96}
-          height={72}
-          alt={t("company")}
-        />
-      </Box>
+      <SearchBox
+        autocompleteSuggestions={false}
+        debounceLength={0}
+        inputView={({ getInputProps }) => (
+          <Input
+            {...getInputProps({
+              placeholder: t("navbar.search_placeholder"),
+            })}
+            width={["auto", "auto", "auto", "xl"]}
+          />
+        )}
+      />
 
       <HStack spacing={{ base: "0", md: "6" }}>
         <Skeleton isLoaded={status !== "loading"}>
@@ -98,10 +97,7 @@ export const NavSidebar = ({ onOpen, ...rest }: MobileProps) => {
                     </Box>
                   </HStack>
                 </MenuButton>
-                <MenuList
-                  bg={useColorModeValue("white", "gray.900")}
-                  borderColor={useColorModeValue("gray.200", "gray.700")}
-                >
+                <MenuList bg={"white"} borderColor={"gray.200"}>
                   {userNavigation.map(({ name, href }) => (
                     <MenuItem as={Link} key={href} href={href}>
                       {name}
