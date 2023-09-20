@@ -76,6 +76,11 @@ const project = new web.NextJsTypeScriptProject({
     "react-infinite-scroll-component",
     "sharp",
     "moment",
+    "@elastic/search-ui",
+    "@elastic/search-ui-elasticsearch-connector",
+    "@elastic/react-search-ui",
+    "@elastic/react-search-ui-views",
+    "rc-pagination",
 
     "@prisma/instrumentation",
     "@opentelemetry/sdk-node",

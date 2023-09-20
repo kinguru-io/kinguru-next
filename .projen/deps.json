@@ -111,6 +111,22 @@
       "type": "runtime"
     },
     {
+      "name": "@elastic/react-search-ui",
+      "type": "runtime"
+    },
+    {
+      "name": "@elastic/react-search-ui-views",
+      "type": "runtime"
+    },
+    {
+      "name": "@elastic/search-ui",
+      "type": "runtime"
+    },
+    {
+      "name": "@elastic/search-ui-elasticsearch-connector",
+      "type": "runtime"
+    },
+    {
       "name": "@emotion/react",
       "type": "runtime"
     },
