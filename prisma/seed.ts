@@ -32,6 +32,7 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   ).map((index) => array[index]);
 };
 
+// @ts-ignore
 async function main() {
   const events = new Array(1000)
     .fill({})
@@ -143,7 +144,7 @@ async function main() {
                 participant: {
                   create: pickUniqueValues(
                     eventsCreated,
-                    Math.round(Math.random() * 3),
+                    Math.round(Math.random() * (eventsCreated.length - 400)),
                   ).map((unique) => ({
                     event: {
                       connect: {
@@ -201,12 +202,26 @@ async function main() {
     .filter((result) => result.status === "rejected")
     .forEach(console.log);
 }
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+//   });
+
+(async function () {
+  const users = await prisma.user.findMany();
+  return prisma.eventComment.createMany({
+    data: users.map((user) => ({
+      eventId: "clmunmlcn00004l6c1m1vukfa",
+      userId: user.id,
+      message: faker.lorem.paragraph(),
+    })),
+    skipDuplicates: true,
   });
+})()
+  .then(console.log)
+  .catch(console.log);

@@ -37,7 +37,15 @@
     "search_price": "Search by price",
     "free": "Free",
     "up_to_5_zl": "Up to 5 zl",
-    "from_5_to_10_zl": "From 5 to 10 zl"
+    "from_5_to_10_zl": "From 5 to 10 zl",
+    "meeting_about": "About the meeting",
+    "meeting_speakers": "Speakers",
+    "meeting_comments": "Comments",
+    "meeting_send_comment": "Send comment",
+    "meeting_send_comment_title": "Send comment for the event",
+    "meeting_send_comment_message": "Your comment message",
+    "meeting_send_comment_rating": "Event rating",
+    "meeting_send_comment_send": "Send comment"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",

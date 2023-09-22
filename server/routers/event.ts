@@ -3,6 +3,115 @@ import { z } from "zod";
 import { publicProcedure, t } from "../trpc";
 
 export const eventRouter = t.router({
+  getEventDetails: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const event = await ctx.prisma.event.findUnique({
+        where: {
+          id: input.eventId,
+        },
+        include: {
+          initiator: true,
+          place: true,
+          speakersOnEvent: {
+            include: {
+              speaker: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      return {
+        ...event,
+        takenPlace: moment(event?.starts).isBefore(),
+      };
+    }),
+  getEventSpeakers: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.event.findUnique({
+        where: {
+          id: input.eventId,
+        },
+        include: {
+          speakersOnEvent: {
+            include: {
+              speaker: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
+        },
+      });
+    }),
+  getEventComments: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).default(10),
+        cursor: z.string().nullish(),
+        eventId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input: { eventId, limit, cursor } }) => {
+      const items = await ctx.prisma.eventComment.findMany({
+        skip: cursor ? 1 : 0,
+        take: limit,
+        orderBy: {
+          createdAt: "desc",
+        },
+        where: { eventId },
+        cursor: cursor ? { id: cursor } : undefined,
+        include: { user: true },
+      });
+      return {
+        items,
+        nextCursor: items.length > 0 ? items[items.length - 1].id : undefined,
+      };
+    }),
+  sendEventComment: publicProcedure
+    .input(
+      z.object({
+        message: z.string(),
+        rating: z.number(),
+        eventId: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input: { eventId, message, rating } }) => {
+      if (!ctx.session?.user?.id) {
+        throw new Error("KR1001");
+      }
+      const event = await ctx.prisma.event.findUnique({
+        where: {
+          id: eventId,
+        },
+      });
+
+      if (moment(event?.starts).isBefore()) {
+        throw new Error("outdated event");
+      }
+
+      return ctx.prisma.eventComment.create({
+        data: {
+          eventId,
+          userId: ctx.session?.user?.id,
+          message,
+          rating,
+        },
+      });
+    }),
   upcoming: publicProcedure
     .input(
       z
@@ -227,7 +336,7 @@ export const eventRouter = t.router({
     )
     .query(async ({ ctx, input: { eventId } }) => {
       if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
+        return false;
       }
 
       const userOnEvent = await ctx.prisma.usersOnEvent.findUnique({

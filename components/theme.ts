@@ -16,6 +16,28 @@ export const theme = extendTheme({
         invitation: {},
       },
     },
+    Tag: {
+      variants: {
+        eventDetails: {
+          border: "2px solid rgb(123, 123, 123)",
+          borderRadius: "md",
+          color: "red",
+          px: 3,
+          py: 2,
+          boxSizing: "border-box",
+        },
+      },
+    },
+    Divider: {
+      variants: {
+        eventDetails: {
+          maxWidth: "72px",
+          height: "5px",
+          background: "brand.primary",
+          opacity: 1,
+        },
+      },
+    },
     Heading: {
       variants: {
         brand: {
@@ -30,6 +52,12 @@ export const theme = extendTheme({
           fontWeight: 400,
           fontSize: "4xl",
           textAlign: "center",
+          color: "gray.100",
+        },
+        eventDescription: {
+          fontWeight: 700,
+          fontSize: "2xl",
+          textAlign: "left",
           color: "gray.100",
         },
       },
