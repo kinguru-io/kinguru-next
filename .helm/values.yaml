@@ -1,0 +1,13 @@
+image:
+  pullSecret: __PULL_SECRET__
+
+ingress:
+  hostname: __HOSTNAME__
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 768Mi

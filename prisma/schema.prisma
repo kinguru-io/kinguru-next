@@ -3,13 +3,6 @@ generator client {
   previewFeatures = ["tracing"]
 }
 
-generator trpc {
-  provider          = "prisma-zod-generator"
-  isGenerateSelect  = true
-  isGenerateInclude = true
-  output            = "../server/generated"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
