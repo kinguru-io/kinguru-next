@@ -9,6 +9,8 @@ const project = new web.NextJsTypeScriptProject({
 
   defaultReleaseBranch: "main",
   release: false,
+  workflowNodeVersion: "18.x",
+  workflowPackageCache: true,
 
   projenrcTs: true,
   tailwind: false,
