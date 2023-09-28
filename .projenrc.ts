@@ -11,6 +11,11 @@ const project = new web.NextJsTypeScriptProject({
   release: false,
   workflowNodeVersion: "18.x",
   workflowPackageCache: true,
+  autoMerge: true,
+  autoApproveOptions: {
+    allowedUsernames: ["dependabot"],
+  },
+  autoApproveUpgrades: true,
 
   projenrcTs: true,
   tailwind: false,
