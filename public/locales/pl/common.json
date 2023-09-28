@@ -11,7 +11,8 @@
     "your_profile": "Your profile",
     "sign_out": "Sign out",
     "settings": "Settings",
-    "open_user_manu": "Open user menu"
+    "open_user_manu": "Open user menu",
+    "search_placeholder": "..."
   },
   "hero": {
     "slug": "Never eat alone!",
@@ -26,7 +27,25 @@
     "more_about": "More about",
     "not_found": "No events found",
     "join": "Join",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "search_tags": "Search by tags",
+    "search_starts": "Search by date",
+    "start_today_or_tomorrow": "today or tomorrow",
+    "start_this_week": "this week",
+    "start_this_month": "this month",
+    "start_this_year": "this year",
+    "search_price": "Search by price",
+    "free": "Free",
+    "up_to_5_zl": "Up to 5 zl",
+    "from_5_to_10_zl": "From 5 to 10 zl",
+    "meeting_about": "About the meeting",
+    "meeting_speakers": "Speakers",
+    "meeting_comments": "Comments",
+    "meeting_send_comment": "Send comment",
+    "meeting_send_comment_title": "Send comment for the event",
+    "meeting_send_comment_message": "Your comment message",
+    "meeting_send_comment_rating": "Event rating",
+    "meeting_send_comment_send": "Send comment"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",
