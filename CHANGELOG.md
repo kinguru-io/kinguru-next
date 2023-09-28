@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/kinguru-io/kinguru-next/compare/v0.2.0...v0.3.0) (2023-09-28)
+
+
+### Features
+
+* add auto-approve updates ([7196006](https://github.com/kinguru-io/kinguru-next/commit/7196006a2a976ff9edd1414f5543d996ad94c2fb))
+
 # [0.2.0](https://github.com/kinguru-io/kinguru-next/compare/v0.1.0...v0.2.0) (2023-09-28)
 
 
