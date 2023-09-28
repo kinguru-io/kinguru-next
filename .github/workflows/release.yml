@@ -49,6 +49,6 @@ jobs:
         run: |
           . $(werf ci-env github --as-file)
           werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
-          werf build --repo ghcr.io/kinguru-io/kinguru-next
+          werf build
         env:
           WERF_ENV: production
