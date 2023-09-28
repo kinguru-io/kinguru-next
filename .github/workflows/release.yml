@@ -36,7 +36,7 @@ jobs:
     needs:
       - semver
     permissions:
-      contents: write
+      contents: read
       packages: write
     steps:
       - name: Checkout
@@ -48,6 +48,7 @@ jobs:
       - name: Run script
         run: |
           . $(werf ci-env github --as-file)
+          werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
           werf build --repo ghcr.io/kinguru-io/kinguru-next
         env:
           WERF_ENV: production
