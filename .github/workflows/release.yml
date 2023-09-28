@@ -27,7 +27,10 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: release
-        run: npx semantic-release-plus
+        run: >-
+          for dir in ".helm" "." ; do
+            pushd $dir; npx semantic-release-plus; popd
+          done
   werf:
     runs-on: ubuntu-latest
     needs:
