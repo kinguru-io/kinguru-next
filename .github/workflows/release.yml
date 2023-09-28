@@ -48,6 +48,6 @@ jobs:
       - name: Run script
         run: |
           . $(werf ci-env github --as-file)
-          werf build
+          werf build --repo ghcr.io/kinguru-io/kinguru-next
         env:
           WERF_ENV: production
