@@ -1,5 +1,12 @@
-import { Box, BoxProps, CloseButton, Flex } from "@chakra-ui/react";
-import { Facet } from "@elastic/react-search-ui";
+import {
+  Box,
+  BoxProps,
+  CloseButton,
+  Flex,
+  FormControl,
+  Select,
+} from "@chakra-ui/react";
+import { Facet, Sorting } from "@elastic/react-search-ui";
 import Image from "next/image";
 import Link from "next/link";
 import { MultiCheckboxFacet } from "@/components/events/facets";
@@ -11,6 +18,21 @@ export interface SidebarProps extends BoxProps {
 
 export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
   const { t } = useLocale();
+  const SORT_OPTIONS = [
+    {
+      name: t("events.sort_by_relevance"),
+      value: [],
+    },
+    {
+      name: t("events.sort_by_start_date"),
+      value: [
+        {
+          field: "starts",
+          direction: "asc",
+        },
+      ],
+    },
+  ];
   return (
     <Box
       transition="3s ease"
@@ -30,6 +52,33 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
         </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
+      <Sorting
+        label={t("event.sorting")}
+        sortOptions={SORT_OPTIONS}
+        view={(props) => {
+          return (
+            <FormControl w={"90%"} m={"auto"} pb={2}>
+              <Select
+                placeholder={props.label}
+                onChange={(event) => {
+                  return event.target.value !== undefined
+                    ? props.onChange(event.target.value)
+                    : null;
+                }}
+              >
+                {props.options.map((option) => (
+                  <option
+                    data-transaction-name={"sorting"}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+          );
+        }}
+      />
       <Facet
         field={"tags.keyword"}
         label={t("events.search_tags")}

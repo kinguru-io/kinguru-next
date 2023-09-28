@@ -17,6 +17,6 @@
   "titleField": "topic",
   "urlField": "id",
   "thumbnailField": "poster",
-  "sortFields": ["starts.keyword"],
+  "sortFields": ["starts"],
   "facets": ["createdAt.keyword", "tags.keyword", "price.keyword"]
 }
