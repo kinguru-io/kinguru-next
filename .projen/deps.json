@@ -74,16 +74,7 @@
       "type": "build"
     },
     {
-      "name": "prisma-zod-generator",
-      "type": "build"
-    },
-    {
       "name": "projen",
-      "type": "build"
-    },
-    {
-      "name": "standard-version",
-      "version": "^9",
       "type": "build"
     },
     {

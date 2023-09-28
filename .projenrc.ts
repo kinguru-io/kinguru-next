@@ -8,7 +8,7 @@ const project = new web.NextJsTypeScriptProject({
   authorEmail: "yersh.maks@gmail.com",
 
   defaultReleaseBranch: "main",
-  release: true,
+  release: false,
 
   projenrcTs: true,
   tailwind: false,
@@ -96,7 +96,6 @@ const project = new web.NextJsTypeScriptProject({
   ],
   devDeps: [
     "prisma",
-    "prisma-zod-generator",
     "@faker-js/faker",
     "@types/node@20",
     "@next/eslint-plugin-next",
