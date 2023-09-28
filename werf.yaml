@@ -1,0 +1,30 @@
+project: kinguru-next
+configVersion: 1
+---
+image: kinguru-next
+from: node:18-alpine
+git:
+  - add: /
+    to: /app
+    includePaths:
+      - next*
+      - tsconfig*
+      - package*
+      - instrumentation*
+      - global*
+      - .projen*
+      - .eslintrc.json
+      - utils/*
+      - server/*
+      - public/*
+      - prisma/*
+      - pages/*
+      - components/*
+shell:
+  beforeInstall:
+    - apk add --no-cache libc6-compat
+  install:
+    - npm install
+    - npx prisma generate
+  setup:
+    - npm run build
