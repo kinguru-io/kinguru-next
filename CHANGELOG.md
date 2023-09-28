@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/kinguru-io/kinguru-next/compare/v0.1.0...v0.2.0) (2023-09-28)
+
+
+### Features
+
+* update Polish translations ([1f46dcd](https://github.com/kinguru-io/kinguru-next/commit/1f46dcdc80d51d778711032a4ec879475989ce5b))
+
 # [0.1.0](https://github.com/kinguru-io/kinguru-next/compare/v0.0.6...v0.1.0) (2023-09-28)
 
 
