@@ -1,9 +1,7 @@
 const { i18n } = require("./next-i18next.config");
-const nextBuildId = require("next-build-id");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  generateBuildId: () => nextBuildId({ dir: __dirname, describe: true }),
   reactStrictMode: true,
   i18n,
   images: {

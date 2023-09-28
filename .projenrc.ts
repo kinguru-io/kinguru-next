@@ -56,7 +56,6 @@ const project = new web.NextJsTypeScriptProject({
     "@trpc/react-query",
     "trpc-shield",
     "next-auth",
-    "next-build-id",
     "@tanstack/react-query",
     "@tanstack/react-query-devtools",
     "zod",
@@ -102,6 +101,12 @@ const project = new web.NextJsTypeScriptProject({
     "@types/node@20",
     "@next/eslint-plugin-next",
     "classnames",
+    "@google/semantic-release-replace-plugin@1.2.0",
+    "@semantic-release/changelog",
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/git",
+    "@semantic-release/release-notes-generator",
+    "semantic-release-plus",
   ],
 });
 

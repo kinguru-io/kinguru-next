@@ -5,7 +5,28 @@
       "type": "build"
     },
     {
+      "name": "@google/semantic-release-replace-plugin",
+      "version": "1.2.0",
+      "type": "build"
+    },
+    {
       "name": "@next/eslint-plugin-next",
+      "type": "build"
+    },
+    {
+      "name": "@semantic-release/changelog",
+      "type": "build"
+    },
+    {
+      "name": "@semantic-release/commit-analyzer",
+      "type": "build"
+    },
+    {
+      "name": "@semantic-release/git",
+      "type": "build"
+    },
+    {
+      "name": "@semantic-release/release-notes-generator",
       "type": "build"
     },
     {
@@ -75,6 +96,10 @@
     },
     {
       "name": "projen",
+      "type": "build"
+    },
+    {
+      "name": "semantic-release-plus",
       "type": "build"
     },
     {
@@ -211,10 +236,6 @@
     },
     {
       "name": "next-auth",
-      "type": "runtime"
-    },
-    {
-      "name": "next-build-id",
       "type": "runtime"
     },
     {

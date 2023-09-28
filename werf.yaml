@@ -1,7 +1,7 @@
-project: kinguru-next
+project: kinguru
 configVersion: 1
 ---
-image: kinguru-next
+image: kinguru
 from: node:18-alpine
 git:
   - add: /
@@ -24,7 +24,9 @@ shell:
   beforeInstall:
     - apk add --no-cache libc6-compat
   install:
+    - cd app
     - npm install
     - npx prisma generate
   setup:
+    - cd app
     - npm run build

@@ -1,0 +1,50 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  semver:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set git identity
+        run: |-
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install dependencies
+        run: npm i
+      - name: release
+        run: npx semantic-release-plus
+  werf:
+    runs-on: ubuntu-latest
+    needs:
+      - semver
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install werf
+        uses: werf/actions/install@v1.2
+      - name: Run script
+        run: |
+          . $(werf ci-env github --as-file)
+          werf build
+        env:
+          WERF_ENV: production
