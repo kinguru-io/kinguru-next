@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
-    "@google/semantic-release-replace-plugin": "1.2.0",
+    "@google/semantic-release-replace-plugin": "1.2.7",
     "@next/eslint-plugin-next": "^13.4.12",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.0.0",
