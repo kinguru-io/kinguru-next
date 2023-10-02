@@ -1,3 +1,11 @@
+## [0.3.5](https://github.com/kinguru-io/kinguru-next/compare/v0.3.4...v0.3.5) (2023-10-02)
+
+
+### Bug Fixes
+
+* add `cacheVersion` property for werf ([1cb8c5e](https://github.com/kinguru-io/kinguru-next/commit/1cb8c5e7847f0fb0232d6b8c032dfd252a08cacb))
+* auto approve allowed usernames ([df3f194](https://github.com/kinguru-io/kinguru-next/commit/df3f1942ddb1f370e880e8eb35c0d178ef937c32))
+
 ## [0.3.4](https://github.com/kinguru-io/kinguru-next/compare/v0.3.3...v0.3.4) (2023-10-02)
 
 
