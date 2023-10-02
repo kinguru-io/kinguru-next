@@ -1,3 +1,11 @@
+## [1.1.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.5...chart-v1.1.6) (2023-10-02)
+
+
+### Bug Fixes
+
+* add migration job ([91d89dc](https://github.com/kinguru-io/kinguru-next/commit/91d89dc682d2a1cbeb4b0615686223d32c39eaec))
+* change cert-manager annotation ([4ec01dd](https://github.com/kinguru-io/kinguru-next/commit/4ec01dd650f9945b9fb55a5b07a126b556b630cb))
+
 ## [1.1.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.4...chart-v1.1.5) (2023-10-02)
 
 
