@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.6...chart-v1.1.7) (2023-10-02)
+
+
+### Bug Fixes
+
+* add imagepullsecrets section for migrate job ([d6ba7e3](https://github.com/kinguru-io/kinguru-next/commit/d6ba7e33d1ddd0f57270cb3cf91ed7da4147e70d))
+
 ## [1.1.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.5...chart-v1.1.6) (2023-10-02)
 
 
