@@ -11,15 +11,12 @@ docker:
     NEXT_PUBLIC_ELASTICSEARCH_API_KEY: {{ env "NEXT_PUBLIC_ELASTICSEARCH_API_KEY" }}
     NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: {{ env "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT" }}
 shell:
-  beforeInstallCacheVersion: 2
   beforeInstall:
     - apk add --no-cache libc6-compat
-  installCacheVersion: 2
   install:
     - cd app
     - npm install
     - npx prisma generate
-  setupCacheVersion: 2
   setup:
     - cd app
     - npm run build
