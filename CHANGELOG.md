@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/kinguru-io/kinguru-next/compare/v0.3.2...v0.3.3) (2023-10-02)
+
+
+### Bug Fixes
+
+* add public runtime config extension ([2022913](https://github.com/kinguru-io/kinguru-next/commit/202291390613548c80872e5c16297e76c7dfcb3c))
+
 ## [0.3.2](https://github.com/kinguru-io/kinguru-next/compare/v0.3.1...v0.3.2) (2023-10-02)
 
 
