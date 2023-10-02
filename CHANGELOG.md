@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/kinguru-io/kinguru-next/compare/v0.3.0...v0.3.1) (2023-10-02)
+
+
+### Bug Fixes
+
+* add search endpoint for application ([2ae7500](https://github.com/kinguru-io/kinguru-next/commit/2ae75000113f5f68c20c034331c75b5d9e4c4c46))
+
 # [0.3.0](https://github.com/kinguru-io/kinguru-next/compare/v0.2.0...v0.3.0) (2023-09-28)
 
 
