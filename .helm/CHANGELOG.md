@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.0...chart-v1.1.1) (2023-10-02)
+
+
+### Bug Fixes
+
+* add command and args for deployment ([e19cc64](https://github.com/kinguru-io/kinguru-next/commit/e19cc64cedca4778c40eceae2a3d54bbb978cc9e))
+
 # [1.1.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.0.0...chart-v1.1.0) (2023-10-02)
 
 
