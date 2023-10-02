@@ -11,7 +11,7 @@ import { useLocale } from "@/utils/use-locale.ts";
 export default function Events() {
   const { t } = useLocale();
   const connector = new ElasticsearchAPIConnector({
-    host: "http://localhost:9200",
+    host: process.env.NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT,
     index: "kinguru.public.event",
   });
   const combinedConfig = useNextRouting(
