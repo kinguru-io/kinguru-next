@@ -13,7 +13,7 @@ const project = new web.NextJsTypeScriptProject({
   workflowPackageCache: true,
   autoMerge: true,
   autoApproveOptions: {
-    allowedUsernames: ["dependabot"],
+    allowedUsernames: ["dependabot[bot]"],
   },
   autoApproveUpgrades: true,
 
