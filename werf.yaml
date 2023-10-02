@@ -7,12 +7,15 @@ git:
   - add: /
     to: /app
 shell:
+  beforeInstallCacheVersion: 2
   beforeInstall:
     - apk add --no-cache libc6-compat
+  installCacheVersion: 2
   install:
     - cd app
     - npm install
     - npx prisma generate
+  setupCacheVersion: 2
   setup:
     - cd app
     - npm run build
