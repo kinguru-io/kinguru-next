@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/kinguru-io/kinguru-next/compare/v0.3.3...v0.3.4) (2023-10-02)
+
+
+### Bug Fixes
+
+* remove werf includePaths ([626c2a2](https://github.com/kinguru-io/kinguru-next/commit/626c2a22b7a9efc5799f6c0ed506dd6ea00fb923))
+
 ## [0.3.3](https://github.com/kinguru-io/kinguru-next/compare/v0.3.2...v0.3.3) (2023-10-02)
 
 
