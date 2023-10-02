@@ -1,0 +1,6 @@
+giterminismConfigVersion: 1
+config:
+  goTemplateRendering:
+    allowEnvVariables:
+      - NEXT_PUBLIC_ELASTICSEARCH_API_KEY
+      - NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT

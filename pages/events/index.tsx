@@ -1,6 +1,5 @@
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
 import moment from "moment/moment";
-import getConfig from "next/config";
 import { Search } from "@/components/events/search";
 import {
   buildFacetConfigFromConfig,
@@ -9,13 +8,11 @@ import {
 import { useNextRouting } from "@/utils/elasticsearch/useNextRouting.tsx";
 import { useLocale } from "@/utils/use-locale.ts";
 
-const { publicRuntimeConfig } = getConfig();
-
 export default function Events() {
   const { t } = useLocale();
   const connector = new ElasticsearchAPIConnector({
-    host: publicRuntimeConfig.elasticSearchEndpoint,
-    apiKey: publicRuntimeConfig.elasticSearchApiKey,
+    host: process.env.NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT,
+    apiKey: process.env.NEXT_PUBLIC_ELASTICSEARCH_API_KEY,
     index: "kinguru.public.event",
   });
   const combinedConfig = useNextRouting(
