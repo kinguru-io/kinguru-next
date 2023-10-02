@@ -12,6 +12,7 @@ export default function Events() {
   const { t } = useLocale();
   const connector = new ElasticsearchAPIConnector({
     host: process.env.NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT,
+    apiKey: process.env.NEXT_PUBLIC_ELASTICSEARCH_API_KEY,
     index: "kinguru.public.event",
   });
   const combinedConfig = useNextRouting(
