@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: {{ $.Release.Name }}
     app.kubernetes.io/managed-by: {{ $.Release.Service }}
   annotations:
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    certmanager.k8s.io/cluster-issuer: letsencrypt-tls
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
 spec:
   tls:
