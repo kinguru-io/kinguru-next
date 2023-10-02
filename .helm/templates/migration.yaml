@@ -17,6 +17,8 @@ spec:
       name: {{ .Release.Name }}-migration
     spec:
       restartPolicy: Never
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
       containers:
         - name: migration
           image: {{ .Values.werf.image.kinguru }}
