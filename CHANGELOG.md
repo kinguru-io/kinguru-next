@@ -1,3 +1,10 @@
+## [0.3.7](https://github.com/kinguru-io/kinguru-next/compare/v0.3.6...v0.3.7) (2023-10-02)
+
+
+### Bug Fixes
+
+* provide build args into docker-env section ([af1976b](https://github.com/kinguru-io/kinguru-next/commit/af1976b3378278f74ee57043b52f95be29dd5d58))
+
 ## [0.3.6](https://github.com/kinguru-io/kinguru-next/compare/v0.3.5...v0.3.6) (2023-10-02)
 
 
