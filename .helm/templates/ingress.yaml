@@ -15,7 +15,7 @@ spec:
   tls:
     - hosts:
         - {{ $.Values.ingress.hostname }}
-      secretName: {{ .Chart.Name }}-letsencrypt-{{ .Values.werf.env }}
+      secretName: letsencrypt-tls
   rules:
     - host: {{ $.Values.ingress.hostname }}
       http:
