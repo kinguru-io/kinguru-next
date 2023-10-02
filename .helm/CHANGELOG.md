@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.3...chart-v1.1.4) (2023-10-02)
+
+
+### Bug Fixes
+
+* add valid ingress class name ([d16b978](https://github.com/kinguru-io/kinguru-next/commit/d16b9787500e13ec168fcba619f23b5960367f55))
+
 ## [1.1.3](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.2...chart-v1.1.3) (2023-10-02)
 
 
