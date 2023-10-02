@@ -25,6 +25,8 @@ spec:
         - name: {{ .Release.Name }}-app
           image: {{ .Values.werf.image.kinguru }}
           imagePullPolicy: IfNotPresent
+          command: ["npx"]
+          args: ["next", "start"]
           env:
             - name: "REACT_APP_ENVIRONMENT"
               value: "PROD"
