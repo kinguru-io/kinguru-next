@@ -17,6 +17,10 @@ const nextConfig = {
   experimental: {
     instrumentationHook: true,
   },
+  publicRuntimeConfig: {
+    elasticSearchApiKey: process.env.ELASTICSEARCH_API_KEY,
+    elasticSearchEndpoint: process.env.ELASTICSEARCH_ENDPOINT,
+  },
   productionBrowserSourceMaps: true,
 };
 
