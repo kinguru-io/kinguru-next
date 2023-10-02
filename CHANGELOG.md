@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/kinguru-io/kinguru-next/compare/v0.3.1...v0.3.2) (2023-10-02)
+
+
+### Bug Fixes
+
+* add elasticsearch readonly key management ([8e7fce9](https://github.com/kinguru-io/kinguru-next/commit/8e7fce9264d976870d303ab4628560a2cc29f558))
+
 ## [0.3.1](https://github.com/kinguru-io/kinguru-next/compare/v0.3.0...v0.3.1) (2023-10-02)
 
 
