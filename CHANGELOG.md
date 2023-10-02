@@ -1,3 +1,11 @@
+## [0.3.6](https://github.com/kinguru-io/kinguru-next/compare/v0.3.5...v0.3.6) (2023-10-02)
+
+
+### Bug Fixes
+
+* add build-args for werf converge ([daf0515](https://github.com/kinguru-io/kinguru-next/commit/daf0515f367c3433665aa7b28a7092cac03ae83b))
+* add new merge request approve ([37c8928](https://github.com/kinguru-io/kinguru-next/commit/37c892870a01fdd9334ae91c9cf0cd2efb79daf9))
+
 ## [0.3.5](https://github.com/kinguru-io/kinguru-next/compare/v0.3.4...v0.3.5) (2023-10-02)
 
 
