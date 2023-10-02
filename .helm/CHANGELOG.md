@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.0.0...chart-v1.1.0) (2023-10-02)
+
+
+### Features
+
+* add initial deployment ([#16](https://github.com/kinguru-io/kinguru-next/issues/16)) ([951665d](https://github.com/kinguru-io/kinguru-next/commit/951665d8c591ea0194ea37eaddd355e6a456c363))
+
 # 1.0.0 (2023-09-28)
 
 
