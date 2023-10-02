@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.4...chart-v1.1.5) (2023-10-02)
+
+
+### Bug Fixes
+
+* rename secret name for ingress cert ([910722f](https://github.com/kinguru-io/kinguru-next/commit/910722f635751d386a92873117ef7d05cfa0ced0))
+
 ## [1.1.4](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.3...chart-v1.1.4) (2023-10-02)
 
 
