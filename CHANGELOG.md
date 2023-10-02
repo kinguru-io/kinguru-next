@@ -1,3 +1,10 @@
+## [0.3.8](https://github.com/kinguru-io/kinguru-next/compare/v0.3.7...v0.3.8) (2023-10-02)
+
+
+### Bug Fixes
+
+* remove cache verions from werf ([484f980](https://github.com/kinguru-io/kinguru-next/commit/484f980a4cd3b3917b6901277e05618e25f47e17))
+
 ## [0.3.7](https://github.com/kinguru-io/kinguru-next/compare/v0.3.6...v0.3.7) (2023-10-02)
 
 
