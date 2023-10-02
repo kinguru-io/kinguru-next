@@ -6,20 +6,6 @@ from: node:18-alpine
 git:
   - add: /
     to: /app
-    includePaths:
-      - next*
-      - tsconfig*
-      - package*
-      - instrumentation*
-      - global*
-      - .projen*
-      - .eslintrc.json
-      - utils/*
-      - server/*
-      - public/*
-      - prisma/*
-      - pages/*
-      - components/*
 shell:
   beforeInstall:
     - apk add --no-cache libc6-compat
