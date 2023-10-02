@@ -4,6 +4,10 @@ image:
 ingress:
   hostname: __HOSTNAME__
 
+defaultReplicas: 2
+
+environment: {}
+
 resources:
   requests:
     cpu: 100m
