@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.2...chart-v1.1.3) (2023-10-02)
+
+
+### Bug Fixes
+
+* remove liveness & readiness probes ([14df3f7](https://github.com/kinguru-io/kinguru-next/commit/14df3f7bd3f7bade38665808bdc9f7c3de2265cb))
+
 ## [1.1.2](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.1...chart-v1.1.2) (2023-10-02)
 
 
