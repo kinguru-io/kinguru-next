@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/kinguru-io/kinguru-next/compare/v0.3.14...v0.4.0) (2023-10-03)
+
+
+### Features
+
+* add static website generation snippets ([d595f46](https://github.com/kinguru-io/kinguru-next/commit/d595f46d8439e12e2c32d4208bf0963a17180e27))
+
 ## [0.3.14](https://github.com/kinguru-io/kinguru-next/compare/v0.3.13...v0.3.14) (2023-10-03)
 
 
