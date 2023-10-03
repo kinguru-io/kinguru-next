@@ -1,3 +1,10 @@
+## [0.4.4](https://github.com/kinguru-io/kinguru-next/compare/v0.4.3...v0.4.4) (2023-10-03)
+
+
+### Bug Fixes
+
+* event details guests section ([d2d9754](https://github.com/kinguru-io/kinguru-next/commit/d2d9754120de74664fde8748a6bd41de2b75ff48))
+
 ## [0.4.3](https://github.com/kinguru-io/kinguru-next/compare/v0.4.2...v0.4.3) (2023-10-03)
 
 
