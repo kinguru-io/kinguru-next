@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/kinguru-io/kinguru-next/compare/v0.4.0...v0.4.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* rename import for ssg module ([e968275](https://github.com/kinguru-io/kinguru-next/commit/e96827560a94db078d20fc7ff9ac8f1fe39c4899))
+
 # [0.4.0](https://github.com/kinguru-io/kinguru-next/compare/v0.3.14...v0.4.0) (2023-10-03)
 
 
