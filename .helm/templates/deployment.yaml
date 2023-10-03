@@ -28,8 +28,8 @@ spec:
           command: ["/bin/ash", "-c", "--"]
           args: ["cd app && npm run server"]
           env:
-            - name: "REACT_APP_ENVIRONMENT"
-              value: "PROD"
+            - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
+              value: "http://tempo.observability.svc.cluster.local:4318/"
           envFrom:
             - secretRef:
                 name: kr-prod-environment-vars
