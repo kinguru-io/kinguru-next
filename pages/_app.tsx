@@ -1,10 +1,12 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import App, { AppContext, AppInitialProps, AppProps } from "next/app";
+import { GetStaticPropsContext } from "next";
+import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation, SSRConfig } from "next-i18next";
 import { ComponentProps } from "react";
 import { theme } from "@/components/theme";
+import { ssgInit } from "@/server/ssg-init.ts";
 import { trpc } from "@/utils/trpc";
 
 const I18nextAdapter = appWithTranslation<
@@ -46,11 +48,17 @@ function MainApp({
   );
 }
 
-MainApp.getInitialProps = async (
-  context: AppContext,
-): Promise<AppInitialProps> => {
-  const ctx = await App.getInitialProps(context);
-  return { ...ctx };
-};
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const ssg = await ssgInit(context);
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      filter: (context.params?.filter as string) ?? "all",
+      locale: context.locale ?? context.defaultLocale,
+      locales: context.locales ?? ["pl", "en"],
+    },
+    revalidate: 1,
+  };
+}
 
 export default trpc.withTRPC(MainApp);
