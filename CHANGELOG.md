@@ -1,3 +1,10 @@
+## [0.3.13](https://github.com/kinguru-io/kinguru-next/compare/v0.3.12...v0.3.13) (2023-10-03)
+
+
+### Bug Fixes
+
+* sidebar image width & height ([0e18864](https://github.com/kinguru-io/kinguru-next/commit/0e188643146bd956de7afbb3380827bef31caff7))
+
 ## [0.3.12](https://github.com/kinguru-io/kinguru-next/compare/v0.3.11...v0.3.12) (2023-10-03)
 
 
