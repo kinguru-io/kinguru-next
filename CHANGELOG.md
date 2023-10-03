@@ -1,3 +1,10 @@
+## [0.3.9](https://github.com/kinguru-io/kinguru-next/compare/v0.3.8...v0.3.9) (2023-10-03)
+
+
+### Bug Fixes
+
+* add werf stage dependencies ([b650c26](https://github.com/kinguru-io/kinguru-next/commit/b650c261dbbd56e2881b06c2e222b86a9b8c90c8))
+
 ## [0.3.8](https://github.com/kinguru-io/kinguru-next/compare/v0.3.7...v0.3.8) (2023-10-02)
 
 
