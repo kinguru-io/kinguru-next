@@ -1,3 +1,10 @@
+## [0.3.14](https://github.com/kinguru-io/kinguru-next/compare/v0.3.13...v0.3.14) (2023-10-03)
+
+
+### Bug Fixes
+
+* disable serverside rendering ([83a41cc](https://github.com/kinguru-io/kinguru-next/commit/83a41cc78beceafcdd171687e11894fb1bcf5d41))
+
 ## [0.3.13](https://github.com/kinguru-io/kinguru-next/compare/v0.3.12...v0.3.13) (2023-10-03)
 
 
