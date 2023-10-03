@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.7...chart-v1.1.8) (2023-10-03)
+
+
+### Bug Fixes
+
+* add otel exporter endpoint ([bdce1c3](https://github.com/kinguru-io/kinguru-next/commit/bdce1c3a3752dd8daafe03eafed670ad2ec0d0f5))
+
 ## [1.1.7](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.6...chart-v1.1.7) (2023-10-02)
 
 
