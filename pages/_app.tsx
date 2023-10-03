@@ -6,7 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { appWithTranslation, SSRConfig } from "next-i18next";
 import { ComponentProps } from "react";
 import { theme } from "@/components/theme";
-import { ssgInit } from "@/server/ssg-init.ts";
+import { ssgInit } from "@/server/ssg-init";
 import { trpc } from "@/utils/trpc";
 
 const I18nextAdapter = appWithTranslation<
