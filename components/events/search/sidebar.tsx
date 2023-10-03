@@ -43,12 +43,7 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Box as={Link} mx={"auto"} href={"/"}>
-          <Image
-            src={"/img/logo_header.png"}
-            width={112}
-            height={72}
-            alt={t("company")}
-          />
+          <Image src={"/img/logo_header.png"} alt={t("company")} />
         </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
