@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/kinguru-io/kinguru-next/compare/v0.4.1...v0.4.2) (2023-10-03)
+
+
+### Bug Fixes
+
+* remove props from main app component ([6f09d69](https://github.com/kinguru-io/kinguru-next/commit/6f09d6905bd9153533fe3aeac219df8dc8b71a60))
+
 ## [0.4.1](https://github.com/kinguru-io/kinguru-next/compare/v0.4.0...v0.4.1) (2023-10-03)
 
 
