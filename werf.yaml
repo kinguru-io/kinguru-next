@@ -2,26 +2,7 @@ project: kinguru
 configVersion: 1
 ---
 image: kinguru
-from: node:18-alpine
-git:
-  - add: /
-    to: /app
-    stageDependencies:
-      install:
-        - package-lock.json
-        - projen/**/*.json
-        - prisma/schema.prisma
-docker:
-  ENV:
-    NEXT_PUBLIC_ELASTICSEARCH_API_KEY: {{ env "NEXT_PUBLIC_ELASTICSEARCH_API_KEY" }}
-    NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: {{ env "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT" }}
-shell:
-  beforeInstall:
-    - apk add --no-cache libc6-compat
-  install:
-    - cd app
-    - npm install
-    - npx prisma generate
-  setup:
-    - cd app
-    - npm run build
+dockerfile: Dockerfile
+args:
+  NEXT_PUBLIC_ELASTICSEARCH_API_KEY: {{ env "NEXT_PUBLIC_ELASTICSEARCH_API_KEY" }}
+  NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: {{ env "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT" }}

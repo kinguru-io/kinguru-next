@@ -1,3 +1,11 @@
+.docker
+.github
+.helm
 .next
 node_modules
-Dockerfile
+.env
+CHANGELOG.md
+docker-compose.yml
+README.md
+release.config.js
+setup-debezium.http
