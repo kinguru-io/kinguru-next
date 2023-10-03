@@ -6,6 +6,11 @@ from: node:18-alpine
 git:
   - add: /
     to: /app
+    stageDependencies:
+      install:
+        - package-lock.json
+        - projen/**/*.json
+        - prisma/schema.prisma
 docker:
   ENV:
     NEXT_PUBLIC_ELASTICSEARCH_API_KEY: {{ env "NEXT_PUBLIC_ELASTICSEARCH_API_KEY" }}
