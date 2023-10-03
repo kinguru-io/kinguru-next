@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppProps } from "next/app";
+import App, { AppContext, AppInitialProps, AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { appWithTranslation, SSRConfig } from "next-i18next";
 import { ComponentProps } from "react";
@@ -30,7 +30,10 @@ const I18nProvider = (props: AppProps) => {
   return <I18nextAdapter {...passedProps} />;
 };
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MainApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <I18nProvider {...pageProps}>
       <SessionProvider session={pageProps.session}>
@@ -43,4 +46,11 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   );
 }
 
-export default trpc.withTRPC(App);
+MainApp.getInitialProps = async (
+  context: AppContext,
+): Promise<AppInitialProps> => {
+  const ctx = await App.getInitialProps(context);
+  return { ...ctx };
+};
+
+export default trpc.withTRPC(MainApp);
