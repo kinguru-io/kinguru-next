@@ -1,3 +1,10 @@
+## [0.3.10](https://github.com/kinguru-io/kinguru-next/compare/v0.3.9...v0.3.10) (2023-10-03)
+
+
+### Bug Fixes
+
+* add werf dockerfile ([293bbd4](https://github.com/kinguru-io/kinguru-next/commit/293bbd4a010ceb675af8281c257a24d5af1f50f5))
+
 ## [0.3.9](https://github.com/kinguru-io/kinguru-next/compare/v0.3.8...v0.3.9) (2023-10-03)
 
 
