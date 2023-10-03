@@ -188,25 +188,13 @@
           "exec": "npm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@google/semantic-release-replace-plugin,@types/node'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@google/semantic-release-replace-plugin,@types/node'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@google/semantic-release-replace-plugin,@types/node'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@google/semantic-release-replace-plugin,@types/node'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@google/semantic-release-replace-plugin,@types/node'"
+          "exec": "npm-check-updates --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@faker-js/faker,@next/eslint-plugin-next,@semantic-release/changelog,@semantic-release/commit-analyzer,@semantic-release/git,@semantic-release/release-notes-generator,@types/react,@types/react-dom,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,classnames,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,npm-check-updates,prettier,prisma,projen,semantic-release-plus,ts-node,typescript,@chakra-ui/icons,@chakra-ui/next-js,@chakra-ui/react,@chakra-ui/theme-tools,@egjs/react-flicking,@elastic/react-search-ui,@elastic/react-search-ui-views,@elastic/search-ui,@elastic/search-ui-elasticsearch-connector,@emotion/react,@emotion/styled,@opentelemetry/exporter-trace-otlp-http,@opentelemetry/instrumentation,@opentelemetry/resources,@opentelemetry/sdk-node,@opentelemetry/sdk-trace-base,@opentelemetry/sdk-trace-node,@opentelemetry/semantic-conventions,@prisma/client,@prisma/instrumentation,@tanstack/react-query,@tanstack/react-query-devtools,@trpc/client,@trpc/next,@trpc/react-query,@trpc/server,formik,framer-motion,i18next,moment,next,next-auth,next-i18next,nodemailer,rc-pagination,react,react-dom,react-i18next,react-icons,react-infinite-scroll-component,react-intersection-observer,react-rating-stars-component,sharp,superjson,trpc-shield,zod,zod-formik-adapter"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update @faker-js/faker @google/semantic-release-replace-plugin @next/eslint-plugin-next @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/release-notes-generator @types/node @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser classnames eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates prettier prisma projen semantic-release-plus ts-node typescript @chakra-ui/icons @chakra-ui/next-js @chakra-ui/react @chakra-ui/theme-tools @egjs/react-flicking @elastic/react-search-ui @elastic/react-search-ui-views @elastic/search-ui @elastic/search-ui-elasticsearch-connector @emotion/react @emotion/styled @opentelemetry/exporter-trace-otlp-http @opentelemetry/instrumentation @opentelemetry/resources @opentelemetry/sdk-node @opentelemetry/sdk-trace-base @opentelemetry/sdk-trace-node @opentelemetry/semantic-conventions @prisma/client @prisma/instrumentation @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server formik framer-motion i18next moment next next-auth next-i18next nodemailer rc-pagination react react-dom react-i18next react-icons react-infinite-scroll-component react-intersection-observer react-rating-stars-component sharp superjson trpc-shield zod zod-formik-adapter"
+          "exec": "npm update @faker-js/faker @next/eslint-plugin-next @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/release-notes-generator @types/react @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser classnames eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint npm-check-updates prettier prisma projen semantic-release-plus ts-node typescript @chakra-ui/icons @chakra-ui/next-js @chakra-ui/react @chakra-ui/theme-tools @egjs/react-flicking @elastic/react-search-ui @elastic/react-search-ui-views @elastic/search-ui @elastic/search-ui-elasticsearch-connector @emotion/react @emotion/styled @opentelemetry/exporter-trace-otlp-http @opentelemetry/instrumentation @opentelemetry/resources @opentelemetry/sdk-node @opentelemetry/sdk-trace-base @opentelemetry/sdk-trace-node @opentelemetry/semantic-conventions @prisma/client @prisma/instrumentation @tanstack/react-query @tanstack/react-query-devtools @trpc/client @trpc/next @trpc/react-query @trpc/server formik framer-motion i18next moment next next-auth next-i18next nodemailer rc-pagination react react-dom react-i18next react-icons react-infinite-scroll-component react-intersection-observer react-rating-stars-component sharp superjson trpc-shield zod zod-formik-adapter"
         },
         {
           "exec": "npx projen"
