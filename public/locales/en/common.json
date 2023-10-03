@@ -46,7 +46,8 @@
     "meeting_send_comment_message": "Your comment message",
     "meeting_send_comment_rating": "Event rating",
     "meeting_send_comment_send": "Send comment",
-    "meeting_guests": "Guests of this meeting"
+    "meeting_guests": "Guests of this meeting",
+    "meeting_place": "Meeting location"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",

@@ -81,6 +81,27 @@ export const eventRouter = t.router({
         nextCursor: items.length > 0 ? items[items.length - 1].id : undefined,
       };
     }),
+  getEventPlace: publicProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input: { eventId } }) => {
+      const event = await ctx.prisma.event.findUnique({
+        where: { id: eventId },
+        include: {
+          place: {
+            include: {
+              organization: true,
+              owner: true,
+              resources: true,
+            },
+          },
+        },
+      });
+      return event?.place;
+    }),
   sendEventComment: publicProcedure
     .input(
       z.object({

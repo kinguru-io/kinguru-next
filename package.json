@@ -58,6 +58,7 @@
     "@chakra-ui/next-js": "^2.1.5",
     "@chakra-ui/react": "^2.8.1",
     "@chakra-ui/theme-tools": "^2.1.1",
+    "@egjs/flicking-plugins": "^4.7.1",
     "@egjs/react-flicking": "^4.11.0",
     "@elastic/react-search-ui": "^1.20.2",
     "@elastic/react-search-ui-views": "^1.20.2",

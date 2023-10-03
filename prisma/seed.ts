@@ -214,11 +214,10 @@ async function main() {
 
 (async function () {
   const users = await prisma.user.findMany();
-  return prisma.eventComment.createMany({
+  return prisma.usersOnEvent.createMany({
     data: users.map((user) => ({
-      eventId: "clmunmlcn00004l6c1m1vukfa",
+      eventId: "clmunmlde00044l6c349m5qid",
       userId: user.id,
-      message: faker.lorem.paragraph(),
     })),
     skipDuplicates: true,
   });

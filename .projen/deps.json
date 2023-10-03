@@ -127,6 +127,10 @@
       "type": "runtime"
     },
     {
+      "name": "@egjs/flicking-plugins",
+      "type": "runtime"
+    },
+    {
       "name": "@egjs/react-flicking",
       "type": "runtime"
     },
