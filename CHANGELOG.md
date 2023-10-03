@@ -1,3 +1,10 @@
+## [0.4.3](https://github.com/kinguru-io/kinguru-next/compare/v0.4.2...v0.4.3) (2023-10-03)
+
+
+### Bug Fixes
+
+* turn off ssr mode for trpc ([23b75ba](https://github.com/kinguru-io/kinguru-next/commit/23b75bafc7abe161c9a611c364a9fb07d7ff921b))
+
 ## [0.4.2](https://github.com/kinguru-io/kinguru-next/compare/v0.4.1...v0.4.2) (2023-10-03)
 
 
