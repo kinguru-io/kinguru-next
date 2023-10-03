@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.8...chart-v1.1.9) (2023-10-03)
+
+
+### Bug Fixes
+
+* migrate job and deployment path fix ([7147b5f](https://github.com/kinguru-io/kinguru-next/commit/7147b5fae371801034f30531835477b63c325a6d))
+
 ## [1.1.8](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.7...chart-v1.1.8) (2023-10-03)
 
 
