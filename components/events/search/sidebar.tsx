@@ -5,9 +5,9 @@ import {
   Flex,
   FormControl,
   Select,
+  Image,
 } from "@chakra-ui/react";
 import { Facet, Sorting } from "@elastic/react-search-ui";
-import Image from "next/image";
 import Link from "next/link";
 import { MultiCheckboxFacet } from "@/components/events/facets";
 import { useLocale } from "@/utils/use-locale.ts";
