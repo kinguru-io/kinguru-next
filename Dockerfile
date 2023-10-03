@@ -23,6 +23,7 @@ COPY --from=builder /app/next-env.d.ts ./
 COPY --from=builder /app/next-i18next.config.js ./
 COPY --from=builder /app/nextauth.d.ts ./
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 EXPOSE 3000
