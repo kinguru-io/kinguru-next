@@ -57,5 +57,5 @@ export const trpc = createTRPCNext<typeof appRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    **/
-  ssr: true,
+  ssr: false,
 });
