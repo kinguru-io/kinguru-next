@@ -9,8 +9,6 @@ import {
   HowItWorks,
 } from "components/home";
 
-export interface HomeProps {}
-
 export default function Home() {
   return (
     <>

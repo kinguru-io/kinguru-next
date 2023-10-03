@@ -19,7 +19,7 @@ export default function EventDetails() {
       <EventDetailsSection eventId={eventId} />
       <EventSpeakersSection eventId={eventId} />
       <EventCommentsSection eventId={eventId} />
-      <EventGuestsSection />
+      <EventGuestsSection eventId={eventId} />
       <EventPlaceSection />
       <FooterSection />
     </>
