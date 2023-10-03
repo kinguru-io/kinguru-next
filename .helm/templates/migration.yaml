@@ -23,8 +23,8 @@ spec:
         - name: migration
           image: {{ .Values.werf.image.kinguru }}
           imagePullPolicy: IfNotPresent
-          command: [ "/bin/ash", "-c", "--" ]
-          args: [ "cd app && npx prisma migrate deploy" ]
+          command: [ "npx" ]
+          args: [ "prisma", "migrate", "deploy" ]
           envFrom:
             - secretRef:
                 name: kr-prod-environment-vars
