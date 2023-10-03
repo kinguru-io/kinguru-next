@@ -85,7 +85,7 @@
     "framer-motion": "^10.16.4",
     "i18next": "^23.5.1",
     "moment": "^2.29.4",
-    "next": "^13.5.3",
+    "next": "^13.5.4",
     "next-auth": "^4.23.2",
     "next-i18next": "^14.0.3",
     "nodemailer": "^6.9.5",
