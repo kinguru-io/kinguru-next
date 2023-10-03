@@ -1,3 +1,10 @@
+## [0.3.11](https://github.com/kinguru-io/kinguru-next/compare/v0.3.10...v0.3.11) (2023-10-03)
+
+
+### Bug Fixes
+
+* change sidebar image to chakra components ([f6f06a2](https://github.com/kinguru-io/kinguru-next/commit/f6f06a2c1f0f2afefec00b2351eda3244491be8d))
+
 ## [0.3.10](https://github.com/kinguru-io/kinguru-next/compare/v0.3.9...v0.3.10) (2023-10-03)
 
 
