@@ -55,7 +55,7 @@ export function HeroContent() {
             fontSize={useBreakpointValue({ base: "xl", md: "2xl" })}
           >
             <Highlight
-              query={t("company")}
+              query={["Organize", "choose", "earn"]}
               styles={{ color: "brand.primary", fontWeight: "bold" }}
             >
               {t("hero.description")}
