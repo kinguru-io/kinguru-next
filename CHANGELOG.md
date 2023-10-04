@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/kinguru-io/kinguru-next/compare/v0.5.0...v0.5.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* change homepage slug ([54b3d9b](https://github.com/kinguru-io/kinguru-next/commit/54b3d9bc657a59482d8c8ea3b39f30edb8afb9b6))
+
 # [0.5.0](https://github.com/kinguru-io/kinguru-next/compare/v0.4.4...v0.5.0) (2023-10-03)
 
 
