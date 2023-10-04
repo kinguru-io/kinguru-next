@@ -28,6 +28,7 @@ export function HeroContent() {
         url(/img/main.jpg) no-repeat center center`}
       backgroundAttachment={"fixed, scroll"}
       backgroundSize={"contain,cover"}
+      pt={24}
     >
       <VStack
         w={"full"}
