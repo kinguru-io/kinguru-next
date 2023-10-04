@@ -1,3 +1,10 @@
+## [1.1.15](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.14...chart-v1.1.15) (2023-10-04)
+
+
+### Bug Fixes
+
+* add liveness & readiness probes ([4e70645](https://github.com/kinguru-io/kinguru-next/commit/4e7064543b2b742e6aa8046629bf1b436315ffec))
+
 ## [1.1.14](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.13...chart-v1.1.14) (2023-10-04)
 
 
