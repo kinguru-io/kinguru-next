@@ -40,11 +40,18 @@ export function HeroContent() {
           <Text
             marginX={"auto"}
             color={"white"}
+            textAlign={"left"}
+            whiteSpace={"pre"}
             fontWeight={700}
             lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: "4xl", md: "6xl" })}
+            fontSize={["4xl"]}
           >
-            {t("hero.slug")}
+            <Highlight
+              query={["Organize", "choose", "earn"]}
+              styles={{ color: "brand.primary", fontWeight: "bold" }}
+            >
+              {t("hero.slug")}
+            </Highlight>
           </Text>
           <Stripes />
           <Text
@@ -55,7 +62,7 @@ export function HeroContent() {
             fontSize={useBreakpointValue({ base: "xl", md: "2xl" })}
           >
             <Highlight
-              query={["Organize", "choose", "earn"]}
+              query={t("company")}
               styles={{ color: "brand.primary", fontWeight: "bold" }}
             >
               {t("hero.description")}

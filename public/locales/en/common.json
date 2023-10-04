@@ -15,8 +15,8 @@
     "search_placeholder": "..."
   },
   "hero": {
-    "slug": "Never eat alone!",
-    "description": "Organize events, choose free locations and earn",
+    "slug": "Organize events,\nChoose free locations\nAnd earn!",
+    "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
     "go_to_dashboard": "Go to dashboard"
