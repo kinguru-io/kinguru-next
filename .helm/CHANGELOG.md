@@ -1,3 +1,10 @@
+## [1.1.14](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.13...chart-v1.1.14) (2023-10-04)
+
+
+### Bug Fixes
+
+* add resource limits & requests for deployment ([131970e](https://github.com/kinguru-io/kinguru-next/commit/131970eaca7f30bc49e0e3813ea526a2a3d4a15e))
+
 ## [1.1.13](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.12...chart-v1.1.13) (2023-10-04)
 
 
