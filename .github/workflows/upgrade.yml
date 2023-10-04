@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - env:
+          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: testing
+          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: testing
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

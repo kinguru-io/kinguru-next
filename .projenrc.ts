@@ -17,6 +17,15 @@ const project = new web.NextJsTypeScriptProject({
   },
   autoApproveUpgrades: true,
 
+  workflowBootstrapSteps: [
+    {
+      env: {
+        NEXT_PUBLIC_ELASTICSEARCH_API_KEY: "testing",
+        NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: "testing",
+      },
+    },
+  ],
+
   projenrcTs: true,
   tailwind: false,
   eslint: true,
