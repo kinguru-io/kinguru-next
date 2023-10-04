@@ -1,3 +1,10 @@
+## [1.1.13](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.12...chart-v1.1.13) (2023-10-04)
+
+
+### Bug Fixes
+
+* add additional memory resource metric to track for hpa ([4c96d93](https://github.com/kinguru-io/kinguru-next/commit/4c96d9321bd20fd2f902dd2a020e2cd13e009789))
+
 ## [1.1.12](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.11...chart-v1.1.12) (2023-10-04)
 
 
