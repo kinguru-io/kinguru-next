@@ -1,3 +1,10 @@
+## [0.5.4](https://github.com/kinguru-io/kinguru-next/compare/v0.5.3...v0.5.4) (2023-10-04)
+
+
+### Bug Fixes
+
+* add spacing for hero section on homepage ([b76e69b](https://github.com/kinguru-io/kinguru-next/commit/b76e69b159ef2d17d04030a2f59b4acb35190425))
+
 ## [0.5.3](https://github.com/kinguru-io/kinguru-next/compare/v0.5.2...v0.5.3) (2023-10-04)
 
 
