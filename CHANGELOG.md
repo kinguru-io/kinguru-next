@@ -1,3 +1,11 @@
+# [0.5.0](https://github.com/kinguru-io/kinguru-next/compare/v0.4.4...v0.5.0) (2023-10-03)
+
+
+### Features
+
+* add place details block ([7e2b463](https://github.com/kinguru-io/kinguru-next/commit/7e2b46346a8cbb4b3bafc41bcfab86ca5fa393f5))
+* initial event create section ([096aa97](https://github.com/kinguru-io/kinguru-next/commit/096aa9799af7d8a53ddbae7e8f230d304661d214))
+
 ## [0.4.4](https://github.com/kinguru-io/kinguru-next/compare/v0.4.3...v0.4.4) (2023-10-03)
 
 
