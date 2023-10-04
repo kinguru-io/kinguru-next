@@ -1,3 +1,10 @@
+## [1.1.12](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.11...chart-v1.1.12) (2023-10-04)
+
+
+### Bug Fixes
+
+* add label for deployment hpa ([5c9e4bd](https://github.com/kinguru-io/kinguru-next/commit/5c9e4bd1ef1ea8e6a9a33b6a10e9999e9ad1bede))
+
 ## [1.1.11](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.10...chart-v1.1.11) (2023-10-04)
 
 
