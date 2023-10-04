@@ -19,9 +19,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - env:
-          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: testing
-          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: testing
+      - run: echo "NEXT_PUBLIC_ELASTICSEARCH_API_KEY=testing" >> $GITHUB_ENV
+      - run: echo "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT=testing" >> $GITHUB_ENV
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

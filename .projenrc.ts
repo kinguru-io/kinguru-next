@@ -19,10 +19,10 @@ const project = new web.NextJsTypeScriptProject({
 
   workflowBootstrapSteps: [
     {
-      env: {
-        NEXT_PUBLIC_ELASTICSEARCH_API_KEY: "testing",
-        NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: "testing",
-      },
+      run: `echo "NEXT_PUBLIC_ELASTICSEARCH_API_KEY=testing" >> $GITHUB_ENV`,
+    },
+    {
+      run: `echo "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT=testing" >> $GITHUB_ENV`,
     },
   ],
 
