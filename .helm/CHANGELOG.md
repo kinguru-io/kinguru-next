@@ -1,3 +1,10 @@
+## [1.1.11](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.10...chart-v1.1.11) (2023-10-04)
+
+
+### Bug Fixes
+
+* add hpa for deployment in helm release ([9872224](https://github.com/kinguru-io/kinguru-next/commit/9872224a982eb13616f402fcb948cb4f78d5a303))
+
 ## [1.1.10](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.9...chart-v1.1.10) (2023-10-03)
 
 
