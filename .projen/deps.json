@@ -219,6 +219,10 @@
       "type": "runtime"
     },
     {
+      "name": "core-js",
+      "type": "runtime"
+    },
+    {
       "name": "formik",
       "type": "runtime"
     },

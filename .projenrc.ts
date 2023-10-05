@@ -76,6 +76,7 @@ const project = new web.NextJsTypeScriptProject({
     "superjson",
     "next-i18next",
     "react-i18next",
+    "core-js",
     "i18next",
     "nodemailer",
     "@chakra-ui/react",
