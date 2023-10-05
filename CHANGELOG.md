@@ -1,3 +1,10 @@
+## [0.5.5](https://github.com/kinguru-io/kinguru-next/compare/v0.5.4...v0.5.5) (2023-10-05)
+
+
+### Bug Fixes
+
+* add core-js library ([2472a76](https://github.com/kinguru-io/kinguru-next/commit/2472a76c9485526a8d5adc91bce0584769a5ef8c))
+
 ## [0.5.4](https://github.com/kinguru-io/kinguru-next/compare/v0.5.3...v0.5.4) (2023-10-04)
 
 
