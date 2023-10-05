@@ -1,3 +1,10 @@
+## [0.5.6](https://github.com/kinguru-io/kinguru-next/compare/v0.5.5...v0.5.6) (2023-10-05)
+
+
+### Bug Fixes
+
+* add core-js library to dockerfile ([294f982](https://github.com/kinguru-io/kinguru-next/commit/294f9824d3bf50fa0f5fd6c9549f1b0f2bb12239))
+
 ## [0.5.5](https://github.com/kinguru-io/kinguru-next/compare/v0.5.4...v0.5.5) (2023-10-05)
 
 
