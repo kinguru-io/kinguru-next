@@ -50,7 +50,7 @@ jobs:
         run: |
           . $(werf ci-env github --as-file)
           werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
-          werf converge
+          werf converge --atomic
         env:
           WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
           WERF_ENV: prod
