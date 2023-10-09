@@ -73,7 +73,7 @@
     "@opentelemetry/sdk-trace-base": "^1.17.0",
     "@opentelemetry/sdk-trace-node": "^1.17.0",
     "@opentelemetry/semantic-conventions": "^1.17.0",
-    "@prisma/client": "^5.4.1",
+    "@prisma/client": "^5.4.2",
     "@prisma/instrumentation": "^5.4.1",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-query-devtools": "^4.36.1",
