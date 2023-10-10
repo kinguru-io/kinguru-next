@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/kinguru-io/kinguru-next/compare/v0.6.0...v0.6.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* allow usage of prisma generated types ([fbd2d34](https://github.com/kinguru-io/kinguru-next/commit/fbd2d347392f25843b988b201d10d1aee42679b8))
+
 # [0.6.0](https://github.com/kinguru-io/kinguru-next/compare/v0.5.6...v0.6.0) (2023-10-10)
 
 
