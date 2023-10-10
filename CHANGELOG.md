@@ -1,3 +1,10 @@
+## [0.6.4](https://github.com/kinguru-io/kinguru-next/compare/v0.6.3...v0.6.4) (2023-10-10)
+
+
+### Bug Fixes
+
+* allow mapbox build-arg for werf ([48f0dee](https://github.com/kinguru-io/kinguru-next/commit/48f0dee4562c86921c919f046af6bb119bd9c92f))
+
 ## [0.6.3](https://github.com/kinguru-io/kinguru-next/compare/v0.6.2...v0.6.3) (2023-10-10)
 
 
