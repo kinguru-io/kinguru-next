@@ -27,9 +27,6 @@ const project = new web.NextJsTypeScriptProject({
     {
       run: `echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV`,
     },
-    {
-      run: `npx prisma generate`,
-    },
   ],
 
   projenrcTs: true,

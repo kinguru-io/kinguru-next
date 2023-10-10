@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Place, PlaceResource } from ".prisma/client";
 import {
   Button,
   Card,
@@ -16,6 +14,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Flicking from "@egjs/react-flicking";
+import { Place, PlaceResource } from "@prisma/client";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as mapboxgl from "mapbox-gl";
 import moment from "moment/moment";
