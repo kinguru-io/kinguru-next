@@ -191,21 +191,42 @@ model SpeakersOnEvent {
 }
 
 model Place {
-  id             String          @id @default(cuid())
-  owner          User            @relation(fields: [ownerId], references: [id])
+  id             String              @id @default(cuid())
+  owner          User                @relation(fields: [ownerId], references: [id])
   ownerId        String
-  private        Boolean?        @default(true)
-  tel            String?         @db.VarChar(255)
-  location       String          @db.VarChar(255)
-  coordsLat      Float           @db.Real
-  coordsLng      Float           @db.Real
+  private        Boolean?            @default(true)
+  tel            String?             @db.VarChar(255)
+  location       String              @db.VarChar(255)
+  coordsLat      Float               @db.Real
+  coordsLng      Float               @db.Real
   Event          Event[]
-  organization   Organization?   @relation(fields: [organizationId], references: [id])
+  organization   Organization?       @relation(fields: [organizationId], references: [id])
   organizationId String?
+  capacity       Int?
+  openingHours   PlaceOpeningHours[]
   resources      PlaceResource[]
   comments       PlaceComment[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+model PlaceOpeningHours {
+  id        String       @id @default(cuid())
+  place     Place        @relation(fields: [placeId], references: [id])
+  placeId   String
+  day       DayOfTheWeek
+  openTime  DateTime
+  closeTime DateTime
+}
+
+enum DayOfTheWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
 }
 
 model PlaceComment {

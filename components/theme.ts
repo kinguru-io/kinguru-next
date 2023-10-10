@@ -5,6 +5,7 @@ import { StyleConfig } from "@chakra-ui/theme-tools";
 export const theme = extendTheme({
   colors: {
     brand: {
+      500: "#ffd800",
       primary: "#ffd800",
       primaryActive: "#ffea00",
       secondary: "#2a2a2a",
@@ -14,6 +15,28 @@ export const theme = extendTheme({
     Input: {
       variants: {
         invitation: {},
+        brand: {
+          field: {
+            border: "1px solid",
+            borderColor: "gray.200",
+            _focus: {
+              border: "2px solid",
+              borderColor: "brand.primary",
+            },
+          },
+        },
+      },
+    },
+    Textarea: {
+      variants: {
+        brand: {
+          border: "1px solid",
+          borderColor: "gray.200",
+          _focus: {
+            border: "2px solid",
+            borderColor: "brand.primary",
+          },
+        },
       },
     },
     Tag: {
@@ -83,8 +106,19 @@ export const theme = extendTheme({
           },
         },
         secondary: {
+          bg: "gray.200",
+          rounded: "full",
+          fontSize: "md",
+          fontWeight: "bold",
+          textTransform: "uppercase",
           px: "10",
           py: "7",
+          _hover: {
+            bg: "gray.100",
+          },
+          _active: {
+            boxShadow: "0 0 0 3px var(--chakra-colors-gray-100)",
+          },
         },
       },
     },

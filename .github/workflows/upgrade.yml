@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v3
       - run: echo "NEXT_PUBLIC_ELASTICSEARCH_API_KEY=testing" >> $GITHUB_ENV
       - run: echo "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT=testing" >> $GITHUB_ENV
+      - run: echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

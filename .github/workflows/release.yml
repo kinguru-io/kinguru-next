@@ -56,5 +56,6 @@ jobs:
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=v2.kinguru.io
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
           NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
           NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}

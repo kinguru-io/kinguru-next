@@ -19,7 +19,7 @@
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
-    "go_to_dashboard": "Go to dashboard"
+    "create_event": "Create event"
   },
   "events": {
     "upcoming_events": "Upcoming events",
@@ -47,7 +47,31 @@
     "meeting_send_comment_rating": "Event rating",
     "meeting_send_comment_send": "Send comment",
     "meeting_guests": "Guests of this meeting",
-    "meeting_place": "Meeting location"
+    "meeting_place": "Meeting location",
+    "new_event_creating": "Create your new event!",
+    "new_event_details": "Your event details",
+    "new_event_details_description": "Provide the event bare minimum",
+    "new_event_date_place": "Date & Place",
+    "new_event_date_place_description": "Provide the place for the event and date",
+    "new_event_review": "Review",
+    "new_event_review_description": "Review the results",
+    "new_event_topic": "Event topic",
+    "new_event_description": "Event description",
+    "new_event_tags": "Event tags",
+    "new_event_ticket_price": "Ticket price",
+    "new_event_select_poster": "Select poster",
+    "new_event_next": "Next",
+    "new_event_prev": "Previous",
+    "new_event_done": "Done",
+    "new_event_poster": "Poster",
+    "new_event_date_time": "Date & Time",
+    "new_event_guests_num": "Number of guests",
+    "new_event_place": "Place",
+    "new_event_was_created": "Your event was created!",
+    "new_event_was_created_description": "It will be available after moderation",
+    "new_event_was_not_created": "Event was not created",
+    "new_event_was_not_created_description": "Check that the form is filled out correctly",
+    "new_event_create_event": "Create an event"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",

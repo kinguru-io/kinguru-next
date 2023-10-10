@@ -24,6 +24,9 @@ const project = new web.NextJsTypeScriptProject({
     {
       run: `echo "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT=testing" >> $GITHUB_ENV`,
     },
+    {
+      run: `echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV`,
+    },
   ],
 
   projenrcTs: true,
@@ -74,6 +77,7 @@ const project = new web.NextJsTypeScriptProject({
     "@tanstack/react-query-devtools",
     "zod",
     "superjson",
+    "next-s3-upload",
     "next-i18next",
     "react-i18next",
     "i18next",
@@ -84,6 +88,8 @@ const project = new web.NextJsTypeScriptProject({
     "@chakra-ui/theme-tools",
     "@emotion/react",
     "@emotion/styled",
+    "react-map-gl",
+    "mapbox-gl",
     "framer-motion",
     "formik",
     "zod-formik-adapter",

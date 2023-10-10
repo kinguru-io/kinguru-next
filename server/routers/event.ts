@@ -3,6 +3,43 @@ import { z } from "zod";
 import { publicProcedure, t } from "../trpc";
 
 export const eventRouter = t.router({
+  createEvent: publicProcedure
+    .input(
+      z.object({
+        topic: z.string(),
+        description: z.string().min(40).max(2048),
+        tags: z.array(z.string()).optional(),
+        price: z.number().min(20),
+        poster: z.string().url(),
+        date: z.string(),
+        time: z.string(),
+        placeId: z.string(),
+        guests: z.number().min(3),
+      }),
+    )
+    .mutation(
+      async ({
+        ctx,
+        input: { topic, description, placeId, date, time, poster, price, tags },
+      }) => {
+        if (!ctx.session?.user?.id) {
+          throw new Error("KR1001");
+        }
+
+        return ctx.prisma.event.create({
+          data: {
+            topic,
+            description,
+            initiatorId: ctx.session.user.id,
+            placeId,
+            starts: moment(`${date} ${time}`, "yyyy-MM-DD HH:mm").toDate(),
+            poster,
+            price,
+            tags,
+          },
+        });
+      },
+    ),
   getEventDetails: publicProcedure
     .input(
       z.object({

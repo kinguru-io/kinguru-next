@@ -75,8 +75,8 @@ export function HeroContent() {
                 {t("hero.view_events")}
               </Button>
               {status === "authenticated" ? (
-                <Button as={Link} variant={"primary"} href={"/dashboard"}>
-                  {t("hero.go_to_dashboard")}
+                <Button as={Link} variant={"primary"} href={"/events/create"}>
+                  {t("hero.create_event")}
                 </Button>
               ) : (
                 <Button variant={"primary"} onClick={() => signIn()}>

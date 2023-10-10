@@ -12,6 +12,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "s3.pl-waw.scw.cloud",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   output: "standalone",

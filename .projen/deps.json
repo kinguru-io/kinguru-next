@@ -231,6 +231,10 @@
       "type": "runtime"
     },
     {
+      "name": "mapbox-gl",
+      "type": "runtime"
+    },
+    {
       "name": "moment",
       "type": "runtime"
     },
@@ -244,6 +248,10 @@
     },
     {
       "name": "next-i18next",
+      "type": "runtime"
+    },
+    {
+      "name": "next-s3-upload",
       "type": "runtime"
     },
     {
@@ -276,6 +284,10 @@
     },
     {
       "name": "react-intersection-observer",
+      "type": "runtime"
+    },
+    {
+      "name": "react-map-gl",
       "type": "runtime"
     },
     {
