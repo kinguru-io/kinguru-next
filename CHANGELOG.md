@@ -1,3 +1,10 @@
+## [0.6.3](https://github.com/kinguru-io/kinguru-next/compare/v0.6.2...v0.6.3) (2023-10-10)
+
+
+### Bug Fixes
+
+* change default active step ([c566c2f](https://github.com/kinguru-io/kinguru-next/commit/c566c2faae4d5fd939cdfcb5874e701f20800e71))
+
 ## [0.6.2](https://github.com/kinguru-io/kinguru-next/compare/v0.6.1...v0.6.2) (2023-10-10)
 
 
