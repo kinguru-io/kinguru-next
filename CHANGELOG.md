@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/kinguru-io/kinguru-next/compare/v0.5.6...v0.6.0) (2023-10-10)
+
+
+### Features
+
+* **KINGU-26:** create new event page ([7cc875a](https://github.com/kinguru-io/kinguru-next/commit/7cc875a828935f1148981a58df3df13a2825296c))
+
 ## [0.5.6](https://github.com/kinguru-io/kinguru-next/compare/v0.5.5...v0.5.6) (2023-10-05)
 
 
