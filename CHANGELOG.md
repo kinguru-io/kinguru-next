@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/kinguru-io/kinguru-next/compare/v0.6.1...v0.6.2) (2023-10-10)
+
+
+### Bug Fixes
+
+* change prisma types packages ([89b165e](https://github.com/kinguru-io/kinguru-next/commit/89b165ea68438e6be8d8d61f8b4e64b946e265af))
+
 ## [0.6.1](https://github.com/kinguru-io/kinguru-next/compare/v0.6.0...v0.6.1) (2023-10-10)
 
 
