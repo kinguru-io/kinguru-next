@@ -48,7 +48,7 @@ export function NewEventStepper() {
     },
   ];
   const { activeStep, setActiveStep } = useSteps({
-    index: 2,
+    index: 0,
     count: steps.length,
   });
 
