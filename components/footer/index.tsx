@@ -23,8 +23,8 @@ export const FooterSection = () => {
           alignItems={["center", "baseline"]}
           justifyContent={"center"}
         >
-          <Link href={"tel:+375296561757"}>+375 29 656 17 57</Link>
-          <Link href={"mailto:info@kinguru.info"}>info@kinguru.info</Link>
+          <Link href={"tel:+48792665092"}>+48792665092</Link>
+          <Link href={"mailto:t.yarosh@kinguru.io"}>t.yarosh@kinguru.io</Link>
         </VStack>
         <VStack
           color={"gray.100"}
@@ -61,6 +61,7 @@ export const FooterSection = () => {
           alignItems={["center", "baseline"]}
           justifyContent={"center"}
         >
+          <Link href="/privacy-policy">{t("footer.privacy_policy")}</Link>
           <Link href="/#">{t("footer.photo_reports")}</Link>
           <Link href="/#">{t("footer.contacts")}</Link>
         </VStack>

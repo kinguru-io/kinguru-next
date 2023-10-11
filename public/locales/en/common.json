@@ -71,7 +71,9 @@
     "new_event_was_created_description": "It will be available after moderation",
     "new_event_was_not_created": "Event was not created",
     "new_event_was_not_created_description": "Check that the form is filled out correctly",
-    "new_event_create_event": "Create an event"
+    "new_event_create_event": "Create an event",
+    "new_event_date": "Date",
+    "new_event_time": "Time"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",
@@ -108,6 +110,7 @@
     "how_it_works": "How it works",
     "reviews": "Reviews",
     "photo_reports": "Photo reports",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "privacy_policy": "Privacy policy"
   }
 }
