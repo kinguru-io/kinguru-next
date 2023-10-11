@@ -1,3 +1,10 @@
+## [0.6.5](https://github.com/kinguru-io/kinguru-next/compare/v0.6.4...v0.6.5) (2023-10-11)
+
+
+### Bug Fixes
+
+* integrate email auth with scw transactional email ([1ba4639](https://github.com/kinguru-io/kinguru-next/commit/1ba46399f014ff7f672d77aa689589d02ba9e334))
+
 ## [0.6.4](https://github.com/kinguru-io/kinguru-next/compare/v0.6.3...v0.6.4) (2023-10-10)
 
 
