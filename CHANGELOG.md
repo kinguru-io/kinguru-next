@@ -1,3 +1,10 @@
+## [0.6.6](https://github.com/kinguru-io/kinguru-next/compare/v0.6.5...v0.6.6) (2023-10-11)
+
+
+### Bug Fixes
+
+* add privacy policy for service ([b4cc097](https://github.com/kinguru-io/kinguru-next/commit/b4cc0970171caa2febafd80158f7b5afb65c1581))
+
 ## [0.6.5](https://github.com/kinguru-io/kinguru-next/compare/v0.6.4...v0.6.5) (2023-10-11)
 
 
