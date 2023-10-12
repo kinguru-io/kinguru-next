@@ -101,7 +101,7 @@
     "react-map-gl": "^7.1.6",
     "react-rating-stars-component": "^2.2.3",
     "sharp": "^0.32.6",
-    "superjson": "^1.13.3",
+    "superjson": "^2.0.0",
     "trpc-shield": "^0.4.3",
     "zod": "^3.22.4",
     "zod-formik-adapter": "^1.2.0"
