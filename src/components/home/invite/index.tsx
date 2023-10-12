@@ -1,0 +1,46 @@
+import {
+  Box,
+  Container,
+  Heading,
+  SimpleGrid,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react'
+import {Stripes} from 'components/common/stripes'
+import {InviteForm} from 'components/home/invite/inviteForm'
+import {useLocale} from 'utils/use-locale'
+
+export function InviteSection() {
+  const {t} = useLocale()
+  return (
+    <Container
+      maxWidth="100%"
+      py={16}
+      style={{
+        background:
+          '#2a2a2a url(/img/parallax-mobile.png) no-repeat center 200px',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'contain'
+      }}
+    >
+      <SimpleGrid
+        alignContent="center"
+        columns={{sm: 1, md: 2}}
+        maxW="4xl"
+        mx="auto"
+        spacing={8}
+      >
+        <Box>
+          <Heading variant="invitation">{t('invite.title')}</Heading>
+          <Stripes />
+          <Text color={useColorModeValue('gray.100', 'gray.700')}>
+            {t('invite.description')}
+          </Text>
+        </Box>
+        <Box>
+          <InviteForm />
+        </Box>
+      </SimpleGrid>
+    </Container>
+  )
+}

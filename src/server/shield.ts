@@ -1,0 +1,17 @@
+import {rule, shield} from 'trpc-shield'
+import {Context} from './context'
+
+export const isAuthenticated = rule<Context>()(
+  async (ctx) => ctx.session?.user !== undefined
+)
+
+export const isAdmin = rule<Context>()(
+  async (ctx) => ctx.session?.user?.role === 'admin'
+)
+
+export const permissions = shield<Context>({
+  query: {},
+  mutation: {
+    attendTheEvent: isAuthenticated
+  }
+})

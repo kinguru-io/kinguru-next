@@ -1,0 +1,5 @@
+export * from './EventCommentsSection'
+export * from './EventDetailsSection'
+export * from './EventGuestsSection'
+export * from './EventPlaceSection'
+export * from './EventSpeakersSection'

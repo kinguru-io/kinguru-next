@@ -1,0 +1,63 @@
+$sizes: (
+  "sm": 18,
+  "base": 24,
+  "lg": 32
+);
+
+$strokeWidth: (
+  "sm": 2,
+  "base": 3,
+  "lg": 4
+);
+
+@each $size, $value in $sizes {
+  .spinner-#{$size} {
+    width: ($value + map-get($strokeWidth, $size)) + px;
+    height: 0;
+    x: 0px;
+    y: 0px;
+    viewBox: 0 0 ($value + map-get($strokeWidth, $size)) ($value + map-get($strokeWidth, $size));
+    animation: slide-#{$size} 1s ease 3.5s forwards;
+
+    circle {
+      cx: $value / 2;
+      cy: $value / 2;
+      r: ($value - map-get($strokeWidth, $size)) / 2;
+      fill: transparent;
+      stroke-width: map-get($strokeWidth, $size);
+      stroke-linecap: round;
+      stroke-dasharray: (3.14 * $value);
+      transform-origin: (0.5px * $value) (0.5px * $value) 0;
+      animation: spinner-#{$size} 4s linear infinite;
+      opacity: 0;
+      transition-duration: 1000ms;
+    }
+
+    .circle-show-#{$size} {
+      opacity: 1;
+    }
+  }
+
+  .spinner-show-#{$size} {
+    height: ($value + map-get($strokeWidth, $size)) + px;
+  }
+
+  @keyframes spinner-#{$size} {
+    0% {
+      stroke-dashoffset: (0.66 * $value);
+      transform: rotate(0deg);
+    } 50% {
+        stroke-dashoffset: (3.14 * $value);
+        transform: rotate(720deg);
+      } 100% {
+          stroke-dashoffset: (0.66 * $value);
+          transform: rotate(1080deg);
+        }
+  }
+
+  @keyframes slide-#{$size} {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+

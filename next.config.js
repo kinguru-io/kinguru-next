@@ -1,34 +1,36 @@
-const { i18n } = require("./next-i18next.config");
+const withNextIntl = require('next-intl/plugin')('./src/i18n.ts')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  i18n,
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "loremflickr.com",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'loremflickr.com',
+        port: '',
+        pathname: '/**'
       },
       {
-        protocol: "https",
-        hostname: "s3.pl-waw.scw.cloud",
-        port: "",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**'
       },
-    ],
+      {
+        protocol: 'https',
+        hostname: 's3.pl-waw.scw.cloud',
+        port: '',
+        pathname: '/**'
+      }
+    ]
   },
-  output: "standalone",
   experimental: {
     instrumentationHook: true,
+    serverActions: true
   },
-  publicRuntimeConfig: {
-    elasticSearchApiKey: process.env.ELASTICSEARCH_API_KEY,
-    elasticSearchEndpoint: process.env.ELASTICSEARCH_ENDPOINT,
-  },
-  productionBrowserSourceMaps: true,
-};
+  productionBrowserSourceMaps: true
+}
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig)
