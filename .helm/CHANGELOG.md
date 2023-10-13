@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.0...chart-v1.2.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* add prisma studio deployment ([7bc0d5e](https://github.com/kinguru-io/kinguru-next/commit/7bc0d5e4f23c199b46af3f71ff6bef5524356d2a))
+
 # [1.2.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.15...chart-v1.2.0) (2023-10-13)
 
 
