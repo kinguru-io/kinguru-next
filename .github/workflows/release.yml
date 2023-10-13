@@ -13,6 +13,11 @@ jobs:
     env:
       CI: true
     steps:
+      - name: Find Docker Host IP
+        uses: addnab/docker-run-action@v1
+        with:
+          image: alpine:latest
+          run: apk update > /dev/null && apk add iproute2 > /dev/null && ip -4 route show default | cut -d' ' -f3
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -25,13 +30,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - uses: actions/cache@v3
-        with:
-          path: |-
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+          cache: npm
       - name: Install dependencies
         run: npm i
       - name: release
