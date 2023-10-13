@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.2...chart-v1.2.3) (2023-10-13)
+
+
+### Bug Fixes
+
+* prisma studio ingresses ([2ba9875](https://github.com/kinguru-io/kinguru-next/commit/2ba987516b0149cbdd838157265c13efd4b38f37))
+
 ## [1.2.2](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.1...chart-v1.2.2) (2023-10-13)
 
 
