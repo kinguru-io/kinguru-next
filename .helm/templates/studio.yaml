@@ -97,7 +97,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /
-              port: 3000
+              port: 5555
               scheme: HTTP
             periodSeconds: 10
             successThreshold: 1
@@ -107,7 +107,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: /
-              port: 3000
+              port: 5555
               scheme: HTTP
             periodSeconds: 10
             successThreshold: 1
