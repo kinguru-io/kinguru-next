@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.15...chart-v1.2.0) (2023-10-13)
+
+
+### Features
+
+* add prisma studio deployment ([cfa9b8d](https://github.com/kinguru-io/kinguru-next/commit/cfa9b8d717663e8f1c559057da2cfbed85aa5670))
+
 ## [1.1.15](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.1.14...chart-v1.1.15) (2023-10-04)
 
 
