@@ -4,10 +4,11 @@ on:
     branches:
       - main
 jobs:
-  semver:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
     env:
       CI: true
     steps:
@@ -26,24 +27,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm i
+      - name: Generate Prisma client
+        run: npx prisma generate
       - name: release
         run: >-
           for dir in ".helm" "." ; do
             pushd $dir; npx semantic-release-plus; popd
           done
-  werf:
-    runs-on: ubuntu-latest
-    needs:
-      - semver
-    environment: prod
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: vbem/kubeconfig4sa@v1
         with:
           server: https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443
@@ -52,17 +42,8 @@ jobs:
           namespace: persistence
       - uses: vbem/k8s-port-forward@v1
         with:
-          workload: svc/postgres-cluster
+          workload: svc/postgres-cluster-repl
           mappings: 5432:5432
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          cache: npm
-      - name: Install dependencies
-        run: npm install
-      - name: Generate Prisma client
-        run: npx prisma generate
       - name: build
         run: npx projen build
         env:
@@ -80,4 +61,4 @@ jobs:
         env:
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
-          WERF_SET_2: ingress.hostname=v2.kinguru.io
+          WERF_SET_2: ingress.hostname=kinguru.io
