@@ -1,3 +1,10 @@
+## [0.7.3](https://github.com/kinguru-io/kinguru-next/compare/v0.7.2...v0.7.3) (2023-10-13)
+
+
+### Bug Fixes
+
+* werf builder docker internal setup ([9c05f25](https://github.com/kinguru-io/kinguru-next/commit/9c05f254aad36b786f9d46555517bd3e46ce115d))
+
 ## [0.7.2](https://github.com/kinguru-io/kinguru-next/compare/v0.7.1...v0.7.2) (2023-10-13)
 
 
