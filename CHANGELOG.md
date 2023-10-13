@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/kinguru-io/kinguru-next/compare/v0.7.0...v0.7.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* github actions port-forwarding ([9c85386](https://github.com/kinguru-io/kinguru-next/commit/9c85386d8b8faec53c7fc60d75e95ada457f3cd0))
+
 # [0.7.0](https://github.com/kinguru-io/kinguru-next/compare/v0.6.6...v0.7.0) (2023-10-13)
 
 
