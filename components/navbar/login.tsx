@@ -33,7 +33,11 @@ export const Login = () => {
               cursor={"pointer"}
               minW={0}
             >
-              <Avatar size={"sm"} src={session?.user?.image ?? undefined} />
+              <Avatar
+                size={"sm"}
+                name={session?.user?.name || ""}
+                src={session?.user?.image ?? undefined}
+              />
             </MenuButton>
             <MenuList>
               {userNavigation.map(({ name, href }) => (

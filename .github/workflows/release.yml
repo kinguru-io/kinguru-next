@@ -44,6 +44,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - uses: vbem/kubeconfig4sa@v1
+        with:
+          server: https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443
+          ca-base64: ${{ secrets.K8S_CA_BASE64 }}
+          token: ${{ secrets.K8S_SA_TOKEN }}
+          namespace: persistence
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: svc/postgres-cluster
+          mappings: 5432:5432
       - name: Install werf
         uses: werf/actions/install@v1.2
       - name: Run deployment
@@ -52,7 +62,7 @@ jobs:
           werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
           werf converge --atomic
         env:
-          WERF_KUBECONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64_DATA }}
+          DATABASE_URL: ${{ secrets.DB_URL }}
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=v2.kinguru.io

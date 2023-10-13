@@ -95,6 +95,8 @@ Content-Type: application/json
 
 ### Delete connector
 DELETE http://localhost:8083/connectors/inventory-connector
+### Delete connector
+DELETE http://localhost:8083/connectors/elastic-sink
 
 ### Delete ES index
 DELETE http://localhost:9200/kinguru.public.event

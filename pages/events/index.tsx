@@ -1,5 +1,6 @@
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
 import moment from "moment/moment";
+import Head from "next/head";
 import { Search } from "@/components/events/search";
 import {
   buildFacetConfigFromConfig,
@@ -81,5 +82,19 @@ export default function Events() {
     },
     "/events",
   );
-  return <Search config={combinedConfig} />;
+  return (
+    <>
+      <Head>
+        <title>{t("metadata.events.title")}</title>
+        <meta name="description" content={t("metadata.events.description")} />
+        <meta property="og:title" content={t("metadata.events.title")} />
+        <meta
+          property="og:description"
+          content={t("metadata.events.description")}
+        />
+        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+      </Head>
+      <Search config={combinedConfig} />
+    </>
+  );
 }

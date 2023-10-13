@@ -130,7 +130,7 @@ model Event {
   starts          DateTime          @db.Timestamp
   duration        DateTime?         @db.Time
   poster          String?
-  price           Decimal?          @db.Money
+  price           Float?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   tags            String[]

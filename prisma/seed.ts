@@ -83,8 +83,18 @@ async function main() {
                   },
                 },
                 resources: {
-                  create: {
-                    url: faker.image.url({ width: 200, height: 100 }),
+                  createMany: {
+                    data: [
+                      {
+                        url: faker.image.url({ width: 200, height: 100 }),
+                      },
+                      {
+                        url: faker.image.url({ width: 200, height: 100 }),
+                      },
+                      {
+                        url: faker.image.url({ width: 200, height: 100 }),
+                      },
+                    ],
                   },
                 },
               },
@@ -130,7 +140,7 @@ async function main() {
             participant: {
               create: pickUniqueValues(
                 eventsCreated,
-                Math.round(Math.random() * eventsCreated.length),
+                Math.round(Math.random() * eventsCreated.length * 2),
               ).map((unique) => ({
                 event: {
                   connect: {
@@ -165,7 +175,7 @@ async function main() {
             eventComments: {
               create: pickUniqueValues(
                 eventsCreated,
-                Math.round(Math.random() * eventsCreated.length),
+                Math.round(Math.random() * eventsCreated.length * 2),
               ).map((unique) => ({
                 event: {
                   connect: {
@@ -202,25 +212,12 @@ async function main() {
     .filter((result) => result.status === "rejected")
     .forEach(console.log);
 }
-// main()
-//   .then(async () => {
-//     await prisma.$disconnect();
-//   })
-//   .catch(async (e) => {
-//     console.error(e);
-//     await prisma.$disconnect();
-//     process.exit(1);
-//   });
-
-(async function () {
-  const users = await prisma.user.findMany();
-  return prisma.usersOnEvent.createMany({
-    data: users.map((user) => ({
-      eventId: "clmunmlde00044l6c349m5qid",
-      userId: user.id,
-    })),
-    skipDuplicates: true,
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });
-})()
-  .then(console.log)
-  .catch(console.log);

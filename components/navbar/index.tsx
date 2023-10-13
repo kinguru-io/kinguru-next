@@ -9,11 +9,12 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Image,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import Link from "next/link";
 import { Login } from "@/components/navbar/login";
 import { NavLink } from "@/components/navbar/navlink";
+import headerLogo from "@/public/img/logo_header.png";
 import { useLocale } from "@/utils/use-locale";
 
 export function Navbar({ full }: { full?: boolean }) {
@@ -53,7 +54,12 @@ export function Navbar({ full }: { full?: boolean }) {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box as={Link} href={"/"}>
-              <Image src="/img/logo_header.png" width={24} />
+              <Image
+                src={headerLogo}
+                width={96}
+                height={36}
+                alt={t("company")}
+              />
             </Box>
             <HStack
               as={"nav"}

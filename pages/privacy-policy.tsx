@@ -12,13 +12,26 @@ import {
   UnorderedList,
   VStack,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/img/logo_rounded.png";
+import { useLocale } from "@/utils/use-locale.ts";
 
 export default function PrivacyPolicyPage() {
+  const { t } = useLocale();
   return (
     <Container maxW={["full", "80%", "70%", "50%"]} py={10}>
+      <Head>
+        <title>{t("metadata.privacy.title")}</title>
+        <meta name="description" content={t("metadata.privacy.description")} />
+        <meta property="og:title" content={t("metadata.privacy.title")} />
+        <meta
+          property="og:description"
+          content={t("metadata.privacy.description")}
+        />
+        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+      </Head>
       <VStack>
         <Image
           src={logo}

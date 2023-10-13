@@ -27,6 +27,26 @@ const project = new web.NextJsTypeScriptProject({
     {
       run: `echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV`,
     },
+    {
+      run: `echo "DATABASE_URL=\${{ secrets.DB_URL }}" >> $GITHUB_ENV`,
+    },
+    {
+      uses: "vbem/kubeconfig4sa@v1",
+      with: {
+        server:
+          "https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443",
+        "ca-base64": "${{ secrets.K8S_CA_BASE64 }}",
+        token: "${{ secrets.K8S_SA_TOKEN }}",
+        namespace: "persistence",
+      },
+    },
+    {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "svc/postgres-cluster",
+        mappings: "5432:5432",
+      },
+    },
   ],
 
   projenrcTs: true,

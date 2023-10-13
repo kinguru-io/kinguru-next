@@ -63,6 +63,7 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
               >
                 {props.options.map((option) => (
                   <option
+                    key={option.value}
                     data-transaction-name={"sorting"}
                     value={option.value}
                   >

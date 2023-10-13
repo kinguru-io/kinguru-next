@@ -1,5 +1,23 @@
 {
   "company": "Kinguru",
+  "metadata": {
+    "home": {
+      "title": "Kinguru - Organize and Attend Thematic Meetings with Expert Speakers",
+      "description": "Discover, organize, and attend thematic meetings with expert speakers in cafes and restaurants. Explore upcoming events and sign up today!"
+    },
+    "events": {
+      "title": "Upcoming Events - Kinguru",
+      "description": "Browse through upcoming thematic meetings and events. Join us for insightful sessions with expert speakers in cozy locations.",
+      "create": {
+        "title": "Create Your Event - Kinguru",
+        "description": "Step into Kinguru’s intuitive event creation page. In just a few clicks, set up and customize your event, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy - Your Data is Safe with Kinguru",
+      "description": "At Kinguru, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
+    }
+  },
   "navbar": {
     "events": "Events",
     "speakers": "Speakers",

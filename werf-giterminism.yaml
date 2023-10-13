@@ -2,6 +2,7 @@ giterminismConfigVersion: 1
 config:
   goTemplateRendering:
     allowEnvVariables:
+      - DATABASE_URL
       - NEXT_PUBLIC_MAPBOX_TOKEN
       - NEXT_PUBLIC_ELASTICSEARCH_API_KEY
       - NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT

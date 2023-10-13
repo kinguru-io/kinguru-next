@@ -28,7 +28,12 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
       <SimpleGrid w={"70%"} mx={"auto"} columns={[1, 2]}>
         <Flicking horizontal={true} circular={true} plugins={[new Arrow()]}>
           {place?.resources.map((photo) => (
-            <Image src={photo.url} width={photo.width} height={photo.height} />
+            <Image
+              key={photo.id}
+              src={photo.url}
+              width={photo.width}
+              height={photo.height}
+            />
           ))}
           <ViewportSlot>
             <span slot="viewport" className="flicking-arrow-prev"></span>
