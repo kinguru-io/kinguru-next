@@ -1,3 +1,11 @@
+# [0.7.0](https://github.com/kinguru-io/kinguru-next/compare/v0.6.6...v0.7.0) (2023-10-13)
+
+
+### Features
+
+* upgrade ssg next page router prop ([f048063](https://github.com/kinguru-io/kinguru-next/commit/f04806309b53e3c66ab44a0b8782a06364898cb4))
+* use new build system ([7e71de2](https://github.com/kinguru-io/kinguru-next/commit/7e71de2bce8db1a94e33b965dba87becd02d1021))
+
 ## [0.6.6](https://github.com/kinguru-io/kinguru-next/compare/v0.6.5...v0.6.6) (2023-10-11)
 
 
