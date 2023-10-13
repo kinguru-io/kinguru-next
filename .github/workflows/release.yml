@@ -54,6 +54,22 @@ jobs:
         with:
           workload: svc/postgres-cluster
           mappings: 5432:5432
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Generate Prisma client
+        run: npx prisma generate
+      - name: build
+        run: npx projen build
+        env:
+          DATABASE_URL: ${{ secrets.DB_URL }}
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
       - name: Install werf
         uses: werf/actions/install@v1.2
       - name: Run deployment
@@ -62,10 +78,6 @@ jobs:
           werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
           werf converge --atomic
         env:
-          DATABASE_URL: ${{ secrets.DB_URL }}
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=v2.kinguru.io
-          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
-          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
-          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
