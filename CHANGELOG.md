@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/kinguru-io/kinguru-next/compare/v0.7.1...v0.7.2) (2023-10-13)
+
+
+### Bug Fixes
+
+* add environment for release job ([26ebf7c](https://github.com/kinguru-io/kinguru-next/commit/26ebf7c4c336fafd82e2454b38a4480ef2c0cc28))
+
 ## [0.7.1](https://github.com/kinguru-io/kinguru-next/compare/v0.7.0...v0.7.1) (2023-10-13)
 
 
