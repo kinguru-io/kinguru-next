@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.1...chart-v1.2.2) (2023-10-13)
+
+
+### Bug Fixes
+
+* add prisma studio deployment readiness & liveness ([48e15ec](https://github.com/kinguru-io/kinguru-next/commit/48e15ece8ec4606ca60d1035e70f18dfd3d74638))
+
 ## [1.2.1](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.0...chart-v1.2.1) (2023-10-13)
 
 
