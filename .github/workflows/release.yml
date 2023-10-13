@@ -34,8 +34,6 @@ jobs:
           restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Install dependencies
         run: npm i
-      - name: Generate Prisma client
-        run: npx prisma generate
       - name: release
         run: >-
           for dir in ".helm" "." ; do
@@ -51,13 +49,6 @@ jobs:
         with:
           workload: svc/postgres-cluster-repl
           mappings: 5432:5432
-      - name: build
-        run: npx projen build
-        env:
-          DATABASE_URL: ${{ secrets.DB_URL }}
-          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
-          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
-          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
       - name: Install werf
         uses: werf/actions/install@v1.2
       - name: Run deployment
@@ -69,3 +60,7 @@ jobs:
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=kinguru.io
+          DATABASE_URL: ${{ secrets.DB_URL }}
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
