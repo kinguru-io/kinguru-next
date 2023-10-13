@@ -47,6 +47,15 @@ const project = new web.NextJsTypeScriptProject({
         mappings: "5432:5432",
       },
     },
+    {
+      uses: "actions/cache@v3",
+      with: {
+        path: "~/.npm\n${{ github.workspace }}/.next/cache",
+        key: "${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}",
+        "restore-keys":
+          "${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-",
+      },
+    },
   ],
 
   projenrcTs: true,
