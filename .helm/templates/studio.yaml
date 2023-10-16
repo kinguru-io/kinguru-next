@@ -146,6 +146,7 @@ metadata:
     app.kubernetes.io/instance: {{ $.Release.Name }}
     app.kubernetes.io/managed-by: {{ $.Release.Service }}
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-tls
     nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
@@ -161,6 +162,29 @@ spec:
                 name: {{ .Release.Name }}-studio-svc
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - studio.kinguru.io
+      secretName: letsencrypt-tls-studio
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-auth2-proxy
+  labels:
+    helm.sh/chart: {{ $.Chart.Name }}-{{ $.Chart.Version }}
+    app.kubernetes.io/name: {{ .Release.Name }}-auth2-proxy
+    app.kubernetes.io/instance: {{ $.Release.Name }}
+    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: studio.kinguru.io
+      http:
+        paths:
           - path: /oauth2
             pathType: Prefix
             backend:
