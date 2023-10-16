@@ -1,3 +1,10 @@
+## [0.9.1](https://github.com/kinguru-io/kinguru-next/compare/v0.9.0...v0.9.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* localization setup ([6d6f1eb](https://github.com/kinguru-io/kinguru-next/commit/6d6f1ebc3ae2938cd0ebbc714e3b918fd70c0b13))
+
 # [0.9.0](https://github.com/kinguru-io/kinguru-next/compare/v0.8.0...v0.9.0) (2023-10-16)
 
 
