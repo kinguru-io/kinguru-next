@@ -1,3 +1,10 @@
+## [0.7.4](https://github.com/kinguru-io/kinguru-next/compare/v0.7.3...v0.7.4) (2023-10-16)
+
+
+### Bug Fixes
+
+* add google auth for nextauth ([f9a0121](https://github.com/kinguru-io/kinguru-next/commit/f9a01219fe8fbb51f5e018a9b04956e3a2348e96))
+
 ## [0.7.3](https://github.com/kinguru-io/kinguru-next/compare/v0.7.2...v0.7.3) (2023-10-13)
 
 
