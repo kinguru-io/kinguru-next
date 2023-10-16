@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/kinguru-io/kinguru-next/compare/v0.8.0...v0.9.0) (2023-10-16)
+
+
+### Features
+
+* add Google Analytics support ([bdfe799](https://github.com/kinguru-io/kinguru-next/commit/bdfe79905af06806da83b910c2decd69835c4905))
+
 # [0.8.0](https://github.com/kinguru-io/kinguru-next/compare/v0.7.5...v0.8.0) (2023-10-16)
 
 
