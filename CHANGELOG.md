@@ -1,3 +1,10 @@
+## [0.9.3](https://github.com/kinguru-io/kinguru-next/compare/v0.9.2...v0.9.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* add poster placeholder for event ([b62c678](https://github.com/kinguru-io/kinguru-next/commit/b62c678afa1f0ae7832442da8ab5788b189bb3b2))
+
 ## [0.9.2](https://github.com/kinguru-io/kinguru-next/compare/v0.9.1...v0.9.2) (2023-10-16)
 
 
