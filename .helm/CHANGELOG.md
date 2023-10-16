@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.4...chart-v1.2.5) (2023-10-16)
+
+
+### Bug Fixes
+
+* add ingress for auth2-proxy ([5be67bc](https://github.com/kinguru-io/kinguru-next/commit/5be67bc37ffdb6be47a70fb1c29d4eacc5d9d57b))
+
 ## [1.2.4](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.3...chart-v1.2.4) (2023-10-13)
 
 
