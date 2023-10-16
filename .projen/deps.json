@@ -255,6 +255,10 @@
       "type": "runtime"
     },
     {
+      "name": "next-sitemap",
+      "type": "runtime"
+    },
+    {
       "name": "nodemailer",
       "type": "runtime"
     },

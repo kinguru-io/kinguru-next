@@ -90,7 +90,7 @@ const project = new web.NextJsTypeScriptProject({
     ],
     exclude: ["server/generated"],
   },
-  gitignore: [".env", "prisma/sqlite"],
+  gitignore: [".env", "prisma/sqlite", "public/robots.txt", "public/sitemap*"],
 
   minNodeVersion: "18.16.0",
   packageManager: NodePackageManager.NPM,
@@ -108,6 +108,7 @@ const project = new web.NextJsTypeScriptProject({
     "superjson",
     "next-s3-upload",
     "next-i18next",
+    "next-sitemap",
     "react-i18next",
     "i18next",
     "nodemailer",
@@ -160,6 +161,7 @@ const project = new web.NextJsTypeScriptProject({
   ],
 });
 
+project.postCompileTask.exec("npx next-sitemap");
 project.package.addDevDeps("@types/node@20");
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();

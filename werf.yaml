@@ -4,6 +4,7 @@ configVersion: 1
 image: kinguru
 dockerfile: Dockerfile
 args:
+  SITE_URL: {{ env "SITE_URL" }}
   DATABASE_URL: {{ env "DATABASE_URL" }}
   NEXT_PUBLIC_MAPBOX_TOKEN: {{ env "NEXT_PUBLIC_MAPBOX_TOKEN" }}
   NEXT_PUBLIC_ELASTICSEARCH_API_KEY: {{ env "NEXT_PUBLIC_ELASTICSEARCH_API_KEY" }}

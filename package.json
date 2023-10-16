@@ -90,6 +90,7 @@
     "next-auth": "^4.23.2",
     "next-i18next": "^14.0.3",
     "next-s3-upload": "^0.3.3",
+    "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.6",
     "rc-pagination": "^1.21.1",
     "react": "^18.2.0",
