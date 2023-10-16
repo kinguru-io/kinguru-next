@@ -14,10 +14,11 @@ import {
   Button,
   Flex,
   Skeleton,
+  Collapse,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
 import posterPlaceholder from "@/public/img/event-1.jpg";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
@@ -34,28 +35,16 @@ export function EventCard({
     takenPlace: boolean;
   };
 }) {
+  const [show, setShow] = useState(false);
+  const handleToggle = () => setShow(!show);
   const { t } = useLocale();
-  const { status } = useSession();
-  const { mutateAsync: attendTheEvent, isLoading: attendTheEventLoading } =
-    trpc.event.attendTheEvent.useMutation();
-  const {
-    mutateAsync: cancelEventRegistration,
-    isLoading: cancelEventRegistrationLoading,
-  } = trpc.event.cancelEventRegistration.useMutation();
-  const { data: isPresentOnEvent, refetch: isPresentOnEventRefetch } =
-    trpc.event.isPresentOnEvent.useQuery({
-      eventId: event.id,
-    });
-  const {
-    data: participants,
-    refetch: participantsRrefetch,
-    isLoading: participantsLoading,
-  } = trpc.event.usersOnEvent.useInfiniteQuery(
-    { limit: 10, eventId: event.id },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
-  );
+  const { data: participants, isLoading: participantsLoading } =
+    trpc.event.usersOnEvent.useInfiniteQuery(
+      { limit: 10, eventId: event.id },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      },
+    );
   return (
     <Card
       key={event.id}
@@ -90,41 +79,18 @@ export function EventCard({
             </LinkOverlay>
           </Heading>
           <Text>{event.starts.toLocaleDateString()}</Text>
-          <Text color={"gray.500"} mt={2} textAlign={"left"}>
-            {event.description}
-          </Text>
+          <Collapse startingHeight={80} in={show} color={"gray.500"}>
+            <Text mt={2} textAlign={"left"}>
+              {event.description}
+            </Text>
+          </Collapse>
         </LinkBox>
       </CardBody>
       <CardFooter>
         <Flex w={"full"} justifyContent={"space-between"}>
-          {status === "authenticated" && !event.takenPlace ? (
-            isPresentOnEvent ? (
-              <Button
-                isLoading={cancelEventRegistrationLoading}
-                variant={"primary"}
-                onClick={() => {
-                  void cancelEventRegistration({ eventId: event.id })
-                    .then(() => isPresentOnEventRefetch())
-                    .then(() => participantsRrefetch());
-                }}
-              >
-                {t("events.cancel")}
-              </Button>
-            ) : (
-              <Button
-                isLoading={attendTheEventLoading}
-                variant={"primary"}
-                disabled={true}
-                onClick={() => {
-                  void attendTheEvent({ eventId: event.id })
-                    .then(() => isPresentOnEventRefetch())
-                    .then(() => participantsRrefetch());
-                }}
-              >
-                {t("events.join")}
-              </Button>
-            )
-          ) : null}
+          <Button variant={"secondary"} onClick={handleToggle}>
+            {show ? t("events.less") : t("events.more")}
+          </Button>
           <Skeleton isLoaded={!participantsLoading}>
             <AvatarGroup max={2}>
               {participants?.pages[0].items.map((participant) => (

@@ -48,7 +48,7 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       <Sorting
-        label={t("event.sorting")}
+        label={t("events.sorting")}
         sortOptions={SORT_OPTIONS}
         view={(props) => {
           return (
@@ -56,9 +56,9 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
               <Select
                 placeholder={props.label}
                 onChange={(event) => {
-                  return event.target.value !== undefined
-                    ? props.onChange(event.target.value)
-                    : null;
+                  if (event?.target?.value !== "") {
+                    props.onChange(event?.target?.value);
+                  }
                 }}
               >
                 {props.options.map((option) => (

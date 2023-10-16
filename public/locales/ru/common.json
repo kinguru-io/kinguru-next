@@ -57,6 +57,8 @@
     "start_this_year": "В этом году",
     "search_price": "Поиск по цене",
     "free": "Бесплатно",
+    "more": "Больше",
+    "less": "Меньше",
     "up_to_5_zl": "До 5 zl",
     "from_5_to_10_zl": "От 5 до 10 zl",
     "meeting_about": "О мероприятии",
@@ -94,7 +96,10 @@
     "new_event_was_not_created_description": "Проверьте правильность заполенения всех полей",
     "new_event_create_event": "Создать событие",
     "new_event_date": "Дата",
-    "new_event_time": "Время"
+    "new_event_time": "Время",
+    "sorting": "Сортировка...",
+    "sort_by_relevance": "По релевантности",
+    "sort_by_start_date": "По дате старта"
   },
   "invite": {
     "title": "Разрешите пригласить вас за подходящий столик",

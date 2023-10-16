@@ -58,6 +58,8 @@
     "start_this_year": "this year",
     "search_price": "Search by price",
     "free": "Free",
+    "more": "More",
+    "less": "Less",
     "up_to_5_zl": "Up to 5 zl",
     "from_5_to_10_zl": "From 5 to 10 zl",
     "meeting_about": "About the meeting",
@@ -95,7 +97,10 @@
     "new_event_was_not_created_description": "Check that the form is filled out correctly",
     "new_event_create_event": "Create an event",
     "new_event_date": "Date",
-    "new_event_time": "Time"
+    "new_event_time": "Time",
+    "sorting": "Sorting...",
+    "sort_by_relevance": "Sort by relevance",
+    "sort_by_start_date": "Sort by start date"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",
