@@ -1,3 +1,10 @@
+## [0.9.4](https://github.com/kinguru-io/kinguru-next/compare/v0.9.3...v0.9.4) (2023-10-16)
+
+
+### Bug Fixes
+
+* sorting behavior for events page ([792b0d1](https://github.com/kinguru-io/kinguru-next/commit/792b0d1c29cb0eb5d6a05a858ebd526ff5ab9d8c))
+
 ## [0.9.3](https://github.com/kinguru-io/kinguru-next/compare/v0.9.2...v0.9.3) (2023-10-16)
 
 
