@@ -1,3 +1,10 @@
+## [0.7.5](https://github.com/kinguru-io/kinguru-next/compare/v0.7.4...v0.7.5) (2023-10-16)
+
+
+### Bug Fixes
+
+* remove unique constraint for user name ([c13a338](https://github.com/kinguru-io/kinguru-next/commit/c13a33844bbce8bf259891bfbffc3e92b4ec199b))
+
 ## [0.7.4](https://github.com/kinguru-io/kinguru-next/compare/v0.7.3...v0.7.4) (2023-10-16)
 
 
