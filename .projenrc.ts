@@ -31,6 +31,9 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "DATABASE_URL=\${{ secrets.DB_URL }}" >> $GITHUB_ENV`,
     },
     {
+      run: `echo "NEXT_PUBLIC_GA_ID=\${{ secrets.GA_ID }}" >> $GITHUB_ENV`,
+    },
+    {
       uses: "vbem/kubeconfig4sa@v1",
       with: {
         server:

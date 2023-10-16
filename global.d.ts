@@ -6,4 +6,9 @@ declare global {
       prisma: PrismaClient;
     }
   }
+  interface GtagWindow extends Window {
+    gtag: any;
+  }
 }
+
+declare var window: GtagWindow & typeof globalThis;
