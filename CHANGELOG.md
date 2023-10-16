@@ -1,3 +1,10 @@
+# [0.8.0](https://github.com/kinguru-io/kinguru-next/compare/v0.7.5...v0.8.0) (2023-10-16)
+
+
+### Features
+
+* add sitemap support ([430060b](https://github.com/kinguru-io/kinguru-next/commit/430060b30d88caf43742fd623e86fb9c51f226e5))
+
 ## [0.7.5](https://github.com/kinguru-io/kinguru-next/compare/v0.7.4...v0.7.5) (2023-10-16)
 
 
