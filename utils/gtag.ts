@@ -1,8 +1,7 @@
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 declare var window: GtagWindow & typeof globalThis;
 
 export const pageview = (url: string) => {
-  window.gtag("config", GA_TRACKING_ID, {
+  window.gtag("config", process.env.NEXT_PUBLIC_GA_ID, {
     page_path: url,
   });
 };

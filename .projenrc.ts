@@ -16,6 +16,9 @@ const project = new web.NextJsTypeScriptProject({
     allowedUsernames: ["dependabot[bot]", "edelwud"],
   },
   autoApproveUpgrades: true,
+  depsUpgradeOptions: {
+    target: "latest",
+  },
 
   workflowBootstrapSteps: [
     {
