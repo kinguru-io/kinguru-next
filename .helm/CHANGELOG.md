@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.6...chart-v1.2.7) (2023-10-16)
+
+
+### Bug Fixes
+
+* use Google auth for studio login ([b56e961](https://github.com/kinguru-io/kinguru-next/commit/b56e9617ec1ad3daf32c15f0855334f7c94c37c6))
+
 ## [1.2.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.5...chart-v1.2.6) (2023-10-16)
 
 
