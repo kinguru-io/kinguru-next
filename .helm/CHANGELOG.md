@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.7...chart-v1.2.8) (2023-10-16)
+
+
+### Bug Fixes
+
+* change requests and limits for app ([8021aab](https://github.com/kinguru-io/kinguru-next/commit/8021aabaae9ce78faa34cd4a82f563a6f278dae0))
+
 ## [1.2.7](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.6...chart-v1.2.7) (2023-10-16)
 
 
