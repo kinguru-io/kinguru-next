@@ -1,3 +1,10 @@
+## [0.9.2](https://github.com/kinguru-io/kinguru-next/compare/v0.9.1...v0.9.2) (2023-10-16)
+
+
+### Bug Fixes
+
+* issue for core-js library ([dacbf0c](https://github.com/kinguru-io/kinguru-next/commit/dacbf0c741d62cdef59f97394e2d70d1b2ee3261))
+
 ## [0.9.1](https://github.com/kinguru-io/kinguru-next/compare/v0.9.0...v0.9.1) (2023-10-16)
 
 
