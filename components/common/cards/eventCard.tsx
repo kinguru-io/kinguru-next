@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import posterPlaceholder from "@/public/img/event-1.jpg";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -66,7 +67,7 @@ export function EventCard({
       <CardHeader p={0} bg={useColorModeValue("white", "gray.900")}>
         <AspectRatio maxHeight={250} ratio={16 / 9}>
           <Image
-            src={event.poster ?? ""}
+            src={event.poster ?? posterPlaceholder}
             width={640}
             height={480}
             style={{

@@ -56,7 +56,7 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
           columns={[1, 1, 1, 2]}
           alignItems={"center"}
         >
-          <Image src={data?.poster || undefined} />
+          <Image src={data?.poster || "/img/event-1.jpg"} />
           <VStack w={"full"}>
             <Heading pt={[5, 0]} textAlign={"center"}>
               {data?.topic}
