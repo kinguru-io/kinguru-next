@@ -1,7 +1,9 @@
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
 import moment from "moment/moment";
 import Head from "next/head";
+import { GetStaticPropsContext } from "next/types";
 import { Search } from "@/components/events/search";
+import { ssgInit } from "@/server/ssg-init.ts";
 import {
   buildFacetConfigFromConfig,
   buildSearchOptionsFromConfig,
@@ -97,4 +99,13 @@ export default function Events() {
       <Search config={combinedConfig} />
     </>
   );
+}
+
+export async function getServerSideProps(ctx: GetStaticPropsContext) {
+  const helpers = await ssgInit(ctx);
+  return {
+    props: {
+      trpcState: helpers.dehydrate(),
+    },
+  };
 }

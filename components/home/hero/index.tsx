@@ -43,10 +43,10 @@ export function HeroContent() {
             whiteSpace={"pre"}
             fontWeight={700}
             lineHeight={1.2}
-            fontSize={["4xl"]}
+            fontSize={["2xl", "4xl"]}
           >
             <Highlight
-              query={["Organize", "choose", "earn"]}
+              query={t("hero.slug_keywords").split(",")}
               styles={{ color: "brand.primary", fontWeight: "bold" }}
             >
               {t("hero.slug")}

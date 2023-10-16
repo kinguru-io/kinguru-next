@@ -30,9 +30,13 @@
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
-    "search_placeholder": "..."
+    "search_placeholder": "...",
+    "lang_en": "English",
+    "lang_pl": "Polish",
+    "lang_ru": "Russian"
   },
   "hero": {
+    "slug_keywords": "organize,choose,earn",
     "slug": "Organize events,\nChoose free locations\nAnd earn!",
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",

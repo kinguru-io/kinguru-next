@@ -68,7 +68,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export async function getStaticProps(
   context: GetStaticPropsContext<{ id: string }>,
 ) {
-  const helpers = await ssgInit({});
+  const helpers = await ssgInit(context as GetStaticPropsContext);
   const id = context.params?.id as string;
   await helpers.event.getEventDetails.prefetch({ eventId: id });
   await helpers.event.getEventSpeakers.prefetch({ eventId: id });

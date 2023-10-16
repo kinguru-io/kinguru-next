@@ -28,7 +28,7 @@ export const HowItWorks = () => {
       <Heading variant={"brand"}>{t("works.how_it_works")}</Heading>
       <Stripes />
       <Tabs variant="unstyled" w={["full", "3xl"]} mx={"auto"}>
-        <TabList>
+        <TabList flexDir={["column", "column", "row"]}>
           {tabsAvailable.map((text) => (
             <Tab fontSize={["xl", "3xl"]} key={text}>
               {t(`works.${text}`)}

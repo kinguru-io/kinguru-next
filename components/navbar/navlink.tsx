@@ -1,15 +1,18 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
+import Link from "next/link";
 
 export const NavLink = ({
   children,
   href,
+  locale,
 }: {
   href: string;
   children: React.ReactNode;
+  locale?: string;
 }) => {
   return (
     <Box
-      as="a"
+      as={Link}
       px={2}
       py={1}
       rounded={"md"}
@@ -18,6 +21,7 @@ export const NavLink = ({
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
       href={href}
+      locale={locale}
     >
       {children}
     </Box>

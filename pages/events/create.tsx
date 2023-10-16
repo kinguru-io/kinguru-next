@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { GetStaticPropsContext } from "next/types";
 import { NewEventStepper } from "@/components/events/create";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
@@ -29,8 +30,8 @@ export default function EventCreate() {
   );
 }
 
-export async function getServerSideProps() {
-  const helpers = await ssgInit({});
+export async function getServerSideProps(ctx: GetStaticPropsContext) {
+  const helpers = await ssgInit(ctx);
   await helpers.places.all.prefetch();
   return {
     props: {

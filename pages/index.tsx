@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { GetStaticPropsContext } from "next/types";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { useLocale } from "@/utils/use-locale.ts";
@@ -38,8 +39,8 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps() {
-  const helpers = await ssgInit({});
+export async function getServerSideProps(ctx: GetStaticPropsContext) {
+  const helpers = await ssgInit(ctx);
   await helpers.speaker.bestSpeakers.prefetch();
   await helpers.event.upcoming.prefetch();
   await helpers.event.recent.prefetch();

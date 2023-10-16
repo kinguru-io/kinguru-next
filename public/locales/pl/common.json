@@ -1,5 +1,23 @@
 {
   "company": "Kinguru",
+  "metadata": {
+    "home": {
+      "title": "Kinguru - Organize and Attend Thematic Meetings with Expert Speakers",
+      "description": "Discover, organize, and attend thematic meetings with expert speakers in cafes and restaurants. Explore upcoming events and sign up today!"
+    },
+    "events": {
+      "title": "Upcoming Events - Kinguru",
+      "description": "Browse through upcoming thematic meetings and events. Join us for insightful sessions with expert speakers in cozy locations.",
+      "create": {
+        "title": "Create Your Event - Kinguru",
+        "description": "Step into Kinguru’s intuitive event creation page. In just a few clicks, set up and customize your event, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy - Your Data is Safe with Kinguru",
+      "description": "At Kinguru, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
+    }
+  },
   "navbar": {
     "events": "Events",
     "speakers": "Speakers",
@@ -12,14 +30,18 @@
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
-    "search_placeholder": "..."
+    "search_placeholder": "...",
+    "lang_en": "English",
+    "lang_pl": "Polish",
+    "lang_ru": "Russian"
   },
   "hero": {
-    "slug": "Never eat alone!",
+    "slug_keywords": "organize,choose,earn",
+    "slug": "Organize events,\nChoose free locations\nAnd earn!",
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
-    "go_to_dashboard": "Go to dashboard"
+    "create_event": "Create event"
   },
   "events": {
     "upcoming_events": "Upcoming events",
@@ -45,7 +67,35 @@
     "meeting_send_comment_title": "Send comment for the event",
     "meeting_send_comment_message": "Your comment message",
     "meeting_send_comment_rating": "Event rating",
-    "meeting_send_comment_send": "Send comment"
+    "meeting_send_comment_send": "Send comment",
+    "meeting_guests": "Guests of this meeting",
+    "meeting_place": "Meeting location",
+    "new_event_creating": "Create your new event!",
+    "new_event_details": "Your event details",
+    "new_event_details_description": "Provide the event bare minimum",
+    "new_event_date_place": "Date & Place",
+    "new_event_date_place_description": "Provide the place for the event and date",
+    "new_event_review": "Review",
+    "new_event_review_description": "Review the results",
+    "new_event_topic": "Event topic",
+    "new_event_description": "Event description",
+    "new_event_tags": "Event tags",
+    "new_event_ticket_price": "Ticket price",
+    "new_event_select_poster": "Select poster",
+    "new_event_next": "Next",
+    "new_event_prev": "Previous",
+    "new_event_done": "Done",
+    "new_event_poster": "Poster",
+    "new_event_date_time": "Date & Time",
+    "new_event_guests_num": "Number of guests",
+    "new_event_place": "Place",
+    "new_event_was_created": "Your event was created!",
+    "new_event_was_created_description": "It will be available after moderation",
+    "new_event_was_not_created": "Event was not created",
+    "new_event_was_not_created_description": "Check that the form is filled out correctly",
+    "new_event_create_event": "Create an event",
+    "new_event_date": "Date",
+    "new_event_time": "Time"
   },
   "invite": {
     "title": "Let me invite you to a suitable table",
@@ -82,6 +132,7 @@
     "how_it_works": "How it works",
     "reviews": "Reviews",
     "photo_reports": "Photo reports",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "privacy_policy": "Privacy policy"
   }
 }

@@ -26,7 +26,11 @@ export const createContext = async ({
 }: trpcNext.CreateNextContextOptions) => {
   const session = req && res && (await getServerSession(req, res, authOptions));
   const acceptLanguage = req.headers["accept-language"];
-  const locale = acceptLanguage?.includes("pl") ? "pl" : "en";
+  const locale = acceptLanguage?.includes("pl")
+    ? "pl"
+    : acceptLanguage?.includes("ru")
+    ? "ru"
+    : "en";
   const i18n = await serverSideTranslations(locale, ["common"]);
 
   const innerContext = await createInnerTRPCContext({
