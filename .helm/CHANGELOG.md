@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.5...chart-v1.2.6) (2023-10-16)
+
+
+### Bug Fixes
+
+* remove annotations from auth2 proxy ([cb5824b](https://github.com/kinguru-io/kinguru-next/commit/cb5824b58a9b2d98563ec2a8db9f8327d3eea398))
+
 ## [1.2.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.4...chart-v1.2.5) (2023-10-16)
 
 
