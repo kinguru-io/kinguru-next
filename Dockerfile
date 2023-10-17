@@ -12,7 +12,7 @@ ARG NEXT_PUBLIC_ELASTICSEARCH_API_KEY
 ARG NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT
 ENV NODE_ENV="production"
 
-RUN npx prisma generate
+RUN npx prisma dev
 RUN npm run build
 
 FROM node:18-alpine as runner
