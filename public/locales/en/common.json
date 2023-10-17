@@ -126,7 +126,6 @@
   },
   "best_speakers": {
     "title": "Best speakers",
-    "followers_loader": "Counting...",
     "followers": "Followers",
     "follow": "Follow",
     "unfollow": "Unfollow"

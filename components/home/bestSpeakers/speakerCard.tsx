@@ -9,6 +9,7 @@ import {
   Stack,
   Button,
   useColorModeValue,
+  Skeleton,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -38,10 +39,13 @@ export const SpeakerCard = ({
     trpc.speaker.isFollowing.useQuery({
       speakerId: speaker.id,
     });
-  const { data: followers, refetch: followersRefetch } =
-    trpc.speaker.speakerFollowers.useQuery({
-      speakerId: speaker.id,
-    });
+  const {
+    data: followers,
+    refetch: followersRefetch,
+    isLoading: isFollowersLoading,
+  } = trpc.speaker.speakerFollowers.useQuery({
+    speakerId: speaker.id,
+  });
   return (
     <>
       <Center py={6}>
@@ -89,10 +93,9 @@ export const SpeakerCard = ({
 
             <Stack direction={"row"} justify={"center"} spacing={6}>
               <Stack spacing={0} align={"center"}>
-                <Text fontWeight={600}>
-                  {followers?._count.followers ||
-                    t("best_speakers.followers_loader")}
-                </Text>
+                <Skeleton isLoaded={!isFollowersLoading}>
+                  <Text fontWeight={600}>{followers?._count.followers}</Text>
+                </Skeleton>
                 <Text fontSize={"sm"} color={"gray.500"}>
                   {t("best_speakers.followers")}
                 </Text>

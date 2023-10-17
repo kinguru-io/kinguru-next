@@ -1,10 +1,10 @@
 import {
   Avatar,
-  Badge,
   Box,
   Container,
   Flex,
   Heading,
+  HStack,
   Skeleton,
   Stack,
   Text,
@@ -12,8 +12,10 @@ import {
 import Flicking from "@egjs/react-flicking";
 import "@egjs/react-flicking/dist/flicking.css";
 import "@egjs/react-flicking/dist/flicking-inline.css";
+import Image from "next/image";
 import Link from "next/link";
 import { Stripes } from "@/components/common/stripes";
+import bigStar from "@/public/img/big_star.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -50,14 +52,16 @@ export const EventSpeakersSection = ({ eventId }: { eventId: string }) => {
               >
                 <Avatar src={speaker.user.image || undefined} />
                 <Box ml="3">
-                  <Text
-                    as={Link}
-                    href={`/speakers/${speaker.id}`}
-                    fontWeight="bold"
-                  >
-                    {speaker.user.name}
-                    <Badge ml="1">5.00</Badge>
-                  </Text>
+                  <HStack>
+                    <Text
+                      as={Link}
+                      href={`/speakers/${speaker.id}`}
+                      fontWeight="bold"
+                    >
+                      {speaker.user.name}
+                    </Text>
+                    <Image src={bigStar} alt={"rating"} width={16} />
+                  </HStack>
                   <Text fontSize="sm">{speaker.user.position}</Text>
                 </Box>
               </Flex>

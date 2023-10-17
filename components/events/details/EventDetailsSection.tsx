@@ -97,7 +97,10 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                 {data?.speakersOnEvent?.map(({ speaker }) => (
                   <HStack key={speaker.userId}>
                     <Image src={"/img/speak.png"} />
-                    <Text as={Link} href={`/speakers/${speaker.id}`}>
+                    <Text
+                      as={Link}
+                      href={speaker.user.website || `/speakers/${speaker.id}`}
+                    >
                       {speaker.user.name}
                     </Text>
                   </HStack>

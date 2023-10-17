@@ -125,7 +125,6 @@
   },
   "best_speakers": {
     "title": "Лучшие спикеры",
-    "followers_loader": "Считаем...",
     "followers": "Подписчики",
     "follow": "Подписаться",
     "unfollow": "Отписаться"
