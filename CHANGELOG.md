@@ -1,3 +1,11 @@
+## [0.10.5](https://github.com/kinguru-io/kinguru-next/compare/v0.10.4...v0.10.5) (2023-10-17)
+
+
+### Bug Fixes
+
+* event details tag duplication ([a5c23eb](https://github.com/kinguru-io/kinguru-next/commit/a5c23eb3b07f7a95e22b97324a456dd421a46f65))
+* event details tag spacing ([994817c](https://github.com/kinguru-io/kinguru-next/commit/994817ce0b2290968b0b0ee9c933716c0cc4763c))
+
 ## [0.10.4](https://github.com/kinguru-io/kinguru-next/compare/v0.10.3...v0.10.4) (2023-10-17)
 
 

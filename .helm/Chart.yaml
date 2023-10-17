@@ -2,4 +2,4 @@ apiVersion: v2
 name: kinguru-next
 
 version: 1.2.9
-appVersion: 0.10.4
+appVersion: 0.10.5
