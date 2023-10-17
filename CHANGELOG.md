@@ -1,3 +1,15 @@
+# [0.10.0](https://github.com/kinguru-io/kinguru-next/compare/v0.9.4...v0.10.0) (2023-10-17)
+
+
+### Bug Fixes
+
+* add localization for best speakers section ([8adc28f](https://github.com/kinguru-io/kinguru-next/commit/8adc28fc270665d1f82e72c40d46af027f86c36a))
+
+
+### Features
+
+* add speaker followers feature ([4fce32b](https://github.com/kinguru-io/kinguru-next/commit/4fce32b7f398a14e145f163ad9200007246a016c))
+
 ## [0.9.4](https://github.com/kinguru-io/kinguru-next/compare/v0.9.3...v0.9.4) (2023-10-16)
 
 
