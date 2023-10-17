@@ -11,6 +11,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { trpc } from "@/utils/trpc.ts";
 
 export const SpeakerCard = ({
   speaker,
@@ -25,6 +27,19 @@ export const SpeakerCard = ({
     };
   };
 }) => {
+  const { status: userStatus } = useSession();
+  const { mutateAsync: followSpeaker, isLoading: followSpeakerLoading } =
+    trpc.speaker.followSpeaker.useMutation();
+  const { mutateAsync: unfollowSpeaker, isLoading: unfollowSpeakerLoading } =
+    trpc.speaker.unfollowSpeaker.useMutation();
+  const { data: isFollowing, refetch: isFollowingRefetch } =
+    trpc.speaker.isFollowing.useQuery({
+      speakerId: speaker.id,
+    });
+  const { data: followers, refetch: followersRefetch } =
+    trpc.speaker.speakerFollowers.useQuery({
+      speakerId: speaker.id,
+    });
   return (
     <>
       <Center py={6}>
@@ -72,22 +87,44 @@ export const SpeakerCard = ({
 
             <Stack direction={"row"} justify={"center"} spacing={6}>
               <Stack spacing={0} align={"center"}>
-                <Text fontWeight={600}>23k</Text>
-                <Text fontSize={"sm"} color={"gray.500"}>
-                  Followers
+                <Text fontWeight={600}>
+                  {followers?._count.followers || "Counting..."}
                 </Text>
-              </Stack>
-              <Stack spacing={0} align={"center"}>
-                <Text fontWeight={600}>23k</Text>
                 <Text fontSize={"sm"} color={"gray.500"}>
                   Followers
                 </Text>
               </Stack>
             </Stack>
 
-            <Button w={"full"} mt={8} variant={"primary"}>
-              Follow
-            </Button>
+            {userStatus === "authenticated" && isFollowing ? (
+              <Button
+                w={"full"}
+                mt={8}
+                isLoading={unfollowSpeakerLoading}
+                variant={"primary"}
+                onClick={() =>
+                  unfollowSpeaker({ speakerId: speaker.id })
+                    .then(() => isFollowingRefetch())
+                    .then(() => followersRefetch())
+                }
+              >
+                Unfollow
+              </Button>
+            ) : (
+              <Button
+                w={"full"}
+                mt={8}
+                isLoading={followSpeakerLoading}
+                variant={"primary"}
+                onClick={() =>
+                  followSpeaker({ speakerId: speaker.id })
+                    .then(() => isFollowingRefetch())
+                    .then(() => followersRefetch())
+                }
+              >
+                Follow
+              </Button>
+            )}
           </Box>
         </Box>
       </Center>

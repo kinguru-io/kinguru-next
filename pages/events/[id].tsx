@@ -27,14 +27,13 @@ export default function EventDetails({
   const router = useRouter();
   const eventId =
     !router.query.id || router.query.id instanceof Array ? "" : router.query.id;
+  const title = `${topic} - ${t("company")}`;
   return (
     <>
       <Head>
-        <title>
-          {topic} - {t("company")}
-        </title>
+        <title>{title}</title>
         <meta name="description" content={description} />
-        <meta property="og:title" content={`${topic} - ${t("company")}`} />
+        <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={poster} />
       </Head>

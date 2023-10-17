@@ -30,6 +30,7 @@ model User {
   facebook        String?
   instagram       String?
   linkedin        String?
+  telegram        String?
   website         String?
   role            UserRole         @default(user)
   createdAt       DateTime         @default(now())
@@ -43,6 +44,7 @@ model User {
   eventComments   EventComment[]
   placeComments   PlaceComment[]
   speakerComments SpeakerComment[]
+  following       SpeakerFollower[]
 }
 
 enum UserRole {
@@ -104,6 +106,7 @@ model Speaker {
   updatedAt   DateTime          @updatedAt
   participant SpeakersOnEvent[]
   comments    SpeakerComment[]
+  followers   SpeakerFollower[]
 }
 
 model SpeakerComment {
@@ -116,6 +119,16 @@ model SpeakerComment {
   message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model SpeakerFollower {
+  speaker    Speaker  @relation(fields: [speakerId], references: [id])
+  speakerId  String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  followedAt DateTime @default(now())
+
+  @@id([speakerId, userId])
 }
 
 model Event {
@@ -192,6 +205,7 @@ model SpeakersOnEvent {
 
 model Place {
   id             String              @id @default(cuid())
+  name           String              @default("Place")
   owner          User                @relation(fields: [ownerId], references: [id])
   ownerId        String
   private        Boolean?            @default(true)

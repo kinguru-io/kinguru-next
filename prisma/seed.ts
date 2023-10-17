@@ -211,6 +211,33 @@ async function main() {
   )
     .filter((result) => result.status === "rejected")
     .forEach(console.log);
+
+  const createdUsers = await prisma.user.findMany();
+  const speakers = await prisma.speaker.findMany();
+
+  await Promise.allSettled(
+    speakers.map((speaker) =>
+      prisma.speaker.update({
+        where: {
+          id: speaker.id,
+        },
+        data: {
+          followers: {
+            create: pickUniqueValues(
+              createdUsers,
+              Math.round(Math.random() * createdUsers.length),
+            ).map((user) => ({
+              user: {
+                connect: {
+                  id: user.id,
+                },
+              },
+            })),
+          },
+        },
+      }),
+    ),
+  );
 }
 main()
   .then(async () => {
