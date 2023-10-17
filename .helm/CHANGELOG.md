@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.8...chart-v1.2.9) (2023-10-17)
+
+
+### Bug Fixes
+
+* migrate during a build process ([c556eaa](https://github.com/kinguru-io/kinguru-next/commit/c556eaa17b0b5d7948909551a70de1ec70a4861e))
+
 ## [1.2.8](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.7...chart-v1.2.8) (2023-10-16)
 
 
