@@ -1,3 +1,10 @@
+## [0.10.3](https://github.com/kinguru-io/kinguru-next/compare/v0.10.2...v0.10.3) (2023-10-17)
+
+
+### Bug Fixes
+
+* add migration schema for follower table ([a6cb82d](https://github.com/kinguru-io/kinguru-next/commit/a6cb82dfd6066df8198aa041f822e5dfc403d675))
+
 ## [0.10.2](https://github.com/kinguru-io/kinguru-next/compare/v0.10.1...v0.10.2) (2023-10-17)
 
 
