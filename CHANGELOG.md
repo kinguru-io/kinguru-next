@@ -1,3 +1,10 @@
+## [0.10.1](https://github.com/kinguru-io/kinguru-next/compare/v0.10.0...v0.10.1) (2023-10-17)
+
+
+### Bug Fixes
+
+* centralize hero text ([e587e6b](https://github.com/kinguru-io/kinguru-next/commit/e587e6be34be5f838df0df42c844c16bcdba8d3e))
+
 # [0.10.0](https://github.com/kinguru-io/kinguru-next/compare/v0.9.4...v0.10.0) (2023-10-17)
 
 
