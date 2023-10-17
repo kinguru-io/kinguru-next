@@ -1,3 +1,10 @@
+## [0.10.2](https://github.com/kinguru-io/kinguru-next/compare/v0.10.1...v0.10.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* port-forwarding master replica for gh actions ([4c38221](https://github.com/kinguru-io/kinguru-next/commit/4c38221ec9ecda77a3dc8354d1cfbb5b09b4a3d4))
+
 ## [0.10.1](https://github.com/kinguru-io/kinguru-next/compare/v0.10.0...v0.10.1) (2023-10-17)
 
 
