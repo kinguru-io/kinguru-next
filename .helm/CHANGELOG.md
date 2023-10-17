@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.10...chart-v1.2.11) (2023-10-17)
+
+
+### Bug Fixes
+
+* nginx ingress letsencrypt cert for www ([2b11ad4](https://github.com/kinguru-io/kinguru-next/commit/2b11ad499c053f7a8a5f91b78bebd85ad247894c))
+
 ## [1.2.10](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.9...chart-v1.2.10) (2023-10-17)
 
 
