@@ -94,6 +94,10 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                     {data?.place?.location}
                   </Text>
                 </HStack>
+                <HStack>
+                  <Image src={"/img/dollar_yellow.png"} />
+                  <Text>{data?.price} zł</Text>
+                </HStack>
               </VStack>
               <VStack alignItems={["center", "baseline"]} spacing={5}>
                 {data?.speakersOnEvent?.map(({ speaker }) => (

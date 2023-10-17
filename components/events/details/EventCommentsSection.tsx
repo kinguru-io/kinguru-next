@@ -85,7 +85,7 @@ export const EventCommentsSection = ({ eventId }: { eventId: string }) => {
             nextCursor: page.nextCursor,
           }))
           .items.map((comment, index, allComments) => (
-            <Card maxW="md" mr={10} key={index}>
+            <Card w={["sm", "md"]} mr={10} key={index}>
               <CardHeader>
                 <Flex>
                   <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">

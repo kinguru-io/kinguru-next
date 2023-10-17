@@ -71,6 +71,8 @@
     "meeting_send_comment_send": "Отправить комментарий",
     "meeting_guests": "Гости этого события",
     "meeting_place": "Площадка мероприятия",
+    "meeting_place_tel": "Телефон",
+    "meeting_place_address": "Адрес",
     "new_event_creating": "Создайте свое новое событие!",
     "new_event_details": "Описание вашего события",
     "new_event_details_description": "Кратко изложите суть мероприятия",

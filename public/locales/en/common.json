@@ -72,6 +72,8 @@
     "meeting_send_comment_send": "Send comment",
     "meeting_guests": "Guests of this meeting",
     "meeting_place": "Meeting location",
+    "meeting_place_tel": "Tel",
+    "meeting_place_address": "Address",
     "new_event_creating": "Create your new event!",
     "new_event_details": "Your event details",
     "new_event_details_description": "Provide the event bare minimum",
