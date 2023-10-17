@@ -61,21 +61,26 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
             <Heading pt={[5, 0]} textAlign={"center"}>
               {data?.topic}
             </Heading>
-            <HStack py={7}>
-              {data?.tags?.map((tag) => (
-                <Tag
-                  key={tag}
-                  background={"transparent"}
-                  color={"gray.100"}
-                  border={"2px solid rgb(123, 123, 123)"}
-                  px={4}
-                  py={2}
-                  borderRadius={"full"}
-                >
-                  {tag}
-                </Tag>
-              ))}
-            </HStack>
+            <Container py={7} display={"block"} textAlign={"center"}>
+              {data?.tags
+                ?.concat(data?.tags)
+                .concat(data?.tags)
+                .map((tag) => (
+                  <Tag
+                    key={tag}
+                    background={"transparent"}
+                    color={"gray.100"}
+                    border={"2px solid rgb(123, 123, 123)"}
+                    px={4}
+                    py={2}
+                    mr={3}
+                    mt={2}
+                    borderRadius={"full"}
+                  >
+                    {tag}
+                  </Tag>
+                ))}
+            </Container>
             <SimpleGrid w={["full", "80%"]} mx={"auto"} columns={2}>
               <VStack alignItems={["center", "baseline"]} spacing={5}>
                 <HStack>
