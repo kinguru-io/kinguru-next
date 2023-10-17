@@ -124,7 +124,11 @@
     "networking": "Нетворкинг"
   },
   "best_speakers": {
-    "title": "Лучшие спикеры"
+    "title": "Лучшие спикеры",
+    "followers_loader": "Считаем...",
+    "followers": "Подписчики",
+    "follow": "Подписаться",
+    "unfollow": "Отписаться"
   },
   "company_statistics": {
     "events_held": "событий проведено",

@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { trpc } from "@/utils/trpc.ts";
+import { useLocale } from "@/utils/use-locale.ts";
 
 export const SpeakerCard = ({
   speaker,
@@ -27,6 +28,7 @@ export const SpeakerCard = ({
     };
   };
 }) => {
+  const { t } = useLocale();
   const { status: userStatus } = useSession();
   const { mutateAsync: followSpeaker, isLoading: followSpeakerLoading } =
     trpc.speaker.followSpeaker.useMutation();
@@ -88,10 +90,11 @@ export const SpeakerCard = ({
             <Stack direction={"row"} justify={"center"} spacing={6}>
               <Stack spacing={0} align={"center"}>
                 <Text fontWeight={600}>
-                  {followers?._count.followers || "Counting..."}
+                  {followers?._count.followers ||
+                    t("best_speakers.followers_loader")}
                 </Text>
                 <Text fontSize={"sm"} color={"gray.500"}>
-                  Followers
+                  {t("best_speakers.followers")}
                 </Text>
               </Stack>
             </Stack>
@@ -108,7 +111,7 @@ export const SpeakerCard = ({
                     .then(() => followersRefetch())
                 }
               >
-                Unfollow
+                {t("best_speakers.unfollow")}
               </Button>
             ) : (
               <Button
@@ -122,7 +125,7 @@ export const SpeakerCard = ({
                     .then(() => followersRefetch())
                 }
               >
-                Follow
+                {t("best_speakers.follow")}
               </Button>
             )}
           </Box>
