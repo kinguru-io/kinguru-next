@@ -1,3 +1,10 @@
+## [0.10.4](https://github.com/kinguru-io/kinguru-next/compare/v0.10.3...v0.10.4) (2023-10-17)
+
+
+### Bug Fixes
+
+* add star icon for a speaker ([1c54697](https://github.com/kinguru-io/kinguru-next/commit/1c54697ddfc2c491447f43667eaffbf4c3844651))
+
 ## [0.10.3](https://github.com/kinguru-io/kinguru-next/compare/v0.10.2...v0.10.3) (2023-10-17)
 
 
