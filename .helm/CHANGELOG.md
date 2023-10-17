@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.9...chart-v1.2.10) (2023-10-17)
+
+
+### Bug Fixes
+
+* nginx ingress www redirect ([8e3079e](https://github.com/kinguru-io/kinguru-next/commit/8e3079e3c87a917cf46cf9c31cb503384fc5cdce))
+
 ## [1.2.9](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.8...chart-v1.2.9) (2023-10-17)
 
 
