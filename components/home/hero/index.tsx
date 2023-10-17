@@ -39,7 +39,7 @@ export function HeroContent() {
           <Text
             marginX={"auto"}
             color={"white"}
-            textAlign={"left"}
+            textAlign={"center"}
             whiteSpace={"pre"}
             fontWeight={700}
             lineHeight={1.2}
