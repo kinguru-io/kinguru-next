@@ -10,6 +10,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-tls
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   ingressClassName: nginx
   tls:
