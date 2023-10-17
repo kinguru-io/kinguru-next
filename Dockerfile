@@ -12,7 +12,7 @@ ARG NEXT_PUBLIC_ELASTICSEARCH_API_KEY
 ARG NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT
 ENV NODE_ENV="production"
 
-RUN prisma generate
+RUN npx prisma generate
 RUN npx prisma migrate deploy
 RUN npm run build
 
