@@ -1,3 +1,10 @@
+## [0.10.6](https://github.com/kinguru-io/kinguru-next/compare/v0.10.5...v0.10.6) (2023-10-17)
+
+
+### Bug Fixes
+
+* event details meeting place ([45b50c4](https://github.com/kinguru-io/kinguru-next/commit/45b50c4af455283ced1c9d9d57e39fb3e322b9ea))
+
 ## [0.10.5](https://github.com/kinguru-io/kinguru-next/compare/v0.10.4...v0.10.5) (2023-10-17)
 
 
