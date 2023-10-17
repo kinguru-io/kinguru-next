@@ -16,6 +16,7 @@ spec:
   tls:
     - hosts:
         - {{ $.Values.ingress.hostname }}
+        - www.{{ $.Values.ingress.hostname }}
       secretName: letsencrypt-tls
   rules:
     - host: {{ $.Values.ingress.hostname }}
