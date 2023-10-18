@@ -1,3 +1,10 @@
+## [1.2.12](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.11...chart-v1.2.12) (2023-10-18)
+
+
+### Bug Fixes
+
+* change limits for deployment ([cc90121](https://github.com/kinguru-io/kinguru-next/commit/cc90121e79b913e2f2f54a6f06b2abe12cc780e9))
+
 ## [1.2.11](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.10...chart-v1.2.11) (2023-10-17)
 
 
