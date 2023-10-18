@@ -13,5 +13,5 @@ resources:
     cpu: 200m
     memory: 256Mi
   limits:
-    cpu: 768m
-    memory: 512Mi
+    cpu: 500m
+    memory: 768Mi
