@@ -1,3 +1,10 @@
+## [0.10.9](https://github.com/kinguru-io/kinguru-next/compare/v0.10.8...v0.10.9) (2023-10-20)
+
+
+### Bug Fixes
+
+* fetching data for upcoming and recent events ([26ce10f](https://github.com/kinguru-io/kinguru-next/commit/26ce10f97c77d0ce88fb7deb7668822d89bb4aa1))
+
 ## [0.10.8](https://github.com/kinguru-io/kinguru-next/compare/v0.10.7...v0.10.8) (2023-10-20)
 
 
