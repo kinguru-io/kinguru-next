@@ -70,8 +70,6 @@ export async function getStaticProps(
   const helpers = await ssgInit(context as GetStaticPropsContext);
   const id = context.params?.id as string;
   await helpers.event.getEventDetails.prefetch({ eventId: id });
-  await helpers.event.getEventSpeakers.prefetch({ eventId: id });
-  await helpers.event.getEventPlace.prefetch({ eventId: id });
   const { topic, description, poster } =
     await helpers.event.getEventDetails.fetch({
       eventId: id,
