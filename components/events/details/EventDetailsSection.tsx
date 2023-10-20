@@ -79,7 +79,7 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
               ))}
             </Container>
             <SimpleGrid w={["full", "80%"]} mx={"auto"} columns={2}>
-              <VStack alignItems={["center", "baseline"]} spacing={5}>
+              <VStack alignItems={"baseline"} spacing={5}>
                 <HStack>
                   <Image src={"/img/calendar.png"} />
                   <Text>{data?.starts?.toLocaleDateString()}</Text>

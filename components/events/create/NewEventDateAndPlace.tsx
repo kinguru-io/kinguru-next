@@ -18,6 +18,7 @@ import { Place, PlaceResource } from "@prisma/client";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as mapboxgl from "mapbox-gl";
 import moment from "moment/moment";
+import NextImage from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import Map, {
@@ -29,6 +30,7 @@ import Map, {
 } from "react-map-gl";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import marker from "@/public/img/apple-touch-icon.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -188,8 +190,8 @@ export function NewEventDateAndPlace({
                       mapLib={mapboxgl}
                       initialViewState={{
                         longitude: 21,
-                        latitude: 52.196217,
-                        zoom: 9,
+                        latitude: 52.23,
+                        zoom: 11,
                         bearing: 0,
                         pitch: 0,
                       }}
@@ -204,7 +206,7 @@ export function NewEventDateAndPlace({
                           key={`marker-${index}`}
                           longitude={place.coordsLng}
                           latitude={place.coordsLat}
-                          anchor="bottom"
+                          anchor="center"
                           onClick={(e) => {
                             e.originalEvent.stopPropagation();
                             field.onChange({
@@ -216,7 +218,13 @@ export function NewEventDateAndPlace({
                             setPlaceId(place.id);
                             setPopupInfo(place);
                           }}
-                        ></Marker>
+                        >
+                          <NextImage
+                            src={marker}
+                            alt={place.name || "Location"}
+                            width={32}
+                          />
+                        </Marker>
                       ))}
                       {popupInfo && (
                         <Popup

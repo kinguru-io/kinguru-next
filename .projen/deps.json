@@ -131,10 +131,6 @@
       "type": "runtime"
     },
     {
-      "name": "@egjs/flicking-plugins",
-      "type": "runtime"
-    },
-    {
       "name": "@egjs/react-flicking",
       "type": "runtime"
     },
@@ -301,7 +297,7 @@
       "type": "runtime"
     },
     {
-      "name": "react-rating-stars-component",
+      "name": "react-simple-star-rating",
       "type": "runtime"
     },
     {

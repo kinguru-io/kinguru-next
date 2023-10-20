@@ -41,6 +41,8 @@ export default function Home() {
 
 export async function getServerSideProps(ctx: GetStaticPropsContext) {
   const helpers = await ssgInit(ctx);
+  await helpers.event.upcoming.prefetch();
+  await helpers.event.recent.prefetch();
   await helpers.speaker.bestSpeakers.prefetch();
   return {
     props: {

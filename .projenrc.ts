@@ -139,8 +139,7 @@ const project = new web.NextJsTypeScriptProject({
     "@elastic/react-search-ui-views",
     "rc-pagination",
     "@egjs/react-flicking",
-    "@egjs/flicking-plugins",
-    "react-rating-stars-component",
+    "react-simple-star-rating",
     "react-intersection-observer",
 
     "@prisma/instrumentation",

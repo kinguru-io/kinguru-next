@@ -27,8 +27,7 @@ import Flicking from "@egjs/react-flicking";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import { useInView } from "react-intersection-observer";
-// @ts-ignore
-import ReactStars from "react-rating-stars-component";
+import { Rating } from "react-simple-star-rating";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Stripes } from "@/components/common/stripes";
@@ -109,12 +108,15 @@ export const EventCommentsSection = ({ eventId }: { eventId: string }) => {
                 <Text>{comment.message}</Text>
               </CardBody>
               <CardFooter pt={0} mt={0} justifyContent={"center"}>
-                <ReactStars
-                  count={5}
-                  value={comment.rating}
+                <Rating
+                  initialValue={comment.rating}
+                  readonly
                   size={24}
-                  edit={false}
-                  activeColor="#ffd700"
+                  SVGstrokeColor="#ffd700"
+                  SVGstyle={{
+                    display: "inline-block",
+                  }}
+                  fillColor="#ffd700"
                 />
               </CardFooter>
             </Card>
@@ -182,12 +184,14 @@ export const EventCommentsSection = ({ eventId }: { eventId: string }) => {
                             <FormLabel>
                               {t("events.meeting_send_comment_rating")}
                             </FormLabel>
-                            <ReactStars
-                              count={5}
+                            <Rating
                               size={24}
-                              activeColor="#ffd700"
-                              {...field}
-                              onChange={(value: number) =>
+                              SVGstrokeColor="#ffd700"
+                              SVGstyle={{
+                                display: "inline-block",
+                              }}
+                              fillColor="#ffd700"
+                              onClick={(value: number) =>
                                 field.onChange({
                                   target: { value, name: field.name },
                                 })

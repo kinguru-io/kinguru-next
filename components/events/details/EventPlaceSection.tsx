@@ -1,16 +1,17 @@
-import {
-  Container,
-  Heading,
-  Image,
-  SimpleGrid,
-  VStack,
-  Text,
-} from "@chakra-ui/react";
-import { Arrow } from "@egjs/flicking-plugins";
-import Flicking, { ViewportSlot } from "@egjs/react-flicking";
+import { Container, Heading, Flex, VStack, Text } from "@chakra-ui/react";
+import * as mapboxgl from "mapbox-gl";
+import Image from "next/image";
+import Map, {
+  FullscreenControl,
+  GeolocateControl,
+  Marker,
+  NavigationControl,
+} from "react-map-gl";
 import { Stripes } from "@/components/common/stripes";
+import marker from "@/public/img/apple-touch-icon.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
   const { t } = useLocale();
@@ -32,34 +33,36 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
     >
       <Heading variant={"brand"}>{t("events.meeting_place")}</Heading>
       <Stripes />
-      <SimpleGrid w={["full", "70%"]} px={3} mx={"auto"} columns={[1, 2]}>
-        <Flicking
-          horizontal={true}
-          circular={true}
-          autoResize={true}
-          align={"center"}
-          plugins={[new Arrow()]}
+      <Flex w={["full", "70%"]} px={3} mx={"auto"} justifyContent={"right"}>
+        <Map
+          mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+          mapLib={mapboxgl}
+          initialViewState={{
+            longitude: 21,
+            latitude: 52.23,
+            zoom: 11,
+            bearing: 0,
+            pitch: 0,
+          }}
+          style={{ width: "100%", height: 400 }}
+          mapStyle="mapbox://styles/mapbox/dark-v9"
         >
-          {place?.resources.map((photo) => (
-            <Image key={photo.id} src={photo.url} height={300} />
-          ))}
-          <ViewportSlot>
-            <span slot="viewport" className="flicking-arrow-prev"></span>
-            <span slot="viewport" className="flicking-arrow-next"></span>
-          </ViewportSlot>
-        </Flicking>
-        <VStack align={"left"} spacing={3} ml={[0, 3]}>
-          <Heading variant={"brand"} textAlign={"left"}>
-            {place?.name}
-          </Heading>
-          <Text>
-            {t("events.meeting_place_tel")}: {place?.tel}
-          </Text>
-          <Text>
-            {t("events.meeting_place_address")}: {place?.location}
-          </Text>
+          <GeolocateControl position="top-left" />
+          <FullscreenControl position="top-left" />
+          <NavigationControl position="top-left" />
+          <Marker
+            longitude={place?.coordsLng || 21}
+            latitude={place?.coordsLat || 52.23}
+            anchor="center"
+          >
+            <Image src={marker} alt={place?.name || "Location"} width={32} />
+          </Marker>
+        </Map>
+        <VStack position={"absolute"} p={4} alignItems={"left"}>
+          <Heading color={"white"}>{place?.name}</Heading>
+          <Text color={"white"}>{place?.location}</Text>
         </VStack>
-      </SimpleGrid>
+      </Flex>
     </Container>
   );
 };
