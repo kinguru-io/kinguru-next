@@ -1,3 +1,10 @@
+## [0.10.12](https://github.com/kinguru-io/kinguru-next/compare/v0.10.11...v0.10.12) (2023-10-20)
+
+
+### Bug Fixes
+
+* extend link overlay ([9da61a5](https://github.com/kinguru-io/kinguru-next/commit/9da61a5512b3c7541f9a2ef0b6a83cc27dafb3ad))
+
 ## [0.10.11](https://github.com/kinguru-io/kinguru-next/compare/v0.10.10...v0.10.11) (2023-10-20)
 
 
