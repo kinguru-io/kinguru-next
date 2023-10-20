@@ -1,3 +1,10 @@
+## [0.10.7](https://github.com/kinguru-io/kinguru-next/compare/v0.10.6...v0.10.7) (2023-10-20)
+
+
+### Bug Fixes
+
+* configure trpc shield ([60a02fc](https://github.com/kinguru-io/kinguru-next/commit/60a02fc7a17f300459b71f09975cd4fdf10ffe56))
+
 ## [0.10.6](https://github.com/kinguru-io/kinguru-next/compare/v0.10.5...v0.10.6) (2023-10-17)
 
 
