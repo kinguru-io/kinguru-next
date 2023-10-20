@@ -1,3 +1,10 @@
+## [0.10.8](https://github.com/kinguru-io/kinguru-next/compare/v0.10.7...v0.10.8) (2023-10-20)
+
+
+### Bug Fixes
+
+* add redirecting on insufficient privileges ([db2c4d4](https://github.com/kinguru-io/kinguru-next/commit/db2c4d4dbd1051e6d3dcf0c3c21ed84dad8e2f86))
+
 ## [0.10.7](https://github.com/kinguru-io/kinguru-next/compare/v0.10.6...v0.10.7) (2023-10-20)
 
 
