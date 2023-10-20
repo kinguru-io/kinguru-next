@@ -1,6 +1,14 @@
-import { Container, Heading, Flex, VStack, Text } from "@chakra-ui/react";
+import {
+  Container,
+  Heading,
+  Flex,
+  VStack,
+  Text,
+  Image,
+} from "@chakra-ui/react";
+import Flicking from "@egjs/react-flicking";
 import * as mapboxgl from "mapbox-gl";
-import Image from "next/image";
+import NextImage from "next/image";
 import Map, {
   FullscreenControl,
   GeolocateControl,
@@ -33,7 +41,7 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
     >
       <Heading variant={"brand"}>{t("events.meeting_place")}</Heading>
       <Stripes />
-      <Flex w={["full", "70%"]} px={3} mx={"auto"} justifyContent={"right"}>
+      <Flex w={["full", "70%"]} px={3} mx={"auto"}>
         <Map
           mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
           mapLib={mapboxgl}
@@ -55,13 +63,36 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
             latitude={place?.coordsLat || 52.23}
             anchor="center"
           >
-            <Image src={marker} alt={place?.name || "Location"} width={32} />
+            <NextImage
+              src={marker}
+              alt={place?.name || "Location"}
+              width={32}
+            />
           </Marker>
+          <VStack
+            position={"absolute"}
+            top={0}
+            right={0}
+            p={4}
+            alignItems={"left"}
+            maxW={"sm"}
+            backgroundColor={"rgba(0,0,0,.1)"}
+            roundedBottomLeft={"xl"}
+          >
+            <Heading color={"white"}>{place?.name}</Heading>
+            <Text color={"white"}>{place?.location}</Text>
+            <Flicking>
+              {place?.resources.map((resource) => (
+                <Image
+                  key={resource.id}
+                  src={resource.url}
+                  alt={place.name}
+                  height={200}
+                />
+              ))}
+            </Flicking>
+          </VStack>
         </Map>
-        <VStack position={"absolute"} p={4} alignItems={"left"}>
-          <Heading color={"white"}>{place?.name}</Heading>
-          <Text color={"white"}>{place?.location}</Text>
-        </VStack>
       </Flex>
     </Container>
   );
