@@ -33,6 +33,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Stripes } from "@/components/common/stripes";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
+import "@egjs/react-flicking/dist/flicking.css";
 
 export const EventCommentsSection = ({ eventId }: { eventId: string }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -77,7 +78,7 @@ export const EventCommentsSection = ({ eventId }: { eventId: string }) => {
     >
       <Heading variant={"brand"}>{t("events.meeting_comments")}</Heading>
       <Stripes />
-      <Flicking>
+      <Flicking hideBeforeInit={true}>
         {comments?.pages
           .reduce((acc, page) => ({
             items: acc.items.concat(page.items),

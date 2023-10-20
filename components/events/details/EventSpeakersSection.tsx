@@ -39,7 +39,7 @@ export const EventSpeakersSection = ({ eventId }: { eventId: string }) => {
         <Heading variant={"brand"}>{t("events.meeting_speakers")}</Heading>
         <Stripes />
         <Stack mx={"auto"} mt={5}>
-          <Flicking>
+          <Flicking hideBeforeInit={true}>
             {data?.speakersOnEvent.map(({ speaker }) => (
               <Flex
                 key={speaker.id}

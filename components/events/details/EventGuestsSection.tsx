@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Stripes } from "@/components/common/stripes";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
+import "@egjs/react-flicking/dist/flicking.css";
 
 export const EventGuestsSection = ({ eventId }: { eventId: string }) => {
   const { t } = useLocale();
@@ -38,7 +39,7 @@ export const EventGuestsSection = ({ eventId }: { eventId: string }) => {
       <Heading variant={"brand"}>{t("events.meeting_guests")}</Heading>
       <Stripes color={"white"} />
       <Flex w={"full"} mx={"auto"}>
-        <Flicking>
+        <Flicking hideBeforeInit={true}>
           {users?.pages
             .reduce((acc, page) => ({
               items: acc.items.concat(page.items),

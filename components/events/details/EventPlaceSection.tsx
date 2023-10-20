@@ -20,6 +20,7 @@ import marker from "@/public/img/apple-touch-icon.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "@egjs/react-flicking/dist/flicking.css";
 
 export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
   const { t } = useLocale();
@@ -75,13 +76,13 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
             right={0}
             p={4}
             alignItems={"left"}
-            maxW={"sm"}
+            maxW={"xs"}
             backgroundColor={"rgba(0,0,0,.1)"}
             roundedBottomLeft={"xl"}
           >
             <Heading color={"white"}>{place?.name}</Heading>
             <Text color={"white"}>{place?.location}</Text>
-            <Flicking>
+            <Flicking hideBeforeInit={true}>
               {place?.resources.map((resource) => (
                 <Image
                   key={resource.id}

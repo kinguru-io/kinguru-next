@@ -160,7 +160,7 @@ export function NewEventDateAndPlace({
               {featuredPlace && (
                 <Card w={"full"}>
                   <CardBody>
-                    <Flicking>
+                    <Flicking hideBeforeInit={true}>
                       {featuredPlace.resources.map((resource) => (
                         <Image src={resource.url} width={"full"} />
                       ))}

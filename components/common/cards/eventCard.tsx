@@ -53,22 +53,22 @@ export function EventCard({
       boxShadow={["md", "2xl"]}
       rounded={"md"}
     >
-      <CardHeader p={0} bg={useColorModeValue("white", "gray.900")}>
-        <AspectRatio maxHeight={250} ratio={16 / 9}>
-          <Image
-            src={event.poster ?? posterPlaceholder}
-            width={640}
-            height={480}
-            style={{
-              objectFit: "cover",
-              borderRadius: "6px 6px 0 0",
-            }}
-            alt={event.topic}
-          />
-        </AspectRatio>
-      </CardHeader>
-      <CardBody pt={6}>
-        <LinkBox>
+      <LinkBox>
+        <CardHeader p={0} bg={useColorModeValue("white", "gray.900")}>
+          <AspectRatio maxHeight={250} ratio={16 / 9}>
+            <Image
+              src={event.poster ?? posterPlaceholder}
+              width={640}
+              height={480}
+              style={{
+                objectFit: "cover",
+                borderRadius: "6px 6px 0 0",
+              }}
+              alt={event.topic}
+            />
+          </AspectRatio>
+        </CardHeader>
+        <CardBody pt={6}>
           <Heading
             color={useColorModeValue("gray.700", "white")}
             fontSize={"2xl"}
@@ -84,8 +84,8 @@ export function EventCard({
               {event.description}
             </Text>
           </Collapse>
-        </LinkBox>
-      </CardBody>
+        </CardBody>
+      </LinkBox>
       <CardFooter>
         <Flex w={"full"} justifyContent={"space-between"}>
           <Button variant={"secondary"} onClick={handleToggle}>
