@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import moment from "moment/moment";
 import { z } from "zod";
 import { publicProcedure, t } from "../trpc";
@@ -22,15 +23,11 @@ export const eventRouter = t.router({
         ctx,
         input: { topic, description, placeId, date, time, poster, price, tags },
       }) => {
-        if (!ctx.session?.user?.id) {
-          throw new Error("KR1001");
-        }
-
         return ctx.prisma.event.create({
           data: {
             topic,
             description,
-            initiatorId: ctx.session.user.id,
+            initiatorId: ctx.session!.user!.id,
             placeId,
             starts: moment(`${date} ${time}`, "yyyy-MM-DD HH:mm").toDate(),
             poster,
@@ -148,9 +145,6 @@ export const eventRouter = t.router({
       }),
     )
     .mutation(async ({ ctx, input: { eventId, message, rating } }) => {
-      if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
-      }
       const event = await ctx.prisma.event.findUnique({
         where: {
           id: eventId,
@@ -158,13 +152,16 @@ export const eventRouter = t.router({
       });
 
       if (moment(event?.starts).isBefore()) {
-        throw new Error("outdated event");
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Event starts before",
+        });
       }
 
       return ctx.prisma.eventComment.create({
         data: {
           eventId,
-          userId: ctx.session?.user?.id,
+          userId: ctx.session!.user!.id,
           message,
           rating,
         },
@@ -322,14 +319,11 @@ export const eventRouter = t.router({
       }),
     )
     .mutation(async ({ ctx, input: { eventId } }) => {
-      if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
-      }
       const alreadyAttend = await ctx.prisma.usersOnEvent.findUnique({
         where: {
           userId_eventId: {
             eventId,
-            userId: ctx.session?.user?.id,
+            userId: ctx.session!.user!.id,
           },
         },
       });
@@ -345,13 +339,16 @@ export const eventRouter = t.router({
       });
 
       if (moment(event?.starts).isBefore()) {
-        throw new Error("outdated event");
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Event starts before",
+        });
       }
 
       return ctx.prisma.usersOnEvent.create({
         data: {
           eventId,
-          userId: ctx.session?.user?.id,
+          userId: ctx.session!.user!.id,
         },
       });
     }),
@@ -362,15 +359,11 @@ export const eventRouter = t.router({
       }),
     )
     .mutation(async ({ ctx, input: { eventId } }) => {
-      if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
-      }
-
       const present = await ctx.prisma.usersOnEvent.findUnique({
         where: {
           userId_eventId: {
             eventId,
-            userId: ctx.session?.user?.id,
+            userId: ctx.session!.user!.id,
           },
         },
       });
@@ -381,7 +374,7 @@ export const eventRouter = t.router({
         where: {
           userId_eventId: {
             eventId,
-            userId: ctx.session?.user?.id,
+            userId: ctx.session!.user!.id,
           },
         },
       });
@@ -401,7 +394,7 @@ export const eventRouter = t.router({
         where: {
           userId_eventId: {
             eventId,
-            userId: ctx.session?.user?.id,
+            userId: ctx.session.user.id,
           },
         },
       });
@@ -416,7 +409,7 @@ export const eventRouter = t.router({
     )
     .query(async ({ ctx, input: { eventId } }) => {
       if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
+        return false;
       }
 
       const userOnEvent = await ctx.prisma.usersOnEvent.findUnique({

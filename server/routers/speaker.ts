@@ -23,13 +23,13 @@ export const speakerRouter = t.router({
     )
     .query(async ({ ctx, input: { speakerId } }) => {
       if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
+        return false;
       }
       return ctx.prisma.speakerFollower.findUnique({
         where: {
           speakerId_userId: {
             speakerId,
-            userId: ctx.session.user.id,
+            userId: ctx.session!.user!.id,
           },
         },
       });
@@ -41,24 +41,20 @@ export const speakerRouter = t.router({
       }),
     )
     .mutation(async ({ ctx, input: { speakerId } }) => {
-      if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
-      }
-
       return ctx.prisma.speakerFollower.upsert({
         where: {
           speakerId_userId: {
             speakerId,
-            userId: ctx.session.user.id,
+            userId: ctx.session!.user!.id,
           },
         },
         update: {
           speakerId,
-          userId: ctx.session.user.id,
+          userId: ctx.session!.user!.id,
         },
         create: {
           speakerId,
-          userId: ctx.session.user.id,
+          userId: ctx.session!.user!.id,
         },
       });
     }),
@@ -69,15 +65,11 @@ export const speakerRouter = t.router({
       }),
     )
     .mutation(async ({ ctx, input: { speakerId } }) => {
-      if (!ctx.session?.user?.id) {
-        throw new Error("KR1001");
-      }
-
       return ctx.prisma.speakerFollower.delete({
         where: {
           speakerId_userId: {
             speakerId,
-            userId: ctx.session.user.id,
+            userId: ctx.session!.user!.id,
           },
         },
       });

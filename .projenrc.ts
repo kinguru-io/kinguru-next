@@ -155,6 +155,7 @@ const project = new web.NextJsTypeScriptProject({
   devDeps: [
     "prisma",
     "@faker-js/faker",
+    "@types/gtag.js",
     "@types/node@20",
     "@next/eslint-plugin-next",
     "classnames",

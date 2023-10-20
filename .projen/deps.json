@@ -30,6 +30,10 @@
       "type": "build"
     },
     {
+      "name": "@types/gtag.js",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
       "version": "20",
       "type": "build"
