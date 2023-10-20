@@ -199,11 +199,13 @@
       "type": "runtime"
     },
     {
-      "name": "@tanstack/react-query",
+      "name": "@tanstack/react-query-devtools",
+      "version": "<5",
       "type": "runtime"
     },
     {
-      "name": "@tanstack/react-query-devtools",
+      "name": "@tanstack/react-query",
+      "version": "<5",
       "type": "runtime"
     },
     {

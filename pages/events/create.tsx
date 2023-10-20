@@ -1,9 +1,14 @@
 import Head from "next/head";
-import { GetStaticPropsContext } from "next/types";
+import {
+  GetStaticPropsContext,
+  NextApiRequest,
+  NextApiResponse,
+} from "next/types";
 import { NewEventStepper } from "@/components/events/create";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
+import { redirect } from "@/utils/redirect.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
 export default function EventCreate() {
@@ -30,12 +35,17 @@ export default function EventCreate() {
   );
 }
 
-export async function getServerSideProps(ctx: GetStaticPropsContext) {
+export async function getServerSideProps(
+  ctx: GetStaticPropsContext & { req: NextApiRequest; res: NextApiResponse },
+) {
   const helpers = await ssgInit(ctx);
   await helpers.places.all.prefetch();
+  const { auth, speaker } = await redirect(ctx.req, ctx.res);
   return {
     props: {
       trpcState: helpers.dehydrate(),
     },
+    ...auth(),
+    ...(await speaker()),
   };
 }
