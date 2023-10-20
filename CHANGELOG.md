@@ -1,3 +1,10 @@
+## [0.10.11](https://github.com/kinguru-io/kinguru-next/compare/v0.10.10...v0.10.11) (2023-10-20)
+
+
+### Bug Fixes
+
+* add resources for place details ([1618c3c](https://github.com/kinguru-io/kinguru-next/commit/1618c3c6aadf9243a2ec410447b184ed7b96ac51))
+
 ## [0.10.10](https://github.com/kinguru-io/kinguru-next/compare/v0.10.9...v0.10.10) (2023-10-20)
 
 
