@@ -1,3 +1,10 @@
+## [0.10.10](https://github.com/kinguru-io/kinguru-next/compare/v0.10.9...v0.10.10) (2023-10-20)
+
+
+### Bug Fixes
+
+* react rating library usage ([c28585f](https://github.com/kinguru-io/kinguru-next/commit/c28585f6b556106789b45c80f777763ec8c7bd9a))
+
 ## [0.10.9](https://github.com/kinguru-io/kinguru-next/compare/v0.10.8...v0.10.9) (2023-10-20)
 
 
