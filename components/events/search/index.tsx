@@ -82,6 +82,7 @@ export const Search = memo<{ config: any }>(({ config }) => {
                               topic: result.topic.raw,
                               poster: result.poster.raw,
                               description: result.description.raw,
+                              placeId: result.placeId.raw,
                             }}
                           />
                         );

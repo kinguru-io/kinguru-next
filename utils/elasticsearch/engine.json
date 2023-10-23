@@ -8,6 +8,7 @@
     "topic",
     "description",
     "poster",
+    "placeId",
     "price",
     "tags",
     "starts",

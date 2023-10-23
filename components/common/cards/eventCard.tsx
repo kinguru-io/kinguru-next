@@ -15,12 +15,14 @@ import {
   Flex,
   Skeleton,
   Collapse,
+  HStack,
 } from "@chakra-ui/react";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import posterPlaceholder from "@/public/img/event-1.jpg";
+import placeImg from "@/public/img/place.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -34,6 +36,7 @@ export function EventCard({
     poster: string | null;
     starts: Date;
     takenPlace: boolean;
+    placeId: string;
   };
 }) {
   const [show, setShow] = useState(false);
@@ -46,6 +49,9 @@ export function EventCard({
         getNextPageParam: (lastPage) => lastPage.nextCursor,
       },
     );
+  const { data: place } = trpc.places.get.useQuery({
+    placeId: event.placeId,
+  });
   return (
     <Card
       key={event.id}
@@ -81,9 +87,15 @@ export function EventCard({
           </Heading>
           <Text>{moment(event.starts).format("DD.MM.yyyy HH:mm")}</Text>
           <Collapse startingHeight={80} in={show} color={"gray.500"}>
-            <Text mt={2} textAlign={"left"}>
+            <Text noOfLines={4} mt={2} textAlign={"left"}>
               {event.description}
             </Text>
+            <HStack mt={4}>
+              <Image src={placeImg} alt={"place"} />
+              <Text as={Link} href={`/places/${place?.id}`}>
+                {place?.location} ({place?.name})
+              </Text>
+            </HStack>
           </Collapse>
         </CardBody>
       </LinkBox>
