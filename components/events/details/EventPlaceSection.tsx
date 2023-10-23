@@ -41,9 +41,9 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
             mapLib={mapboxgl}
             initialViewState={{
-              longitude: place!.coordsLng + 0.05 || 21,
+              longitude: place?.coordsLng || 21,
               latitude: place?.coordsLat || 52.23,
-              zoom: 11,
+              zoom: 17,
               bearing: 0,
               pitch: 0,
             }}
