@@ -1,6 +1,8 @@
 import { Container, SimpleGrid, VStack, Link } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
+import logo from "@/public/img/logo_header.svg";
+import logoText from "@/public/img/logo_header_text.svg";
 import { useLocale } from "@/utils/use-locale";
 
 export const FooterSection = () => {
@@ -9,12 +11,19 @@ export const FooterSection = () => {
     <Container maxW={"full"} bgColor={"brand.secondary"} py={10}>
       <SimpleGrid columns={[2, 5]} maxWidth={"5xl"} mx={"auto"}>
         <VStack py={5} justifyContent={"center"}>
-          <Image src="/img/logo_header.svg" alt="" width={80} height={73} />
           <Image
-            src="/img/logo_header_text.svg"
-            alt=""
+            src={logo}
+            alt={t("company")}
+            width={80}
+            height={73}
+            priority={false}
+          />
+          <Image
+            src={logoText}
+            alt={t("company")}
             width={105}
             height={24}
+            priority={false}
           />
         </VStack>
         <VStack

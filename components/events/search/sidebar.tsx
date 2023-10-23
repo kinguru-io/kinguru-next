@@ -5,11 +5,12 @@ import {
   Flex,
   FormControl,
   Select,
-  Image,
 } from "@chakra-ui/react";
 import { Facet, Sorting } from "@elastic/react-search-ui";
+import NextImage from "next/image";
 import Link from "next/link";
 import { MultiCheckboxFacet } from "@/components/events/facets";
+import headerLogo from "@/public/img/logo_header.png";
 import { useLocale } from "@/utils/use-locale.ts";
 
 export interface SidebarProps extends BoxProps {
@@ -43,7 +44,12 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Box as={Link} mx={"auto"} href={"/"}>
-          <Image src={"/img/logo_header.png"} alt={t("company")} />
+          <NextImage
+            src={headerLogo}
+            alt={t("company")}
+            width={110}
+            priority={true}
+          />
         </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>

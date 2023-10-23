@@ -17,8 +17,14 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import moment from "moment/moment";
+import NextImage from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import time from "@/public/img/calendar.png";
+import price from "@/public/img/dollar_yellow.png";
+import place from "@/public/img/place.png";
+import calendar from "@/public/img/time.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -81,21 +87,21 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
             <SimpleGrid w={["full", "80%"]} mx={"auto"} columns={2}>
               <VStack alignItems={"baseline"} spacing={5}>
                 <HStack>
-                  <Image src={"/img/calendar.png"} />
-                  <Text>{data?.starts?.toLocaleDateString()}</Text>
+                  <NextImage src={calendar} alt={"calendar"} />
+                  <Text>{moment(data?.starts).format("DD.MM.yyyy")}</Text>
                 </HStack>
                 <HStack>
-                  <Image src={"/img/time.png"} />
-                  <Text>{data?.starts?.toLocaleTimeString()}</Text>
+                  <NextImage src={time} alt={"time"} />
+                  <Text>{moment(data?.starts).format("hh:mm")}</Text>
                 </HStack>
                 <HStack>
-                  <Image src={"/img/place.png"} />
+                  <NextImage src={place} alt={"place"} />
                   <Text as={Link} href={`/places/${data?.place?.id}`}>
                     {data?.place?.location}
                   </Text>
                 </HStack>
                 <HStack>
-                  <Image src={"/img/dollar_yellow.png"} />
+                  <NextImage src={price} alt={"price"} />
                   <Text>{data?.price} zł</Text>
                 </HStack>
               </VStack>

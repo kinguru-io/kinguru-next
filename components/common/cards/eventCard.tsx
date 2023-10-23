@@ -16,6 +16,7 @@ import {
   Skeleton,
   Collapse,
 } from "@chakra-ui/react";
+import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -78,7 +79,7 @@ export function EventCard({
               {event.topic}
             </LinkOverlay>
           </Heading>
-          <Text>{event.starts.toLocaleDateString()}</Text>
+          <Text>{moment(event.starts).format("DD.MM.yyyy hh:mm")}</Text>
           <Collapse startingHeight={80} in={show} color={"gray.500"}>
             <Text mt={2} textAlign={"left"}>
               {event.description}
