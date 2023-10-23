@@ -1,3 +1,10 @@
+## [0.10.16](https://github.com/kinguru-io/kinguru-next/compare/v0.10.15...v0.10.16) (2023-10-23)
+
+
+### Bug Fixes
+
+* event details place zoom ([5b4b129](https://github.com/kinguru-io/kinguru-next/commit/5b4b1298d703c7ce727f4eef518d4d0085875ad2))
+
 ## [0.10.15](https://github.com/kinguru-io/kinguru-next/compare/v0.10.14...v0.10.15) (2023-10-23)
 
 
