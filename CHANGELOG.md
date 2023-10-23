@@ -1,3 +1,10 @@
+## [0.10.14](https://github.com/kinguru-io/kinguru-next/compare/v0.10.13...v0.10.14) (2023-10-23)
+
+
+### Bug Fixes
+
+* date and time viewing for details page ([ebb2398](https://github.com/kinguru-io/kinguru-next/commit/ebb23980692609ff09092a26403031766b81f795))
+
 ## [0.10.13](https://github.com/kinguru-io/kinguru-next/compare/v0.10.12...v0.10.13) (2023-10-23)
 
 
