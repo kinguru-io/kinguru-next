@@ -90,6 +90,10 @@ export const EventPlaceSection = ({ eventId }: { eventId: string }) => {
                     alt={place.name}
                     width={resource.width}
                     height={resource.height}
+                    style={{
+                      width: resource.width,
+                      height: resource.height,
+                    }}
                   />
                 ))}
               </Flicking>
