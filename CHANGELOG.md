@@ -1,3 +1,10 @@
+## [0.10.15](https://github.com/kinguru-io/kinguru-next/compare/v0.10.14...v0.10.15) (2023-10-23)
+
+
+### Bug Fixes
+
+* event details place resources style ([d2d33da](https://github.com/kinguru-io/kinguru-next/commit/d2d33dab75607435bdf422a418fe66c90aed1856))
+
 ## [0.10.14](https://github.com/kinguru-io/kinguru-next/compare/v0.10.13...v0.10.14) (2023-10-23)
 
 
