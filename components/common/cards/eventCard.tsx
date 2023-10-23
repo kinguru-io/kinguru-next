@@ -49,7 +49,7 @@ export function EventCard({
         getNextPageParam: (lastPage) => lastPage.nextCursor,
       },
     );
-  const { data: place } = trpc.places.get.useQuery({
+  const { data: place, isLoading: isPlaceLoading } = trpc.places.get.useQuery({
     placeId: event.placeId,
   });
   return (
@@ -90,12 +90,14 @@ export function EventCard({
             <Text noOfLines={4} mt={2} textAlign={"left"}>
               {event.description}
             </Text>
-            <HStack mt={4}>
-              <Image src={placeImg} alt={"place"} />
-              <Text as={Link} href={`/places/${place?.id}`}>
-                {place?.location} ({place?.name})
-              </Text>
-            </HStack>
+            <Skeleton isLoaded={!isPlaceLoading}>
+              <HStack mt={4}>
+                <Image src={placeImg} alt={"place"} />
+                <Text as={Link} href={`/places/${place?.id}`}>
+                  {place?.location} ({place?.name})
+                </Text>
+              </HStack>
+            </Skeleton>
           </Collapse>
         </CardBody>
       </LinkBox>
