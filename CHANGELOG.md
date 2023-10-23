@@ -1,3 +1,10 @@
+## [0.10.17](https://github.com/kinguru-io/kinguru-next/compare/v0.10.16...v0.10.17) (2023-10-23)
+
+
+### Bug Fixes
+
+* add place for event card ([b3d5980](https://github.com/kinguru-io/kinguru-next/commit/b3d5980885effecc3a8b222331b40414dac09b8b))
+
 ## [0.10.16](https://github.com/kinguru-io/kinguru-next/compare/v0.10.15...v0.10.16) (2023-10-23)
 
 
