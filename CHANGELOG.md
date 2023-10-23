@@ -1,3 +1,10 @@
+## [0.10.13](https://github.com/kinguru-io/kinguru-next/compare/v0.10.12...v0.10.13) (2023-10-23)
+
+
+### Bug Fixes
+
+* add moment usage for date and time ([0726dc5](https://github.com/kinguru-io/kinguru-next/commit/0726dc5fae73c56e12835744aa046b21e89c2582))
+
 ## [0.10.12](https://github.com/kinguru-io/kinguru-next/compare/v0.10.11...v0.10.12) (2023-10-20)
 
 
