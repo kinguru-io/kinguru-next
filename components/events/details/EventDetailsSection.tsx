@@ -92,7 +92,7 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                 </HStack>
                 <HStack>
                   <NextImage src={time} alt={"time"} />
-                  <Text>{moment(data?.starts).format("hh:mm")}</Text>
+                  <Text>{moment(data?.starts).format("HH:mm")}</Text>
                 </HStack>
                 <HStack>
                   <NextImage src={place} alt={"place"} />

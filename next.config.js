@@ -14,6 +14,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "s3.pl-waw.scw.cloud",
         port: "",
         pathname: "/**",

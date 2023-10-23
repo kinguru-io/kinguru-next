@@ -79,7 +79,7 @@ export function EventCard({
               {event.topic}
             </LinkOverlay>
           </Heading>
-          <Text>{moment(event.starts).format("DD.MM.yyyy hh:mm")}</Text>
+          <Text>{moment(event.starts).format("DD.MM.yyyy HH:mm")}</Text>
           <Collapse startingHeight={80} in={show} color={"gray.500"}>
             <Text mt={2} textAlign={"left"}>
               {event.description}
