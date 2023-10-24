@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/kinguru-io/kinguru-next/compare/v0.11.0...v0.11.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* add creating stripe user feature when login ([bd19345](https://github.com/kinguru-io/kinguru-next/commit/bd19345e62f9fba5a458047c794c74b6c1a362ba))
+
 # [0.11.0](https://github.com/kinguru-io/kinguru-next/compare/v0.10.18...v0.11.0) (2023-10-24)
 
 
