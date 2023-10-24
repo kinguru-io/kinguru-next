@@ -5,7 +5,6 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
-import "./CheckoutForm.module.css";
 import { useLocale } from "@/utils/use-locale.ts";
 
 export default function CheckoutForm({

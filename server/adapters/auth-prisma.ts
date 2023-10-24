@@ -1,22 +1,34 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { Adapter } from "next-auth/adapters";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2023-10-16",
+});
 
 export function PrismaAdapter(p: PrismaClient): Adapter {
   return {
-    createUser: (data) =>
-      p.user.create({
+    createUser: async (data) => {
+      const { id: stripeCustomerId } = await stripe.customers.create({
+        email: data.email!,
+        name: data.name!,
+      });
+      return p.user.create({
         data: {
           name: data.name,
           email: data.email,
           emailVerified: data.emailVerified,
           image: data.image,
+          stripeCustomerId,
         },
         select: {
           id: true,
           email: true,
           emailVerified: true,
+          stripeCustomerId: true,
         },
-      }),
+      });
+    },
     getUser: (id) => p.user.findUnique({ where: { id } }),
     getUserByEmail: (email) => p.user.findUnique({ where: { email } }),
     async getUserByAccount(provider_providerAccountId) {
@@ -24,7 +36,20 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         where: { provider_providerAccountId },
         select: { user: true },
       });
-      return account?.user ?? null;
+      if (!account) return null;
+      if (!account.user.stripeCustomerId) {
+        const { id: stripeCustomerId } = await stripe.customers.create({
+          email: account.user.email,
+          name: account.user.name || "",
+        });
+        return p.user.update({
+          where: { id: account.user.id },
+          data: {
+            stripeCustomerId,
+          },
+        });
+      }
+      return account.user;
     },
     updateUser: ({ id, ...data }) => p.user.update({ where: { id }, data }),
     deleteUser: (id) => p.user.delete({ where: { id } }),

@@ -4,6 +4,7 @@ import { UserRole } from "@prisma/client";
 declare module "next-auth" {
   interface User extends DefaultUser {
     role?: UserRole;
+    stripeCustomerId: string | null;
   }
   interface Session extends DefaultSession {
     user?: User;

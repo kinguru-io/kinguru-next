@@ -9,43 +9,44 @@ datasource db {
 }
 
 model User {
-  id              String            @id @default(cuid())
-  name            String?
-  email           String            @unique
-  emailVerified   DateTime?
-  image           String?
-  confirmed       Boolean           @default(false)
-  firstname       String?
-  lastname        String?
-  phoneNumber     String?
-  description     String?
-  gender          UserGender?       @default(notSpecified)
-  birthdate       DateTime?         @db.Date
-  country         String?
-  city            String?
-  position        String?
-  company         String?
-  interests       String[]
-  vk              String?
-  facebook        String?
-  instagram       String?
-  linkedin        String?
-  telegram        String?
-  website         String?
-  role            UserRole          @default(user)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  events          Event[]
-  participant     UsersOnEvent[]
-  places          Place[]
-  speaker         Speaker?
-  accounts        Account[]
-  sessions        Session[]
-  eventComments   EventComment[]
-  placeComments   PlaceComment[]
-  speakerComments SpeakerComment[]
-  following       SpeakerFollower[]
-  ticketIntents   TicketIntent[]
+  id               String            @id @default(cuid())
+  name             String?
+  email            String            @unique
+  emailVerified    DateTime?
+  stripeCustomerId String?           @unique
+  image            String?
+  confirmed        Boolean           @default(false)
+  firstname        String?
+  lastname         String?
+  phoneNumber      String?
+  description      String?
+  gender           UserGender?       @default(notSpecified)
+  birthdate        DateTime?         @db.Date
+  country          String?
+  city             String?
+  position         String?
+  company          String?
+  interests        String[]
+  vk               String?
+  facebook         String?
+  instagram        String?
+  linkedin         String?
+  telegram         String?
+  website          String?
+  role             UserRole          @default(user)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  events           Event[]
+  participant      UsersOnEvent[]
+  places           Place[]
+  speaker          Speaker?
+  accounts         Account[]
+  sessions         Session[]
+  eventComments    EventComment[]
+  placeComments    PlaceComment[]
+  speakerComments  SpeakerComment[]
+  following        SpeakerFollower[]
+  ticketIntents    TicketIntent[]
 }
 
 enum UserRole {
