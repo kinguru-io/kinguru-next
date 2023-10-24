@@ -29,6 +29,7 @@ export const paymentRouter = t.router({
         await stripe.paymentIntents.create({
           amount: Math.round(event.price * 100),
           currency: "PLN",
+          customer: ctx.session?.user?.stripeCustomerId || undefined,
           automatic_payment_methods: { enabled: true },
         });
 
@@ -45,6 +46,6 @@ export const paymentRouter = t.router({
         },
       });
 
-      return clientSecret;
+      return { clientSecret, id };
     }),
 });

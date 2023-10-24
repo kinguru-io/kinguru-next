@@ -30,6 +30,7 @@ import time from "@/public/img/calendar.png";
 import price from "@/public/img/dollar_yellow.png";
 import place from "@/public/img/place.png";
 import calendar from "@/public/img/time.png";
+import * as gtag from "@/utils/gtag.ts";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -50,10 +51,19 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
     });
   const { data, status } = trpc.event.getEventDetails.useQuery({ eventId });
 
+  const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const { mutateAsync: ticketIntent, isLoading: ticketIntentLoading } =
     trpc.payment.ticketIntent.useMutation();
   const ticketIntentNotification = useToast();
+
+  const checkoutEvent = gtag.checkout({
+    item: {
+      id: data?.id || "",
+      name: data?.topic || "",
+    },
+    value: data?.price || 0,
+  });
 
   return (
     <Container
@@ -163,6 +173,7 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                                 "events.ticket_intent_succeed_description",
                               ),
                             });
+                            checkoutEvent.purchase(transactionId);
                             void isPresentOnEventRefetch();
                           }}
                         />
@@ -175,7 +186,11 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                         disabled={true}
                         onClick={() => {
                           void ticketIntent({ eventId: eventId }).then(
-                            (secret) => setClientSecret(secret),
+                            ({ clientSecret: secret, id }) => {
+                              checkoutEvent.begin();
+                              setClientSecret(secret);
+                              setTransactionId(id);
+                            },
                           );
                         }}
                       >
