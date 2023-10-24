@@ -24,7 +24,7 @@ import moment from "moment/moment";
 import NextImage from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckoutForm from "@/components/common/checkout/CheckoutForm.tsx";
 import time from "@/public/img/calendar.png";
 import price from "@/public/img/dollar_yellow.png";
@@ -57,13 +57,17 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
     trpc.payment.ticketIntent.useMutation();
   const ticketIntentNotification = useToast();
 
-  const checkoutEvent = gtag.checkout({
+  const checkoutEvent = gtag.eventItem({
     item: {
       id: data?.id || "",
       name: data?.topic || "",
     },
     value: data?.price || 0,
   });
+
+  useEffect(() => {
+    if (data) checkoutEvent.view();
+  }, []);
 
   return (
     <Container
@@ -187,7 +191,7 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                         onClick={() => {
                           void ticketIntent({ eventId: eventId }).then(
                             ({ clientSecret: secret, id }) => {
-                              checkoutEvent.begin();
+                              checkoutEvent.beginCheckout();
                               setClientSecret(secret);
                               setTransactionId(id);
                             },

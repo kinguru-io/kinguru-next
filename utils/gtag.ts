@@ -24,7 +24,7 @@ export const event = ({
   });
 };
 
-export const checkout = ({
+export const eventItem = ({
   value,
   item,
 }: {
@@ -32,7 +32,13 @@ export const checkout = ({
   item: { name: string; id: string };
 }) => {
   return {
-    begin: () =>
+    view: () =>
+      window.gtag("event", "view_item", {
+        currency: "PLN",
+        value,
+        items: [{ item_id: item.id, item_name: item.name, price: value }],
+      }),
+    beginCheckout: () =>
       window.gtag("event", "begin_checkout", {
         currency: "PLN",
         value,
