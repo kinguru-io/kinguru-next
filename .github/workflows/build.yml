@@ -24,6 +24,7 @@ jobs:
       - run: echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV
       - run: echo "DATABASE_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
       - run: echo "NEXT_PUBLIC_GA_ID=${{ secrets.GA_ID }}" >> $GITHUB_ENV
+      - run: echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV
       - uses: vbem/kubeconfig4sa@v1
         with:
           server: https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443

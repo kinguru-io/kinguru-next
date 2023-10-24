@@ -195,6 +195,14 @@
       "type": "runtime"
     },
     {
+      "name": "@stripe/react-stripe-js",
+      "type": "runtime"
+    },
+    {
+      "name": "@stripe/stripe-js",
+      "type": "runtime"
+    },
+    {
       "name": "@tanstack/react-query-devtools",
       "version": "<5",
       "type": "runtime"
@@ -234,6 +242,10 @@
     },
     {
       "name": "mapbox-gl",
+      "type": "runtime"
+    },
+    {
+      "name": "micro",
       "type": "runtime"
     },
     {
@@ -302,6 +314,10 @@
     },
     {
       "name": "sharp",
+      "type": "runtime"
+    },
+    {
+      "name": "stripe",
       "type": "runtime"
     },
     {

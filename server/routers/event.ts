@@ -312,46 +312,6 @@ export const eventRouter = t.router({
           items.length > 0 ? items[items.length - 1].userId : undefined,
       };
     }),
-  attendTheEvent: publicProcedure
-    .input(
-      z.object({
-        eventId: z.string(),
-      }),
-    )
-    .mutation(async ({ ctx, input: { eventId } }) => {
-      const alreadyAttend = await ctx.prisma.usersOnEvent.findUnique({
-        where: {
-          userId_eventId: {
-            eventId,
-            userId: ctx.session!.user!.id,
-          },
-        },
-      });
-
-      if (alreadyAttend) {
-        return alreadyAttend;
-      }
-
-      const event = await ctx.prisma.event.findUnique({
-        where: {
-          id: eventId,
-        },
-      });
-
-      if (moment(event?.starts).isBefore()) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "Event starts before",
-        });
-      }
-
-      return ctx.prisma.usersOnEvent.create({
-        data: {
-          eventId,
-          userId: ctx.session!.user!.id,
-        },
-      });
-    }),
   cancelEventRegistration: publicProcedure
     .input(
       z.object({

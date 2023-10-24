@@ -37,6 +37,9 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "NEXT_PUBLIC_GA_ID=\${{ secrets.GA_ID }}" >> $GITHUB_ENV`,
     },
     {
+      run: `echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=\${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV`,
+    },
+    {
       uses: "vbem/kubeconfig4sa@v1",
       with: {
         server:
@@ -141,6 +144,11 @@ const project = new web.NextJsTypeScriptProject({
     "@egjs/react-flicking",
     "react-simple-star-rating",
     "react-intersection-observer",
+
+    "stripe",
+    "@stripe/stripe-js",
+    "@stripe/react-stripe-js",
+    "micro",
 
     "@prisma/instrumentation",
     "@opentelemetry/sdk-node",

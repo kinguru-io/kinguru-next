@@ -15,12 +15,17 @@ import {
   Skeleton,
   Tag,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import moment from "moment/moment";
 import NextImage from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import CheckoutForm from "@/components/common/checkout/CheckoutForm.tsx";
 import time from "@/public/img/calendar.png";
 import price from "@/public/img/dollar_yellow.png";
 import place from "@/public/img/place.png";
@@ -28,11 +33,13 @@ import calendar from "@/public/img/time.png";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
+
 export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
   const { t } = useLocale();
   const { status: userStatus } = useSession();
-  const { mutateAsync: attendTheEvent, isLoading: attendTheEventLoading } =
-    trpc.event.attendTheEvent.useMutation();
   const {
     mutateAsync: cancelEventRegistration,
     isLoading: cancelEventRegistrationLoading,
@@ -42,6 +49,12 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
       eventId: eventId,
     });
   const { data, status } = trpc.event.getEventDetails.useQuery({ eventId });
+
+  const [clientSecret, setClientSecret] = useState("");
+  const { mutateAsync: ticketIntent, isLoading: ticketIntentLoading } =
+    trpc.payment.ticketIntent.useMutation();
+  const ticketIntentNotification = useToast();
+
   return (
     <Container
       maxWidth={"100%"}
@@ -135,19 +148,41 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                     {t("events.cancel")}
                   </Button>
                 ) : (
-                  <Button
-                    isLoading={attendTheEventLoading}
-                    variant={"primary"}
-                    color={"black"}
-                    disabled={true}
-                    onClick={() => {
-                      void attendTheEvent({ eventId: eventId }).then(() =>
-                        isPresentOnEventRefetch(),
-                      );
-                    }}
-                  >
-                    {t("events.join")}
-                  </Button>
+                  <>
+                    {clientSecret !== "" ? (
+                      <Elements
+                        stripe={stripePromise}
+                        options={{ clientSecret }}
+                      >
+                        <CheckoutForm
+                          succeedRefetch={() => {
+                            void ticketIntentNotification({
+                              status: "success",
+                              title: t("events.ticket_intent_succeed"),
+                              description: t(
+                                "events.ticket_intent_succeed_description",
+                              ),
+                            });
+                            void isPresentOnEventRefetch();
+                          }}
+                        />
+                      </Elements>
+                    ) : (
+                      <Button
+                        isLoading={ticketIntentLoading}
+                        variant={"primary"}
+                        color={"black"}
+                        disabled={true}
+                        onClick={() => {
+                          void ticketIntent({ eventId: eventId }).then(
+                            (secret) => setClientSecret(secret),
+                          );
+                        }}
+                      >
+                        {t("events.join")}
+                      </Button>
+                    )}
+                  </>
                 )
               ) : null}
             </Flex>
