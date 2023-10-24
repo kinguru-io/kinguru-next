@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/kinguru-io/kinguru-next/compare/v0.10.18...v0.11.0) (2023-10-24)
+
+
+### Features
+
+* add stripe integration for event tickets ([be566e4](https://github.com/kinguru-io/kinguru-next/commit/be566e4fb3f50d43218f02756652e83879bf25a1))
+
 ## [0.10.18](https://github.com/kinguru-io/kinguru-next/compare/v0.10.17...v0.10.18) (2023-10-23)
 
 
