@@ -106,7 +106,7 @@
     "react-simple-star-rating": "^5.1.7",
     "sharp": "^0.32.6",
     "stripe": "^14.1.0",
-    "superjson": "^2.0.0",
+    "superjson": "^2.2.0",
     "trpc-shield": "^0.4.3",
     "zod": "^3.22.4",
     "zod-formik-adapter": "^1.2.0"
