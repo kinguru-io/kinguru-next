@@ -1,3 +1,10 @@
+## [0.11.3](https://github.com/kinguru-io/kinguru-next/compare/v0.11.2...v0.11.3) (2023-10-24)
+
+
+### Bug Fixes
+
+* add gtag for event page view ([396bf2c](https://github.com/kinguru-io/kinguru-next/commit/396bf2c1cc6be404a391b5f2247ec807d256c079))
+
 ## [0.11.2](https://github.com/kinguru-io/kinguru-next/compare/v0.11.1...v0.11.2) (2023-10-24)
 
 
