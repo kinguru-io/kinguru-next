@@ -1,3 +1,10 @@
+## [0.10.18](https://github.com/kinguru-io/kinguru-next/compare/v0.10.17...v0.10.18) (2023-10-23)
+
+
+### Bug Fixes
+
+* add skeleton for event card places ([c9eb573](https://github.com/kinguru-io/kinguru-next/commit/c9eb5737495c48cef73a306b948a1e59bf8e7274))
+
 ## [0.10.17](https://github.com/kinguru-io/kinguru-next/compare/v0.10.16...v0.10.17) (2023-10-23)
 
 
