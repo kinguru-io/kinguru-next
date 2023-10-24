@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/kinguru-io/kinguru-next/compare/v0.11.1...v0.11.2) (2023-10-24)
+
+
+### Bug Fixes
+
+* link customer with his payments ([b01bbde](https://github.com/kinguru-io/kinguru-next/commit/b01bbdea5872855b3123f2ecf241da8535f0eb5b))
+
 ## [0.11.1](https://github.com/kinguru-io/kinguru-next/compare/v0.11.0...v0.11.1) (2023-10-24)
 
 
