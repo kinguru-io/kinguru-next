@@ -74,7 +74,7 @@
     "@opentelemetry/sdk-trace-node": "^1.17.1",
     "@opentelemetry/semantic-conventions": "^1.17.1",
     "@prisma/client": "^5.4.2",
-    "@prisma/instrumentation": "^5.4.2",
+    "@prisma/instrumentation": "^5.5.0",
     "@stripe/react-stripe-js": "^2.3.1",
     "@stripe/stripe-js": "^2.1.10",
     "@tanstack/react-query": "<5",
