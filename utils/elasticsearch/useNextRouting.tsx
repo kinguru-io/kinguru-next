@@ -36,7 +36,7 @@ export const useNextRouting = (config: any, basePathUrl: any) => {
     },
   };
 
-  return useMemo(() => {
+  return useMemo<typeof routingOptions>(() => {
     return {
       ...config,
       routingOptions,
