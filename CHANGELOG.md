@@ -1,3 +1,10 @@
+## [0.11.5](https://github.com/kinguru-io/kinguru-next/compare/v0.11.4...v0.11.5) (2023-10-27)
+
+
+### Bug Fixes
+
+* move purchase to modal form ([c0a8921](https://github.com/kinguru-io/kinguru-next/commit/c0a8921ec76004a2e01af0f0556f937a897a6ed8))
+
 ## [0.11.4](https://github.com/kinguru-io/kinguru-next/compare/v0.11.3...v0.11.4) (2023-10-27)
 
 
