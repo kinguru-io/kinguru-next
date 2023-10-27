@@ -76,6 +76,7 @@
     "meeting_place_address": "Address",
     "processing": "Processing...",
     "pay_now": "Pay now",
+    "buy_a_ticket": "Buying a ticket to the event",
     "ticket_intent_succeed": "You're successfully buy the ticket",
     "ticket_intent_succeed_description": "Now you're attend the meeting",
     "new_event_creating": "Create your new event!",

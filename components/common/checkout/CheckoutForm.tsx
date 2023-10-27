@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Alert, AlertIcon, Button } from "@chakra-ui/react";
 import {
   PaymentElement,
   useStripe,
@@ -54,33 +54,27 @@ export default function CheckoutForm({
       id="payment-form"
       onSubmit={handleSubmit}
       style={{
-        padding: "20px",
-        background: "rgba(255,255,255,.1)",
-        borderRadius: "5px",
-        color: "white",
+        padding: "10px",
         textAlign: "center",
       }}
     >
-      <PaymentElement
-        id="payment-element"
-        options={{
-          layout: "accordion",
-        }}
-      />
+      {message && (
+        <Alert status="error" mb={7}>
+          <AlertIcon />
+          {message}
+        </Alert>
+      )}
+      <PaymentElement id="payment-element" />
       <Button
         isLoading={isProcessing || !stripe || !elements}
         type={"submit"}
         id="submit"
         variant={"primary"}
         color={"black"}
-        mt={5}
+        mt={10}
       >
-        <span id="button-text">
-          {isProcessing ? t("events.processing") : t("events.pay_now")}
-        </span>
+        {t("events.pay_now")}
       </Button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
     </form>
   );
 }

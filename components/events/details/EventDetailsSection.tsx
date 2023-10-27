@@ -11,10 +11,17 @@ import {
   Heading,
   HStack,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   SimpleGrid,
   Skeleton,
   Tag,
   Text,
+  useDisclosure,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -40,6 +47,7 @@ const stripePromise = loadStripe(
 
 export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
   const { t } = useLocale();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { status: userStatus } = useSession();
   const {
     mutateAsync: cancelEventRegistration,
@@ -163,44 +171,61 @@ export const EventDetailsSection = ({ eventId }: { eventId: string }) => {
                   </Button>
                 ) : (
                   <>
-                    {clientSecret !== "" ? (
-                      <Elements
-                        stripe={stripePromise}
-                        options={{ clientSecret }}
-                      >
-                        <CheckoutForm
-                          succeedRefetch={() => {
-                            void ticketIntentNotification({
-                              status: "success",
-                              title: t("events.ticket_intent_succeed"),
-                              description: t(
-                                "events.ticket_intent_succeed_description",
-                              ),
-                            });
-                            checkoutEvent.purchase(transactionId);
-                            void isPresentOnEventRefetch();
-                          }}
-                        />
-                      </Elements>
-                    ) : (
-                      <Button
-                        isLoading={ticketIntentLoading}
-                        variant={"primary"}
-                        color={"black"}
-                        disabled={true}
-                        onClick={() => {
-                          void ticketIntent({ eventId: eventId }).then(
-                            ({ clientSecret: secret, id }) => {
-                              checkoutEvent.beginCheckout();
-                              setClientSecret(secret);
-                              setTransactionId(id);
-                            },
-                          );
-                        }}
-                      >
-                        {t("events.join")}
-                      </Button>
-                    )}
+                    <Modal
+                      closeOnOverlayClick={false}
+                      isOpen={isOpen}
+                      onClose={onClose}
+                      blockScrollOnMount={false}
+                      isCentered
+                    >
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>{t("events.buy_a_ticket")}</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody pb={6}>
+                          {clientSecret !== "" && (
+                            <Elements
+                              stripe={stripePromise}
+                              options={{ clientSecret }}
+                            >
+                              <CheckoutForm
+                                succeedRefetch={() => {
+                                  void ticketIntentNotification({
+                                    status: "success",
+                                    title: t("events.ticket_intent_succeed"),
+                                    description: t(
+                                      "events.ticket_intent_succeed_description",
+                                    ),
+                                  });
+                                  checkoutEvent.purchase(transactionId);
+                                  void isPresentOnEventRefetch();
+                                  onClose();
+                                }}
+                              />
+                            </Elements>
+                          )}
+                        </ModalBody>
+                      </ModalContent>
+                    </Modal>
+
+                    <Button
+                      isLoading={ticketIntentLoading}
+                      variant={"primary"}
+                      color={"black"}
+                      disabled={true}
+                      onClick={() => {
+                        void ticketIntent({ eventId: eventId }).then(
+                          ({ clientSecret: secret, id }) => {
+                            checkoutEvent.beginCheckout();
+                            setClientSecret(secret);
+                            setTransactionId(id);
+                            onOpen();
+                          },
+                        );
+                      }}
+                    >
+                      {t("events.join")}
+                    </Button>
                   </>
                 )
               ) : null}

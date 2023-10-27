@@ -75,6 +75,7 @@
     "meeting_place_address": "Адрес",
     "processing": "Оплачиваем...",
     "pay_now": "Оплатить",
+    "buy_a_ticket": "Покупка билета на мероприятие",
     "ticket_intent_succeed": "Вы успешно приобрели билет",
     "ticket_intent_succeed_description": "Теперь вы можете присутствовать на мероприятии",
     "new_event_creating": "Создайте свое новое событие!",
