@@ -290,6 +290,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-cookie-consent",
+      "type": "runtime"
+    },
+    {
       "name": "react-dom",
       "type": "runtime"
     },

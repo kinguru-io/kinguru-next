@@ -144,6 +144,7 @@ const project = new web.NextJsTypeScriptProject({
     "@egjs/react-flicking",
     "react-simple-star-rating",
     "react-intersection-observer",
+    "react-cookie-consent",
 
     "stripe",
     "@stripe/stripe-js",
