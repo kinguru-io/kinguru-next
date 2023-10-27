@@ -1,3 +1,10 @@
+## [0.11.4](https://github.com/kinguru-io/kinguru-next/compare/v0.11.3...v0.11.4) (2023-10-27)
+
+
+### Bug Fixes
+
+* add react cookie consent popup ([582fe0d](https://github.com/kinguru-io/kinguru-next/commit/582fe0d1e7320557d22f2e273df8ca0d69366a34))
+
 ## [0.11.3](https://github.com/kinguru-io/kinguru-next/compare/v0.11.2...v0.11.3) (2023-10-24)
 
 
