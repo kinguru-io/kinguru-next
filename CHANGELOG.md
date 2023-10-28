@@ -1,3 +1,10 @@
+## [0.11.7](https://github.com/kinguru-io/kinguru-next/compare/v0.11.6...v0.11.7) (2023-10-28)
+
+
+### Bug Fixes
+
+* upgrade node version ([45ac784](https://github.com/kinguru-io/kinguru-next/commit/45ac784fbdd634890c2f13d29ab3f1224f47d20e))
+
 ## [0.11.6](https://github.com/kinguru-io/kinguru-next/compare/v0.11.5...v0.11.6) (2023-10-28)
 
 
