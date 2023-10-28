@@ -1,3 +1,10 @@
+## [0.11.6](https://github.com/kinguru-io/kinguru-next/compare/v0.11.5...v0.11.6) (2023-10-28)
+
+
+### Bug Fixes
+
+* add staged build for werf ([9d8dff4](https://github.com/kinguru-io/kinguru-next/commit/9d8dff4969d739595eb5ab181223230b7fdcb234))
+
 ## [0.11.5](https://github.com/kinguru-io/kinguru-next/compare/v0.11.4...v0.11.5) (2023-10-27)
 
 
