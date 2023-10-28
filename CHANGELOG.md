@@ -1,3 +1,10 @@
+## [0.11.8](https://github.com/kinguru-io/kinguru-next/compare/v0.11.7...v0.11.8) (2023-10-28)
+
+
+### Bug Fixes
+
+* upgrade semver package ([3946d6a](https://github.com/kinguru-io/kinguru-next/commit/3946d6a63844951d72069012a1fe68578152f953))
+
 ## [0.11.7](https://github.com/kinguru-io/kinguru-next/compare/v0.11.6...v0.11.7) (2023-10-28)
 
 
