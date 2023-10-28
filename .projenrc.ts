@@ -164,7 +164,6 @@ const project = new web.NextJsTypeScriptProject({
     "prisma",
     "@faker-js/faker",
     "@types/gtag.js",
-    "@types/node@20",
     "@next/eslint-plugin-next",
     "classnames",
     "@google/semantic-release-replace-plugin@1.2.0",
@@ -177,6 +176,5 @@ const project = new web.NextJsTypeScriptProject({
 });
 
 project.postCompileTask.exec("npx next-sitemap");
-project.package.addDevDeps("@types/node@20");
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();
