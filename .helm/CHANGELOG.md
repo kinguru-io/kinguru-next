@@ -1,3 +1,10 @@
+## [1.2.14](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.13...chart-v1.2.14) (2023-10-29)
+
+
+### Bug Fixes
+
+* move to esm projen parts ([1045a07](https://github.com/kinguru-io/kinguru-next/commit/1045a0735b5dce1fe17f9b1428c03e9d6260a717))
+
 ## [1.2.13](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.12...chart-v1.2.13) (2023-10-29)
 
 
