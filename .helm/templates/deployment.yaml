@@ -25,8 +25,8 @@ spec:
         - name: {{ .Release.Name }}-app
           image: {{ .Values.werf.image.kinguru }}
           imagePullPolicy: IfNotPresent
-          command: ["npx"]
-          args: ["projen", "server"]
+          command: ["next"]
+          args: ["start"]
           env:
             - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
               value: "http://tempo.observability.svc.cluster.local:4318/"
