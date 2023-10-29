@@ -58,9 +58,5 @@
   "exclude": [
     "node_modules",
     "server/generated"
-  ],
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  ]
 }

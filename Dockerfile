@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:20-alpine as builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm i
@@ -12,22 +12,21 @@ ARG NEXT_PUBLIC_ELASTICSEARCH_API_KEY
 ARG NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT
 ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV NODE_ENV="production"
-ENV I18NEXT_DEFAULT_CONFIG_PATH="./next-i18next.config.cjs"
 
 RUN npx prisma generate
 RUN npx prisma migrate deploy
 RUN npm run build
 
-FROM node:18-alpine as runner
+FROM node:20-alpine as runner
 WORKDIR /app
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/package-lock.json .
 COPY --from=builder /app/global.d.ts ./
 COPY --from=builder /app/instrumentation.node.ts ./
 COPY --from=builder /app/instrumentation.ts ./
-COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/next.config.cjs ./
 COPY --from=builder /app/next-env.d.ts ./
-COPY --from=builder /app/next-i18next.config.js ./
+COPY --from=builder /app/next-i18next.config.cjs ./
 COPY --from=builder /app/nextauth.d.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma

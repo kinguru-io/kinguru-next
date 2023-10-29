@@ -1,3 +1,5 @@
+process.env.I18NEXT_DEFAULT_CONFIG_PATH = `${__dirname}/next-i18next.config.cjs`;
+
 const { i18n } = require("./next-i18next.config");
 
 /** @type {import('next').NextConfig} */

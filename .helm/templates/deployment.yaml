@@ -30,6 +30,8 @@ spec:
           env:
             - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
               value: "http://tempo.observability.svc.cluster.local:4318/"
+            - name: "I18NEXT_DEFAULT_CONFIG_PATH"
+              value: "./next-i18next.config.cjs"
           envFrom:
             - secretRef:
                 name: kr-prod-environment-vars

@@ -9,7 +9,7 @@ const project = new web.NextJsTypeScriptProject({
 
   defaultReleaseBranch: "main",
   release: false,
-  workflowNodeVersion: "18.x",
+  workflowNodeVersion: "20.x",
   workflowPackageCache: true,
   autoMerge: true,
   autoApproveOptions: {
@@ -105,7 +105,7 @@ const project = new web.NextJsTypeScriptProject({
   },
   gitignore: [".env", "prisma/sqlite", "public/robots.txt", "public/sitemap*"],
 
-  minNodeVersion: "18.16.0",
+  minNodeVersion: "20.9.0",
   packageManager: NodePackageManager.NPM,
   deps: [
     "@prisma/client",
@@ -179,11 +179,16 @@ const project = new web.NextJsTypeScriptProject({
   ],
 });
 
+project.defaultTask?.reset(
+  'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
+);
 project.tryFindObjectFile("package.json")?.addOverride("type", "module");
-project.tsconfigDev.file.addOverride("ts-node", {
-  esm: true,
-  experimentalSpecifierResolution: "node",
-});
-project.postCompileTask.exec("npx next-sitemap");
+project.compileTask.env(
+  "I18NEXT_DEFAULT_CONFIG_PATH",
+  "./next-i18next.config.cjs",
+);
+project.postCompileTask.exec(
+  "npx next-sitemap --config next-sitemap.config.cjs",
+);
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();

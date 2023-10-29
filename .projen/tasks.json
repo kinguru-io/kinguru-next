@@ -59,6 +59,9 @@
     "compile": {
       "name": "compile",
       "description": "Only compile",
+      "env": {
+        "I18NEXT_DEFAULT_CONFIG_PATH": "./next-i18next.config.cjs"
+      },
       "steps": [
         {
           "exec": "tsc --build"
@@ -73,7 +76,7 @@
       "description": "Synthesize project files",
       "steps": [
         {
-          "exec": "ts-node --project tsconfig.dev.json .projenrc.ts"
+          "exec": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node .projenrc.ts"
         }
       ]
     },
@@ -143,7 +146,7 @@
       "description": "Runs after successful compilation",
       "steps": [
         {
-          "exec": "npx next-sitemap"
+          "exec": "npx next-sitemap --config next-sitemap.config.cjs"
         }
       ]
     },
