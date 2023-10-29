@@ -26,13 +26,13 @@ COPY --from=builder /app/package-lock.json .
 COPY --from=builder /app/global.d.ts ./
 COPY --from=builder /app/instrumentation.node.ts ./
 COPY --from=builder /app/instrumentation.ts ./
-COPY --from=builder /app/next.config.cjs ./
+COPY --from=builder /app/next.config.mjs ./
 COPY --from=builder /app/next-env.d.ts ./
 COPY --from=builder /app/next-i18next.config.cjs ./
 COPY --from=builder /app/nextauth.d.ts ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
 EXPOSE 3000

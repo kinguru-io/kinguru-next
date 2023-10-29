@@ -1,11 +1,9 @@
-process.env.I18NEXT_DEFAULT_CONFIG_PATH = `${__dirname}/next-i18next.config.cjs`;
-
-const { i18n } = require("./next-i18next.config");
+import i18next from "./next-i18next.config.cjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
-  i18n,
+  i18n: i18next.i18n,
   images: {
     remotePatterns: [
       {
@@ -38,4 +36,4 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
 };
 
-module.exports = nextConfig;
+export default nextConfig;
