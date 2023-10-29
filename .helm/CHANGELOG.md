@@ -1,3 +1,10 @@
+## [1.2.17](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.16...chart-v1.2.17) (2023-10-29)
+
+
+### Bug Fixes
+
+* move next config to ecmascript modules ([dc6987c](https://github.com/kinguru-io/kinguru-next/commit/dc6987c027a7a539bdfda12f38bee4c20fe0dee0))
+
 ## [1.2.16](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.15...chart-v1.2.16) (2023-10-29)
 
 
