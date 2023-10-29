@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.15...chart-v1.2.16) (2023-10-29)
+
+
+### Bug Fixes
+
+* chart deployment entrypoint ([ad0f5f2](https://github.com/kinguru-io/kinguru-next/commit/ad0f5f254067124cbcc4772d40442150026fe15c))
+
 ## [1.2.15](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.14...chart-v1.2.15) (2023-10-29)
 
 
