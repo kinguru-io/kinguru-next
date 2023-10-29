@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import SuperJSON from "superjson";
 import { createInnerTRPCContext } from "./context";
 import { appRouter } from "./routers/_app";
-import { i18n } from "next-i18next.config";
+import { i18n } from "next-i18next.config.cjs";
 
 export async function ssgInit<TParams extends { locale?: string }>(
   opts: GetStaticPropsContext<TParams>,

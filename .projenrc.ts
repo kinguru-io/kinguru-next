@@ -40,6 +40,9 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=\${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV`,
     },
     {
+      run: `echo "I18NEXT_DEFAULT_CONFIG_PATH=./next-i18next.config.cjs" >> $GITHUB_ENV`,
+    },
+    {
       uses: "vbem/kubeconfig4sa@v1",
       with: {
         server:
@@ -74,10 +77,11 @@ const project = new web.NextJsTypeScriptProject({
   tsconfig: {
     compilerOptions: {
       allowImportingTsExtensions: true,
-      target: "es5",
+      target: "esnext",
       allowJs: true,
       baseUrl: ".",
       rootDir: ".",
+      module: "esnext",
       forceConsistentCasingInFileNames: true,
       noEmit: true,
       esModuleInterop: true,
@@ -175,6 +179,11 @@ const project = new web.NextJsTypeScriptProject({
   ],
 });
 
+project.tryFindObjectFile("package.json")?.addOverride("type", "module");
+project.tsconfigDev.file.addOverride("ts-node", {
+  esm: true,
+  experimentalSpecifierResolution: "node",
+});
 project.postCompileTask.exec("npx next-sitemap");
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();

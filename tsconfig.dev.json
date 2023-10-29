@@ -12,7 +12,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "CommonJS",
+    "module": "esnext",
     "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -25,7 +25,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "es5",
+    "target": "esnext",
     "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "preserve",
@@ -58,5 +58,9 @@
   "exclude": [
     "node_modules",
     "server/generated"
-  ]
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }
