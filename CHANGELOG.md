@@ -1,3 +1,10 @@
+## [0.11.9](https://github.com/kinguru-io/kinguru-next/compare/v0.11.8...v0.11.9) (2023-10-29)
+
+
+### Bug Fixes
+
+* rollback node version ([20cf859](https://github.com/kinguru-io/kinguru-next/commit/20cf85924ccfbeb846b5b7f79a87c9949b56be3d))
+
 ## [0.11.8](https://github.com/kinguru-io/kinguru-next/compare/v0.11.7...v0.11.8) (2023-10-28)
 
 
