@@ -1,3 +1,10 @@
+## [0.11.11](https://github.com/kinguru-io/kinguru-next/compare/v0.11.10...v0.11.11) (2023-10-29)
+
+
+### Bug Fixes
+
+* move to esm projen parts ([1045a07](https://github.com/kinguru-io/kinguru-next/commit/1045a0735b5dce1fe17f9b1428c03e9d6260a717))
+
 ## [0.11.10](https://github.com/kinguru-io/kinguru-next/compare/v0.11.9...v0.11.10) (2023-10-29)
 
 
