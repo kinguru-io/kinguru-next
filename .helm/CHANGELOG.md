@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.12...chart-v1.2.13) (2023-10-29)
+
+
+### Bug Fixes
+
+* move to esm chart release config ([5843079](https://github.com/kinguru-io/kinguru-next/commit/5843079c9707c8141eb10e600a0f0a31084281fc))
+
 ## [1.2.12](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.11...chart-v1.2.12) (2023-10-18)
 
 
