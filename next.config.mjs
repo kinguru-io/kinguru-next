@@ -1,3 +1,5 @@
+process.env.I18NEXT_DEFAULT_CONFIG_PATH = `./next-i18next.config.cjs`;
+
 import i18next from "./next-i18next.config.cjs";
 
 /** @type {import('next').NextConfig} */

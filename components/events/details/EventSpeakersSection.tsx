@@ -5,6 +5,8 @@ import {
   Flex,
   Heading,
   HStack,
+  LinkBox,
+  LinkOverlay,
   Skeleton,
   Stack,
   Text,
@@ -42,6 +44,7 @@ export const EventSpeakersSection = ({ eventId }: { eventId: string }) => {
           <Flicking hideBeforeInit={true}>
             {data?.speakersOnEvent.map(({ speaker }) => (
               <Flex
+                as={LinkBox}
                 key={speaker.id}
                 px={3}
                 py={2}
@@ -53,12 +56,13 @@ export const EventSpeakersSection = ({ eventId }: { eventId: string }) => {
                 <Avatar src={speaker.user.image || undefined} />
                 <Box ml="3">
                   <HStack>
-                    <Text
-                      as={Link}
-                      href={`/speakers/${speaker.id}`}
-                      fontWeight="bold"
-                    >
-                      {speaker.user.name}
+                    <Text fontWeight="bold">
+                      <LinkOverlay
+                        as={Link}
+                        href={speaker.user.website || `/speakers/${speaker.id}`}
+                      >
+                        {speaker.user.name}
+                      </LinkOverlay>
                     </Text>
                     <Image src={bigStar} alt={"rating"} width={16} />
                   </HStack>
