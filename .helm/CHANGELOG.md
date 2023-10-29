@@ -1,3 +1,10 @@
+## [1.2.15](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.14...chart-v1.2.15) (2023-10-29)
+
+
+### Bug Fixes
+
+* docker deployment configuration ([cfa66c1](https://github.com/kinguru-io/kinguru-next/commit/cfa66c1cf1d7f11c3f013553244ab62d1840dec2))
+
 ## [1.2.14](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.13...chart-v1.2.14) (2023-10-29)
 
 
