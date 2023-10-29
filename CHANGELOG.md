@@ -1,3 +1,10 @@
+## [0.11.10](https://github.com/kinguru-io/kinguru-next/compare/v0.11.9...v0.11.10) (2023-10-29)
+
+
+### Bug Fixes
+
+* move to esm ([2ca7995](https://github.com/kinguru-io/kinguru-next/commit/2ca7995c419130957d872f4af133faadbbcf1b74))
+
 ## [0.11.9](https://github.com/kinguru-io/kinguru-next/compare/v0.11.8...v0.11.9) (2023-10-29)
 
 
