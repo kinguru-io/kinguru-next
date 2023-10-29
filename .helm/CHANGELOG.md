@@ -1,3 +1,10 @@
+## [1.2.18](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.17...chart-v1.2.18) (2023-10-29)
+
+
+### Bug Fixes
+
+* add node_modules dir to production build ([219031c](https://github.com/kinguru-io/kinguru-next/commit/219031c4f7f21e9cfc982a520e4877a4030e06a1))
+
 ## [1.2.17](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.16...chart-v1.2.17) (2023-10-29)
 
 
