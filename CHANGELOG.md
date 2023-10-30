@@ -1,3 +1,10 @@
+## [0.11.12](https://github.com/kinguru-io/kinguru-next/compare/v0.11.11...v0.11.12) (2023-10-30)
+
+
+### Bug Fixes
+
+* add link for speaker website in speaker details ([100beb8](https://github.com/kinguru-io/kinguru-next/commit/100beb8137f039105c5c1da6d41e6d4117be5cab))
+
 ## [0.11.11](https://github.com/kinguru-io/kinguru-next/compare/v0.11.10...v0.11.11) (2023-10-29)
 
 
