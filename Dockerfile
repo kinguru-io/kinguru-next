@@ -26,18 +26,18 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 WORKDIR /app
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/package-lock.json ./
-COPY --from=builder /app/global.d.ts ./
-COPY --from=builder /app/instrumentation.node.ts ./
-COPY --from=builder /app/instrumentation.ts ./
-COPY --from=builder /app/next.config.mjs ./
-COPY --from=builder /app/next-env.d.ts ./
-COPY --from=builder /app/next-i18next.config.cjs ./
-COPY --from=builder /app/nextauth.d.ts ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/package-lock.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/global.d.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.node.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
+COPY --from=builder --chown=nextjs:nodejs /app/next-env.d.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/next-i18next.config.cjs ./
+COPY --from=builder --chown=nextjs:nodejs /app/nextauth.d.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 USER nextjs
