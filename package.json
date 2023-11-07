@@ -68,7 +68,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.44.0",
-    "@opentelemetry/instrumentation": "^0.44.0",
+    "@opentelemetry/instrumentation": "^0.45.0",
     "@opentelemetry/resources": "^1.17.1",
     "@opentelemetry/sdk-node": "^0.44.0",
     "@opentelemetry/sdk-trace-base": "^1.17.1",
