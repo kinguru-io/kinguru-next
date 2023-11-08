@@ -27,14 +27,17 @@ export const InviteSection = () => {
       <SimpleGrid
         columns={{ sm: 1, md: 2 }}
         spacing={8}
-        maxW="4xl"
+        maxW="6xl"
         mx={"auto"}
         alignContent={"center"}
       >
         <Box>
           <Heading variant={"invitation"}>{t("invite.title")}</Heading>
           <Stripes />
-          <Text color={useColorModeValue("gray.100", "gray.700")}>
+          <Text
+            color={useColorModeValue("gray.100", "gray.700")}
+            textAlign={"center"}
+          >
             {t("invite.description")}
           </Text>
         </Box>

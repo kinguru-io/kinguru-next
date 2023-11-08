@@ -6,7 +6,6 @@ import {
   VStack,
   useBreakpointValue,
   Skeleton,
-  SimpleGrid,
   Highlight,
 } from "@chakra-ui/react";
 import Link from "next/link";
@@ -43,7 +42,7 @@ export function HeroContent() {
             whiteSpace={"pre"}
             fontWeight={700}
             lineHeight={1.2}
-            fontSize={["2xl", "4xl"]}
+            fontSize={["xl", "4xl"]}
           >
             <Highlight
               query={t("hero.slug_keywords").split(",")}
@@ -58,7 +57,7 @@ export function HeroContent() {
             color={"white"}
             fontWeight={300}
             lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: "xl", md: "2xl" })}
+            fontSize={["xl", "2xl"]}
           >
             <Highlight
               query={t("company")}
@@ -68,20 +67,20 @@ export function HeroContent() {
             </Highlight>
           </Text>
           <Skeleton isLoaded={status !== "loading"} my={10} marginX={"auto"}>
-            <SimpleGrid columns={[1, 2]} spacing={5}>
-              <Button as={Link} variant={"primary"} href={"/events"}>
-                {t("hero.view_events")}
+            {status === "authenticated" ? (
+              <Button as={Link} variant={"primary"} href={"/events/create"}>
+                {t("hero.create_event")}
               </Button>
-              {status === "authenticated" ? (
-                <Button as={Link} variant={"primary"} href={"/events/create"}>
-                  {t("hero.create_event")}
-                </Button>
-              ) : (
-                <Button variant={"primary"} onClick={() => signIn()}>
-                  {t("hero.sign_up")}
-                </Button>
-              )}
-            </SimpleGrid>
+            ) : (
+              <Button
+                variant={"primary"}
+                onClick={() =>
+                  signIn(undefined, { callbackUrl: "/events/create" })
+                }
+              >
+                {t("hero.create_event")}
+              </Button>
+            )}
           </Skeleton>
         </Stack>
       </VStack>

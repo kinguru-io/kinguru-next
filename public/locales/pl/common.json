@@ -22,6 +22,7 @@
     "events": "Events",
     "speakers": "Speakers",
     "places": "Places",
+    "price": "Price",
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
@@ -36,8 +37,8 @@
     "lang_ru": "Russian"
   },
   "hero": {
-    "slug_keywords": "organize,choose,earn",
-    "slug": "Organize events,\nChoose free locations\nAnd earn!",
+    "slug_keywords": "choose,organize,earn",
+    "slug": "Choose free locations\nOrganize events,\nAnd earn!",
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
@@ -110,14 +111,21 @@
     "sort_by_start_date": "Sort by start date"
   },
   "invite": {
-    "title": "Let me invite you to a suitable table",
+    "title": "Subscribe to our news and stay updated on the most interesting events",
     "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in",
-    "subscribe": "Subscribe to events",
+    "subscribe": "Subscribe to updates",
     "email": "Email",
-    "telephone": "Telephone"
+    "name": "Name"
   },
   "works": {
-    "how_it_works": "How it works",
+    "how_it_works": "How the platform works",
+    "register": "Registration on the platform",
+    "fill_profile": "Complete your profile",
+    "pick_subscription": "Choose one of the subscriptions",
+    "organize_meetups": "Organize an event"
+  },
+  "getting": {
+    "what_are_you_getting": "What are you getting",
     "speakers": "Speakers",
     "places": "Places",
     "visitors": "Visitors",

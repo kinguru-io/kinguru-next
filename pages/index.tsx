@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { GetStaticPropsContext } from "next/types";
+import { WhatAreYouGetting } from "@/components/home/getting";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { useLocale } from "@/utils/use-locale.ts";
@@ -32,6 +33,7 @@ export default function Home() {
       <Events />
       <InviteSection />
       <HowItWorks />
+      <WhatAreYouGetting />
       <BestSpeakersSection />
       <CompanyStatisticsSection />
       <FooterSection />

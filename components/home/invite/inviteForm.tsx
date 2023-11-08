@@ -14,7 +14,7 @@ import { useLocale } from "@/utils/use-locale";
 export const InviteForm = () => {
   const { t } = useLocale();
   const inviteSchema = z.object({
-    telephone: z.string().optional(),
+    name: z.string().optional(),
     email: z.string().email(t("invite.invalid_email")),
   });
 
@@ -22,28 +22,26 @@ export const InviteForm = () => {
     <Formik
       initialValues={{ telephone: "", email: "" }}
       validationSchema={toFormikValidationSchema(inviteSchema)}
-      onSubmit={(values, actions) => {
+      onSubmit={(_, actions) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
         }, 1000);
       }}
     >
       {(props) => (
         <Form>
-          <Field name="telephone">
+          <Field name="name">
             {({ field, form, meta }: FieldProps) => (
               <FormControl
                 py={1}
                 isInvalid={
-                  !!form.errors.telephone?.length &&
-                  form.touched.telephone !== undefined
+                  !!form.errors.name?.length && form.touched.name !== undefined
                 }
               >
                 <FormLabel color={useColorModeValue("gray.100", "gray.700")}>
-                  {t("invite.telephone")}
+                  {t("invite.name")}
                 </FormLabel>
-                <Input variant={"invitation"} {...field} placeholder="+" />
+                <Input variant={"invitation"} {...field} />
                 <FormErrorMessage>{meta.error}</FormErrorMessage>
               </FormControl>
             )}

@@ -6,7 +6,7 @@
       "description": "Находите, организуйте и посещайте тематические встречи с экспертами-спикерами в кафе и ресторанах. Узнайте о предстоящих мероприятиях и зарегистрируйтесь сегодня!"
     },
     "events": {
-      "title": "Предстоящие события - Kinguru",
+      "title": "Предстоящие мероприятия - Kinguru",
       "description": "Просмотрите предстоящие тематические встречи и мероприятия. Присоединяйтесь к нам на познавательных сессиях с опытными спикерами в уютных местах.",
       "create": {
         "title": "Создайте свое мероприятие - Kinguru",
@@ -19,9 +19,10 @@
     }
   },
   "navbar": {
-    "events": "События",
+    "events": "Мероприятия",
     "speakers": "Спикеры",
     "places": "Площадки",
+    "price": "Цены",
     "open_main_menu": "Открыть главное меню",
     "close_menu": "Закрыть меню",
     "sign_in": "Войти",
@@ -36,17 +37,17 @@
     "lang_ru": "Русский"
   },
   "hero": {
-    "slug_keywords": "огранизуйте,выбирайте,зарабатывайте",
-    "slug": "Огранизуйте события,\nВыбирайте свободные локации\nИ зарабатывайте!",
+    "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",
+    "slug": "Выбирайте бесплатные локации\nОгранизуйте мероприятия,\nИ зарабатывайте!",
     "description": "Kinguru - платформа для организации тематических мероприятий со спикерами в кафе и ресторанах.",
     "sign_up": "Зарегистрироваться",
-    "view_events": "Показать события",
-    "create_event": "Создать событие"
+    "view_events": "Показать мероприятия",
+    "create_event": "Создать мероприятие"
   },
   "events": {
-    "upcoming_events": "Ближайшие события",
-    "recent_events": "Прошедние события",
-    "not_found": "События не найдены",
+    "upcoming_events": "Ближайшие мероприятия",
+    "recent_events": "Прошедние мероприятия",
+    "not_found": "Мероприятия не найдены",
     "join": "Пойду",
     "cancel": "Не пойду",
     "search_tags": "Поиск по тегам",
@@ -67,9 +68,9 @@
     "meeting_send_comment": "Оставить комментарий",
     "meeting_send_comment_title": "Оставить комментарий к событию",
     "meeting_send_comment_message": "Сообщение комментария",
-    "meeting_send_comment_rating": "Рейтинг события",
+    "meeting_send_comment_rating": "Рейтинг мероприятия",
     "meeting_send_comment_send": "Отправить комментарий",
-    "meeting_guests": "Гости этого события",
+    "meeting_guests": "Гости этого мероприятия",
     "meeting_place": "Площадка мероприятия",
     "meeting_place_tel": "Телефон",
     "meeting_place_address": "Адрес",
@@ -78,16 +79,16 @@
     "buy_a_ticket": "Покупка билета на мероприятие",
     "ticket_intent_succeed": "Вы успешно приобрели билет",
     "ticket_intent_succeed_description": "Теперь вы можете присутствовать на мероприятии",
-    "new_event_creating": "Создайте свое новое событие!",
-    "new_event_details": "Описание вашего события",
+    "new_event_creating": "Создайте свое новое мероприятие!",
+    "new_event_details": "Описание вашего мероприятия",
     "new_event_details_description": "Кратко изложите суть мероприятия",
     "new_event_date_place": "Дата и место",
     "new_event_date_place_description": "Выберите дату, время, количество мест и место",
     "new_event_review": "Ревью",
     "new_event_review_description": "Посмотрите, что получилось",
-    "new_event_topic": "Тема события",
+    "new_event_topic": "Тема мероприятия",
     "new_event_description": "Описание",
-    "new_event_tags": "Теги события",
+    "new_event_tags": "Теги мероприятия",
     "new_event_ticket_price": "Цена билета",
     "new_event_select_poster": "Выберите постер",
     "new_event_next": "Далее",
@@ -97,11 +98,11 @@
     "new_event_date_time": "Дата и время",
     "new_event_guests_num": "Количество гостей",
     "new_event_place": "Площадка",
-    "new_event_was_created": "Выше событие было успешно создано!",
+    "new_event_was_created": "Выше мероприятие было успешно создано!",
     "new_event_was_created_description": "Оно будет доступно после модерации",
-    "new_event_was_not_created": "Событие не было создано",
+    "new_event_was_not_created": "Мероприятие не было создано",
     "new_event_was_not_created_description": "Проверьте правильность заполенения всех полей",
-    "new_event_create_event": "Создать событие",
+    "new_event_create_event": "Создать мероприятие",
     "new_event_date": "Дата",
     "new_event_time": "Время",
     "sorting": "Сортировка...",
@@ -109,14 +110,21 @@
     "sort_by_start_date": "По дате старта"
   },
   "invite": {
-    "title": "Разрешите пригласить вас за подходящий столик",
+    "title": "Подпишитесь на наши новости и будьте в курсе самых интересных мероприятий",
     "description": "Оставьте свои контакты - и мы вышлем вам приглашение на интересующую вас тему",
-    "subscribe": "Подписаться на события",
+    "subscribe": "Подписаться на новости",
     "email": "Электронный адрес",
-    "telephone": "Номер телефона"
+    "name": "Имя"
   },
   "works": {
-    "how_it_works": "Как это работает",
+    "how_it_works": "Как работает платформа",
+    "register": "Регистрация на платформе",
+    "fill_profile": "Заполните свой профиль",
+    "pick_subscription": "Выберите одну из подписок",
+    "organize_meetups": "Организуйте мероприятие"
+  },
+  "getting": {
+    "what_are_you_getting": "Что вы получаете",
     "speakers": "Спикеры",
     "places": "Площадки",
     "visitors": "Посетители",
@@ -142,7 +150,7 @@
     "connected_establishments": "подключенных площадок"
   },
   "footer": {
-    "upcoming_events": "Предстоящие события",
+    "upcoming_events": "Предстоящие мероприятия",
     "how_it_works": "Как это работает",
     "reviews": "Ревью",
     "photo_reports": "Фото-репортажи",

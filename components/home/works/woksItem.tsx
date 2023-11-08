@@ -1,27 +1,26 @@
-import { Container, Text } from "@chakra-ui/react";
-import Image from "next/image";
+import { Container, Text, HStack } from "@chakra-ui/react";
+import { BiRightArrowAlt } from "react-icons/bi";
 
 export const WorksItem = ({
   title,
-  image,
+  last,
 }: {
   title: string;
-  image: string;
+  last: boolean;
 }) => {
   return (
-    <Container maxWidth={"xs"} mt={10}>
-      <Image
-        src={image}
-        width={100}
-        height={100}
-        style={{
-          margin: "auto",
-        }}
-        alt={title}
-      />
-      <Text textAlign={"center"} mt={5}>
-        {title}
-      </Text>
-    </Container>
+    <HStack>
+      <Container
+        maxWidth={"sm"}
+        bg={"brand.primary"}
+        mr={[0, 2]}
+        borderRadius={10}
+      >
+        <Text textAlign={"center"} my={7} mx={2}>
+          {title}
+        </Text>
+      </Container>
+      {!last && <BiRightArrowAlt size={32} />}
+    </HStack>
   );
 };

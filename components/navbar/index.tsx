@@ -9,12 +9,9 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Select,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 import { Login } from "@/components/navbar/login";
 import { NavLink } from "@/components/navbar/navlink";
 import headerLogo from "@/public/img/logo_header.png";
@@ -23,33 +20,12 @@ import { useLocale } from "@/utils/use-locale";
 export function Navbar({ full }: { full?: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useLocale();
-  const { i18n } = useTranslation();
 
   const navigation = [
     { name: t("navbar.events"), href: "/events" },
     { name: t("navbar.speakers"), href: "/speakers" },
     { name: t("navbar.places"), href: "/places" },
-  ];
-
-  const router = useRouter();
-  const onToggleLanguageClick = (newLocale: string) => {
-    const { pathname, asPath, query } = router;
-    void router.push({ pathname, query }, asPath, { locale: newLocale });
-  };
-
-  const languageOptions = [
-    {
-      code: "en",
-      text: t("navbar.lang_en"),
-    },
-    {
-      code: "pl",
-      text: t("navbar.lang_pl"),
-    },
-    {
-      code: "ru",
-      text: t("navbar.lang_ru"),
-    },
+    { name: t("navbar.price"), href: "/price" },
   ];
 
   return (
@@ -99,27 +75,7 @@ export function Navbar({ full }: { full?: boolean }) {
               ))}
             </HStack>
           </HStack>
-          <Flex>
-            <Select
-              variant="filled"
-              placeholder={
-                languageOptions.find(
-                  ({ code }) => code === i18n.resolvedLanguage,
-                )?.text
-              }
-              onChange={({ target: { value } }) => onToggleLanguageClick(value)}
-              mr={3}
-            >
-              {languageOptions
-                .filter(({ code }) => code !== i18n.resolvedLanguage)
-                .map(({ code, text }) => (
-                  <option value={code} key={code}>
-                    {text}
-                  </option>
-                ))}
-            </Select>
-            <Login />
-          </Flex>
+          <Login />
         </Flex>
 
         {isOpen ? (

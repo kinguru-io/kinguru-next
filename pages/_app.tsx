@@ -1,6 +1,7 @@
 import { Button, ChakraProvider } from "@chakra-ui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AppProps } from "next/app";
+import { Noto_Sans } from "next/font/google";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
@@ -11,6 +12,11 @@ import { theme } from "@/components/theme";
 import * as gtag from "@/utils/gtag.ts";
 import { trpc } from "@/utils/trpc";
 import "@/components/styles.css";
+
+const notoSans = Noto_Sans({
+  subsets: ["latin", "cyrillic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 const handleDeclineCookie = () => {
   Cookies.remove("_ga");
@@ -56,7 +62,7 @@ function MainApp({
     };
   }, [router.events]);
   return (
-    <>
+    <main className={notoSans.className}>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -103,7 +109,7 @@ function MainApp({
           <ReactQueryDevtools initialIsOpen />
         </SessionProvider>
       </I18nProvider>
-    </>
+    </main>
   );
 }
 

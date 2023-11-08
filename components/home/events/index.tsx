@@ -15,8 +15,6 @@ export const Events = () => {
   const { t } = useLocale();
   const { data: upcomingEvents, status: upcomingStatus } =
     trpc.event.upcoming.useQuery();
-  const { data: recentEvents, status: recentStatus } =
-    trpc.event.recent.useQuery();
   return (
     <>
       <Container maxW="6xl" py={20}>
@@ -36,29 +34,6 @@ export const Events = () => {
           ) : (
             <SimpleGrid spacing={4} columns={{ sm: 2, md: 3 }}>
               {upcomingEvents?.map((event) => (
-                <EventCard event={event} key={event.id} />
-              ))}
-            </SimpleGrid>
-          )}
-        </Skeleton>
-        <Heading variant={"brand"} mt={10}>
-          {t("events.recent_events")}
-        </Heading>
-        <Stripes />
-        <Skeleton isLoaded={recentStatus === "success"}>
-          {!recentEvents?.length ? (
-            <Text
-              color={useColorModeValue("gray.700", "white")}
-              fontWeight={400}
-              fontSize={"xl"}
-              fontFamily={"body"}
-              textAlign={"center"}
-            >
-              {t("events.not_found")}
-            </Text>
-          ) : (
-            <SimpleGrid spacing={4} columns={{ sm: 2, md: 3 }}>
-              {recentEvents?.map((event) => (
                 <EventCard event={event} key={event.id} />
               ))}
             </SimpleGrid>
