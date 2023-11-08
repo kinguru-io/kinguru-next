@@ -1,3 +1,10 @@
+## [0.11.13](https://github.com/kinguru-io/kinguru-next/compare/v0.11.12...v0.11.13) (2023-11-08)
+
+
+### Bug Fixes
+
+* homepage changes ([e4c0447](https://github.com/kinguru-io/kinguru-next/commit/e4c044750d8a79d4962d78442b68f0328eb86173))
+
 ## [0.11.12](https://github.com/kinguru-io/kinguru-next/compare/v0.11.11...v0.11.12) (2023-10-30)
 
 
