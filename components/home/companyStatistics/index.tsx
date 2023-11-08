@@ -80,7 +80,7 @@ export const CompanyStatisticsSection = () => {
                   key={id}
                   name={name || undefined}
                   border={0}
-                  src={resources[0].url || undefined}
+                  src={resources[0]?.url || undefined}
                 />
               ))}
             </AvatarGroup>
