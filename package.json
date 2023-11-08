@@ -73,7 +73,7 @@
     "@opentelemetry/sdk-node": "^0.45.0",
     "@opentelemetry/sdk-trace-base": "^1.18.0",
     "@opentelemetry/sdk-trace-node": "^1.18.0",
-    "@opentelemetry/semantic-conventions": "^1.18.0",
+    "@opentelemetry/semantic-conventions": "^1.18.1",
     "@prisma/client": "^5.5.2",
     "@prisma/instrumentation": "^5.5.2",
     "@stripe/react-stripe-js": "^2.3.1",
