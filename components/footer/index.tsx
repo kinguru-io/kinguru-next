@@ -1,5 +1,12 @@
-import { Container, SimpleGrid, VStack, Link, Select } from "@chakra-ui/react";
+import {
+  Container,
+  SimpleGrid,
+  VStack,
+  Select,
+  HStack,
+} from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
@@ -9,6 +16,12 @@ import { useLocale } from "@/utils/use-locale";
 
 export const FooterSection = () => {
   const { t } = useLocale();
+  const navigation = [
+    { name: t("navbar.events"), href: "/events" },
+    { name: t("navbar.speakers"), href: "/speakers" },
+    { name: t("navbar.places"), href: "/places" },
+    { name: t("navbar.price"), href: "/price" },
+  ];
 
   const { i18n } = useTranslation();
 
@@ -34,7 +47,7 @@ export const FooterSection = () => {
   ];
   return (
     <Container maxW={"full"} bgColor={"brand.secondary"} py={10}>
-      <SimpleGrid columns={[2, 5]} maxWidth={"5xl"} mx={"auto"}>
+      <SimpleGrid columns={[2, 4]} maxWidth={"5xl"} mx={"auto"}>
         <VStack py={5} justifyContent={"center"}>
           <Image
             src={logo}
@@ -57,9 +70,41 @@ export const FooterSection = () => {
           alignItems={["center", "baseline"]}
           justifyContent={"center"}
         >
+          {navigation.map(({ href, name }) => (
+            <Link key={name} href={href}>
+              {name}
+            </Link>
+          ))}
+        </VStack>
+        <VStack
+          color={"gray.100"}
+          py={5}
+          alignItems={["center", "baseline"]}
+          justifyContent={"center"}
+        >
+          <Link href="/privacy-policy">{t("footer.privacy_policy")}</Link>
+          <Link href="/#">{t("footer.faq")}</Link>
+        </VStack>
+        <VStack
+          color={"gray.100"}
+          py={5}
+          alignItems={["center", "baseline"]}
+          justifyContent={"center"}
+        >
+          <HStack>
+            <Link href={"#"}>
+              <FaLinkedin style={{ display: "inline", fontSize: "18px" }} />
+            </Link>
+            <Link href={"#"}>
+              <FaFacebook style={{ display: "inline", fontSize: "18px" }} />
+            </Link>
+            <Link href={"#"}>
+              <FaInstagram style={{ display: "inline", fontSize: "18px" }} />
+            </Link>
+          </HStack>
           <Link href={"tel:+48792665092"}>+48792665092</Link>
-          <Link href={"mailto:t.yarosh@kinguru.io"}>t.yarosh@kinguru.io</Link>
           <Select
+            mt={1}
             w={"auto"}
             color="white"
             placeholder={
@@ -77,45 +122,6 @@ export const FooterSection = () => {
                 </option>
               ))}
           </Select>
-        </VStack>
-        <VStack
-          color={"gray.100"}
-          py={5}
-          alignItems={["center", "baseline"]}
-          justifyContent={"center"}
-        >
-          <Link href={"https://www.facebook.com/kinguru.online/"} isExternal>
-            <FaFacebook style={{ display: "inline", fontSize: "13px" }} />{" "}
-            facebook
-          </Link>
-          <Link href={"https://www.linkedin.com/"} isExternal>
-            <FaLinkedin style={{ display: "inline", fontSize: "13px" }} />{" "}
-            linkedin
-          </Link>
-          <Link href={"https://www.instagram.com/kinguru.online/"} isExternal>
-            <FaInstagram style={{ display: "inline", fontSize: "13px" }} />{" "}
-            instagram
-          </Link>
-        </VStack>
-        <VStack
-          color={"gray.100"}
-          py={5}
-          alignItems={["center", "baseline"]}
-          justifyContent={"center"}
-        >
-          <Link href="/#events">{t("footer.upcoming_events")}</Link>
-          <Link href="/#how_it_works">{t("footer.how_it_works")}</Link>
-          <Link href="/#events">{t("footer.reviews")}</Link>
-        </VStack>
-        <VStack
-          color={"gray.100"}
-          py={5}
-          alignItems={["center", "baseline"]}
-          justifyContent={"center"}
-        >
-          <Link href="/privacy-policy">{t("footer.privacy_policy")}</Link>
-          <Link href="/#">{t("footer.photo_reports")}</Link>
-          <Link href="/#">{t("footer.contacts")}</Link>
         </VStack>
       </SimpleGrid>
     </Container>
