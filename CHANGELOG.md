@@ -1,3 +1,10 @@
+## [0.11.14](https://github.com/kinguru-io/kinguru-next/compare/v0.11.13...v0.11.14) (2023-11-09)
+
+
+### Bug Fixes
+
+* avatar group place resource undefined possible ([d666a22](https://github.com/kinguru-io/kinguru-next/commit/d666a22669e8657f03c553fa4b7e89dde88b04e0))
+
 ## [0.11.13](https://github.com/kinguru-io/kinguru-next/compare/v0.11.12...v0.11.13) (2023-11-08)
 
 
