@@ -1,3 +1,10 @@
+# [0.12.0](https://github.com/kinguru-io/kinguru-next/compare/v0.11.14...v0.12.0) (2023-11-09)
+
+
+### Features
+
+* add price page for speakers ([2560a32](https://github.com/kinguru-io/kinguru-next/commit/2560a32f40f1c51f7e69bec1a8b8b87e8d32132a))
+
 ## [0.11.14](https://github.com/kinguru-io/kinguru-next/compare/v0.11.13...v0.11.14) (2023-11-09)
 
 
