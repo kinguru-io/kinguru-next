@@ -16,6 +16,10 @@
     "privacy": {
       "title": "Privacy Policy - Your Data is Safe with Kinguru",
       "description": "At Kinguru, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
+    },
+    "price": {
+      "title": "Speaker Subscriptions: Choose Your Plan with Kinguru",
+      "description": "Amplify your impact with Kinguru's speaker subscription plans. From basic to pro, find the perfect tier for your speaking journey. Join us and expand your influence today!"
     }
   },
   "navbar": {
@@ -149,6 +153,33 @@
     "events_held": "events held",
     "speakers": "speakers",
     "connected_establishments": "connected establishments"
+  },
+  "pricing": {
+    "popular": "Popular offer",
+    "basic_plan": "Basic",
+    "basic_plan_features": {
+      "event_number": "1 event",
+      "choose_location": "No choice of location",
+      "attracting_an_audience": "The platform helps with attracting an audience"
+    },
+    "standard_plan": "Standard",
+    "standard_plan_features": {
+      "event_number": "2-5 events",
+      "choose_location": "You can choose any location on the platform",
+      "attracting_an_audience": "The platform helps with attracting an audience"
+    },
+    "pro_plan": "PRO",
+    "pro_plan_features": {
+      "event_number": "6-10 events",
+      "choose_location": "You can choose any location on the platform",
+      "attracting_an_audience": "The platform is guaranteed to help with attracting an audience"
+    },
+    "free": "free",
+    "trial": "month trial",
+    "per_month": "per month",
+    "buy": "Buy",
+    "our_offers": "Our offers",
+    "choose_optimal": "Choose the optimal conditions for you and organize your first event"
   },
   "footer": {
     "upcoming_events": "Upcoming events",
