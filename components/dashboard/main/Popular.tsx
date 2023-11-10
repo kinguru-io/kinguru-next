@@ -42,7 +42,7 @@ export const Popular: FC = () => {
                 {event.topic}
               </Heading>
               <Text fontSize={"sm"}>
-                {moment(event.starts).format("DD.MM.yyyy hh:mm")}
+                {moment(event.starts).format("DD.MM.yyyy HH:mm")}
               </Text>
             </Box>
           ))}
