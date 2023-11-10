@@ -4,7 +4,7 @@ import {
   NextApiRequest,
   NextApiResponse,
 } from "next/types";
-import { ProfileView, Sidebar } from "@/components/dashboard";
+import { Sidebar } from "@/components/dashboard";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { PlanComponent } from "@/components/pricing/plans";
@@ -21,9 +21,9 @@ export default function Subscriptions() {
     >
       <Navbar />
       <main>
-        <ProfileView />
         <Flex
           w={"full"}
+          pt={20}
           flexDir={["column", "column", "column", "row", "row", "row"]}
         >
           <Sidebar />
