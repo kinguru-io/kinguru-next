@@ -1,3 +1,10 @@
+## [0.13.1](https://github.com/kinguru-io/kinguru-next/compare/v0.13.0...v0.13.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* dashboard mobile view ([e3fad5d](https://github.com/kinguru-io/kinguru-next/commit/e3fad5dcb684e37aac475ef96c8b4c302fd80533))
+
 # [0.13.0](https://github.com/kinguru-io/kinguru-next/compare/v0.12.1...v0.13.0) (2023-11-10)
 
 
