@@ -22,7 +22,7 @@ export default function Dashboard() {
       <Navbar />
       <main>
         <ProfileView />
-        <Flex w={"full"}>
+        <Flex w={"full"} flexDir={["column", "row"]}>
           <Sidebar />
           <MainInfo />
         </Flex>

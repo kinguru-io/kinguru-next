@@ -10,9 +10,10 @@ export const SidebarItem: FC<{
 }> = ({ name, href, active, disabled }) => {
   return (
     <LinkBox
-      borderRightRadius={"full"}
+      borderRightRadius={[0, "full"]}
       mt={2}
       py={2}
+      px={[2, 0]}
       bg={active ? "#ffd8001a" : undefined}
       // @ts-ignore
       disabled={disabled}
@@ -26,7 +27,7 @@ export const SidebarItem: FC<{
         bg: "white",
         color: "gray.300",
       }}
-      w={"50%"}
+      w={["100%", "70%"]}
     >
       <LinkOverlay as={NextLink} ml={7} href={disabled ? "" : href}>
         {name}

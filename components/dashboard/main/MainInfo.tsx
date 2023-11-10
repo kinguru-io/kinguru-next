@@ -14,30 +14,37 @@ import {
 export const MainInfo: FC = () => {
   return (
     <Grid
-      w={"4xl"}
+      w={["full", "6xl"]}
       py={10}
+      px={[3, 0]}
       mx={0}
-      templateColumns="repeat(5, 1fr)"
-      templateRows="repeat(3, 1fr)"
+      templateColumns={["repeat(1, 1fr)", "repeat(5, 1fr)"]}
+      templateRows={["repeat(1, 1fr)", "repeat(3, 1fr)"]}
       gap={4}
     >
-      <GridItem rowSpan={2} colSpan={1} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem
+        rowSpan={[1, 2]}
+        colSpan={1}
+        bg={"#D4D4D4"}
+        p={5}
+        borderRadius={10}
+      >
         <UpcomingEventsCalendar />
       </GridItem>
-      <GridItem colSpan={2} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
         <ProfileFilled />
       </GridItem>
-      <GridItem colSpan={2} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
         <Notifications />
       </GridItem>
-      <GridItem colSpan={2} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
         <Popular />
       </GridItem>
-      <GridItem colSpan={2} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
         <FAQ />
       </GridItem>
       <GridItem
-        colSpan={2}
+        colSpan={[1, 2]}
         bg={"#D4D4D4"}
         borderRadius={10}
         position={"relative"}
@@ -45,7 +52,7 @@ export const MainInfo: FC = () => {
         <NextEvent />
       </GridItem>
       <GridItem
-        colSpan={2}
+        colSpan={[1, 2]}
         bg={"#D4D4D4"}
         borderRadius={10}
         position={"relative"}

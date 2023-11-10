@@ -44,10 +44,10 @@ export const Sidebar: FC = () => {
   ];
   return (
     <Flex
-      w={"26%"}
+      w={["100%", "20%"]}
       flexDir={"column"}
-      position={"sticky"}
-      top={"65px"}
+      position={["relative", "sticky"]}
+      top={[0, "65px"]}
       h={"fit-content"}
     >
       {sidebarNavigation.map((props) => (
