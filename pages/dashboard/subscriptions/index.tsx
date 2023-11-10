@@ -5,13 +5,13 @@ import {
   NextApiResponse,
 } from "next/types";
 import { ProfileView, Sidebar } from "@/components/dashboard";
-import { MainInfo } from "@/components/dashboard/main";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { PlanComponent } from "@/components/pricing/plans";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
 
-export default function Dashboard() {
+export default function Subscriptions() {
   return (
     <Flex
       maxW={"full"}
@@ -27,7 +27,7 @@ export default function Dashboard() {
           flexDir={["column", "column", "column", "row", "row", "row"]}
         >
           <Sidebar />
-          <MainInfo />
+          <PlanComponent />
         </Flex>
       </main>
       <FooterSection />
