@@ -31,7 +31,7 @@ export const MainInfo: FC = () => {
       >
         <UpcomingEventsCalendar />
       </GridItem>
-      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
+      <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} borderRadius={10}>
         <ProfileFilled />
       </GridItem>
       <GridItem colSpan={[1, 2]} bg={"#D4D4D4"} p={5} borderRadius={10}>
