@@ -26,15 +26,24 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           email: true,
           emailVerified: true,
           stripeCustomerId: true,
+          speaker: true,
         },
       });
     },
-    getUser: (id) => p.user.findUnique({ where: { id } }),
-    getUserByEmail: (email) => p.user.findUnique({ where: { email } }),
+    getUser: (id) =>
+      p.user.findUnique({ where: { id }, include: { speaker: true } }),
+    getUserByEmail: (email) =>
+      p.user.findUnique({ where: { email }, include: { speaker: true } }),
     async getUserByAccount(provider_providerAccountId) {
       const account = await p.account.findUnique({
         where: { provider_providerAccountId },
-        select: { user: true },
+        select: {
+          user: {
+            include: {
+              speaker: true,
+            },
+          },
+        },
       });
       if (!account) return null;
       if (!account.user.stripeCustomerId) {
@@ -47,12 +56,23 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           data: {
             stripeCustomerId,
           },
+          include: {
+            speaker: true,
+          },
         });
       }
       return account.user;
     },
-    updateUser: ({ id, ...data }) => p.user.update({ where: { id }, data }),
-    deleteUser: (id) => p.user.delete({ where: { id } }),
+    updateUser: ({ id, ...data }) => {
+      const { speaker, ...user } = data;
+      return p.user.update({
+        where: { id },
+        data: user,
+        include: { speaker: true },
+      });
+    },
+    deleteUser: (id) =>
+      p.user.delete({ where: { id }, include: { speaker: true } }),
     linkAccount: (data) =>
       p.account.create({
         data: {
@@ -81,7 +101,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     async getSessionAndUser(sessionToken) {
       const userAndSession = await p.session.findUnique({
         where: { sessionToken },
-        include: { user: true },
+        include: { user: { include: { speaker: true } } },
       });
       if (!userAndSession) return null;
       const { user, ...session } = userAndSession;

@@ -4,7 +4,8 @@ import {
   NextApiRequest,
   NextApiResponse,
 } from "next/types";
-import { ProfileView } from "@/components/dashboard";
+import { ProfileView, Sidebar } from "@/components/dashboard";
+import { MainInfo } from "@/components/dashboard/main";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
@@ -19,7 +20,13 @@ export default function Dashboard() {
       justifyContent={"space-between"}
     >
       <Navbar />
-      <ProfileView />
+      <main>
+        <ProfileView />
+        <Flex w={"full"}>
+          <Sidebar />
+          <MainInfo />
+        </Flex>
+      </main>
       <FooterSection />
     </Flex>
   );
