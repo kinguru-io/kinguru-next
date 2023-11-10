@@ -393,4 +393,30 @@ export const eventRouter = t.router({
 
       return moment(event?.starts).isAfter();
     }),
+  popularEvents: publicProcedure
+    .input(
+      z
+        .object({
+          limit: z.number().optional(),
+        })
+        .default({
+          limit: 2,
+        }),
+    )
+    .query(({ ctx, input: { limit } }) => {
+      return ctx.prisma.event.findMany({
+        take: limit,
+        where: {
+          status: "active",
+          starts: {
+            gt: new Date(),
+          },
+        },
+        orderBy: {
+          usersOnEvent: {
+            _count: "desc",
+          },
+        },
+      });
+    }),
 });

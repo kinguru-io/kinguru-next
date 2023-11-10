@@ -40,7 +40,6 @@ export const MainInfo: FC = () => {
         rowSpan={[1, 1, 1, 1, 2, 2]}
         colSpan={1}
         bg={"#D4D4D4"}
-        p={5}
         borderRadius={10}
       >
         <UpcomingEventsCalendar />
@@ -59,8 +58,8 @@ export const MainInfo: FC = () => {
       <GridItem
         colSpan={[1, 1, 1, 2, 2, 2]}
         bg={"#D4D4D4"}
-        p={5}
         borderRadius={10}
+        position={"relative"}
       >
         <Popular />
       </GridItem>
