@@ -181,6 +181,11 @@
     "our_offers": "Our offers",
     "choose_optimal": "Choose the optimal conditions for you and organize your first event"
   },
+  "dashboard": {
+    "greeting": "Hello",
+    "announce": "On this page we have collected for you the most important news of the time.",
+    "become_speaker": "I want to become a speaker"
+  },
   "footer": {
     "upcoming_events": "Upcoming events",
     "how_it_works": "How it works",

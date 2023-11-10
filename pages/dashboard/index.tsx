@@ -1,19 +1,27 @@
+import { Flex } from "@chakra-ui/react";
 import {
   GetStaticPropsContext,
   NextApiRequest,
   NextApiResponse,
 } from "next/types";
-import { DashboardSidebar } from "@/components/dashboard";
+import { ProfileView } from "@/components/dashboard";
 import { FooterSection } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
 
-export default function Home() {
+export default function Dashboard() {
   return (
-    <>
-      <DashboardSidebar />
+    <Flex
+      maxW={"full"}
+      minH={"100vh"}
+      flexDir={"column"}
+      justifyContent={"space-between"}
+    >
+      <Navbar />
+      <ProfileView />
       <FooterSection />
-    </>
+    </Flex>
   );
 }
 
