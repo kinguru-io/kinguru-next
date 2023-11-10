@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/kinguru-io/kinguru-next/compare/v0.12.1...v0.13.0) (2023-11-10)
+
+
+### Features
+
+* add initial dashboard page ([42be683](https://github.com/kinguru-io/kinguru-next/commit/42be683a0b4e907a77eb261c8818c6dc65784e7a))
+
 ## [0.12.1](https://github.com/kinguru-io/kinguru-next/compare/v0.12.0...v0.12.1) (2023-11-10)
 
 
