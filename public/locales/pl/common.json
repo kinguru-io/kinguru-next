@@ -181,6 +181,28 @@
     "our_offers": "Our offers",
     "choose_optimal": "Choose the optimal conditions for you and organize your first event"
   },
+  "dashboard": {
+    "greeting": "Hello",
+    "announce": "On this page we have collected for you the most important news of the time.",
+    "become_speaker": "I want to become a speaker",
+    "sidebar_home": "Home",
+    "sidebar_personal_info": "Personal info",
+    "sidebar_my_activity": "My activity",
+    "sidebar_my_events": "My events",
+    "sidebar_subscriptions": "Subscriptions",
+    "sidebar_settings": "Settings",
+    "main_upcoming_events": "Your upcoming events",
+    "main_profile_filled": "Your profile is complete:",
+    "main_notifications": "Notifications",
+    "main_popular": "Popular",
+    "main_faq": "Is there something you don't understand? Let's figure it out",
+    "main_next_event": "Your next event",
+    "main_profit": "Your profit this month",
+    "main_total": "organized events this year",
+    "main_become_speaker_total": "Become a speaker and monitor your success",
+    "main_become_speaker_profit": "Become a speaker and track your profits from events",
+    "main_become_speaker_next_event": "Become a speaker and keep track of all the news about your own event"
+  },
   "footer": {
     "upcoming_events": "Upcoming events",
     "how_it_works": "How it works",
