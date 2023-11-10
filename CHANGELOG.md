@@ -1,3 +1,12 @@
+## [0.13.2](https://github.com/kinguru-io/kinguru-next/compare/v0.13.1...v0.13.2) (2023-11-10)
+
+
+### Bug Fixes
+
+* add profile filled component for dashboard ([271af78](https://github.com/kinguru-io/kinguru-next/commit/271af78b78590d520308191b9aab78631bbf5cc2))
+* add russian localization for dashboard ([821677d](https://github.com/kinguru-io/kinguru-next/commit/821677d4fab582df92e87af050f81621187bc16c))
+* dashboard become speaker button ([4e423ac](https://github.com/kinguru-io/kinguru-next/commit/4e423ac722886afd6a400b81af31e0fffa272d1b))
+
 ## [0.13.1](https://github.com/kinguru-io/kinguru-next/compare/v0.13.0...v0.13.1) (2023-11-10)
 
 
