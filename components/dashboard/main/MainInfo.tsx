@@ -15,7 +15,7 @@ export const MainInfo: FC = () => {
   return (
     <Grid
       w={["full", "6xl"]}
-      py={10}
+      pb={10}
       px={[3, 0]}
       mx={0}
       templateColumns={["repeat(1, 1fr)", "repeat(5, 1fr)"]}

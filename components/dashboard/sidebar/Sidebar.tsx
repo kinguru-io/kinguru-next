@@ -48,6 +48,7 @@ export const Sidebar: FC = () => {
       flexDir={"column"}
       position={["relative", "sticky"]}
       top={[0, "65px"]}
+      mb={[10, 0]}
       h={"fit-content"}
     >
       {sidebarNavigation.map((props) => (

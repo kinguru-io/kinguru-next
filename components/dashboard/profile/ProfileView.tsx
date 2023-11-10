@@ -18,7 +18,8 @@ export const ProfileView: FC = () => {
     <Flex
       maxW={"4xl"}
       mx={"auto"}
-      pt={32}
+      pt={[24, 32]}
+      mb={5}
       textAlign={"center"}
       flexDir={"column"}
       alignItems={"center"}
@@ -42,9 +43,11 @@ export const ProfileView: FC = () => {
         </Heading>
         <Text mt={3}>{t("dashboard.announce")}</Text>
       </SkeletonText>
-      <Button my={3} variant={"primary"}>
-        {t("dashboard.become_speaker")}
-      </Button>
+      {!session?.user?.speaker && (
+        <Button mt={3} variant={"primary"}>
+          {t("dashboard.become_speaker")}
+        </Button>
+      )}
     </Flex>
   );
 };
