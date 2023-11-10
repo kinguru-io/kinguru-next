@@ -1,3 +1,10 @@
+## [0.12.1](https://github.com/kinguru-io/kinguru-next/compare/v0.12.0...v0.12.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* remove tprc ssg events fetch from price page ([2b7e436](https://github.com/kinguru-io/kinguru-next/commit/2b7e436db39ea11b216c386f769a805917f211e0))
+
 # [0.12.0](https://github.com/kinguru-io/kinguru-next/compare/v0.11.14...v0.12.0) (2023-11-09)
 
 
