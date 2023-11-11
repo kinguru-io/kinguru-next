@@ -52,7 +52,7 @@ export const Popular: FC = () => {
       <AbsoluteCenter
         as={Link}
         bg={
-          "linear-gradient(90deg, transparent 0%, transparent 50%, #A79E9E 100%)"
+          "linear-gradient(90deg, transparent 0%, transparent 50%, rgba(212, 212, 212, 1) 100%)"
         }
         transition={"all 0.1s ease-out"}
         opacity={0.8}

@@ -12,7 +12,7 @@ export const Profit: FC = () => {
       <AbsoluteCenter
         as={Flex}
         bg={
-          "linear-gradient(90deg, rgba(212, 212, 212, .8) 0%, rgba(212, 212, 212, 1) 70%, rgba(212, 212, 212, 1) 100%)"
+          "linear-gradient(90deg, rgba(224, 224, 224, .8) 0%, rgba(224, 224, 224, 1) 70%, rgba(224, 224, 224, 1) 100%)"
         }
         w={"full"}
         h={"full"}

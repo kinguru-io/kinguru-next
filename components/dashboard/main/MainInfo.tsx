@@ -12,6 +12,42 @@ import {
 } from "@/components/dashboard/main";
 
 export const MainInfo: FC = () => {
+  const mainInfoItems = [
+    {
+      colSpan: 1,
+      rowSpan: [1, 1, 1, 2, 2, 2],
+      Component: UpcomingEventsCalendar,
+    },
+    {
+      colSpan: [1, 1, 1, 1, 2, 2],
+      Component: ProfileFilled,
+    },
+    {
+      colSpan: [1, 1, 1, 1, 2, 2],
+      Component: Notifications,
+    },
+    {
+      colSpan: [1, 1, 1, 1, 2, 2],
+      Component: Popular,
+    },
+    {
+      colSpan: [1, 1, 1, 1, 2, 2],
+      Component: FAQ,
+    },
+    {
+      colSpan: [1, 1, 1, 2, 2, 2],
+      Component: NextEvent,
+    },
+    {
+      colSpan: [1, 1, 1, 1, 2, 2],
+      Component: Profit,
+    },
+    {
+      colSpan: 1,
+      Component: Total,
+    },
+  ];
+
   return (
     <Grid
       w={["full", "full", "full", "2xl", "4xl", "6xl"]}
@@ -36,65 +72,17 @@ export const MainInfo: FC = () => {
       ]}
       gap={4}
     >
-      <GridItem
-        rowSpan={[1, 1, 1, 1, 2, 2]}
-        colSpan={1}
-        bg={"#D4D4D4"}
-        borderRadius={10}
-      >
-        <UpcomingEventsCalendar />
-      </GridItem>
-      <GridItem colSpan={[1, 1, 1, 1, 2, 2]} bg={"#D4D4D4"} borderRadius={10}>
-        <ProfileFilled />
-      </GridItem>
-      <GridItem
-        colSpan={[1, 1, 1, 2, 2, 2]}
-        bg={"#D4D4D4"}
-        p={5}
-        borderRadius={10}
-      >
-        <Notifications />
-      </GridItem>
-      <GridItem
-        colSpan={[1, 1, 1, 2, 2, 2]}
-        bg={"#D4D4D4"}
-        borderRadius={10}
-        position={"relative"}
-      >
-        <Popular />
-      </GridItem>
-      <GridItem
-        colSpan={[1, 1, 1, 2, 2, 2]}
-        bg={"#D4D4D4"}
-        p={5}
-        borderRadius={10}
-      >
-        <FAQ />
-      </GridItem>
-      <GridItem
-        colSpan={[1, 1, 1, 2, 2, 2]}
-        bg={"#D4D4D4"}
-        borderRadius={10}
-        position={"relative"}
-      >
-        <NextEvent />
-      </GridItem>
-      <GridItem
-        colSpan={[1, 1, 1, 1, 2, 2]}
-        bg={"#D4D4D4"}
-        borderRadius={10}
-        position={"relative"}
-      >
-        <Profit />
-      </GridItem>
-      <GridItem
-        colSpan={1}
-        bg={"#D4D4D4"}
-        borderRadius={10}
-        position={"relative"}
-      >
-        <Total />
-      </GridItem>
+      {mainInfoItems.map(({ Component, ...props }, index) => (
+        <GridItem
+          key={index}
+          bg={"#e0e0e0"}
+          borderRadius={10}
+          position={"relative"}
+          {...props}
+        >
+          <Component />
+        </GridItem>
+      ))}
     </Grid>
   );
 };
