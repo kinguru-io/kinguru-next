@@ -1,3 +1,10 @@
+## [0.13.5](https://github.com/kinguru-io/kinguru-next/compare/v0.13.4...v0.13.5) (2023-11-11)
+
+
+### Bug Fixes
+
+* add chevron button for a popular component ([4d918e0](https://github.com/kinguru-io/kinguru-next/commit/4d918e0449efd04d020fc89ee4806f6c408794aa))
+
 ## [0.13.4](https://github.com/kinguru-io/kinguru-next/compare/v0.13.3...v0.13.4) (2023-11-11)
 
 
