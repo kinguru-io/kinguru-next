@@ -1,3 +1,11 @@
+## [0.13.7](https://github.com/kinguru-io/kinguru-next/compare/v0.13.6...v0.13.7) (2023-11-11)
+
+
+### Bug Fixes
+
+* change popular container properties ([0d11ab4](https://github.com/kinguru-io/kinguru-next/commit/0d11ab445bc8aec53f8aa8daace95f917a8ebd65))
+* dashboard colors ([5edb5b6](https://github.com/kinguru-io/kinguru-next/commit/5edb5b6b81b12b4493b71a8a303ce17de11de9c7))
+
 ## [0.13.6](https://github.com/kinguru-io/kinguru-next/compare/v0.13.5...v0.13.6) (2023-11-11)
 
 
