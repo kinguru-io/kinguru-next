@@ -1,3 +1,12 @@
+## [0.13.4](https://github.com/kinguru-io/kinguru-next/compare/v0.13.3...v0.13.4) (2023-11-11)
+
+
+### Bug Fixes
+
+* add popular component for dashboard ([76f06bb](https://github.com/kinguru-io/kinguru-next/commit/76f06bbc7b97d351b19af00aa4db7c0508f96379))
+* popular component moment call ([5e38ba8](https://github.com/kinguru-io/kinguru-next/commit/5e38ba8fbee8fd68118da7399d9bd598c06d1758))
+* remove profile view from subscriptions page ([78a175d](https://github.com/kinguru-io/kinguru-next/commit/78a175db272c838cff2977282cad68393dbc6f66))
+
 ## [0.13.3](https://github.com/kinguru-io/kinguru-next/compare/v0.13.2...v0.13.3) (2023-11-10)
 
 
