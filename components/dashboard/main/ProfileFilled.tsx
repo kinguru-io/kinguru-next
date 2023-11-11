@@ -48,7 +48,7 @@ export const ProfileFilled: FC = () => {
         </Text>
       </SkeletonText>
       <Text fontSize={"sm"}>{t("dashboard.main_profile_fill_60")}</Text>
-      <Box position={"relative"}>
+      <Box position={"relative"} mt={[3, 3, 3, 0, 0, 0]}>
         <Progress
           value={completeness || undefined}
           borderRadius={10}
@@ -85,7 +85,7 @@ export const ProfileFilled: FC = () => {
           </Text>
         </Box>
       </Box>
-      <Text pt={3} fontSize={"xs"} fontWeight={300}>
+      <Text pt={[9, 9, 9, 6, 6, 3]} fontSize={"xs"} fontWeight={300}>
         {t("dashboard.main_profile_speaker_minimum")}
       </Text>
     </Container>
