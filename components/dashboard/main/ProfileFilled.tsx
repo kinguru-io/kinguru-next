@@ -33,7 +33,7 @@ export const ProfileFilled: FC = () => {
         endColor="#D4D4D4"
         noOfLines={1}
       >
-        <Text pt={2} fontSize={"sm"}>
+        <Text pt={1} fontSize={"sm"}>
           {t("dashboard.main_profile_status")} -{" "}
           {session?.user?.speaker
             ? t("dashboard.main_profile_speaker")
