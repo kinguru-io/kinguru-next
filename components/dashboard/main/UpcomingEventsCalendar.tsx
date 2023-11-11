@@ -14,7 +14,7 @@ export const UpcomingEventsCalendar: FC = () => {
       <Grid
         mt={2}
         templateColumns={"repeat(7, 1fr)"}
-        templateRows={"repeat(9, 1fr)"}
+        templateRows={"repeat(5, 1fr)"}
         gap={1}
       >
         {new Array(35)

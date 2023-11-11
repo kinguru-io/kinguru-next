@@ -22,7 +22,7 @@ export const Popular: FC = () => {
     <>
       <Container
         py={5}
-        w={["xs", "md", "xl", "100%", "100%", "100%"]}
+        maxW={["sm", "md", "prose", "prose", "prose", "prose"]}
         overflow={"hidden"}
       >
         <Heading fontSize={"lg"}>{t("dashboard.main_popular")}</Heading>
