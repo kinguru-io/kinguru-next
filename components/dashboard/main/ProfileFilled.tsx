@@ -17,7 +17,13 @@ export const ProfileFilled: FC = () => {
   const { data: completeness, isLoading: isCompletenessLoading } =
     trpc.user.profileCompleteness.useQuery();
   return (
-    <Container py={5}>
+    <Container
+      py={5}
+      display={"flex"}
+      flexDir={"column"}
+      h={"100%"}
+      justifyContent={"space-between"}
+    >
       <Heading fontSize={"lg"}>
         <SkeletonText
           noOfLines={1}
@@ -33,7 +39,7 @@ export const ProfileFilled: FC = () => {
         endColor="#D4D4D4"
         noOfLines={1}
       >
-        <Text pt={1} fontSize={"sm"}>
+        <Text fontSize={"sm"}>
           {t("dashboard.main_profile_status")} -{" "}
           {session?.user?.speaker
             ? t("dashboard.main_profile_speaker")
@@ -41,12 +47,9 @@ export const ProfileFilled: FC = () => {
           .
         </Text>
       </SkeletonText>
-      <Text pt={2} fontSize={"sm"}>
-        {t("dashboard.main_profile_fill_60")}
-      </Text>
+      <Text fontSize={"sm"}>{t("dashboard.main_profile_fill_60")}</Text>
       <Box position={"relative"}>
         <Progress
-          mt={5}
           value={completeness || undefined}
           borderRadius={10}
           height="26px"
@@ -82,7 +85,7 @@ export const ProfileFilled: FC = () => {
           </Text>
         </Box>
       </Box>
-      <Text pt={9} fontSize={"xs"} fontWeight={300}>
+      <Text pt={3} fontSize={"xs"} fontWeight={300}>
         {t("dashboard.main_profile_speaker_minimum")}
       </Text>
     </Container>

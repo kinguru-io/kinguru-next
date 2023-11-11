@@ -11,6 +11,7 @@ import {
 import moment from "moment";
 import Link from "next/link";
 import { FC } from "react";
+import { BiChevronRight } from "react-icons/bi";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
@@ -30,7 +31,7 @@ export const Popular: FC = () => {
         </Text>
         <Flex w={"120%"} mt={1}>
           {popularEvents?.map((event) => (
-            <Box w={"230px"} mr={3}>
+            <Box key={event.id} w={"230px"} mr={3}>
               <AspectRatio maxW="230px" ratio={1.7}>
                 <Image
                   src={event.poster || undefined}
@@ -54,8 +55,9 @@ export const Popular: FC = () => {
           "linear-gradient(90deg, transparent 0%, transparent 50%, #A79E9E 100%)"
         }
         transition={"all 0.1s ease-out"}
+        opacity={0.8}
         _hover={{
-          opacity: 0.7,
+          opacity: 1,
         }}
         w={"full"}
         h={"full"}
@@ -64,7 +66,26 @@ export const Popular: FC = () => {
         alignItems={"center"}
         p={5}
         href={"/events"}
-      />
+      >
+        <Flex
+          w={"full"}
+          h={"full"}
+          justifyContent={"flex-end"}
+          alignItems={"center"}
+        >
+          <Box
+            bg={"white"}
+            w={50}
+            h={50}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            borderRadius={"full"}
+          >
+            <BiChevronRight size={32} />
+          </Box>
+        </Flex>
+      </AbsoluteCenter>
     </>
   );
 };
