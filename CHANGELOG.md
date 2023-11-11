@@ -1,3 +1,10 @@
+## [0.13.6](https://github.com/kinguru-io/kinguru-next/compare/v0.13.5...v0.13.6) (2023-11-11)
+
+
+### Bug Fixes
+
+* sizes for popular component ([36601b9](https://github.com/kinguru-io/kinguru-next/commit/36601b984d87669c52dd5675a321a0e653665420))
+
 ## [0.13.5](https://github.com/kinguru-io/kinguru-next/compare/v0.13.4...v0.13.5) (2023-11-11)
 
 
