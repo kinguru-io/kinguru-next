@@ -81,7 +81,7 @@
     "@tanstack/react-query-devtools": "<5",
     "@trpc/client": "^10.43.3",
     "@trpc/next": "^10.43.3",
-    "@trpc/react-query": "^10.43.3",
+    "@trpc/react-query": "^10.43.4",
     "@trpc/server": "^10.43.3",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.5",
