@@ -82,7 +82,11 @@ export const FooterSection = () => {
           alignItems={["center", "baseline"]}
           justifyContent={"center"}
         >
-          <Link href="/privacy-policy">{t("footer.privacy_policy")}</Link>
+          <Link href="/legal/privacy-policy">{t("footer.privacy_policy")}</Link>
+          <Link href="/legal/terms-and-conditions">
+            {t("footer.terms_and_conditions")}
+          </Link>
+          <Link href="/legal/cookie-policy">{t("footer.cookie_policy")}</Link>
           <Link href="/#">{t("footer.faq")}</Link>
         </VStack>
         <VStack

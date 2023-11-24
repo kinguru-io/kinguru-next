@@ -17,6 +17,14 @@
       "title": "Privacy Policy - Your Data is Safe with Kinguru",
       "description": "At Kinguru, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
     },
+    "terms": {
+      "title": "Terms & Conditions: Your Guide to Kinguru's Policies",
+      "description": "Get acquainted with Kinguru's Terms & Conditions. This page outlines our policies, ensuring transparency and clarity for all users. Read more to understand our guidelines."
+    },
+    "cookie": {
+      "title": "Your Data, Your Control: Kinguru's Cookie Policy",
+      "description": "Discover how Kinguru utilizes cookies to enhance your browsing experience. Our Cookie Policy page details their use, ensuring transparency and control over your data."
+    },
     "price": {
       "title": "Speaker Subscriptions: Choose Your Plan with Kinguru",
       "description": "Amplify your impact with Kinguru's speaker subscription plans. From basic to pro, find the perfect tier for your speaking journey. Join us and expand your influence today!"
@@ -215,6 +223,9 @@
     "reviews": "Reviews",
     "photo_reports": "Photo reports",
     "contacts": "Contacts",
-    "privacy_policy": "Privacy policy"
+    "privacy_policy": "Privacy policy",
+    "terms_and_conditions": "Terms & Conditions",
+    "cookie_policy": "Cookie Policy",
+    "faq": "FAQ"
   }
 }
