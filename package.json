@@ -83,7 +83,7 @@
     "@trpc/react-query": "^10.44.1",
     "@trpc/server": "^10.44.1",
     "formik": "^2.4.5",
-    "framer-motion": "^10.16.5",
+    "framer-motion": "^10.16.9",
     "i18next": "^23.7.7",
     "mapbox-gl": "^3.0.0",
     "micro": "^10.0.1",
