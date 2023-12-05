@@ -1,3 +1,10 @@
+## [0.14.2](https://github.com/kinguru-io/kinguru-next/compare/v0.14.1...v0.14.2) (2023-12-05)
+
+
+### Bug Fixes
+
+* react-table eslint disable ([6188b2e](https://github.com/kinguru-io/kinguru-next/commit/6188b2e925063cd519d8e6ecba9e03917a75ab30))
+
 ## [0.14.1](https://github.com/kinguru-io/kinguru-next/compare/v0.14.0...v0.14.1) (2023-12-05)
 
 
