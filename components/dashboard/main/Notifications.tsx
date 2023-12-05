@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ModerationNotification, PurchaseNotification } from "@prisma/client";
 import { flexRender, useReactTable } from "@tanstack/react-table";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { createColumnHelper, getCoreRowModel } from "@tanstack/table-core";
 import { FC } from "react";
 import { trpc } from "@/utils/trpc.ts";

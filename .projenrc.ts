@@ -115,6 +115,7 @@ const project = new web.NextJsTypeScriptProject({
     "@trpc/react-query",
     "trpc-shield",
     "next-auth",
+    "@tanstack/react-table",
     "@tanstack/react-query@<5",
     "@tanstack/react-query-devtools@<5",
     "zod",
@@ -149,7 +150,6 @@ const project = new web.NextJsTypeScriptProject({
     "react-simple-star-rating",
     "react-intersection-observer",
     "react-cookie-consent",
-    "@tanstack/react-table",
 
     "stripe",
     "@stripe/stripe-js",
