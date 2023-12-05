@@ -9,44 +9,46 @@ datasource db {
 }
 
 model User {
-  id               String            @id @default(cuid())
-  name             String?
-  email            String            @unique
-  emailVerified    DateTime?
-  stripeCustomerId String?           @unique
-  image            String?
-  confirmed        Boolean           @default(false)
-  firstname        String?
-  lastname         String?
-  phoneNumber      String?
-  description      String?
-  gender           UserGender?       @default(notSpecified)
-  birthdate        DateTime?         @db.Date
-  country          String?
-  city             String?
-  position         String?
-  company          String?
-  interests        String[]
-  vk               String?
-  facebook         String?
-  instagram        String?
-  linkedin         String?
-  telegram         String?
-  website          String?
-  role             UserRole          @default(user)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  events           Event[]
-  participant      UsersOnEvent[]
-  places           Place[]
-  speaker          Speaker?
-  accounts         Account[]
-  sessions         Session[]
-  eventComments    EventComment[]
-  placeComments    PlaceComment[]
-  speakerComments  SpeakerComment[]
-  following        SpeakerFollower[]
-  ticketIntents    TicketIntent[]
+  id                     String                   @id @default(cuid())
+  name                   String?
+  email                  String                   @unique
+  emailVerified          DateTime?
+  stripeCustomerId       String?                  @unique
+  image                  String?
+  confirmed              Boolean                  @default(false)
+  firstname              String?
+  lastname               String?
+  phoneNumber            String?
+  description            String?
+  gender                 UserGender?              @default(notSpecified)
+  birthdate              DateTime?                @db.Date
+  country                String?
+  city                   String?
+  position               String?
+  company                String?
+  interests              String[]
+  vk                     String?
+  facebook               String?
+  instagram              String?
+  linkedin               String?
+  telegram               String?
+  website                String?
+  role                   UserRole                 @default(user)
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  events                 Event[]
+  participant            UsersOnEvent[]
+  places                 Place[]
+  speaker                Speaker?
+  accounts               Account[]
+  sessions               Session[]
+  eventComments          EventComment[]
+  placeComments          PlaceComment[]
+  speakerComments        SpeakerComment[]
+  following              SpeakerFollower[]
+  ticketIntents          TicketIntent[]
+  moderationNotification ModerationNotification[]
+  purchaseNotification   PurchaseNotification[]
 }
 
 enum UserRole {
@@ -133,27 +135,61 @@ model SpeakerFollower {
   @@id([speakerId, userId])
 }
 
+model PurchaseNotification {
+  id      String             @id @default(cuid())
+  user    User?              @relation(fields: [userId], references: [id])
+  userId  String?
+  event   Event?             @relation(fields: [eventId], references: [id])
+  eventId String?
+  viewed  Boolean            @default(false)
+  status  TicketIntentStatus @default(progress)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ModerationNotification {
+  id      String                       @id @default(cuid())
+  user    User                         @relation(fields: [userId], references: [id])
+  userId  String
+  event   Event                        @relation(fields: [eventId], references: [id])
+  eventId String
+  viewed  Boolean                      @default(false)
+  status  ModerationNotificationStatus @default(sent)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ModerationNotificationStatus {
+  sent
+  passed
+  failed
+}
+
 model Event {
-  id              String            @id @default(cuid())
-  topic           String
-  description     String
-  status          EventStatus       @default(unmoderated)
-  initiator       User              @relation(fields: [initiatorId], references: [id])
-  initiatorId     String
-  place           Place             @relation(fields: [placeId], references: [id])
-  placeId         String
-  starts          DateTime          @db.Timestamp
-  duration        DateTime?         @db.Time
-  poster          String?
-  price           Float?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  tags            String[]
-  resources       EventResource[]
-  comments        EventComment[]
-  usersOnEvent    UsersOnEvent[]
-  speakersOnEvent SpeakersOnEvent[]
-  ticketIntents   TicketIntent[]
+  id                     String                   @id @default(cuid())
+  topic                  String
+  description            String
+  status                 EventStatus              @default(unmoderated)
+  initiator              User                     @relation(fields: [initiatorId], references: [id])
+  initiatorId            String
+  place                  Place                    @relation(fields: [placeId], references: [id])
+  placeId                String
+  starts                 DateTime                 @db.Timestamp
+  duration               DateTime?                @db.Time
+  poster                 String?
+  price                  Float?
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  tags                   String[]
+  resources              EventResource[]
+  comments               EventComment[]
+  usersOnEvent           UsersOnEvent[]
+  speakersOnEvent        SpeakersOnEvent[]
+  ticketIntents          TicketIntent[]
+  moderationNotification ModerationNotification[]
+  purchaseNotification   PurchaseNotification[]
 }
 
 enum EventStatus {

@@ -38,6 +38,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             },
           });
 
+          await prisma.purchaseNotification.create({
+            data: {
+              userId,
+              status: "succeed",
+            },
+          });
+
           await prisma.usersOnEvent.create({
             data: {
               eventId,
@@ -48,11 +55,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           break;
         case "payment_intent.payment_failed":
           const paymentIntentFailed = event.data.object;
-          await prisma.ticketIntent.update({
-            where: {
-              id: paymentIntentFailed.id,
-            },
+          const { userId: ticketIntentUserId } =
+            await prisma.ticketIntent.update({
+              where: {
+                id: paymentIntentFailed.id,
+              },
+              data: {
+                status: "failed",
+              },
+            });
+
+          await prisma.purchaseNotification.create({
             data: {
+              userId: ticketIntentUserId,
               status: "failed",
             },
           });

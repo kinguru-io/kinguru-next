@@ -4,7 +4,7 @@ import i18next from "./next-i18next.config.cjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   i18n: i18next.i18n,
   images: {
     remotePatterns: [

@@ -149,6 +149,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-simple-star-rating",
     "react-intersection-observer",
     "react-cookie-consent",
+    "@tanstack/react-table",
 
     "stripe",
     "@stripe/stripe-js",

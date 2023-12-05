@@ -209,6 +209,10 @@
       "type": "runtime"
     },
     {
+      "name": "@tanstack/react-table",
+      "type": "runtime"
+    },
+    {
       "name": "@trpc/client",
       "type": "runtime"
     },

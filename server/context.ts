@@ -29,8 +29,8 @@ export const createContext = async ({
   const locale = acceptLanguage?.includes("pl")
     ? "pl"
     : acceptLanguage?.includes("ru")
-    ? "ru"
-    : "en";
+      ? "ru"
+      : "en";
   const i18n = await serverSideTranslations(locale, ["common"]);
 
   const innerContext = await createInnerTRPCContext({

@@ -23,7 +23,11 @@ export const eventRouter = t.router({
         ctx,
         input: { topic, description, placeId, date, time, poster, price, tags },
       }) => {
-        return ctx.prisma.event.create({
+        if (moment(`${date} ${time}`, "yyyy-MM-DD HH:mm").isBefore(moment())) {
+          return new TRPCError({ code: "BAD_REQUEST" });
+        }
+
+        const event = await ctx.prisma.event.create({
           data: {
             topic,
             description,
@@ -35,6 +39,15 @@ export const eventRouter = t.router({
             tags,
           },
         });
+
+        await ctx.prisma.moderationNotification.createMany({
+          data: [event.initiatorId].map((userId) => ({
+            userId: userId,
+            eventId: event.id,
+          })),
+        });
+
+        return event;
       },
     ),
   getEventDetails: publicProcedure
