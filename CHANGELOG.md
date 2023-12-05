@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/kinguru-io/kinguru-next/compare/v0.14.0...v0.14.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* trpc mutation now returns `TRPCError` ([a8eeb21](https://github.com/kinguru-io/kinguru-next/commit/a8eeb21c1f4b8d68240731eca5455a7a04244c26))
+
 # [0.14.0](https://github.com/kinguru-io/kinguru-next/compare/v0.13.7...v0.14.0) (2023-12-05)
 
 
