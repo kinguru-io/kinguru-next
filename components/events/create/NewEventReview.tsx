@@ -11,6 +11,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
+import { TRPCError } from "@trpc/server";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { z } from "zod";
@@ -107,7 +108,19 @@ export function NewEventReview({
               void createEvent({
                 ...EventDetailsSchema.parse(details),
                 ...EventDateAndPlaceSchema.parse(dateAndPlace),
-              }).then(({ id }) => {
+              }).then((result) => {
+                if (result instanceof TRPCError) {
+                  toast({
+                    title: t("events.new_event_was_not_created"),
+                    description: t(
+                      "events.new_event_was_not_created_description",
+                    ),
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                  });
+                  return;
+                }
                 toast({
                   title: t("events.new_event_was_created"),
                   description: t("events.new_event_was_created_description"),
@@ -115,7 +128,7 @@ export function NewEventReview({
                   duration: 9000,
                   isClosable: true,
                 });
-                router.push(`/events/${id}`);
+                router.push(`/events/${result.id}`);
               });
             } catch (e) {
               toast({
