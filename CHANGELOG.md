@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/kinguru-io/kinguru-next/compare/v0.13.7...v0.14.0) (2023-12-05)
+
+
+### Features
+
+* add notifications for dashboard ([0d1910f](https://github.com/kinguru-io/kinguru-next/commit/0d1910fd1cf553901504f72d88985c609bacefc2))
+
 ## [0.13.7](https://github.com/kinguru-io/kinguru-next/compare/v0.13.6...v0.13.7) (2023-11-11)
 
 
