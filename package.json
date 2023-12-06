@@ -51,7 +51,7 @@
     "projen": "^0.77.5",
     "semantic-release-plus": "^20.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
