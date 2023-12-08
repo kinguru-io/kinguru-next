@@ -25,4 +25,21 @@ export const placesRouter = t.router({
         },
       });
     }),
+  createPlace: publicProcedure
+    .input(
+      z.object({
+        name: z.string(),
+      }),
+    )
+    .mutation(({ ctx, input: { name } }) => {
+      return ctx.prisma.place.create({
+        data: {
+          name,
+          ownerId: ctx.session!.user!.id,
+          location: "123",
+          coordsLat: 0,
+          coordsLng: 0,
+        },
+      });
+    }),
 });
