@@ -14,7 +14,17 @@ import {
   useBreakpointValue,
   useSteps,
 } from "@chakra-ui/react";
-import { NewPlaceReview, NewPlaceLocation } from "@/components/places/create";
+import { useState } from "react";
+import { z } from "zod";
+import {
+  NewPlaceReview,
+  NewPlaceLocation,
+  PlaceLocationSchema,
+} from "@/components/places/create";
+import {
+  NewPlaceType,
+  PlaceTypeSchema,
+} from "@/components/places/create/NewPlaceType.tsx";
 import { useLocale } from "@/utils/use-locale.ts";
 
 export function NewPlaceStepper() {
@@ -25,6 +35,10 @@ export function NewPlaceStepper() {
       description: t("places.new_places_location_description"),
     },
     {
+      title: t("places.new_place_type"),
+      description: t("places.new_place_type_description"),
+    },
+    {
       title: t("places.new_place_review"),
       description: t("places.new_place_review_description"),
     },
@@ -33,6 +47,10 @@ export function NewPlaceStepper() {
     index: 0,
     count: steps.length,
   });
+
+  const [location, setLocation] =
+    useState<z.infer<typeof PlaceLocationSchema>>();
+  const [type, setType] = useState<z.infer<typeof PlaceTypeSchema>>();
 
   return (
     <Container maxWidth={["full", "full", "70%"]} py={16} px={0}>
@@ -69,12 +87,26 @@ export function NewPlaceStepper() {
       </Stepper>
       {activeStep === 0 && (
         <NewPlaceLocation
+          location={location}
+          setLocation={setLocation}
           activeStep={activeStep}
           setActiveStep={setActiveStep}
         />
       )}
       {activeStep === 1 && (
-        <NewPlaceReview activeStep={activeStep} setActiveStep={setActiveStep} />
+        <NewPlaceType
+          type={type}
+          setType={setType}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
+      )}
+      {activeStep === 2 && (
+        <NewPlaceReview
+          location={location}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
       )}
     </Container>
   );

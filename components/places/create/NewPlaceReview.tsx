@@ -1,14 +1,28 @@
-import { Button, HStack, useToast, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Tr,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import { TRPCError } from "@trpc/server";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
+import { z } from "zod";
+import { PlaceLocationSchema } from "@/components/places/create/NewPlaceLocation.tsx";
 import { trpc } from "@/utils/trpc.ts";
 import { useLocale } from "@/utils/use-locale.ts";
 
 export function NewPlaceReview({
+  location,
   activeStep,
   setActiveStep,
 }: {
+  location?: z.infer<typeof PlaceLocationSchema>;
   activeStep?: number;
   setActiveStep?: Dispatch<SetStateAction<number>>;
 }) {
@@ -19,6 +33,24 @@ export function NewPlaceReview({
   const router = useRouter();
   return (
     <VStack>
+      <TableContainer w={["full", "full", "50%"]} mx={"auto"} my={15}>
+        <Table variant="simple">
+          <Tbody>
+            <Tr>
+              <Td>{t("places.location_mapbox_id")}</Td>
+              <Td>{location?.locationMapboxId}</Td>
+            </Tr>
+            <Tr>
+              <Td>{t("places.location_use_same_billing_address")}</Td>
+              <Td>{location?.useSameAddress ? "true" : "false"}</Td>
+            </Tr>
+            <Tr>
+              <Td>{t("places.billing_mapbox_id")}</Td>
+              <Td>{location?.billingMapboxId}</Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </TableContainer>
       <HStack w={"full"} justifyContent={"center"}>
         {activeStep !== 0 ? (
           <Button

@@ -45,14 +45,15 @@ export const useSearchBoxCore = (
 
   const retrieve = useDebouncedCallback(
     (
-      suggestion: SearchBoxSuggestion,
-      cb: (data: SearchBoxRetrieveResponse) => void,
+      suggestion?: SearchBoxSuggestion | null,
+      cb?: (data: SearchBoxRetrieveResponse) => void,
     ) => {
+      if (!suggestion) return;
       void search
         .retrieve(suggestion, {
           sessionToken: "test-123",
         })
-        .then((data) => cb(data));
+        .then((data) => cb?.(data));
     },
     300,
   );

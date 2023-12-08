@@ -15,7 +15,7 @@ import { AsyncSelect } from "chakra-react-select";
 import { Field, FieldProps, Form, Formik } from "formik";
 import * as mapboxgl from "mapbox-gl";
 import NextImage from "next/image";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import Map, { MapRef, Marker } from "react-map-gl";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
@@ -28,6 +28,8 @@ export const PlaceLocationSchema = z.object({
   locationMapboxId: z.string(),
   billingMapboxId: z.string().nullish(),
   useSameAddress: z.boolean().default(false),
+  isMarkerSet: z.boolean().nullish(),
+  currentMarker: z.array(z.number()).max(2).default([21, 52.23]),
 });
 
 export function NewPlaceLocation({
@@ -46,8 +48,6 @@ export function NewPlaceLocation({
   const { t } = useLocale();
   const mapRef = useRef<MapRef>(null);
   const { fetchSuggestions, retrieve } = useSearchBoxCore({});
-  const [isMarkerSet, setMarkerFlag] = useState(false);
-  const [currentMarker, setCurrentMarker] = useState([21, 52.23]);
   return (
     <Formik
       initialValues={
@@ -55,6 +55,8 @@ export function NewPlaceLocation({
           locationMapboxId: "",
           billingMapboxId: "",
           useSameAddress: true,
+          isMarkerSet: false,
+          currentMarker: [21, 52.23],
         }
       }
       validationSchema={toFormikValidationSchema(PlaceLocationSchema)}
@@ -79,8 +81,8 @@ export function NewPlaceLocation({
                     <FormLabel>{t("places.new_place_location")}</FormLabel>
                     <AsyncSelect
                       variant={"brand"}
-                      onChange={(e) => {
-                        retrieve(e!, (data) => {
+                      onChange={(suggestion) => {
+                        retrieve(suggestion, (data) => {
                           mapRef.current?.setCenter(
                             data.features[0].geometry.coordinates as [
                               number,
@@ -88,14 +90,15 @@ export function NewPlaceLocation({
                             ],
                           );
                           mapRef.current?.setZoom(16);
-                          setCurrentMarker(
+                          void form.setFieldValue("isMarkerSet", true);
+                          void form.setFieldValue(
+                            "currentMarker",
                             data.features[0].geometry.coordinates,
                           );
-                          setMarkerFlag(true);
                         });
                         field.onChange({
                           target: {
-                            value: e?.mapbox_id,
+                            value: suggestion?.mapbox_id,
                             name: "locationMapboxId",
                           },
                         });
@@ -151,10 +154,10 @@ export function NewPlaceLocation({
                     <FormLabel>{t("places.new_billing_location")}</FormLabel>
                     <AsyncSelect
                       variant={"brand"}
-                      onChange={(e) => {
+                      onChange={(suggestion) => {
                         field.onChange({
                           target: {
-                            value: e?.mapbox_id,
+                            value: suggestion?.mapbox_id,
                             name: "billingMapboxId",
                           },
                         });
@@ -171,30 +174,34 @@ export function NewPlaceLocation({
               <Divider orientation="vertical" />
             </Center>
             <VStack w={["full", "full", "50%"]} px={5} pt={[5, 5, 0]}>
-              <Map
-                ref={mapRef}
-                mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-                mapLib={mapboxgl}
-                initialViewState={{
-                  longitude: currentMarker[0],
-                  latitude: currentMarker[1],
-                  zoom: 11,
-                  bearing: 0,
-                  pitch: 0,
-                }}
-                style={{ width: "100%", height: 400 }}
-                mapStyle="mapbox://styles/mapbox/dark-v9"
-              >
-                {isMarkerSet && (
-                  <Marker
-                    anchor="center"
-                    longitude={currentMarker[0]}
-                    latitude={currentMarker[1]}
+              <Field name="currentMarker">
+                {({ field, form }: FieldProps) => (
+                  <Map
+                    ref={mapRef}
+                    mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                    mapLib={mapboxgl}
+                    initialViewState={{
+                      longitude: field.value[0],
+                      latitude: field.value[1],
+                      zoom: 16,
+                      bearing: 0,
+                      pitch: 0,
+                    }}
+                    style={{ width: "100%", height: 400 }}
+                    mapStyle="mapbox://styles/mapbox/dark-v9"
                   >
-                    <NextImage src={marker} alt={"Location"} width={32} />
-                  </Marker>
+                    {form.values.isMarkerSet && (
+                      <Marker
+                        anchor="center"
+                        longitude={field.value[0]}
+                        latitude={field.value[1]}
+                      >
+                        <NextImage src={marker} alt={"Location"} width={32} />
+                      </Marker>
+                    )}
+                  </Map>
                 )}
-              </Map>
+              </Field>
             </VStack>
           </Flex>
           <HStack w={"full"} justifyContent={"center"}>
