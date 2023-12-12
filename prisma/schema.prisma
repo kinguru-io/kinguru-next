@@ -260,24 +260,42 @@ model SpeakersOnEvent {
 }
 
 model Place {
-  id             String              @id @default(cuid())
-  name           String              @default("Place")
-  owner          User                @relation(fields: [ownerId], references: [id])
-  ownerId        String
-  private        Boolean?            @default(true)
-  tel            String?             @db.VarChar(255)
-  location       String              @db.VarChar(255)
-  coordsLat      Float               @db.Real
-  coordsLng      Float               @db.Real
-  Event          Event[]
-  organization   Organization?       @relation(fields: [organizationId], references: [id])
-  organizationId String?
-  capacity       Int?
-  openingHours   PlaceOpeningHours[]
-  resources      PlaceResource[]
-  comments       PlaceComment[]
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
+  id                     String              @id @default(cuid())
+  name                   String              @default("Place")
+  title                  String              @default("Place")
+  description            String              @default("Description")
+  rules                  String?             @default("Rules")
+  area                   Float               @default(0)
+  owner                  User                @relation(fields: [ownerId], references: [id])
+  ownerId                String
+  private                Boolean?            @default(true)
+  tel                    String?             @db.VarChar(255)
+  location               String              @db.VarChar(255)
+  coordsLat              Float               @db.Real
+  coordsLng              Float               @db.Real
+  Event                  Event[]
+  organization           Organization?       @relation(fields: [organizationId], references: [id])
+  organizationId         String?
+  capacity               Int?
+  minCapacity            Int?
+  maxCapacity            Int?
+  ageRestrictions        String              @default("+4")
+  parkingArea            String[]
+  cameraOrAudioRecording Boolean?
+  hasWifi                Boolean             @default(false)
+  wifiLogin              String?
+  wifiPassword           String?
+  amenities              String[]
+  locationMapboxId       String              @default("")
+  billingMapboxId        String              @default("")
+  routeToPremises        String?
+  rentalPriceByHour      Float               @default(0)
+  cleaningFeePrice       Float               @default(0)
+  openingHours           PlaceOpeningHours[]
+  resources              PlaceResource[]
+  comments               PlaceComment[]
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
 }
 
 model PlaceOpeningHours {

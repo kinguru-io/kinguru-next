@@ -217,6 +217,15 @@
     "main_become_speaker_profit": "Become a speaker and track your profits from events",
     "main_become_speaker_next_event": "Become a speaker and keep track of all the news about your own event"
   },
+  "places": {
+    "hours_monday_short": "Mon",
+    "hours_tuesday_short": "Tue",
+    "hours_wednesday_short": "Wed",
+    "hours_thursday_short": "Thu",
+    "hours_friday_short": "Fri",
+    "hours_saturday_short": "Sat",
+    "hours_sunday_short": "Sun"
+  },
   "footer": {
     "upcoming_events": "Upcoming events",
     "how_it_works": "How it works",

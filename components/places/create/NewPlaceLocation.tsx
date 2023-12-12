@@ -10,6 +10,8 @@ import {
   HStack,
   Radio,
   RadioGroup,
+  FormHelperText,
+  Textarea,
 } from "@chakra-ui/react";
 import { AsyncSelect } from "chakra-react-select";
 import { Field, FieldProps, Form, Formik } from "formik";
@@ -26,10 +28,11 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 export const PlaceLocationSchema = z.object({
   locationMapboxId: z.string(),
-  billingMapboxId: z.string().nullish(),
+  billingMapboxId: z.string().optional(),
   useSameAddress: z.boolean().default(false),
-  isMarkerSet: z.boolean().nullish(),
+  isMarkerSet: z.boolean().optional(),
   currentMarker: z.array(z.number()).max(2).default([21, 52.23]),
+  routeToPremises: z.string().optional(),
 });
 
 export function NewPlaceLocation({
@@ -53,7 +56,6 @@ export function NewPlaceLocation({
       initialValues={
         location || {
           locationMapboxId: "",
-          billingMapboxId: "",
           useSameAddress: true,
           isMarkerSet: false,
           currentMarker: [21, 52.23],
@@ -119,7 +121,7 @@ export function NewPlaceLocation({
                     }
                   >
                     <FormLabel>
-                      {t("places.use_same_billing_location")}
+                      {t("places.location_use_same_billing_address")}
                     </FormLabel>
                     <RadioGroup
                       name={"billing-address"}
@@ -169,6 +171,25 @@ export function NewPlaceLocation({
                   </FormControl>
                 )}
               </Field>
+              <Field name="routeToPremises">
+                {({ field, form, meta }: FieldProps) => (
+                  <FormControl
+                    isInvalid={
+                      !!form.errors.routeToPremises?.length &&
+                      form.touched.routeToPremises !== undefined
+                    }
+                  >
+                    <FormLabel>
+                      {t("places.location_route_to_premises")}
+                    </FormLabel>
+                    <Textarea {...field} />
+                    <FormHelperText>
+                      {t("places.location_route_to_premises_helper")}
+                    </FormHelperText>
+                    <FormErrorMessage>{meta.error}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
             </VStack>
             <Center>
               <Divider orientation="vertical" />
@@ -212,7 +233,7 @@ export function NewPlaceLocation({
                   setActiveStep && setActiveStep((activeStep || 0) - 1)
                 }
               >
-                {t("events.new_event_prev")}
+                {t("places.new_place_prev")}
               </Button>
             ) : null}
             <Button
@@ -220,7 +241,7 @@ export function NewPlaceLocation({
               isLoading={props.isSubmitting}
               type="submit"
             >
-              {t("events.new_event_next")}
+              {t("places.new_place_next")}
             </Button>
           </HStack>
         </Form>
