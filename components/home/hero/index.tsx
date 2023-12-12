@@ -68,18 +68,39 @@ export function HeroContent() {
           </Text>
           <Skeleton isLoaded={status !== "loading"} my={10} marginX={"auto"}>
             {status === "authenticated" ? (
-              <Button as={Link} variant={"primary"} href={"/events/create"}>
-                {t("hero.create_event")}
-              </Button>
+              <Flex>
+                <Button
+                  as={Link}
+                  variant={"primary"}
+                  href={"/places/create"}
+                  mr={3}
+                >
+                  {t("hero.create_place")}
+                </Button>
+                <Button as={Link} variant={"primary"} href={"/events/create"}>
+                  {t("hero.create_event")}
+                </Button>
+              </Flex>
             ) : (
-              <Button
-                variant={"primary"}
-                onClick={() =>
-                  signIn(undefined, { callbackUrl: "/events/create" })
-                }
-              >
-                {t("hero.create_event")}
-              </Button>
+              <Flex>
+                <Button
+                  variant={"primary"}
+                  onClick={() =>
+                    signIn(undefined, { callbackUrl: "/places/create" })
+                  }
+                  mr={3}
+                >
+                  {t("hero.create_place")}
+                </Button>
+                <Button
+                  variant={"primary"}
+                  onClick={() =>
+                    signIn(undefined, { callbackUrl: "/events/create" })
+                  }
+                >
+                  {t("hero.create_event")}
+                </Button>
+              </Flex>
             )}
           </Skeleton>
         </Stack>

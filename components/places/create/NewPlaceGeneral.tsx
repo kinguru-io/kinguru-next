@@ -32,8 +32,8 @@ export const PlaceGeneralSchema = z.object({
     )
     .min(1),
   title: z.string().min(10),
-  description: z.string().min(30),
-  rules: z.string().optional(),
+  description: z.string().min(280),
+  rules: z.string().min(100).optional(),
   area: z.number().min(10),
   minCapacity: z.number().min(0),
   maxCapacity: z.number().min(0),
@@ -127,6 +127,7 @@ export function NewPlaceGeneral({
                     </FormLabel>
                     <CreatableSelect
                       isMulti
+                      variant={"brand"}
                       options={typeOfPremisesOptions}
                       value={field.value}
                       onChange={(values) =>
@@ -138,7 +139,7 @@ export function NewPlaceGeneral({
                         })
                       }
                     />
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_type_of_premises_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -154,8 +155,12 @@ export function NewPlaceGeneral({
                     }
                   >
                     <FormLabel>{t("places.general_title")}</FormLabel>
-                    <Input {...field} />
-                    <FormHelperText>
+                    <Input
+                      variant={"brand"}
+                      placeholder={t("places.general_title_placeholder")}
+                      {...field}
+                    />
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_title_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -171,8 +176,12 @@ export function NewPlaceGeneral({
                     }
                   >
                     <FormLabel>{t("places.general_description")}</FormLabel>
-                    <Textarea {...field} />
-                    <FormHelperText>
+                    <Textarea
+                      variant={"brand"}
+                      placeholder={t("places.general_description_placeholder")}
+                      {...field}
+                    />
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_description_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -188,8 +197,12 @@ export function NewPlaceGeneral({
                     }
                   >
                     <FormLabel>{t("places.general_rules")}</FormLabel>
-                    <Textarea {...field} />
-                    <FormHelperText>
+                    <Textarea
+                      variant={"brand"}
+                      placeholder={t("places.general_rules_placeholder")}
+                      {...field}
+                    />
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_rules_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -223,7 +236,7 @@ export function NewPlaceGeneral({
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_area_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -256,7 +269,7 @@ export function NewPlaceGeneral({
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_min_capacity_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -289,7 +302,7 @@ export function NewPlaceGeneral({
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_max_capacity_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -308,6 +321,7 @@ export function NewPlaceGeneral({
                       {t("places.general_age_restrictions")}
                     </FormLabel>
                     <Select
+                      variant={"brand"}
                       options={ageRestrictionsOptions}
                       value={field.value}
                       onChange={(values) =>
@@ -319,7 +333,7 @@ export function NewPlaceGeneral({
                         })
                       }
                     />
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.general_age_restrictions_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>

@@ -104,7 +104,12 @@ export function NewPlaceStepper() {
         textAlign={["left", "left", "center"]}
       >
         {steps.map((step, index) => (
-          <Stack key={index} w={"auto"} display={"inline-block"}>
+          <Stack
+            key={index}
+            w={"auto"}
+            display={"inline-block"}
+            textAlign={"left"}
+          >
             <Step onClick={() => setActiveStep(index)}>
               <StepIndicator>
                 <StepStatus

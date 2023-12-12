@@ -89,7 +89,7 @@ export function NewPlacePricing({
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.pricing_rental_price_by_hour_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -121,7 +121,7 @@ export function NewPlacePricing({
                         <Radio value={"0"}>{t("places.no")}</Radio>
                       </VStack>
                     </RadioGroup>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.pricing_cleaning_fee_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -158,9 +158,6 @@ export function NewPlacePricing({
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                    <FormHelperText>
-                      {t("places.pricing_cleaning_fee_price_helper")}
-                    </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 )}

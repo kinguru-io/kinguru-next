@@ -42,7 +42,6 @@ export async function getServerSideProps(
   ctx: GetStaticPropsContext & { req: NextApiRequest; res: NextApiResponse },
 ) {
   const helpers = await ssgInit(ctx);
-  await helpers.places.all.prefetch();
   const { auth, speaker } = await redirect(ctx.req, ctx.res);
   return {
     props: {

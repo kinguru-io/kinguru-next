@@ -104,7 +104,7 @@ export function NewPlaceResources({
                             borderColor={"gray.100"}
                             mb={5}
                           />
-                          <AbsoluteCenter left={0}>
+                          <AbsoluteCenter>
                             <Button
                               variant={"primary"}
                               onClick={() =>
@@ -117,7 +117,7 @@ export function NewPlaceResources({
                                 )
                               }
                             >
-                              Remove
+                              {t("places.remove")}
                             </Button>
                           </AbsoluteCenter>
                         </Flex>

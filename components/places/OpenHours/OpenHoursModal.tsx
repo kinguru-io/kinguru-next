@@ -150,7 +150,7 @@ export function OpenHoursModal({
               setTimepickerInputs([...timepickerInputs, { start: "", end: "" }])
             }
           >
-            Add more
+            {t("places.add_more")}
           </Button>
           <Button
             variant={"primary"}

@@ -311,7 +311,7 @@ export function NewPlaceFeatures({
                         <Radio value={"0"}>{t("places.no")}</Radio>
                       </VStack>
                     </RadioGroup>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.features_parking_area_exists_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -330,6 +330,7 @@ export function NewPlaceFeatures({
                     <FormLabel>{t("places.features_parking_area")}</FormLabel>
                     <Select
                       isMulti
+                      variant={"brand"}
                       options={parkingAreaOptions}
                       value={field.value}
                       onChange={(values) =>
@@ -341,7 +342,7 @@ export function NewPlaceFeatures({
                         })
                       }
                     />
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.features_parking_area_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -375,7 +376,7 @@ export function NewPlaceFeatures({
                         <Radio value={"0"}>{t("places.no")}</Radio>
                       </VStack>
                     </RadioGroup>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.features_camera_or_audio_recoding_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -409,9 +410,6 @@ export function NewPlaceFeatures({
                         <Radio value={"0"}>{t("places.no")}</Radio>
                       </VStack>
                     </RadioGroup>
-                    <FormHelperText>
-                      {t("places.features_does_premises_have_wifi_helper")}
-                    </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -439,10 +437,7 @@ export function NewPlaceFeatures({
                               <FormLabel>
                                 {t("places.features_wifi_login")}
                               </FormLabel>
-                              <Input {...field} />
-                              <FormHelperText>
-                                {t("places.features_wifi_login_helper")}
-                              </FormHelperText>
+                              <Input variant={"brand"} {...field} />
                               <FormErrorMessage>{meta.error}</FormErrorMessage>
                             </FormControl>
                           )}
@@ -461,6 +456,7 @@ export function NewPlaceFeatures({
                               </FormLabel>
                               <InputGroup>
                                 <Input
+                                  variant={"brand"}
                                   type={showWifiPassword ? "text" : "password"}
                                   {...field}
                                 />
@@ -479,17 +475,13 @@ export function NewPlaceFeatures({
                                   </Button>
                                 </InputRightElement>
                               </InputGroup>
-
-                              <FormHelperText>
-                                {t("places.features_wifi_login_helper")}
-                              </FormHelperText>
                               <FormErrorMessage>{meta.error}</FormErrorMessage>
                             </FormControl>
                           )}
                         </Field>
                       </VStack>
                     </Card>
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.features_wifi_credentials_helper")}
                     </FormHelperText>
                   </FormControl>
@@ -506,6 +498,7 @@ export function NewPlaceFeatures({
                     <FormLabel>{t("places.features_amenities")}</FormLabel>
                     <CreatableSelect
                       isMulti
+                      variant={"brand"}
                       options={amenitiesOptions}
                       value={field.value}
                       onChange={(values) =>
@@ -517,7 +510,7 @@ export function NewPlaceFeatures({
                         })
                       }
                     />
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.features_amenities_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>

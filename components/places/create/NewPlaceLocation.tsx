@@ -108,6 +108,9 @@ export function NewPlaceLocation({
                       loadOptions={fetchSuggestions}
                       getOptionValue={({ name }) => name}
                     />
+                    <FormHelperText whiteSpace={"pre-line"}>
+                      {t("places.new_place_location_helper")}
+                    </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -136,8 +139,8 @@ export function NewPlaceLocation({
                       defaultValue={field.value ? "1" : "0"}
                     >
                       <VStack alignItems={"flex-start"}>
-                        <Radio value={"1"}>Use the same address</Radio>
-                        <Radio value={"0"}>Enter new address</Radio>
+                        <Radio value={"1"}>{t("places.yes")}</Radio>
+                        <Radio value={"0"}>{t("places.no")}</Radio>
                       </VStack>
                     </RadioGroup>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -183,7 +186,7 @@ export function NewPlaceLocation({
                       {t("places.location_route_to_premises")}
                     </FormLabel>
                     <Textarea {...field} />
-                    <FormHelperText>
+                    <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.location_route_to_premises_helper")}
                     </FormHelperText>
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
