@@ -1,3 +1,10 @@
+## [0.15.1](https://github.com/kinguru-io/kinguru-next/compare/v0.15.0...v0.15.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* place creates translation ([5574fed](https://github.com/kinguru-io/kinguru-next/commit/5574fed073ec041c836bf906b67df89d4fd9e30a))
+
 # [0.15.0](https://github.com/kinguru-io/kinguru-next/compare/v0.14.2...v0.15.0) (2023-12-12)
 
 
