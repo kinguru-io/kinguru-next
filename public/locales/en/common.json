@@ -227,6 +227,7 @@
     "main_become_speaker_next_event": "Become a speaker and keep track of all the news about your own event"
   },
   "places": {
+    "new_place_creating": "Adding a site to the platform",
     "new_place_general": "General info",
     "new_place_general_description": "Provide a basic info about your place",
     "new_place_features": "Features",
