@@ -1,3 +1,17 @@
+# [0.15.0](https://github.com/kinguru-io/kinguru-next/compare/v0.14.2...v0.15.0) (2023-12-12)
+
+
+### Bug Fixes
+
+* finalize places creation ([76ed9a5](https://github.com/kinguru-io/kinguru-next/commit/76ed9a599182235d4d244b8575c2f6a6bb19214d))
+* integrate state for places create form ([6128fe8](https://github.com/kinguru-io/kinguru-next/commit/6128fe819cfa763c89c3c8cd8a7b7dd17cf8dec9))
+
+
+### Features
+
+* add places location step ([ef5b6f3](https://github.com/kinguru-io/kinguru-next/commit/ef5b6f3fc503c1c8c65bec5fda4d2f3cea35aee4))
+* integrate places with open hours and resources ([50b2414](https://github.com/kinguru-io/kinguru-next/commit/50b24140360af93bf0b6915524bd8483af6d94f2))
+
 ## [0.14.2](https://github.com/kinguru-io/kinguru-next/compare/v0.14.1...v0.14.2) (2023-12-05)
 
 
