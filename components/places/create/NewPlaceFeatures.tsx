@@ -58,202 +58,202 @@ export function NewPlaceFeatures({
   const { t } = useLocale();
   const parkingAreaOptions = [
     {
-      value: "parking_area_options.free_on_site",
+      value: "free_on_site",
       label: t("places.parking_area_options.free_on_site"),
     },
     {
-      value: "parking_area_options.paid_on_site",
+      value: "paid_on_site",
       label: t("places.parking_area_options.paid_on_site"),
     },
     {
-      value: "parking_area_options.free_street",
+      value: "free_street",
       label: t("places.parking_area_options.free_street"),
     },
     {
-      value: "parking_area_options.paid_street",
+      value: "paid_street",
       label: t("places.parking_area_options.free_street"),
     },
     {
-      value: "parking_area_options.valet_parking",
+      value: "valet_parking",
       label: t("places.parking_area_options.valet_parking"),
     },
     {
-      value: "parking_area_options.paid_nearby",
+      value: "paid_nearby",
       label: t("places.parking_area_options.paid_nearby"),
     },
   ];
 
   const amenitiesOptions = [
     {
-      value: "amenities_options.wifi",
+      value: "wifi",
       label: t("places.amenities_options.wifi"),
     },
     {
-      value: "amenities_options.conference_phone",
+      value: "conference_phone",
       label: t("places.amenities_options.conference_phone"),
     },
     {
-      value: "amenities_options.speakers",
+      value: "speakers",
       label: t("places.amenities_options.speakers"),
     },
     {
-      value: "amenities_options.microphones",
+      value: "microphones",
       label: t("places.amenities_options.microphones"),
     },
     {
-      value: "amenities_options.video_equipment",
+      value: "video_equipment",
       label: t("places.amenities_options.video_equipment"),
     },
     {
-      value: "amenities_options.soundproofing",
+      value: "soundproofing",
       label: t("places.amenities_options.soundproofing"),
     },
     {
-      value: "amenities_options.lighting_equipment",
+      value: "lighting_equipment",
       label: t("places.amenities_options.lighting_equipment"),
     },
     {
-      value: "amenities_options.natural_light",
+      value: "natural_light",
       label: t("places.amenities_options.natural_light"),
     },
     {
-      value: "amenities_options.light_blocking_curtains",
+      value: "light_blocking_curtains",
       label: t("places.amenities_options.light_blocking_curtains"),
     },
     {
-      value: "amenities_options.projector",
+      value: "projector",
       label: t("places.amenities_options.projector"),
     },
     {
-      value: "amenities_options.screen_for_projector",
+      value: "screen_for_projector",
       label: t("places.amenities_options.screen_for_projector"),
     },
     {
-      value: "amenities_options.monitor",
+      value: "monitor",
       label: t("places.amenities_options.monitor"),
     },
     {
-      value: "amenities_options.green_screen",
+      value: "green_screen",
       label: t("places.amenities_options.green_screen"),
     },
     {
-      value: "amenities_options.magnetic_board",
+      value: "magnetic_board",
       label: t("places.amenities_options.magnetic_board"),
     },
     {
-      value: "amenities_options.chalk_board",
+      value: "chalk_board",
       label: t("places.amenities_options.chalk_board"),
     },
     {
-      value: "amenities_options.flipcharts",
+      value: "flipcharts",
       label: t("places.amenities_options.flipcharts"),
     },
     {
-      value: "amenities_options.printer",
+      value: "printer",
       label: t("places.amenities_options.printer"),
     },
     {
-      value: "amenities_options.apple_tv",
+      value: "apple_tv",
       label: t("places.amenities_options.apple_tv"),
     },
     {
-      value: "amenities_options.scene",
+      value: "scene",
       label: t("places.amenities_options.scene"),
     },
     {
-      value: "amenities_options.tables",
+      value: "tables",
       label: t("places.amenities_options.tables"),
     },
     {
-      value: "amenities_options.chairs",
+      value: "chairs",
       label: t("places.amenities_options.chairs"),
     },
     {
-      value: "amenities_options.tablecloths",
+      value: "tablecloths",
       label: t("places.amenities_options.tablecloths"),
     },
     {
-      value: "amenities_options.plates_and_cutlery",
+      value: "plates_and_cutlery",
       label: t("places.amenities_options.plates_and_cutlery"),
     },
     {
-      value: "amenities_options.kitchen",
+      value: "kitchen",
       label: t("places.amenities_options.kitchen"),
     },
     {
-      value: "amenities_options.coffee",
+      value: "coffee",
       label: t("places.amenities_options.coffee"),
     },
     {
-      value: "amenities_options.wardrobe",
+      value: "wardrobe",
       label: t("places.amenities_options.wardrobe"),
     },
     {
-      value: "amenities_options.clothes_hangers",
+      value: "clothes_hangers",
       label: t("places.amenities_options.clothes_hangers"),
     },
     {
-      value: "amenities_options.steamer",
+      value: "steamer",
       label: t("places.amenities_options.steamer"),
     },
     {
-      value: "amenities_options.restrooms",
+      value: "restrooms",
       label: t("places.amenities_options.restrooms"),
     },
     {
-      value: "amenities_options.sink",
+      value: "sink",
       label: t("places.amenities_options.sink"),
     },
     {
-      value: "amenities_options.view_windows",
+      value: "view_windows",
       label: t("places.amenities_options.view_windows"),
     },
     {
-      value: "amenities_options.dormer_windows",
+      value: "dormer_windows",
       label: t("places.amenities_options.dormer_windows"),
     },
     {
-      value: "amenities_options.attic",
+      value: "attic",
       label: t("places.amenities_options.attic"),
     },
     {
-      value: "amenities_options.meeting_room",
+      value: "meeting_room",
       label: t("places.amenities_options.meeting_room"),
     },
     {
-      value: "amenities_options.freight_elevators",
+      value: "freight_elevators",
       label: t("places.amenities_options.freight_elevators"),
     },
     {
-      value: "amenities_options.open_area",
+      value: "open_area",
       label: t("places.amenities_options.open_area"),
     },
     {
-      value: "amenities_options.access_from_street_level",
+      value: "access_from_street_level",
       label: t("places.amenities_options.access_from_street_level"),
     },
     {
-      value: "amenities_options.van_accessible",
+      value: "van_accessible",
       label: t("places.amenities_options.van_accessible"),
     },
     {
-      value: "amenities_options.parking_places",
+      value: "parking_places",
       label: t("places.amenities_options.parking_places"),
     },
     {
-      value: "amenities_options.proximity_to_public_transport",
+      value: "proximity_to_public_transport",
       label: t("places.amenities_options.proximity_to_public_transport"),
     },
     {
-      value: "amenities_options.audiovisual_specialist",
+      value: "audiovisual_specialist",
       label: t("places.amenities_options.audiovisual_specialist"),
     },
     {
-      value: "amenities_options.security",
+      value: "security",
       label: t("places.amenities_options.security"),
     },
     {
-      value: "amenities_options.cleaning_services",
+      value: "cleaning_services",
       label: t("places.amenities_options.cleaning_services"),
     },
   ];

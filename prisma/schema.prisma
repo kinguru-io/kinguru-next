@@ -264,6 +264,7 @@ model Place {
   name                   String              @default("Place")
   title                  String              @default("Place")
   description            String              @default("Description")
+  typeOfPremises         String[]
   rules                  String?             @default("Rules")
   area                   Float               @default(0)
   owner                  User                @relation(fields: [ownerId], references: [id])

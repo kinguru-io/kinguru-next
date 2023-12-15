@@ -51,6 +51,7 @@ export const placesRouter = t.router({
         ctx,
         input: {
           general: {
+            typeOfPremises,
             title,
             description,
             rules,
@@ -75,6 +76,7 @@ export const placesRouter = t.router({
       }) => {
         return ctx.prisma.place.create({
           data: {
+            typeOfPremises: typeOfPremises.map(({ value }) => value),
             title,
             description,
             rules,
