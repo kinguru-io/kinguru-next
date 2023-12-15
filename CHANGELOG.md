@@ -1,3 +1,10 @@
+## [0.15.2](https://github.com/kinguru-io/kinguru-next/compare/v0.15.1...v0.15.2) (2023-12-15)
+
+
+### Bug Fixes
+
+* add `typeOfPremise` options for place model ([9d069e7](https://github.com/kinguru-io/kinguru-next/commit/9d069e75a80e19b2833caf4c885ef2a9233a07c1))
+
 ## [0.15.1](https://github.com/kinguru-io/kinguru-next/compare/v0.15.0...v0.15.1) (2023-12-12)
 
 
