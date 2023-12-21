@@ -79,7 +79,7 @@
     "@stripe/stripe-js": "^2.2.2",
     "@tanstack/react-query": "<5",
     "@tanstack/react-query-devtools": "<5",
-    "@tanstack/react-table": "^8.11.0",
+    "@tanstack/react-table": "^8.11.2",
     "@trpc/client": "^10.44.1",
     "@trpc/next": "^10.44.1",
     "@trpc/react-query": "^10.44.1",
