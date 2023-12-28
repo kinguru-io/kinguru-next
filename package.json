@@ -87,7 +87,7 @@
     "chakra-react-select": "^4.7.6",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.16",
-    "i18next": "^23.7.11",
+    "i18next": "^23.7.12",
     "mapbox-gl": "^3.0.1",
     "micro": "^10.0.1",
     "moment": "^2.30.1",
