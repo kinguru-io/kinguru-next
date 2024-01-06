@@ -44,7 +44,6 @@
     }
   },
   "include": [
-    ".projenrc.js",
     "pages/**/*.ts",
     "test/**/*.ts",
     "process.d.ts",

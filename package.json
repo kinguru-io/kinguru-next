@@ -48,7 +48,7 @@
     "eslint-plugin-prettier": "^5.1.2",
     "prettier": "^3.1.1",
     "prisma": "^5.7.1",
-    "projen": "^0.78.8",
+    "projen": "^0.78.10",
     "semantic-release-plus": "^20.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
@@ -86,7 +86,7 @@
     "@trpc/server": "^10.45.0",
     "chakra-react-select": "^4.7.6",
     "formik": "^2.4.5",
-    "framer-motion": "^10.17.6",
+    "framer-motion": "^10.17.9",
     "i18next": "^23.7.16",
     "mapbox-gl": "^3.0.1",
     "micro": "^10.0.1",
