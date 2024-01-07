@@ -20,3 +20,4 @@ tsconfig.tsbuildinfo
 /.eslintrc.json
 /.next/
 /.gitattributes
+/.projenrc.ts
