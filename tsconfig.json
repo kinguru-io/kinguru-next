@@ -28,7 +28,7 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "target": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "jsx": "preserve",
     "allowJs": true,
@@ -36,13 +36,18 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
-    "allowImportingTsExtensions": true,
-    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
       "@/*": [
         "*"
       ]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "baseUrl": "."
   },
   "include": [
     "pages/**/*.ts",
