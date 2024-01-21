@@ -4,15 +4,15 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useLocale } from "@/utils/use-locale.ts";
 
 export default function CheckoutForm({
   succeedRefetch,
 }: {
   succeedRefetch: () => void;
 }) {
-  const { t } = useLocale();
+  const t = useTranslations();
   const stripe = useStripe();
   const elements = useElements();
 
