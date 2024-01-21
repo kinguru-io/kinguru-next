@@ -4,11 +4,9 @@ import { Link } from "@/navigation.ts";
 export const NavLink = ({
   children,
   href,
-  locale,
 }: {
   href: string;
   children: React.ReactNode;
-  locale?: string;
 }) => {
   return (
     <Box
@@ -21,7 +19,6 @@ export const NavLink = ({
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
       href={href}
-      locale={locale}
     >
       {children}
     </Box>

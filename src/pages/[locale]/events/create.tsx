@@ -4,15 +4,15 @@ import {
   NextApiRequest,
   NextApiResponse,
 } from "next/types";
+import { useTranslations } from "next-intl";
 import { NewEventStepper } from "@/components/events/create";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
-import { useLocale } from "@/utils/use-locale.ts";
 
 export default function EventCreate() {
-  const { t } = useLocale();
+  const t = useTranslations();
   return (
     <>
       <Head>

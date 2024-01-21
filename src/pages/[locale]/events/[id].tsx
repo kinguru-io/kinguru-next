@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 import {
   EventCommentsSection,
   EventDetailsSection,
@@ -13,7 +14,6 @@ import { Navbar } from "@/components/navbar";
 import { locales } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 import { ssgInit } from "@/server/ssg-init.ts";
-import { useLocale } from "@/utils/use-locale.ts";
 
 export default function EventDetails({
   topic,
@@ -24,7 +24,7 @@ export default function EventDetails({
   description: string;
   poster: string;
 }) {
-  const { t } = useLocale();
+  const t = useTranslations();
   const router = useRouter();
   const eventId =
     !router.query.id || router.query.id instanceof Array ? "" : router.query.id;
