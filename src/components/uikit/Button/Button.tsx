@@ -8,7 +8,7 @@ export type Button = {
 const BUTTON_STYLES = stylex.create({
   base: {
     padding: "10px",
-    border: 0,
+    borderStyle: "none",
     cursor: "pointer",
   },
   primary: {

@@ -1,10 +1,10 @@
 import { Avatar, Container, Flex, Heading } from "@chakra-ui/react";
 import Flicking from "@egjs/react-flicking";
+import { useTranslations } from "next-intl";
 import { useInView } from "react-intersection-observer";
 import { Stripes } from "@/components/common/stripes";
 import { trpc } from "@/utils/trpc.ts";
 import "@egjs/react-flicking/dist/flicking.css";
-import { useTranslations } from "next-intl";
 
 export const EventGuestsSection = ({ eventId }: { eventId: string }) => {
   const t = useTranslations();
