@@ -1,4 +1,5 @@
-import withNextIntl from 'next-intl/plugin';
+const withNextIntl = require("next-intl/plugin");
+const stylexPlugin = require("@stylexjs/nextjs-plugin");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -33,6 +34,11 @@ const nextConfig = {
     elasticSearchEndpoint: process.env.ELASTICSEARCH_ENDPOINT,
   },
   productionBrowserSourceMaps: true,
+  transpilePackages: ["@stylexjs/open-props"],
 };
 
-export default withNextIntl()(nextConfig);
+module.exports = withNextIntl()(
+  stylexPlugin({
+    rootDir: __dirname,
+  })(nextConfig),
+);

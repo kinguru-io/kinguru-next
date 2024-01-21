@@ -203,6 +203,22 @@
       "type": "runtime"
     },
     {
+      "name": "@stylexjs/eslint-plugin",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/nextjs-plugin",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/open-props",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/stylex",
+      "type": "runtime"
+    },
+    {
       "name": "@tanstack/react-query-devtools",
       "version": "<5",
       "type": "runtime"

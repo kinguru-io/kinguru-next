@@ -159,6 +159,11 @@ const project = new web.NextJsTypeScriptProject({
     "react-intersection-observer",
     "react-cookie-consent",
 
+    "@stylexjs/stylex",
+    "@stylexjs/nextjs-plugin",
+    "@stylexjs/eslint-plugin",
+    "@stylexjs/open-props",
+
     "stripe",
     "@stripe/stripe-js",
     "@stripe/react-stripe-js",
@@ -191,10 +196,13 @@ const project = new web.NextJsTypeScriptProject({
 project.defaultTask?.reset(
   'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
 );
-project.tryFindObjectFile("package.json")?.addOverride("type", "module");
 project.postCompileTask.exec(
-  "npx next-sitemap --config next-sitemap.config.cjs",
+  "npx next-sitemap --config next-sitemap.config.js",
 );
+project.eslint?.addPlugins("@stylexjs");
+project.eslint?.addRules({
+  "@stylexjs/valid-styles": ["error"],
+});
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();
 

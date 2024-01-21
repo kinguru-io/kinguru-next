@@ -1,4 +1,6 @@
-import { Providers } from "@/app/[locale]/providers.tsx";
+import "../globals.css";
+import * as stylex from "@stylexjs/stylex";
+import { globalTokens as $ } from "../globalTokens.stylex.ts";
 
 export const metadata = {
   title: "Next.js",
@@ -15,8 +17,27 @@ export default function RootLayout({
   };
 }) {
   return (
-    <html lang={locale}>
-      <Providers>{children}</Providers>
+    <html {...stylex.props(styles.html, styles.reset)} lang={locale}>
+      <body {...stylex.props(styles.reset, styles.body)}>{children}</body>
     </html>
   );
 }
+
+const DARK = "@media (prefers-color-scheme: dark)";
+const styles = stylex.create({
+  html: {
+    colorScheme: "light dark",
+  },
+  reset: {
+    minHeight: "100%",
+    margin: 0,
+    padding: 0,
+  },
+  body: {
+    color: `rgba(${$.foregroundR}, ${$.foregroundG}, ${$.foregroundB}, 1)`,
+    backgroundImage: {
+      default: "linear-gradient(to bottom, rgb(214, 219, 220), white)",
+      [DARK]: "linear-gradient(to bottom, rgb(20, 22, 27), black)",
+    },
+  },
+});

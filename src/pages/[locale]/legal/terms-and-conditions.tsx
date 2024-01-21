@@ -17,11 +17,13 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useLocale } from "@/utils/use-locale.ts";
+import { GetStaticPropsContext } from "next/types";
+import { useTranslations } from "next-intl";
+import { staticPaths } from "@/navigation.ts";
 import logo from "~/public/img/logo_rounded.png";
 
 export default function PrivacyPolicyPage() {
-  const { t } = useLocale();
+  const t = useTranslations();
   return (
     <Container maxW={["full", "80%", "70%", "50%"]} py={10}>
       <Head>
@@ -863,4 +865,20 @@ export default function PrivacyPolicyPage() {
       </Accordion>
     </Container>
   );
+}
+
+export async function getStaticProps({ params }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`~/public/locales/${params?.locale}/common.json`))
+        .default,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: staticPaths,
+    fallback: false,
+  };
 }
