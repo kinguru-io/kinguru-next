@@ -1,3 +1,10 @@
+# [0.16.0](https://github.com/kinguru-io/kinguru-next/compare/v0.15.2...v0.16.0) (2024-01-21)
+
+
+### Features
+
+* move from pages router to app router ([#334](https://github.com/kinguru-io/kinguru-next/issues/334)) ([c40ba4f](https://github.com/kinguru-io/kinguru-next/commit/c40ba4f7c6bc00ba417c921373699e4b31f4e296))
+
 ## [0.15.2](https://github.com/kinguru-io/kinguru-next/compare/v0.15.1...v0.15.2) (2023-12-15)
 
 
