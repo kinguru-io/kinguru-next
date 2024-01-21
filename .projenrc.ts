@@ -1,9 +1,9 @@
-import * as fs from "fs";
-import { web } from "projen";
-import {
+const fs = require("fs");
+const { web } = require("projen");
+const {
   NodePackageManager,
   TypeScriptModuleResolution,
-} from "projen/lib/javascript";
+} = require("projen/lib/javascript");
 
 const project = new web.NextJsTypeScriptProject({
   name: "kinguru-next",
