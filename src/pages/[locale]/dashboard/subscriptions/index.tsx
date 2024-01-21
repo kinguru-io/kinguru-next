@@ -8,7 +8,6 @@ import { Sidebar } from "@/components/dashboard";
 import { FooterSection } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { PlanComponent } from "@/components/pricing/plans";
-import { staticPaths } from "@/navigation.ts";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
 
@@ -36,7 +35,7 @@ export default function Subscriptions() {
   );
 }
 
-export async function getStaticProps({
+export async function getServerSideProps({
   params,
   req,
   res,
@@ -50,12 +49,5 @@ export async function getStaticProps({
       trpcState: helpers.dehydrate(),
     },
     ...auth(),
-  };
-}
-
-export async function getStaticPaths() {
-  return {
-    paths: staticPaths,
-    fallback: false,
   };
 }
