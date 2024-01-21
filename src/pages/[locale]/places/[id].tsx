@@ -1,6 +1,8 @@
+import { GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { GetStaticPropsContext } from "next/types";
-import { staticPaths } from "@/navigation.ts";
+import { locales } from "@/navigation.ts";
+import prisma from "@/server/prisma.ts";
 import { ssgInit } from "@/server/ssg-init.ts";
 
 export default function PlaceDetails() {
@@ -19,9 +21,23 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
   };
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const events = await prisma.place.findMany({
+    select: {
+      id: true,
+    },
+  });
   return {
-    paths: staticPaths,
-    fallback: false,
+    paths: locales
+      .map((locale) =>
+        events.map((event) => ({
+          params: {
+            id: event.id,
+            locale,
+          },
+        })),
+      )
+      .flat(),
+    fallback: "blocking",
   };
-}
+};

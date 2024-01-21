@@ -44,9 +44,6 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=\${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV`,
     },
     {
-      run: `echo "I18NEXT_DEFAULT_CONFIG_PATH=./next-i18next.config.cjs" >> $GITHUB_ENV`,
-    },
-    {
       uses: "vbem/kubeconfig4sa@v1",
       with: {
         server:
