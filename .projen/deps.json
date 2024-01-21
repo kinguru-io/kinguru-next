@@ -245,10 +245,6 @@
       "type": "runtime"
     },
     {
-      "name": "i18next",
-      "type": "runtime"
-    },
-    {
       "name": "mapbox-gl",
       "type": "runtime"
     },
@@ -269,7 +265,7 @@
       "type": "runtime"
     },
     {
-      "name": "next-i18next",
+      "name": "next-intl",
       "type": "runtime"
     },
     {
@@ -298,10 +294,6 @@
     },
     {
       "name": "react-dom",
-      "type": "runtime"
-    },
-    {
-      "name": "react-i18next",
       "type": "runtime"
     },
     {

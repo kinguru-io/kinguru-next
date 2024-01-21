@@ -30,11 +30,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/package-lock.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/global.d.ts ./
-COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.node.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/src/instrumentation.node.ts ./src
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
 COPY --from=builder --chown=nextjs:nodejs /app/next-env.d.ts ./
-COPY --from=builder --chown=nextjs:nodejs /app/next-i18next.config.cjs ./
 COPY --from=builder --chown=nextjs:nodejs /app/nextauth.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma

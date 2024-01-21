@@ -28,7 +28,7 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "target": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "preserve",
     "allowJs": true,
@@ -43,6 +43,9 @@
     ],
     "paths": {
       "@/*": [
+        "./src/*"
+      ],
+      "~/*": [
         "*"
       ]
     },
@@ -55,7 +58,8 @@
     "next-env.d.ts",
     "next-auth.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "server/generated"
