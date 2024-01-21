@@ -203,6 +203,22 @@
       "type": "runtime"
     },
     {
+      "name": "@stylexjs/eslint-plugin",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/nextjs-plugin",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/open-props",
+      "type": "runtime"
+    },
+    {
+      "name": "@stylexjs/stylex",
+      "type": "runtime"
+    },
+    {
       "name": "@tanstack/react-query-devtools",
       "version": "<5",
       "type": "runtime"
@@ -245,10 +261,6 @@
       "type": "runtime"
     },
     {
-      "name": "i18next",
-      "type": "runtime"
-    },
-    {
       "name": "mapbox-gl",
       "type": "runtime"
     },
@@ -269,7 +281,7 @@
       "type": "runtime"
     },
     {
-      "name": "next-i18next",
+      "name": "next-intl",
       "type": "runtime"
     },
     {
@@ -298,10 +310,6 @@
     },
     {
       "name": "react-dom",
-      "type": "runtime"
-    },
-    {
-      "name": "react-i18next",
       "type": "runtime"
     },
     {

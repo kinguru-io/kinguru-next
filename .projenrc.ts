@@ -1,5 +1,9 @@
-import { web } from "projen";
-import { NodePackageManager } from "projen/lib/javascript";
+const fs = require("fs");
+const { web } = require("projen");
+const {
+  NodePackageManager,
+  TypeScriptModuleResolution,
+} = require("projen/lib/javascript");
 
 const project = new web.NextJsTypeScriptProject({
   name: "kinguru-next",
@@ -38,9 +42,6 @@ const project = new web.NextJsTypeScriptProject({
     },
     {
       run: `echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=\${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV`,
-    },
-    {
-      run: `echo "I18NEXT_DEFAULT_CONFIG_PATH=./next-i18next.config.cjs" >> $GITHUB_ENV`,
     },
     {
       uses: "vbem/kubeconfig4sa@v1",
@@ -82,6 +83,7 @@ const project = new web.NextJsTypeScriptProject({
       baseUrl: ".",
       rootDir: ".",
       module: "esnext",
+      moduleResolution: TypeScriptModuleResolution.NODE,
       forceConsistentCasingInFileNames: true,
       noEmit: true,
       esModuleInterop: true,
@@ -91,7 +93,8 @@ const project = new web.NextJsTypeScriptProject({
       skipLibCheck: true,
       strictNullChecks: true,
       paths: {
-        "@/*": ["*"],
+        "@/*": ["./src/*"],
+        "~/*": ["*"],
       },
     },
     include: [
@@ -100,6 +103,7 @@ const project = new web.NextJsTypeScriptProject({
       "next-auth.d.ts",
       "**/*.ts",
       "**/*.tsx",
+      ".next/types/**/*.ts",
     ],
     exclude: ["server/generated"],
   },
@@ -121,10 +125,8 @@ const project = new web.NextJsTypeScriptProject({
     "zod",
     "superjson",
     "next-s3-upload",
-    "next-i18next",
     "next-sitemap",
-    "react-i18next",
-    "i18next",
+    "next-intl",
     "nodemailer",
     "@chakra-ui/react",
     "@chakra-ui/next-js",
@@ -153,6 +155,11 @@ const project = new web.NextJsTypeScriptProject({
     "react-simple-star-rating",
     "react-intersection-observer",
     "react-cookie-consent",
+
+    "@stylexjs/stylex",
+    "@stylexjs/nextjs-plugin",
+    "@stylexjs/eslint-plugin",
+    "@stylexjs/open-props",
 
     "stripe",
     "@stripe/stripe-js",
@@ -186,13 +193,14 @@ const project = new web.NextJsTypeScriptProject({
 project.defaultTask?.reset(
   'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
 );
-project.tryFindObjectFile("package.json")?.addOverride("type", "module");
-project.compileTask.env(
-  "I18NEXT_DEFAULT_CONFIG_PATH",
-  "./next-i18next.config.cjs",
-);
 project.postCompileTask.exec(
-  "npx next-sitemap --config next-sitemap.config.cjs",
+  "npx next-sitemap --config next-sitemap.config.js",
 );
+project.eslint?.addPlugins("@stylexjs");
+project.eslint?.addRules({
+  "@stylexjs/valid-styles": ["error"],
+});
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.synth();
+
+fs.rmSync("./pages", { recursive: true, force: true });

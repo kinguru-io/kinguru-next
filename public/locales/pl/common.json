@@ -54,7 +54,8 @@
     "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
-    "create_event": "Create event"
+    "create_event": "Create event",
+    "create_place": "Create a place"
   },
   "events": {
     "upcoming_events": "Upcoming events",
@@ -127,7 +128,8 @@
     "description": "Leave your contacts - and we will send you an invitation to the topic you are interested in",
     "subscribe": "Subscribe to updates",
     "email": "Email",
-    "name": "Name"
+    "name": "Name",
+    "invalid_email": "Invalid email address"
   },
   "works": {
     "how_it_works": "How the platform works",
