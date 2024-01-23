@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/kinguru-io/kinguru-next/compare/v0.16.0...v0.17.0) (2024-01-23)
+
+
+### Features
+
+* migrate from stylex to panda css library ([#340](https://github.com/kinguru-io/kinguru-next/issues/340)) ([acb2c28](https://github.com/kinguru-io/kinguru-next/commit/acb2c289b5bd912bc69bfba79e2fa939628b721d))
+
 # [0.16.0](https://github.com/kinguru-io/kinguru-next/compare/v0.15.2...v0.16.0) (2024-01-21)
 
 
