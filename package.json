@@ -88,7 +88,7 @@
     "@trpc/server": "^10.45.0",
     "chakra-react-select": "^4.7.6",
     "formik": "^2.4.5",
-    "framer-motion": "^10.18.0",
+    "framer-motion": "^11.0.2",
     "mapbox-gl": "^3.1.0",
     "micro": "^10.0.1",
     "moment": "^2.30.1",
