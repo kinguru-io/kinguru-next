@@ -107,7 +107,13 @@ const project = new web.NextJsTypeScriptProject({
     ],
     exclude: ["server/generated"],
   },
-  gitignore: [".env", "prisma/sqlite", "public/robots.txt", "public/sitemap*"],
+  gitignore: [
+    ".env",
+    "prisma/sqlite",
+    "public/robots.txt",
+    "public/sitemap*",
+    "styled-system",
+  ],
 
   minNodeVersion: "20.9.0",
   packageManager: NodePackageManager.NPM,
@@ -156,11 +162,6 @@ const project = new web.NextJsTypeScriptProject({
     "react-intersection-observer",
     "react-cookie-consent",
 
-    "@stylexjs/stylex",
-    "@stylexjs/nextjs-plugin",
-    "@stylexjs/eslint-plugin",
-    "@stylexjs/open-props",
-
     "stripe",
     "@stripe/stripe-js",
     "@stripe/react-stripe-js",
@@ -176,6 +177,7 @@ const project = new web.NextJsTypeScriptProject({
     "@opentelemetry/resources",
   ],
   devDeps: [
+    "@pandacss/dev",
     "prisma",
     "@faker-js/faker",
     "@types/gtag.js",
@@ -196,11 +198,8 @@ project.defaultTask?.reset(
 project.postCompileTask.exec(
   "npx next-sitemap --config next-sitemap.config.js",
 );
-project.eslint?.addPlugins("@stylexjs");
-project.eslint?.addRules({
-  "@stylexjs/valid-styles": ["error"],
-});
 project.eslint?.addExtends("plugin:@next/next/recommended");
+project.addScripts({ prepare: "panda codegen" });
 project.synth();
 
 fs.rmSync("./pages", { recursive: true, force: true });

@@ -18,7 +18,8 @@
     "test": "npx projen test",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
-    "projen": "npx projen"
+    "projen": "npx projen",
+    "prepare": "panda codegen"
   },
   "author": {
     "name": "Maksim Yersh",
@@ -29,6 +30,7 @@
     "@faker-js/faker": "^8.3.1",
     "@google/semantic-release-replace-plugin": "1.2.0",
     "@next/eslint-plugin-next": "^14.1.0",
+    "@pandacss/dev": "^0.27.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/git": "^10.0.1",
@@ -77,10 +79,6 @@
     "@prisma/instrumentation": "^5.8.1",
     "@stripe/react-stripe-js": "^2.4.0",
     "@stripe/stripe-js": "^2.4.0",
-    "@stylexjs/eslint-plugin": "^0.4.1",
-    "@stylexjs/nextjs-plugin": "^0.4.1",
-    "@stylexjs/open-props": "^0.4.1",
-    "@stylexjs/stylex": "^0.4.1",
     "@tanstack/react-query": "<5",
     "@tanstack/react-query-devtools": "<5",
     "@tanstack/react-table": "^8.11.7",

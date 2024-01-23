@@ -7,8 +7,7 @@
   "root": true,
   "plugins": [
     "@typescript-eslint",
-    "import",
-    "@stylexjs"
+    "import"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -126,9 +125,6 @@
           "method"
         ]
       }
-    ],
-    "@stylexjs/valid-styles": [
-      "error"
     ]
   },
   "overrides": [

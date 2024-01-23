@@ -1,28 +1,23 @@
-import * as stylex from "@stylexjs/stylex";
-import { ComponentProps, FC } from "react";
+import { cva } from "~/styled-system/css";
+import { styled } from "~/styled-system/jsx";
 
-export type Button = {
-  variant?: "primary" | "danger";
-} & ComponentProps<"button">;
-
-const BUTTON_STYLES = stylex.create({
+export const button = cva({
   base: {
-    padding: "10px",
-    borderStyle: "none",
-    cursor: "pointer",
+    fontWeight: "medium",
+    borderRadius: "md",
   },
-  primary: {
-    background: "blue",
-  },
-  danger: {
-    background: "red",
+  variants: {
+    status: {
+      default: {
+        color: "white",
+        bg: "gray.500",
+      },
+      success: {
+        color: "white",
+        bg: "green.500",
+      },
+    },
   },
 });
 
-export const Button: FC<Button> = ({ children, variant = "primary" }) => {
-  return (
-    <button {...stylex.props(BUTTON_STYLES.base, BUTTON_STYLES[variant])}>
-      {children}
-    </button>
-  );
-};
+export const Button = styled("button", button);

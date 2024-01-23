@@ -14,6 +14,10 @@
       "type": "build"
     },
     {
+      "name": "@pandacss/dev",
+      "type": "build"
+    },
+    {
       "name": "@semantic-release/changelog",
       "type": "build"
     },
@@ -200,22 +204,6 @@
     },
     {
       "name": "@stripe/stripe-js",
-      "type": "runtime"
-    },
-    {
-      "name": "@stylexjs/eslint-plugin",
-      "type": "runtime"
-    },
-    {
-      "name": "@stylexjs/nextjs-plugin",
-      "type": "runtime"
-    },
-    {
-      "name": "@stylexjs/open-props",
-      "type": "runtime"
-    },
-    {
-      "name": "@stylexjs/stylex",
       "type": "runtime"
     },
     {
