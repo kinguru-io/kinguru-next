@@ -113,6 +113,7 @@ const project = new web.NextJsTypeScriptProject({
     "public/robots.txt",
     "public/sitemap*",
     "styled-system",
+    "storybook-static",
   ],
 
   minNodeVersion: "20.9.0",
@@ -178,6 +179,19 @@ const project = new web.NextJsTypeScriptProject({
   ],
   devDeps: [
     "@pandacss/dev",
+
+    "tsconfig-paths-webpack-plugin",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-links",
+    "@storybook/addon-onboarding",
+    "@storybook/blocks",
+    "@storybook/nextjs",
+    "@storybook/react",
+    "@storybook/test",
+    "eslint-plugin-storybook",
+    "storybook",
+
     "prisma",
     "@faker-js/faker",
     "@types/gtag.js",
@@ -200,6 +214,8 @@ project.postCompileTask.exec(
 );
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.addScripts({ prepare: "panda codegen" });
+project.addScripts({ storybook: "storybook dev -p 6006" });
+project.addScripts({ "build-storybook": "storybook build" });
 project.synth();
 
 fs.rmSync("./pages", { recursive: true, force: true });
