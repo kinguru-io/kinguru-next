@@ -35,6 +35,7 @@ jspm_packages/
 prisma/sqlite
 public/robots.txt
 public/sitemap*
+styled-system
 !/.github/workflows/build.yml
 !/.mergify.yml
 !/.github/workflows/upgrade.yml

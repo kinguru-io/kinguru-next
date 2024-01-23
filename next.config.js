@@ -1,5 +1,4 @@
 const withNextIntl = require("next-intl/plugin");
-const stylexPlugin = require("@stylexjs/nextjs-plugin");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -37,8 +36,4 @@ const nextConfig = {
   transpilePackages: ["@stylexjs/open-props"],
 };
 
-module.exports = withNextIntl()(
-  stylexPlugin({
-    rootDir: __dirname,
-  })(nextConfig),
-);
+module.exports = withNextIntl()(nextConfig);

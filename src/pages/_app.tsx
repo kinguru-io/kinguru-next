@@ -11,6 +11,7 @@ import { theme } from "@/components/theme";
 import * as gtag from "@/utils/gtag.ts";
 import { trpc } from "@/utils/trpc";
 import "@/components/styles.css";
+import "./globals.css";
 
 const handleDeclineCookie = () => {
   Cookies.remove("_ga");
@@ -63,7 +64,7 @@ function MainApp({
         timeZone="Europe/Vienna"
       >
         <SessionProvider session={pageProps.session}>
-          <ChakraProvider theme={theme}>
+          <ChakraProvider theme={theme} resetCSS={false}>
             <Component {...pageProps} />
             <CookieConsent
               disableButtonStyles={true}
