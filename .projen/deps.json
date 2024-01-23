@@ -34,6 +34,38 @@
       "type": "build"
     },
     {
+      "name": "@storybook/addon-essentials",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/addon-interactions",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/addon-links",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/addon-onboarding",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/blocks",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/nextjs",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/react",
+      "type": "build"
+    },
+    {
+      "name": "@storybook/test",
+      "type": "build"
+    },
+    {
       "name": "@types/gtag.js",
       "type": "build"
     },
@@ -86,6 +118,10 @@
       "type": "build"
     },
     {
+      "name": "eslint-plugin-storybook",
+      "type": "build"
+    },
+    {
       "name": "eslint",
       "version": "^8",
       "type": "build"
@@ -107,7 +143,15 @@
       "type": "build"
     },
     {
+      "name": "storybook",
+      "type": "build"
+    },
+    {
       "name": "ts-node",
+      "type": "build"
+    },
+    {
+      "name": "tsconfig-paths-webpack-plugin",
       "type": "build"
     },
     {
