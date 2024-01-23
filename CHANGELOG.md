@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/kinguru-io/kinguru-next/compare/v0.17.0...v0.18.0) (2024-01-23)
+
+
+### Features
+
+* **KINGU-50:** add initial setup for storybook ([#343](https://github.com/kinguru-io/kinguru-next/issues/343)) ([2dd9307](https://github.com/kinguru-io/kinguru-next/commit/2dd93075e2a5a0084474d47fa1288b0e3ab758c2))
+
 # [0.17.0](https://github.com/kinguru-io/kinguru-next/compare/v0.16.0...v0.17.0) (2024-01-23)
 
 
