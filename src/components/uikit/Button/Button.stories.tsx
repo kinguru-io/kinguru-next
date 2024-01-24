@@ -1,7 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { FaAccessibleIcon } from "react-icons/fa6";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Button } from "@/components/uikit";
 
 const meta = {
