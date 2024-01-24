@@ -1,8 +1,5 @@
 FROM node:20-alpine as builder
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm i
-COPY . .
 
 ARG SITE_URL
 ARG DATABASE_URL
@@ -14,6 +11,8 @@ ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV NODE_ENV="production"
 ENV NEXT_TELEMETRY_DISABLED 1
 
+COPY . .
+RUN npm i
 RUN npx prisma generate
 RUN npx prisma migrate deploy
 RUN npm run build
