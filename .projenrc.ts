@@ -212,7 +212,7 @@ project.postCompileTask.exec(
   "npx next-sitemap --config next-sitemap.config.js",
 );
 project.eslint?.addExtends("plugin:@next/next/recommended");
-project.addScripts({ prepare: "panda codegen" });
+project.addScripts({ prepare: "npx panda codegen" });
 project.addScripts({ storybook: "storybook dev -p 6006" });
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
 project.synth();

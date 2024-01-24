@@ -19,7 +19,7 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
-    "prepare": "panda codegen",
+    "prepare": "npx panda codegen",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook"
   },
