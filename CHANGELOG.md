@@ -1,3 +1,10 @@
+## [0.18.1](https://github.com/kinguru-io/kinguru-next/compare/v0.18.0...v0.18.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* panda-css package script ([7dbf813](https://github.com/kinguru-io/kinguru-next/commit/7dbf8136013debf50606fe8fff2fb8c4d7932df4))
+
 # [0.18.0](https://github.com/kinguru-io/kinguru-next/compare/v0.17.0...v0.18.0) (2024-01-23)
 
 
