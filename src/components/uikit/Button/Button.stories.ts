@@ -11,7 +11,19 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    backgroundColor: { control: "color" },
+    variant: {
+      description: "default | unfilled",
+      options: ["default", "unfilled"],
+      control: { type: "radio" },
+    },
+    size: {
+      description: "sm | ...",
+      options: ["sm"],
+      control: { type: "radio" },
+    },
+    disabled: {
+      control: "boolean",
+    },
   },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
@@ -19,30 +31,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    status: "default",
-    children: "Hello",
+    variant: "default",
+    children: "Подробнее",
   },
 };
 
-export const Secondary: Story = {
+export const Unfilled: Story = {
   args: {
-    status: "default",
-    children: "Hello",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    status: "default",
-    children: "Hello",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    status: "default",
-    children: "Hello",
+    variant: "unfilled",
+    children: "Показать все направления",
   },
 };
