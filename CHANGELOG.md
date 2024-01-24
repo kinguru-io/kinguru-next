@@ -1,3 +1,10 @@
+## [0.18.2](https://github.com/kinguru-io/kinguru-next/compare/v0.18.1...v0.18.2) (2024-01-24)
+
+
+### Bug Fixes
+
+* package lock mutation ([d525d47](https://github.com/kinguru-io/kinguru-next/commit/d525d47e5b19042e332b968c371fee8854f19477))
+
 ## [0.18.1](https://github.com/kinguru-io/kinguru-next/compare/v0.18.0...v0.18.1) (2024-01-24)
 
 
