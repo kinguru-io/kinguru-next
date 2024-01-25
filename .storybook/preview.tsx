@@ -14,7 +14,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <main className={NotoSans.variable}>
+      <main>
+        <style>
+          {`
+            :root {
+              --font-noto-sans: ${NotoSans.style.fontFamily};
+            }
+          `}
+        </style>
         <Story />
       </main>
     ),
