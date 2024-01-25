@@ -344,7 +344,7 @@ model PlaceResource {
 model Organization {
   id             String   @id @default(cuid())
   name           String
-  foudationDate  DateTime @db.Date
+  foundationDate DateTime @db.Date
   requisites     String   
   aboutCompany   String
   activitySphere String
