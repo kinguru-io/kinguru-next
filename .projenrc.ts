@@ -208,6 +208,7 @@ const project = new web.NextJsTypeScriptProject({
 project.defaultTask?.reset(
   'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
 );
+project.preCompileTask.exec("npx prisma generate");
 project.postCompileTask.exec(
   "npx next-sitemap --config next-sitemap.config.js",
 );
