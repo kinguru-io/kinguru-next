@@ -80,6 +80,11 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
+                    foudationDate: faker.date.past(),
+                    requisites: faker.location.streetAddress(),
+                    aboutCompany: faker.company.catchPhrase(),
+                    activitySphere: faker.company.buzzPhrase(),
+                    logotype: faker.image.avatar(),
                   },
                 },
                 resources: {
