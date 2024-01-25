@@ -16,6 +16,9 @@ export default defineConfig({
   theme: {
     extend: {
       tokens: {
+        fonts: {
+          noto: { value: "var(--font-noto-sans), sans-serif" },
+        },
         colors: {
           "yellow.1": { value: "#FFD800" },
           "yellow.2": { value: "#FFE44D" },

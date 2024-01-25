@@ -8,8 +8,11 @@ import { NextIntlClientProvider } from "next-intl";
 import { useEffect } from "react";
 import CookieConsent, { Cookies } from "react-cookie-consent";
 import { theme } from "@/components/theme";
+import { NotoSans } from "@/fontLoader.ts";
 import * as gtag from "@/utils/gtag.ts";
 import { trpc } from "@/utils/trpc";
+import { css } from "~/styled-system/css";
+
 import "@/components/styles.css";
 import "./globals.css";
 
@@ -38,7 +41,14 @@ function MainApp({
     };
   }, [router.events]);
   return (
-    <main>
+    <>
+      <style jsx global>
+        {`
+          :root {
+            --font-noto-sans: ${NotoSans.style.fontFamily};
+          }
+        `}
+      </style>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
@@ -65,31 +75,33 @@ function MainApp({
       >
         <SessionProvider session={pageProps.session}>
           <ChakraProvider theme={theme} resetCSS={false}>
-            <Component {...pageProps} />
-            <CookieConsent
-              disableButtonStyles={true}
-              ButtonComponent={Button}
-              buttonWrapperClasses={"flex"}
-              customButtonProps={{
-                variant: "primary",
-                color: "black",
-                mr: 3,
-              }}
-              customDeclineButtonProps={{
-                variant: "secondary",
-                color: "black",
-                mr: 3,
-              }}
-              enableDeclineButton
-              onDecline={handleDeclineCookie}
-            >
-              This website uses cookies to enhance the user experience.
-            </CookieConsent>
+            <main className={css({ fontFamily: "noto" })}>
+              <Component {...pageProps} />
+              <CookieConsent
+                disableButtonStyles={true}
+                ButtonComponent={Button}
+                buttonWrapperClasses={"flex"}
+                customButtonProps={{
+                  variant: "primary",
+                  color: "black",
+                  mr: 3,
+                }}
+                customDeclineButtonProps={{
+                  variant: "secondary",
+                  color: "black",
+                  mr: 3,
+                }}
+                enableDeclineButton
+                onDecline={handleDeclineCookie}
+              >
+                This website uses cookies to enhance the user experience.
+              </CookieConsent>
+            </main>
           </ChakraProvider>
           <ReactQueryDevtools initialIsOpen />
         </SessionProvider>
       </NextIntlClientProvider>
-    </main>
+    </>
   );
 }
 
