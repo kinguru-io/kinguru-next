@@ -342,7 +342,12 @@ model PlaceResource {
 }
 
 model Organization {
-  id     String  @id @default(cuid())
-  name   String
-  places Place[]
+  id             String   @id @default(cuid())
+  name           String
+  foudationDate  DateTime @db.Date
+  requisites     String   
+  aboutCompany   String
+  activitySphere String
+  logotype       String?
+  places         Place[]
 }
