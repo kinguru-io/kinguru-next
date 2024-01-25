@@ -13,7 +13,13 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      tokens: {
+        fonts: {
+          noto: { value: "var(--font-noto-sans), sans-serif" },
+        },
+      },
+    },
   },
 
   // The output directory for your css system
