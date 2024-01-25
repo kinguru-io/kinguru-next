@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import { publicProcedure, t } from "../trpc";
 
-const profileProgressMap: Record<keyof User, number> = {
+export const profileProgressMap: Record<keyof User, number> = {
   country: 5,
   city: 5,
   birthdate: 5,
