@@ -345,9 +345,21 @@ model Organization {
   id             String   @id @default(cuid())
   name           String
   foundationDate DateTime @db.Date
-  requisites     String   
+  requisitesUrl  String   
   aboutCompany   String
-  activitySphere String
+  activitySphere String[]
   logotype       String?
   places         Place[]
+  resources      OrganizationResourse[]
+}
+
+model OrganizationResourse {
+  id             String        @id @default(cuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  organizationId String        
+  height         Int           
+  width          Int           
+  url            String        
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
