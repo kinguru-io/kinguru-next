@@ -13,13 +13,13 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     variant: {
-      description: "primary | outline",
-      options: ["primary", "outline"],
+      description: "primary | outline | success | danger",
+      options: ["primary", "outline", "success", "danger"],
       control: { type: "radio" },
     },
     size: {
-      description: "sm | ...",
-      options: ["sm"],
+      description: "sm | md",
+      options: ["sm", "md"],
       control: { type: "radio" },
     },
     iconPosition: {
