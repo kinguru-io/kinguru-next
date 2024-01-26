@@ -63,7 +63,7 @@
     "prisma": "^5.8.1",
     "projen": "^0.79.3",
     "semantic-release-plus": "^20.0.0",
-    "storybook": "^8.0.0-alpha.13",
+    "storybook": "^8.0.0-alpha.15",
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.3.3"
