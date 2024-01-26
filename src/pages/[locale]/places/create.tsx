@@ -44,7 +44,7 @@ export async function getServerSideProps({
   res,
 }: GetStaticPropsContext & { req: NextApiRequest; res: NextApiResponse }) {
   const helpers = await ssgInit();
-  const { auth, speaker } = await redirect(req, res);
+  const { auth, profileCompleteness } = await redirect(req, res);
   return {
     props: {
       messages: (await import(`~/public/locales/${params?.locale}/common.json`))
@@ -52,6 +52,6 @@ export async function getServerSideProps({
       trpcState: helpers.dehydrate(),
     },
     ...auth(),
-    ...(await speaker()),
+    ...(await profileCompleteness()),
   };
 }

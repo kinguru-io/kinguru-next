@@ -12,6 +12,8 @@ import {
   RadioGroup,
   FormHelperText,
   Textarea,
+  Checkbox,
+  Input,
 } from "@chakra-ui/react";
 import { AsyncSelect } from "chakra-react-select";
 import { Field, FieldProps, Form, Formik } from "formik";
@@ -33,6 +35,7 @@ export const PlaceLocationSchema = z.object({
   isMarkerSet: z.boolean().optional(),
   currentMarker: z.array(z.number()).max(2).default([21, 52.23]),
   routeToPremises: z.string().optional(),
+  locationIsNotFound: z.boolean().optional(),
 });
 
 export function NewPlaceLocation({
@@ -59,6 +62,7 @@ export function NewPlaceLocation({
           useSameAddress: true,
           isMarkerSet: false,
           currentMarker: [21, 52.23],
+          locationIsNotFound: false,
         }
       }
       validationSchema={toFormikValidationSchema(PlaceLocationSchema)}
@@ -83,6 +87,7 @@ export function NewPlaceLocation({
                     <FormLabel>{t("places.new_place_location")}</FormLabel>
                     <AsyncSelect
                       variant={"brand"}
+                      placeholder={t("places.new_place_choose_address")}
                       onChange={(suggestion) => {
                         retrieve(suggestion, (data) => {
                           mapRef.current?.setCenter(
@@ -111,6 +116,27 @@ export function NewPlaceLocation({
                     <FormHelperText whiteSpace={"pre-line"}>
                       {t("places.new_place_location_helper")}
                     </FormHelperText>
+                    <Checkbox
+                      my={2}
+                      isChecked={form.values.locationIsNotFound}
+                      onChange={() => {
+                        void form.setFieldValue(
+                          "locationIsNotFound",
+                          !form.values.locationIsNotFound,
+                        );
+                      }}
+                    >
+                      {t("places.new_place_location_not_found")}
+                    </Checkbox>
+                    {form.values.locationIsNotFound && (
+                      <>
+                        <FormLabel>{t("places.new_place_location")}</FormLabel>
+                        <Input />
+                        <FormHelperText whiteSpace={"pre-line"}>
+                          {t("places.new_place_location_helper")}
+                        </FormHelperText>
+                      </>
+                    )}
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -159,6 +185,7 @@ export function NewPlaceLocation({
                     <FormLabel>{t("places.new_billing_location")}</FormLabel>
                     <AsyncSelect
                       variant={"brand"}
+                      placeholder={t("places.new_place_choose_address")}
                       onChange={(suggestion) => {
                         field.onChange({
                           target: {
