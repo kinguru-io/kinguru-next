@@ -1,20 +1,21 @@
-import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth].ts";
 import prisma from "@/server/prisma.ts";
-import { profileProgressMap } from "@/server/routers/user.ts";
+import { calculateCompleteness } from "@/utils/profileCompleteness.ts";
+
+const makeRedirectObject = (destination: string) => ({
+  redirect: {
+    destination,
+    permanent: false,
+  },
+});
 
 export const redirect = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
-  const authRedirect = {
-    redirect: {
-      destination: `/api/auth/signin?callbackUrl=${encodeURIComponent(
-        req.url || "",
-      )}`,
-      permanent: false,
-    },
-  };
+  const authRedirect = makeRedirectObject(
+    `/api/auth/signin?callbackUrl=${encodeURIComponent(req.url || "")}`,
+  );
   return {
     auth() {
       return session ? {} : authRedirect;
@@ -30,20 +31,10 @@ export const redirect = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!user) return authRedirect;
 
-      const completenessPercentage = (
-        Object.keys(user) as (keyof User)[]
-      ).reduce((completeness, key: keyof User) => {
-        if (user[key]) completeness += profileProgressMap[key];
-        return completeness;
-      }, 0);
+      const completenessPercentage = calculateCompleteness(user);
 
       if (completenessPercentage < 10) {
-        return {
-          redirect: {
-            destination: "/dashboard",
-            permanent: false,
-          },
-        };
+        return makeRedirectObject("/dashboard");
       }
 
       return {};
@@ -56,14 +47,7 @@ export const redirect = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         _count: true,
       });
-      return _count === 0
-        ? {
-            redirect: {
-              destination: "/dashboard",
-              permanent: false,
-            },
-          }
-        : {};
+      return _count === 0 ? makeRedirectObject("/dashboard") : {};
     },
   };
 };
