@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/kinguru-io/kinguru-next/compare/v0.20.0...v0.20.1) (2024-01-26)
+
+
+### Bug Fixes
+
+* **KINGU-45:** adding few fixes for place creation form ([#354](https://github.com/kinguru-io/kinguru-next/issues/354)) ([8308dba](https://github.com/kinguru-io/kinguru-next/commit/8308dba56ad8bb10638017855080e2fca7969b89))
+
 # [0.20.0](https://github.com/kinguru-io/kinguru-next/compare/v0.19.0...v0.20.0) (2024-01-25)
 
 
