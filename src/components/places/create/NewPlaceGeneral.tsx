@@ -33,7 +33,7 @@ export const PlaceGeneralSchema = z.object({
     .min(1),
   title: z.string().min(10),
   description: z.string().min(280),
-  rules: z.string().min(100).optional(),
+  rules: z.string(),
   area: z.number().min(10),
   minCapacity: z.number().min(0),
   maxCapacity: z.number().min(0),
