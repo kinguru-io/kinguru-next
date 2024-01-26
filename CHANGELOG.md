@@ -1,3 +1,10 @@
+# [0.20.0](https://github.com/kinguru-io/kinguru-next/compare/v0.19.0...v0.20.0) (2024-01-25)
+
+
+### Features
+
+* **KINGU-52:** modify organization model ([#353](https://github.com/kinguru-io/kinguru-next/issues/353)) ([2a0ab18](https://github.com/kinguru-io/kinguru-next/commit/2a0ab18017242cd70acdbd0edadb5359785b29ad))
+
 # [0.19.0](https://github.com/kinguru-io/kinguru-next/compare/v0.18.2...v0.19.0) (2024-01-25)
 
 

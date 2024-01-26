@@ -1,3 +1,6 @@
+import { NotoSans } from "@/fontLoader.ts";
+import { css } from "~/styled-system/css";
+
 import "../globals.css";
 
 export const metadata = {
@@ -15,8 +18,8 @@ export default function RootLayout({
   };
 }) {
   return (
-    <html lang={locale}>
-      <body>{children}</body>
+    <html lang={locale} className={`${NotoSans.variable}`}>
+      <body className={css({ fontFamily: "noto" })}>{children}</body>
     </html>
   );
 }

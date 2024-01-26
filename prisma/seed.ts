@@ -80,6 +80,26 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
+                    foundationDate: faker.date.past(),
+                    requisitesUrl: faker.internet.url(),
+                    aboutCompany: faker.company.catchPhrase(),
+                    activitySphere: faker.company.buzzPhrase().split(' '),
+                    logotype: faker.image.avatar(),
+                    resources: {
+                      createMany: {
+                        data: [
+                          {
+                            url: faker.image.url({ width: 200, height: 100 }),
+                          },
+                          {
+                            url: faker.image.url({ width: 200, height: 100 }),
+                          },
+                          {
+                            url: faker.image.url({ width: 200, height: 100 }),
+                          },
+                        ],
+                      }
+                    }
                   },
                 },
                 resources: {
