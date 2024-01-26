@@ -1,7 +1,9 @@
 import "../src/app/globals.css";
 
+import React from 'react';
 import type { Preview } from "@storybook/react";
 import { NotoSans } from "@/fontLoader.ts";
+import { css } from "~/styled-system/css";
 
 const preview: Preview = {
   parameters: {
@@ -14,7 +16,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <main>
+      <main className={css({ fontFamily: 'noto' })}>
         <style>
           {`
             :root {
