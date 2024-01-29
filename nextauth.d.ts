@@ -1,5 +1,5 @@
 import { DefaultSession, DefaultUser } from "next-auth";
-import { Speaker, UserRole } from "@prisma/client";
+import { Organization, Speaker, UserRole } from "@prisma/client";
 import { AdapterUser } from "next-auth/adapters";
 
 declare module "next-auth" {
@@ -10,6 +10,7 @@ declare module "next-auth" {
   }
   interface Session extends DefaultSession {
     user?: User;
+    organization?: Organization;
   }
 }
 
@@ -21,6 +22,16 @@ declare module "next-auth/adapters" {
     activitySphere: Array<string>;
     logotype?: string | null;
     password: string;
+  }
+  interface AdapterAccount extends Account {
+    userId?: string;
+    organizationId?: string;
+  }
+  interface AdapterSession {
+    sessionToken: string;
+    userId?: string;
+    expires: Date;
+    organizationId?: string,
   }
 }
 
