@@ -1,6 +1,32 @@
 import { ComponentProps } from "react";
 import { ImSpinner8 } from "react-icons/im";
 import { css, cva, type RecipeVariantProps } from "~/styled-system/css";
+import type { SystemStyleObject } from "~/styled-system/types";
+
+const getVariantsBase = <T extends string>(variantList: T[]) => {
+  return variantList.reduce(
+    (variants, name) => {
+      variants[name] = {
+        bg: `token(colors.${name})`,
+        borderColor: `token(colors.${name})`,
+        _hoverEnabled: {
+          bg: `token(colors.${name}.hover)`,
+          borderColor: `token(colors.${name}.hover)`,
+        },
+        _activeEnabled: {
+          bg: `token(colors.${name}.active)`,
+          borderColor: `token(colors.${name}.active)`,
+        },
+        _disabled: {
+          bg: `token(colors.${name}.disabled)`,
+          borderColor: `token(colors.${name}.disabled)`,
+        },
+      };
+      return variants;
+    },
+    {} as Record<T, SystemStyleObject>,
+  );
+};
 
 export const button = cva({
   base: {
@@ -23,39 +49,12 @@ export const button = cva({
   },
   variants: {
     variant: {
-      primary: {
-        bg: "primary",
-        borderColor: "primary",
-        _hoverEnabled: {
-          bg: "primary.hover",
-          borderColor: "primary.hover",
-        },
-        _activeEnabled: {
-          bg: "primary.active",
-          borderColor: "primary.active",
-        },
-        _disabled: {
-          bg: "primary.disabled",
-          borderColor: "primary.disabled",
-        },
-      },
-      secondary: {
-        bg: "secondary",
-        borderColor: "secondary",
-        color: "neutral.5",
-        _hoverEnabled: {
-          bg: "secondary.hover",
-          borderColor: "secondary.hover",
-        },
-        _activeEnabled: {
-          bg: "secondary.active",
-          borderColor: "secondary.active",
-        },
-        _disabled: {
-          bg: "secondary.disabled",
-          borderColor: "secondary.disabled",
-        },
-      },
+      ...getVariantsBase([
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+      ] as const),
       outline: {
         bg: "neutral.5",
         borderColor: "neutral.1",
@@ -68,42 +67,6 @@ export const button = cva({
         },
         _disabled: {
           borderColor: "neutral.2",
-        },
-      },
-      success: {
-        bg: "success",
-        borderColor: "success",
-        color: "neutral.5",
-        _hoverEnabled: {
-          bg: "success.hover",
-          borderColor: "success.hover",
-        },
-        _activeEnabled: {
-          bg: "success.active",
-          borderColor: "success.active",
-        },
-        _disabled: {
-          bg: "success.disabled",
-          borderColor: "success.disabled",
-          color: "neutral.5",
-        },
-      },
-      danger: {
-        bg: "danger",
-        borderColor: "danger",
-        color: "neutral.5",
-        _hoverEnabled: {
-          bg: "danger.hover",
-          borderColor: "danger.hover",
-        },
-        _activeEnabled: {
-          bg: "danger.active",
-          borderColor: "danger.active",
-        },
-        _disabled: {
-          bg: "danger.disabled",
-          borderColor: "danger.disabled",
-          color: "neutral.5",
         },
       },
     },
@@ -134,6 +97,17 @@ export const button = cva({
       right: { flexDirection: "row-reverse" },
     },
   },
+  compoundVariants: [
+    {
+      variant: ["success", "danger"],
+      css: {
+        color: "neutral.5",
+        _disabled: {
+          color: "neutral.5",
+        },
+      },
+    },
+  ],
 });
 
 function LoaderIcon() {
