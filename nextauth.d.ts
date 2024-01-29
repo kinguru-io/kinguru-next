@@ -1,5 +1,6 @@
 import { DefaultSession, DefaultUser } from "next-auth";
 import { Speaker, UserRole } from "@prisma/client";
+import { AdapterUser } from "next-auth/adapters";
 
 declare module "next-auth" {
   interface User extends DefaultUser {
@@ -11,6 +12,13 @@ declare module "next-auth" {
     user?: User;
   }
 }
+
+declare module "next-auth/adapters" {
+  interface AdapterOrganization extends AdapterUser {
+    foundationDate: Date;
+  }
+}
+
 declare module "next-auth/jwt" {
   interface JWT {}
 }

@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { Adapter, AdapterUser } from "next-auth/adapters";
+import { Adapter, AdapterOrganization } from "next-auth/adapters";
 
-export function PrismaAdapter(p: PrismaClient) : Adapter{
+export function PrismaOrganizationAdapter(p: PrismaClient): Adapter {
   return {
-    createUser: async (data : any) : Promise<AdapterUser> => {
+    createUser: async (data: any): Promise<AdapterOrganization> => {
       return p.organization.create({
         data: {
           name: data.name!,
@@ -15,6 +15,7 @@ export function PrismaAdapter(p: PrismaClient) : Adapter{
           email: data.email,
           emailVerified: data.emailVerified,
         },
-      })}
-  }
+      });
+    },
+  };
 }

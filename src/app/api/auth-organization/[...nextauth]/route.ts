@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
-import { authOptions } from "./organization-auth-config";
+import { organizationAuthOptions } from "@/auth.ts";
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(organizationAuthOptions);
 
-export { handler as GET, handler as POST}
+export { handler as GET, handler as POST };
