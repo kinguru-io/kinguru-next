@@ -349,8 +349,9 @@ model Organization {
   aboutCompany   String
   activitySphere String[]
   logotype       String?
-  email          String   @default("example@mail.com")
-  emailVerified  DateTime @default(now())
+  email          String   
+  emailVerified  DateTime?
+  password       String 
   places         Place[]
   resources      OrganizationResourse[]
 }
