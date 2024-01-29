@@ -16,6 +16,11 @@ declare module "next-auth" {
 declare module "next-auth/adapters" {
   interface AdapterOrganization extends AdapterUser {
     foundationDate: Date;
+    requisitesUrl: string;
+    aboutCompany: string;
+    activitySphere: Array<string>;
+    logotype?: string;
+    password: string;
   }
 }
 
