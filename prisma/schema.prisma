@@ -354,6 +354,8 @@ model Organization {
   password       String 
   places         Place[]
   resources      OrganizationResourse[]
+  accounts       OrganizationAccount[]
+  sessions       OrganizationSession[]
 }
 
 model OrganizationResourse {
@@ -365,4 +367,38 @@ model OrganizationResourse {
   url            String        
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
+}
+
+model OrganizationAccount {
+  id                String       @id @unique @default(cuid())
+  organization      Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId    String
+  type              ProviderType
+  provider          String
+  providerAccountId String
+  refresh_token     String?      @db.Text
+  access_token      String?      @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?      @db.Text
+  session_state     String?
+
+  @@unique([provider, providerAccountId])
+}
+
+model OrganizationSession {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  sessionToken   String       @unique
+  expires        DateTime  
+}
+
+model OrganizationVerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
