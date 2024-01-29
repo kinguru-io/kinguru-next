@@ -349,7 +349,7 @@ model Organization {
   aboutCompany   String
   activitySphere String[]
   logotype       String?
-  email          String   
+  email          String   @unique
   emailVerified  DateTime?
   password       String 
   places         Place[]
