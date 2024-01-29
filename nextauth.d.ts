@@ -19,7 +19,7 @@ declare module "next-auth/adapters" {
     requisitesUrl: string;
     aboutCompany: string;
     activitySphere: Array<string>;
-    logotype?: string;
+    logotype?: string | null;
     password: string;
   }
 }
