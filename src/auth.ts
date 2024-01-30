@@ -9,38 +9,27 @@ import prisma from "@/server/prisma";
 export const organizationAuthOptions: NextAuthOptions = {
   providers: [
     Credentials({
-      id: "custom-signup",
       credentials: {
-        name: { label: "name", required: true },
-        foundationDate: { label: "foundationDate", required: true },
-        requisitesUrl: { label: "requisitesUrl", required: true },
-        aboutCompany: { label: "aboutCompany", required: true },
-        activitySphere: { label: "activitySphere", required: true },
-        logotype: { label: "logotype", type: "file", required: false },
         email: { lable: "email", type: "email", required: true },
         password: { label: "password", type: "password", required: true },
       },
       async authorize(credentials) {
-        try {
-          return await prisma.organization.create({
-            data: {
-              name: credentials!.name,
-              foundationDate: credentials!.foundationDate,
-              requisitesUrl: credentials!.requisitesUrl,
-              aboutCompany: credentials!.aboutCompany,
-              activitySphere: credentials!.activitySphere.split("+"),
-              logotype: credentials!.logotype,
-              email: credentials!.email,
-              password: credentials!.password,
-            },
-          });
-        } catch (err) {
-          return null;
-        }
+        const organization = prisma.organization.findUnique({
+          where: {
+            email: credentials?.email,
+            password: credentials?.password,
+          },
+        });
+        if (organization) return organization;
+        return null;
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaOrganizationAdapter(prisma),
+  pages: {
+    signIn: "/api/auth-organ/login",
+  },
 };
 
 export const authOptions: NextAuthOptions = {
