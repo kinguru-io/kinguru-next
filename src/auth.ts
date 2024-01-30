@@ -16,10 +16,27 @@ export const organizationAuthOptions: NextAuthOptions = {
         requisitesUrl: { label: "requisitesUrl", required: true },
         aboutCompany: { label: "aboutCompany", required: true },
         activitySphere: { label: "activitySphere", required: true },
-        logotype: { label: "logotype", type: "file", required: true },
+        logotype: { label: "logotype", type: "file", required: false },
+        email: { lable: "email", type: "email", required: true },
+        password: { label: "password", type: "password", required: true },
       },
-      async authorize() {
-        return null;
+      async authorize(credentials) {
+        try {
+          return await prisma.organization.create({
+            data: {
+              name: credentials!.name,
+              foundationDate: credentials!.foundationDate,
+              requisitesUrl: credentials!.requisitesUrl,
+              aboutCompany: credentials!.aboutCompany,
+              activitySphere: credentials!.activitySphere.split("+"),
+              logotype: credentials!.logotype,
+              email: credentials!.email,
+              password: credentials!.password,
+            },
+          });
+        } catch (err) {
+          return null;
+        }
       },
     }),
   ],

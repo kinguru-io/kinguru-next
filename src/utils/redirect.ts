@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth].ts";
+import { authOptions } from "@/auth";
 import prisma from "@/server/prisma.ts";
 
 export const redirect = async (req: NextApiRequest, res: NextApiResponse) => {

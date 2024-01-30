@@ -3,7 +3,7 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { getServerSession, Session } from "next-auth";
 import prisma from "./prisma";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { authOptions } from "@/auth";
 
 export interface CreateInnerContextOptions
   extends Partial<CreateNextContextOptions> {
