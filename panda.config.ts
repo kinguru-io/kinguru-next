@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from "@pandacss/dev";
-import { buttonRecipe } from "@/components/uikit/Button/Button.recipe";
+import { buttonRecipe } from "src/components/uikit/Button/Button.recipe";
 
 export default defineConfig({
   jsxFramework: "react",

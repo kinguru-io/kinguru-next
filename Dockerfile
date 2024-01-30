@@ -1,6 +1,7 @@
 FROM node:20-alpine as builder
 WORKDIR /app
-COPY package.json package-lock.json panda.config.ts src ./
+COPY package.json package-lock.json panda.config.ts ./
+COPY src/components/uikit ./src/components/uikit
 RUN npm i
 COPY . .
 
