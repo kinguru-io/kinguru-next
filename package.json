@@ -32,7 +32,7 @@
     "@faker-js/faker": "^8.4.0",
     "@google/semantic-release-replace-plugin": "1.2.0",
     "@next/eslint-plugin-next": "^14.1.0",
-    "@pandacss/dev": "^0.29.0",
+    "@pandacss/dev": "^0.29.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/git": "^10.0.1",
