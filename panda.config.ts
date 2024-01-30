@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from "@pandacss/dev";
+import { buttonRecipe } from "@/components/uikit/Button/Button.recipe";
 
 export default defineConfig({
   jsxFramework: "react",
@@ -15,6 +16,9 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      recipes: {
+        button: buttonRecipe,
+      },
       tokens: {
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
@@ -40,6 +44,7 @@ export default defineConfig({
         },
       },
     },
+    // Semantic tokens declaration
     semanticTokens: {
       colors: {
         primary: {
@@ -50,6 +55,7 @@ export default defineConfig({
         },
         secondary: {
           DEFAULT: { value: "{colors.neutral.2}" },
+          darker: { value: "{colors.neutral.1}" },
           hover: { value: "{colors.neutral.3}" },
           active: { value: "{colors.neutral.4}" },
           disabled: { value: "{colors.neutral.4}" },
@@ -59,16 +65,19 @@ export default defineConfig({
           hover: { value: "{colors.red.2}" },
           active: { value: "{colors.red.3}" },
           disabled: { value: "{colors.red.4}" },
+          text: { value: "{colors.neutral.5}" },
         },
         success: {
           DEFAULT: { value: "{colors.green.1}" },
           hover: { value: "{colors.green.2}" },
           active: { value: "{colors.green.3}" },
           disabled: { value: "{colors.green.4}" },
+          text: { value: "{colors.neutral.5}" },
         },
       },
     },
   },
+  // Custom conditions (css-selectors)
   conditions: {
     extend: {
       hoverEnabled: "&:not([disabled]):hover",
@@ -78,4 +87,21 @@ export default defineConfig({
 
   // The output directory for your css system
   outdir: "styled-system",
+
+  staticCss: {
+    recipes: {
+      button: [
+        { size: ["*"], responsive: true },
+        { variant: ["*"] },
+        { iconPosition: ["*"] },
+      ],
+    },
+    css: [
+      {
+        properties: {
+          colorPalette: ["primary", "secondary", "success", "danger"],
+        },
+      },
+    ],
+  },
 });

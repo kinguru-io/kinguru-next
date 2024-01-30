@@ -2,8 +2,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { FaAccessibleIcon } from "react-icons/fa6";
-import { Button, button as buttonStyles } from "@/components/uikit";
+import { Button, buttonColorPalette } from "@/components/uikit";
 import { css } from "~/styled-system/css";
+import { button as buttonRecipe } from "~/styled-system/recipes";
+
+const variantMap = buttonRecipe.variantMap;
 
 const meta = {
   title: "UIKit/Button",
@@ -14,13 +17,18 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     variant: {
-      description: buttonStyles.variantMap.variant.join(" | "),
-      options: buttonStyles.variantMap.variant,
-      control: { type: "select" },
+      description: variantMap.variant.join(" | "),
+      options: variantMap.variant,
+      control: { type: "radio" },
     },
     size: {
-      description: buttonStyles.variantMap.size.join(" | "),
-      options: buttonStyles.variantMap.size,
+      description: variantMap.size.join(" | "),
+      options: variantMap.size,
+      control: { type: "radio" },
+    },
+    colorPalette: {
+      description: buttonColorPalette.join(" | "),
+      options: buttonColorPalette,
       control: { type: "radio" },
     },
     iconPosition: { description: "left | right" },
@@ -32,16 +40,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const SolidSM: Story = {
   args: {
-    variant: "primary",
     children: "Подробнее",
   },
 };
 
-const renderSizeVariantsFn =
-  (variant: (typeof buttonStyles.variantMap.variant)[number]) => () => {
-    const sizes = buttonStyles.variantMap.size;
+export const RandomVariantConditionalSize: StoryObj = {
+  name: "Random color with conditional size",
+  args: {
+    colorPalette: buttonColorPalette.at(
+      Math.floor(Math.random() * buttonColorPalette.length),
+    ),
+    children: "[md, xl]",
+    size: ["md", "xl"],
+  },
+};
+
+function renderSizedFn(colorPalette: (typeof buttonColorPalette)[number]) {
+  return () => {
+    const sizes = variantMap.size;
 
     return (
       <div
@@ -52,48 +70,45 @@ const renderSizeVariantsFn =
         })}
       >
         {sizes.map((size) => (
-          <Button variant={variant} size={size}>
-            {variant} [{size}]
+          <Button colorPalette={colorPalette} size={size}>
+            {colorPalette} [{size}]
           </Button>
         ))}
       </div>
     );
   };
+}
 
 export const PrimarySized: Story = {
-  render: renderSizeVariantsFn("primary"),
+  render: renderSizedFn("primary"),
 };
 
 export const SecondarySized: Story = {
-  render: renderSizeVariantsFn("secondary"),
-};
-
-export const OutlineSized: Story = {
-  render: renderSizeVariantsFn("outline"),
+  render: renderSizedFn("secondary"),
 };
 
 export const DangerSized: Story = {
-  render: renderSizeVariantsFn("danger"),
+  render: renderSizedFn("danger"),
 };
 
 export const SuccessSized: Story = {
-  render: renderSizeVariantsFn("success"),
+  render: renderSizedFn("success"),
 };
 
 export const PrimaryWithIcon: StoryObj = {
   name: "Primary with an icon",
   args: {
-    variant: "primary",
     children: "Primary",
     icon: <FaAccessibleIcon />,
     size: "md",
   },
 };
 
-export const OutlineWithIcon: StoryObj = {
-  name: "Outline with an icon on the right side",
+export const OutlineSecondaryWithIcon: StoryObj = {
+  name: "Outline secondary with an icon on the right side",
   args: {
     variant: "outline",
+    colorPalette: "secondary",
     children: "Outline",
     icon: <FaAccessibleIcon />,
     iconPosition: "right",
