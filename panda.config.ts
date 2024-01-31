@@ -1,6 +1,51 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { defineConfig } from "@pandacss/dev";
+/* eslint-disable import/no-extraneous-dependencies */
+import { defineConfig, defineRecipe } from "@pandacss/dev";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
+
+const inputRecipe = defineRecipe({
+  className: "input",
+  base: {
+    display: "block",
+    w: "full",
+    fontSize: "16px",
+    lineHeight: "1.25",
+    bg: "neutral.5",
+    border: "1px solid token(colors.neutral.2)",
+    transition: "colors",
+    _placeholder: {
+      color: "neutral.2",
+    },
+    _hoverEnabled: {
+      borderColor: "primary",
+    },
+    _focusVisible: {
+      outline: "none",
+      borderColor: "primary",
+    },
+    _disabled: {
+      color: "neutral.3",
+      borderColor: "neutral.3",
+    },
+  },
+  variants: {
+    variant: {
+      default: {
+        borderInline: "none",
+        borderBlockStart: "none",
+        py: "2px",
+      },
+      outline: {
+        borderRadius: "full",
+        px: "25px",
+        py: "10px",
+      },
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+  staticCss: [{ variant: ["*"] }],
+});
 
 export default defineConfig({
   jsxFramework: "react",
@@ -18,6 +63,7 @@ export default defineConfig({
     extend: {
       recipes: {
         button: buttonRecipe,
+        input: inputRecipe,
       },
       tokens: {
         fonts: {
