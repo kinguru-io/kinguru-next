@@ -10,7 +10,7 @@ const inputRecipe = defineRecipe({
     fontSize: "16px",
     lineHeight: "1.25",
     bg: "neutral.5",
-    border: "1px solid token(colors.neutral.2)",
+    border: "1px solid token(colors.secondary)",
     transition: "colors",
     _placeholder: {
       color: "neutral.2",
@@ -25,6 +25,7 @@ const inputRecipe = defineRecipe({
     _disabled: {
       color: "neutral.3",
       borderColor: "neutral.3",
+      cursor: "not-allowed",
     },
   },
   variants: {

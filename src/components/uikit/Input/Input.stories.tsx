@@ -11,15 +11,15 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    placeholder: {
-      defaultValue: "Placeholder...",
-      control: "text",
-    },
     variant: {
+      description: inputRecipe.variantMap.variant.join(" | "),
       options: inputRecipe.variantMap.variant,
       control: "radio",
     },
-    disabled: { control: "boolean" },
+  },
+  args: {
+    placeholder: "Placeholder...",
+    disabled: false,
   },
 } satisfies Meta<typeof Input>;
 
