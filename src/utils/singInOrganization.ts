@@ -214,8 +214,6 @@ export async function signIn<
   const baseUrl = apiBaseUrl(__NEXTAUTH);
   const providers = await getProviders();
 
-  console.log(providers);
-
   if (!providers) {
     window.location.href = `${baseUrl}/error`;
     return;

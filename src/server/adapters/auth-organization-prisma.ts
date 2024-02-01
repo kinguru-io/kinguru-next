@@ -36,10 +36,10 @@ export function PrismaOrganizationAdapter(p: PrismaClient): Adapter {
       });
     },
     deleteUser: (id) => p.organization.delete({ where: { id } }),
-    linkAccount: (data: any) =>
+    linkAccount: (data) =>
       p.organizationAccount.create({
         data: {
-          organizationId: data.organizationId,
+          organizationId: data.userId,
           providerAccountId: data.providerAccountId,
           provider: data.provider,
           type: data.type,
