@@ -1,22 +1,16 @@
 "use client";
-import { signIn } from "next-auth/react";
 import { FormEvent } from "react";
+import { signIn } from "@/utils/singInOrganization";
 
 export default function form() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const credentials = new FormData(e.currentTarget);
-    const res = await signIn("credentials", {
+    await signIn("credentials", {
       email: credentials.get("email"),
       password: credentials.get("password"),
       redirect: false,
-      callbackUrl: "/",
     });
-    if (res?.error) {
-      console.log("asdas");
-    } else {
-      console.log("sucess");
-    }
   };
   return (
     <form

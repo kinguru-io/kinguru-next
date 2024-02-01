@@ -28,7 +28,7 @@ export const organizationAuthOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: PrismaOrganizationAdapter(prisma),
   pages: {
-    signIn: "/api/auth-organ/login",
+    signIn: "/en/login",
   },
 };
 
