@@ -174,7 +174,6 @@ export default defineConfig({
       {
         properties: {
           colorPalette: ["primary", "secondary", "success", "danger"],
-          sizes: ["10"],
         },
       },
     ],
