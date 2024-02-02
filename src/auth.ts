@@ -1,4 +1,5 @@
 import { NextAuthOptions } from "next-auth";
+import { AdapterOrganization } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
@@ -29,6 +30,28 @@ export const organizationAuthOptions: NextAuthOptions = {
   adapter: PrismaOrganizationAdapter(prisma),
   pages: {
     signIn: "/en/login",
+  },
+  callbacks: {
+    session({ session, user }) {
+      const org = user as AdapterOrganization;
+
+      if (org) {
+        session.organization = {
+          id: org.id,
+          name: org.name || "",
+          foundationDate: org.foundationDate,
+          requisitesUrl: org.requisitesUrl,
+          aboutCompany: org.aboutCompany,
+          activitySphere: org.activitySphere,
+          logotype: org.logotype || "",
+          email: org.email,
+          emailVerified: org.emailVerified,
+          password: org.password,
+        };
+      }
+
+      return session;
+    },
   },
 };
 
