@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 import { AdapterOrganization } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
@@ -15,13 +16,19 @@ export const organizationAuthOptions: NextAuthOptions = {
         password: { label: "password", type: "password", required: true },
       },
       async authorize(credentials) {
-        const organization = prisma.organization.findUnique({
+        const organization = await prisma.organization.findUnique({
           where: {
             email: credentials?.email,
-            password: credentials?.password,
           },
         });
-        if (organization) return organization;
+        if (organization) {
+          const isCorrectPassword = await bcrypt.compare(
+            credentials?.password || "",
+            organization.password,
+          );
+
+          return isCorrectPassword ? organization : null;
+        }
         return null;
       },
     }),

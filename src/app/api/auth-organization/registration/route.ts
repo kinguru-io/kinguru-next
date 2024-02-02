@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 import prisma from "@/server/prisma";
 
@@ -13,7 +14,7 @@ export async function POST(req: Request) {
         activitySphere: data.activitySphere.split(" "),
         logotype: data.logotype,
         email: data.email,
-        password: data.password,
+        password: await bcrypt.hash(data.password, 10),
       },
     });
   } catch (error) {
