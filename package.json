@@ -20,7 +20,7 @@
     "watch": "npx projen watch",
     "projen": "npx projen",
     "prepare": "npx panda codegen",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "STORYBOOK_DEV=true npx storybook dev -p 6006 --ci & npx panda --watch",
     "build-storybook": "storybook build -o dist/storybook"
   },
   "author": {
