@@ -4,7 +4,6 @@ import { defineRecipe } from "@pandacss/dev";
 export const buttonRecipe = defineRecipe({
   className: "button",
   base: {
-    lineHeight: "1.2",
     display: "flex",
     alignItems: "center",
     gap: "2",
@@ -57,22 +56,22 @@ export const buttonRecipe = defineRecipe({
     },
     size: {
       sm: {
-        fontSize: "12px",
+        textStyle: "button.sm",
         px: "20px",
         py: "7px",
       },
       md: {
-        fontSize: "14px",
+        textStyle: "button.md",
         px: "25px",
         py: "11px",
       },
       lg: {
-        fontSize: "20px",
+        textStyle: "button.lg",
         px: "40px",
         py: "16px",
       },
       xl: {
-        fontSize: "24px",
+        textStyle: "button.xl",
         px: "44px",
         py: "20px",
       },
