@@ -1,3 +1,10 @@
+# [0.21.0](https://github.com/kinguru-io/kinguru-next/compare/v0.20.1...v0.21.0) (2024-02-06)
+
+
+### Features
+
+* **KINGU-49:** semantic typography, (temp) storybook hmr fix ([#401](https://github.com/kinguru-io/kinguru-next/issues/401)) ([2e78b0d](https://github.com/kinguru-io/kinguru-next/commit/2e78b0dd9faafd51125569fd174b86cb038012b7))
+
 ## [0.20.1](https://github.com/kinguru-io/kinguru-next/compare/v0.20.0...v0.20.1) (2024-01-26)
 
 
