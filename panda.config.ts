@@ -81,10 +81,10 @@ const inputRecipe = defineRecipe({
 
 const additionalTextStyles = defineTextStyles({
   body: {
-    1: { value: { fontSize: "8px" } },
-    2: { value: { fontSize: "12px" } },
-    3: { value: { fontSize: "16px" } },
-    4: { value: { fontSize: "18px" } },
+    1: { value: { fontSize: "18px" } },
+    2: { value: { fontSize: "16px" } },
+    3: { value: { fontSize: "12px" } },
+    4: { value: { fontSize: "8px" } },
   },
   heading: {
     h1: {
