@@ -10,10 +10,10 @@ import { inputRecipe } from "@/components/uikit/Input/Input.recipe";
 
 const additionalTextStyles = defineTextStyles({
   body: {
-    1: { value: { fontSize: "8px" } },
-    2: { value: { fontSize: "12px" } },
-    3: { value: { fontSize: "16px" } },
-    4: { value: { fontSize: "18px" } },
+    1: { value: { fontSize: "18px" } },
+    2: { value: { fontSize: "16px" } },
+    3: { value: { fontSize: "12px" } },
+    4: { value: { fontSize: "8px" } },
   },
   heading: {
     h1: {
@@ -116,6 +116,15 @@ export default defineConfig({
         avatar: avatarRecipe,
       },
       tokens: {
+        gradients: {
+          cardImage: {
+            value:
+              "linear-gradient(269deg, rgba(0, 0, 0, 0.2) 34.5%, rgba(0, 0, 0, 0) 88%)",
+          },
+        },
+        shadows: {
+          cardShadow: { value: "7px 7px 20px 6px rgb(0 0 0 / 0.08)" },
+        },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
         },
@@ -137,12 +146,14 @@ export default defineConfig({
           "neutral.3": { value: "#D9D9D9" },
           "neutral.4": { value: "#F2F2F2" },
           "neutral.5": { value: "#FFFFFF" },
+          blue: { value: "#0B99FF" },
         },
       },
     },
     // Semantic tokens declaration
     semanticTokens: {
       colors: {
+        focus: { value: "{colors.blue}" },
         primary: {
           DEFAULT: { value: "{colors.yellow.1}" },
           hover: { value: "{colors.yellow.2}" },
