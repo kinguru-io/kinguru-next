@@ -2,82 +2,11 @@
 import {
   defineConfig,
   defineGlobalStyles,
-  defineRecipe,
   defineTextStyles,
 } from "@pandacss/dev";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
-
-const avatarRecipe = defineRecipe({
-  className: "avatar",
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    bg: "primary",
-    color: "neutral.1",
-    fontSize: "12px",
-    lineHeight: "1.2",
-    borderWidth: "1px",
-    borderColor: "primary",
-    borderRadius: "full",
-    position: "relative", // since fill={true} for inner Image(next/image) component
-    overflow: "hidden",
-  },
-  variants: {
-    size: {
-      sm: { w: "10", h: "10" },
-      md: { w: "24", h: "24" },
-      lg: { w: "44", h: "44", borderWidth: "2px" },
-    },
-  },
-  staticCss: [{ size: ["*"] }],
-});
-
-const inputRecipe = defineRecipe({
-  className: "input",
-  base: {
-    display: "block",
-    w: "full",
-    fontSize: "16px",
-    lineHeight: "1.25",
-    bg: "neutral.5",
-    border: "1px solid token(colors.secondary)",
-    transition: "colors",
-    _placeholder: {
-      color: "neutral.2",
-    },
-    _hoverEnabled: {
-      borderColor: "primary",
-    },
-    _focusVisible: {
-      outline: "none",
-      borderColor: "primary",
-    },
-    _disabled: {
-      color: "neutral.3",
-      borderColor: "neutral.3",
-      cursor: "not-allowed",
-    },
-  },
-  variants: {
-    variant: {
-      default: {
-        borderInline: "none",
-        borderBlockStart: "none",
-        py: "2px",
-      },
-      outline: {
-        borderRadius: "full",
-        px: "25px",
-        py: "10px",
-      },
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-  staticCss: [{ variant: ["*"] }],
-});
+import { avatarRecipe } from "@/components/uikit/Avatar/Avatar.recipe";
+import { inputRecipe } from "@/components/uikit/Input/Input.recipe";
 
 const additionalTextStyles = defineTextStyles({
   body: {
