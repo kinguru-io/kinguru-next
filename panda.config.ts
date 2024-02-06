@@ -4,9 +4,9 @@ import {
   defineGlobalStyles,
   defineTextStyles,
 } from "@pandacss/dev";
+import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
-import { avatarRecipe } from "@/components/uikit/Avatar/Avatar.recipe";
-import { inputRecipe } from "@/components/uikit/Input/Input.recipe";
+import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 
 const additionalTextStyles = defineTextStyles({
   body: {
