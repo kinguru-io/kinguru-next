@@ -30,7 +30,7 @@ export const CardTemplate: Story = {
         <Card>
           <a
             className={css({
-              "&::before": {
+              _before: {
                 content: "''",
                 position: "absolute",
                 inset: 0,
