@@ -214,7 +214,13 @@ project.postCompileTask.exec(
 );
 project.eslint?.addExtends("plugin:@next/next/recommended");
 project.addScripts({ prepare: "npx panda codegen" });
-project.addScripts({ storybook: "storybook dev -p 6006" });
+
+//project.addScripts({ storybook: "storybook dev -p 6006" });
+// TODO Replace with one above once @pandacss/dev with the storybook hmr fix is out
+project.addScripts({
+  storybook:
+    "STORYBOOK_DEV=true npx storybook dev -p 6006 --ci & npx panda --watch",
+});
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
 project.synth();
 
