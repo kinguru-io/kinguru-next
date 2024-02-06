@@ -96,7 +96,7 @@
     "@tanstack/react-query-devtools": "<5",
     "@tanstack/react-table": "^8.11.8",
     "@trpc/client": "^10.45.0",
-    "@trpc/next": "^10.45.0",
+    "@trpc/next": "^10.45.1",
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
     "chakra-react-select": "^4.7.6",
