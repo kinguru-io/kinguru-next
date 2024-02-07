@@ -13,6 +13,7 @@ export const buttonRecipe = defineRecipe({
     position: "relative",
     overflow: "hidden",
     transition: "colors",
+    outline: "none",
     _disabled: {
       cursor: "not-allowed",
     },
@@ -38,8 +39,7 @@ export const buttonRecipe = defineRecipe({
           color: "token(colors.colorPalette.text, colors.neutral.2)",
         },
         _focus: {
-          outline: "1px solid",
-          outlineColor: "token(colors.focus)",
+          borderColor: "token(colors.focus)",
         },
       },
       outline: {
@@ -57,8 +57,7 @@ export const buttonRecipe = defineRecipe({
           borderColor: "token(colors.colorPalette.disabled)",
         },
         _focus: {
-          outline: "1px solid",
-          outlineColor: "token(colors.focus)",
+          borderColor: "token(colors.focus)",
         },
       },
     },
@@ -66,22 +65,26 @@ export const buttonRecipe = defineRecipe({
       sm: {
         textStyle: "button.sm",
         px: "20px",
-        py: "7px",
+        py: "6.8px",
+        border: "1px solid",
       },
       md: {
         textStyle: "button.md",
         px: "25px",
-        py: "11px",
+        py: "10.6px",
+        border: "1px solid",
       },
       lg: {
         textStyle: "button.lg",
         px: "40px",
-        py: "16px",
+        py: "13.5px",
+        border: "2px solid",
       },
       xl: {
         textStyle: "button.xl",
         px: "44px",
-        py: "20px",
+        py: "17.6px",
+        border: "3px solid",
       },
     },
     iconPosition: {
