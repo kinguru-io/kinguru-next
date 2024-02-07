@@ -31,11 +31,11 @@ export default defineConfig({
         gradients: {
           cardImage: {
             value:
-              "linear-gradient(269deg, rgba(0, 0, 0, 0.2) 34.5%, rgba(0, 0, 0, 0) 88%)",
+              "linear-gradient(269deg, rgba(0, 0, 0, 0.2) 34.5%, transparent 88%)",
           },
         },
         shadows: {
-          cardShadow: { value: "7px 7px 20px 6px rgb(0 0 0 / 0.08)" },
+          cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },

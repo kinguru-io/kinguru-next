@@ -15,14 +15,17 @@ export function Card({ children }: CardProps) {
         bg: "neutral.5",
         position: "relative",
         borderRadius: "10px",
-        boxShadow: "cardShadow",
+        boxShadow: {
+          base: "cardShadow",
+          _focusWithin:
+            "token(shadows.cardShadow), 0 0 0 2px token(colors.focus)",
+          _hover: "token(shadows.cardShadow), 0 0 0 2px token(colors.primary)",
+        },
+        transition: "shadow",
         overflow: "hidden",
         textStyle: "body.3",
-        _hover: {
-          outline: "2px solid token(colors.primary)",
-        },
-        _focusWithin: {
-          outline: "2px solid token(colors.focus)",
+        "&:hover, &:focus-within [data-card=heading]": {
+          textDecoration: "underline",
         },
       })}
     >
@@ -45,6 +48,10 @@ export function CardInner({ children }: CardProps) {
       {children}
     </div>
   );
+}
+
+export function CardHeading({ children }: CardProps) {
+  return <div data-card="heading">{children}</div>;
 }
 
 export function CardBody({ children }: CardProps) {
