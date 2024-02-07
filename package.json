@@ -48,7 +48,7 @@
     "@types/gtag.js": "^0.0.18",
     "@types/node": "^20",
     "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.18",
+    "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "classnames": "^2.5.1",
