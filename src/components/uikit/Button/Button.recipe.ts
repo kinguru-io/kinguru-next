@@ -56,6 +56,10 @@ export const buttonRecipe = defineRecipe({
           color: "neutral.2",
           borderColor: "token(colors.colorPalette.disabled)",
         },
+        _focus: {
+          outline: "1px solid",
+          outlineColor: "token(colors.focus)",
+        },
       },
     },
     size: {
