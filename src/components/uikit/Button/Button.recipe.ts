@@ -89,4 +89,10 @@ export const buttonRecipe = defineRecipe({
       right: { flexDirection: "row-reverse" },
     },
   },
+  staticCss: [
+    { size: ["*"], responsive: true },
+    { variant: ["*"] },
+    { iconPosition: ["*"] },
+    { colorPalette: ["primary", "secondary", "success", "danger"] },
+  ],
 });

@@ -106,21 +106,4 @@ export default defineConfig({
 
   // The output directory for your css system
   outdir: "styled-system",
-
-  staticCss: {
-    recipes: {
-      button: [
-        { size: ["*"], responsive: true },
-        { variant: ["*"] },
-        { iconPosition: ["*"] },
-      ],
-    },
-    css: [
-      {
-        properties: {
-          colorPalette: ["primary", "secondary", "success", "danger"],
-        },
-      },
-    ],
-  },
 });
