@@ -24,8 +24,10 @@ export function Card({ children }: CardProps) {
         transition: "shadow",
         overflow: "hidden",
         textStyle: "body.3",
-        "&:hover, &:focus-within [data-card=heading]": {
-          textDecoration: "underline",
+        "&:hover, &:focus-within": {
+          "& [data-card=heading]": {
+            textDecoration: "underline",
+          },
         },
       })}
     >
