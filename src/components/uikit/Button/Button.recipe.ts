@@ -14,6 +14,8 @@ export const buttonRecipe = defineRecipe({
     overflow: "hidden",
     transition: "colors",
     outline: "none",
+    "&[data-icon-position=left]": { flexDirection: "row" },
+    "&[data-icon-position=right]": { flexDirection: "row-reverse" },
     _disabled: {
       cursor: "not-allowed",
     },
@@ -56,7 +58,7 @@ export const buttonRecipe = defineRecipe({
           color: "neutral.2",
           borderColor: "token(colors.colorPalette.disabled)",
         },
-        _focus: {
+        _focusVisible: {
           borderColor: "token(colors.focus)",
         },
       },
@@ -86,10 +88,6 @@ export const buttonRecipe = defineRecipe({
         py: "17.6px",
         border: "3px solid",
       },
-    },
-    iconPosition: {
-      left: { flexDirection: "row" },
-      right: { flexDirection: "row-reverse" },
     },
   },
   staticCss: [

@@ -35,7 +35,6 @@ type ButtonProps = {
 
 export function Button({
   icon = null,
-  iconPosition = "left",
   variant = "solid",
   colorPalette = "primary",
   size = "sm",
@@ -46,10 +45,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={cx(
-        css({ colorPalette }),
-        button({ variant, size, iconPosition }),
-      )}
+      className={cx(css({ colorPalette }), button({ variant, size }))}
       disabled={isLoading || disabled}
       {...restProps}
     >
