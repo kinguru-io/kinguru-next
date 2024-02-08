@@ -38,6 +38,7 @@ const Header = () => {
             className={css({
               display: "flex",
               gap: "65px",
+              paddingRight: "60px",
             })}
           >
             {navigation.map(({ href, name }) => (
