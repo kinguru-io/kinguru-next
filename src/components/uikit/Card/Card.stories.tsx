@@ -5,7 +5,13 @@ import Image from "next/image";
 import { BsGeoAlt } from "react-icons/bs";
 import { Tag } from "@/components/uikit";
 import { Button } from "@/components/uikit/Button";
-import { Card, CardInner, CardBody, CardFooter } from "@/components/uikit/Card";
+import {
+  Card,
+  CardInner,
+  CardBody,
+  CardFooter,
+  CardHeading,
+} from "@/components/uikit/Card";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, Flex, Float } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
@@ -59,10 +65,12 @@ export const CardTemplate: Story = {
               <Tag variant="tertiary">42</Tag>
             </Float>
 
-            <h4>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Molestiae, sapiente.
-            </h4>
+            <CardHeading>
+              <h4>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Molestiae, sapiente.
+              </h4>
+            </CardHeading>
             <PseudoSection />
             <CardBody>
               <p>
