@@ -13,6 +13,9 @@ export const buttonRecipe = defineRecipe({
     position: "relative",
     overflow: "hidden",
     transition: "colors",
+    outline: "none",
+    "&[data-icon-position=left]": { flexDirection: "row" },
+    "&[data-icon-position=right]": { flexDirection: "row-reverse" },
     _disabled: {
       cursor: "not-allowed",
     },
@@ -37,6 +40,9 @@ export const buttonRecipe = defineRecipe({
           borderColor: "token(colors.colorPalette.disabled)",
           color: "token(colors.colorPalette.text, colors.neutral.2)",
         },
+        _focusVisible: {
+          borderColor: "token(colors.focus)",
+        },
       },
       outline: {
         bg: "neutral.5",
@@ -52,33 +58,41 @@ export const buttonRecipe = defineRecipe({
           color: "neutral.2",
           borderColor: "token(colors.colorPalette.disabled)",
         },
+        _focusVisible: {
+          borderColor: "token(colors.focus)",
+        },
       },
     },
     size: {
       sm: {
         textStyle: "button.sm",
         px: "20px",
-        py: "7px",
+        py: "6.8px",
+        border: "1px solid",
       },
       md: {
         textStyle: "button.md",
         px: "25px",
-        py: "11px",
+        py: "10.6px",
+        border: "1px solid",
       },
       lg: {
         textStyle: "button.lg",
         px: "40px",
-        py: "16px",
+        py: "13.5px",
+        border: "2px solid",
       },
       xl: {
         textStyle: "button.xl",
         px: "44px",
-        py: "20px",
+        py: "17.6px",
+        border: "3px solid",
       },
     },
-    iconPosition: {
-      left: { flexDirection: "row" },
-      right: { flexDirection: "row-reverse" },
-    },
   },
+  staticCss: [
+    { size: ["*"], responsive: true },
+    { variant: ["*"] },
+    { iconPosition: ["*"] },
+  ],
 });

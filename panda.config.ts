@@ -108,13 +108,6 @@ export default defineConfig({
   outdir: "styled-system",
 
   staticCss: {
-    recipes: {
-      button: [
-        { size: ["*"], responsive: true },
-        { variant: ["*"] },
-        { iconPosition: ["*"] },
-      ],
-    },
     css: [
       {
         properties: {
