@@ -6,7 +6,7 @@ import {
   NextApiResponse,
 } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { NewPlaceStepper } from "@/components/places/create";
 import { ssgInit } from "@/server/ssg-init.ts";

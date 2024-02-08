@@ -6,7 +6,7 @@ import {
 } from "next/types";
 import { useTranslations } from "next-intl";
 import { NewEventStepper } from "@/components/events/create";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
