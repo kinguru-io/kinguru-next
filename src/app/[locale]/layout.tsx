@@ -19,7 +19,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang={locale} className={`${NotoSans.variable}`}>
-      <body className={css({ fontFamily: "noto" })}>{children}</body>
+      <body className={css({ fontFamily: "noto" })}>
+        {/* Header placeholder START */}
+        <header
+          className={css({
+            height: "85px",
+            bgColor: "neutral.5",
+            borderStyle: "solid",
+            borderColor: "neutral.3",
+            borderBottom: "1px",
+          })}
+        />
+        {/* Header placeholder END */}
+        <main>{children}</main>
+        {/* Footer placeholder START */}
+        <footer className={css({ height: "256px", bgColor: "neutral.1" })} />
+        {/* Footer placeholder END */}
+      </body>
     </html>
   );
 }
