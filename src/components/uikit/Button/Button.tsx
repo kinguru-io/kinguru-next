@@ -29,6 +29,7 @@ export const buttonColorPalette = [
 type ButtonProps = {
   icon?: React.ReactNode;
   isLoading?: boolean;
+  iconPosition?: "left" | "right";
   colorPalette?: (typeof buttonColorPalette)[number];
 } & ButtonVariantProps &
   ComponentProps<"button">;
@@ -36,6 +37,7 @@ type ButtonProps = {
 export function Button({
   icon = null,
   variant = "solid",
+  iconPosition = "left",
   colorPalette = "primary",
   size = "sm",
   children,
@@ -45,6 +47,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
+      data-icon-position={iconPosition}
       className={cx(css({ colorPalette }), button({ variant, size }))}
       disabled={isLoading || disabled}
       {...restProps}
