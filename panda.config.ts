@@ -106,4 +106,14 @@ export default defineConfig({
 
   // The output directory for your css system
   outdir: "styled-system",
+
+  staticCss: {
+    css: [
+      {
+        properties: {
+          colorPalette: ["primary", "secondary", "success", "danger"],
+        },
+      },
+    ],
+  },
 });

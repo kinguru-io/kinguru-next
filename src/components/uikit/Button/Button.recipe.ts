@@ -96,6 +96,5 @@ export const buttonRecipe = defineRecipe({
     { size: ["*"], responsive: true },
     { variant: ["*"] },
     { iconPosition: ["*"] },
-    { colorPalette: ["primary", "secondary", "success", "danger"] },
   ],
 });
