@@ -22,7 +22,7 @@ export const layerStyles = defineLayerStyles({
   outlineSecondaryWrapper: {
     value: {
       ...outlineWrapperBaseStyles,
-      borderColor: "secondary",
+      borderColor: "neutral.3",
       paddingBlockStart: "51px",
       paddingBlockEnd: "72px",
     },
