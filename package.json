@@ -61,7 +61,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "prettier": "^3.2.5",
     "prisma": "^5.9.1",
-    "projen": "^0.79.9",
+    "projen": "^0.79.11",
     "semantic-release-plus": "^20.0.0",
     "storybook": "^8.0.0-alpha.13",
     "ts-node": "^10.9.2",
