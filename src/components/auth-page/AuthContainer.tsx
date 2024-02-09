@@ -6,7 +6,7 @@ import { Center } from "~/styled-system/jsx";
 export function AuthContainer({ children }: { children: React.ReactNode }) {
   return (
     <Center
-      h="100vh"
+      height="full"
       bgRepeat="no-repeat"
       bgPosition="center"
       bgSize="cover"
@@ -21,10 +21,10 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
         })}
       />
       <Center
+        position="relative"
         maxWidth="380px"
         width="full"
-        zIndex="1"
-        layerStyle="authContainer"
+        layerStyle="outlinePrimaryWrapper"
       >
         {children}
       </Center>
