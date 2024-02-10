@@ -30,6 +30,10 @@ export const dropdownRecipe = defineRecipe({
       md: { w: "157px" },
       lg: { w: "259px" },
     },
+    visibility: {
+      visible: { visibility: "visible" },
+      hidden: { visibility: "hidden", display: "none" },
+    },
   },
-  staticCss: [{ size: ["*"] }],
+  staticCss: [{ size: ["*"] }, { visibility: ["*"] }],
 });
