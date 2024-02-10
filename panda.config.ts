@@ -5,6 +5,7 @@ import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { additionalTextStyles } from "./src/theme/textStyles";
+import { dropdownRecipe } from "@/components/uikit/Dropdown/Dropdown.recipe";
 
 export default defineConfig({
   globalCss: additionalGlobalCss,
@@ -26,6 +27,7 @@ export default defineConfig({
         button: buttonRecipe,
         input: inputRecipe,
         avatar: avatarRecipe,
+        dropdown: dropdownRecipe,
       },
       tokens: {
         gradients: {
