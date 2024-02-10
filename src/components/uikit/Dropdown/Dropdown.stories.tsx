@@ -5,7 +5,7 @@ import { Dropdown } from "./Dropdown";
 import { dropdown } from "~/styled-system/recipes";
 
 const meta = {
-  title: "UIKit/Dropdown/Dropdown",
+  title: "UIKit/Dropdown",
   component: Dropdown,
   parameters: {
     layout: "centered",
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultDropdown: Story = {
   args: {
     size: "sm",
-    children: [<div>Sd</div>, <div>Sd</div>],
+    children: [<div>English</div>, <div>Русский</div>],
   },
 };
 
