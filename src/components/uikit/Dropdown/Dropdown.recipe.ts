@@ -9,6 +9,20 @@ export const dropdownRecipe = defineRecipe({
     padding: "10px",
     borderRadius: "6px",
     boxShadow: "0 4px 4px 0 #00000040",
+    flexDirection: "column",
+    position: "relative",
+    "& > *:not(:last-child)": {
+      position: "relative",
+    },
+    "& > *:not(:last-child)::after": {
+      content: '""',
+      display: "block",
+      height: "1px",
+      backgroundColor: "token(colors.neutral.4)",
+      bottom: "-5px",
+      position: "absolute",
+      width: "100%",
+    },
   },
   variants: {
     size: {
