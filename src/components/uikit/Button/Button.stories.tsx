@@ -31,6 +31,7 @@ const meta = {
       options: buttonColorPalette,
       control: { type: "radio" },
     },
+    iconPosition: { description: "left | right" },
     disabled: { control: "boolean" },
   },
   args: { onClick: fn() },
