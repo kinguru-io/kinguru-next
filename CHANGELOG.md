@@ -1,3 +1,10 @@
+# [0.22.0](https://github.com/kinguru-io/kinguru-next/compare/v0.21.0...v0.22.0) (2024-02-11)
+
+
+### Features
+
+* **KINGU-77:** auth page layout ([#418](https://github.com/kinguru-io/kinguru-next/issues/418)) ([03191a1](https://github.com/kinguru-io/kinguru-next/commit/03191a13fd99d2f24fecbb661a2ebaa982d50379))
+
 # [0.21.0](https://github.com/kinguru-io/kinguru-next/compare/v0.20.1...v0.21.0) (2024-02-06)
 
 
