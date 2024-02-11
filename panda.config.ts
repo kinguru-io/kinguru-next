@@ -4,6 +4,7 @@ import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
+import { layerStyles } from "./src/theme/layerStyles";
 import { additionalTextStyles } from "./src/theme/textStyles";
 
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      layerStyles,
       textStyles: additionalTextStyles,
       recipes: {
         button: buttonRecipe,
