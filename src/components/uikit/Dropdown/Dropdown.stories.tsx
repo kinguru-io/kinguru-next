@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultDropdown: Story = {
   args: {
     size: "sm",
-    visible: true,
+    hidden: false,
     children: [<div>English</div>, <div>Русский</div>],
   },
 };
@@ -35,7 +35,7 @@ export const SizedDropdown: Story = {
   render: ({ children }) => {
     const data = dropdown.variantMap.size.map((value) => {
       return (
-        <Dropdown visible={true} size={value}>
+        <Dropdown hidden={false} size={value}>
           {children}
         </Dropdown>
       );
