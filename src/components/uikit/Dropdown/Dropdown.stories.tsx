@@ -19,6 +19,7 @@ const meta = {
       options: dropdown.variantMap.size,
       control: "radio",
     },
+    hidden: { control: "boolean" },
   },
 } satisfies Meta<typeof Dropdown>;
 
@@ -37,7 +38,7 @@ export const DefaultDropdown: Story = {
       return (
         <Dropdown>
           <DropdownInitiator>
-            <Button onClick={() => changeOpen(!isOpen)}>Meny</Button>
+            <Button onClick={() => changeOpen(!isOpen)}>Menu</Button>
           </DropdownInitiator>
           <DropdownMenu hidden={isOpen} size={size}>
             {children}
@@ -65,7 +66,7 @@ export const SizedDropdown: Story = {
       return (
         <Dropdown>
           <DropdownInitiator>
-            <Button onClick={() => changeOpen(!isOpen)}>Meny</Button>
+            <Button onClick={() => changeOpen(!isOpen)}>Menu</Button>
           </DropdownInitiator>
           <DropdownMenu hidden={isOpen} size={value}>
             {children}
