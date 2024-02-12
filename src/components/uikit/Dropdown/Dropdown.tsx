@@ -5,14 +5,14 @@ type DropdownProps = {
   visible: boolean;
 } & DropdownVariantProps;
 
-export const Dropdown = ({
+export function Dropdown({
   size = "sm",
   visible = true,
   children,
-}: DropdownProps) => {
+}: DropdownProps) {
   return (
     <div className={dropdown({ size })} data-hidden={visible}>
       {children}
     </div>
   );
-};
+}
