@@ -5,25 +5,14 @@ export const dropdownRecipe = defineRecipe({
   className: "dropdown",
   base: {
     display: "flex",
-    gap: "10px",
+    gap: "5px",
     padding: "10px",
     borderRadius: "6px",
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     flexDirection: "column",
-    position: "relative",
+    position: "absolute",
+    top: "calc(100% + 5px)",
     "&[data-hidden=true]": { display: "none" },
-    "& > *:not(:last-child)": {
-      position: "relative",
-    },
-    "& > *:not(:last-child)::after": {
-      content: '""',
-      display: "block",
-      height: "1px",
-      backgroundColor: "token(colors.neutral.4)",
-      bottom: "-5px",
-      position: "absolute",
-      width: "100%",
-    },
   },
   variants: {
     size: {
