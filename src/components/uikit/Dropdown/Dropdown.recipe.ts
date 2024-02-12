@@ -8,9 +8,10 @@ export const dropdownRecipe = defineRecipe({
     gap: "10px",
     padding: "10px",
     borderRadius: "6px",
-    boxShadow: "0 4px 4px 0 #00000040",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     flexDirection: "column",
     position: "relative",
+    "&[data-hidden=true]": { display: "none" },
     "& > *:not(:last-child)": {
       position: "relative",
     },
@@ -30,10 +31,6 @@ export const dropdownRecipe = defineRecipe({
       md: { w: "157px" },
       lg: { w: "259px" },
     },
-    visibility: {
-      visible: { visibility: "visible" },
-      hidden: { visibility: "hidden", display: "none" },
-    },
   },
-  staticCss: [{ size: ["*"] }, { visibility: ["*"] }],
+  staticCss: [{ size: ["*"] }],
 });

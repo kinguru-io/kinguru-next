@@ -16,10 +16,6 @@ const meta = {
       options: dropdown.variantMap.size,
       control: "radio",
     },
-    visibility: {
-      options: dropdown.variantMap.visibility,
-      control: "radio",
-    },
   },
 } satisfies Meta<typeof Dropdown>;
 
@@ -29,7 +25,7 @@ type Story = StoryObj<typeof meta>;
 export const DefaultDropdown: Story = {
   args: {
     size: "sm",
-    visibility: "visible",
+    visible: true,
     children: [<div>English</div>, <div>Русский</div>],
   },
 };
@@ -39,7 +35,7 @@ export const SizedDropdown: Story = {
   render: ({ children }) => {
     const data = dropdown.variantMap.size.map((value) => {
       return (
-        <Dropdown size={value} visibility={"visible"}>
+        <Dropdown visible={true} size={value}>
           {children}
         </Dropdown>
       );

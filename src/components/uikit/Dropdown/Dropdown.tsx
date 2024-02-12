@@ -2,12 +2,17 @@ import { dropdown, DropdownVariantProps } from "~/styled-system/recipes";
 
 type DropdownProps = {
   children: React.ReactNode[];
+  visible: boolean;
 } & DropdownVariantProps;
 
 export const Dropdown = ({
   size = "sm",
-  visibility = "hidden",
+  visible = true,
   children,
 }: DropdownProps) => {
-  return <div className={dropdown({ size, visibility })}>{children}</div>;
+  return (
+    <div className={dropdown({ size })} data-hidden={visible}>
+      {children}
+    </div>
+  );
 };
