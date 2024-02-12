@@ -2,7 +2,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Dropdown } from "./Dropdown";
+import { Dropdown, DropdownInitiator, DropdownMenu } from "./Dropdown";
 import { Button } from "../Button";
 import { css } from "~/styled-system/css";
 import { dropdown } from "~/styled-system/recipes";
@@ -29,19 +29,19 @@ export const DefaultDropdown: Story = {
   args: {
     size: "sm",
     hidden: false,
-    parent: <Button>Меню</Button>,
     children: [<div>English</div>, <div>Русский</div>],
   },
-  render: ({ children, parent, hidden, size }) => {
+  render: ({ children, hidden, size }) => {
     const Data = () => {
       const [isOpen, changeOpen] = useState(hidden);
       return (
-        <Dropdown
-          hidden={isOpen}
-          size={size}
-          parent={<div onClick={() => changeOpen(!isOpen)}>{parent}</div>}
-        >
-          {children}
+        <Dropdown>
+          <DropdownInitiator>
+            <Button onClick={() => changeOpen(!isOpen)}>Meny</Button>
+          </DropdownInitiator>
+          <DropdownMenu hidden={isOpen} size={size}>
+            {children}
+          </DropdownMenu>
         </Dropdown>
       );
     };
@@ -59,16 +59,17 @@ export const DefaultDropdown: Story = {
 
 export const SizedDropdown: Story = {
   args: DefaultDropdown.args,
-  render: ({ children, parent, hidden }) => {
+  render: ({ children, hidden }) => {
     const data = dropdown.variantMap.size.map((value) => {
       const [isOpen, changeOpen] = useState(hidden);
       return (
-        <Dropdown
-          hidden={isOpen}
-          size={value}
-          parent={<div onClick={() => changeOpen(!isOpen)}>{parent}</div>}
-        >
-          {children}
+        <Dropdown>
+          <DropdownInitiator>
+            <Button onClick={() => changeOpen(!isOpen)}>Meny</Button>
+          </DropdownInitiator>
+          <DropdownMenu hidden={isOpen} size={value}>
+            {children}
+          </DropdownMenu>
         </Dropdown>
       );
     });
