@@ -27,6 +27,8 @@ export default defineConfig({
         button: buttonRecipe,
         input: inputRecipe,
         avatar: avatarRecipe,
+      },
+      slotRecipes: {
         dropdown: dropdownRecipe,
       },
       tokens: {

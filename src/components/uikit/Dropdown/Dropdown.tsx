@@ -1,5 +1,4 @@
 import React from "react";
-import { css } from "~/styled-system/css";
 import { Divider } from "~/styled-system/jsx";
 import { dropdown, DropdownVariantProps } from "~/styled-system/recipes";
 
@@ -8,21 +7,23 @@ type DropdownProps = {
 } & DropdownVariantProps;
 
 const DropdownContext = React.createContext({
-  open: false,
-  setOpen: (_value: boolean) => {},
+  hidden: true,
+  setHidden: (_value: boolean) => {},
 });
 
-export function Dropdown({ children }: DropdownProps) {
-  const [open, setOpen] = React.useState(false);
+export function Dropdown({ children, size }: DropdownProps) {
+  const [hidden, setHidden] = React.useState(true);
+  const classes = dropdown({ size });
   return (
-    <DropdownContext.Provider value={{ open, setOpen }}>
-      <div className={css({ position: "relative" })}>{children}</div>
+    <DropdownContext.Provider value={{ hidden, setHidden }}>
+      <div className={classes.dropdown}>{children}</div>
     </DropdownContext.Provider>
   );
 }
 
 export function DropdownMenu({ children, size }: DropdownProps) {
-  const { open } = React.useContext(DropdownContext);
+  const { hidden } = React.useContext(DropdownContext);
+  const classes = dropdown({ size });
 
   const child =
     children instanceof Array
@@ -33,17 +34,17 @@ export function DropdownMenu({ children, size }: DropdownProps) {
       : [];
   const dividedChildren = child.slice(0, child.length - 1);
   return (
-    <div className={dropdown({ size })} data-hidden={open}>
+    <div className={classes.menu} data-hidden={hidden}>
       {dividedChildren}
     </div>
   );
 }
 
 export function DropdownInitiator({ children }: DropdownProps) {
-  const { open, setOpen } = React.useContext(DropdownContext);
+  const { hidden, setHidden } = React.useContext(DropdownContext);
 
   const clickHandler = () => {
-    setOpen(!open);
+    setHidden(!hidden);
   };
 
   return <div onClick={clickHandler}>{children}</div>;
