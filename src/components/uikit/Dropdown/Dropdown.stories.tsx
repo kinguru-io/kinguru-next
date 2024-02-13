@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "./Dropdown";
 import { Button } from "../Button";
 import { css } from "~/styled-system/css";
@@ -19,7 +18,6 @@ const meta = {
       options: dropdown.variantMap.size,
       control: "radio",
     },
-    hidden: { control: "boolean" },
   },
 } satisfies Meta<typeof Dropdown>;
 
@@ -29,20 +27,16 @@ type Story = StoryObj<typeof meta>;
 export const DefaultDropdown: Story = {
   args: {
     size: "sm",
-    hidden: false,
     children: [<div>English</div>, <div>Русский</div>],
   },
-  render: ({ children, hidden, size }) => {
+  render: ({ children, size }) => {
     const Data = () => {
-      const [isOpen, changeOpen] = useState(hidden);
       return (
         <Dropdown>
           <DropdownInitiator>
-            <Button onClick={() => changeOpen(!isOpen)}>Menu</Button>
+            <Button>Menu</Button>
           </DropdownInitiator>
-          <DropdownMenu hidden={isOpen} size={size}>
-            {children}
-          </DropdownMenu>
+          <DropdownMenu size={size}>{children}</DropdownMenu>
         </Dropdown>
       );
     };
@@ -60,17 +54,14 @@ export const DefaultDropdown: Story = {
 
 export const SizedDropdown: Story = {
   args: DefaultDropdown.args,
-  render: ({ children, hidden }) => {
+  render: ({ children }) => {
     const data = dropdown.variantMap.size.map((value) => {
-      const [isOpen, changeOpen] = useState(hidden);
       return (
         <Dropdown>
           <DropdownInitiator>
-            <Button onClick={() => changeOpen(!isOpen)}>Menu</Button>
+            <Button>Menu</Button>
           </DropdownInitiator>
-          <DropdownMenu hidden={isOpen} size={value}>
-            {children}
-          </DropdownMenu>
+          <DropdownMenu size={value}>{children}</DropdownMenu>
         </Dropdown>
       );
     });
