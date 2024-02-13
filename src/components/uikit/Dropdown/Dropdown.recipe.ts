@@ -13,6 +13,7 @@ export const dropdownRecipe = defineRecipe({
     position: "absolute",
     top: "calc(100% + 5px)",
     right: "0",
+    zIndex: "token(zIndex.dropdown)",
     "&[data-hidden=true]": { display: "none" },
   },
   variants: {

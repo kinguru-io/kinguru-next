@@ -42,6 +42,9 @@ export default defineConfig({
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
         },
+        zIndex: {
+          dropdown: { value: "100" },
+        },
         colors: {
           "yellow.1": { value: "#FFD800" },
           "yellow.2": { value: "#FFE44D" },
