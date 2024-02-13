@@ -2,10 +2,10 @@
 import { defineConfig } from "@pandacss/dev";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
+import { dropdownRecipe } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { additionalTextStyles } from "./src/theme/textStyles";
-import { dropdownRecipe } from "@/components/uikit/Dropdown/Dropdown.recipe";
 
 export default defineConfig({
   globalCss: additionalGlobalCss,
