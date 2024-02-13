@@ -1,8 +1,9 @@
+import { NextIntlClientProvider, useMessages } from "next-intl";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
+import { Box } from "~/styled-system/jsx";
 
 import "../globals.css";
-import { Box } from "~/styled-system/jsx";
 
 export const metadata = {
   title: "Next.js",
@@ -18,32 +19,38 @@ export default function RootLayout({
     locale: string;
   };
 }) {
+  const messages = useMessages();
+
   return (
     <html lang={locale} className={`${NotoSans.variable}`}>
-      <body className={css({ fontFamily: "noto" })}>
-        <Box minHeight="100vh">
-          {/* Header placeholder START */}
-          <header
-            className={css({
-              zIndex: "1",
-              height: "85px",
-              bgColor: "neutral.5",
-              borderStyle: "solid",
-              borderColor: "neutral.3",
-              borderBottomWidth: "1px",
-              position: "sticky",
-              top: "0",
-            })}
-          />
-          {/* Header placeholder END */}
-          <main className={css({ height: 0, minHeight: "calc(100vh - 85px)" })}>
-            {children}
-          </main>
-        </Box>
-        {/* Footer placeholder START */}
-        <footer className={css({ height: "256px", bgColor: "neutral.1" })} />
-        {/* Footer placeholder END */}
-      </body>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <body className={css({ fontFamily: "noto" })}>
+          <Box minHeight="100vh">
+            {/* Header placeholder START */}
+            <header
+              className={css({
+                zIndex: "1",
+                height: "85px",
+                bgColor: "neutral.5",
+                borderStyle: "solid",
+                borderColor: "neutral.3",
+                borderBottomWidth: "1px",
+                position: "sticky",
+                top: "0",
+              })}
+            />
+            {/* Header placeholder END */}
+            <main
+              className={css({ height: "0", minHeight: "calc(100vh - 85px)" })}
+            >
+              {children}
+            </main>
+          </Box>
+          {/* Footer placeholder START */}
+          <footer className={css({ height: "256px", bgColor: "neutral.1" })} />
+          {/* Footer placeholder END */}
+        </body>
+      </NextIntlClientProvider>
     </html>
   );
 }

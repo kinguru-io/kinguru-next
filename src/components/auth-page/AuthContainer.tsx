@@ -12,7 +12,6 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
       bgSize="cover"
       style={{ backgroundImage: `url(${authBg.src})` }}
       pos="relative"
-      className={css({ "& h1": { mb: "38px" } })}
     >
       <span
         className={css({
@@ -28,6 +27,11 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
         width="full"
         layerStyle="outlinePrimaryWrapper"
         textAlign="center"
+        className={css({
+          "& h1": { mb: "30px", fontSize: "20px" }, // fontSize is temporary since no tokens in design
+          "& button[type=submit]": { mt: "30px" },
+          "& p": { mt: "20px" },
+        })}
       >
         {children}
       </Flex>

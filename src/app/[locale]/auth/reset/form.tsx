@@ -2,6 +2,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm, type UseFormRegister } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
@@ -21,21 +22,27 @@ function ResetFormInner({
   register: UseFormRegister<ResetFormInput>;
   isValid: boolean;
 }) {
+  const t = useTranslations();
   const { pending } = useFormStatus();
 
   return (
-    <VStack gap="15px">
+    <VStack gap="0">
       <Input
         variant="outline"
-        placeholder="Введите email"
+        placeholder={t("auth.reset_form.email_placeholder")}
+        disabled={pending}
         {...register("email")}
       />
-      <p className={css({ textStyle: "body.3", color: "neutral.2" })}>
-        Введите адрес электронной почты используемый для входа и мы вышлем вам
-        письмо со ссылкой для создания нового пароля
+      <p
+        className={css({
+          textStyle: "body.3",
+          color: "neutral.2",
+        })}
+      >
+        {t("auth.reset_form.helper")}
       </p>
       <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
-        Отправить
+        {t("auth.reset_form.submit")}
       </Button>
     </VStack>
   );

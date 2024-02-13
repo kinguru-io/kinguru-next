@@ -228,5 +228,14 @@
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ"
+  },
+  "auth": {
+    "reset_form": {
+      "email_placeholder": "Введите email",
+      "submit": "Отправить",
+      "helper": "Введите адрес электронной почты используемый для входа и мы вышлем вам письмо со ссылкой для создания нового пароля"
+    },
+    "signin_form": {},
+    "signup_form": {}
   }
 }

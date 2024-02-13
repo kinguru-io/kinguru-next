@@ -1,4 +1,9 @@
-export type ResetPasswordState = { status: string; message: string } | null;
+import { resetFormSchema } from "./validation";
+
+export type ResetPasswordState = {
+  status: "success" | "error";
+  message: string;
+} | null;
 
 export async function resetPassword(
   _prevState: ResetPasswordState,
@@ -6,9 +11,18 @@ export async function resetPassword(
 ): Promise<ResetPasswordState> {
   await delay(500);
 
+  const parseResult = resetFormSchema.safeParse(data);
+
+  if (!parseResult.success) {
+    return {
+      status: "error",
+      message: JSON.stringify(parseResult.error),
+    };
+  }
+
   return {
     status: "success",
-    message: JSON.stringify([...data.entries()]),
+    message: JSON.stringify(data),
   };
 }
 
