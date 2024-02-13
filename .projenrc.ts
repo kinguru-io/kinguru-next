@@ -175,6 +175,10 @@ const project = new web.NextJsTypeScriptProject({
     "@opentelemetry/sdk-trace-base",
     "@opentelemetry/sdk-trace-node",
     "@opentelemetry/resources",
+
+    "react-hook-form",
+    "@hookform/resolvers",
+    "zod-form-data",
   ],
   devDeps: [
     "@pandacss/dev",

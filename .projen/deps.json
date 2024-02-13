@@ -203,6 +203,10 @@
       "type": "runtime"
     },
     {
+      "name": "@hookform/resolvers",
+      "type": "runtime"
+    },
+    {
       "name": "@mapbox/search-js-react",
       "type": "runtime"
     },
@@ -345,6 +349,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-hook-form",
+      "type": "runtime"
+    },
+    {
       "name": "react-icons",
       "type": "runtime"
     },
@@ -386,6 +394,10 @@
     },
     {
       "name": "zod",
+      "type": "runtime"
+    },
+    {
+      "name": "zod-form-data",
       "type": "runtime"
     },
     {

@@ -1,8 +1,11 @@
-import { ComponentProps } from "react";
+import { ComponentProps, LegacyRef, forwardRef } from "react";
 import { input, type InputVariantProps } from "~/styled-system/recipes";
 
 type InputProps = InputVariantProps & ComponentProps<"input">;
 
-export function Input({ variant, ...restProps }: InputProps) {
-  return <input className={input({ variant })} {...restProps} />;
-}
+export const Input = forwardRef(function Input(
+  { variant, ...restProps }: InputProps,
+  ref: LegacyRef<HTMLInputElement>,
+) {
+  return <input ref={ref} className={input({ variant })} {...restProps} />;
+});
