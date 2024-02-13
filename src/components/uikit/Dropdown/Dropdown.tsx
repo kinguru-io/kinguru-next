@@ -47,5 +47,9 @@ export function DropdownInitiator({ children }: DropdownProps) {
     setHidden(!hidden);
   };
 
-  return <div onClick={clickHandler}>{children}</div>;
+  return (
+    <div role="button" onClick={clickHandler}>
+      {children}
+    </div>
+  );
 }
