@@ -12,6 +12,7 @@ export const dropdownRecipe = defineRecipe({
     flexDirection: "column",
     position: "absolute",
     top: "calc(100% + 5px)",
+    bg: "token(color.neutral.5)",
     right: "0",
     zIndex: "token(zIndex.dropdown)",
     "&[data-hidden=true]": { display: "none" },
