@@ -7,7 +7,7 @@ export const dropdownRecipe = defineSlotRecipe({
   base: {
     menu: {
       display: "flex",
-      gap: "5px",
+      gap: "10px",
       padding: "10px",
       borderRadius: "6px",
       boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",

@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider } from "~/styled-system/jsx";
+import { customDivider } from "~/styled-system/patterns";
 import { dropdown, DropdownVariantProps } from "~/styled-system/recipes";
 
 type DropdownProps = {
@@ -24,18 +24,12 @@ export function Dropdown({ children, size }: DropdownProps) {
 export function DropdownMenu({ children, size }: DropdownProps) {
   const { hidden } = React.useContext(DropdownContext);
   const classes = dropdown({ size });
-
-  const child =
-    children instanceof Array
-      ? children!.flatMap((elem) => [
-          elem,
-          <Divider color={"token(colors.neutral.4)"} />,
-        ])
-      : [];
-  const dividedChildren = child.slice(0, child.length - 1);
   return (
-    <div className={classes.menu} data-hidden={hidden}>
-      {dividedChildren}
+    <div
+      className={classes.menu + " " + customDivider({})}
+      data-hidden={hidden}
+    >
+      {children}
     </div>
   );
 }
