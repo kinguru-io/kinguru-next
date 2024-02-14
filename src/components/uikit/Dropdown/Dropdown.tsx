@@ -10,23 +10,26 @@ type DropdownProps = {
 const DropdownContext = React.createContext({
   hidden: true,
   setHidden: (_value: boolean) => {},
+  dropdownSlot: dropdown(),
 });
 
 export function Dropdown({ children, size = "sm" }: DropdownProps) {
   const [hidden, setHidden] = React.useState(true);
-  const classes = dropdown({ size });
+  const dropdownSlot = dropdown({ size });
   return (
-    <DropdownContext.Provider value={{ hidden, setHidden }}>
-      <div className={classes.dropdown}>{children}</div>
+    <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
+      <div className={dropdownSlot.dropdown}>{children}</div>
     </DropdownContext.Provider>
   );
 }
 
-export function DropdownMenu({ children, size }: DropdownProps) {
-  const { hidden } = React.useContext(DropdownContext);
-  const classes = dropdown({ size });
+export function DropdownMenu({ children }: DropdownProps) {
+  const { hidden, dropdownSlot } = React.useContext(DropdownContext);
   return (
-    <div className={cx(classes.menu, customDivider({}))} data-hidden={hidden}>
+    <div
+      className={cx(dropdownSlot.menu, customDivider({}))}
+      data-hidden={hidden}
+    >
       {children}
     </div>
   );

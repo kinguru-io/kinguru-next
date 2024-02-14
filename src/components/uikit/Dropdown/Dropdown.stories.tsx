@@ -32,11 +32,11 @@ export const DefaultDropdown: Story = {
   render: ({ children, size }) => {
     const Data = () => {
       return (
-        <Dropdown>
+        <Dropdown size={size}>
           <DropdownInitiator>
             <Button>Menu</Button>
           </DropdownInitiator>
-          <DropdownMenu size={size}>{children}</DropdownMenu>
+          <DropdownMenu>{children}</DropdownMenu>
         </Dropdown>
       );
     };
@@ -57,11 +57,11 @@ export const SizedDropdown: Story = {
   render: ({ children }) => {
     const data = dropdown.variantMap.size.map((value) => {
       return (
-        <Dropdown>
+        <Dropdown size={value}>
           <DropdownInitiator>
             <Button>Menu</Button>
           </DropdownInitiator>
-          <DropdownMenu size={value}>{children}</DropdownMenu>
+          <DropdownMenu>{children}</DropdownMenu>
         </Dropdown>
       );
     });
