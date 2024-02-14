@@ -98,6 +98,7 @@ const project = new web.NextJsTypeScriptProject({
       },
     },
     include: [
+      "global.d.ts",
       "process.d.ts",
       "next-env.d.ts",
       "next-auth.d.ts",

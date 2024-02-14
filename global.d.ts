@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+type Messages = typeof import("./public/locales/ru/common.json");
+
 declare global {
   namespace NodeJS {
     interface Global {
@@ -9,6 +11,7 @@ declare global {
   interface GtagWindow extends Window {
     gtag: any;
   }
+  interface IntlMessages extends Messages {}
 }
 
 declare var window: GtagWindow & typeof globalThis;
