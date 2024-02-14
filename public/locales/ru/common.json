@@ -231,11 +231,29 @@
   },
   "auth": {
     "reset_form": {
+      "heading": "Забыли пароль?",
       "email_placeholder": "Введите email",
       "submit": "Отправить",
       "helper": "Введите адрес электронной почты используемый для входа и мы вышлем вам письмо со ссылкой для создания нового пароля"
     },
-    "signin_form": {},
-    "signup_form": {}
+    "signin_form": {
+      "heading": "Вход в кабинет организации",
+      "email_placeholder": "Введите email",
+      "password_placeholder": "Пароль",
+      "submit": "Войти",
+      "forgot_password": "Забыли пароль?"
+    },
+    "signup_form": {
+      "heading": "Зарегистрируйте свою организацию",
+      "email_placeholder": "Введите email",
+      "password_placeholder": "Пароль",
+      "password_confirm_placeholder": "Повтор пароля",
+      "submit": "Зарегестрироваться",
+      "helper_part_1": "Нажимая на кнопку \"Зарегестрироваться\", Вы принимаете условия",
+      "helper_link_agreement": "Партнёрского соглашения",
+      "helper_part_2": ", подтверждаете, что ознакомились с ",
+      "helper_link_data": "Политикой обработки персональный данных",
+      "helper_part_3": ", и даете Согласие на обработку персональных данных"
+    }
   }
 }

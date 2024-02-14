@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,44 +8,10 @@ import { Button, Input } from "@/components/uikit";
 import {
   resetFormSchema,
   resetPassword,
-  type ResetPasswordState,
+  type AuthFormState,
   type ResetFormInput,
 } from "@/lib/actions/auth";
-import { css } from "~/styled-system/css";
 import { VStack } from "~/styled-system/jsx";
-
-function ResetFormInner({
-  register,
-  isValid,
-}: {
-  register: UseFormRegister<ResetFormInput>;
-  isValid: boolean;
-}) {
-  const t = useTranslations();
-  const { pending } = useFormStatus();
-
-  return (
-    <VStack gap="0">
-      <Input
-        variant="outline"
-        placeholder={t("auth.reset_form.email_placeholder")}
-        disabled={pending}
-        {...register("email")}
-      />
-      <p
-        className={css({
-          textStyle: "body.3",
-          color: "neutral.2",
-        })}
-      >
-        {t("auth.reset_form.helper")}
-      </p>
-      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
-        {t("auth.reset_form.submit")}
-      </Button>
-    </VStack>
-  );
-}
 
 export function ResetForm() {
   const {
@@ -56,7 +21,8 @@ export function ResetForm() {
     mode: "onBlur",
     resolver: zodResolver(resetFormSchema),
   });
-  const [_state, formAction] = useFormState<ResetPasswordState, FormData>(
+  // TODO `state` might be used for notifications?
+  const [_state, formAction] = useFormState<AuthFormState, FormData>(
     resetPassword,
     null,
   );
@@ -65,5 +31,31 @@ export function ResetForm() {
     <form action={formAction}>
       <ResetFormInner register={register} isValid={isValid} />
     </form>
+  );
+}
+
+function ResetFormInner({
+  register,
+  isValid,
+}: {
+  register: UseFormRegister<ResetFormInput>;
+  isValid: boolean;
+}) {
+  const t = useTranslations("auth.reset_form");
+  const { pending } = useFormStatus();
+
+  return (
+    <VStack gap="0">
+      <Input
+        variant="outline"
+        placeholder={t("email_placeholder")}
+        disabled={pending}
+        {...register("email")}
+      />
+      <p>{t("helper")}</p>
+      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
+        {t("submit")}
+      </Button>
+    </VStack>
   );
 }

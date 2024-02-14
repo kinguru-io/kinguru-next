@@ -1,28 +1,49 @@
-import { resetFormSchema } from "./validation";
+import { ZodEffects, ZodTypeAny } from "zod";
 
-export type ResetPasswordState = {
+export type AuthFormState = {
   status: "success" | "error";
   message: string;
 } | null;
 
-export async function resetPassword(
-  _prevState: ResetPasswordState,
-  data: FormData,
-): Promise<ResetPasswordState> {
-  await delay(500);
+// ? фабрика выглядит неплохо, если сами экшены можно уместить в функцию
+// храниться будет в `lib/actions/auth/utils.ts` без экспорта во внешний мир
+//
+// TODO remove once fabric using is discussed
+// function createFormAction(action, schema) {
+//   return async function processAction(prevState, formData) {
+//     try {
+//       await schema.parse(formData) // unsafe parsing so ZodError will be thrown
+//       await action()
 
-  const parseResult = resetFormSchema.safeParse(data);
+//       return { status: 'success', message: 'xxx' }
+//     } catch(e) {
+//       if (e instanceof ZodError) { ... }
 
-  if (!parseResult.success) {
+//       return { status: 'error', message: 'xxx' }
+//     }
+//   }
+// }
+
+export function createFormAction<T extends ZodEffects<ZodTypeAny>>(schema: T) {
+  return async function processAction(
+    _prevState: AuthFormState,
+    data: FormData,
+  ): Promise<AuthFormState> {
+    await delay(500);
+
+    const parseResult = schema.safeParse(data);
+
+    if (!parseResult.success) {
+      return {
+        status: "error",
+        message: JSON.stringify(parseResult.error),
+      };
+    }
+
     return {
-      status: "error",
-      message: JSON.stringify(parseResult.error),
+      status: "success",
+      message: JSON.stringify(data),
     };
-  }
-
-  return {
-    status: "success",
-    message: JSON.stringify(data),
   };
 }
 

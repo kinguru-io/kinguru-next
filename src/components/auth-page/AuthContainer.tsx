@@ -28,9 +28,20 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
         layerStyle="outlinePrimaryWrapper"
         textAlign="center"
         className={css({
-          "& h1": { mb: "30px", fontSize: "20px" }, // fontSize is temporary since no tokens in design
+          "& h1": { mb: "30px", fontSize: "20px" }, // TODO (replace) fontSize is temporary since no tokens in design
           "& button[type=submit]": { mt: "30px" },
-          "& p": { mt: "20px" },
+          "& a.button": { mt: "15px" },
+          "& p": {
+            mt: "20px",
+            textStyle: "body.3",
+            color: "neutral.2",
+            "& a": {
+              color: "neutral.1",
+              _hover: {
+                textDecoration: "underline",
+              },
+            },
+          },
         })}
       >
         {children}
