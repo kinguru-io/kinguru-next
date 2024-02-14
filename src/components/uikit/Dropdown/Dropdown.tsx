@@ -1,4 +1,5 @@
 import React from "react";
+import { cx } from "~/styled-system/css";
 import { customDivider } from "~/styled-system/patterns";
 import { dropdown, DropdownVariantProps } from "~/styled-system/recipes";
 
@@ -25,10 +26,7 @@ export function DropdownMenu({ children, size }: DropdownProps) {
   const { hidden } = React.useContext(DropdownContext);
   const classes = dropdown({ size });
   return (
-    <div
-      className={classes.menu + " " + customDivider({})}
-      data-hidden={hidden}
-    >
+    <div className={cx(classes.menu, customDivider({}))} data-hidden={hidden}>
       {children}
     </div>
   );
