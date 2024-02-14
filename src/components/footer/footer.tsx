@@ -1,6 +1,10 @@
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageDropdown } from "./languageDropdown";
 import { Link } from "@/navigation";
+import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
+import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
+import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
 import { css } from "~/styled-system/css";
 
 const Footer = () => {
@@ -110,16 +114,40 @@ const Footer = () => {
               gap: "5px",
             })}
           >
-            <ul
+            <div
               className={css({
                 display: "flex",
                 gap: "10px",
               })}
             >
-              <li>inst</li>
-              <li>fb</li>
-              <li>ln</li>
-            </ul>
+              <a href="#">
+                <Image
+                  src={instagramIcon.src}
+                  alt="instagram icon"
+                  role="link"
+                  width={22}
+                  height={22}
+                />
+              </a>
+              <a href="#">
+                <Image
+                  src={facebookIcon.src}
+                  alt="facebook icon"
+                  role="link"
+                  width={22}
+                  height={22}
+                />
+              </a>
+              <a href="#">
+                <Image
+                  src={linkedinIcon.src}
+                  alt="linkedin icon"
+                  role="link"
+                  width={22}
+                  height={22}
+                />
+              </a>
+            </div>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
             <LanguageDropdown locale={locale} langOptions={languageOptions} />
           </div>
