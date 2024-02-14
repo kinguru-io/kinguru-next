@@ -7,7 +7,7 @@ import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
 import { css } from "~/styled-system/css";
 
-const Footer = () => {
+export function Footer() {
   // to-do move select and icon from ui kit
   const t = useTranslations();
   const locale = useLocale();
@@ -154,6 +154,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
