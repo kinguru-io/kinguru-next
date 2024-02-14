@@ -42,11 +42,7 @@ export function LanguageDropdown({
         {langOptions
           .filter(({ code }) => code !== locale)
           .map(({ code, text }) => (
-            <span
-              key={code}
-              style={{ color: "black" }}
-              onClick={() => onToggleLanguageClick(code)}
-            >
+            <span key={code} onClick={() => onToggleLanguageClick(code)}>
               {text}
             </span>
           ))}
