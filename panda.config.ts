@@ -2,7 +2,7 @@
 import { defineConfig } from "@pandacss/dev";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
-import { dropdownRecipe } from "./src/components/uikit/Dropdown/Dropdown.recipe";
+import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
@@ -30,7 +30,7 @@ export default defineConfig({
         avatar: avatarRecipe,
       },
       slotRecipes: {
-        dropdown: dropdownRecipe,
+        dropdown: dropdownSlot,
       },
       tokens: {
         gradients: {

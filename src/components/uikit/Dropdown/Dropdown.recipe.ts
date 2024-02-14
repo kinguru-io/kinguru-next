@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineSlotRecipe } from "@pandacss/dev";
 
-export const dropdownRecipe = defineSlotRecipe({
+export const dropdownSlot = defineSlotRecipe({
   className: "dropdown",
   slots: ["menu", "dropdown"],
   base: {
