@@ -2,9 +2,11 @@
 import { defineConfig } from "@pandacss/dev";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
+import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
+import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
 
 export default defineConfig({
@@ -29,6 +31,9 @@ export default defineConfig({
         input: inputRecipe,
         avatar: avatarRecipe,
       },
+      slotRecipes: {
+        dropdown: dropdownSlot,
+      },
       tokens: {
         gradients: {
           cardImage: {
@@ -41,6 +46,9 @@ export default defineConfig({
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
+        },
+        zIndex: {
+          dropdown: { value: "100" },
         },
         colors: {
           "yellow.1": { value: "#FFD800" },
@@ -117,5 +125,10 @@ export default defineConfig({
         },
       },
     ],
+  },
+  patterns: {
+    extend: {
+      customDivider: customDividerPattern,
+    },
   },
 });
