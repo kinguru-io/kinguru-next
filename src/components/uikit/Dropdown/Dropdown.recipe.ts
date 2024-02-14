@@ -16,6 +16,7 @@ export const dropdownSlot = defineSlotRecipe({
       top: "calc(100% + 5px)",
       bg: "token(color.neutral.5)",
       right: "0",
+      minW: "110px",
       zIndex: "token(zIndex.dropdown)",
       "&[data-hidden=true]": { display: "none" },
     },
@@ -25,9 +26,9 @@ export const dropdownSlot = defineSlotRecipe({
   },
   variants: {
     size: {
-      sm: { menu: { w: "110px" } },
-      md: { menu: { w: "157px" } },
-      lg: { menu: { w: "259px" } },
+      sm: { menu: { maxW: "110px" } },
+      md: { menu: { maxW: "157px" } },
+      lg: { menu: { maxW: "259px" } },
     },
   },
   staticCss: [{ size: ["*"] }],
