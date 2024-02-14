@@ -48,6 +48,7 @@ const Footer = () => {
         height: "256px",
         width: "100%",
         color: "token(colors.neutral.5)",
+        textStyle: "body.2",
       })}
     >
       <div
@@ -60,8 +61,18 @@ const Footer = () => {
           gap: "107px",
           justifyContent: "center",
           alignItems: "center",
+          position: "relative",
         })}
       >
+        <div
+          className={css({
+            color: "token(colors.neutral.2)",
+            position: "absolute",
+            bottom: "20px",
+          })}
+        >
+          2023 Kinguru. Все права защищены
+        </div>
         <div>Logo</div>
         <div
           className={css({
@@ -77,13 +88,7 @@ const Footer = () => {
             })}
           >
             {navigation.map(({ href, name }) => (
-              <Link
-                key={name}
-                href={href}
-                className={css({
-                  textStyle: "body.2",
-                })}
-              >
+              <Link key={name} href={href}>
                 {name}
               </Link>
             ))}
@@ -96,13 +101,7 @@ const Footer = () => {
             })}
           >
             {policies.map(({ href, name }) => (
-              <Link
-                key={name}
-                href={href}
-                className={css({
-                  textStyle: "body.2",
-                })}
-              >
+              <Link key={name} href={href}>
                 {name}
               </Link>
             ))}
