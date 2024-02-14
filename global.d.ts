@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-type Messages = typeof import("./public/locales/ru/common.json");
+type Messages =
+| typeof import("./public/locales/eng/common.json")
+| typeof import("./public/locales/ru/common.json")
+| typeof import("./public/locales/pl/common.json");
 
 declare global {
   namespace NodeJS {
