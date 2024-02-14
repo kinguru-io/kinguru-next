@@ -5,6 +5,7 @@ import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
+import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
 
@@ -23,6 +24,7 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      layerStyles,
       textStyles: additionalTextStyles,
       recipes: {
         button: buttonRecipe,
