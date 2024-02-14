@@ -256,12 +256,12 @@
     },
     {
       "name": "@tanstack/react-query-devtools",
-      "version": "<5",
+      "version": "^4.18.0",
       "type": "runtime"
     },
     {
       "name": "@tanstack/react-query",
-      "version": "<5",
+      "version": "^4.18.0",
       "type": "runtime"
     },
     {
