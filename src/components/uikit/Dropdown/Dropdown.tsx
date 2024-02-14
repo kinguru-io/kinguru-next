@@ -42,7 +42,7 @@ export function DropdownInitiator({ children }: DropdownProps) {
   };
 
   return (
-    <div role="button" onClick={clickHandler}>
+    <div role="button" tabIndex={0} onClick={clickHandler}>
       {children}
     </div>
   );
