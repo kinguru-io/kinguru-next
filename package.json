@@ -94,7 +94,7 @@
     "@stripe/stripe-js": "^3.0.1",
     "@tanstack/react-query": "^4.18.0",
     "@tanstack/react-query-devtools": "^4.18.0",
-    "@tanstack/react-table": "^8.11.8",
+    "@tanstack/react-table": "^8.12.0",
     "@trpc/client": "^10.45.1",
     "@trpc/next": "^10.45.1",
     "@trpc/react-query": "^10.45.1",
