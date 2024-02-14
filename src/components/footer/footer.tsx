@@ -1,10 +1,12 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { LanguageDropdown } from "./languageDropdown";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 
 const Footer = () => {
   // to-do move select and icon from ui kit
   const t = useTranslations();
+  const locale = useLocale();
 
   const navigation = [
     { name: t("navbar.events"), href: "/events" },
@@ -119,13 +121,7 @@ const Footer = () => {
               <li>ln</li>
             </ul>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
-            <select>
-              {languageOptions.map(({ code, text }) => (
-                <option value={code} key={code} style={{ color: "black" }}>
-                  {text}
-                </option>
-              ))}
-            </select>
+            <LanguageDropdown locale={locale} langOptions={languageOptions} />
           </div>
         </div>
       </div>
