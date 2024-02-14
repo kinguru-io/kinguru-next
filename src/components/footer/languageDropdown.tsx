@@ -1,6 +1,8 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
+import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
+import { css } from "~/styled-system/css";
 
 type LanguageDropdownProps = {
   langOptions: Array<any>;
@@ -13,6 +15,9 @@ export function LanguageDropdown({
 }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const currentLang =
+    langOptions[langOptions.findIndex((elem) => locale === elem.code)].text;
+
   const onToggleLanguageClick = (newLocale: string) => {
     const pathArr = pathname?.split("/");
     console.log(pathArr, pathname);
@@ -23,9 +28,15 @@ export function LanguageDropdown({
   };
 
   return (
-    <Dropdown size={"sm"}>
+    <Dropdown size={"lg"}>
       <DropdownInitiator>
-        <>languaage</>
+        <div
+          className={css({ display: "flex", gap: "8px", alignItems: "center" })}
+        >
+          <BsGlobe />
+          {currentLang}
+          <BsChevronDown />
+        </div>
       </DropdownInitiator>
       <DropdownMenu>
         {langOptions
