@@ -14,7 +14,7 @@ export const dropdownSlot = defineSlotRecipe({
       flexDirection: "column",
       position: "absolute",
       top: "calc(100% + 5px)",
-      bg: "token(color.neutral.5)",
+      bg: "token(colors.neutral.5)",
       right: "0",
       minW: "110px",
       zIndex: "token(zIndex.dropdown)",

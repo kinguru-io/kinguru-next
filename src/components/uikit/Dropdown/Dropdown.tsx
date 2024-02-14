@@ -12,7 +12,7 @@ const DropdownContext = React.createContext({
   setHidden: (_value: boolean) => {},
 });
 
-export function Dropdown({ children, size }: DropdownProps) {
+export function Dropdown({ children, size = "sm" }: DropdownProps) {
   const [hidden, setHidden] = React.useState(true);
   const classes = dropdown({ size });
   return (
