@@ -6,15 +6,16 @@ import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm, type UseFormRegister } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
-import {
-  resetFormSchema,
-  resetPassword,
-  type AuthFormState,
-  type ResetFormInput,
-} from "@/lib/actions/auth";
+import { type ResetPasswordAction } from "@/lib/actions";
+import { AuthFormState } from "@/lib/utils";
+import { resetFormSchema, type ResetFormInput } from "@/lib/validations";
 import { VStack } from "~/styled-system/jsx";
 
-export function ResetForm() {
+export function ResetForm({
+  resetPassword,
+}: {
+  resetPassword: ResetPasswordAction;
+}) {
   const {
     register,
     formState: { isValid },

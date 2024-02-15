@@ -1,4 +1,4 @@
-import type { ActionType, AuthFormResponse } from "./util";
+import type { ActionType, AuthFormResponse } from "@/lib/utils";
 
 // TODO remove once real actions are available
 export const noopAction: ActionType = (_data) => {

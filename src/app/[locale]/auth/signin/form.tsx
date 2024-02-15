@@ -5,17 +5,14 @@ import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
-import {
-  signinFormSchema,
-  type SigninFormInput,
-  AuthFormState,
-  signIn,
-} from "@/lib/actions/auth";
+import { type SignInAction } from "@/lib/actions";
+import { AuthFormState } from "@/lib/utils";
+import { SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
-export function SigninForm() {
+export function SigninForm({ signIn }: { signIn: SignInAction }) {
   const {
     register,
     formState: { isValid },

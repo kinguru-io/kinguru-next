@@ -5,12 +5,9 @@ import { RichTranslationValues, useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
-import {
-  signupFormSchema,
-  type SignupFormInput,
-  AuthFormState,
-  signUp,
-} from "@/lib/actions/auth";
+import { type SignUpAction } from "@/lib/actions";
+import { AuthFormState } from "@/lib/utils";
+import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
 
@@ -20,7 +17,7 @@ const translationValues: RichTranslationValues = {
   personalDataProcess: (chunks) => <Link href="#">{chunks}</Link>,
 };
 
-export function SignupForm() {
+export function SignupForm({ signUp }: { signUp: SignUpAction }) {
   const {
     register,
     formState: { isValid },
