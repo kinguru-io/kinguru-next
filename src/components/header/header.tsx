@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Links } from "./headerLinks";
-import { Avatar } from "../uikit";
+import { UserSection } from "./userSection";
 import { css } from "~/styled-system/css";
 
 export function Header() {
@@ -27,7 +27,7 @@ export function Header() {
           maxWidth: "1920px",
           margin: "auto",
           display: "flex",
-          gap: "131px",
+          gap: "62px",
           alignItems: "center",
           px: "370px",
         })}
@@ -38,17 +38,12 @@ export function Header() {
             className={css({
               display: "flex",
               gap: "65px",
-              paddingRight: "60px",
             })}
           >
             <Links navigation={navigation} />
           </ul>
         </nav>
-        <Avatar
-          image="https://loremflickr.com/320/240"
-          name="random pic"
-          size="sm"
-        />
+        <UserSection />
       </div>
     </header>
   );
