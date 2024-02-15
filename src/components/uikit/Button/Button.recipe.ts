@@ -7,7 +7,7 @@ export const buttonRecipe = defineRecipe({
     display: "flex",
     alignItems: "center",
     gap: "2",
-    borderRadius: "3rem",
+    borderRadius: "full",
     borderStyle: "solid",
     cursor: "pointer",
     position: "relative",
@@ -58,6 +58,18 @@ export const buttonRecipe = defineRecipe({
           color: "neutral.2",
           borderColor: "token(colors.colorPalette.disabled)",
         },
+        _focusVisible: {
+          borderColor: "token(colors.focus)",
+        },
+      },
+      ghost: {
+        bg: "transparent",
+        borderColor: "transparent",
+        color: "neutral.1",
+        fontWeight: "bold",
+        _hoverEnabled: { textDecoration: "underline" },
+        _activeEnabled: { bg: "neutral.4" },
+        _disabled: { color: "neutral.2" },
         _focusVisible: {
           borderColor: "token(colors.focus)",
         },

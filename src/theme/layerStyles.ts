@@ -7,7 +7,7 @@ const outlineWrapperBaseStyles: LayerStyle = {
   borderStyle: "solid",
   borderRadius: "10px",
   backgroundColor: "neutral.5",
-  paddingInline: "25px", // safe space for inners
+  paddingInline: "38px",
 };
 
 export const layerStyles = defineLayerStyles({
@@ -15,8 +15,7 @@ export const layerStyles = defineLayerStyles({
     value: {
       ...outlineWrapperBaseStyles,
       borderColor: "primary",
-      paddingBlockStart: "38px",
-      paddingBlockEnd: "19px",
+      paddingBlock: "35px",
     },
   },
   outlineSecondaryWrapper: {

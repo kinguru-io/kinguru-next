@@ -54,6 +54,7 @@
   },
   "include": [
     "pages/**/*.ts",
+    "global.d.ts",
     "process.d.ts",
     "next-env.d.ts",
     "next-auth.d.ts",

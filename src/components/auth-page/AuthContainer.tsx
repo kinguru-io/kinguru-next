@@ -1,7 +1,7 @@
 import authBg from "~/public/img/auth-page/auth-page-bg.jpg";
 
 import { css } from "~/styled-system/css";
-import { Center } from "~/styled-system/jsx";
+import { Center, Flex } from "~/styled-system/jsx";
 
 export function AuthContainer({ children }: { children: React.ReactNode }) {
   return (
@@ -20,14 +20,32 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
           backdropFilter: "blur(5px)",
         })}
       />
-      <Center
+      <Flex
+        flexDirection="column"
         position="relative"
         maxWidth="380px"
         width="full"
         layerStyle="outlinePrimaryWrapper"
+        textAlign="center"
+        className={css({
+          "& h1": { mb: "30px", fontSize: "20px" }, // TODO (replace) fontSize is temporary since no tokens in design
+          "& button[type=submit]": { mt: "30px" },
+          "& a.button": { mt: "15px" },
+          "& p": {
+            mt: "20px",
+            textStyle: "body.3",
+            color: "neutral.2",
+            "& a": {
+              color: "neutral.1",
+              _hover: {
+                textDecoration: "underline",
+              },
+            },
+          },
+        })}
       >
         {children}
-      </Center>
+      </Flex>
     </Center>
   );
 }
