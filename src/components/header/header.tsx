@@ -10,7 +10,7 @@ const Header = () => {
     { name: t("navbar.speakers"), href: "/speakers" },
     { name: t("navbar.places"), href: "/places" },
     { name: t("navbar.price"), href: "/price" },
-    { name: "Как это работает?", href: "/#" },
+    { name: t("navbar.how_it_work"), href: "/#" },
   ];
   return (
     <header
