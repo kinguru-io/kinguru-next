@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
+import { Links } from "./headerLinks";
 import { Avatar } from "../uikit";
-import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 
 const Header = () => {
@@ -41,17 +41,7 @@ const Header = () => {
               paddingRight: "60px",
             })}
           >
-            {navigation.map(({ href, name }) => (
-              <Link
-                key={name}
-                href={href}
-                className={css({
-                  textStyle: "body.2",
-                })}
-              >
-                {name}
-              </Link>
-            ))}
+            <Links navigation={navigation} />
           </ul>
         </nav>
         <Avatar
