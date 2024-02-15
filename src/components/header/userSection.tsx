@@ -22,7 +22,9 @@ export async function UserSection() {
       ) : (
         <Dropdown size={"lg"}>
           <DropdownInitiator>
-            <Button variant="outline">Вход и регистрация</Button>
+            <Button variant="outline" size={"md"}>
+              Вход и регистрация
+            </Button>
           </DropdownInitiator>
           <DropdownMenu>
             <Link href="#">Вход</Link>
