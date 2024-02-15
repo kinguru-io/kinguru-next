@@ -1,3 +1,10 @@
+# [0.23.0](https://github.com/kinguru-io/kinguru-next/compare/v0.22.1...v0.23.0) (2024-02-15)
+
+
+### Features
+
+* **KINGU-78:** auth page forms ([#434](https://github.com/kinguru-io/kinguru-next/issues/434)) ([e12277d](https://github.com/kinguru-io/kinguru-next/commit/e12277dafbacebc07ec62691122c9f6754f4d2fd))
+
 ## [0.22.1](https://github.com/kinguru-io/kinguru-next/compare/v0.22.0...v0.22.1) (2024-02-13)
 
 
