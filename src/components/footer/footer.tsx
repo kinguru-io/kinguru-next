@@ -71,7 +71,7 @@ export function Footer() {
             bottom: "20px",
           })}
         >
-          2023 Kinguru. Все права защищены
+          {t("footer.all_rights_reserved")}
         </div>
         <div>Logo</div>
         <div
