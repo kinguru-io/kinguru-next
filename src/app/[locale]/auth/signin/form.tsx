@@ -23,7 +23,7 @@ export function SigninForm() {
     mode: "onBlur",
     resolver: zodResolver(signinFormSchema),
   });
-
+  // TODO `state` might be used for notifications?
   const [_state, formAction] = useFormState<AuthFormState, FormData>(
     signIn,
     null,

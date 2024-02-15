@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm, type UseFormRegister } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
@@ -22,10 +23,14 @@ export function ResetForm() {
     resolver: zodResolver(resetFormSchema),
   });
   // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<AuthFormState, FormData>(
+  const [state, formAction] = useFormState<AuthFormState, FormData>(
     resetPassword,
     null,
   );
+
+  useEffect(() => {
+    console.log(state?.message);
+  }, [state]);
 
   return (
     <form action={formAction}>

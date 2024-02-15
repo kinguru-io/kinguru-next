@@ -1,19 +1,18 @@
-import { createFormAction } from "./action";
+import { noopAction } from "./action";
+import { createFormAction } from "./util";
 import {
   resetFormSchema,
   signinFormSchema,
   signupFormSchema,
 } from "./validation";
 
-// ? простое использование фабрики при эскпорте из модуля. вроде как похоже на deps inversion (?)
-// TODO refactor fabriс using once discussed
-export const resetPassword = createFormAction(resetFormSchema);
-export const signIn = createFormAction(signinFormSchema);
-export const signUp = createFormAction(signupFormSchema);
+export const resetPassword = createFormAction(noopAction, resetFormSchema);
+export const signIn = createFormAction(noopAction, signinFormSchema);
+export const signUp = createFormAction(noopAction, signupFormSchema);
 
 export { resetFormSchema, signinFormSchema, signupFormSchema };
 
-export type { AuthFormState } from "./action";
+export type { AuthFormState } from "./util";
 export type {
   ResetFormInput,
   SigninFormInput,
