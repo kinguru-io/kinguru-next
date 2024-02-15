@@ -3,14 +3,14 @@ import { Links } from "./headerLinks";
 import { Avatar } from "../uikit";
 import { css } from "~/styled-system/css";
 
-const Header = () => {
+export function Header() {
   const t = useTranslations();
   const navigation = [
     { name: t("navbar.events"), href: "/events" },
     { name: t("navbar.speakers"), href: "/speakers" },
     { name: t("navbar.places"), href: "/places" },
     { name: t("navbar.price"), href: "/price" },
-    { name: t("navbar.how_it_work"), href: "/#" },
+    { name: t("navbar.how_it_works"), href: "/#" },
   ];
   return (
     <header
@@ -52,6 +52,4 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}
