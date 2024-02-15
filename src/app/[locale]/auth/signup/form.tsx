@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { RichTranslationValues, useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
@@ -14,6 +14,12 @@ import {
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
 
+const translationValues: RichTranslationValues = {
+  partnerAgreement: (chunks) => <Link href="#">{chunks}</Link>,
+  personalDataPolicy: (chunks) => <Link href="#">{chunks}</Link>,
+  personalDataProcess: (chunks) => <Link href="#">{chunks}</Link>,
+};
+
 export function SignupForm() {
   const {
     register,
@@ -22,7 +28,7 @@ export function SignupForm() {
     mode: "onBlur",
     resolver: zodResolver(signupFormSchema),
   });
-
+  // TODO `state` might be used for notifications?
   const [_state, formAction] = useFormState<AuthFormState, FormData>(
     signUp,
     null,
@@ -72,12 +78,7 @@ function SignupFormInner({
       <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
         {t("submit")}
       </Button>
-      <p>
-        {t("helper_part_1")} <Link href="#">{t("helper_link_agreement")}</Link>
-        {t("helper_part_2")}
-        <Link href="#">{t("helper_link_data")}</Link>
-        {t("helper_part_3")}
-      </p>
+      <p>{t.rich("helper", translationValues)}</p>
     </VStack>
   );
 }
