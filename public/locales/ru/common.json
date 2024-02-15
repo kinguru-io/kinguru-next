@@ -228,5 +228,28 @@
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ"
+  },
+  "auth": {
+    "reset_form": {
+      "heading": "Забыли пароль?",
+      "email_placeholder": "Введите email",
+      "submit": "Отправить",
+      "helper": "Введите адрес электронной почты используемый для входа и мы вышлем вам письмо со ссылкой для создания нового пароля"
+    },
+    "signin_form": {
+      "heading": "Вход в кабинет организации",
+      "email_placeholder": "Введите email",
+      "password_placeholder": "Пароль",
+      "submit": "Войти",
+      "forgot_password": "Забыли пароль?"
+    },
+    "signup_form": {
+      "heading": "Зарегистрируйте свою организацию",
+      "email_placeholder": "Введите email",
+      "password_placeholder": "Пароль",
+      "password_confirm_placeholder": "Повтор пароля",
+      "submit": "Зарегестрироваться",
+      "helper": "Нажимая на кнопку \"Зарегестрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
+    }
   }
 }

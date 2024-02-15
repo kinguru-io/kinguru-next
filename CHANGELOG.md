@@ -1,3 +1,17 @@
+# [0.23.0](https://github.com/kinguru-io/kinguru-next/compare/v0.22.1...v0.23.0) (2024-02-15)
+
+
+### Features
+
+* **KINGU-78:** auth page forms ([#434](https://github.com/kinguru-io/kinguru-next/issues/434)) ([e12277d](https://github.com/kinguru-io/kinguru-next/commit/e12277dafbacebc07ec62691122c9f6754f4d2fd))
+
+## [0.22.1](https://github.com/kinguru-io/kinguru-next/compare/v0.22.0...v0.22.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* pin react query library version ([b2f9d43](https://github.com/kinguru-io/kinguru-next/commit/b2f9d4327f7cb8c5801da1fcff3027817af58297))
+
 # [0.22.0](https://github.com/kinguru-io/kinguru-next/compare/v0.21.0...v0.22.0) (2024-02-11)
 
 
