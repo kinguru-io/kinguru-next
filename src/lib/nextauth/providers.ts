@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { loginSchema } from "@/lib/actions/auth/login.ts";
+import { signinFormSchema } from "@/lib/validations";
 import prisma from "@/server/prisma.ts";
 
 export const providers = (adapter: Adapter) => [
@@ -32,7 +32,7 @@ export const providers = (adapter: Adapter) => [
       password: { label: "Password", type: "password" },
     },
     authorize: async (credentials) => {
-      const creds = loginSchema.parse(credentials);
+      const creds = signinFormSchema.parse(credentials);
 
       const user = await adapter.getUserByEmail?.(creds.email);
       if (!user) {
