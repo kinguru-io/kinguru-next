@@ -20,10 +20,13 @@ export function Footer() {
   ];
 
   const policies = [
-    { name: t("footer.privacy_policy"), href: "/" },
-    { name: t("footer.terms_and_conditions"), href: "/" },
-    { name: t("footer.cookie_policy"), href: "/" },
-    { name: t("footer.faq"), href: "/" },
+    { name: t("footer.privacy_policy"), href: "/legal/privacy-policy" },
+    {
+      name: t("footer.terms_and_conditions"),
+      href: "/legal/terms-and-conditions",
+    },
+    { name: t("footer.cookie_policy"), href: "/legal/cookie-policy" },
+    { name: t("footer.faq"), href: "/#" },
   ];
 
   const languageOptions = [
