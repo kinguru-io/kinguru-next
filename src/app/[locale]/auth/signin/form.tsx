@@ -1,33 +1,41 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
-import { type SignInAction } from "@/lib/actions";
-import { AuthFormState } from "@/lib/utils";
 import { SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
-export function SigninForm({ signIn }: { signIn: SignInAction }) {
+export function SigninForm() {
   const {
     register,
     formState: { isValid },
+    handleSubmit,
   } = useForm<SigninFormInput>({
     mode: "onBlur",
     resolver: zodResolver(signinFormSchema),
   });
-  // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<AuthFormState, FormData>(
-    signIn,
-    null,
-  );
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams?.get("callbackUrl") || undefined;
+
+  const onSubmit = ({ email, password }: SigninFormInput) => {
+    void signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+      callbackUrl,
+    });
+  };
 
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <SigninFormInner register={register} isValid={isValid} />
     </form>
   );
