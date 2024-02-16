@@ -20,11 +20,11 @@ export function LanguageDropdown({
 
   const onToggleLanguageClick = (newLocale: string) => {
     const pathArr = pathname?.split("/");
-    console.log(pathArr, pathname);
-    pathArr![1] = newLocale;
+    if (pathArr) pathArr[1] = newLocale;
+
     const newPathname = pathArr?.join("/");
-    console.log(pathArr, newPathname);
-    router.push(newPathname!);
+
+    router.push(newPathname || "/");
   };
 
   return (
