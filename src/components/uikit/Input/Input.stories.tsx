@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { InputPassword } from "@/components/common/form/input-password";
 import { Input } from "@/components/uikit/Input";
 import { vstack } from "~/styled-system/patterns";
 import { input as inputRecipe } from "~/styled-system/recipes";
@@ -88,4 +89,12 @@ export const ManyOutlineTextFields: Story = {
       </div>
     );
   },
+};
+
+export const InputTypePassword: Story = {
+  render: () => (
+    <>
+      <InputPassword defaultValue="" placeholder="Password..." />
+    </>
+  ),
 };
