@@ -4,8 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RichTranslationValues, useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
-import { InputPassword } from "@/components/common/form/input-password";
-import { Button, Input } from "@/components/uikit";
+import { Button, Input, InputPassword } from "@/components/uikit";
 import {
   signupFormSchema,
   type SignupFormInput,

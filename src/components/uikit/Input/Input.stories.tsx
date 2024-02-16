@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { InputPassword } from "@/components/common/form/input-password";
-import { Input } from "@/components/uikit/Input";
+import { Input, InputPassword } from "@/components/uikit";
 import { vstack } from "~/styled-system/patterns";
 import { input as inputRecipe } from "~/styled-system/recipes";
 
