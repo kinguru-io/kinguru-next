@@ -1,6 +1,13 @@
-import { noopAction } from "@/lib/actions/auth/action.ts";
-import { createFormAction } from "@/lib/utils";
-import { resetFormSchema } from "@/lib/validations";
+import { AuthFormState, createFormAction } from "@/lib/utils";
+import { ResetFormInput, resetFormSchema } from "@/lib/validations";
 
-export const resetPassword = createFormAction(noopAction, resetFormSchema);
+const resetPasswordHandler =
+  async ({}: ResetFormInput): Promise<AuthFormState> => {
+    return null;
+  };
+
+export const resetPassword = createFormAction(
+  resetPasswordHandler,
+  resetFormSchema,
+);
 export type ResetPasswordAction = typeof resetPassword;
