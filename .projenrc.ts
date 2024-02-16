@@ -180,8 +180,11 @@ const project = new web.NextJsTypeScriptProject({
     "react-hook-form",
     "@hookform/resolvers",
     "zod-form-data",
+    "bcrypt",
   ],
   devDeps: [
+    "@types/bcrypt",
+
     "@pandacss/dev",
 
     "tsconfig-paths-webpack-plugin",

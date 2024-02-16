@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
@@ -44,13 +45,22 @@ export const providers = (adapter: Adapter) => [
           userId: user.id,
           type: "credentials",
         },
+        select: {
+          providerAccountId: true,
+        },
       });
 
       if (!account) {
         return null;
       }
 
-      return user;
+      const isPasswordCorrect = await bcrypt.compare(
+        creds.password,
+        account.providerAccountId,
+      );
+      if (isPasswordCorrect) return user;
+
+      return null;
     },
   }),
 ];

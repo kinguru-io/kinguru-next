@@ -66,6 +66,10 @@
       "type": "build"
     },
     {
+      "name": "@types/bcrypt",
+      "type": "build"
+    },
+    {
       "name": "@types/gtag.js",
       "type": "build"
     },
@@ -282,6 +286,10 @@
     },
     {
       "name": "@trpc/server",
+      "type": "runtime"
+    },
+    {
+      "name": "bcrypt",
       "type": "runtime"
     },
     {

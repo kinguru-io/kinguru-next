@@ -5,25 +5,20 @@ export type AuthFormResponse = {
   message: string;
 };
 export type AuthFormState = AuthFormResponse | null;
-export type ActionType = (data: FormData) => Promise<AuthFormState>;
+export type ActionType<T> = (data: T) => Promise<AuthFormState>;
 
 export function createFormAction<
   I,
   O,
   T extends ZodEffects<ZodType<O, ZodTypeDef, I>>,
->(action: ActionType, schema: T) {
+>(action: ActionType<O>, schema: T) {
   return async function processAction(
     _prevState: AuthFormState,
     data: FormData,
   ): Promise<AuthFormState> {
     try {
-      schema.parse(data);
-      const result = await action(data);
-
-      return {
-        status: "success",
-        message: JSON.stringify(result?.message),
-      };
+      const parsedSchema = schema.parse(data);
+      return await action(parsedSchema);
     } catch (e) {
       if (e instanceof ZodError) {
         return {
