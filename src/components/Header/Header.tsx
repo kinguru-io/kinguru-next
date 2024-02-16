@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
-import { Links } from "./headerLinks";
-import { UserSection } from "./userSection";
+import { Links } from "./HeaderLinks";
+import { UserSection } from "./UserSection";
 import { css } from "~/styled-system/css";
 
 export function Header() {

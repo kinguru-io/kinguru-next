@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { LanguageDropdown } from "./languageDropdown";
+import { LanguageDropdown } from "./LanguageDropdown";
 import { Link } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
@@ -8,7 +8,6 @@ import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
 import { css } from "~/styled-system/css";
 
 export function Footer() {
-  // to-do move select and icon from ui kit
   const t = useTranslations();
   const locale = useLocale();
 
