@@ -6,8 +6,10 @@ import { Input, InputProps } from "@/components/uikit";
 import { css } from "~/styled-system/css";
 import { Box } from "~/styled-system/jsx";
 
+type InputPasswordProps = Omit<InputProps, "type" | "variant">;
+
 export const InputPassword = forwardRef(function InputPassword(
-  { variant, type, ...restProps }: InputProps,
+  props: InputPasswordProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const [passwordShown, setPasswordShownState] = useState(false);
@@ -25,7 +27,7 @@ export const InputPassword = forwardRef(function InputPassword(
         type={passwordShown ? "text" : "password"}
         variant="outline"
         ref={ref}
-        {...restProps}
+        {...props}
       />
       <button
         type="button"
