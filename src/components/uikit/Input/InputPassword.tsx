@@ -1,3 +1,5 @@
+"use client";
+
 import { ForwardedRef, forwardRef, useState } from "react";
 import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 import { Input, InputProps } from "@/components/uikit";
