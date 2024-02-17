@@ -25,6 +25,9 @@ export const authOptionsWrapper = (request: NextRequest, context: Context) => {
       jwt: jwt(request, params),
       events,
       ...adapterOptions,
+      pages: {
+        signIn: `/auth/signin`,
+      },
     } as AuthOptions,
   ] as const;
 };
