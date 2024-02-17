@@ -229,7 +229,7 @@
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ",
-    "all_rights_reserved": "2023  Kinguru. Все права защищены",
+    "all_rights_reserved": "{year}  Kinguru. Все права защищены",
     "lang_en": "Английский",
     "lang_pl": "Польский",
     "lang_ru": "Русский",

@@ -73,7 +73,7 @@ export function Footer() {
             bottom: "20px",
           })}
         >
-          {t("all_rights_reserved")}
+          {t("all_rights_reserved", { year: new Date().getFullYear() })}
         </div>
         <div>Logo</div>
         <div
