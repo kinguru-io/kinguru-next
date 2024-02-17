@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageDropdown } from "./LanguageDropdown";
-import { Link } from "@/navigation";
+import { Link, locales } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
@@ -28,20 +28,10 @@ export function Footer() {
     { name: t("faq"), href: "/#" },
   ];
 
-  const languageOptions = [
-    {
-      code: "en",
-      text: t("lang_en"),
-    },
-    {
-      code: "pl",
-      text: t("lang_pl"),
-    },
-    {
-      code: "ru",
-      text: t("lang_ru"),
-    },
-  ];
+  const languageOptions = locales.map((code) => ({
+    code: code,
+    text: t(`lang_${code}`),
+  }));
 
   return (
     <footer
