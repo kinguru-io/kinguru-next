@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
-import { Button, Input } from "@/components/uikit";
+import { Button, Input, InputPassword } from "@/components/uikit";
 import { SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
@@ -60,9 +60,7 @@ function SigninFormInner({
           disabled={pending}
           {...register("email")}
         />
-        <Input
-          type="password"
-          variant="outline"
+        <InputPassword
           placeholder={t("password_placeholder")}
           disabled={pending}
           {...register("password")}

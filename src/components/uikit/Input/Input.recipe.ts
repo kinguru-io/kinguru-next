@@ -5,7 +5,7 @@ export const inputRecipe = defineRecipe({
   className: "input",
   base: {
     display: "block",
-    w: "full",
+    width: "full",
     fontSize: "16px",
     lineHeight: "1.25",
     bg: "neutral.5",
@@ -37,7 +37,7 @@ export const inputRecipe = defineRecipe({
       outline: {
         borderRadius: "full",
         px: "25px",
-        py: "10px",
+        py: "8px",
       },
     },
   },

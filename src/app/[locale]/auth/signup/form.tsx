@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RichTranslationValues, useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
-import { Button, Input } from "@/components/uikit";
+import { Button, Input, InputPassword } from "@/components/uikit";
 import { type SignUpAction } from "@/lib/actions";
 import { AuthFormState } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
@@ -57,16 +57,12 @@ function SignupFormInner({
           disabled={pending}
           {...register("email")}
         />
-        <Input
-          type="password"
-          variant="outline"
+        <InputPassword
           placeholder={t("password_placeholder")}
           disabled={pending}
           {...register("password")}
         />
-        <Input
-          type="password"
-          variant="outline"
+        <InputPassword
           placeholder={t("password_confirm_placeholder")}
           disabled={pending}
           {...register("confirmPassword")}
