@@ -392,6 +392,13 @@
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ",
-    "all_rights_reserved": "2023  Kinguru. All rights reserved"
+    "all_rights_reserved": "2023  Kinguru. All rights reserved",
+    "lang_en": "English",
+    "lang_pl": "Polish",
+    "lang_ru": "Russian",
+    "events": "Events",
+    "speakers": "Speakers",
+    "places": "Places",
+    "price": "Price"
   }
 }

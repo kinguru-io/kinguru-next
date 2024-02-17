@@ -8,38 +8,38 @@ import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
 import { css } from "~/styled-system/css";
 
 export function Footer() {
-  const t = useTranslations();
+  const t = useTranslations("footer");
   const locale = useLocale();
 
   const navigation = [
-    { name: t("navbar.events"), href: "/events" },
-    { name: t("navbar.speakers"), href: "/speakers" },
-    { name: t("navbar.places"), href: "/places" },
-    { name: t("navbar.price"), href: "/price" },
+    { name: t("events"), href: "/events" },
+    { name: t("speakers"), href: "/speakers" },
+    { name: t("places"), href: "/places" },
+    { name: t("price"), href: "/price" },
   ];
 
   const policies = [
-    { name: t("footer.privacy_policy"), href: "/legal/privacy-policy" },
+    { name: t("privacy_policy"), href: "/legal/privacy-policy" },
     {
-      name: t("footer.terms_and_conditions"),
+      name: t("terms_and_conditions"),
       href: "/legal/terms-and-conditions",
     },
-    { name: t("footer.cookie_policy"), href: "/legal/cookie-policy" },
-    { name: t("footer.faq"), href: "/#" },
+    { name: t("cookie_policy"), href: "/legal/cookie-policy" },
+    { name: t("faq"), href: "/#" },
   ];
 
   const languageOptions = [
     {
       code: "en",
-      text: t("navbar.lang_en"),
+      text: t("lang_en"),
     },
     {
       code: "pl",
-      text: t("navbar.lang_pl"),
+      text: t("lang_pl"),
     },
     {
       code: "ru",
-      text: t("navbar.lang_ru"),
+      text: t("lang_ru"),
     },
   ];
 
@@ -73,7 +73,7 @@ export function Footer() {
             bottom: "20px",
           })}
         >
-          {t("footer.all_rights_reserved")}
+          {t("all_rights_reserved")}
         </div>
         <div>Logo</div>
         <div
