@@ -111,7 +111,7 @@ export function Footer() {
                 gap: "10px",
               })}
             >
-              <a href="#">
+              <Link href="https://www.instagram.com/eventify.today/">
                 <Image
                   src={instagramIcon.src}
                   alt="instagram icon"
@@ -119,8 +119,8 @@ export function Footer() {
                   width={22}
                   height={22}
                 />
-              </a>
-              <a href="#">
+              </Link>
+              <Link href="#">
                 <Image
                   src={facebookIcon.src}
                   alt="facebook icon"
@@ -128,8 +128,8 @@ export function Footer() {
                   width={22}
                   height={22}
                 />
-              </a>
-              <a href="#">
+              </Link>
+              <Link href="#">
                 <Image
                   src={linkedinIcon.src}
                   alt="linkedin icon"
@@ -137,7 +137,7 @@ export function Footer() {
                   width={22}
                   height={22}
                 />
-              </a>
+              </Link>
             </div>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
             <LanguageDropdown locale={locale} langOptions={languageOptions} />
