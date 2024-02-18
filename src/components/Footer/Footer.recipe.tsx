@@ -17,6 +17,7 @@ export const footerSlot = defineSlotRecipe({
       bg: "token(colors.neutral.1)",
       py: "70px 20px",
       width: "100%",
+      maxHeight: "256px",
       color: "token(colors.neutral.5)",
       textStyle: "body.2",
     },
