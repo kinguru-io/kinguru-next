@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { css } from "~/styled-system/css";
+import { footer } from "~/styled-system/recipes";
 
 type LanguageDropdownProps = {
   langOptions: Array<any>;
@@ -15,6 +15,9 @@ export function LanguageDropdown({
 }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
+
+  const classes = footer();
+
   const currentLang =
     langOptions[langOptions.findIndex((elem) => locale === elem.code)].text;
 
@@ -30,9 +33,7 @@ export function LanguageDropdown({
   return (
     <Dropdown size={"lg"}>
       <DropdownInitiator>
-        <div
-          className={css({ display: "flex", gap: "8px", alignItems: "center" })}
-        >
+        <div className={classes.languageDropdownInitiator}>
           <BsGlobe />
           {currentLang}
           <BsChevronDown />

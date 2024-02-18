@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from "@pandacss/dev";
+import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
@@ -33,6 +34,7 @@ export default defineConfig({
       },
       slotRecipes: {
         dropdown: dropdownSlot,
+        footer: footerSlot,
       },
       tokens: {
         gradients: {
