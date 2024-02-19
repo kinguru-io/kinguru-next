@@ -9,6 +9,7 @@ import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
+import { headerSlot } from "@/components/Header/Header.recipe";
 
 export default defineConfig({
   globalCss: additionalGlobalCss,
@@ -35,6 +36,7 @@ export default defineConfig({
       slotRecipes: {
         dropdown: dropdownSlot,
         footer: footerSlot,
+        header: headerSlot,
       },
       tokens: {
         gradients: {
