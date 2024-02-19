@@ -4,7 +4,11 @@ import { Avatar } from "../uikit";
 import { Button } from "../uikit/Button";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 
-export async function UserSection() {
+type UserSectionProps = {
+  t: any;
+};
+
+export async function UserSection({ t }: UserSectionProps) {
   const session = await getServerSession();
 
   return (
@@ -14,20 +18,20 @@ export async function UserSection() {
           <Avatar name="avatar" image={session.user?.image!} />
         ) : (
           <Button variant="outline" size={"md"}>
-            Вход и регистрация
+            {t("sign_in_and_sign_up")}
           </Button>
         )}
       </DropdownInitiator>
       <DropdownMenu>
         {session ? (
           <>
-            <Link href="#">Выйти</Link>
-            <Link href="#">Добавить кабинет организации</Link>
+            <Link href="#">{t("sign_out")}</Link>
+            <Link href="#">{t("add_organization")}</Link>
           </>
         ) : (
           <>
-            <Link href="#">Вход</Link>
-            <Link href="#">Регистрация</Link>
+            <Link href="#">{t("sign_in")}</Link>
+            <Link href="#">{t("sign_up")}</Link>
           </>
         )}
       </DropdownMenu>

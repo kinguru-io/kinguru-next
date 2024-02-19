@@ -38,7 +38,7 @@
     "how_it_works": "Как это работает",
     "open_main_menu": "Открыть главное меню",
     "close_menu": "Закрыть меню",
-    "sign_in": "Войти",
+    "sign_in": "Вход",
     "view_notifications": "Просмотр уведомлений",
     "your_profile": "Ваш профиль",
     "sign_out": "Выход",
@@ -47,7 +47,10 @@
     "search_placeholder": "...",
     "lang_en": "Английский",
     "lang_pl": "Польский",
-    "lang_ru": "Русский"
+    "lang_ru": "Русский",
+    "sign_up": "Регистрация",
+    "add_organization": "Добавить кабинет организации",
+    "sign_in_and_sign_up": "Вход и регистрация"
   },
   "hero": {
     "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",

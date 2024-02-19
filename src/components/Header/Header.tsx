@@ -25,7 +25,7 @@ export function Header() {
             <Links navigation={navigation} />
           </Flex>
         </nav>
-        <UserSection />
+        <UserSection t={t} />
       </Container>
     </header>
   );
