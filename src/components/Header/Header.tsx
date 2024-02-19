@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
 import { css } from "~/styled-system/css";
+import { Flex } from "~/styled-system/jsx";
 
 export function Header() {
   const t = useTranslations();
@@ -34,14 +35,9 @@ export function Header() {
       >
         <div>Logo</div>
         <nav>
-          <ul
-            className={css({
-              display: "flex",
-              gap: "65px",
-            })}
-          >
+          <Flex gap="65px">
             <Links navigation={navigation} />
-          </ul>
+          </Flex>
         </nav>
         <UserSection />
       </div>
