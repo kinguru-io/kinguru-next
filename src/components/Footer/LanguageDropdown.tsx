@@ -5,21 +5,33 @@ import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 import { footer } from "~/styled-system/recipes";
 
 type LanguageDropdownProps = {
-  langOptions: Array<any>;
   locale: string;
 };
 
-export function LanguageDropdown({
-  langOptions,
-  locale,
-}: LanguageDropdownProps) {
+export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const classes = footer();
 
+  const languageOptions = [
+    {
+      code: "ru",
+      text: "Русский",
+    },
+    {
+      code: "pl",
+      text: "Polska",
+    },
+    {
+      code: "en",
+      text: "English",
+    },
+  ];
+
   const currentLang =
-    langOptions[langOptions.findIndex((elem) => locale === elem.code)].text;
+    languageOptions[languageOptions.findIndex((elem) => locale === elem.code)]
+      .text;
 
   const onToggleLanguageClick = (newLocale: string) => {
     const pathArr = pathname?.split("/");
@@ -40,7 +52,7 @@ export function LanguageDropdown({
         </div>
       </DropdownInitiator>
       <DropdownMenu>
-        {langOptions
+        {languageOptions
           .filter(({ code }) => code !== locale)
           .map(({ code, text }) => (
             <span key={code} onClick={() => onToggleLanguageClick(code)}>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageDropdown } from "./LanguageDropdown";
-import { Link, locales } from "@/navigation";
+import { Link } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
@@ -29,11 +29,6 @@ export function Footer() {
     { name: t("cookie_policy"), href: "/legal/cookie-policy" },
     { name: t("faq"), href: "/#" },
   ];
-
-  const languageOptions = locales.map((code) => ({
-    code: code,
-    text: t(`lang_${code}`),
-  }));
 
   return (
     <footer className={classes.footer}>
@@ -85,7 +80,7 @@ export function Footer() {
               </Link>
             </div>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
-            <LanguageDropdown locale={locale} langOptions={languageOptions} />
+            <LanguageDropdown locale={locale} />
           </div>
         </div>
         <div className={classes.additionalText}>
