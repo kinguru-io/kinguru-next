@@ -12,24 +12,9 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const languageOptions = [
-    {
-      code: "ru",
-      text: "Русский",
-    },
-    {
-      code: "pl",
-      text: "Polska",
-    },
-    {
-      code: "en",
-      text: "English",
-    },
-  ];
+  const languageOptions = { ru: "Русский", pl: "Polska", en: "English" };
 
-  const currentLang =
-    languageOptions[languageOptions.findIndex((elem) => locale === elem.code)]
-      .text;
+  const currentLang = languageOptions[locale as keyof typeof languageOptions];
 
   const onToggleLanguageClick = (newLocale: string) => {
     const pathArr = pathname?.split("/");
@@ -50,11 +35,11 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
         </Flex>
       </DropdownInitiator>
       <DropdownMenu>
-        {languageOptions
-          .filter(({ code }) => code !== locale)
-          .map(({ code, text }) => (
+        {Object.keys(languageOptions)
+          .filter((code) => code !== locale)
+          .map((code) => (
             <span key={code} onClick={() => onToggleLanguageClick(code)}>
-              {text}
+              {languageOptions[code as keyof typeof languageOptions]}
             </span>
           ))}
       </DropdownMenu>
