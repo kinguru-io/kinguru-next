@@ -22,10 +22,7 @@ export const footerSlot = defineSlotRecipe({
       textStyle: "body.2",
     },
     footerWrapper: {
-      maxWidth: "1920px",
-      margin: "auto",
       height: "100%",
-      px: "430px",
       display: "flex",
       justifyContent: "center",
       flexDirection: "column",

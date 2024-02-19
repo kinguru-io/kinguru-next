@@ -5,6 +5,7 @@ import { Link } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
+import { Container } from "~/styled-system/jsx";
 import { footer } from "~/styled-system/recipes";
 
 export function Footer() {
@@ -50,7 +51,7 @@ export function Footer() {
 
   return (
     <footer className={classes.footer}>
-      <div className={classes.footerWrapper}>
+      <Container className={classes.footerWrapper} px={"230px"}>
         <div className={classes.contentWrapper}>
           <div>Logo</div>
           <div className={classes.links}>
@@ -87,7 +88,7 @@ export function Footer() {
         <div className={classes.additionalText}>
           {t("all_rights_reserved", { year: new Date().getFullYear() })}
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
