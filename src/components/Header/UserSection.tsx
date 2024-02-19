@@ -8,30 +8,29 @@ export async function UserSection() {
   const session = await getServerSession();
 
   return (
-    <>
-      {session ? (
-        <Dropdown size={"lg"}>
-          <DropdownInitiator>
-            <Avatar name="avatar" image={session.user?.image!} />
-          </DropdownInitiator>
-          <DropdownMenu>
+    <Dropdown size={"lg"}>
+      <DropdownInitiator>
+        {session ? (
+          <Avatar name="avatar" image={session.user?.image!} />
+        ) : (
+          <Button variant="outline" size={"md"}>
+            Вход и регистрация
+          </Button>
+        )}
+      </DropdownInitiator>
+      <DropdownMenu>
+        {session ? (
+          <>
             <Link href="#">Выйти</Link>
             <Link href="#">Добавить кабинет организации</Link>
-          </DropdownMenu>
-        </Dropdown>
-      ) : (
-        <Dropdown size={"lg"}>
-          <DropdownInitiator>
-            <Button variant="outline" size={"md"}>
-              Вход и регистрация
-            </Button>
-          </DropdownInitiator>
-          <DropdownMenu>
+          </>
+        ) : (
+          <>
             <Link href="#">Вход</Link>
             <Link href="#">Регистрация</Link>
-          </DropdownMenu>
-        </Dropdown>
-      )}
-    </>
+          </>
+        )}
+      </DropdownMenu>
+    </Dropdown>
   );
 }
