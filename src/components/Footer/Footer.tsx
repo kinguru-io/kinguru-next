@@ -30,6 +30,24 @@ export function Footer() {
     { name: t("faq"), href: "/#" },
   ];
 
+  const socialMedia = [
+    {
+      name: "Instagram",
+      src: instagramIcon.src,
+      link: "https://www.instagram.com/eventify.today/",
+    },
+    {
+      name: "Facebook",
+      src: facebookIcon.src,
+      link: "https://www.linkedin.com/company/eventifytoday/",
+    },
+    {
+      name: "Linkedin",
+      src: linkedinIcon.src,
+      link: "https://www.facebook.com/eventify.today",
+    },
+  ];
+
   return (
     <footer className={classes.footer}>
       <div className={classes.footerWrapper}>
@@ -51,33 +69,16 @@ export function Footer() {
           </div>
           <div className={classes.links}>
             <div className={classes.socialLinks}>
-              <Link href="https://www.instagram.com/eventify.today/">
-                <Image
-                  src={instagramIcon.src}
-                  alt="instagram icon"
-                  role="link"
-                  width={22}
-                  height={22}
-                />
-              </Link>
-              <Link href="#">
-                <Image
-                  src={facebookIcon.src}
-                  alt="facebook icon"
-                  role="link"
-                  width={22}
-                  height={22}
-                />
-              </Link>
-              <Link href="#">
-                <Image
-                  src={linkedinIcon.src}
-                  alt="linkedin icon"
-                  role="link"
-                  width={22}
-                  height={22}
-                />
-              </Link>
+              {socialMedia.map(({ name, src, link }) => (
+                <Link href={link}>
+                  <Image
+                    src={src}
+                    alt={`Follow us on ${name}`}
+                    width={22}
+                    height={22}
+                  />
+                </Link>
+              ))}
             </div>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
             <LanguageDropdown locale={locale} />
