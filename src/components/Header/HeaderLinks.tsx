@@ -17,12 +17,14 @@ export function Links({ navigation }: LinksProps) {
 
   const navigationLinks = navigation.map(({ href, name }) => {
     const textStyle = path?.indexOf(href) !== -1 ? "heading.h4" : "body.2";
+    const newHref = path?.indexOf(href) !== -1 ? "" : href;
     return (
       <Link
         key={name}
-        href={href}
+        href={newHref}
         className={css({
           textStyle: textStyle,
+          padding: "5px",
         })}
       >
         {name}

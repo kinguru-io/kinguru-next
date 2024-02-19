@@ -5,13 +5,14 @@ import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
 export function Header() {
-  const t = useTranslations();
+  const t = useTranslations("navbar");
+
   const navigation = [
-    { name: t("navbar.events"), href: "/events" },
-    { name: t("navbar.speakers"), href: "/speakers" },
-    { name: t("navbar.places"), href: "/places" },
-    { name: t("navbar.price"), href: "/price" },
-    { name: t("navbar.how_it_works"), href: "/#" },
+    { name: t("events"), href: "/events" },
+    { name: t("speakers"), href: "/speakers" },
+    { name: t("places"), href: "/places" },
+    { name: t("price"), href: "/price" },
+    { name: t("how_it_works"), href: "/#" },
   ];
   return (
     <header
@@ -35,7 +36,7 @@ export function Header() {
       >
         <div>Logo</div>
         <nav>
-          <Flex gap="65px">
+          <Flex gap="55px">
             <Links navigation={navigation} />
           </Flex>
         </nav>
