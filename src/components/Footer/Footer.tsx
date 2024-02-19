@@ -5,7 +5,7 @@ import { Link } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
-import { Container } from "~/styled-system/jsx";
+import { Container, Flex } from "~/styled-system/jsx";
 import { footer } from "~/styled-system/recipes";
 
 export function Footer() {
@@ -54,22 +54,22 @@ export function Footer() {
       <Container className={classes.footerWrapper} px={"230px"}>
         <div className={classes.contentWrapper}>
           <div>Logo</div>
-          <div className={classes.links}>
+          <Flex gap="5px" direction="column">
             {navigation.map(({ href, name }) => (
               <Link key={name} href={href}>
                 {name}
               </Link>
             ))}
-          </div>
-          <div className={classes.links}>
+          </Flex>
+          <Flex gap="5px" direction="column">
             {policies.map(({ href, name }) => (
               <Link key={name} href={href}>
                 {name}
               </Link>
             ))}
-          </div>
-          <div className={classes.links}>
-            <div className={classes.socialLinks}>
+          </Flex>
+          <Flex gap="5px" direction="column">
+            <Flex gap="10px">
               {socialMedia.map(({ name, src, link }) => (
                 <Link href={link}>
                   <Image
@@ -80,10 +80,10 @@ export function Footer() {
                   />
                 </Link>
               ))}
-            </div>
+            </Flex>
             <Link href={"tel:+48792665092"}>+48792665092</Link>
             <LanguageDropdown locale={locale} />
-          </div>
+          </Flex>
         </div>
         <div className={classes.additionalText}>
           {t("all_rights_reserved", { year: new Date().getFullYear() })}

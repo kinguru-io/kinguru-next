@@ -3,15 +3,7 @@ import { defineSlotRecipe } from "@pandacss/dev";
 
 export const footerSlot = defineSlotRecipe({
   className: "footer",
-  slots: [
-    "footer",
-    "footerWrapper",
-    "additionalText",
-    "links",
-    "contentWrapper",
-    "socialLinks",
-    "languageDropdownInitiator",
-  ],
+  slots: ["footer", "footerWrapper", "additionalText", "contentWrapper"],
   base: {
     footer: {
       bg: "token(colors.neutral.1)",
@@ -32,24 +24,10 @@ export const footerSlot = defineSlotRecipe({
     additionalText: {
       color: "token(colors.neutral.2)",
     },
-    links: {
-      display: "flex",
-      gap: "5px",
-      flexDirection: "column",
-    },
     contentWrapper: {
       display: "flex",
       justifyContent: "space-between",
       width: "100%",
-    },
-    socialLinks: {
-      display: "flex",
-      gap: "10px",
-    },
-    languageDropdownInitiator: {
-      display: "flex",
-      gap: "8px",
-      alignItems: "center",
     },
   },
 });
