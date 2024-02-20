@@ -3,13 +3,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css } from "~/styled-system/css";
 
-type navigationLink = {
+type NavigationLink = {
   href: string;
   name: string;
 };
 
 type LinksProps = {
-  navigation: Array<navigationLink>;
+  navigation: Array<NavigationLink>;
 };
 
 export function Links({ navigation }: LinksProps) {
