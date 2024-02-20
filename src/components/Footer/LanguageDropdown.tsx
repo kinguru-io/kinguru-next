@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { languages } from "@/navigation";
+import { locales } from "@/navigation";
 import { Flex } from "~/styled-system/jsx";
 
 type LanguageDropdownProps = {
@@ -13,7 +13,9 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const currentLang = languages[locale as keyof typeof languages];
+  const lang = new Intl.DisplayNames(locales, { type: "language" });
+
+  const currentLang = lang.of(locale);
 
   const onToggleLanguageClick = (newLocale: string) => {
     const pathArr = pathname?.split("/");
@@ -34,11 +36,11 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
         </Flex>
       </DropdownInitiator>
       <DropdownMenu>
-        {Object.keys(languages)
+        {locales
           .filter((code) => code !== locale)
           .map((code) => (
             <span key={code} onClick={() => onToggleLanguageClick(code)}>
-              {languages[code as keyof typeof languages]}
+              {lang.of(code)}
             </span>
           ))}
       </DropdownMenu>
