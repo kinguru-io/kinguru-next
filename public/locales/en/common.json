@@ -396,12 +396,10 @@
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ",
     "all_rights_reserved": "{year}  Kinguru. All rights reserved",
-    "lang_en": "English",
-    "lang_pl": "Polish",
-    "lang_ru": "Russian",
     "events": "Events",
     "speakers": "Speakers",
     "places": "Places",
-    "price": "Price"
+    "price": "Price",
+    "follow_us": "Follow us on {social}" 
   }
 }

@@ -74,7 +74,7 @@ export function Footer() {
                 <Link href={link}>
                   <Image
                     src={src}
-                    alt={`Follow us on ${name}`}
+                    alt={t("follow_us", { social: name })}
                     width={22}
                     height={22}
                   />
