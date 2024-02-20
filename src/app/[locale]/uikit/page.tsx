@@ -1,9 +1,9 @@
-import { Button } from "@/components/uikit";
+import { ProfileImagePicker } from "@/components/common/form/input-profile-image";
 
 export default function Uikit() {
   return (
     <>
-      <Button>Hello</Button>
+      <ProfileImagePicker />
     </>
   );
 }

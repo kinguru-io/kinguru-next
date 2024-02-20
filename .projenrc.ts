@@ -119,6 +119,9 @@ const project = new web.NextJsTypeScriptProject({
   minNodeVersion: "20.9.0",
   packageManager: NodePackageManager.NPM,
   deps: [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+
     "@prisma/client",
     "@trpc/client",
     "@trpc/server",
