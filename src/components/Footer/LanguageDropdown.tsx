@@ -1,8 +1,7 @@
 "use client";
-import { usePathname } from "next/navigation";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { locales, useRouter } from "@/navigation";
+import { locales, useRouter, usePathname } from "@/navigation";
 import { Flex } from "~/styled-system/jsx";
 
 type LanguageDropdownProps = {
