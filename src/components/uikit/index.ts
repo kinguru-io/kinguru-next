@@ -5,3 +5,5 @@ export * from "./Tag";
 export * from "./Avatar";
 export * from "./AvatarGroup";
 export * from "./Card";
+export * from "./Dropdown";
+export * from "./Select";
