@@ -18,6 +18,9 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   staticDirs: ["../public"],
+  features: {
+    experimentalRSC: true,
+  },
 
   webpackFinal: async (config) => {
     if (config.resolve) {

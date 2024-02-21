@@ -188,6 +188,8 @@ const project = new web.NextJsTypeScriptProject({
     "@storybook/nextjs",
     "@storybook/react",
     "@storybook/test",
+    "@storybook/jest",
+    "storybook-addon-module-mock",
     "eslint-plugin-storybook",
     "storybook",
 

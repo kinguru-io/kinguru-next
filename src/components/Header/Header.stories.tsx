@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
-import * as gss from "next-auth";
+import * as nextauth from "next-auth/next";
 import { NextIntlClientProvider } from "next-intl";
 import { createMock } from "storybook-addon-module-mock";
 import { Header } from "./Header";
@@ -29,9 +30,24 @@ export const notAuthHeader: Story = {
   parameters: {
     moduleMock: {
       mock: () => {
-        const mock = createMock(gss);
-        mock.mockReturnValue(gss.getServerSession);
-        return [mock];
+        const mockSession = createMock(nextauth, "getServerSession");
+        mockSession.mockReturnValue(Promise.resolve(null));
+        return [mockSession];
+      },
+    },
+  },
+};
+
+export const authHeader: Story = {
+  args: {},
+  parameters: {
+    moduleMock: {
+      mock: () => {
+        const mockSession = createMock(nextauth, "getServerSession");
+        mockSession.mockReturnValue(
+          Promise.resolve({ user: { image: faker.image.avatar() } }),
+        );
+        return [mockSession];
       },
     },
   },

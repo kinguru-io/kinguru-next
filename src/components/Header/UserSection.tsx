@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
-import { getTranslations } from "next-intl/server";
 import { Avatar } from "../uikit";
 import { Button } from "../uikit/Button";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 
-export async function UserSection() {
+type UserSectionProps = {
+  t: any;
+};
+export async function UserSection({ t }: UserSectionProps) {
   const session = await getServerSession();
-  const t = await getTranslations("navbar");
-
   return (
     <Dropdown size={"lg"}>
       <DropdownInitiator>
