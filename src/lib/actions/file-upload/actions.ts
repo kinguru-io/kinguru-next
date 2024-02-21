@@ -1,48 +1,31 @@
 "use server";
 
-import { S3Client, PutObjectCommand, S3ClientConfig } from "@aws-sdk/client-s3";
+import { randomUUID } from "crypto";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { v4 as uuid } from "uuid";
+import { imageSchema } from "./validation";
+import { s3client } from "@/s3client";
 
-const client = new S3Client({
-  region: process.env.S3_UPLOAD_REGION,
-  endpoint: process.env.S3_UPLOAD_ENDPOINT_URL,
-  credentials: {
-    accessKeyId: process.env.S3_UPLOAD_KEY,
-    secretAccessKey: process.env.S3_UPLOAD_SECRET,
-  },
-} as S3ClientConfig);
+export type ProfileImageActionData = Pick<File, "name" | "size" | "type">;
+type GroupKey = string;
 
-export async function uploadProfileImage(data: FormData, key: string) {
-  const image = data.get(key) as File;
-
-  if (!image) {
-    // TODO handle an error?
-    return;
-  }
+export async function uploadProfileImage(
+  data: ProfileImageActionData,
+  groupKey: GroupKey,
+) {
+  const imageExtension = data.type.split("/").pop();
+  const command = new PutObjectCommand({
+    Bucket: process.env.S3_UPLOAD_BUCKET,
+    Key: `${groupKey}/${randomUUID()}.${imageExtension}`,
+    ContentType: data.type,
+  });
 
   try {
-    // TODO add zod validation
+    imageSchema.parse(data);
 
-    const command = new PutObjectCommand({
-      Bucket: process.env.S3_UPLOAD_BUCKET,
-      Key: `test-uploads/${uuid()}/${image.name}`,
-      ContentType: "image/*",
-    });
-
-    const presignedURL = await getSignedUrl(client, command); // default URL lifetime = 900s (15mins)
-
-    await fetch(presignedURL, { method: "PUT", body: image });
-
-    return cutSearchParams(presignedURL);
+    return await getSignedUrl(s3client, command); // default URL lifetime = 900s (15mins)
   } catch (e) {
     // TODO handle an error?
     return JSON.stringify(e);
   }
-}
-
-// TODO move to utils
-function cutSearchParams(url: string) {
-  return url.slice(0, url.indexOf("?"));
 }

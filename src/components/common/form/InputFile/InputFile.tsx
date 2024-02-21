@@ -1,15 +1,12 @@
 import { ComponentProps } from "react";
 import { css } from "~/styled-system/css";
 
-export type InputFileProps = Omit<ComponentProps<"input">, "type" | "hidden">;
+export type InputFileProps = Omit<
+  ComponentProps<"input">,
+  "type" | "hidden" | "name"
+>;
 
-//TODO maybe worth adding styles when navigate from keyboard?
-export function InputFile({
-  children,
-  onChange,
-  disabled,
-  ...props
-}: InputFileProps) {
+export function InputFile({ children, disabled, ...props }: InputFileProps) {
   return (
     <label
       data-disabled={disabled}
@@ -21,9 +18,14 @@ export function InputFile({
         "&[data-disabled=true]": {
           cursor: "not-allowed",
         },
+        borderRadius: "full",
+        transition: "shadow",
+        _focusWithin: {
+          boxShadow: "0 0 0 2px token(colors.focus)",
+        },
       })}
     >
-      <input type="file" onChange={onChange} hidden {...props} />
+      <input type="file" className={css({ srOnly: true })} {...props} />
       {children}
     </label>
   );

@@ -391,5 +391,11 @@
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ"
+  },
+  "form": {
+    "common": {
+      "upload_photo": "Upload a photo",
+      "uploaded_photo": "Uploaded photo"
+    }
   }
 }
