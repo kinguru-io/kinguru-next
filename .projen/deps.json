@@ -46,11 +46,11 @@
       "type": "build"
     },
     {
-      "name": "@storybook/addon-onboarding",
+      "name": "@storybook/blocks",
       "type": "build"
     },
     {
-      "name": "@storybook/blocks",
+      "name": "@storybook/jest",
       "type": "build"
     },
     {
@@ -127,6 +127,15 @@
       "type": "build"
     },
     {
+      "name": "msw",
+      "type": "build"
+    },
+    {
+      "name": "msw-storybook-addon",
+      "version": "canary",
+      "type": "build"
+    },
+    {
       "name": "prettier",
       "type": "build"
     },
@@ -144,6 +153,10 @@
     },
     {
       "name": "storybook",
+      "type": "build"
+    },
+    {
+      "name": "storybook-addon-module-mock",
       "type": "build"
     },
     {

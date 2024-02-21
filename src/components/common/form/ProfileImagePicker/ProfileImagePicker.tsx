@@ -138,7 +138,7 @@ function AvatarPickerPlaceholder({
         alt={t("uploaded_photo")}
         width={175}
         height={175}
-        style={{ objectFit: "cover" }}
+        style={{ height: "100%", objectFit: "cover" }}
       />
     );
   }
