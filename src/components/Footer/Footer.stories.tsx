@@ -13,7 +13,6 @@ const meta = {
       <Footer />
     </NextIntlClientProvider>
   ),
-  tags: ["autodocs"],
 };
 
 export default meta;
