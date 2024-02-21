@@ -1,3 +1,10 @@
+# [0.24.0](https://github.com/kinguru-io/kinguru-next/compare/v0.23.0...v0.24.0) (2024-02-21)
+
+
+### Features
+
+* **KINGU-89:** profile image picker ([#459](https://github.com/kinguru-io/kinguru-next/issues/459)) ([c35ee0e](https://github.com/kinguru-io/kinguru-next/commit/c35ee0e302435759d22c6bfd0756ec2b4dbbb492))
+
 # [0.23.0](https://github.com/kinguru-io/kinguru-next/compare/v0.22.1...v0.23.0) (2024-02-15)
 
 
