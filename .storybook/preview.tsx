@@ -4,6 +4,9 @@ import React from 'react';
 import type { Preview } from "@storybook/react";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
+import { initialize, mswLoader } from 'msw-storybook-addon';
+
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -28,6 +31,7 @@ const preview: Preview = {
       </main>
     ),
   ],
+  loaders: [mswLoader]
 };
 
 export default preview;

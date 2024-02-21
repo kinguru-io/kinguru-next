@@ -251,5 +251,11 @@
       "submit": "Зарегестрироваться",
       "helper": "Нажимая на кнопку \"Зарегестрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
     }
+  },
+  "form": {
+    "common": {
+      "upload_photo": "Загрузите фото",
+      "uploaded_photo": "Загруженное фото"
+    }
   }
 }

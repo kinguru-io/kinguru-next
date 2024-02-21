@@ -6,8 +6,8 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
+    "storybook-addon-module-mock",
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -17,6 +17,9 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   staticDirs: ["../public"],
+  features: {
+    experimentalRSC: true
+  },
 
   webpackFinal: async (config) => {
     if (config.resolve) {
