@@ -55,7 +55,7 @@ jobs:
           WERF_ENV: prod
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=eventify.today
-          SITE_URL: https://kinguru.io
+          SITE_URL: https://eventify.today
           DATABASE_URL: ${{ secrets.DB_URL }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
           NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
