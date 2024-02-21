@@ -9,3 +9,4 @@ docker-compose.yml
 README.md
 release.config.js
 setup-debezium.http
+public/mockServiceWorker.js
