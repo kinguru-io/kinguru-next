@@ -80,3 +80,33 @@ export const SizedDropdown: Story = {
     );
   },
 };
+
+export const WidthTextDropdown: Story = {
+  args: {
+    children: [
+      <div>Текст очень очень оhgfdfghjklче asd asd as das das</div>,
+      <div>Русский azsdas</div>,
+    ],
+  },
+  render: ({ children }) => {
+    const Data = () => {
+      return (
+        <Dropdown size="lg">
+          <DropdownInitiator>
+            <Button>Menu</Button>
+          </DropdownInitiator>
+          <DropdownMenu>{children}</DropdownMenu>
+        </Dropdown>
+      );
+    };
+    return (
+      <div
+        className={css({
+          margin: "100px",
+        })}
+      >
+        <Data />
+      </div>
+    );
+  },
+};
