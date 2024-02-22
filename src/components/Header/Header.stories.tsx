@@ -4,7 +4,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import * as nextauth from "next-auth/next";
 import { NextIntlClientProvider } from "next-intl";
 import * as nextintl from "next-intl/server";
-import { getTranslations } from "next-intl/server";
 import { createMock } from "storybook-addon-module-mock";
 import { Header } from "./Header";
 
@@ -40,7 +39,7 @@ export const notAuthHeader: Story = {
           Promise.resolve(
             ((langCode: keyof typeof russianLocale.navbar) =>
               russianLocale.navbar[langCode]) as unknown as ReturnType<
-              typeof getTranslations
+              typeof nextintl.getTranslations
             >,
           ),
         );
@@ -67,7 +66,7 @@ export const authHeader: Story = {
           Promise.resolve(
             ((langCode: keyof typeof russianLocale.navbar) =>
               russianLocale.navbar[langCode]) as unknown as ReturnType<
-              typeof getTranslations
+              typeof nextintl.getTranslations
             >,
           ),
         );
