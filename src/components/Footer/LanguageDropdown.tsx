@@ -1,7 +1,7 @@
 "use client";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { locales, useRouter, usePathname } from "@/navigation";
+import { locales, useRouter, usePathname, lang } from "@/navigation";
 import { Flex } from "~/styled-system/jsx";
 
 type LanguageDropdownProps = {
@@ -12,12 +12,10 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const lang = new Intl.DisplayNames(locales, { type: "language" });
-
   const currentLang = lang.of(locale);
 
   const onToggleLanguageClick = (newLocale: string) => {
-    router.replace(pathname!, { locale: newLocale });
+    router.replace(pathname, { locale: newLocale });
   };
 
   return (
