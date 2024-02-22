@@ -7,7 +7,13 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-addon-module-mock",
+    {
+      name: "storybook-addon-module-mock",
+      options: {
+        include: ["**/src/lib/actions/**"],
+        exclude: ["**/node_modules/**"],
+      }
+    }
   ],
   framework: {
     name: "@storybook/nextjs",
