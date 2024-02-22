@@ -17,7 +17,7 @@ export const dropdownSlot = defineSlotRecipe({
       bg: "token(colors.neutral.5)",
       right: "0",
       minW: "110px",
-      color: "#000000",
+      color: "token(colors.neutral.1)",
       zIndex: "token(zIndex.dropdown)",
       "&[data-hidden=true]": { display: "none" },
     },
