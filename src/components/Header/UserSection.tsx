@@ -7,7 +7,7 @@ import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 
 export async function UserSection() {
   const session = await getServerSession();
-  const t = await getTranslations();
+  const t = await getTranslations("navbar");
 
   return (
     <Dropdown size={"lg"}>
