@@ -11,6 +11,7 @@ export const headerSlot = defineSlotRecipe({
       bg: "token(colors.neutral.5)",
       maxH: "85px",
       py: "22px",
+      position: "sticky",
     },
     headerWrapper: {
       display: "grid",

@@ -1,3 +1,5 @@
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
 
@@ -22,27 +24,12 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <body className={css({ fontFamily: "noto" })}>
         <Box minHeight="100vh">
-          {/* Header placeholder START */}
-          <header
-            className={css({
-              zIndex: "1",
-              height: "85px",
-              bgColor: "neutral.5",
-              borderStyle: "solid",
-              borderColor: "neutral.3",
-              borderBottomWidth: "1px",
-              position: "sticky",
-              top: "0",
-            })}
-          />
-          {/* Header placeholder END */}
+          <Header />
           <main className={css({ height: 0, minHeight: "calc(100vh - 85px)" })}>
             {children}
           </main>
         </Box>
-        {/* Footer placeholder START */}
-        <footer className={css({ height: "256px", bgColor: "neutral.1" })} />
-        {/* Footer placeholder END */}
+        <Footer />
       </body>
     </html>
   );
