@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
-import { Container, Flex } from "~/styled-system/jsx";
+import { Container } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
 
 export function Header() {
@@ -18,12 +18,10 @@ export function Header() {
   ];
   return (
     <header className={classes.header}>
-      <Container className={classes.headerWrapper} px="370px" maxW={"1920px"}>
+      <Container className={classes.headerWrapper} maxW={"5xl"}>
         <div>Logo</div>
         <nav>
-          <Flex gap="55px">
-            <Links navigation={navigation} />
-          </Flex>
+          <Links navigation={navigation} />
         </nav>
         <UserSection />
       </Container>

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css } from "~/styled-system/css";
+import { Flex } from "~/styled-system/jsx";
 
 type NavigationLink = {
   href: string;
@@ -32,5 +33,5 @@ export function Links({ navigation }: LinksProps) {
     );
   });
 
-  return <>{navigationLinks}</>;
+  return <Flex justify="space-evenly">{navigationLinks}</Flex>;
 }

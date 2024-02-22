@@ -13,10 +13,10 @@ export const headerSlot = defineSlotRecipe({
       py: "22px",
     },
     headerWrapper: {
-      height: "100%",
-      display: "flex",
+      display: "grid",
       justifyContent: "space-between",
       alignItems: "center",
+      gridTemplateColumns: "auto 1fr auto",
     },
   },
 });
