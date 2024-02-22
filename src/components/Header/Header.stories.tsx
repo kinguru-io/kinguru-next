@@ -3,6 +3,8 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import * as nextauth from "next-auth/next";
 import { NextIntlClientProvider } from "next-intl";
+import * as nextintl from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { createMock } from "storybook-addon-module-mock";
 import { Header } from "./Header";
 
@@ -32,7 +34,17 @@ export const notAuthHeader: Story = {
       mock: () => {
         const mockSession = createMock(nextauth, "getServerSession");
         mockSession.mockReturnValue(Promise.resolve(null));
-        return [mockSession];
+
+        const mockTranslations = createMock(nextintl, "getTranslations");
+        mockTranslations.mockReturnValue(
+          Promise.resolve(
+            ((langCode: keyof typeof russianLocale.navbar) =>
+              russianLocale.navbar[langCode]) as unknown as ReturnType<
+              typeof getTranslations
+            >,
+          ),
+        );
+        return [mockSession, mockTranslations];
       },
     },
   },
@@ -45,9 +57,21 @@ export const authHeader: Story = {
       mock: () => {
         const mockSession = createMock(nextauth, "getServerSession");
         mockSession.mockReturnValue(
-          Promise.resolve({ user: { image: faker.image.avatar() } }),
+          Promise.resolve({
+            user: { image: faker.image.avatar(), name: "Name Surname" },
+          }),
         );
-        return [mockSession];
+
+        const mockTranslations = createMock(nextintl, "getTranslations");
+        mockTranslations.mockReturnValue(
+          Promise.resolve(
+            ((langCode: keyof typeof russianLocale.navbar) =>
+              russianLocale.navbar[langCode]) as unknown as ReturnType<
+              typeof getTranslations
+            >,
+          ),
+        );
+        return [mockSession, mockTranslations];
       },
     },
   },
