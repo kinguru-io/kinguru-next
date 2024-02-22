@@ -1,5 +1,7 @@
 "use client";
+import { useTransition } from "react";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
+import { RiLoader2Fill } from "react-icons/ri";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 import { locales, useRouter, usePathname, lang } from "@/navigation";
 import { Flex } from "~/styled-system/jsx";
@@ -11,18 +13,21 @@ type LanguageDropdownProps = {
 export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
   const currentLang = lang.of(locale);
 
   const onToggleLanguageClick = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    startTransition(() => {
+      router.replace(pathname, { locale: newLocale });
+    });
   };
 
   return (
     <Dropdown size={"lg"}>
       <DropdownInitiator>
         <Flex gap="8px" alignItems="center">
-          <BsGlobe />
+          {isPending ? <RiLoader2Fill /> : <BsGlobe />}
           {currentLang}
           <BsChevronDown />
         </Flex>
