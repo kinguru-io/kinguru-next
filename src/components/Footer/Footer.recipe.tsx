@@ -16,9 +16,8 @@ export const footerSlot = defineSlotRecipe({
     footerWrapper: {
       height: "100%",
       display: "flex",
-      justifyContent: "center",
+      gap: "30px",
       flexDirection: "column",
-      gap: "50px",
       alignItems: "center",
     },
     additionalText: {
