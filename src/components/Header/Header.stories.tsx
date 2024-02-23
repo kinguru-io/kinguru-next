@@ -20,6 +20,12 @@ const meta = {
     docs: {
       source: { type: "code" },
     },
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        segments: ["events", "places"],
+      },
+    },
   },
 } satisfies Meta<typeof Header>;
 
