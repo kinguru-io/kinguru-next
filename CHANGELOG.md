@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/kinguru-io/kinguru-next/compare/v0.25.0...v0.26.0) (2024-02-23)
+
+
+### Features
+
+* **KINGU-79:** create header and footer  ([#462](https://github.com/kinguru-io/kinguru-next/issues/462)) ([9ab6dfa](https://github.com/kinguru-io/kinguru-next/commit/9ab6dfabbcc10921c901509084c5dc0a5bf59944))
+
 # [0.25.0](https://github.com/kinguru-io/kinguru-next/compare/v0.24.0...v0.25.0) (2024-02-22)
 
 
