@@ -16,9 +16,6 @@ export const customDividerPattern: PatternConfig = {
       ...rest
     } = props;
     return {
-      "& > *": {
-        wordBreak: "break-word",
-      },
       "& > *:not(:last-child)": {
         position: "relative",
       },

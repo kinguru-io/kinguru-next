@@ -5,7 +5,7 @@ import {
   NextApiResponse,
 } from "next/types";
 import { Sidebar } from "@/components/dashboard";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { PlanComponent } from "@/components/pricing/plans";
 import { ssgInit } from "@/server/ssg-init.ts";

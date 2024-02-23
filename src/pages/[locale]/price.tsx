@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { GetStaticPropsContext } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { HowItWorks } from "@/components/home";
 import { Navbar } from "@/components/navbar";
 import { OurOffers } from "@/components/pricing/ourOffers";

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from "@pandacss/dev";
+import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
@@ -9,6 +10,7 @@ import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
+import { headerSlot } from "@/components/Header/Header.recipe";
 
 export default defineConfig({
   globalCss: additionalGlobalCss,
@@ -35,6 +37,8 @@ export default defineConfig({
       slotRecipes: {
         dropdown: dropdownSlot,
         select: selectSlot,
+        footer: footerSlot,
+        header: headerSlot,
       },
       tokens: {
         gradients: {

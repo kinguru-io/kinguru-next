@@ -35,6 +35,7 @@
     "speakers": "Speakers",
     "places": "Places",
     "price": "Price",
+    "how_it_works": "How it works",
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
@@ -46,7 +47,10 @@
     "search_placeholder": "...",
     "lang_en": "English",
     "lang_pl": "Polish",
-    "lang_ru": "Russian"
+    "lang_ru": "Russian",
+    "sign_up": "Sign up",
+    "add_organization": "Add an organization account",
+    "sign_in_and_sign_up": "Sign in and sign up"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
@@ -228,6 +232,12 @@
     "privacy_policy": "Privacy policy",
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "all_rights_reserved": "{year} Kinguru. All rights reserved",
+    "events": "Events",
+    "speakers": "Speakers",
+    "places": "Places",
+    "price": "Price",
+    "follow_us": "Follow us on {social}" 
   }
 }
