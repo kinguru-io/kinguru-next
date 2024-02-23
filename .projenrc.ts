@@ -119,6 +119,9 @@ const project = new web.NextJsTypeScriptProject({
   minNodeVersion: "20.9.0",
   packageManager: NodePackageManager.NPM,
   deps: [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+
     "@prisma/client",
     "@trpc/client",
     "@trpc/server",
@@ -191,13 +194,17 @@ const project = new web.NextJsTypeScriptProject({
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-links",
-    "@storybook/addon-onboarding",
     "@storybook/blocks",
     "@storybook/nextjs",
     "@storybook/react",
     "@storybook/test",
+    "@storybook/jest",
+    "storybook-addon-module-mock",
     "eslint-plugin-storybook",
     "storybook",
+    "msw",
+    "msw-storybook-addon@canary",
+    "storybook-addon-module-mock",
 
     "prisma",
     "@faker-js/faker",

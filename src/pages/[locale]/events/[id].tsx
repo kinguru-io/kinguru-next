@@ -9,7 +9,7 @@ import {
   EventPlaceSection,
   EventSpeakersSection,
 } from "@/components/events/details";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { locales } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";

@@ -6,7 +6,7 @@ import {
   NextApiResponse,
 } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { NewPlaceStepper } from "@/components/places/create";
 import { ssgInit } from "@/server/ssg-init.ts";
@@ -27,7 +27,10 @@ export default function PlaceCreate() {
           property="og:description"
           content={t("metadata.places.create.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <VStack h={"100vh"} justifyContent={"space-between"}>
         <Navbar />

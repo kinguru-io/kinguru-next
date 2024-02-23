@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "./Dropdown";
 import { Button } from "../Button";
@@ -76,6 +77,36 @@ export const SizedDropdown: Story = {
         })}
       >
         {data}
+      </div>
+    );
+  },
+};
+
+export const WidthTextDropdown: Story = {
+  args: {
+    children: [
+      <div>{faker.lorem.paragraph(1)}</div>,
+      <div>{faker.lorem.paragraph(1)}</div>,
+    ],
+  },
+  render: ({ children }) => {
+    const Data = () => {
+      return (
+        <Dropdown size="lg">
+          <DropdownInitiator>
+            <Button>Menu</Button>
+          </DropdownInitiator>
+          <DropdownMenu>{children}</DropdownMenu>
+        </Dropdown>
+      );
+    };
+    return (
+      <div
+        className={css({
+          margin: "100px",
+        })}
+      >
+        <Data />
       </div>
     );
   },

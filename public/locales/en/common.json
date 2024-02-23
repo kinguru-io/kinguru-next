@@ -6,36 +6,36 @@
       "description": "Discover, organize, and attend thematic meetings with expert speakers in cafes and restaurants. Explore upcoming events and sign up today!"
     },
     "events": {
-      "title": "Upcoming Events - Kinguru",
+      "title": "Upcoming Events - Eventify",
       "description": "Browse through upcoming thematic meetings and events. Join us for insightful sessions with expert speakers in cozy locations.",
       "create": {
-        "title": "Create Your Event - Kinguru",
-        "description": "Step into Kinguru’s intuitive event creation page. In just a few clicks, set up and customize your event, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
+        "title": "Create Your Event - Eventify",
+        "description": "Step into Eventify’s intuitive event creation page. In just a few clicks, set up and customize your event, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
       }
     },
     "places": {
-      "title": "Places - Kinguru",
+      "title": "Places - Eventify",
       "description": "Browse through our places store. Join us for insightful sessions with expert speakers in cozy locations.",
       "create": {
-        "title": "Create Your Place - Kinguru",
-        "description": "Step into Kinguru’s intuitive place creation page. In just a few clicks, set up and customize your place, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
+        "title": "Create Your Place - Eventify",
+        "description": "Step into Eventify’s intuitive place creation page. In just a few clicks, set up and customize your place, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
       }
     },
     "privacy": {
-      "title": "Privacy Policy - Your Data is Safe with Kinguru",
-      "description": "At Kinguru, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
+      "title": "Privacy Policy - Your Data is Safe with Eventify",
+      "description": "At Eventify, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
     },
     "terms": {
-      "title": "Terms & Conditions: Your Guide to Kinguru's Policies",
-      "description": "Get acquainted with Kinguru's Terms & Conditions. This page outlines our policies, ensuring transparency and clarity for all users. Read more to understand our guidelines."
+      "title": "Terms & Conditions: Your Guide to Eventify's Policies",
+      "description": "Get acquainted with Eventify's Terms & Conditions. This page outlines our policies, ensuring transparency and clarity for all users. Read more to understand our guidelines."
     },
     "cookie": {
-      "title": "Your Data, Your Control: Kinguru's Cookie Policy",
-      "description": "Discover how Kinguru utilizes cookies to enhance your browsing experience. Our Cookie Policy page details their use, ensuring transparency and control over your data."
+      "title": "Your Data, Your Control: Eventify's Cookie Policy",
+      "description": "Discover how Eventify utilizes cookies to enhance your browsing experience. Our Cookie Policy page details their use, ensuring transparency and control over your data."
     },
     "price": {
-      "title": "Speaker Subscriptions: Choose Your Plan with Kinguru",
-      "description": "Amplify your impact with Kinguru's speaker subscription plans. From basic to pro, find the perfect tier for your speaking journey. Join us and expand your influence today!"
+      "title": "Speaker Subscriptions: Choose Your Plan with Eventify",
+      "description": "Amplify your impact with Eventify's speaker subscription plans. From basic to pro, find the perfect tier for your speaking journey. Join us and expand your influence today!"
     }
   },
   "navbar": {
@@ -43,6 +43,7 @@
     "speakers": "Speakers",
     "places": "Places",
     "price": "Price",
+    "how_it_works": "How it works",
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
@@ -54,12 +55,15 @@
     "search_placeholder": "...",
     "lang_en": "English",
     "lang_pl": "Polish",
-    "lang_ru": "Russian"
+    "lang_ru": "Russian",
+    "sign_up": "Sign up",
+    "add_organization": "Add an organization account",
+    "sign_in_and_sign_up": "Sign in and sign up"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
     "slug": "Choose free locations\nOrganize events,\nAnd earn!",
-    "description": "Kinguru is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
+    "description": "Eventify is a platform for organizing thematic meetings with speakers in cafes and restaurants.",
     "sign_up": "Sign up",
     "view_events": "View events",
     "create_event": "Create an event",
@@ -347,7 +351,7 @@
       "cleaning_services": "Cleaning services"
     },
     "new_place_location": "Address of the event space",
-    "new_place_location_helper": "Your premises address will not be publicly displayed on your Kinguru page. It will only be available to guests once they have made a reservation.",
+    "new_place_location_helper": "Your premises address will not be publicly displayed on your Eventify page. It will only be available to guests once they have made a reservation.",
     "location_use_same_billing_address": "Can this address be used for billing?",
     "new_billing_location": "Billing Address",
     "location_route_to_premises": "Provide directions to your premises",
@@ -390,6 +394,18 @@
     "privacy_policy": "Privacy policy",
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "all_rights_reserved": "{year} Kinguru. All rights reserved",
+    "events": "Events",
+    "speakers": "Speakers",
+    "places": "Places",
+    "price": "Price",
+    "follow_us": "Follow us on {social}" 
+  },
+  "form": {
+    "common": {
+      "upload_photo": "Upload a photo",
+      "uploaded_photo": "Uploaded photo"
+    }
   }
 }

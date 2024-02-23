@@ -6,7 +6,7 @@ import {
 } from "next/types";
 import { ProfileView, Sidebar } from "@/components/dashboard";
 import { MainInfo } from "@/components/dashboard/main";
-import { FooterSection } from "@/components/footer";
+import { FooterSection } from "@/components/footerOld";
 import { Navbar } from "@/components/navbar";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
