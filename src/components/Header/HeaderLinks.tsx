@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
@@ -14,11 +14,12 @@ type LinksProps = {
 };
 
 export function Links({ navigation }: LinksProps) {
-  const path = usePathname();
+  const selectedSegment = useSelectedLayoutSegment();
 
   const navigationLinks = navigation.map(({ href, name }) => {
-    const textStyle = path?.includes(href) ? "heading.h4" : "body.2";
-    const newHref = path?.includes(href) ? "" : href;
+    const textStyle =
+      selectedSegment === href.slice(1) ? "heading.h4" : "body.2";
+    const newHref = selectedSegment === href.slice(1) ? "" : href;
     return (
       <Link
         key={name}
