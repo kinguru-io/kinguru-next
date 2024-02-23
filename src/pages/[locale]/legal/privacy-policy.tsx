@@ -34,26 +34,29 @@ export default function PrivacyPolicyPage() {
           property="og:description"
           content={t("metadata.privacy.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <VStack>
         <Image
           src={logo}
-          alt={"Kinguru"}
+          alt={"EVENTIFY"}
           style={{ margin: "auto" }}
           width={150}
         />
         <Heading textAlign={"center"}>PRIVACY POLICY</Heading>
         <Text textAlign={"center"}>Updated at October 10th, 2023</Text>
         <Text wordBreak={"normal"}>
-          KINGURU (“we,” “our,” or “us”) is committed to protecting your
+          EVENTIFY (“we,” “our,” or “us”) is committed to protecting your
           privacy. This Privacy Policy explains how your personal information is
-          collected, used, and disclosed by KINGURU.
+          collected, used, and disclosed by EVENTIFY.
         </Text>
         <Text>
           This Privacy Policy applies to our website, and its associated
           subdomains (collectively, our “Service”) alongside our application,
-          KINGURU. By accessing or using our Service, you signify that you have
+          EVENTIFY. By accessing or using our Service, you signify that you have
           read, understood, and agree to our collection, storage, use, and
           disclosure of your personal information as described in this Privacy
           Policy and our Terms of Service.
@@ -65,7 +68,9 @@ export default function PrivacyPolicyPage() {
         <UnorderedList>
           <ListItem>
             Via Email:{" "}
-            <Link href={"mailto:t.yarosh@kinguru.io"}>t.yarosh@kinguru.io</Link>
+            <Link href={"mailto:t.yarosh@eventify.today"}>
+              t.yarosh@eventify.today
+            </Link>
           </ListItem>
           <ListItem>
             Via Phone Number:{" "}
@@ -101,17 +106,17 @@ export default function PrivacyPolicyPage() {
                 under this Privacy Policy.
               </ListItem>
               <ListItem>
-                Country: where KINGURU or the owners/founders of KINGURU are
+                Country: where EVENTIFY or the owners/founders of EVENTIFY are
                 based, in this case is Poland
               </ListItem>
               <ListItem>
                 Customer: refers to the company, organization or person that
-                signs up to use the KINGURU Service to manage the relationships
+                signs up to use the EVENTIFY Service to manage the relationships
                 with your consumers or service users.
               </ListItem>
               <ListItem>
                 Device: any internet connected device such as a phone, tablet,
-                computer or any other device that can be used to visit KINGURU
+                computer or any other device that can be used to visit EVENTIFY
                 and use the services.
               </ListItem>
               <ListItem>
@@ -123,7 +128,7 @@ export default function PrivacyPolicyPage() {
               </ListItem>
               <ListItem>
                 Personnel: refers to those individuals who are employed by
-                KINGURU or are under contract to perform a service on behalf of
+                EVENTIFY or are under contract to perform a service on behalf of
                 one of the parties.
               </ListItem>
               <ListItem>
@@ -143,7 +148,7 @@ export default function PrivacyPolicyPage() {
               </ListItem>
               <ListItem>
                 Website: KINGURU’s site, which can be accessed via this URL:
-                kinguru.io
+                eventify.today
               </ListItem>
               <ListItem>
                 You: a person or entity that is registered with KINGURU to use

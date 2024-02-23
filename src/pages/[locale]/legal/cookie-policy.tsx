@@ -34,12 +34,15 @@ export default function PrivacyPolicyPage() {
           property="og:description"
           content={t("metadata.cookie.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <VStack>
         <Image
           src={logo}
-          alt={"Kinguru"}
+          alt={"Eventify"}
           style={{ margin: "auto" }}
           width={150}
         />
@@ -52,7 +55,9 @@ export default function PrivacyPolicyPage() {
         <UnorderedList>
           <ListItem>
             Via Email:{" "}
-            <Link href={"mailto:t.yarosh@kinguru.io"}>t.yarosh@kinguru.io</Link>
+            <Link href={"mailto:t.yarosh@eventify.today"}>
+              t.yarosh@eventify.today
+            </Link>
           </ListItem>
           <ListItem>
             Via Phone Number:{" "}
@@ -89,7 +94,7 @@ export default function PrivacyPolicyPage() {
               </ListItem>
               <ListItem>
                 Device: any internet connected device such as a phone, tablet,
-                computer or any other device that can be used to visit KINGURU
+                computer or any other device that can be used to visit EVENTIFY
                 and use the services.
               </ListItem>
               <ListItem>
@@ -106,7 +111,7 @@ export default function PrivacyPolicyPage() {
                 identifiability of a natural person.
               </ListItem>
               <ListItem>
-                Service: refers to the service provided by KINGURU as described
+                Service: refers to the service provided by EVENTIFY as described
                 in the relative terms (if available) and on this platform.
               </ListItem>
               <ListItem>
@@ -115,8 +120,8 @@ export default function PrivacyPolicyPage() {
                 content or whose products or services we think may interest you.
               </ListItem>
               <ListItem>
-                Website: KINGURU’s site, which can be accessed via this URL:
-                kinguru.io
+                Website: EVENTIFY’s site, which can be accessed via this URL:
+                eventify.today
               </ListItem>
             </UnorderedList>
           </AccordionPanel>
@@ -130,10 +135,10 @@ export default function PrivacyPolicyPage() {
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Text>
-              This Cookie Policy explains how kinguru and its affiliates
+              This Cookie Policy explains how EVENTIFY and its affiliates
               (collectively "kinguru", "we", "us", and "ours"), use cookies and
               similar technologies to recognize you when you visit our website,
-              including without limitation kinguru.io and any related URLs,
+              including without limitation eventify.today and any related URLs,
               mobile or localized versions and related domains / sub-domains
               ("Websites"). It explains what these technologies are and why we
               use them, as well as the choices for how to control them.

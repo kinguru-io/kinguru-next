@@ -34,39 +34,42 @@ export default function PrivacyPolicyPage() {
           property="og:description"
           content={t("metadata.terms.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <VStack>
         <Image
           src={logo}
-          alt={"Kinguru"}
+          alt={"EVENTIFY"}
           style={{ margin: "auto" }}
           width={150}
         />
         <Heading textAlign={"center"}>Terms & Conditions</Heading>
         <Text textAlign={"center"}>Updated at 2023-11-22</Text>
         <Text wordBreak={"normal"}>
-          By accessing and placing an order with Kinguru, you confirm that you
+          By accessing and placing an order with EVENTIFY, you confirm that you
           are in agreement with and bound by the terms of service contained in
           the Terms & Conditions outlined below. These terms apply to the entire
           website and any email or other type of communication between you and
-          Kinguru. Under no circumstances shall Kinguru team be liable for any
+          EVENTIFY. Under no circumstances shall EVENTIFY team be liable for any
           direct, indirect, special, incidental or consequential damages,
           including, but not limited to, loss of data or profit, arising out of
           the use, or the inability to use, the materials on this site, even if
-          Kinguru team or an authorized representative has been advised of the
+          EVENTIFY team or an authorized representative has been advised of the
           possibility of such damages. If your use of materials from this site
           results in the need for servicing, repair or correction of equipment
-          or data, you assume any costs thereof. Kinguru will not be responsible
-          for any outcome that may occur during the course of usage of our
-          resources. We reserve the rights to change prices and revise the
-          resources usage policy in any moment.
+          or data, you assume any costs thereof. EVENTIFY will not be
+          responsible for any outcome that may occur during the course of usage
+          of our resources. We reserve the rights to change prices and revise
+          the resources usage policy in any moment.
         </Text>
         <Text>
-          Kinguru grants you a revocable, non-exclusive, non-transferable,
+          EVENTIFY grants you a revocable, non-exclusive, non-transferable,
           limited license to download, install and use the website strictly in
           accordance with the terms of this Agreement. These Terms & Conditions
-          are a contract between you and Kinguru (referred to in these Terms &
+          are a contract between you and EVENTIFY (referred to in these Terms &
           Conditions as "Kinguru", "us", "we" or "our"), the provider of the
           Kinguru website and the services accessible from the Kinguru website
           (which are collectively referred to in these Terms & Conditions as the
@@ -84,7 +87,9 @@ export default function PrivacyPolicyPage() {
         <UnorderedList>
           <ListItem>
             Via Email:{" "}
-            <Link href={"mailto:t.yarosh@kinguru.io"}>t.yarosh@kinguru.io</Link>
+            <Link href={"mailto:t.yarosh@eventify.today"}>
+              t.yarosh@eventify.today
+            </Link>
           </ListItem>
           <ListItem>
             Via Phone Number:{" "}
@@ -139,7 +144,7 @@ export default function PrivacyPolicyPage() {
               </ListItem>
               <ListItem>
                 Website: Kinguru's site, which can be accessed via this URL:
-                kinguru.io
+                eventify.today
               </ListItem>
               <ListItem>
                 You: a person or entity that is registered with Kinguru to use

@@ -152,7 +152,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: studio.kinguru.io
+    - host: studio.eventify.today
       http:
         paths:
           - path: /
@@ -164,7 +164,7 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - studio.kinguru.io
+        - studio.eventify.today
       secretName: letsencrypt-tls-studio
 ---
 apiVersion: networking.k8s.io/v1
@@ -179,7 +179,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: studio.kinguru.io
+    - host: studio.eventify.today
       http:
         paths:
           - path: /oauth2
@@ -191,5 +191,5 @@ spec:
                   number: 4180
   tls:
     - hosts:
-        - studio.kinguru.io
+        - studio.eventify.today
       secretName: letsencrypt-tls-studio
