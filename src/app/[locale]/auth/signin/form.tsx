@@ -3,7 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { BuiltInProviderType } from "next-auth/providers";
 import { ClientSafeProvider, LiteralUnion, signIn } from "next-auth/react";
-import { Button } from "@/components/uikit";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Button, Input } from "@/components/uikit";
 import { VStack } from "~/styled-system/jsx";
 
 export function SigninForm({
@@ -14,26 +16,38 @@ export function SigninForm({
     ClientSafeProvider
   > | null;
 }) {
+  const t = useTranslations("auth.signin_form");
+  const [email, setEmail] = useState("");
+
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl") || undefined;
 
   return (
-    <VStack>
+    <VStack gap="15px">
       {providers &&
         Object.values(providers)
           .filter(({ name }) => name !== "Credentials")
           .map((provider) => (
-            <Button
-              key={provider.name}
-              onClick={() =>
-                signIn(provider.id, {
-                  callbackUrl,
-                  redirect: true,
-                })
-              }
-            >
-              {provider.name}
-            </Button>
+            <VStack key={provider.name} gap="5px">
+              {provider.name === "Email" && (
+                <Input
+                  variant="outline"
+                  placeholder={t("email_placeholder")}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              )}
+              <Button
+                onClick={() =>
+                  signIn(provider.id, {
+                    email: provider.id === "email" ? email : undefined,
+                    callbackUrl,
+                    redirect: true,
+                  })
+                }
+              >
+                {provider.name}
+              </Button>
+            </VStack>
           ))}
     </VStack>
   );
