@@ -6,9 +6,14 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
-    "storybook-addon-module-mock",
+    {
+      name: "storybook-addon-module-mock",
+      options: {
+        include: ["**/src/lib/actions/**"],
+        exclude: ["**/node_modules/**"],
+      }
+    }
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -19,7 +24,7 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
   features: {
-    experimentalRSC: true,
+    experimentalRSC: true
   },
 
   webpackFinal: async (config) => {

@@ -46,11 +46,11 @@
       "type": "build"
     },
     {
-      "name": "@storybook/addon-onboarding",
+      "name": "@storybook/blocks",
       "type": "build"
     },
     {
-      "name": "@storybook/blocks",
+      "name": "@storybook/jest",
       "type": "build"
     },
     {
@@ -127,6 +127,15 @@
       "type": "build"
     },
     {
+      "name": "msw",
+      "type": "build"
+    },
+    {
+      "name": "msw-storybook-addon",
+      "version": "canary",
+      "type": "build"
+    },
+    {
       "name": "prettier",
       "type": "build"
     },
@@ -147,6 +156,10 @@
       "type": "build"
     },
     {
+      "name": "storybook-addon-module-mock",
+      "type": "build"
+    },
+    {
       "name": "ts-node",
       "type": "build"
     },
@@ -157,6 +170,14 @@
     {
       "name": "typescript",
       "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-sdk/s3-request-presigner",
+      "type": "runtime"
     },
     {
       "name": "@chakra-ui/icons",
@@ -200,6 +221,10 @@
     },
     {
       "name": "@emotion/styled",
+      "type": "runtime"
+    },
+    {
+      "name": "@hookform/resolvers",
       "type": "runtime"
     },
     {
@@ -345,6 +370,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-hook-form",
+      "type": "runtime"
+    },
+    {
       "name": "react-icons",
       "type": "runtime"
     },
@@ -386,6 +415,10 @@
     },
     {
       "name": "zod",
+      "type": "runtime"
+    },
+    {
+      "name": "zod-form-data",
       "type": "runtime"
     },
     {

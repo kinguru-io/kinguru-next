@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.18...chart-v1.3.0) (2024-02-22)
+
+
+### Features
+
+* change domain name to eventify.today ([b3afdcc](https://github.com/kinguru-io/kinguru-next/commit/b3afdcc69d7732c9a029a92e834bd3a0ef4b657b))
+
 ## [1.2.18](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.17...chart-v1.2.18) (2023-10-29)
 
 

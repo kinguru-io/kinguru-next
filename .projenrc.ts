@@ -98,6 +98,7 @@ const project = new web.NextJsTypeScriptProject({
       },
     },
     include: [
+      "global.d.ts",
       "process.d.ts",
       "next-env.d.ts",
       "next-auth.d.ts",
@@ -118,6 +119,9 @@ const project = new web.NextJsTypeScriptProject({
   minNodeVersion: "20.9.0",
   packageManager: NodePackageManager.NPM,
   deps: [
+    "@aws-sdk/client-s3",
+    "@aws-sdk/s3-request-presigner",
+
     "@prisma/client",
     "@trpc/client",
     "@trpc/server",
@@ -175,6 +179,10 @@ const project = new web.NextJsTypeScriptProject({
     "@opentelemetry/sdk-trace-base",
     "@opentelemetry/sdk-trace-node",
     "@opentelemetry/resources",
+
+    "react-hook-form",
+    "@hookform/resolvers",
+    "zod-form-data",
   ],
   devDeps: [
     "@pandacss/dev",
@@ -183,7 +191,6 @@ const project = new web.NextJsTypeScriptProject({
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-links",
-    "@storybook/addon-onboarding",
     "@storybook/blocks",
     "@storybook/nextjs",
     "@storybook/react",
@@ -192,6 +199,9 @@ const project = new web.NextJsTypeScriptProject({
     "storybook-addon-module-mock",
     "eslint-plugin-storybook",
     "storybook",
+    "msw",
+    "msw-storybook-addon@canary",
+    "storybook-addon-module-mock",
 
     "prisma",
     "@faker-js/faker",

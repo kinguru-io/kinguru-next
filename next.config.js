@@ -23,6 +23,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "kinguru-storage.s3.pl-waw.scw.cloud",
+        port: "",
+        pathname: "/**"
+      }
     ],
   },
   experimental: {

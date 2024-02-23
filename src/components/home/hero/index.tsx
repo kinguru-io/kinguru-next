@@ -82,13 +82,17 @@ export function HeroContent() {
                 </Button>
               </Flex>
             ) : (
-              <Flex>
+              <Flex
+                direction={["column", "row"]}
+                alignItems={["center", "inherit"]}
+                gap={[2, 0]}
+              >
                 <Button
                   variant={"primary"}
                   onClick={() =>
                     signIn(undefined, { callbackUrl: "/places/create" })
                   }
-                  mr={3}
+                  mr={[0, 3]}
                 >
                   {t("hero.create_place")}
                 </Button>

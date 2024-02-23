@@ -1,9 +1,10 @@
-import { Button } from "@/components/uikit";
+import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
+import { Box } from "~/styled-system/jsx";
 
 export default function Uikit() {
   return (
-    <>
-      <Button>Hello</Button>
-    </>
+    <Box p="5">
+      <ProfileImagePicker name="profile_image" />
+    </Box>
   );
 }

@@ -27,7 +27,10 @@ export default function PlaceCreate() {
           property="og:description"
           content={t("metadata.places.create.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <VStack h={"100vh"} justifyContent={"space-between"}>
         <Navbar />

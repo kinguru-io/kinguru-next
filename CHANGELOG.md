@@ -1,3 +1,24 @@
+# [0.25.0](https://github.com/kinguru-io/kinguru-next/compare/v0.24.0...v0.25.0) (2024-02-22)
+
+
+### Features
+
+* change domain name to eventify.today ([b3afdcc](https://github.com/kinguru-io/kinguru-next/commit/b3afdcc69d7732c9a029a92e834bd3a0ef4b657b))
+
+# [0.24.0](https://github.com/kinguru-io/kinguru-next/compare/v0.23.0...v0.24.0) (2024-02-21)
+
+
+### Features
+
+* **KINGU-89:** profile image picker ([#459](https://github.com/kinguru-io/kinguru-next/issues/459)) ([c35ee0e](https://github.com/kinguru-io/kinguru-next/commit/c35ee0e302435759d22c6bfd0756ec2b4dbbb492))
+
+# [0.23.0](https://github.com/kinguru-io/kinguru-next/compare/v0.22.1...v0.23.0) (2024-02-15)
+
+
+### Features
+
+* **KINGU-78:** auth page forms ([#434](https://github.com/kinguru-io/kinguru-next/issues/434)) ([e12277d](https://github.com/kinguru-io/kinguru-next/commit/e12277dafbacebc07ec62691122c9f6754f4d2fd))
+
 ## [0.22.1](https://github.com/kinguru-io/kinguru-next/compare/v0.22.0...v0.22.1) (2024-02-13)
 
 

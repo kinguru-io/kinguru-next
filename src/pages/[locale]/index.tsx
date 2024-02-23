@@ -27,7 +27,10 @@ export default function Home() {
           property="og:description"
           content={t("metadata.home.description")}
         />
-        <meta property="og:image" content="https://kinguru.io/img/brand.png" />
+        <meta
+          property="og:image"
+          content="https://eventify.today/img/brand.png"
+        />
       </Head>
       <Navbar />
       <HeroContent />

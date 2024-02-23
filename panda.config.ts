@@ -5,6 +5,7 @@ import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
+import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
@@ -35,6 +36,7 @@ export default defineConfig({
       },
       slotRecipes: {
         dropdown: dropdownSlot,
+        select: selectSlot,
         footer: footerSlot,
         header: headerSlot,
       },
