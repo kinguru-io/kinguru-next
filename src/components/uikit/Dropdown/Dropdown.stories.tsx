@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "./Dropdown";
 import { Button } from "../Button";
@@ -84,8 +85,8 @@ export const SizedDropdown: Story = {
 export const WidthTextDropdown: Story = {
   args: {
     children: [
-      <div>Текст очень очень оhgfdfghjklче asd asd as das das</div>,
-      <div>Русский azsdas</div>,
+      <div>{faker.lorem.paragraph(1)}</div>,
+      <div>{faker.lorem.paragraph(1)}</div>,
     ],
   },
   render: ({ children }) => {
