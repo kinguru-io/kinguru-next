@@ -16,6 +16,7 @@ export const SliderSlot = defineSlotRecipe({
       overflow: "hidden",
       w: "391px",
       h: "220px",
+      borderRadius: "12px",
     },
     sliderButton: {
       position: "absolute",
