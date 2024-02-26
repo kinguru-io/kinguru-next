@@ -46,6 +46,7 @@ export const SliderSlot = defineSlotRecipe({
       right: "6px",
     },
     sliderOptions: {
+      transition: "0.5s",
       "& > *": { w: "391px", h: "220px" },
       display: "flex",
       position: "absolute",

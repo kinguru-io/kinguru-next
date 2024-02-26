@@ -23,13 +23,25 @@ export const DefaultSlider: Story = {
         width={391}
         height={220}
         alt="test image"
-        src={faker.image.url()}
+        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
       />,
       <Image
         width={391}
         height={220}
         alt="test image"
-        src={faker.image.url()}
+        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
+      />,
+      <Image
+        width={391}
+        height={220}
+        alt="test image"
+        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
+      />,
+      <Image
+        width={391}
+        height={220}
+        alt="test image"
+        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
       />,
     ],
   },

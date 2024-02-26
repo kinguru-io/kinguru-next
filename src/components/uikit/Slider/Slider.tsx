@@ -10,9 +10,10 @@ type SliderProps = {
 export function Slider({ children }: SliderProps) {
   const [cur, setCur] = useState(0);
   const classes = slider();
+  const slidesCount = children instanceof Array ? children.length : 1;
 
   const nextMoving = () => {
-    if (cur >= 2 - 1) {
+    if (cur >= slidesCount - 1) {
       setCur(0);
     } else {
       setCur(cur + 1);
@@ -20,7 +21,7 @@ export function Slider({ children }: SliderProps) {
   };
   const prevMoving = () => {
     if (cur <= 0) {
-      setCur(2 - 1);
+      setCur(slidesCount - 1);
     } else {
       setCur(cur - 1);
     }
@@ -46,7 +47,7 @@ export function Slider({ children }: SliderProps) {
       </div>
       <div
         className={classes.sliderOptions}
-        style={{ left: `-${cur * 339}px` }}
+        style={{ left: `-${cur * 391}px` }}
       >
         {children}
       </div>
