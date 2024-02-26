@@ -1,7 +1,6 @@
-import { css } from "~/styled-system/css";
+import { Collapse, type CollapseProps } from "@/components/uikit";
 
-type TextCollapseProps = {
-  isShown: boolean;
+type TextCollapseProps = Pick<CollapseProps, "isShown"> & {
   textContent: string;
   visibleCharsCount: number;
 };
@@ -27,19 +26,7 @@ export function TextCollapse({
   return (
     <p>
       {visiblePart}
-      <span
-        className={css({
-          display: "grid",
-          gridTemplateRows: "0fr",
-          transition: "grid-template-rows 350ms",
-          "&[data-shown=true]": {
-            gridTemplateRows: "1fr",
-          },
-        })}
-        data-shown={isShown}
-      >
-        <span className={css({ overflow: "hidden" })}>{hiddenPart}</span>
-      </span>
+      <Collapse isShown={isShown}>{hiddenPart}</Collapse>
     </p>
   );
 }

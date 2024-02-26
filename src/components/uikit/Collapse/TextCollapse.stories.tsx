@@ -33,7 +33,7 @@ export const Basic: Story = {
   ],
 };
 
-export const WithButtonToggler: Story = {
+export const WithTrigger: Story = {
   args: Basic.args,
   render: ({ isShown: _unused, ...restProps }) => {
     const [isShown, setIsShown] = useState(false);
