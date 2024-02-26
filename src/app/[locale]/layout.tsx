@@ -27,8 +27,8 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
-          <Header />
           <Box minHeight="100vh">
+            <Header />
             <main
               className={css({ height: 0, minHeight: "calc(100vh - 85px)" })}
             >
