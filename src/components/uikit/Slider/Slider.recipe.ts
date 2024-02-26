@@ -19,6 +19,7 @@ export const SliderSlot = defineSlotRecipe({
     },
     sliderButton: {
       position: "absolute",
+      transition: "0.5s",
       top: "calc(100% / 2 - 18.5px)",
       h: "35px",
       w: "35px",
@@ -29,6 +30,14 @@ export const SliderSlot = defineSlotRecipe({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      _hover: {
+        bg: "token(colors.neutral.4)",
+      },
+      _focusVisible: {
+        border: "1px solid",
+        outline: "none",
+        borderColor: "token(colors.blue)",
+      },
     },
     prevButton: {
       left: "6px",

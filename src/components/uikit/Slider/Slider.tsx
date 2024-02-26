@@ -29,16 +29,20 @@ export function Slider({ children }: SliderProps) {
   return (
     <div className={classes.slider}>
       <div
-        className={cx(classes.sliderButton, classes.nextButton)}
-        onClick={nextMoving}
-      >
-        <GrNext />
-      </div>
-      <div
+        role="button"
+        tabIndex={0}
         className={cx(classes.sliderButton, classes.prevButton)}
         onClick={prevMoving}
       >
         <GrPrevious />
+      </div>
+      <div
+        role="button"
+        tabIndex={0}
+        className={cx(classes.sliderButton, classes.nextButton)}
+        onClick={nextMoving}
+      >
+        <GrNext />
       </div>
       <div
         className={classes.sliderOptions}
