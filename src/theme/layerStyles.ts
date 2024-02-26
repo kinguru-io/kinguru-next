@@ -22,8 +22,8 @@ export const layerStyles = defineLayerStyles({
     value: {
       ...outlineWrapperBaseStyles,
       borderColor: "neutral.3",
-      paddingBlockStart: "51px",
-      paddingBlockEnd: "72px",
+      paddingBlockStart: "50px",
+      paddingBlockEnd: "60px",
     },
   },
 });
