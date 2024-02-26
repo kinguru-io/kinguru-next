@@ -7,7 +7,8 @@ export function Textarea({ children, ...restProps }: TextareaProps) {
   return (
     <textarea
       className={css({
-        fontSize: "16px",
+        "&[rows]": { width: "full" },
+        minHeight: "calc(1.25rem + 22px)", // (line-height) + (padding-inline) + (border-width * 2)
         lineHeight: "1.25",
         p: "10px",
         bg: "neutral.5",
