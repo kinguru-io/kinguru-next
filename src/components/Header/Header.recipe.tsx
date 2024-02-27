@@ -6,7 +6,7 @@ export const headerSlot = defineSlotRecipe({
   slots: ["header", "headerWrapper"],
   base: {
     header: {
-      zIndex: "1",
+      zIndex: "header",
       width: "100%",
       borderBottom: "1px solid token(colors.neutral.3)",
       bg: "token(colors.neutral.5)",

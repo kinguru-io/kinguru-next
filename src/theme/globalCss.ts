@@ -4,10 +4,14 @@ import { defineGlobalStyles } from "@pandacss/dev";
 export const additionalGlobalCss = defineGlobalStyles({
   // TODO ? Consider adding conditional `textStyle: ["body.X"]`
   html: {
+    fontSize: "16px",
+    height: "full",
+    minHeight: "full",
+  },
+  body: {
+    minHeight: "100vh",
     color: "neutral.1",
     lineHeight: "1.25",
-    height: "100%",
-    width: "100%",
   },
   h1: { textStyle: "heading.1" },
   h2: { textStyle: "heading.2" },

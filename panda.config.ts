@@ -55,6 +55,7 @@ export default defineConfig({
         },
         zIndex: {
           dropdown: { value: "100" },
+          header: { value: "10" },
         },
         colors: {
           "yellow.1": { value: "#FFD800" },
