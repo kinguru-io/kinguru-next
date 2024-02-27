@@ -103,7 +103,9 @@ export function NewPlaceOpenHours({
                         {({ field }: FieldProps) => (
                           <Tr>
                             <Td>
-                              {t(`places.hours_${day.toLocaleLowerCase()}`)}
+                              {t(
+                                `places.hours_${day.toLocaleLowerCase() as Lowercase<typeof day>}`,
+                              )}
                             </Td>
                             <Td>{formatTimeInterval(field.value)}</Td>
                             <Td>

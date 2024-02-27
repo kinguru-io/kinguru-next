@@ -400,12 +400,29 @@
     "speakers": "Speakers",
     "places": "Places",
     "price": "Price",
-    "follow_us": "Follow us on {social}" 
+    "follow_us": "Follow us on {social}"
   },
   "form": {
     "common": {
       "upload_photo": "Upload a photo",
       "uploaded_photo": "Uploaded photo"
+    }
+  },
+  "organization": {
+    "basic_info_page": {
+      "heading": "Basic organization information"
+    },
+    "basic_info_form": {
+      "main_heading": "Main",
+      "name": "Company name",
+      "foundationDate": "Year founded",
+      "activitySphere": "Select a field of activity",
+      "aboutCompany": "Tell more about your organization...",
+      "credentials_heading": "Credentials*",
+      "email": "Email",
+      "extra_heading": "Extra",
+      "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
+      "submit": "Save"
     }
   }
 }

@@ -9,40 +9,49 @@ export const additionalTextStyles = defineTextStyles({
     4: { value: { fontSize: "8px" } },
   },
   heading: {
-    h1: {
+    1: {
       value: {
         fontSize: "36px",
         fontWeight: "700",
         lineHeight: "1.35",
       },
     },
-    h2: {
+    2: {
       value: {
         fontSize: "30px",
         fontWeight: "700",
         lineHeight: "1.35",
       },
     },
-    h3: {
+    3: {
       value: {
         fontSize: "24px",
         fontWeight: "400",
         lineHeight: "1.35",
       },
     },
-    h4: {
+    4: {
       value: {
         fontSize: "14px",
         fontWeight: "700",
         lineHeight: "1.35",
       },
     },
-    h5: {
+    5: {
       value: {
         fontSize: "14px",
         fontWeight: "700",
         lineHeight: "1.35",
         textDecoration: "underline",
+      },
+    },
+    extra: {
+      1: {
+        value: {
+          fontSize: "20px",
+          fontWeight: "700",
+          lineHeight: "1.35",
+        },
       },
     },
   },

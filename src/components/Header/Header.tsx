@@ -18,7 +18,7 @@ export function Header() {
   ];
   return (
     <header className={classes.header}>
-      <Container className={classes.headerWrapper} maxW={"5xl"}>
+      <Container className={classes.headerWrapper}>
         <div>Logo</div>
         <nav>
           <Links navigation={navigation} />
