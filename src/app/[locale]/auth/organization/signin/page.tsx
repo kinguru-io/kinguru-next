@@ -6,7 +6,7 @@ export default function Page() {
 
   return (
     <>
-      <h1>{t("heading")}</h1>
+      <h1>{t("heading_org")}</h1>
       <SigninForm />
     </>
   );

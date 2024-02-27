@@ -26,13 +26,14 @@ export async function UserSection() {
       <DropdownMenu>
         {session ? (
           <>
-            <Link href="#">{t("sign_out")}</Link>
-            <Link href="#">{t("add_organization")}</Link>
+            <Link href="">{t("sign_out")}</Link>
+            <Link href="">{t("add_organization")}</Link>
           </>
         ) : (
           <>
-            <Link href="#">{t("sign_in")}</Link>
-            <Link href="#">{t("sign_up")}</Link>
+            <Link href="/auth/signin">{t("sign_in")}</Link>
+            <Link href="/auth/organization/signin">{t("sign_in_org")}</Link>
+            <Link href="/auth/organization/signup">{t("sign_up")}</Link>
           </>
         )}
       </DropdownMenu>

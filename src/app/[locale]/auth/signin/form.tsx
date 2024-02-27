@@ -23,7 +23,7 @@ export function SigninForm({
   const callbackUrl = searchParams?.get("callbackUrl") || undefined;
 
   return (
-    <VStack gap="15px">
+    <VStack gap="20px">
       {providers &&
         Object.values(providers)
           .filter(({ name }) => name !== "Credentials")
@@ -45,7 +45,7 @@ export function SigninForm({
                   })
                 }
               >
-                {provider.name}
+                {provider.id === "email" ? t("submit") : provider.name}
               </Button>
             </VStack>
           ))}
