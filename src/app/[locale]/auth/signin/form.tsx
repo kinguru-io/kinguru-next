@@ -31,6 +31,7 @@ export function SigninForm({
             <VStack key={provider.name} gap="5px">
               {provider.name === "Email" && (
                 <Input
+                  type="email"
                   variant="outline"
                   placeholder={t("email_placeholder")}
                   onChange={(e) => setEmail(e.target.value)}
