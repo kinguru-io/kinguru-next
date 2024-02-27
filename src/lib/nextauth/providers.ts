@@ -1,9 +1,9 @@
-import bcrypt from "bcrypt";
 import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { Argon2id } from "oslo/password";
 import { signinFormSchema } from "@/lib/validations";
 import prisma from "@/server/prisma.ts";
 
@@ -54,11 +54,11 @@ export const providers = (adapter: Adapter) => [
         return null;
       }
 
-      const isPasswordCorrect = await bcrypt.compare(
-        creds.password,
+      const validPassword = await new Argon2id().verify(
         account.providerAccountId,
+        creds.password,
       );
-      if (isPasswordCorrect) return user;
+      if (validPassword) return user;
 
       return null;
     },

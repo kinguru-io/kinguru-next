@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcrypt";
+import { Argon2id } from "oslo/password";
 import { AuthFormState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import prisma from "@/server/prisma.ts";
@@ -20,6 +20,8 @@ const signUpHandler = async ({
     };
   }
 
+  const hashedPassword = await new Argon2id().hash(password);
+
   await prisma.user.create({
     data: {
       email,
@@ -28,7 +30,7 @@ const signUpHandler = async ({
           {
             type: "credentials",
             provider: "credentials",
-            providerAccountId: await bcrypt.hash(password, 10),
+            providerAccountId: hashedPassword,
           },
         ],
       },

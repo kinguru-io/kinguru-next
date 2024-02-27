@@ -66,10 +66,6 @@
       "type": "build"
     },
     {
-      "name": "@types/bcrypt",
-      "type": "build"
-    },
-    {
       "name": "@types/gtag.js",
       "type": "build"
     },
@@ -310,10 +306,6 @@
       "type": "runtime"
     },
     {
-      "name": "bcrypt",
-      "type": "runtime"
-    },
-    {
       "name": "chakra-react-select",
       "type": "runtime"
     },
@@ -359,6 +351,10 @@
     },
     {
       "name": "nodemailer",
+      "type": "runtime"
+    },
+    {
+      "name": "oslo",
       "type": "runtime"
     },
     {
