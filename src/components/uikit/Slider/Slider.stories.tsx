@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import { Slider, SliderItem } from "./Slider";
-import { Box } from "~/styled-system/jsx";
+import { AspectRatio, Box } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
@@ -18,7 +18,9 @@ const meta = {
         items={items}
         renderItem={({ item, isSnapPoint }) => (
           <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
-            <Image src={item.src} width="391" height="220" alt="" />
+            <AspectRatio ratio={16 / 9}>
+              <Image src={item.src} fill alt="" />
+            </AspectRatio>
           </SliderItem>
         )}
       ></Slider>

@@ -14,6 +14,7 @@ export const sliderSlot = defineSlotRecipe({
   base: {
     slider: {
       position: "relative",
+      h: "100%",
     },
     sliderButton: {
       position: "absolute",
@@ -55,6 +56,8 @@ export const sliderSlot = defineSlotRecipe({
     },
     item: {
       flexShrink: 0,
+      w: "100%",
+      h: "100%",
       "&[data-snap-point='true']": {
         scrollSnapAlign: "start",
       },
