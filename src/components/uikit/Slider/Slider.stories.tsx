@@ -3,6 +3,7 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import { Slider, SliderItem } from "./Slider";
+import { Box } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
@@ -12,14 +13,16 @@ const items = Array.from({ length: 5 }).map((_, i) => ({
 const meta = {
   title: "UIKit/Slider",
   component: () => (
-    <Slider
-      items={items}
-      renderItem={({ item, isSnapPoint }) => (
-        <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
-          <Image src={item.src} width="391" height="220" alt="" />
-        </SliderItem>
-      )}
-    ></Slider>
+    <Box w="391px" h="220px">
+      <Slider
+        items={items}
+        renderItem={({ item, isSnapPoint }) => (
+          <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+            <Image src={item.src} width="391" height="220" alt="" />
+          </SliderItem>
+        )}
+      ></Slider>
+    </Box>
   ),
   parameters: {
     layout: "centered",
