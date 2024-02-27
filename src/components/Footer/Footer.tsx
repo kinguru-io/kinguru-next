@@ -51,7 +51,7 @@ export function Footer() {
 
   return (
     <footer className={classes.footer}>
-      <Container className={classes.footerWrapper} px="0" maxW={"5xl"}>
+      <Container className={classes.footerWrapper}>
         <div className={classes.contentWrapper}>
           <div>Logo</div>
           <Flex gap="5px" direction="column">

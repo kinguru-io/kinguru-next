@@ -100,7 +100,9 @@ export function OpenHoursModal({
                   }
                 >
                   <Text fontWeight={"500"}>
-                    {t(`places.hours_${day.toLocaleLowerCase()}_short`)}
+                    {t(
+                      `places.hours_${day.toLocaleLowerCase() as Lowercase<typeof day>}_short`,
+                    )}
                   </Text>
                 </Flex>
               );
