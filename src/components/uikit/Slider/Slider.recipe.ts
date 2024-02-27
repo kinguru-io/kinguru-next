@@ -48,11 +48,16 @@ export const sliderSlot = defineSlotRecipe({
     sliderOptions: {
       position: "relative",
       display: "flex",
-      overflow: "hidden",
+      overflow: "auto",
       scrollSnapType: "x mandatory",
+      scrollbarWidth: "none",
+      msOverflowStyle: "none",
       h: "100%",
       w: "auto",
       borderRadius: "12px",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
     },
     item: {
       flexShrink: 0,
