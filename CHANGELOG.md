@@ -1,3 +1,10 @@
+# [0.27.0](https://github.com/kinguru-io/kinguru-next/compare/v0.26.0...v0.27.0) (2024-02-27)
+
+
+### Features
+
+* **KINGU-95:** Organisation basic information form ([#478](https://github.com/kinguru-io/kinguru-next/issues/478)) ([776f9e6](https://github.com/kinguru-io/kinguru-next/commit/776f9e6d28d17c1ec5dc7d1208e6519c76e5a9bd))
+
 # [0.26.0](https://github.com/kinguru-io/kinguru-next/compare/v0.25.0...v0.26.0) (2024-02-23)
 
 
