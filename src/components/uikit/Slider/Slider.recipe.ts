@@ -9,14 +9,14 @@ export const SliderSlot = defineSlotRecipe({
     "prevButton",
     "nextButton",
     "sliderButton",
+    "itemSnapPoint",
+    "item",
   ],
   base: {
     slider: {
       position: "relative",
-      overflow: "hidden",
       w: "391px",
       h: "220px",
-      borderRadius: "12px",
     },
     sliderButton: {
       position: "absolute",
@@ -47,10 +47,20 @@ export const SliderSlot = defineSlotRecipe({
       right: "6px",
     },
     sliderOptions: {
-      transition: "0.5s",
-      "& > *": { w: "391px", h: "220px" },
+      position: "relative",
       display: "flex",
-      position: "absolute",
+      overflow: "hidden",
+      scrollSnapType: "x mandatory",
+      h: "100%",
+      w: "auto",
+    },
+    itemSnapPoint: {
+      scrollSnapAlign: "start",
+    },
+    item: {
+      w: "391px",
+      h: "220px",
+      flexShrink: 0,
     },
   },
 });

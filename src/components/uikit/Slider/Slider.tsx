@@ -1,39 +1,59 @@
-import { useState } from "react";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import { useSnapCarousel } from "react-snap-carousel";
 import { cx } from "~/styled-system/css";
-import { SliderVariantProps, slider } from "~/styled-system/recipes";
+import { slider } from "~/styled-system/recipes";
 
-type SliderProps = {
-  children: React.ReactNode;
-} & SliderVariantProps;
+type SliderProps<T> = {
+  readonly items: T[];
+  readonly renderItem: (
+    props: SliderRenderItemProps<T>,
+  ) => React.ReactElement<SliderItemProps>;
+};
 
-export function Slider({ children }: SliderProps) {
-  const [cur, setCur] = useState(0);
+type SliderRenderItemProps<T> = {
+  readonly item: T;
+  readonly isSnapPoint: boolean;
+};
+
+type SliderItemProps = {
+  readonly isSnapPoint: boolean;
+  readonly children?: React.ReactNode;
+};
+
+export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
+  const { scrollRef, prev, next, snapPointIndexes, activePageIndex, goTo } =
+    useSnapCarousel();
   const classes = slider();
-  const slidesCount = children instanceof Array ? children.length : 1;
 
-  const nextMoving = () => {
-    if (cur >= slidesCount - 1) {
-      setCur(0);
+  console.log(activePageIndex);
+  const nextSlide = () => {
+    if (items.length > activePageIndex + 1) {
+      next();
     } else {
-      setCur(cur + 1);
+      goTo(0);
     }
   };
-  const prevMoving = () => {
-    if (cur <= 0) {
-      setCur(slidesCount - 1);
+
+  const prevSlide = () => {
+    if (activePageIndex > 0) {
+      prev();
     } else {
-      setCur(cur - 1);
+      goTo(items.length - 1);
     }
   };
 
   return (
     <div className={classes.slider}>
+      <ul className={classes.sliderOptions} ref={scrollRef}>
+        {items.map((item, i) =>
+          renderItem({ item, isSnapPoint: snapPointIndexes.has(i) }),
+        )}
+      </ul>
       <div
         role="button"
         tabIndex={0}
         className={cx(classes.sliderButton, classes.prevButton)}
-        onClick={prevMoving}
+        onClick={prevSlide}
       >
         <GrPrevious />
       </div>
@@ -41,16 +61,20 @@ export function Slider({ children }: SliderProps) {
         role="button"
         tabIndex={0}
         className={cx(classes.sliderButton, classes.nextButton)}
-        onClick={nextMoving}
+        onClick={nextSlide}
       >
         <GrNext />
       </div>
-      <div
-        className={classes.sliderOptions}
-        style={{ left: `-${cur * 391}px` }}
-      >
-        {children}
-      </div>
     </div>
+  );
+}
+
+export function SliderItem({ children, isSnapPoint }: SliderItemProps) {
+  const classes = slider();
+
+  return (
+    <li className={cx(classes.item, isSnapPoint ? classes.itemSnapPoint : "")}>
+      {children}
+    </li>
   );
 }

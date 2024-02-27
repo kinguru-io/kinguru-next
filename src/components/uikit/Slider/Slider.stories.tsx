@@ -2,11 +2,25 @@
 import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
-import { Slider } from "./Slider";
+import { Slider, SliderItem } from "./Slider";
+
+const items = Array.from({ length: 3 }).map((_, i) => ({
+  id: i,
+  src: faker.image.urlLoremFlickr({ height: 220, width: 391 }),
+}));
 
 const meta = {
   title: "UIKit/Slider",
-  component: Slider,
+  component: () => (
+    <Slider
+      items={items}
+      renderItem={({ item, isSnapPoint }) => (
+        <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+          <Image src={item.src} width="391" height="220" alt="" />
+        </SliderItem>
+      )}
+    ></Slider>
+  ),
   parameters: {
     layout: "centered",
   },
@@ -16,33 +30,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultSlider: Story = {
-  args: {
-    children: [
-      <Image
-        width={391}
-        height={220}
-        alt="test image"
-        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
-      />,
-      <Image
-        width={391}
-        height={220}
-        alt="test image"
-        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
-      />,
-      <Image
-        width={391}
-        height={220}
-        alt="test image"
-        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
-      />,
-      <Image
-        width={391}
-        height={220}
-        alt="test image"
-        src={faker.image.urlLoremFlickr({ height: 220, width: 391 })}
-      />,
-    ],
-  },
-};
+export const DefaultSlider: Story = {};
