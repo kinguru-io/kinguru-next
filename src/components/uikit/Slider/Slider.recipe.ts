@@ -18,7 +18,8 @@ export const sliderSlot = defineSlotRecipe({
     sliderButton: {
       position: "absolute",
       transition: "0.5s",
-      top: "calc(100% / 2 - 18.5px)",
+      top: "50%",
+      transform: "translateY(-50%)",
       h: "35px",
       w: "35px",
       borderRadius: "50%",
