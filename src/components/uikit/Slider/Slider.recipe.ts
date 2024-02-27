@@ -50,6 +50,7 @@ export const SliderSlot = defineSlotRecipe({
       scrollSnapType: "x mandatory",
       h: "100%",
       w: "auto",
+      borderRadius: "12px",
     },
     item: {
       flexShrink: 0,
