@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import { Slider, SliderItem } from "./Slider";
 
-const items = Array.from({ length: 3 }).map((_, i) => ({
+const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
   src: faker.image.urlLoremFlickr({ height: 220, width: 391 }),
 }));

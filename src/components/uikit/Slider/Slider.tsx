@@ -25,7 +25,6 @@ export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
     useSnapCarousel();
   const classes = slider();
 
-  console.log(activePageIndex);
   const nextSlide = () => {
     if (items.length > activePageIndex + 1) {
       next();
@@ -49,22 +48,20 @@ export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
           renderItem({ item, isSnapPoint: snapPointIndexes.has(i) }),
         )}
       </ul>
-      <div
-        role="button"
-        tabIndex={0}
+      <button
+        type="button"
         className={cx(classes.sliderButton, classes.prevButton)}
         onClick={prevSlide}
       >
         <GrPrevious />
-      </div>
-      <div
-        role="button"
-        tabIndex={0}
+      </button>
+      <button
+        type="button"
         className={cx(classes.sliderButton, classes.nextButton)}
         onClick={nextSlide}
       >
         <GrNext />
-      </div>
+      </button>
     </div>
   );
 }
