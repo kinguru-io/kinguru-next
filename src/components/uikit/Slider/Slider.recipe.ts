@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineSlotRecipe } from "@pandacss/dev";
 
-export const SliderSlot = defineSlotRecipe({
+export const sliderSlot = defineSlotRecipe({
   className: "slider",
   slots: [
     "slider",
