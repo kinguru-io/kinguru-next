@@ -12,6 +12,7 @@ import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
+import { hallCardSlot } from "@/components/uikit/HallCard/HallCard.recipe";
 
 export default defineConfig({
   globalCss: additionalGlobalCss,
@@ -41,6 +42,7 @@ export default defineConfig({
         footer: footerSlot,
         header: headerSlot,
         slider: sliderSlot,
+        hallCard: hallCardSlot,
       },
       tokens: {
         gradients: {
