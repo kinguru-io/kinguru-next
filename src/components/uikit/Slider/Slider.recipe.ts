@@ -9,7 +9,6 @@ export const SliderSlot = defineSlotRecipe({
     "prevButton",
     "nextButton",
     "sliderButton",
-    "itemSnapPoint",
     "item",
   ],
   base: {
@@ -54,13 +53,13 @@ export const SliderSlot = defineSlotRecipe({
       h: "100%",
       w: "auto",
     },
-    itemSnapPoint: {
-      scrollSnapAlign: "start",
-    },
     item: {
       w: "391px",
       h: "220px",
       flexShrink: 0,
+      "&[data-snap-point='true']": {
+        scrollSnapAlign: "start",
+      },
     },
   },
 });

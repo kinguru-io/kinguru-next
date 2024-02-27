@@ -70,7 +70,7 @@ export function SliderItem({ children, isSnapPoint }: SliderItemProps) {
   const classes = slider();
 
   return (
-    <li className={cx(classes.item, isSnapPoint ? classes.itemSnapPoint : "")}>
+    <li className={classes.item} data-snap-point={isSnapPoint}>
       {children}
     </li>
   );
