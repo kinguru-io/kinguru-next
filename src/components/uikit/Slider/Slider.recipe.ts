@@ -24,7 +24,6 @@ export const sliderSlot = defineSlotRecipe({
       h: "35px",
       w: "35px",
       borderRadius: "50%",
-      zIndex: 20,
       cursor: "pointer",
       bg: "token(colors.neutral.5)",
       display: "flex",
