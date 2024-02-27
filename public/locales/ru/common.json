@@ -267,5 +267,22 @@
       "upload_photo": "Загрузите фото",
       "uploaded_photo": "Загруженное фото"
     }
+  },
+  "organization": {
+    "basic_info_page": {
+      "heading": "Основная информация об организации"
+    },
+    "basic_info_form": {
+      "main_heading": "Главное",
+      "name": "Имя компании",
+      "foundationDate": "Год основания",
+      "activitySphere": "Выберите сферу деятельности",
+      "aboutCompany": "Расскажите о вашей организации поподробнее...",
+      "credentials_heading": "Реквизиты*",
+      "email": "Email",
+      "extra_heading": "Дополнительно",
+      "credentials_asterisk_helper": "* вся указанная информация будет использоваться исключительно в рамках внутренних рабочих процессов",
+      "submit": "Сохранить"
+    }
   }
 }
