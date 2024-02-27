@@ -3,13 +3,19 @@ import { defineGlobalStyles } from "@pandacss/dev";
 
 export const additionalGlobalCss = defineGlobalStyles({
   // TODO ? Consider adding conditional `textStyle: ["body.X"]`
-  "html, body": {
+  html: {
+    fontSize: "16px",
+    height: "full",
+    minHeight: "full",
+  },
+  body: {
+    minHeight: "100vh",
     color: "neutral.1",
     lineHeight: "1.25",
   },
-  h1: { textStyle: "heading.h1" },
-  h2: { textStyle: "heading.h2" },
-  h3: { textStyle: "heading.h3" },
-  h4: { textStyle: "heading.h4" },
-  h5: { textStyle: "heading.h5" },
+  h1: { textStyle: "heading.1" },
+  h2: { textStyle: "heading.2" },
+  h3: { textStyle: "heading.3" },
+  h4: { textStyle: "heading.4" },
+  h5: { textStyle: "heading.5" },
 });

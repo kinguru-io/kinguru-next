@@ -19,7 +19,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TextArea: Story = {
+export const TextAreaEmpty: Story = {
   args: {
     placeholder: "Placeholder...",
   },
