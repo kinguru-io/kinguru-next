@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
 import { Button, Select, Input, Textarea } from "@/components/uikit";
-import { Box, Flex } from "~/styled-system/jsx";
+import { FormInnerLayout } from "@/layout/block";
+import { Flex } from "~/styled-system/jsx";
 
 export function BasicInfoForm() {
   return (
@@ -17,16 +18,7 @@ function BasicInfoFormInner() {
   const t = useTranslations("organization.basic_info_form");
 
   return (
-    <Box
-      css={{
-        "& h3": { textStyle: "heading.extra.1" },
-        "& .helper": {
-          textStyle: "body.3",
-          color: "neutral.2",
-        },
-        "& .button": { mx: "auto" },
-      }}
-    >
+    <FormInnerLayout>
       <BasicInfoFormBoxLayout>
         <h3>{t("main_heading")}</h3>
         <BasicInfoFormGroupLayout>
@@ -66,14 +58,13 @@ function BasicInfoFormInner() {
       <Button type="submit" size="md">
         {t("submit")}
       </Button>
-    </Box>
+    </FormInnerLayout>
   );
 }
 
 function BasicInfoFormBoxLayout({ children }: { children: React.ReactNode }) {
   return (
     <Flex
-      className="form_box_layout"
       layerStyle="outlineSecondaryWrapper"
       paddingInline="30px"
       marginBlockEnd="60px"
@@ -89,7 +80,6 @@ function BasicInfoFormBoxLayout({ children }: { children: React.ReactNode }) {
 function BasicInfoFormGroupLayout({ children }: { children: React.ReactNode }) {
   return (
     <Flex
-      className="form_group_layout"
       justifyContent="space-between"
       alignItems="center"
       flexWrap="wrap"

@@ -1,13 +1,5 @@
-import { Box, Container } from "~/styled-system/jsx";
+import { ProfileLayout } from "@/layout/page";
 
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <Container>
-      <Box paddingBlock="83px 40px">{children}</Box>
-    </Container>
-  );
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <ProfileLayout>{children}</ProfileLayout>;
 }
