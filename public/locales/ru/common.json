@@ -237,7 +237,7 @@
     "speakers": "Спикеры",
     "places": "Площадки",
     "price": "Цены",
-    "follow_us": "Следите за нами в {social}" 
+    "follow_us": "Следите за нами в {social}"
   },
   "auth": {
     "reset_form": {
