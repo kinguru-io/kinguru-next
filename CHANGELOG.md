@@ -1,3 +1,10 @@
+## [0.27.1](https://github.com/kinguru-io/kinguru-next/compare/v0.27.0...v0.27.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* translations type checking ([#479](https://github.com/kinguru-io/kinguru-next/issues/479)) ([7a21bd6](https://github.com/kinguru-io/kinguru-next/commit/7a21bd68295a5b26cd729935974952d49cbea718))
+
 # [0.27.0](https://github.com/kinguru-io/kinguru-next/compare/v0.26.0...v0.27.0) (2024-02-27)
 
 
