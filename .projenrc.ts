@@ -183,6 +183,8 @@ const project = new web.NextJsTypeScriptProject({
     "react-hook-form",
     "@hookform/resolvers",
     "zod-form-data",
+
+    "react-snap-carousel",
   ],
   devDeps: [
     "@pandacss/dev",

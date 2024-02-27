@@ -7,6 +7,7 @@ import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
+import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
@@ -39,6 +40,7 @@ export default defineConfig({
         select: selectSlot,
         footer: footerSlot,
         header: headerSlot,
+        slider: sliderSlot,
       },
       tokens: {
         gradients: {
