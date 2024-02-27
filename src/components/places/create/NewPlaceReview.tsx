@@ -67,7 +67,7 @@ export function NewPlaceReview({
               <Td>{t("places.general_type_of_premises")}</Td>
               <Td>
                 {general?.typeOfPremises
-                  .map(({ label }) => t(label))
+                  .map(({ label }) => t(label as any))
                   .join(", ")}
               </Td>
             </Tr>
@@ -98,7 +98,9 @@ export function NewPlaceReview({
             <Tr>
               <Td>{t("places.features_parking_area")}</Td>
               <Td>
-                {features?.parkingArea.map(({ label }) => t(label)).join(", ")}
+                {features?.parkingArea
+                  .map(({ label }) => t(label as any))
+                  .join(", ")}
               </Td>
             </Tr>
             <Tr>
@@ -120,11 +122,13 @@ export function NewPlaceReview({
             <Tr>
               <Td>{t("places.features_amenities")}</Td>
               <Td>
-                {features?.amenities.map(({ label }) => t(label)).join(", ")}
+                {features?.amenities
+                  .map(({ label }) => t(label as any))
+                  .join(", ")}
               </Td>
             </Tr>
             <Tr>
-              <Td>{t("places.location_mapbox_id")}</Td>
+              <Td>{t("places.location_mapbox_id" as any)}</Td>
               <Td>{location?.locationMapboxId}</Td>
             </Tr>
             <Tr>
@@ -132,7 +136,7 @@ export function NewPlaceReview({
               <Td>{location?.useSameAddress ? "true" : "false"}</Td>
             </Tr>
             <Tr>
-              <Td>{t("places.billing_mapbox_id")}</Td>
+              <Td>{t("places.billing_mapbox_id" as any)}</Td>
               <Td>{location?.billingMapboxId}</Td>
             </Tr>
             <Tr>
@@ -142,12 +146,19 @@ export function NewPlaceReview({
             <Tr>
               <Td>{t("places.hours_of_premises")}</Td>
               <Td>
-                {Object.keys(openHours || {}).map((day) => (
+                {(
+                  Object.keys(
+                    openHours || {},
+                  ) as (typeof daysOfTheWeek)[number][]
+                ).map((day) => (
                   <div>
-                    {t(`places.hours_${day}`)}:{" "}
+                    {t(
+                      `places.hours_${day.toLowerCase() as Lowercase<typeof day>}`,
+                    )}
+                    :{" "}
                     {openHours
-                      ? openHours[day as (typeof daysOfTheWeek)[number]]
-                        ? openHours[day as (typeof daysOfTheWeek)[number]]
+                      ? openHours[day]
+                        ? openHours[day]
                             ?.map((value) => value.start + " - " + value.end)
                             .join(", ")
                         : t("places.closed")
