@@ -55,6 +55,7 @@ export default defineConfig({
         },
         zIndex: {
           dropdown: { value: "100" },
+          header: { value: "10" },
         },
         colors: {
           "yellow.1": { value: "#FFD800" },
@@ -135,6 +136,18 @@ export default defineConfig({
   patterns: {
     extend: {
       customDivider: customDividerPattern,
+      container: {
+        transform(props) {
+          return {
+            position: "relative",
+            maxWidth: "7xl",
+            mx: "auto",
+            // auto padding from 20px to 50px (1rem = 16px, viewport 480px to 1280px)
+            px: "clamp(1.25rem, 0.125rem + 3.75vw, 3.125rem)",
+            ...props,
+          };
+        },
+      },
     },
   },
 });

@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
-import { Box } from "~/styled-system/jsx";
+import { Grid } from "~/styled-system/jsx";
 
 import "../globals.css";
 
@@ -27,15 +27,11 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
-          <Header />
-          <Box minHeight="100vh">
-            <main
-              className={css({ height: 0, minHeight: "calc(100vh - 85px)" })}
-            >
-              {children}
-            </main>
-          </Box>
-          <Footer />
+          <Grid gridTemplateRows="auto 1fr auto" gap="0" minHeight="full">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </Grid>
         </body>
       </NextIntlClientProvider>
     </html>
