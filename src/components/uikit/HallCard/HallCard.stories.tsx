@@ -22,12 +22,11 @@ const items = Array.from({ length: 5 }).map((_, i) => ({
 }));
 
 const meta = {
-  title: "HallCard",
+  title: "UIKit/HallCard",
   component: HallCard,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
 } satisfies Meta<typeof HallCard>;
 
 export default meta;
