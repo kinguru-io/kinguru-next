@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineSlotRecipe } from "@pandacss/dev";
 
-export const hallCardSlot = defineSlotRecipe({
-  className: "hall",
-  slots: ["hall", "hallSlider", "hallContent"],
+export const premiseCardSlot = defineSlotRecipe({
+  className: "premise",
+  slots: ["premise", "premiseSlider", "premiseContent"],
   base: {
-    hall: {
+    premise: {
       w: "1120px",
       padding: "23px 30px",
       border: "1px solid token(colors.neutral.3)",
@@ -16,12 +16,12 @@ export const hallCardSlot = defineSlotRecipe({
       justifyContent: "space-between",
       alignItems: "center",
     },
-    hallSlider: {
+    premiseSlider: {
       w: "391px",
       h: "220px",
       position: "relative",
     },
-    hallContent: {
+    premiseContent: {
       display: "flex",
       maxW: "600px",
       h: "100%",

@@ -3,15 +3,15 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import {
-  HallCard,
-  HallContent,
-  HallDescription,
-  HallPrice,
-  HallSlider,
-  HallTextContent,
-  HallTitle,
-  HallTitleSize,
-} from "./HallCard";
+  PremiseCard,
+  PremiseContent,
+  PremiseDescription,
+  PremisePrice,
+  PremiseSlider,
+  PremiseTextContent,
+  PremiseTitle,
+  PremiseTitleSize,
+} from "./PremiseCard";
 import { Button } from "../Button";
 import { Slider, SliderItem } from "../Slider/Slider";
 import { AspectRatio } from "~/styled-system/jsx";
@@ -22,34 +22,34 @@ const items = Array.from({ length: 5 }).map((_, i) => ({
 }));
 
 const meta = {
-  title: "UIKit/HallCard",
-  component: HallCard,
+  title: "UIKit/PremiseCard",
+  component: PremiseCard,
   parameters: {
     layout: "centered",
   },
-} satisfies Meta<typeof HallCard>;
+} satisfies Meta<typeof PremiseCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultHallCard: Story = {
+export const DefaultPremiseCard: Story = {
   args: { children: null },
   render: () => {
     return (
-      <HallCard>
-        <HallContent>
-          <HallTextContent>
-            <HallTitle>
+      <PremiseCard>
+        <PremiseContent>
+          <PremiseTextContent>
+            <PremiseTitle>
               Зал 1
-              <HallTitleSize>
+              <PremiseTitleSize>
                 (20 м<sup>2</sup>)
-              </HallTitleSize>
-            </HallTitle>
-            <HallDescription>{faker.lorem.lines(4)}</HallDescription>
-          </HallTextContent>
+              </PremiseTitleSize>
+            </PremiseTitle>
+            <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
+          </PremiseTextContent>
           <Button>Подробнее</Button>
-        </HallContent>
-        <HallSlider>
+        </PremiseContent>
+        <PremiseSlider>
           <Slider
             items={items}
             renderItem={({ item, isSnapPoint }) => (
@@ -60,9 +60,9 @@ export const DefaultHallCard: Story = {
               </SliderItem>
             )}
           ></Slider>
-          <HallPrice>200$</HallPrice>
-        </HallSlider>
-      </HallCard>
+          <PremisePrice>200$</PremisePrice>
+        </PremiseSlider>
+      </PremiseCard>
     );
   },
 };
