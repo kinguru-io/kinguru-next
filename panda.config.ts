@@ -42,7 +42,7 @@ export default defineConfig({
         footer: footerSlot,
         header: headerSlot,
         slider: sliderSlot,
-        hallCard: premiseCardSlot,
+        premiseCard: premiseCardSlot,
       },
       tokens: {
         gradients: {

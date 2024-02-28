@@ -38,11 +38,11 @@ export function PremiseContent({ children }: PremiseCardProps) {
   return <div className={classes.premiseContent}>{children}</div>;
 }
 
-export function premiseTitleSize({ children }: PremiseCardProps) {
+export function PremiseTitleSize({ children }: PremiseCardProps) {
   return <span className={css({ textStyle: "body.2" })}>{children}</span>;
 }
 
-export function premiseTextContent({ children }: PremiseCardProps) {
+export function PremiseTextContent({ children }: PremiseCardProps) {
   return (
     <Flex flexDir="column" gap="20px">
       {children}
