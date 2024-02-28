@@ -15,7 +15,7 @@ import {
 } from "./PremiseCard";
 import { Button } from "../Button";
 import { Slider, SliderItem } from "../Slider/Slider";
-import { AspectRatio } from "~/styled-system/jsx";
+import { AspectRatio, Box } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
@@ -37,33 +37,39 @@ export const DefaultPremiseCard: Story = {
   args: { children: null },
   render: () => {
     return (
-      <PremiseCard>
-        <PremiseContent>
-          <PremiseTextContent>
-            <PremiseTitleWrapper>
-              <PremiseTitle>Зал 1</PremiseTitle>
-              <PremiseTitleSize>
-                (20 м<sup>2</sup>)
-              </PremiseTitleSize>
-            </PremiseTitleWrapper>
-            <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
-          </PremiseTextContent>
-          <Button>Подробнее</Button>
-        </PremiseContent>
-        <PremiseSlider>
-          <Slider
-            items={items}
-            renderItem={({ item, isSnapPoint }) => (
-              <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
-                <AspectRatio ratio={16 / 9}>
-                  <Image src={item.src} fill alt="" />
-                </AspectRatio>
-              </SliderItem>
-            )}
-          ></Slider>
-          <PremisePrice>200$</PremisePrice>
-        </PremiseSlider>
-      </PremiseCard>
+      <Box w="1120px" h="272px">
+        <PremiseCard>
+          <Box w="600px" h="100%">
+            <PremiseContent>
+              <PremiseTextContent>
+                <PremiseTitleWrapper>
+                  <PremiseTitle>Зал 1</PremiseTitle>
+                  <PremiseTitleSize>
+                    (20 м<sup>2</sup>)
+                  </PremiseTitleSize>
+                </PremiseTitleWrapper>
+                <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
+              </PremiseTextContent>
+              <Button>Подробнее</Button>
+            </PremiseContent>
+          </Box>
+          <PremiseSlider>
+            <Box w="391px" h="220px">
+              <Slider
+                items={items}
+                renderItem={({ item, isSnapPoint }) => (
+                  <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+                    <AspectRatio ratio={16 / 9}>
+                      <Image src={item.src} fill alt="" />
+                    </AspectRatio>
+                  </SliderItem>
+                )}
+              ></Slider>
+              <PremisePrice>200$</PremisePrice>
+            </Box>
+          </PremiseSlider>
+        </PremiseCard>
+      </Box>
     );
   },
 };
