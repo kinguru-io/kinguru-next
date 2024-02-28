@@ -12,10 +12,6 @@ export function PremiseCard({ children }: PremiseCardProps) {
   return <div className={classes.premise}>{children}</div>;
 }
 
-export function PremiseTitle({ children }: PremiseCardProps) {
-  return <span className={css({ textStyle: "heading.3" })}>{children}</span>;
-}
-
 export function PremiseDescription({ children }: PremiseCardProps) {
   return <span className={css({ textStyle: "body.3" })}>{children}</span>;
 }
@@ -40,6 +36,14 @@ export function PremiseContent({ children }: PremiseCardProps) {
 
 export function PremiseTitleSize({ children }: PremiseCardProps) {
   return <span className={css({ textStyle: "body.2" })}>{children}</span>;
+}
+
+export function PremiseTitle({ children }: PremiseCardProps) {
+  return <h3>{children}</h3>;
+}
+
+export function PremiseTitleWrapper({ children }: PremiseCardProps) {
+  return <Flex align="baseline">{children}</Flex>;
 }
 
 export function PremiseTextContent({ children }: PremiseCardProps) {

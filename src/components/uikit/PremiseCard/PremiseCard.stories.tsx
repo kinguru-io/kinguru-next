@@ -11,6 +11,7 @@ import {
   PremiseTextContent,
   PremiseTitle,
   PremiseTitleSize,
+  PremiseTitleWrapper,
 } from "./PremiseCard";
 import { Button } from "../Button";
 import { Slider, SliderItem } from "../Slider/Slider";
@@ -39,12 +40,12 @@ export const DefaultPremiseCard: Story = {
       <PremiseCard>
         <PremiseContent>
           <PremiseTextContent>
-            <PremiseTitle>
-              Зал 1
+            <PremiseTitleWrapper>
+              <PremiseTitle>Зал 1</PremiseTitle>
               <PremiseTitleSize>
                 (20 м<sup>2</sup>)
               </PremiseTitleSize>
-            </PremiseTitle>
+            </PremiseTitleWrapper>
             <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
           </PremiseTextContent>
           <Button>Подробнее</Button>
