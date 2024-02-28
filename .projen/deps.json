@@ -398,6 +398,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-snap-carousel",
+      "type": "runtime"
+    },
+    {
       "name": "sharp",
       "type": "runtime"
     },

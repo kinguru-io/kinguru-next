@@ -1,3 +1,10 @@
+# [0.28.0](https://github.com/kinguru-io/kinguru-next/compare/v0.27.1...v0.28.0) (2024-02-27)
+
+
+### Features
+
+* **KINGU-92:** create slider component ([#476](https://github.com/kinguru-io/kinguru-next/issues/476)) ([8d92238](https://github.com/kinguru-io/kinguru-next/commit/8d922386e6782948aeb81ebb33a3dff8050109e9))
+
 ## [0.27.1](https://github.com/kinguru-io/kinguru-next/compare/v0.27.0...v0.27.1) (2024-02-27)
 
 
