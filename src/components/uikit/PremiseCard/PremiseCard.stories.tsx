@@ -15,15 +15,15 @@ import {
 } from "./PremiseCard";
 import { Button } from "../Button";
 import { Slider, SliderItem } from "../Slider/Slider";
-import { AspectRatio, Box } from "~/styled-system/jsx";
+import { AspectRatio, Container } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
-  src: faker.image.urlLoremFlickr({ height: 220, width: 391 }),
+  src: faker.image.urlLoremFlickr(),
 }));
 
 const meta = {
-  title: "UIKit/PremiseCard",
+  title: "UIKit/Cards/PremiseCard",
   component: PremiseCard,
   parameters: {
     layout: "centered",
@@ -37,39 +37,35 @@ export const DefaultPremiseCard: Story = {
   args: { children: null },
   render: () => {
     return (
-      <Box w="1120px" h="272px">
+      <Container>
         <PremiseCard>
-          <Box w="600px" h="100%">
-            <PremiseContent>
-              <PremiseTextContent>
-                <PremiseTitleWrapper>
-                  <PremiseTitle>Зал 1</PremiseTitle>
-                  <PremiseTitleSize>
-                    (20 м<sup>2</sup>)
-                  </PremiseTitleSize>
-                </PremiseTitleWrapper>
-                <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
-              </PremiseTextContent>
-              <Button>Подробнее</Button>
-            </PremiseContent>
-          </Box>
+          <PremiseContent>
+            <PremiseTextContent>
+              <PremiseTitleWrapper>
+                <PremiseTitle>Hall 1</PremiseTitle>
+                <PremiseTitleSize>
+                  (20 m<sup>2</sup>)
+                </PremiseTitleSize>
+              </PremiseTitleWrapper>
+              <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
+            </PremiseTextContent>
+            <Button size="md">More</Button>
+          </PremiseContent>
           <PremiseSlider>
-            <Box w="391px" h="220px">
-              <Slider
-                items={items}
-                renderItem={({ item, isSnapPoint }) => (
-                  <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
-                    <AspectRatio ratio={16 / 9}>
-                      <Image src={item.src} fill alt="" />
-                    </AspectRatio>
-                  </SliderItem>
-                )}
-              ></Slider>
-              <PremisePrice>200$</PremisePrice>
-            </Box>
+            <Slider
+              items={items}
+              renderItem={({ item, isSnapPoint }) => (
+                <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+                  <AspectRatio ratio={16 / 9}>
+                    <Image src={item.src} fill alt="" />
+                  </AspectRatio>
+                </SliderItem>
+              )}
+            ></Slider>
+            <PremisePrice>200$</PremisePrice>
           </PremiseSlider>
         </PremiseCard>
-      </Box>
+      </Container>
     );
   },
 };

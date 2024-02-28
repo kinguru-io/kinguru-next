@@ -9,7 +9,7 @@ type PremiseCardProps = {
 
 export function PremiseCard({ children }: PremiseCardProps) {
   const classes = premiseCard();
-  return <div className={classes.premise}>{children}</div>;
+  return <article className={classes.premise}>{children}</article>;
 }
 
 export function PremiseDescription({ children }: PremiseCardProps) {
@@ -23,7 +23,7 @@ export function PremiseSlider({ children }: PremiseCardProps) {
 
 export function PremisePrice({ children }: PremiseCardProps) {
   return (
-    <Float placement="top-end" offset="10%">
+    <Float placement="top-end" offset="6px" translate="none">
       <Tag>{children}</Tag>
     </Float>
   );
