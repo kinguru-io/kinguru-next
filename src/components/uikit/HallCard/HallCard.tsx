@@ -1,4 +1,6 @@
+import { Tag } from "../Tag";
 import { css } from "~/styled-system/css";
+import { Float } from "~/styled-system/jsx";
 import { hallCard } from "~/styled-system/recipes";
 
 type HallCardProps = {
@@ -21,6 +23,14 @@ export function HallDescription({ children }: HallCardProps) {
 export function HallSlider({ children }: HallCardProps) {
   const classes = hallCard();
   return <div className={classes.hallSlider}>{children}</div>;
+}
+
+export function HallPrice({ children }: HallCardProps) {
+  return (
+    <Float placement="top-end" offset="10%">
+      <Tag>{children}</Tag>
+    </Float>
+  );
 }
 
 export function HallContent({ children }: HallCardProps) {

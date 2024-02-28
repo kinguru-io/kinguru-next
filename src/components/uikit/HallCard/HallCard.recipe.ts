@@ -19,6 +19,7 @@ export const hallCardSlot = defineSlotRecipe({
     hallSlider: {
       w: "391px",
       h: "220px",
+      position: "relative",
     },
     hallContent: {
       display: "flex",

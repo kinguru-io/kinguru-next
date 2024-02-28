@@ -6,6 +6,7 @@ import {
   HallCard,
   HallContent,
   HallDescription,
+  HallPrice,
   HallSlider,
   HallTitle,
 } from "./HallCard";
@@ -51,6 +52,7 @@ export const DefaultHallCard: Story = {
               </SliderItem>
             )}
           ></Slider>
+          <HallPrice>200$</HallPrice>
         </HallSlider>
       </HallCard>
     );
