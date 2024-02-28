@@ -37,3 +37,7 @@ export function HallContent({ children }: HallCardProps) {
   const classes = hallCard();
   return <div className={classes.hallContent}>{children}</div>;
 }
+
+export function HallTitleSize({ children }: HallCardProps) {
+  return <span className={css({ textStyle: "body.2" })}>{children}</span>;
+}

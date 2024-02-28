@@ -9,6 +9,7 @@ import {
   HallPrice,
   HallSlider,
   HallTitle,
+  HallTitleSize,
 } from "./HallCard";
 import { Button } from "../Button";
 import { Slider, SliderItem } from "../Slider/Slider";
@@ -37,7 +38,12 @@ export const DefaultHallCard: Story = {
     return (
       <HallCard>
         <HallContent>
-          <HallTitle>Зал 1</HallTitle>
+          <HallTitle>
+            Зал 1
+            <HallTitleSize>
+              (20 м<sup>2</sup>)
+            </HallTitleSize>
+          </HallTitle>
           <HallDescription>{faker.lorem.lines(4)}</HallDescription>
           <Button>Подробнее</Button>
         </HallContent>
