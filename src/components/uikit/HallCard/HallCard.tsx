@@ -1,6 +1,6 @@
 import { Tag } from "../Tag";
 import { css } from "~/styled-system/css";
-import { Float } from "~/styled-system/jsx";
+import { Flex, Float } from "~/styled-system/jsx";
 import { hallCard } from "~/styled-system/recipes";
 
 type HallCardProps = {
@@ -40,4 +40,12 @@ export function HallContent({ children }: HallCardProps) {
 
 export function HallTitleSize({ children }: HallCardProps) {
   return <span className={css({ textStyle: "body.2" })}>{children}</span>;
+}
+
+export function HallTextContent({ children }: HallCardProps) {
+  return (
+    <Flex flexDir="column" gap="20px">
+      {children}
+    </Flex>
+  );
 }

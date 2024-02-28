@@ -8,6 +8,7 @@ import {
   HallDescription,
   HallPrice,
   HallSlider,
+  HallTextContent,
   HallTitle,
   HallTitleSize,
 } from "./HallCard";
@@ -38,13 +39,15 @@ export const DefaultHallCard: Story = {
     return (
       <HallCard>
         <HallContent>
-          <HallTitle>
-            Зал 1
-            <HallTitleSize>
-              (20 м<sup>2</sup>)
-            </HallTitleSize>
-          </HallTitle>
-          <HallDescription>{faker.lorem.lines(4)}</HallDescription>
+          <HallTextContent>
+            <HallTitle>
+              Зал 1
+              <HallTitleSize>
+                (20 м<sup>2</sup>)
+              </HallTitleSize>
+            </HallTitle>
+            <HallDescription>{faker.lorem.lines(4)}</HallDescription>
+          </HallTextContent>
           <Button>Подробнее</Button>
         </HallContent>
         <HallSlider>
