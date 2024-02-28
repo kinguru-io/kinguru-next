@@ -45,7 +45,7 @@ async function main() {
           starts: faker.date.future(),
           duration: faker.date.future(),
           poster: faker.image.urlLoremFlickr(),
-          price: parseFloat(faker.finance.amount(0, 20)),
+          price: parseFloat(faker.finance.amount({ min: 0, max: 20 })),
           tags: faker.lorem.words().split(" "),
           initiator: {
             create: userSchema(),
@@ -83,7 +83,7 @@ async function main() {
                     foundationDate: faker.date.past(),
                     requisitesUrl: faker.internet.url(),
                     aboutCompany: faker.company.catchPhrase(),
-                    activitySphere: faker.company.buzzPhrase().split(' '),
+                    activitySphere: faker.company.buzzPhrase().split(" "),
                     logotype: faker.image.avatar(),
                     resources: {
                       createMany: {
@@ -98,8 +98,8 @@ async function main() {
                             url: faker.image.url({ width: 200, height: 100 }),
                           },
                         ],
-                      }
-                    }
+                      },
+                    },
                   },
                 },
                 resources: {
@@ -231,6 +231,23 @@ async function main() {
   )
     .filter((result) => result.status === "rejected")
     .forEach(console.log);
+
+  // Venues creation START
+  const venues = Array.from({ length: users.length / 2 }, () => ({
+    name: faker.company.name(),
+    description: faker.lorem.paragraph(30),
+  }));
+
+  (
+    await Promise.allSettled(
+      venues.map((venue) => prisma.venue.create({ data: venue })),
+    )
+  ).forEach((resolvedVenue) => {
+    if (resolvedVenue.status === "rejected") {
+      console.log(resolvedVenue);
+    }
+  });
+  // Venues creation END
 
   const createdUsers = await prisma.user.findMany();
   const speakers = await prisma.speaker.findMany();
