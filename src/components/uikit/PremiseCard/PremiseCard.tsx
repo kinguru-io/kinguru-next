@@ -13,7 +13,7 @@ export function PremiseCard({ children }: PremiseCardProps) {
 }
 
 export function PremiseDescription({ children }: PremiseCardProps) {
-  return <span className={css({ textStyle: "body.3" })}>{children}</span>;
+  return <p className={css({ textStyle: "body.3" })}>{children}</p>;
 }
 
 export function PremiseSlider({ children }: PremiseCardProps) {
