@@ -40,12 +40,12 @@ export function Footer() {
     {
       name: "Facebook",
       src: facebookIcon.src,
-      link: "https://www.linkedin.com/company/eventifytoday/",
+      link: "https://www.facebook.com/eventify.today",
     },
     {
       name: "Linkedin",
       src: linkedinIcon.src,
-      link: "https://www.facebook.com/eventify.today",
+      link: "https://www.linkedin.com/company/eventifytoday/",
     },
   ];
 
