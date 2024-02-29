@@ -27,12 +27,13 @@ const nextConfig = {
         protocol: "https",
         hostname: "kinguru-storage.s3.pl-waw.scw.cloud",
         port: "",
-        pathname: "/**"
-      }
+        pathname: "/**",
+      },
     ],
   },
   experimental: {
     instrumentationHook: true,
+    serverComponentsExternalPackages: ["oslo"],
   },
   publicRuntimeConfig: {
     elasticSearchApiKey: process.env.ELASTICSEARCH_API_KEY,

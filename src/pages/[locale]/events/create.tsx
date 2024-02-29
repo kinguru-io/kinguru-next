@@ -6,8 +6,8 @@ import {
 } from "next/types";
 import { useTranslations } from "next-intl";
 import { NewEventStepper } from "@/components/events/create";
-import { FooterSection } from "@/components/footerOld";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
 
@@ -31,9 +31,9 @@ export default function EventCreate() {
           content="https://eventify.today/img/brand.png"
         />
       </Head>
-      <Navbar />
+      <Header />
       <NewEventStepper />
-      <FooterSection />
+      <Footer />
     </>
   );
 }

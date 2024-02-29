@@ -6,8 +6,8 @@ import {
 } from "next/types";
 import { ProfileView, Sidebar } from "@/components/dashboard";
 import { MainInfo } from "@/components/dashboard/main";
-import { FooterSection } from "@/components/footerOld";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
 
@@ -19,7 +19,7 @@ export default function Dashboard() {
       flexDir={"column"}
       justifyContent={"space-between"}
     >
-      <Navbar />
+      <Header />
       <main>
         <ProfileView />
         <Flex
@@ -30,7 +30,7 @@ export default function Dashboard() {
           <MainInfo />
         </Flex>
       </main>
-      <FooterSection />
+      <Footer />
     </Flex>
   );
 }

@@ -70,15 +70,15 @@ export default function PrivacyPolicyPage() {
           limited license to download, install and use the website strictly in
           accordance with the terms of this Agreement. These Terms & Conditions
           are a contract between you and EVENTIFY (referred to in these Terms &
-          Conditions as "Kinguru", "us", "we" or "our"), the provider of the
-          Kinguru website and the services accessible from the Kinguru website
+          Conditions as "EVENTIFY", "us", "we" or "our"), the provider of the
+          EVENTIFY website and the services accessible from the EVENTIFY website
           (which are collectively referred to in these Terms & Conditions as the
-          "Kinguru Service"). You are agreeing to be bound by these Terms &
+          "EVENTIFY Service"). You are agreeing to be bound by these Terms &
           Conditions. If you do not agree to these Terms & Conditions, please do
-          not use the Kinguru Service. In these Terms & Conditions, "you" refers
-          both to you as an individual and to the entity you represent. If you
-          violate any of these Terms & Conditions, we reserve the right to
-          cancel your account or block access to your account without notice.
+          not use the EVENTIFY Service. In these Terms & Conditions, "you"
+          refers both to you as an individual and to the entity you represent.
+          If you violate any of these Terms & Conditions, we reserve the right
+          to cancel your account or block access to your account without notice.
         </Text>
       </VStack>
       <VStack mt={10} alignItems={"flex-start"}>
@@ -125,16 +125,16 @@ export default function PrivacyPolicyPage() {
                 under this Privacy Policy.
               </ListItem>
               <ListItem>
-                Country: where KINGURU or the owners/founders of KINGURU are
+                Country: where EVENTIFY or the owners/founders of EVENTIFY are
                 based, in this case is Poland
               </ListItem>
               <ListItem>
                 Device: any internet connected device such as a phone, tablet,
-                computer or any other device that can be used to visit KINGURU
+                computer or any other device that can be used to visit EVENTIFY
                 and use the services.
               </ListItem>
               <ListItem>
-                Service: refers to the service provided by Kinguru as described
+                Service: refers to the service provided by EVENTIFY as described
                 in the relative terms (if available) and on this platform.
               </ListItem>
               <ListItem>
@@ -143,7 +143,7 @@ export default function PrivacyPolicyPage() {
                 content or whose products or services we think may interest you.
               </ListItem>
               <ListItem>
-                Website: Kinguru's site, which can be accessed via this URL:
+                Website: EVENTIFY's site, which can be accessed via this URL:
                 eventify.today
               </ListItem>
               <ListItem>

@@ -21,7 +21,7 @@ import { BiArrowToLeft, BiArrowToRight } from "react-icons/bi";
 import { EventCard } from "@/components/common/cards/eventCard.tsx";
 import { NavSidebar } from "@/components/events/search/nav.tsx";
 import { Sidebar } from "@/components/events/search/sidebar.tsx";
-import { FooterSection } from "@/components/footerOld";
+import { Footer } from "@/components/Footer";
 
 export const Search = memo<{ config: any }>(({ config }) => {
   return (
@@ -130,7 +130,7 @@ export const Search = memo<{ config: any }>(({ config }) => {
                         }}
                       />
                     </Box>
-                    <FooterSection />
+                    <Footer />
                   </>
                 }
               />

@@ -1,6 +1,7 @@
 "use client";
-import Link from "next/link";
+
 import { useSelectedLayoutSegment } from "next/navigation";
+import { Link } from "@/navigation.ts";
 import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 

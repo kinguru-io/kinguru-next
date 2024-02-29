@@ -71,7 +71,7 @@ export function Footer() {
           <Flex gap="5px" direction="column">
             <Flex gap="10px">
               {socialMedia.map(({ name, src, link }) => (
-                <Link href={link}>
+                <Link key={name} href={link}>
                   <Image
                     src={src}
                     alt={t("follow_us", { social: name })}

@@ -80,10 +80,13 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
+                    owner: {
+                      create: userSchema(),
+                    },
                     foundationDate: faker.date.past(),
                     requisitesUrl: faker.internet.url(),
                     aboutCompany: faker.company.catchPhrase(),
-                    activitySphere: faker.company.buzzPhrase().split(' '),
+                    activitySphere: faker.company.buzzPhrase().split(" "),
                     logotype: faker.image.avatar(),
                     resources: {
                       createMany: {
@@ -98,8 +101,8 @@ async function main() {
                             url: faker.image.url({ width: 200, height: 100 }),
                           },
                         ],
-                      }
-                    }
+                      },
+                    },
                   },
                 },
                 resources: {

@@ -26,7 +26,7 @@ export const buttonColorPalette = [
   "success",
 ] as const;
 
-type ButtonProps = {
+export type ButtonProps = {
   icon?: React.ReactNode;
   isLoading?: boolean;
   iconPosition?: "left" | "right";

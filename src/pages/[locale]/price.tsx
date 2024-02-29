@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { GetStaticPropsContext } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footerOld";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { HowItWorks } from "@/components/home";
-import { Navbar } from "@/components/navbar";
 import { OurOffers } from "@/components/pricing/ourOffers";
 import { PlanComponent } from "@/components/pricing/plans";
 import { staticPaths } from "@/navigation.ts";
@@ -26,11 +26,11 @@ export default function Home() {
           content="https://eventify.today/img/brand.png"
         />
       </Head>
-      <Navbar />
+      <Header />
       <OurOffers />
       <PlanComponent />
       <HowItWorks />
-      <FooterSection />
+      <Footer />
     </>
   );
 }
