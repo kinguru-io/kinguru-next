@@ -6,6 +6,7 @@ import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
 import footerLogotype from "~/public/img/logotypes/footer-logo.png";
+import { css } from "~/styled-system/css";
 import { Container, Flex } from "~/styled-system/jsx";
 import { footer } from "~/styled-system/recipes";
 
@@ -54,7 +55,7 @@ export function Footer() {
     <footer className={classes.footer}>
       <Container className={classes.footerWrapper}>
         <div className={classes.contentWrapper}>
-          <Link href="/">
+          <Link href="/" className={css({ flexShrink: 0 })}>
             <Image
               src={footerLogotype.src}
               alt={"Eventify"}

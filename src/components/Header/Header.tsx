@@ -4,6 +4,7 @@ import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
 import { Link } from "@/navigation";
 import headerLogotype from "~/public/img/logotypes/header-logo.png";
+import { css } from "~/styled-system/css";
 import { Container } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
 
@@ -22,8 +23,12 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container className={classes.headerWrapper}>
-        <Link href="/">
+        <Link
+          href="/"
+          className={css({ display: "flex", w: "95px", h: "35px" })}
+        >
           <Image
+            className={css({ flexShrink: 0 })}
             src={headerLogotype.src}
             alt="Eventify"
             width="95"
