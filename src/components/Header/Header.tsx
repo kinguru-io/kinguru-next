@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
-import headerLogotype from "~/public/img/logotypes/header-logo.svg";
+import headerLogotype from "~/public/img/logotypes/header-logo.png";
 import { Container } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
 

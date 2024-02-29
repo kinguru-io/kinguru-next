@@ -5,7 +5,7 @@ import { Link } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
-import footerLogotype from "~/public/img/logotypes/footer-logo.svg";
+import footerLogotype from "~/public/img/logotypes/footer-logo.png";
 import { Container, Flex } from "~/styled-system/jsx";
 import { footer } from "~/styled-system/recipes";
 
