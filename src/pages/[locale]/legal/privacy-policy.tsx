@@ -138,7 +138,7 @@ export default function PrivacyPolicyPage() {
                 identifiability of a natural person.
               </ListItem>
               <ListItem>
-                Service: refers to the service provided by KINGURU as described
+                Service: refers to the service provided by EVENTIFY as described
                 in the relative terms (if available) and on this platform.
               </ListItem>
               <ListItem>
@@ -147,11 +147,11 @@ export default function PrivacyPolicyPage() {
                 content or whose products or services we think may interest you.
               </ListItem>
               <ListItem>
-                Website: KINGURU’s site, which can be accessed via this URL:
+                Website: EVENTIFY’s site, which can be accessed via this URL:
                 eventify.today
               </ListItem>
               <ListItem>
-                You: a person or entity that is registered with KINGURU to use
+                You: a person or entity that is registered with EVENTIFY to use
                 the Services.
               </ListItem>
             </UnorderedList>
@@ -207,14 +207,14 @@ export default function PrivacyPolicyPage() {
         <AccordionItem>
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
-              When does KINGURU use end user information from third parties?
+              When does EVENTIFY use end user information from third parties?
             </Box>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Text>
-              KINGURU will collect End User Data necessary to provide the
-              KINGURU services to our customers. End users may voluntarily
+              EVENTIFY will collect End User Data necessary to provide the
+              EVENTIFY services to our customers. End users may voluntarily
               provide us with information they have made available on social
               media websites. If you provide us with any such information, we
               may collect publicly available information from the social media
@@ -227,7 +227,7 @@ export default function PrivacyPolicyPage() {
         <AccordionItem>
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
-              When does KINGURU use customer information from third parties?
+              When does EVENTIFY use customer information from third parties?
             </Box>
             <AccordionIcon />
           </AccordionButton>
@@ -235,9 +235,9 @@ export default function PrivacyPolicyPage() {
             <Text>
               We receive some information from the third parties when you
               contact us. For example, when you submit your email address to us
-              to show interest in becoming a KINGURU customer, we receive
+              to show interest in becoming a EVENTIFY customer, we receive
               information from a third party that provides automated fraud
-              detection services to KINGURU. We also occasionally collect
+              detection services to EVENTIFY. We also occasionally collect
               information that is made publicly available on social media
               websites. You can control how much of your information social
               media websites make public by visiting these websites and changing
@@ -311,7 +311,7 @@ export default function PrivacyPolicyPage() {
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Text>
-              KINGURU will collect personal information that you submit to us.
+              EVENTIFY will collect personal information that you submit to us.
               We may also receive personal information about you from third
               parties as described above.
             </Text>
@@ -393,7 +393,7 @@ export default function PrivacyPolicyPage() {
           <AccordionPanel pb={4}>
             <Text>
               We keep your information only so long as we need it to provide
-              KINGURU to you and fulfill the purposes described in this policy.
+              EVENTIFY to you and fulfill the purposes described in this policy.
               This is also the case for anyone that we share your information
               with and who carries out services on our behalf. When we no longer
               need to use your information and there is no need for us to keep

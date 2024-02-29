@@ -1,25 +1,23 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { getTranslations } from "next-intl/server";
+import { signOut, useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { Avatar } from "../uikit";
 import { Button } from "../uikit/Button";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { SignOutButton } from "@/components/Header/SignOutButton.tsx";
-import { adapterOptions } from "@/lib/nextauth";
+
 import avatar from "~/public/img/user.svg";
+import { css } from "~/styled-system/css";
 
-export async function UserSection() {
-  const session = await getServerSession(adapterOptions);
-  const t = await getTranslations("navbar");
-
-  console.log("Session", session);
+export function UserSection() {
+  const { data: session } = useSession();
+  const t = useTranslations("navbar");
 
   return (
     <Dropdown size={"lg"}>
       <DropdownInitiator>
         {session ? (
           <Avatar
-            name={session.user?.name || ""}
+            name={session.user?.name || "avatar"}
             image={session.user?.image || avatar.src}
           />
         ) : (
@@ -31,7 +29,12 @@ export async function UserSection() {
       <DropdownMenu>
         {session ? (
           <>
-            <SignOutButton>{t("sign_out")}</SignOutButton>
+            <div
+              className={css({ cursor: "pointer" })}
+              onClick={() => signOut()}
+            >
+              {t("sign_out")}
+            </div>
             <Link href="#">{t("add_organization")}</Link>
           </>
         ) : (
