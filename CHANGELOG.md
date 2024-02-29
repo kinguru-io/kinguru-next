@@ -1,3 +1,10 @@
+# [0.29.0](https://github.com/kinguru-io/kinguru-next/compare/v0.28.0...v0.29.0) (2024-02-29)
+
+
+### Features
+
+* **KINGU-54:** implementation of separated auth ([#440](https://github.com/kinguru-io/kinguru-next/issues/440)) ([c9880b4](https://github.com/kinguru-io/kinguru-next/commit/c9880b4c61aed65a46857a6fc48197891f05b30a))
+
 # [0.28.0](https://github.com/kinguru-io/kinguru-next/compare/v0.27.1...v0.28.0) (2024-02-27)
 
 
