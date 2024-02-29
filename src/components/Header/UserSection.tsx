@@ -12,8 +12,6 @@ export async function UserSection() {
   const session = await getServerSession(adapterOptions);
   const t = await getTranslations("navbar");
 
-  console.log("Session", session);
-
   return (
     <Dropdown size={"lg"}>
       <DropdownInitiator>
