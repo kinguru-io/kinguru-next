@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth].ts";
+import { adapterOptions } from "@/lib/nextauth/adapterOptions.ts";
 import prisma from "@/server/prisma.ts";
 import { calculateCompleteness } from "@/utils/profileCompleteness.ts";
 
@@ -12,7 +12,7 @@ const makeRedirectObject = (destination: string) => ({
 });
 
 export const redirect = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, adapterOptions);
   const authRedirect = makeRedirectObject(
     `/api/auth/signin?callbackUrl=${encodeURIComponent(req.url || "")}`,
   );

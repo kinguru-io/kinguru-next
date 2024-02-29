@@ -17,7 +17,7 @@ import { AspectRatio, Box, Flex, Float } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
 
 const meta = {
-  title: "UIKit/Card",
+  title: "UIKit/Cards/Card",
   component: Card,
   parameters: {
     layout: "centered",

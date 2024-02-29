@@ -49,6 +49,7 @@ model User {
   ticketIntents          TicketIntent[]
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
+  organizations          Organization[]
 }
 
 enum UserRole {
@@ -344,6 +345,8 @@ model PlaceResource {
 model Organization {
   id             String   @id @default(cuid())
   name           String
+  owner          User @relation(fields: [ownerId], references: [id])
+  ownerId        String
   foundationDate DateTime @db.Date
   requisitesUrl  String   
   aboutCompany   String

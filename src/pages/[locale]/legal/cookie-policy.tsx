@@ -136,7 +136,7 @@ export default function PrivacyPolicyPage() {
           <AccordionPanel pb={4}>
             <Text>
               This Cookie Policy explains how EVENTIFY and its affiliates
-              (collectively "kinguru", "we", "us", and "ours"), use cookies and
+              (collectively "eventify", "we", "us", and "ours"), use cookies and
               similar technologies to recognize you when you visit our website,
               including without limitation eventify.today and any related URLs,
               mobile or localized versions and related domains / sub-domains
@@ -200,7 +200,7 @@ export default function PrivacyPolicyPage() {
                 interests.
               </ListItem>
               <ListItem>
-                You: a person or entity that is registered with kinguru to use
+                You: a person or entity that is registered with eventify to use
                 the Services.
               </ListItem>
             </UnorderedList>
@@ -209,7 +209,7 @@ export default function PrivacyPolicyPage() {
         <AccordionItem>
           <AccordionButton>
             <Box as="span" flex="1" textAlign="left">
-              What type of cookies does KINGURU use?
+              What type of cookies does EVENTIFY use?
             </Box>
             <AccordionIcon />
           </AccordionButton>
@@ -336,7 +336,7 @@ export default function PrivacyPolicyPage() {
           <AccordionPanel pb={4}>
             <Text>
               Some cookies that have been set on our website are not set on a
-              first party basis by kinguru. The Websites can be embedded with
+              first party basis by EVENTIFY. The Websites can be embedded with
               content from third parties to serve advertising. These third party
               service providers may set their own cookies on your web browser.
               Third party service providers control many of the performance and

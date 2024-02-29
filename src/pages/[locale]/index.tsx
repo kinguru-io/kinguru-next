@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { GetStaticPropsContext } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footerOld";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import {
   BestSpeakersSection,
   CompanyStatisticsSection,
@@ -11,7 +12,6 @@ import {
   HowItWorks,
 } from "@/components/home";
 import { WhatAreYouGetting } from "@/components/home/getting";
-import { Navbar } from "@/components/navbar";
 import { staticPaths } from "@/navigation.ts";
 import { ssgInit } from "@/server/ssg-init.ts";
 
@@ -32,7 +32,7 @@ export default function Home() {
           content="https://eventify.today/img/brand.png"
         />
       </Head>
-      <Navbar />
+      <Header />
       <HeroContent />
       <Events />
       <InviteSection />
@@ -40,7 +40,7 @@ export default function Home() {
       <WhatAreYouGetting />
       <BestSpeakersSection />
       <CompanyStatisticsSection />
-      <FooterSection />
+      <Footer />
     </>
   );
 }

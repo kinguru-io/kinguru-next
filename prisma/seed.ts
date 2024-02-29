@@ -80,6 +80,9 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
+                    owner: {
+                      create: userSchema(),
+                    },
                     foundationDate: faker.date.past(),
                     requisitesUrl: faker.internet.url(),
                     aboutCompany: faker.company.catchPhrase(),

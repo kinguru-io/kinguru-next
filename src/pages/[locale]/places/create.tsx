@@ -6,8 +6,8 @@ import {
   NextApiResponse,
 } from "next/types";
 import { useTranslations } from "next-intl";
-import { FooterSection } from "@/components/footerOld";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { NewPlaceStepper } from "@/components/places/create";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
@@ -33,9 +33,9 @@ export default function PlaceCreate() {
         />
       </Head>
       <VStack h={"100vh"} justifyContent={"space-between"}>
-        <Navbar />
+        <Header />
         <NewPlaceStepper />
-        <FooterSection />
+        <Footer />
       </VStack>
     </>
   );

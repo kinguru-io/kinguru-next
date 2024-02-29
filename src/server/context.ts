@@ -3,7 +3,7 @@ import * as trpcNext from "@trpc/server/adapters/next";
 import { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { getServerSession, Session } from "next-auth";
 import prisma from "./prisma";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { adapterOptions } from "@/lib/nextauth/adapterOptions.ts";
 
 export interface CreateInnerContextOptions
   extends Partial<CreateNextContextOptions> {
@@ -21,7 +21,8 @@ export const createContext = async ({
   req,
   res,
 }: trpcNext.CreateNextContextOptions) => {
-  const session = req && res && (await getServerSession(req, res, authOptions));
+  const session =
+    req && res && (await getServerSession(req, res, adapterOptions));
   const innerContext = await createInnerTRPCContext({
     req,
     session,

@@ -183,6 +183,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-hook-form",
     "@hookform/resolvers",
     "zod-form-data",
+    "oslo",
 
     "react-snap-carousel",
   ],

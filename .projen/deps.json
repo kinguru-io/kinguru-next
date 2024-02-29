@@ -354,6 +354,10 @@
       "type": "runtime"
     },
     {
+      "name": "oslo",
+      "type": "runtime"
+    },
+    {
       "name": "rc-pagination",
       "type": "runtime"
     },

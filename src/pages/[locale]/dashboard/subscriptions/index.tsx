@@ -5,8 +5,8 @@ import {
   NextApiResponse,
 } from "next/types";
 import { Sidebar } from "@/components/dashboard";
-import { FooterSection } from "@/components/footerOld";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { PlanComponent } from "@/components/pricing/plans";
 import { ssgInit } from "@/server/ssg-init.ts";
 import { redirect } from "@/utils/redirect.ts";
@@ -19,7 +19,7 @@ export default function Subscriptions() {
       flexDir={"column"}
       justifyContent={"space-between"}
     >
-      <Navbar />
+      <Header />
       <main>
         <Flex
           w={"full"}
@@ -30,7 +30,7 @@ export default function Subscriptions() {
           <PlanComponent />
         </Flex>
       </main>
-      <FooterSection />
+      <Footer />
     </Flex>
   );
 }

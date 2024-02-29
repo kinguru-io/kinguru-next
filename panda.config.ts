@@ -6,6 +6,7 @@ import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
+import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
@@ -41,6 +42,7 @@ export default defineConfig({
         footer: footerSlot,
         header: headerSlot,
         slider: sliderSlot,
+        premiseCard: premiseCardSlot,
       },
       tokens: {
         gradients: {

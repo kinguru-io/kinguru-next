@@ -4,9 +4,12 @@ import { getTranslations } from "next-intl/server";
 import { Avatar } from "../uikit";
 import { Button } from "../uikit/Button";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
+import { SignOutButton } from "@/components/Header/SignOutButton.tsx";
+import { adapterOptions } from "@/lib/nextauth";
+import avatar from "~/public/img/user.svg";
 
 export async function UserSection() {
-  const session = await getServerSession();
+  const session = await getServerSession(adapterOptions);
   const t = await getTranslations("navbar");
 
   return (
@@ -15,7 +18,7 @@ export async function UserSection() {
         {session ? (
           <Avatar
             name={session.user?.name || ""}
-            image={session.user?.image || ""}
+            image={session.user?.image || avatar.src}
           />
         ) : (
           <Button variant="outline" size={"md"}>
@@ -26,13 +29,14 @@ export async function UserSection() {
       <DropdownMenu>
         {session ? (
           <>
-            <Link href="#">{t("sign_out")}</Link>
+            <SignOutButton>{t("sign_out")}</SignOutButton>
             <Link href="#">{t("add_organization")}</Link>
           </>
         ) : (
           <>
-            <Link href="#">{t("sign_in")}</Link>
-            <Link href="#">{t("sign_up")}</Link>
+            <Link href="/auth/signin">{t("sign_in")}</Link>
+            <Link href="/auth/organization/signin">{t("sign_in_org")}</Link>
+            <Link href="/auth/organization/signup">{t("sign_up")}</Link>
           </>
         )}
       </DropdownMenu>

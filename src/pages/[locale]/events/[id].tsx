@@ -9,8 +9,8 @@ import {
   EventPlaceSection,
   EventSpeakersSection,
 } from "@/components/events/details";
-import { FooterSection } from "@/components/footerOld";
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/headerOld";
 import { locales } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 import { ssgInit } from "@/server/ssg-init.ts";
@@ -38,13 +38,13 @@ export default function EventDetails({
         <meta property="og:description" content={description} />
         <meta property="og:image" content={poster} />
       </Head>
-      <Navbar />
+      <Header />
       <EventDetailsSection eventId={eventId} />
       <EventSpeakersSection eventId={eventId} />
       <EventCommentsSection eventId={eventId} />
       <EventGuestsSection eventId={eventId} />
       <EventPlaceSection eventId={eventId} />
-      <FooterSection />
+      <Footer />
     </>
   );
 }
