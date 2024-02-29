@@ -54,12 +54,14 @@ export function Footer() {
     <footer className={classes.footer}>
       <Container className={classes.footerWrapper}>
         <div className={classes.contentWrapper}>
-          <Image
-            src={footerLogotype.src}
-            alt={"Eventify"}
-            width="115"
-            height="115"
-          />
+          <Link href="/">
+            <Image
+              src={footerLogotype.src}
+              alt={"Eventify"}
+              width="115"
+              height="115"
+            />
+          </Link>
           <Flex gap="5px" direction="column">
             {navigation.map(({ href, name }) => (
               <Link key={name} href={href}>

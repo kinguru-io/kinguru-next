@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
+import { Link } from "@/navigation";
 import headerLogotype from "~/public/img/logotypes/header-logo.png";
 import { Container } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
@@ -21,7 +22,14 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container className={classes.headerWrapper}>
-        <Image src={headerLogotype.src} alt="Eventify" width="95" height="35" />
+        <Link href="/">
+          <Image
+            src={headerLogotype.src}
+            alt="Eventify"
+            width="95"
+            height="35"
+          />
+        </Link>
         <nav>
           <Links navigation={navigation} />
         </nav>
