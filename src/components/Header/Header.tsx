@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Links } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
+import headerLogotype from "~/public/img/logotypes/header-logo.svg";
 import { Container } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
 
@@ -19,7 +21,7 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container className={classes.headerWrapper}>
-        <div>Logo</div>
+        <Image src={headerLogotype.src} alt="Eventify" width="95" height="35" />
         <nav>
           <Links navigation={navigation} />
         </nav>
