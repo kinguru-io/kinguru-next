@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { Avatar } from "../uikit";
 import { Button } from "../uikit/Button";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 
+import { SignOutButton } from "@/components/Header/SignOutButton.tsx";
 import avatar from "~/public/img/user.svg";
-import { css } from "~/styled-system/css";
 
 export function UserSection() {
   const { data: session } = useSession();
@@ -29,12 +29,7 @@ export function UserSection() {
       <DropdownMenu>
         {session ? (
           <>
-            <div
-              className={css({ cursor: "pointer" })}
-              onClick={() => signOut()}
-            >
-              {t("sign_out")}
-            </div>
+            <SignOutButton>{t("sign_out")}</SignOutButton>
             <Link href="#">{t("add_organization")}</Link>
           </>
         ) : (

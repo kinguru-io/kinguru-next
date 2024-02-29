@@ -1,19 +1,14 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { ComponentProps } from "react";
-import { css } from "~/styled-system/css";
+import { Button, ButtonProps } from "@/components/uikit";
 
-export type SignOutButtonProps = ComponentProps<"button">;
+type SignOutButtonProps = Omit<ButtonProps, "variant">;
 
 export function SignOutButton({ children, ...props }: SignOutButtonProps) {
   return (
-    <button
-      className={css({ w: "fit-content", cursor: "pointer" })}
-      onClick={() => signOut()}
-      {...props}
-    >
+    <Button {...props} onClick={() => signOut()} variant="ghost">
       {children}
-    </button>
+    </Button>
   );
 }
