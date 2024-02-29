@@ -58,7 +58,7 @@ export function Footer() {
           <Link href="/" className={css({ flexShrink: 0 })}>
             <Image
               src={footerLogotype.src}
-              alt={"Eventify"}
+              alt={"Eventify logotype"}
               width="115"
               height="115"
             />
