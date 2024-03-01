@@ -9,7 +9,7 @@ import { Box, Flex } from "~/styled-system/jsx";
 
 export default function Uikit() {
   return (
-    <Box p="5" bg="blue">
+    <Box p="5">
       <ProfileImagePicker name="profile_image" />
       <Flex gap="5px">
         <Box w="300px">
