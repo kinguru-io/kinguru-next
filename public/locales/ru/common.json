@@ -51,7 +51,8 @@
     "lang_ru": "Русский",
     "sign_up": "Регистрация организации",
     "add_organization": "Добавить кабинет организации",
-    "sign_in_and_sign_up": "Вход и регистрация"
+    "sign_in_and_sign_up": "Вход и регистрация",
+    "eventify_logotype": "Логотип Eventify"
   },
   "hero": {
     "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",
@@ -238,7 +239,8 @@
     "speakers": "Спикеры",
     "places": "Площадки",
     "price": "Цены",
-    "follow_us": "Следите за нами в {social}"
+    "follow_us": "Следите за нами в {social}",
+    "eventify_logotype": "Логотип Eventify"
   },
   "auth": {
     "reset_form": {
