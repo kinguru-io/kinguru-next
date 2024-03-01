@@ -30,7 +30,7 @@ export function Header() {
           <Image
             className={css({ flexShrink: 0 })}
             src={headerLogotype.src}
-            alt="Eventify logotype"
+            alt={t("eventify_logotype")}
             width="95"
             height="35"
           />
