@@ -5,7 +5,7 @@ import { useState } from "react";
 import { GrNext } from "react-icons/gr";
 import { Button, TextCollapse } from "@/components/uikit";
 import { css } from "~/styled-system/css";
-import { Flex } from "~/styled-system/jsx";
+import { VStack } from "~/styled-system/jsx";
 
 export function VenueDescriptionCollapse({
   description,
@@ -20,7 +20,7 @@ export function VenueDescriptionCollapse({
   };
 
   return (
-    <Flex gap="30px" direction="column" alignItems="flex-start">
+    <VStack gap="30px" alignItems="flex-start">
       <TextCollapse
         isShown={isShown}
         textContent={description}
@@ -34,7 +34,7 @@ export function VenueDescriptionCollapse({
       >
         {isShown ? t("show_less") : t("show_more")}
       </Button>
-    </Flex>
+    </VStack>
   );
 }
 

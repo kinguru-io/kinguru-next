@@ -1,8 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import { Prisma, PrismaClient } from "@prisma/client";
+import slugify from "@sindresorhus/slugify";
 
 const prisma = new PrismaClient();
+const cafeMapboxIds = [
+  "dXJuOm1ieHBsYzpBbnVvdFE",
+  "dXJuOm1ieHBvaTo0NzNkNzVmMy1kMzM2LTQ1OGYtODgyZi0xZWNmZjg4YTg2OTA",
+  "dXJuOm1ieHBvaTo4YWJkOWY0ZC04MzFjLTQ5ZGItYTMzNy00ZTE5OWU4NTYxNDI",
+  "dXJuOm1ieHBsYzpGVUpvdFE",
+  "dXJuOm1ieHBvaTphMDgyNzgzMi1iYjVjLTQzOTQtOWY1NC0wZDhlZDQ0YTcyMDE",
+];
 
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
@@ -22,6 +30,39 @@ const userSchema = (): Prisma.UserCreateInput => ({
   interests: faker.lorem.words().split(" "),
 });
 
+const venueSchema = (): Prisma.VenueCreateInput => {
+  const name = faker.company.name();
+
+  return {
+    name,
+    slug: slugify(name),
+    image: faker.image.urlLoremFlickr({ category: "venue" }),
+    description: faker.lorem.paragraph(30),
+    locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
+  };
+};
+
+const premiseSchemaWithVenueConnection = (
+  id: string,
+): Prisma.PremiseCreateInput => ({
+  name: `${faker.commerce.department()} room`,
+  description: faker.lorem.paragraph(5),
+  area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
+  placeholder_price: faker.number.int({ min: 0, max: 500 }),
+  venue: {
+    connect: {
+      id,
+    },
+  },
+  resources: {
+    createMany: {
+      data: Array.from({ length: 5 }, () => ({
+        url: faker.image.urlLoremFlickr(),
+      })),
+    },
+  },
+});
+
 const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   return Array.from(
     new Set(
@@ -32,7 +73,6 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   ).map((index) => array[index]);
 };
 
-// @ts-ignore
 async function main() {
   const events = new Array(1000)
     .fill({})
@@ -231,26 +271,51 @@ async function main() {
     await Promise.allSettled(
       users.map((user) => prisma.user.create({ data: user })),
     )
-  )
-    .filter((result) => result.status === "rejected")
-    .forEach(console.log);
-
-  // Venues creation START
-  const venues = Array.from({ length: users.length / 2 }, () => ({
-    name: faker.company.name(),
-    description: faker.lorem.paragraph(30),
-  }));
-
-  (
-    await Promise.allSettled(
-      venues.map((venue) => prisma.venue.create({ data: venue })),
-    )
-  ).forEach((resolvedVenue) => {
-    if (resolvedVenue.status === "rejected") {
-      console.log(resolvedVenue);
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
     }
   });
-  // Venues creation END
+
+  // `Venues` with `Premise[]` and `PremiseResource[]` creation START
+  // Venues creation
+  (
+    await Promise.allSettled(
+      Array.from({ length: 15 }, () =>
+        prisma.venue.create({ data: venueSchema() }),
+      ),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+
+  const createdVenues = await prisma.venue.findMany();
+  console.log(`* ${createdVenues.length} Venue records found`);
+
+  const premisesData = createdVenues.reduce((acc, { id }) => {
+    const premiseCount = faker.number.int({ min: 1, max: 6 });
+
+    for (let i = 1; i <= premiseCount; i++) {
+      acc.push(premiseSchemaWithVenueConnection(id));
+    }
+
+    return acc;
+  }, [] as Prisma.PremiseCreateInput[]);
+  console.log(`* ${premisesData.length} Premise records should be generated`);
+
+  // Premises creation and connection with Venues
+  (
+    await Promise.allSettled(
+      premisesData.map((data) => prisma.premise.create({ data })),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+  // `Venues` with `Premise[]` and `PremiseResource[]` creation END
 
   const createdUsers = await prisma.user.findMany();
   const speakers = await prisma.speaker.findMany();

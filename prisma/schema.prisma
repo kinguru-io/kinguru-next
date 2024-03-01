@@ -260,6 +260,7 @@ model SpeakersOnEvent {
   @@id([speakerId, eventId])
 }
 
+/// @deprecated Use `Premise` instead
 model Place {
   id                     String              @id @default(cuid())
   name                   String              @default("Place")
@@ -343,12 +344,12 @@ model PlaceResource {
 }
 
 model Organization {
-  id             String   @id @default(cuid())
+  id             String                 @id @default(cuid())
   name           String
-  owner          User @relation(fields: [ownerId], references: [id])
+  owner          User                   @relation(fields: [ownerId], references: [id])
   ownerId        String
-  foundationDate DateTime @db.Date
-  requisitesUrl  String   
+  foundationDate DateTime               @db.Date
+  requisitesUrl  String
   aboutCompany   String
   activitySphere String[]
   logotype       String?
@@ -357,18 +358,45 @@ model Organization {
 }
 
 model OrganizationResourse {
-  id             String        @id @default(cuid())
-  organization   Organization  @relation(fields: [organizationId], references: [id])
-  organizationId String        
-  height         Int           @default(200) 
-  width          Int           @default(100)
-  url            String        
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String
+  height         Int          @default(200)
+  width          Int          @default(100)
+  url            String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 }
 
 model Venue {
-  id             String   @id @default(cuid())
-  name           String
-  description    String
+  id               String    @id @default(cuid())
+  name             String
+  slug             String    @default("")
+  image            String    @default("")
+  description      String
+  premises         Premise[]
+  locationMapboxId String    @default("")
+}
+
+model Premise {
+  id                String            @id @default(cuid())
+  venue             Venue             @relation(fields: [venueId], references: [id])
+  venueId           String
+  name              String
+  description       String
+  area              Float?
+  /// `placeholder_price` should be removed since prices should rely on custom datetime input
+  placeholder_price Float
+  resources         PremiseResource[]
+}
+
+model PremiseResource {
+  id        String   @id @default(cuid())
+  premise   Premise  @relation(fields: [premiseId], references: [id])
+  premiseId String
+  height    Int      @default(720)
+  width     Int      @default(405)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
