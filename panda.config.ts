@@ -9,7 +9,6 @@ import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
-import { smallCardRecipe } from "./src/components/uikit/SmallCard/SmallCard.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
@@ -36,7 +35,6 @@ export default defineConfig({
         button: buttonRecipe,
         input: inputRecipe,
         avatar: avatarRecipe,
-        smallCard: smallCardRecipe,
       },
       slotRecipes: {
         dropdown: dropdownSlot,
