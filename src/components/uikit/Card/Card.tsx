@@ -13,18 +13,15 @@ export const Card = styled("article", {
     borderRadius: "10px",
     overflow: "hidden",
     textStyle: "body.3",
+    bgColor: "token(colors.neutral.5)",
   },
   variants: {
     variant: {
       speaker: {
-        bg: "token(colors.neutral.4)",
-        minH: "0",
-        padding: "7px 10px",
+        bgColor: "token(colors.neutral.4)",
       },
       marker: {
-        bg: "token(colors.neutral.4)",
-        minH: "0",
-        padding: "7px 10px",
+        bgColor: "token(colors.neutral.4)",
         borderRadius: "20px 20px 0 20px",
       },
       event: {
@@ -34,9 +31,7 @@ export const Card = styled("article", {
             "token(shadows.cardShadow), 0 0 0 2px token(colors.focus)",
           _hover: "token(shadows.cardShadow), 0 0 0 2px token(colors.primary)",
         },
-        minH: "452px",
         transition: "shadow",
-        bg: "neutral.5",
         "&:hover, &:focus-within": {
           "& [data-card=heading]": {
             textDecoration: "underline",

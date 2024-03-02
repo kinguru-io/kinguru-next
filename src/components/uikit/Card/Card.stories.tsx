@@ -150,7 +150,7 @@ export const SpeakerCard: Story = {
     <Box w="300px">
       <Card variant="speaker">
         <CardBody>
-          <Flex gap="5px">
+          <Flex gap="5px" p="7px 10px">
             <Avatar image={logo.src} name="alex" />
             <Flex direction="column" gap="3px">
               <h4>Alexander</h4>
@@ -169,13 +169,13 @@ export const MarkerCard: Story = {
     <Box w="300px">
       <Card variant="marker">
         <CardBody>
-          <Flex gap="5px">
+          <Flex gap="5px" p="7px 10px">
             <Avatar image={logo.src} name="alex" />
             <Flex direction="column" gap="3px">
               <h4>Bank</h4>
-              <div className={css({ textStyle: "body.3" })}>
+              <address className={css({ textStyle: "body.3" })}>
                 пр. независимости 92
-              </div>
+              </address>
             </Flex>
           </Flex>
         </CardBody>
