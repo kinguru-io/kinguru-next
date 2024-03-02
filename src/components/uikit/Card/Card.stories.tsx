@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import { BsGeoAlt } from "react-icons/bs";
-import { Tag } from "@/components/uikit";
+import { Avatar, Tag } from "@/components/uikit";
 import { Button } from "@/components/uikit/Button";
 import {
   Card,
@@ -12,6 +12,7 @@ import {
   CardFooter,
   CardHeading,
 } from "@/components/uikit/Card";
+import logo from "~/public/img/9.svg";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, Flex, Float } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
@@ -142,3 +143,43 @@ function PseudoSection() {
     </ul>
   );
 }
+
+export const SpeakerCard: Story = {
+  args: { children: null },
+  render: () => (
+    <Box w="300px">
+      <Card variant="speaker">
+        <CardBody>
+          <Flex gap="5px">
+            <Avatar image={logo.src} name="alex" />
+            <Flex direction="column" gap="3px">
+              <h4>Alexander</h4>
+              <div className={css({ textStyle: "body.3" })}>Developer</div>
+            </Flex>
+          </Flex>
+        </CardBody>
+      </Card>
+    </Box>
+  ),
+};
+
+export const MarkerCard: Story = {
+  args: { children: null },
+  render: () => (
+    <Box w="300px">
+      <Card variant="marker">
+        <CardBody>
+          <Flex gap="5px">
+            <Avatar image={logo.src} name="alex" />
+            <Flex direction="column" gap="3px">
+              <h4>Bank</h4>
+              <div className={css({ textStyle: "body.3" })}>
+                пр. независимости 92
+              </div>
+            </Flex>
+          </Flex>
+        </CardBody>
+      </Card>
+    </Box>
+  ),
+};
