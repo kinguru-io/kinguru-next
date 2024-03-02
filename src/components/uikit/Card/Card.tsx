@@ -5,26 +5,18 @@ type CardProps = {
   children: React.ReactNode;
 };
 
-export const Card = styled("article", {
-  base: {
-    minW: "0",
-    display: "flex",
-    position: "relative",
-    borderRadius: "10px",
-    overflow: "hidden",
-    textStyle: "body.3",
-    bgColor: "token(colors.neutral.5)",
-  },
-  variants: {
-    variant: {
-      speaker: {
-        bgColor: "token(colors.neutral.4)",
-      },
-      marker: {
-        bgColor: "token(colors.neutral.4)",
-        borderRadius: "20px 20px 0 20px",
-      },
-      event: {
+export const Card = styled(
+  "article",
+  {
+    base: {
+      minW: "0",
+      display: "flex",
+      position: "relative",
+      borderRadius: "10px",
+      overflow: "hidden",
+      textStyle: "body.3",
+      bgColor: "token(colors.neutral.5)",
+      "&[data-interactive]": {
         boxShadow: {
           base: "cardShadow",
           _focusWithin:
@@ -37,11 +29,27 @@ export const Card = styled("article", {
             textDecoration: "underline",
           },
         },
-        flexDirection: "column",
+      },
+    },
+    variants: {
+      variant: {
+        speaker: {
+          bgColor: "token(colors.neutral.4)",
+        },
+        marker: {
+          bgColor: "token(colors.neutral.4)",
+          borderRadius: "20px 20px 0 20px",
+        },
+        event: {
+          flexDirection: "column",
+        },
       },
     },
   },
-});
+  {
+    dataAttr: true,
+  },
+);
 
 export function CardInner({ children }: CardProps) {
   return (
