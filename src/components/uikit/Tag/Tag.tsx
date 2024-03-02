@@ -4,12 +4,8 @@ import { SystemStyleObject } from "~/styled-system/types";
 export const tagStyles = cva({
   base: {
     display: "inline-block",
-    fontSize: "18px",
-    lineHeight: "25px",
-    fontWeight: "bold",
-    px: "8px",
-    py: "3.5px",
     borderRadius: "6px",
+    fontWeight: "bold",
   },
   variants: {
     variant: {
@@ -24,6 +20,32 @@ export const tagStyles = cva({
       tertiary: {
         bg: "neutral.5",
         color: "neutral.1",
+      },
+    },
+    size: {
+      xs: {
+        fontSize: "14px",
+        lineHeight: "19px",
+        px: "4.5px",
+        py: "1.5px",
+      },
+      sm: {
+        fontSize: "18px",
+        lineHeight: "25px",
+        px: "8px",
+        py: "3.5px",
+      },
+      md: {
+        fontSize: "22px",
+        lineHeight: "30px",
+        px: "11px",
+        py: "5px",
+      },
+      lg: {
+        fontSize: "26px",
+        lineHeight: "38px",
+        px: "13px",
+        py: "6px",
       },
     },
   },
