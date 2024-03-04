@@ -1,8 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { $Enums, Prisma, PrismaClient } from "@prisma/client";
 import slugify from "@sindresorhus/slugify";
 
+const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const prisma = new PrismaClient();
 const cafeMapboxIds = [
   "dXJuOm1ieHBsYzpBbnVvdFE",
@@ -36,29 +37,68 @@ const venueSchema = (): Prisma.VenueCreateInput => {
   return {
     name,
     slug: slugify(name),
-    image: faker.image.urlLoremFlickr({ category: "venue" }),
+    image: faker.image.urlLoremFlickr({
+      width: 1280,
+      height: 720,
+    }),
     description: faker.lorem.paragraph(30),
     locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
   };
 };
 
+const premiseOpenHoursPricingSchema = (openHoursId: string) =>
+  [
+    {
+      premiseOpenHours: {
+        connect: {
+          id: openHoursId,
+        },
+      },
+      priceForHour: faker.number.float({ min: 0, max: 30, fractionDigits: 2 }),
+      startTime: "2020-01-01T08:00:00.000Z",
+      endTime: "2020-01-01T15:00:00.000Z",
+    },
+    {
+      premiseOpenHours: {
+        connect: {
+          id: openHoursId,
+        },
+      },
+      priceForHour: faker.number.float({ min: 0, max: 30, fractionDigits: 2 }),
+      startTime: "2020-01-01T15:00:00.000Z",
+      endTime: "2020-01-01T23:00:00.000Z",
+    },
+  ] as Prisma.PremisePricingCreateInput[];
+
+const premiseOpenHoursSchema = (idx: number) => {
+  return {
+    day: dayOfTheWeek[idx],
+    openTime: "2020-01-01T08:00:00.000Z",
+    closeTime: "2020-01-01T23:00:00.000Z",
+  } as Prisma.PremiseOpenHoursCreateInput;
+};
+
 const premiseSchemaWithVenueConnection = (
-  id: string,
+  venueId: string,
 ): Prisma.PremiseCreateInput => ({
   name: `${faker.commerce.department()} room`,
   description: faker.lorem.paragraph(5),
   area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
-  placeholder_price: faker.number.int({ min: 0, max: 500 }),
   venue: {
     connect: {
-      id,
+      id: venueId,
     },
   },
   resources: {
     createMany: {
       data: Array.from({ length: 5 }, () => ({
-        url: faker.image.urlLoremFlickr(),
+        url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
       })),
+    },
+  },
+  openHours: {
+    createMany: {
+      data: Array.from({ length: 7 }, (_, idx) => premiseOpenHoursSchema(idx)),
     },
   },
 });
@@ -277,8 +317,7 @@ async function main() {
     }
   });
 
-  // `Venues` with `Premise[]` and `PremiseResource[]` creation START
-  // Venues creation
+  // * ------------------------------------ Venues START
   (
     await Promise.allSettled(
       Array.from({ length: 15 }, () =>
@@ -305,9 +344,9 @@ async function main() {
   }, [] as Prisma.PremiseCreateInput[]);
   console.log(`* ${premisesData.length} Premise records should be generated`);
 
-  // Premises creation and connection with Venues
   (
     await Promise.allSettled(
+      // Premises creation and connection with Venues
       premisesData.map((data) => prisma.premise.create({ data })),
     )
   ).forEach((result) => {
@@ -315,7 +354,30 @@ async function main() {
       console.log(result);
     }
   });
-  // `Venues` with `Premise[]` and `PremiseResource[]` creation END
+
+  const allOpenHours = await prisma.premiseOpenHours.findMany();
+  console.log(`* ${allOpenHours.length} PremiseOpenHours records found`);
+
+  const pricingData = allOpenHours.reduce((acc, { id }) => {
+    acc.push(premiseOpenHoursPricingSchema(id));
+
+    return acc;
+  }, [] as Prisma.PremisePricingCreateInput[][]);
+  console.log(
+    `* ${pricingData.length * 2} PremisePricing records should be generated`,
+  );
+
+  (
+    await Promise.allSettled(
+      // PremisePricing creation and connection with PremiseOpenHours
+      pricingData.flat().map((data) => prisma.premisePricing.create({ data })),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+  // * ------------------------------------ Venues END
 
   const createdUsers = await prisma.user.findMany();
   const speakers = await prisma.speaker.findMany();

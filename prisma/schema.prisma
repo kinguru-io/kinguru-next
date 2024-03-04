@@ -370,24 +370,56 @@ model OrganizationResourse {
 
 model Venue {
   id               String    @id @default(cuid())
+  slug             String    @unique
   name             String
-  slug             String    @default("")
-  image            String    @default("")
+  image            String?
   description      String
   premises         Premise[]
-  locationMapboxId String    @default("")
+  locationMapboxId String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 }
 
 model Premise {
-  id                String            @id @default(cuid())
-  venue             Venue             @relation(fields: [venueId], references: [id])
-  venueId           String
-  name              String
-  description       String
-  area              Float?
-  /// `placeholder_price` should be removed since prices should rely on custom datetime input
-  placeholder_price Float
-  resources         PremiseResource[]
+  id          String             @id @default(cuid())
+  venue       Venue              @relation(fields: [venueId], references: [id])
+  venueId     String
+  name        String
+  description String
+  area        Float?
+  slots       PremiseSlot[]
+  openHours   PremiseOpenHours[]
+  resources   PremiseResource[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model PremiseOpenHours {
+  id        String           @id @default(cuid())
+  premise   Premise          @relation(fields: [premiseId], references: [id])
+  premiseId String
+  pricing   PremisePricing[]
+  day       DayOfTheWeek
+  openTime  DateTime
+  closeTime DateTime
+}
+
+model PremiseSlot {
+  id        String   @id @default(cuid())
+  premise   Premise  @relation(fields: [premiseId], references: [id])
+  premiseId String
+  date      DateTime
+  startTime DateTime
+  endTime   DateTime
+}
+
+model PremisePricing {
+  id                 String           @id @default(cuid())
+  premiseOpenHours   PremiseOpenHours @relation(fields: [premiseOpenHoursId], references: [id])
+  premiseOpenHoursId String
+  priceForHour       Float
+  startTime          DateTime
+  endTime            DateTime
 }
 
 model PremiseResource {
