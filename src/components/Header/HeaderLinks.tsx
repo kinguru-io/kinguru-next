@@ -11,28 +11,27 @@ type NavigationLink = {
 };
 
 type LinksProps = {
-  navigation: Array<NavigationLink>;
+  navigation: NavigationLink[];
 };
 
 export function Links({ navigation }: LinksProps) {
   const selectedSegment = useSelectedLayoutSegment();
 
-  const navigationLinks = navigation.map(({ href, name }) => {
-    const textStyle =
-      selectedSegment === href.slice(1) ? "heading.h4" : "body.2";
-    return (
-      <Link
-        key={name}
-        href={href}
-        className={css({
-          textStyle: textStyle,
-          padding: "5px",
-        })}
-      >
-        {name}
-      </Link>
-    );
-  });
-
-  return <Flex justify="space-evenly">{navigationLinks}</Flex>;
+  return (
+    <Flex justify="space-evenly">
+      {navigation.map(({ href, name }) => (
+        <Link
+          key={name}
+          href={href}
+          className={css({
+            textStyle:
+              selectedSegment === href.slice(1) ? "heading.4" : "body.2",
+            padding: "5px",
+          })}
+        >
+          {name}
+        </Link>
+      ))}
+    </Flex>
+  );
 }
