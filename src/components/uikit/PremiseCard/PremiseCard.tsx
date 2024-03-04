@@ -24,7 +24,7 @@ export function PremiseSlider({ children }: PremiseCardProps) {
 export function PremisePrice({ children }: PremiseCardProps) {
   return (
     <Float placement="top-end" offset="6px" translate="none">
-      <Tag>{children}</Tag>
+      <Tag size="md">{children}</Tag>
     </Float>
   );
 }

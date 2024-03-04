@@ -89,7 +89,9 @@ export async function PremiseView({ id }: { id: string }) {
             );
           })}
         </Slider>
-        <PremisePrice>{priceForHour}</PremisePrice>
+        <PremisePrice>
+          {t("from")} {priceForHour}
+        </PremisePrice>
       </PremiseSlider>
     </PremiseCard>
   );

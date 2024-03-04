@@ -30,10 +30,12 @@ export default async function VenuePage({
     notFound();
   }
 
+  const { image, name, premises, description } = venue;
+
   return (
     <>
-      <VenueMainInfoLayout bgImageSrc={venue.image || ""}>
-        <h1 className={css({ textAlign: "center" })}>{venue.name}</h1>
+      <VenueMainInfoLayout bgImageSrc={image || ""}>
+        <h1 className={css({ textAlign: "center" })}>{name}</h1>
         <AspectRatio
           ratio={16 / 9}
           maxWidth="900px"
@@ -42,13 +44,9 @@ export default async function VenuePage({
           borderRadius="6px"
           overflow="hidden"
         >
-          <Image
-            src={venue.image || ""}
-            alt={t("image_alt", { name: venue.name })}
-            fill
-          />
+          <Image src={image || ""} alt={t("image_alt", { name: name })} fill />
         </AspectRatio>
-        <VenueDescriptionCollapse description={venue.description} />
+        <VenueDescriptionCollapse description={description} />
       </VenueMainInfoLayout>
 
       <Container paddingBlock="26px 42px">
@@ -56,14 +54,18 @@ export default async function VenuePage({
           <h2 className={css({ textAlign: "center" })}>
             {t("premises_heading")}
           </h2>
-          <PremiseListing premiseIdList={venue.premises} />
+          <PremiseListing premiseIdList={premises} />
         </section>
       </Container>
 
       <VenueMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
-          <VenueMap mapboxId={venue.locationMapboxId || ""} />
+          <VenueMap
+            mapboxId={venue.locationMapboxId || ""}
+            image={image || ""}
+            name={name}
+          />
         </AspectRatio>
       </VenueMapLayout>
     </>
