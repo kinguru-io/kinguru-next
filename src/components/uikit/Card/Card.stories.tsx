@@ -153,8 +153,10 @@ export const SpeakerCard: Story = {
           <Flex gap="5px" p="7px 10px">
             <Avatar image={logo.src} name="alex" />
             <Flex direction="column" gap="3px">
-              <h4>Alexander</h4>
-              <div className={css({ textStyle: "body.3" })}>Developer</div>
+              <h4>{faker.person.firstName()}</h4>
+              <div className={css({ textStyle: "body.3" })}>
+                {faker.person.jobDescriptor()}
+              </div>
             </Flex>
           </Flex>
         </CardBody>
@@ -172,9 +174,9 @@ export const MarkerCard: Story = {
           <Flex gap="5px" p="7px 10px">
             <Avatar image={logo.src} name="alex" />
             <Flex direction="column" gap="3px">
-              <h4>Bank</h4>
+              <h4>{faker.commerce.department()}</h4>
               <address className={css({ textStyle: "body.3" })}>
-                пр. независимости 92
+                {faker.location.streetAddress()}
               </address>
             </Flex>
           </Flex>
