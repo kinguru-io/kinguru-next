@@ -18,12 +18,14 @@ export function VenueMainInfoLayout({
       _before={{
         content: '""',
         position: "absolute",
-        backgroundColor: "neutral.5",
+        backgroundColor: bgImageSrc ? "neutral.5" : "neutral.4",
         inset: "0",
-        opacity: "0.9",
+        opacity: bgImageSrc ? "0.9" : "1",
       }}
     >
-      <Container>{children}</Container>
+      <Container>
+        <section>{children}</section>
+      </Container>
     </Box>
   );
 }

@@ -433,5 +433,9 @@
       "premises_heading": "Venue's premises",
       "map": "Map"
     }
+  },
+  "premise": {
+    "meters": "m",
+    "more": "More"
   }
 }

@@ -18,7 +18,7 @@ export default async function VenueListingPage() {
         <Link
           className={button({ variant: "ghost" })}
           key={id}
-          href={`/venue/${slug}`}
+          href={`/venues/${slug}`}
         >
           {name}
         </Link>
