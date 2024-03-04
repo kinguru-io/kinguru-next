@@ -20,11 +20,10 @@ export function Links({ navigation }: LinksProps) {
   const navigationLinks = navigation.map(({ href, name }) => {
     const textStyle =
       selectedSegment === href.slice(1) ? "heading.h4" : "body.2";
-    const newHref = selectedSegment === href.slice(1) ? "" : href;
     return (
       <Link
         key={name}
-        href={newHref}
+        href={href}
         className={css({
           textStyle: textStyle,
           padding: "5px",

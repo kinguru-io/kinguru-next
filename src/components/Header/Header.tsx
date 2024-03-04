@@ -12,7 +12,7 @@ export function Header() {
   const navigation = [
     { name: t("events"), href: "/events" },
     { name: t("speakers"), href: "/speakers" },
-    { name: t("venues"), href: "/venue" },
+    { name: t("venues"), href: "/venues" },
     { name: t("price"), href: "/price" },
     { name: t("how_it_works"), href: "/#" },
   ];
