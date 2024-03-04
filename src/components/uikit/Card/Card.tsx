@@ -1,20 +1,22 @@
 import { css } from "~/styled-system/css";
+import { styled } from "~/styled-system/jsx";
 
 type CardProps = {
   children: React.ReactNode;
 };
 
-export function Card({ children }: CardProps) {
-  return (
-    <article
-      className={css({
-        minW: "0",
-        minH: "452px",
-        display: "flex",
-        flexDirection: "column",
-        bg: "neutral.5",
-        position: "relative",
-        borderRadius: "10px",
+export const Card = styled(
+  "article",
+  {
+    base: {
+      minW: "0",
+      display: "flex",
+      position: "relative",
+      borderRadius: "10px",
+      overflow: "hidden",
+      textStyle: "body.3",
+      bgColor: "token(colors.neutral.5)",
+      "&[data-interactive]": {
         boxShadow: {
           base: "cardShadow",
           _focusWithin:
@@ -22,19 +24,32 @@ export function Card({ children }: CardProps) {
           _hover: "token(shadows.cardShadow), 0 0 0 2px token(colors.primary)",
         },
         transition: "shadow",
-        overflow: "hidden",
-        textStyle: "body.3",
         "&:hover, &:focus-within": {
           "& [data-card=heading]": {
             textDecoration: "underline",
           },
         },
-      })}
-    >
-      {children}
-    </article>
-  );
-}
+      },
+    },
+    variants: {
+      variant: {
+        speaker: {
+          bgColor: "token(colors.neutral.4)",
+        },
+        marker: {
+          bgColor: "token(colors.neutral.4)",
+          borderRadius: "20px 20px 0 20px",
+        },
+        event: {
+          flexDirection: "column",
+        },
+      },
+    },
+  },
+  {
+    dataAttr: true,
+  },
+);
 
 export function CardInner({ children }: CardProps) {
   return (
