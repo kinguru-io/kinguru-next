@@ -1,19 +1,21 @@
 import type { StorybookConfig } from "@storybook/nextjs";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
+import path from "node:path";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "storybook-addon-turbo-build",
     "@storybook/addon-interactions",
     {
       name: "storybook-addon-module-mock",
       options: {
         include: ["**/src/lib/actions/**"],
         exclude: ["**/node_modules/**"],
-      }
-    }
+      },
+    },
   ],
   framework: {
     name: "@storybook/nextjs",
@@ -24,7 +26,7 @@ const config: StorybookConfig = {
   },
   staticDirs: ["../public"],
   features: {
-    experimentalRSC: true
+    experimentalRSC: true,
   },
 
   webpackFinal: async (config) => {
@@ -36,6 +38,13 @@ const config: StorybookConfig = {
         }),
       ];
     }
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        stripe: path.resolve(__dirname, "stripe.mock.ts"),
+      },
+    };
     return config;
   },
 };

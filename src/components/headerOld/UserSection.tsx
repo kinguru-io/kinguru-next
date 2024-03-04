@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { Avatar } from "../uikit";
-import { Button } from "../uikit/Button";
-import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-
-import { SignOutButton } from "@/components/Header/SignOutButton.tsx";
+import { SignOutButton } from "@/components/Header/SignOutButton";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+} from "@/components/uikit";
 import avatar from "~/public/img/user.svg";
 
 export function UserSection() {

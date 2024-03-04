@@ -1,13 +1,12 @@
-import { getServerSession } from "next-auth";
 import { getProviders } from "next-auth/react";
 import { getTranslations } from "next-intl/server";
 import { SigninForm } from "./form";
-import { adapterOptions } from "@/lib/nextauth";
+import { getSession } from "@/auth.ts";
 import { redirect } from "@/navigation.ts";
 
 export default async function Page() {
   const t = await getTranslations("auth.signin_form");
-  const session = await getServerSession(adapterOptions);
+  const session = await getSession();
 
   if (session) {
     redirect("/");

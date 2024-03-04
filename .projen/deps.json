@@ -164,6 +164,10 @@
       "type": "build"
     },
     {
+      "name": "storybook-addon-turbo-build",
+      "type": "build"
+    },
+    {
       "name": "ts-node",
       "type": "build"
     },

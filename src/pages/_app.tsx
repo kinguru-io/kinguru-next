@@ -14,7 +14,7 @@ import { trpc } from "@/utils/trpc";
 import { css } from "~/styled-system/css";
 
 import "@/components/styles.css";
-import "./globals.css";
+import "@/app/globals.css";
 
 const handleDeclineCookie = () => {
   Cookies.remove("_ga");
