@@ -12,7 +12,6 @@ import {
   CardFooter,
   CardHeading,
 } from "@/components/uikit/Card";
-import logo from "~/public/img/9.svg";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, Flex, Float } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
@@ -151,7 +150,10 @@ export const SpeakerCard: Story = {
       <Card variant="speaker">
         <CardBody>
           <Flex gap="5px" p="7px 10px">
-            <Avatar image={logo.src} name="alex" />
+            <Avatar
+              image={faker.image.avatar()}
+              name={faker.person.firstName()}
+            />
             <Flex direction="column" gap="3px">
               <h4>{faker.person.firstName()}</h4>
               <div className={css({ textStyle: "body.3" })}>
@@ -172,7 +174,10 @@ export const MarkerCard: Story = {
       <Card variant="marker">
         <CardBody>
           <Flex gap="5px" p="7px 10px">
-            <Avatar image={logo.src} name="alex" />
+            <Avatar
+              image={faker.image.avatar()}
+              name={faker.commerce.department()}
+            />
             <Flex direction="column" gap="3px">
               <h4>{faker.commerce.department()}</h4>
               <address className={css({ textStyle: "body.3" })}>
