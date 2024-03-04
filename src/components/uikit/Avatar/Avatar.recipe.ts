@@ -19,9 +19,10 @@ export const avatarRecipe = defineRecipe({
   },
   variants: {
     size: {
-      sm: { w: "10", h: "10" },
-      md: { w: "24", h: "24" },
-      lg: { w: "44", h: "44", borderWidth: "2px" },
+      xs: { w: "40px", h: "40px" },
+      sm: { w: "50px", h: "50px" },
+      md: { w: "100px", h: "100px" },
+      lg: { w: "185px", h: "185px", borderWidth: "2px" },
     },
   },
   staticCss: [{ size: ["*"] }],

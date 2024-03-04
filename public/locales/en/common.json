@@ -58,7 +58,8 @@
     "lang_ru": "Russian",
     "sign_up": "Sign up",
     "add_organization": "Add an organization account",
-    "sign_in_and_sign_up": "Sign in and sign up"
+    "sign_in_and_sign_up": "Sign in and sign up",
+    "eventify_logotype": "Eventify logotype"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
@@ -400,7 +401,8 @@
     "speakers": "Speakers",
     "places": "Places",
     "price": "Price",
-    "follow_us": "Follow us on {social}"
+    "follow_us": "Follow us on {social}",
+    "eventify_logotype": "Eventify logotype"
   },
   "form": {
     "common": {

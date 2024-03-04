@@ -1,3 +1,17 @@
+## [0.30.1](https://github.com/kinguru-io/kinguru-next/compare/v0.30.0...v0.30.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* add header logotype for `headerOld` ([21af310](https://github.com/kinguru-io/kinguru-next/commit/21af3108284cd9e58d26b4eda76c10a67928cf3c))
+
+# [0.30.0](https://github.com/kinguru-io/kinguru-next/compare/v0.29.0...v0.30.0) (2024-03-01)
+
+
+### Features
+
+* **KINGU-99:** add logotype to header footer ([#485](https://github.com/kinguru-io/kinguru-next/issues/485)) ([24414c9](https://github.com/kinguru-io/kinguru-next/commit/24414c962b557a9f0ee43f8b2aad4703711b938c))
+
 # [0.29.0](https://github.com/kinguru-io/kinguru-next/compare/v0.28.0...v0.29.0) (2024-02-29)
 
 

@@ -15,6 +15,10 @@ const meta = {
       options: tagStyles.variantMap.variant,
       control: "radio",
     },
+    size: {
+      options: tagStyles.variantMap.size,
+      control: "radio",
+    },
   },
   args: {
     children: "text",
