@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { faker } from "@faker-js/faker";
 import { Prisma, PrismaClient } from "@prisma/client";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import slugify from "@sindresorhus/slugify";
 
 const prisma = new PrismaClient();
 
@@ -36,33 +38,34 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
 async function main() {
   const events = new Array(1000)
     .fill({})
-    .map(
-      () =>
-        ({
-          topic: faker.commerce.productName(),
-          description: faker.lorem.paragraph(),
-          status: "active",
-          starts: faker.date.future(),
-          duration: faker.date.future(),
-          poster: faker.image.urlLoremFlickr(),
-          price: parseFloat(faker.finance.amount(0, 20)),
-          tags: faker.lorem.words().split(" "),
-          initiator: {
-            create: userSchema(),
-          },
-          place: {
-            create: {
-              tel: faker.phone.number(),
-              location: faker.location.city(),
-              coordsLat: faker.location.latitude(),
-              coordsLng: faker.location.longitude(),
-              owner: {
-                create: userSchema(),
-              },
+    .map(() => {
+      const topic = faker.commerce.productName();
+      return {
+        topic: topic,
+        slug: slugify(topic),
+        description: faker.lorem.paragraph(),
+        status: "active",
+        starts: faker.date.future(),
+        duration: faker.date.future(),
+        poster: faker.image.urlLoremFlickr(),
+        price: parseFloat(faker.finance.amount(0, 20)),
+        tags: faker.lorem.words().split(" "),
+        initiator: {
+          create: userSchema(),
+        },
+        place: {
+          create: {
+            tel: faker.phone.number(),
+            location: faker.location.city(),
+            coordsLat: faker.location.latitude(),
+            coordsLng: faker.location.longitude(),
+            owner: {
+              create: userSchema(),
             },
           },
-        }) as Prisma.EventCreateInput,
-    )
+        },
+      } as Prisma.EventCreateInput;
+    })
     .map((event) => {
       return Math.random() > 0.5
         ? event

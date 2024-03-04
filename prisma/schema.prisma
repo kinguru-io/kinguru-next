@@ -170,6 +170,7 @@ enum ModerationNotificationStatus {
 
 model Event {
   id                     String                   @id @default(cuid())
+  slug                   String                   @default("")
   topic                  String
   description            String
   status                 EventStatus              @default(unmoderated)

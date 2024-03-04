@@ -82,7 +82,7 @@ const project = new web.NextJsTypeScriptProject({
       allowJs: true,
       baseUrl: ".",
       rootDir: ".",
-      module: "esnext",
+      module: "CommonJS",
       moduleResolution: TypeScriptModuleResolution.NODE,
       forceConsistentCasingInFileNames: true,
       noEmit: true,
@@ -206,6 +206,7 @@ const project = new web.NextJsTypeScriptProject({
     "msw-storybook-addon@canary",
     "storybook-addon-module-mock",
 
+    "@sindresorhus/slugify",
     "prisma",
     "@faker-js/faker",
     "@types/gtag.js",
