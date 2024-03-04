@@ -82,7 +82,7 @@ const project = new web.NextJsTypeScriptProject({
       allowJs: true,
       baseUrl: ".",
       rootDir: ".",
-      module: "CommonJS",
+      module: "esnext",
       moduleResolution: TypeScriptModuleResolution.NODE,
       forceConsistentCasingInFileNames: true,
       noEmit: true,
