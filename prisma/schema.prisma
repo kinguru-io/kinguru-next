@@ -361,8 +361,8 @@ model OrganizationResourse {
   id             String       @id @default(cuid())
   organization   Organization @relation(fields: [organizationId], references: [id])
   organizationId String
-  height         Int          @default(200)
-  width          Int          @default(100)
+  height         Int          @default(720)
+  width          Int          @default(405)
   url            String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
@@ -372,10 +372,10 @@ model Venue {
   id               String    @id @default(cuid())
   slug             String    @unique
   name             String
-  image            String?
+  image            String
   description      String
   premises         Premise[]
-  locationMapboxId String?
+  locationMapboxId String
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 }

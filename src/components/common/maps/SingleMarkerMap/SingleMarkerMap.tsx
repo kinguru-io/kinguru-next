@@ -16,7 +16,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export function VenueMap({
+export function SingleMarkerMap({
   mapboxId,
   image,
   name,
@@ -27,7 +27,7 @@ export function VenueMap({
 }) {
   const { retrieve } = useSearchBoxCore({ accessToken });
   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
-  const [venueAddress, setVenueAddress] = useState("");
+  const [placeAddress, setPlaceAddress] = useState("");
 
   useEffect(() => {
     retrieve({ mapbox_id: mapboxId }, (data) => {
@@ -37,7 +37,7 @@ export function VenueMap({
       } = data.features[0].properties;
 
       setCoordinates({ latitude, longitude });
-      setVenueAddress(address);
+      setPlaceAddress(address);
     });
   }, [mapboxId]);
 
@@ -54,12 +54,12 @@ export function VenueMap({
         <Marker {...coordinates} anchor="bottom-right">
           <Card variant="marker">
             <CardBody>
-              <Flex gap="5px" p="7px 10px">
-                <Avatar image={image} name="" />
+              <Flex gap="5px" padding="7px 10px">
+                <Avatar size="sm" image={image} name="" />
                 <Flex direction="column" gap="3px">
                   <h4>{name}</h4>
                   <address className={css({ textStyle: "body.3" })}>
-                    {venueAddress}
+                    {placeAddress}
                   </address>
                 </Flex>
               </Flex>

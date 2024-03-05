@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { useLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import {
   PremiseCard,
@@ -14,13 +15,14 @@ import {
   Slider,
   SliderItem,
 } from "@/components/uikit";
+import { priceFormatter } from "@/lib/utils";
 import { Link } from "@/navigation";
 import prisma from "@/server/prisma";
-import { AspectRatio } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
 export async function PremiseView({ id }: { id: string }) {
   const t = await getTranslations("premise");
+  const locale = useLocale();
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
@@ -66,7 +68,11 @@ export async function PremiseView({ id }: { id: string }) {
             <PremiseTitle>{name}</PremiseTitle>
             {area && (
               <PremiseTitleSize>
-                ({area} {t("meters")}
+                (
+                {area.toLocaleString(locale, {
+                  style: "unit",
+                  unit: "meter",
+                })}
                 <sup>2</sup>)
               </PremiseTitleSize>
             )}
@@ -82,16 +88,16 @@ export async function PremiseView({ id }: { id: string }) {
           {resources.map((item) => {
             return (
               <SliderItem key={item.id}>
-                <AspectRatio ratio={16 / 9}>
-                  <Image src={item.url} fill alt="" />
-                </AspectRatio>
+                <Image src={item.url} width={391} height={220} alt="" />
               </SliderItem>
             );
           })}
         </Slider>
-        <PremisePrice>
-          {t("from")} {priceForHour}
-        </PremisePrice>
+        {priceForHour && (
+          <PremisePrice>
+            {t("from", { price: priceFormatter.format(priceForHour) })}
+          </PremisePrice>
+        )}
       </PremiseSlider>
     </PremiseCard>
   );

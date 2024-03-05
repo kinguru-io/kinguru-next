@@ -41,7 +41,7 @@
   "navbar": {
     "events": "Events",
     "speakers": "Speakers",
-    "Venues": "Venues",
+    "venues": "Venues",
     "price": "Price",
     "how_it_works": "How it works",
     "open_main_menu": "Open main menu",
@@ -437,8 +437,9 @@
     }
   },
   "premise": {
-    "meters": "m",
     "more": "More",
-    "from": "from"
+    "from": "from {price}",
+    "see_all": "See all",
+    "hide": "Hide"
   }
 }

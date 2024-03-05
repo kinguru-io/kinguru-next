@@ -18,9 +18,9 @@ export function VenueMainInfoLayout({
       _before={{
         content: '""',
         position: "absolute",
-        backgroundColor: bgImageSrc ? "neutral.5" : "neutral.4",
+        backgroundColor: "neutral.5",
         inset: "0",
-        opacity: bgImageSrc ? "0.9" : "1",
+        opacity: "0.9",
       }}
     >
       <Container>
