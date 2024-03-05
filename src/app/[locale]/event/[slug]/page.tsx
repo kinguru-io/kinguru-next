@@ -1,6 +1,7 @@
-import { EventMainInfoLayout } from "@/layout/block/EventMainInfoLayout";
+"use server";
+import { notFound } from "next/navigation";
+import { MainInfo } from "./MainInfo";
 import prisma from "@/server/prisma";
-import { Box } from "~/styled-system/jsx";
 
 export default async function EventPage({
   params: { slug },
@@ -9,13 +10,20 @@ export default async function EventPage({
 }) {
   const event = await prisma.event.findFirst({
     where: { slug },
+    include: {
+      usersOnEvent: { include: { user: true } },
+      speakersOnEvent: { include: { speaker: { include: { user: true } } } },
+      place: true,
+    },
   });
 
+  if (!event) {
+    notFound();
+  }
+
   return (
-    <EventMainInfoLayout bgImageSrc={event?.poster || ""}>
-      <Box w="900px" h="100vh">
-        asfasd
-      </Box>
-    </EventMainInfoLayout>
+    <>
+      <MainInfo event={event} />
+    </>
   );
 }
