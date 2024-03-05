@@ -106,7 +106,6 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         readOnly
         hidden
         {...restProps}
-        onChange={() => console.log("Changed")}
       />
     </>
   );
