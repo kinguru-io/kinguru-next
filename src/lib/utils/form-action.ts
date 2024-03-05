@@ -1,4 +1,4 @@
-import { ZodEffects, ZodError, ZodType, ZodTypeDef } from "zod";
+import { ZodEffects, ZodType, ZodTypeDef } from "zod";
 
 export type AuthFormResponse = {
   status: "success" | "error";
@@ -16,21 +16,13 @@ export function createFormAction<
     _prevState: AuthFormState,
     data: FormData,
   ): Promise<AuthFormState> {
-    try {
-      const parsedSchema = schema.parse(data);
-      return await action(parsedSchema);
-    } catch (e) {
-      if (e instanceof ZodError) {
-        return {
-          status: "error",
-          message: JSON.stringify(e.errors),
-        };
-      }
-
+    const parsedSchema = schema.safeParse(data);
+    if (!parsedSchema.success) {
       return {
         status: "error",
-        message: "Something went wrong!",
+        message: JSON.stringify(parsedSchema.error),
       };
     }
+    return action(parsedSchema.data);
   };
 }
