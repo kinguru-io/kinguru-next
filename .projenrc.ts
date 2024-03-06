@@ -206,6 +206,7 @@ const project = new web.NextJsTypeScriptProject({
     "msw",
     "msw-storybook-addon@canary",
     "storybook-addon-module-mock",
+    "storybook-addon-turbo-build",
 
     "prisma",
     "@faker-js/faker",

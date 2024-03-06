@@ -1,15 +1,18 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
-import { Avatar } from "../uikit";
-import { Button } from "../uikit/Button";
-import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { SignOutButton } from "@/components/Header/SignOutButton.tsx";
-import { adapterOptions } from "@/lib/nextauth";
+import { SignOutButton } from "./SignOutButton";
+import { getSession } from "@/auth.ts";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+} from "@/components/uikit";
 import avatar from "~/public/img/user.svg";
 
 export async function UserSection() {
-  const session = await getServerSession(adapterOptions);
+  const session = await getSession();
   const t = await getTranslations("navbar");
 
   return (

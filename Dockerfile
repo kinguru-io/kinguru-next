@@ -1,4 +1,4 @@
-FROM node:20-alpine as builder
+FROM node:21-alpine as builder
 WORKDIR /app
 COPY package.json package-lock.json panda.config.ts ./
 COPY src/components ./src/components
@@ -20,7 +20,7 @@ RUN npx prisma generate
 RUN npx prisma migrate deploy
 RUN npm run build
 
-FROM node:20-alpine as runner
+FROM node:21-alpine as runner
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED 1
 

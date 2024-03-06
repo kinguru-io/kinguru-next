@@ -1,3 +1,10 @@
+## [0.30.2](https://github.com/kinguru-io/kinguru-next/compare/v0.30.1...v0.30.2) (2024-03-04)
+
+
+### Bug Fixes
+
+* workflow storybook building step ([#491](https://github.com/kinguru-io/kinguru-next/issues/491)) ([94cc672](https://github.com/kinguru-io/kinguru-next/commit/94cc6722087f0a227c789264992cc331bf05f3e4))
+
 ## [0.30.1](https://github.com/kinguru-io/kinguru-next/compare/v0.30.0...v0.30.1) (2024-03-01)
 
 
