@@ -10,7 +10,7 @@ import {
   CardInner,
   Tag,
 } from "@/components/uikit";
-import { EventPopularEventsLayout } from "@/layout/block/EventPoppularEventsLayout";
+import { EventPopularEventsLayout } from "@/layout/block/EventPopularEventsLayout";
 import { css } from "~/styled-system/css";
 import {
   VStack,
