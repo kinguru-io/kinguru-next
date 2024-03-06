@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
-import { PremiseListing } from "@/components/Premise";
-import { VenueDescriptionCollapse } from "@/components/venue/";
+import { PremiseListing } from "@/components/premise";
+import { VenueDescriptionCollapse } from "@/components/venue";
 import { VenueMainInfoLayout, VenueMapLayout } from "@/layout/block";
 import prisma from "@/server/prisma";
 
