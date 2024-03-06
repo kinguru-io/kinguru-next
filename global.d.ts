@@ -6,6 +6,9 @@ type Messages =
 & typeof import("./public/locales/pl/common.json");
 
 declare global {
+  namespace globalThis {
+    var prisma: PrismaClient;
+  }
   namespace NodeJS {
     interface Global {
       prisma: PrismaClient;

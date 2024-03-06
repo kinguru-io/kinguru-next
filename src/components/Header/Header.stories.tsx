@@ -68,6 +68,7 @@ export const authHeader: Story = {
               name: "Name Surname",
               speaker: null,
               stripeCustomerId: "123123",
+              organizations: [],
             },
             expires: "date",
           }),

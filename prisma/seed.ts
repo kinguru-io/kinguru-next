@@ -1,10 +1,20 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
+import { $Enums, Prisma, PrismaClient } from "@prisma/client";
 import { Prisma, PrismaClient } from "@prisma/client";
+import slugify from "@sindresorhus/slugify";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import slugify from "@sindresorhus/slugify";
 
+const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const prisma = new PrismaClient();
+const cafeMapboxIds = [
+  "dXJuOm1ieHBsYzpBbnVvdFE",
+  "dXJuOm1ieHBvaTo0NzNkNzVmMy1kMzM2LTQ1OGYtODgyZi0xZWNmZjg4YTg2OTA",
+  "dXJuOm1ieHBvaTo4YWJkOWY0ZC04MzFjLTQ5ZGItYTMzNy00ZTE5OWU4NTYxNDI",
+  "dXJuOm1ieHBsYzpGVUpvdFE",
+  "dXJuOm1ieHBvaTphMDgyNzgzMi1iYjVjLTQzOTQtOWY1NC0wZDhlZDQ0YTcyMDE",
+];
 
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
@@ -24,6 +34,78 @@ const userSchema = (): Prisma.UserCreateInput => ({
   interests: faker.lorem.words().split(" "),
 });
 
+const venueSchema = (): Prisma.VenueCreateInput => {
+  const name = faker.company.name();
+
+  return {
+    name,
+    slug: slugify(name),
+    image: faker.image.urlLoremFlickr({
+      width: 1280,
+      height: 720,
+    }),
+    description: faker.lorem.paragraph(30),
+    locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
+  };
+};
+
+const premiseOpenHoursPricingSchema = (openHoursId: string) =>
+  [
+    {
+      premiseOpenHours: {
+        connect: {
+          id: openHoursId,
+        },
+      },
+      priceForHour: faker.number.float({ min: 0, max: 30, fractionDigits: 2 }),
+      startTime: "2020-01-01T08:00:00.000Z",
+      endTime: "2020-01-01T15:00:00.000Z",
+    },
+    {
+      premiseOpenHours: {
+        connect: {
+          id: openHoursId,
+        },
+      },
+      priceForHour: faker.number.float({ min: 0, max: 30, fractionDigits: 2 }),
+      startTime: "2020-01-01T15:00:00.000Z",
+      endTime: "2020-01-01T23:00:00.000Z",
+    },
+  ] as Prisma.PremisePricingCreateInput[];
+
+const premiseOpenHoursSchema = (idx: number) => {
+  return {
+    day: dayOfTheWeek[idx],
+    openTime: "2020-01-01T08:00:00.000Z",
+    closeTime: "2020-01-01T23:00:00.000Z",
+  } as Prisma.PremiseOpenHoursCreateInput;
+};
+
+const premiseSchemaWithVenueConnection = (
+  venueId: string,
+): Prisma.PremiseCreateInput => ({
+  name: `${faker.commerce.department()} room`,
+  description: faker.lorem.paragraph(5),
+  area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
+  venue: {
+    connect: {
+      id: venueId,
+    },
+  },
+  resources: {
+    createMany: {
+      data: Array.from({ length: 5 }, () => ({
+        url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
+      })),
+    },
+  },
+  openHours: {
+    createMany: {
+      data: Array.from({ length: 7 }, (_, idx) => premiseOpenHoursSchema(idx)),
+    },
+  },
+});
+
 const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   return Array.from(
     new Set(
@@ -34,10 +116,36 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   ).map((index) => array[index]);
 };
 
-// @ts-ignore
 async function main() {
   const events = new Array(1000)
     .fill({})
+    .map(
+      () =>
+        ({
+          topic: faker.commerce.productName(),
+          description: faker.lorem.paragraph(),
+          status: "active",
+          starts: faker.date.future(),
+          duration: faker.date.future(),
+          poster: faker.image.urlLoremFlickr(),
+          price: parseFloat(faker.finance.amount({ min: 0, max: 20 })),
+          tags: faker.lorem.words().split(" "),
+          initiator: {
+            create: userSchema(),
+          },
+          place: {
+            create: {
+              tel: faker.phone.number(),
+              location: faker.location.city(),
+              coordsLat: faker.location.latitude(),
+              coordsLng: faker.location.longitude(),
+              owner: {
+                create: userSchema(),
+              },
+            },
+          },
+        }) as Prisma.EventCreateInput,
+    )
     .map(() => {
       const topic = faker.commerce.productName();
       return {
@@ -234,9 +342,73 @@ async function main() {
     await Promise.allSettled(
       users.map((user) => prisma.user.create({ data: user })),
     )
-  )
-    .filter((result) => result.status === "rejected")
-    .forEach(console.log);
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+
+  // * ------------------------------------ Venues START
+  (
+    await Promise.allSettled(
+      Array.from({ length: 15 }, () =>
+        prisma.venue.create({ data: venueSchema() }),
+      ),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+
+  const createdVenues = await prisma.venue.findMany();
+  console.log(`* ${createdVenues.length} Venue records found`);
+
+  const premisesData = createdVenues.reduce((acc, { id }) => {
+    const premiseCount = faker.number.int({ min: 1, max: 6 });
+
+    for (let i = 1; i <= premiseCount; i++) {
+      acc.push(premiseSchemaWithVenueConnection(id));
+    }
+
+    return acc;
+  }, [] as Prisma.PremiseCreateInput[]);
+  console.log(`* ${premisesData.length} Premise records should be generated`);
+
+  (
+    await Promise.allSettled(
+      // Premises creation and connection with Venues
+      premisesData.map((data) => prisma.premise.create({ data })),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+
+  const allOpenHours = await prisma.premiseOpenHours.findMany();
+  console.log(`* ${allOpenHours.length} PremiseOpenHours records found`);
+
+  const pricingData = allOpenHours.reduce((acc, { id }) => {
+    acc.push(premiseOpenHoursPricingSchema(id));
+
+    return acc;
+  }, [] as Prisma.PremisePricingCreateInput[][]);
+  console.log(
+    `* ${pricingData.length * 2} PremisePricing records should be generated`,
+  );
+
+  (
+    await Promise.allSettled(
+      // PremisePricing creation and connection with PremiseOpenHours
+      pricingData.flat().map((data) => prisma.premisePricing.create({ data })),
+    )
+  ).forEach((result) => {
+    if (result.status === "rejected") {
+      console.log(result);
+    }
+  });
+  // * ------------------------------------ Venues END
 
   const createdUsers = await prisma.user.findMany();
   const speakers = await prisma.speaker.findMany();

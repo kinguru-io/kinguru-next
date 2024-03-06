@@ -276,6 +276,10 @@
       "type": "runtime"
     },
     {
+      "name": "@sindresorhus/slugify",
+      "type": "runtime"
+    },
+    {
       "name": "@stripe/react-stripe-js",
       "type": "runtime"
     },

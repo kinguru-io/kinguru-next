@@ -14,16 +14,15 @@ const meta = {
   title: "UIKit/Slider",
   component: () => (
     <Box w="391px" h="220px">
-      <Slider
-        items={items}
-        renderItem={({ item, isSnapPoint }) => (
-          <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+      <Slider slidesCount={items.length}>
+        {items.map((item) => (
+          <SliderItem key={item.id}>
             <AspectRatio ratio={16 / 9}>
               <Image src={item.src} fill alt="" />
             </AspectRatio>
           </SliderItem>
-        )}
-      ></Slider>
+        ))}
+      </Slider>
     </Box>
   ),
   parameters: {

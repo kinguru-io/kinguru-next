@@ -41,12 +41,13 @@
   "navbar": {
     "events": "Events",
     "speakers": "Speakers",
-    "places": "Places",
+    "venues": "Venues",
     "price": "Price",
     "how_it_works": "How it works",
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
+    "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
     "your_profile": "Your profile",
     "sign_out": "Sign out",
@@ -59,7 +60,8 @@
     "sign_up": "Sign up",
     "add_organization": "Add an organization account",
     "sign_in_and_sign_up": "Sign in and sign up",
-    "eventify_logotype": "Eventify logotype"
+    "eventify_logotype": "Eventify logotype",
+    "toggle_nav": "Open/close navigation menu"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
@@ -426,5 +428,20 @@
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
       "submit": "Save"
     }
+  },
+  "venue": {
+    "public_page": {
+      "image_alt": "Photo of the \"{name}\" venue",
+      "show_more": "More",
+      "show_less": "Less",
+      "premises_heading": "Venue's premises",
+      "map": "Map"
+    }
+  },
+  "premise": {
+    "more": "More",
+    "from": "from {price}",
+    "see_all": "See all",
+    "hide": "Hide"
   }
 }

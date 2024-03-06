@@ -51,6 +51,7 @@ export const tagStyles = cva({
   },
   defaultVariants: {
     variant: "primary",
+    size: "xs",
   },
 });
 

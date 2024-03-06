@@ -1,25 +1,40 @@
-import { GetStaticPropsContext } from "next/types";
-import { staticPaths } from "@/navigation.ts";
-import { ssgInit } from "@/server/ssg-init.ts";
+import type { Prisma } from "@prisma/client";
+import type {
+  InferGetServerSidePropsType,
+  GetServerSideProps,
+} from "next/types";
+import { Link } from "@/navigation";
+import prisma from "@/server/prisma";
+import { Center } from "~/styled-system/jsx";
+import { button } from "~/styled-system/recipes";
 
-export default function Places() {
-  return <>Places</>;
-}
+type VenueLinkData = Pick<Prisma.VenueUncheckedCreateInput, "id" | "name">;
 
-export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const helpers = await ssgInit();
-  return {
-    props: {
-      messages: (await import(`~/public/locales/${params?.locale}/common.json`))
-        .default,
-      trpcState: helpers.dehydrate(),
+export const getServerSideProps = (async () => {
+  const venues = await prisma.venue.findMany({
+    select: {
+      id: true,
+      name: true,
     },
-  };
-}
+  });
 
-export async function getStaticPaths() {
-  return {
-    paths: staticPaths,
-    fallback: false,
-  };
+  return { props: { venues } };
+}) satisfies GetServerSideProps<{ venues: VenueLinkData[] }>;
+
+export default function Places({
+  venues,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <Center flexDirection="column">
+      {venues.map(({ id, name }) => (
+        <Link
+          className={button({ variant: "ghost" })}
+          key={id}
+          href={`/venue/${id}`}
+        >
+          {name}
+        </Link>
+      ))}
+    </Center>
+  );
 }

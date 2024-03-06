@@ -1,10 +1,11 @@
 import { DefaultSession, DefaultUser } from "next-auth";
-import { Speaker, UserRole } from "@prisma/client";
+import { Organization, Speaker, UserRole } from "@prisma/client";
 
 declare module "next-auth" {
   interface User extends DefaultUser {
     role?: UserRole;
     speaker: Speaker | null;
+    organizations: Organization[];
     stripeCustomerId: string | null;
   }
   interface Session extends DefaultSession {

@@ -11,13 +11,26 @@ export const callbacks = (
 ) =>
   ({
     session({ session, user }) {
-      if (session?.user) {
-        session.user.role = user.role;
-        session.user.id = user.id;
-        session.user.speaker = user.speaker;
-        session.user.stripeCustomerId = user.stripeCustomerId;
+      if (!session?.user) {
+        return session;
       }
-      return session;
+
+      const { id, role, speaker, organizations, stripeCustomerId } = user;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id,
+          role,
+          speaker,
+          organizations,
+          stripeCustomerId,
+          image:
+            role === "organization"
+              ? organizations.at(0)?.logotype
+              : user.image,
+        },
+      };
     },
     async signIn({ user }) {
       if (isCredentialsCallback(request, params)) {
@@ -40,7 +53,11 @@ export const callbacks = (
       }
       return true;
     },
-    async redirect({ baseUrl }) {
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
   }) as Partial<CallbacksOptions<Profile, Account>>;

@@ -3,7 +3,10 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import {
+  Slider,
+  SliderItem,
   PremiseCard,
+  Button,
   PremiseContent,
   PremiseDescription,
   PremisePrice,
@@ -12,9 +15,7 @@ import {
   PremiseTitle,
   PremiseTitleSize,
   PremiseTitleWrapper,
-} from "./PremiseCard";
-import { Button } from "../Button";
-import { Slider, SliderItem } from "../Slider/Slider";
+} from "@/components/uikit";
 import { AspectRatio, Container } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
@@ -44,7 +45,8 @@ export const DefaultPremiseCard: Story = {
               <PremiseTitleWrapper>
                 <PremiseTitle>Hall 1</PremiseTitle>
                 <PremiseTitleSize>
-                  (20 m<sup>2</sup>)
+                  ({faker.number.float({ min: 10, max: 20, fractionDigits: 2 })}
+                  m<sup>2</sup>)
                 </PremiseTitleSize>
               </PremiseTitleWrapper>
               <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
@@ -52,17 +54,16 @@ export const DefaultPremiseCard: Story = {
             <Button size="md">More</Button>
           </PremiseContent>
           <PremiseSlider>
-            <Slider
-              items={items}
-              renderItem={({ item, isSnapPoint }) => (
-                <SliderItem key={item.id} isSnapPoint={isSnapPoint}>
+            <Slider slidesCount={items.length}>
+              {items.map((item) => (
+                <SliderItem key={item.id}>
                   <AspectRatio ratio={16 / 9}>
                     <Image src={item.src} fill alt="" />
                   </AspectRatio>
                 </SliderItem>
-              )}
-            ></Slider>
-            <PremisePrice>200$</PremisePrice>
+              ))}
+            </Slider>
+            <PremisePrice>{faker.finance.amount()}$</PremisePrice>
           </PremiseSlider>
         </PremiseCard>
       </Container>

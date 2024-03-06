@@ -33,7 +33,7 @@
   "navbar": {
     "events": "Мероприятия",
     "speakers": "Спикеры",
-    "places": "Площадки",
+    "venues": "Площадки",
     "price": "Цены",
     "how_it_works": "Как это работает",
     "open_main_menu": "Открыть главное меню",
@@ -52,7 +52,8 @@
     "sign_up": "Регистрация организации",
     "add_organization": "Добавить кабинет организации",
     "sign_in_and_sign_up": "Вход и регистрация",
-    "eventify_logotype": "Логотип Eventify"
+    "eventify_logotype": "Логотип Eventify",
+    "toggle_nav": "Открыть/закрыть меню навигацию"
   },
   "hero": {
     "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",
@@ -284,9 +285,25 @@
       "aboutCompany": "Расскажите о вашей организации поподробнее...",
       "credentials_heading": "Реквизиты*",
       "email": "Email",
+      "requisites_url": "Ссылка на документ с реквизитами",
       "extra_heading": "Дополнительно",
       "credentials_asterisk_helper": "* вся указанная информация будет использоваться исключительно в рамках внутренних рабочих процессов",
       "submit": "Сохранить"
     }
+  },
+  "venue": {
+    "public_page": {
+      "image_alt": "Фотография площадки \"{name}\"",
+      "show_more": "Подробнее",
+      "show_less": "Свернуть",
+      "premises_heading": "Помещения этой площадки",
+      "map": "Карта"
+    }
+  },
+  "premise": {
+    "more": "Подробнее",
+    "from": "от {price}",
+    "see_all": "Смотреть все",
+    "hide": "Скрыть"
   }
 }

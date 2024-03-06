@@ -1,3 +1,38 @@
+## [0.34.1](https://github.com/kinguru-io/kinguru-next/compare/v0.34.0...v0.34.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* overlapping migration for organization ([dc90bf7](https://github.com/kinguru-io/kinguru-next/commit/dc90bf77b42ad51eeeeb2e81d14d80fb374efb99))
+
+# [0.34.0](https://github.com/kinguru-io/kinguru-next/compare/v0.33.0...v0.34.0) (2024-03-06)
+
+
+### Features
+
+* add business logic for org registration ([#495](https://github.com/kinguru-io/kinguru-next/issues/495)) ([e334036](https://github.com/kinguru-io/kinguru-next/commit/e334036d59951d2ca6af4b14a84d8c265adf1c28))
+
+# [0.33.0](https://github.com/kinguru-io/kinguru-next/compare/v0.32.0...v0.33.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-103:** responsiveness for footer/header ([#496](https://github.com/kinguru-io/kinguru-next/issues/496)) ([3c8bc96](https://github.com/kinguru-io/kinguru-next/commit/3c8bc96f0ccc0889442fd1dda9e969fcd9960dc5))
+
+# [0.32.0](https://github.com/kinguru-io/kinguru-next/compare/v0.31.0...v0.32.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-97:** add form for organization registration ([#493](https://github.com/kinguru-io/kinguru-next/issues/493)) ([fdcc7bb](https://github.com/kinguru-io/kinguru-next/commit/fdcc7bb7aa42c1c525a1fe261bb596bf3c1b3e02))
+
+# [0.31.0](https://github.com/kinguru-io/kinguru-next/compare/v0.30.2...v0.31.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-62:** venue public page ([#482](https://github.com/kinguru-io/kinguru-next/issues/482)) ([a5c372a](https://github.com/kinguru-io/kinguru-next/commit/a5c372a346023a100bba32a1dec138ac2f3ff1cf))
+
 ## [0.30.2](https://github.com/kinguru-io/kinguru-next/compare/v0.30.1...v0.30.2) (2024-03-04)
 
 

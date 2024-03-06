@@ -11,29 +11,28 @@ type NavigationLink = {
 };
 
 type LinksProps = {
-  navigation: Array<NavigationLink>;
+  links: NavigationLink[];
 };
 
-export function Links({ navigation }: LinksProps) {
+export function HeaderLinks({ links }: LinksProps) {
   const selectedSegment = useSelectedLayoutSegment();
 
-  const navigationLinks = navigation.map(({ href, name }) => {
-    const textStyle =
-      selectedSegment === href.slice(1) ? "heading.h4" : "body.2";
-    const newHref = selectedSegment === href.slice(1) ? "" : href;
-    return (
-      <Link
-        key={name}
-        href={newHref}
-        className={css({
-          textStyle: textStyle,
-          padding: "5px",
-        })}
-      >
-        {name}
-      </Link>
-    );
-  });
-
-  return <Flex justify="space-evenly">{navigationLinks}</Flex>;
+  return (
+    <Flex justify="space-evenly" alignItems="center" flexWrap="wrap">
+      {links.map(({ href, name }) => (
+        <Link
+          key={name}
+          href={href}
+          className={css({
+            textAlign: "center",
+            textStyle:
+              selectedSegment === href.slice(1) ? "heading.4" : "body.2",
+            padding: "5px",
+          })}
+        >
+          {name}
+        </Link>
+      ))}
+    </Flex>
+  );
 }
