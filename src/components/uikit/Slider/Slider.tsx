@@ -1,32 +1,24 @@
+"use client";
+
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { useSnapCarousel } from "react-snap-carousel";
 import { cx } from "~/styled-system/css";
 import { slider } from "~/styled-system/recipes";
 
-type SliderProps<T> = {
-  readonly items: T[];
-  readonly renderItem: (
-    props: SliderRenderItemProps<T>,
-  ) => React.ReactElement<SliderItemProps>;
-};
-
-type SliderRenderItemProps<T> = {
-  readonly item: T;
-  readonly isSnapPoint: boolean;
+type SliderProps = {
+  slidesCount: number;
+  children: React.ReactNode;
 };
 
 type SliderItemProps = {
-  readonly isSnapPoint: boolean;
-  readonly children?: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
-  const { scrollRef, prev, next, snapPointIndexes, activePageIndex, goTo } =
-    useSnapCarousel();
-  const classes = slider();
+export function Slider({ slidesCount, children }: SliderProps) {
+  const { scrollRef, prev, next, activePageIndex, goTo } = useSnapCarousel();
 
   const nextSlide = () => {
-    if (items.length > activePageIndex + 1) {
+    if (slidesCount > activePageIndex + 1) {
       next();
     } else {
       goTo(0);
@@ -37,16 +29,16 @@ export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
     if (activePageIndex > 0) {
       prev();
     } else {
-      goTo(items.length - 1);
+      goTo(slidesCount - 1);
     }
   };
+
+  const classes = slider();
 
   return (
     <div className={classes.slider}>
       <ul className={classes.sliderOptions} ref={scrollRef}>
-        {items.map((item, i) =>
-          renderItem({ item, isSnapPoint: snapPointIndexes.has(i) }),
-        )}
+        {children}
       </ul>
       <button
         type="button"
@@ -66,12 +58,8 @@ export function Slider<T extends any>({ items, renderItem }: SliderProps<T>) {
   );
 }
 
-export function SliderItem({ children, isSnapPoint }: SliderItemProps) {
+export function SliderItem({ children }: SliderItemProps) {
   const classes = slider();
 
-  return (
-    <li className={classes.item} data-snap-point={isSnapPoint}>
-      {children}
-    </li>
-  );
+  return <li className={classes.item}>{children}</li>;
 }

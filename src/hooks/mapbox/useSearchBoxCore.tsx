@@ -8,6 +8,33 @@ import {
 import { useEffect, useMemo } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
+const emptySuggestionObject: SearchBoxSuggestion = {
+  name: "",
+  name_preferred: "",
+  mapbox_id: "",
+  feature_type: "",
+  address: "",
+  full_address: "",
+  place_formatted: "",
+  context: {},
+  language: "",
+  maki: "",
+  poi_category: [""],
+  brand: "",
+  brand_id: "",
+  external_ids: "",
+  metadata: "",
+  distance: 0,
+  eta: 0,
+  added_distance: 0,
+  added_time: 0,
+};
+
+export type Coordinates = {
+  longitude: number;
+  latitude: number;
+};
+
 export const useSearchBoxCore = (
   options: Partial<{ accessToken: string } & SearchBoxOptions>,
 ) => {
@@ -46,14 +73,19 @@ export const useSearchBoxCore = (
 
   const retrieve = useDebouncedCallback(
     (
-      suggestion?: SearchBoxSuggestion | null,
+      suggestion?: Partial<SearchBoxSuggestion> | null,
       cb?: (data: SearchBoxRetrieveResponse) => void,
     ) => {
       if (!suggestion) return;
+
       void search
-        .retrieve(suggestion, {
-          sessionToken: "test-123",
-        })
+        .retrieve(
+          // in order to use e.g. `mapbox_id` only
+          { ...emptySuggestionObject, ...suggestion },
+          {
+            sessionToken: "test-123",
+          },
+        )
         .then((data) => cb?.(data));
     },
     300,

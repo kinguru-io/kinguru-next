@@ -1,3 +1,17 @@
+# [0.32.0](https://github.com/kinguru-io/kinguru-next/compare/v0.31.0...v0.32.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-97:** add form for organization registration ([#493](https://github.com/kinguru-io/kinguru-next/issues/493)) ([fdcc7bb](https://github.com/kinguru-io/kinguru-next/commit/fdcc7bb7aa42c1c525a1fe261bb596bf3c1b3e02))
+
+# [0.31.0](https://github.com/kinguru-io/kinguru-next/compare/v0.30.2...v0.31.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-62:** venue public page ([#482](https://github.com/kinguru-io/kinguru-next/issues/482)) ([a5c372a](https://github.com/kinguru-io/kinguru-next/commit/a5c372a346023a100bba32a1dec138ac2f3ff1cf))
+
 ## [0.30.2](https://github.com/kinguru-io/kinguru-next/compare/v0.30.1...v0.30.2) (2024-03-04)
 
 

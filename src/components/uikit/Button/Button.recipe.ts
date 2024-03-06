@@ -4,6 +4,7 @@ import { defineRecipe } from "@pandacss/dev";
 export const buttonRecipe = defineRecipe({
   className: "button",
   base: {
+    colorPalette: "primary",
     display: "flex",
     alignItems: "center",
     gap: "2",
@@ -101,6 +102,10 @@ export const buttonRecipe = defineRecipe({
         borderWidth: "3px",
       },
     },
+  },
+  defaultVariants: {
+    variant: "solid",
+    size: "sm",
   },
   staticCss: [
     { size: ["*"], responsive: true },
