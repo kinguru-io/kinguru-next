@@ -136,6 +136,7 @@ async function main() {
               location: faker.location.city(),
               coordsLat: faker.location.latitude(),
               coordsLng: faker.location.longitude(),
+              locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
               owner: {
                 create: userSchema(),
               },
@@ -164,6 +165,7 @@ async function main() {
             location: faker.location.city(),
             coordsLat: faker.location.latitude(),
             coordsLng: faker.location.longitude(),
+            locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
             owner: {
               create: userSchema(),
             },
@@ -182,6 +184,7 @@ async function main() {
                 location: faker.location.city(),
                 coordsLat: faker.location.latitude(),
                 coordsLng: faker.location.longitude(),
+                locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
                 owner: {
                   create: userSchema(),
                 },

@@ -5,6 +5,7 @@ import { VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
+import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { EventDescription } from "@/components/event/EventDescription";
 import { EventMainInfo } from "@/components/event/EventMainInfo";
 import {
@@ -19,6 +20,7 @@ import {
   Tag,
 } from "@/components/uikit";
 import { EventMainInfoLayout } from "@/layout/block/EventMainInfoLayout";
+import { EventMapLayout } from "@/layout/block/EventMapLayout";
 import { EventPopularEventsLayout } from "@/layout/block/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
@@ -58,6 +60,7 @@ export default async function EventPage({
     usersOnEvent,
     description,
     tags,
+    place,
   } = event;
 
   return (
@@ -99,7 +102,9 @@ export default async function EventPage({
                   )}
                 />
               </Flex>
-              <Button size="lg">Присоединиться</Button>
+              <Button size="lg" variant="solid">
+                Присоединиться
+              </Button>
             </Flex>
           </Flex>
           <VStack gap="20px" alignItems="baseline">
@@ -139,6 +144,16 @@ export default async function EventPage({
           </HStack>
         </Flex>
       </EventMainInfoLayout>
+      <EventMapLayout>
+        <h2 className={css({ textAlign: "center" })}>Карта</h2>
+        <AspectRatio ratio={16 / 9} marginBlockStart="50px">
+          <SingleMarkerMap
+            mapboxId={place.locationMapboxId}
+            image={poster || ""}
+            name={topic || ""}
+          />
+        </AspectRatio>
+      </EventMapLayout>
       <EventPopularEventsLayout>
         <VStack gap="50px">
           <h2>Популярные события в этой неделе</h2>
