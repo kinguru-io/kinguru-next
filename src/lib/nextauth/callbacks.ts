@@ -15,17 +15,22 @@ export const callbacks = (
         return session;
       }
 
-      if (user.role === "organization") {
-        session.user.image = user.organizations[0].logotype;
-      }
-
-      session.user.role = user.role;
-      session.user.id = user.id;
-      session.user.speaker = user.speaker;
-      session.user.organizations = user.organizations;
-      session.user.stripeCustomerId = user.stripeCustomerId;
-
-      return session;
+      const { id, role, speaker, organizations, stripeCustomerId } = user;
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id,
+          role,
+          speaker,
+          organizations,
+          stripeCustomerId,
+          image:
+            role === "organization"
+              ? organizations.at(0)?.logotype
+              : user.image,
+        },
+      };
     },
     async signIn({ user }) {
       if (isCredentialsCallback(request, params)) {
