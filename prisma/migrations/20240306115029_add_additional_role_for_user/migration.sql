@@ -6,9 +6,3 @@
 */
 -- AlterEnum
 ALTER TYPE "UserRole" ADD VALUE 'organization';
-
--- AlterTable
-ALTER TABLE "Organization" ADD COLUMN     "ownerId" TEXT NOT NULL;
-
--- AddForeignKey
-ALTER TABLE "Organization" ADD CONSTRAINT "Organization_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
