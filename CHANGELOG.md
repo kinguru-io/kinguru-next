@@ -1,3 +1,10 @@
+# [0.34.0](https://github.com/kinguru-io/kinguru-next/compare/v0.33.0...v0.34.0) (2024-03-06)
+
+
+### Features
+
+* add business logic for org registration ([#495](https://github.com/kinguru-io/kinguru-next/issues/495)) ([e334036](https://github.com/kinguru-io/kinguru-next/commit/e334036d59951d2ca6af4b14a84d8c265adf1c28))
+
 # [0.33.0](https://github.com/kinguru-io/kinguru-next/compare/v0.32.0...v0.33.0) (2024-03-06)
 
 
