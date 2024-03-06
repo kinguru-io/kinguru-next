@@ -20,12 +20,10 @@ export const Select = forwardRef(function Select(
 
   return (
     <div className={outerWrapper}>
-      <select
-        ref={ref}
-        className={selectClass}
-        defaultValue={placeholder}
-        {...props}
-      >
+      <select ref={ref} className={selectClass} defaultValue={""} {...props}>
+        <option disabled={true} value="">
+          {placeholder}
+        </option>
         {children}
       </select>
     </div>
