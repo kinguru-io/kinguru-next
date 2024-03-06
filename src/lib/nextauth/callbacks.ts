@@ -11,12 +11,20 @@ export const callbacks = (
 ) =>
   ({
     session({ session, user }) {
-      if (session?.user) {
-        session.user.role = user.role;
-        session.user.id = user.id;
-        session.user.speaker = user.speaker;
-        session.user.stripeCustomerId = user.stripeCustomerId;
+      if (!session?.user) {
+        return session;
       }
+
+      if (user.role === "organization") {
+        session.user.image = user.organizations[0].logotype;
+      }
+
+      session.user.role = user.role;
+      session.user.id = user.id;
+      session.user.speaker = user.speaker;
+      session.user.organizations = user.organizations;
+      session.user.stripeCustomerId = user.stripeCustomerId;
+
       return session;
     },
     async signIn({ user }) {
@@ -40,7 +48,11 @@ export const callbacks = (
       }
       return true;
     },
-    async redirect({ baseUrl }) {
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
   }) as Partial<CallbacksOptions<Profile, Account>>;
