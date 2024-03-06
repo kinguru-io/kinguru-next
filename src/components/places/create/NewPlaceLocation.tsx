@@ -24,7 +24,7 @@ import { Dispatch, SetStateAction, useRef } from "react";
 import Map, { MapRef, Marker } from "react-map-gl";
 import { z } from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { useSearchBoxCore } from "@/utils/mapbox/useSearchBoxCore";
+import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import marker from "~/public/img/apple-touch-icon.png";
 import "mapbox-gl/dist/mapbox-gl.css";
 

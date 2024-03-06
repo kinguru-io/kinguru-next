@@ -36,19 +36,21 @@ export type ButtonProps = {
 
 export function Button({
   icon = null,
-  variant = "solid",
+  variant,
   iconPosition = "left",
-  colorPalette = "primary",
-  size = "sm",
+  colorPalette,
+  size,
   children,
   isLoading = false,
   disabled = false,
   ...restProps
 }: ButtonProps) {
+  const className = cx(css({ colorPalette }), button({ variant, size }));
+
   return (
     <button
       data-icon-position={iconPosition}
-      className={cx(css({ colorPalette }), button({ variant, size }))}
+      className={className}
       disabled={isLoading || disabled}
       {...restProps}
     >

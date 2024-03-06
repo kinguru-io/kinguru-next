@@ -25,5 +25,6 @@ export const avatarRecipe = defineRecipe({
       lg: { w: "185px", h: "185px", borderWidth: "2px" },
     },
   },
+  defaultVariants: { size: "xs" },
   staticCss: [{ size: ["*"] }],
 });
