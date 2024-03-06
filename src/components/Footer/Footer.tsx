@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageDropdown } from "./LanguageDropdown";
-import { Link } from "@/navigation";
+import { Link, type Locale } from "@/navigation";
 import facebookIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedinIcon from "~/public/img/footerIcons/LinkedIn.svg";
@@ -12,7 +12,7 @@ import { footer } from "~/styled-system/recipes";
 
 export function Footer() {
   const t = useTranslations("footer");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
 
   const classes = footer();
 
@@ -55,7 +55,10 @@ export function Footer() {
     <footer className={classes.footer}>
       <Container className={classes.footerWrapper}>
         <div className={classes.contentWrapper}>
-          <Link href="/" className={css({ flexShrink: 0 })}>
+          <Link
+            href="/"
+            className={css({ flexShrink: 0, alignSelf: "center" })}
+          >
             <Image
               src={footerLogotype.src}
               alt={t("eventify_logotype")}
@@ -77,7 +80,11 @@ export function Footer() {
               </Link>
             ))}
           </Flex>
-          <Flex gap="5px" direction="column">
+          <Flex
+            gap="5px"
+            direction="column"
+            alignSelf={{ base: "flex-end", md: "flex-start" }}
+          >
             <Flex gap="10px">
               {socialMedia.map(({ name, src, link }) => (
                 <Link key={name} href={link}>

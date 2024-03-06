@@ -11,19 +11,20 @@ type NavigationLink = {
 };
 
 type LinksProps = {
-  navigation: NavigationLink[];
+  links: NavigationLink[];
 };
 
-export function Links({ navigation }: LinksProps) {
+export function HeaderLinks({ links }: LinksProps) {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <Flex justify="space-evenly">
-      {navigation.map(({ href, name }) => (
+    <Flex justify="space-evenly" alignItems="center" flexWrap="wrap">
+      {links.map(({ href, name }) => (
         <Link
           key={name}
           href={href}
           className={css({
+            textAlign: "center",
             textStyle:
               selectedSegment === href.slice(1) ? "heading.4" : "body.2",
             padding: "5px",
