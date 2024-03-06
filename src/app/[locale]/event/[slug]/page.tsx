@@ -1,6 +1,7 @@
 "use server";
 import { notFound } from "next/navigation";
 import { MainInfo } from "./MainInfo";
+import { PopularEvents } from "./PopularEvents";
 import prisma from "@/server/prisma";
 
 export default async function EventPage({
@@ -17,6 +18,13 @@ export default async function EventPage({
     },
   });
 
+  const popularEvents = await prisma.event.findMany({
+    take: 3,
+    include: {
+      usersOnEvent: { include: { user: true } },
+    },
+  });
+
   if (!event) {
     notFound();
   }
@@ -24,6 +32,7 @@ export default async function EventPage({
   return (
     <>
       <MainInfo event={event} />
+      <PopularEvents popularEvents={popularEvents} />
     </>
   );
 }
