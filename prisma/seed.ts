@@ -1,9 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import { $Enums, Prisma, PrismaClient } from "@prisma/client";
-import { Prisma, PrismaClient } from "@prisma/client";
-import slugify from "@sindresorhus/slugify";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import slugify from "@sindresorhus/slugify";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
