@@ -1,11 +1,15 @@
-import { ComponentProps } from "react";
+import { ComponentProps, ForwardedRef, forwardRef } from "react";
 import { css } from "~/styled-system/css";
 
 type TextareaProps = ComponentProps<"textarea">;
 
-export function Textarea({ children, ...restProps }: TextareaProps) {
+export const Textarea = forwardRef(function Textarea(
+  { children, ...restProps }: TextareaProps,
+  ref: ForwardedRef<HTMLTextAreaElement>,
+) {
   return (
     <textarea
+      ref={ref}
       className={css({
         "&[rows]": { width: "full" },
         minHeight: "calc(1.25rem + 22px)", // (line-height) + (padding-inline) + (border-width * 2)
@@ -36,4 +40,4 @@ export function Textarea({ children, ...restProps }: TextareaProps) {
       {children}
     </textarea>
   );
-}
+});

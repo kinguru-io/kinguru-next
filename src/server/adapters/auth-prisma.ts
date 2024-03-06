@@ -27,19 +27,27 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           emailVerified: true,
           stripeCustomerId: true,
           speaker: true,
+          organizations: true,
         },
       });
     },
     getUser: (id) =>
-      p.user.findUnique({ where: { id }, include: { speaker: true } }),
+      p.user.findUnique({
+        where: { id },
+        include: { organizations: true, speaker: true },
+      }),
     getUserByEmail: (email) =>
-      p.user.findUnique({ where: { email }, include: { speaker: true } }),
+      p.user.findUnique({
+        where: { email },
+        include: { organizations: true, speaker: true },
+      }),
     async getUserByAccount(provider_providerAccountId) {
       const account = await p.account.findUnique({
         where: { provider_providerAccountId },
         select: {
           user: {
             include: {
+              organizations: true,
               speaker: true,
             },
           },
@@ -57,6 +65,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
             stripeCustomerId,
           },
           include: {
+            organizations: true,
             speaker: true,
           },
         });
@@ -64,15 +73,18 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
       return account.user;
     },
     updateUser: ({ id, ...data }) => {
-      const { speaker, ...user } = data;
+      const { speaker, organizations, ...user } = data;
       return p.user.update({
         where: { id },
         data: user,
-        include: { speaker: true },
+        include: { organizations: true, speaker: true },
       });
     },
     deleteUser: (id) =>
-      p.user.delete({ where: { id }, include: { speaker: true } }),
+      p.user.delete({
+        where: { id },
+        include: { organizations: true, speaker: true },
+      }),
     linkAccount: (data) =>
       p.account.create({
         data: {
@@ -101,7 +113,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     async getSessionAndUser(sessionToken) {
       const userAndSession = await p.session.findUnique({
         where: { sessionToken },
-        include: { user: { include: { speaker: true } } },
+        include: { user: { include: { organizations: true, speaker: true } } },
       });
       if (!userAndSession) return null;
       const { user, ...session } = userAndSession;

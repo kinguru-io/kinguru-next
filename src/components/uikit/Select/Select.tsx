@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
 import { cx } from "styled-system/css";
 import {
   input,
@@ -11,20 +11,21 @@ type SelectProps = SelectVariantProps &
     placeholder?: string;
   };
 
-export function Select({ placeholder, children, ...props }: SelectProps) {
+export const Select = forwardRef(function Select(
+  { placeholder, children, ...props }: SelectProps,
+  ref: ForwardedRef<HTMLSelectElement>,
+) {
   const { outerWrapper, selectRoot } = select();
   const selectClass = cx(input(), selectRoot);
 
   return (
     <div className={outerWrapper}>
-      <select className={selectClass} {...props}>
-        {placeholder && (
-          <option value="" selected disabled>
-            {placeholder}
-          </option>
-        )}
+      <select ref={ref} className={selectClass} defaultValue={""} {...props}>
+        <option disabled={true} value="">
+          {placeholder}
+        </option>
         {children}
       </select>
     </div>
   );
-}
+});

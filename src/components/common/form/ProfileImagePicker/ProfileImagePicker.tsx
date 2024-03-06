@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { ForwardedRef, forwardRef, useState, useTransition } from "react";
 import { FaPenAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import {
@@ -22,18 +22,22 @@ type ProfileImagePickerProps = InputFileProps & {
   name?: string;
 };
 
-export function ProfileImagePicker({
-  imageSrc: propsImageSrc = "",
-  name: propsName,
-  ...restProps
-}: ProfileImagePickerProps) {
+export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
+  {
+    imageSrc: propsImageSrc = "",
+    name: propsName,
+    onChange,
+    ...restProps
+  }: ProfileImagePickerProps,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const [imageSrc, setImageSrc] = useState(propsImageSrc);
   const [isPending, startTransition] = useTransition();
 
   const handleFileChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (!target.files) {
+    if (!target.files || !target.files[0]) {
       return;
     }
 
@@ -60,6 +64,12 @@ export function ProfileImagePicker({
         return;
       }
 
+      onChange?.({
+        target: {
+          value: cutSearchParams(presignedUrl),
+          name: propsName,
+        },
+      } as React.ChangeEvent<HTMLInputElement>);
       setImageSrc(cutSearchParams(presignedUrl));
     });
   };
@@ -70,7 +80,6 @@ export function ProfileImagePicker({
         onChange={handleFileChange}
         accept="image/*"
         disabled={isPending}
-        {...restProps}
       >
         <PickerTag />
         <AvatarWrapper size="lg">
@@ -89,16 +98,18 @@ export function ProfileImagePicker({
         </AvatarWrapper>
       </InputFile>
       <input
+        ref={ref}
         type="text"
         name={propsName}
         value={imageSrc}
         required={restProps.required}
         readOnly
         hidden
+        {...restProps}
       />
     </>
   );
-}
+});
 
 function PickerTag() {
   return (

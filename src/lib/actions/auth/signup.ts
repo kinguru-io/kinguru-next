@@ -3,6 +3,7 @@
 import { Argon2id } from "oslo/password";
 import { AuthFormState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
+import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 const signUpHandler = async ({
@@ -36,6 +37,8 @@ const signUpHandler = async ({
       },
     },
   });
+
+  redirect("/profile/organization-register");
 
   return {
     status: "success",
