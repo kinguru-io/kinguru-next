@@ -1,5 +1,6 @@
 "use server";
 
+import { getLocale } from "next-intl/server";
 import { Argon2id } from "oslo/password";
 import { AuthFormState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
@@ -26,6 +27,7 @@ const signUpHandler = async ({
   await prisma.user.create({
     data: {
       email,
+      role: "organization",
       accounts: {
         create: [
           {
@@ -38,12 +40,12 @@ const signUpHandler = async ({
     },
   });
 
-  redirect("/profile/organization-register");
+  const locale = await getLocale();
+  redirect(
+    `/auth/organization/signin?callbackUrl=/${locale}/profile/organization/register`,
+  );
 
-  return {
-    status: "success",
-    message: "OK",
-  };
+  return null;
 };
 
 export const signUp = createFormAction(signUpHandler, signupFormSchema);
