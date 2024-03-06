@@ -1,3 +1,10 @@
+# [0.31.0](https://github.com/kinguru-io/kinguru-next/compare/v0.30.2...v0.31.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-62:** venue public page ([#482](https://github.com/kinguru-io/kinguru-next/issues/482)) ([a5c372a](https://github.com/kinguru-io/kinguru-next/commit/a5c372a346023a100bba32a1dec138ac2f3ff1cf))
+
 ## [0.30.2](https://github.com/kinguru-io/kinguru-next/compare/v0.30.1...v0.30.2) (2024-03-04)
 
 
