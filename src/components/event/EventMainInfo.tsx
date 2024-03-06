@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import calendarIcon from "~/public/img/calendar.svg";
 import markerIcon from "~/public/img/location.svg";
 import timeIcon from "~/public/img/time.svg";
@@ -6,9 +10,22 @@ import { Flex } from "~/styled-system/jsx";
 
 type EventMainInfoProps = {
   starts: Date;
+  mapboxId: string;
 };
 
-export function EventMainInfo({ starts }: EventMainInfoProps) {
+const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
+  const [placeAddress, setPlaceAddress] = useState("");
+  const { retrieve } = useSearchBoxCore({ accessToken });
+
+  useEffect(() => {
+    retrieve({ mapbox_id: mapboxId }, (data) => {
+      const { address } = data.features[0].properties;
+      setPlaceAddress(address);
+    });
+  }, [mapboxId]);
+
   const mainInfo = [
     {
       iconSrc: calendarIcon.src,
@@ -29,10 +46,11 @@ export function EventMainInfo({ starts }: EventMainInfoProps) {
     },
     {
       iconSrc: markerIcon.src,
-      text: "addres example",
+      text: placeAddress,
       altText: "Location Icon",
     },
   ];
+
   return (
     <Flex direction="column" gap="20px" maxW="360px">
       <h3>Основная информация:</h3>

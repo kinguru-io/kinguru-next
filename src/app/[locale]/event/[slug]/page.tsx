@@ -89,7 +89,10 @@ export default async function EventPage({
               </AspectRatio>
             </Box>
             <Flex direction="column" justify="space-between">
-              <EventMainInfo starts={starts} />
+              <EventMainInfo
+                starts={starts}
+                mapboxId={place.locationMapboxId}
+              />
               <Flex direction="column" gap="20px" align="baseline">
                 <h3>Гости мероприятия:</h3>
                 <AvatarGroup
