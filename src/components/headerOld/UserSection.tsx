@@ -33,7 +33,11 @@ export function UserSection() {
         {session ? (
           <>
             <SignOutButton>{t("sign_out")}</SignOutButton>
-            <Link href="#">{t("add_organization")}</Link>
+            {session.user?.role === "organization" && (
+              <Link href="/profile/organization/register">
+                {t("add_organization")}
+              </Link>
+            )}
           </>
         ) : (
           <>
