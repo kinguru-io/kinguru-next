@@ -32,10 +32,9 @@ export const sliderSlot = defineSlotRecipe({
       _hover: {
         bg: "token(colors.neutral.4)",
       },
-      _focusVisible: {
-        border: "1px solid",
+      _focus: {
         outline: "none",
-        borderColor: "token(colors.blue)",
+        border: "1px solid token(colors.focus)",
       },
     },
     prevButton: {
@@ -60,9 +59,7 @@ export const sliderSlot = defineSlotRecipe({
       flexShrink: 0,
       w: "100%",
       h: "100%",
-      "&[data-snap-point='true']": {
-        scrollSnapAlign: "start",
-      },
+      scrollSnapAlign: "start",
     },
   },
 });

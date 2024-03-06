@@ -24,7 +24,7 @@ export function PremiseSlider({ children }: PremiseCardProps) {
 export function PremisePrice({ children }: PremiseCardProps) {
   return (
     <Float placement="top-end" offset="6px" translate="none">
-      <Tag>{children}</Tag>
+      <Tag size="md">{children}</Tag>
     </Float>
   );
 }
@@ -35,7 +35,11 @@ export function PremiseContent({ children }: PremiseCardProps) {
 }
 
 export function PremiseTitleSize({ children }: PremiseCardProps) {
-  return <span className={css({ textStyle: "body.2" })}>{children}</span>;
+  return (
+    <span className={css({ textStyle: "body.2", marginInline: "10px" })}>
+      {children}
+    </span>
+  );
 }
 
 export function PremiseTitle({ children }: PremiseCardProps) {

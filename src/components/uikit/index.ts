@@ -8,3 +8,5 @@ export * from "./Card";
 export * from "./Dropdown";
 export * from "./Select";
 export * from "./Collapse";
+export * from "./PremiseCard";
+export * from "./Slider";
