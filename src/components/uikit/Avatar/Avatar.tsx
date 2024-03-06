@@ -13,7 +13,7 @@ type AvatarWrapperProps = AvatarVariantProps & {
   children: React.ReactNode;
 };
 
-export function AvatarWrapper({ size, children }: AvatarWrapperProps) {
+export function AvatarWrapper({ size = "sm", children }: AvatarWrapperProps) {
   return <span className={avatar({ size })}>{children}</span>;
 }
 
