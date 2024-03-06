@@ -72,14 +72,19 @@ function OrganizationRegisterFormInner({
               <option>Hello</option>
             </Select>
           </Flex>
-          <ProfileImagePicker {...register("logotype")} />
+          <ProfileImagePicker disabled={pending} {...register("logotype")} />
         </OrganizationRegisterFormGroupLayout>
       </OrganizationRegisterFormBoxLayout>
 
       <OrganizationRegisterFormBoxLayout>
         <h3>{t("credentials_heading")}</h3>
         <OrganizationRegisterFormGroupLayout>
-          <Input name="email" placeholder={t("email")} />
+          <Input
+            type="url"
+            placeholder={t("requisites_url")}
+            disabled={pending}
+            {...register("requisitesUrl")}
+          />
         </OrganizationRegisterFormGroupLayout>
         <span className="helper">{t("credentials_asterisk_helper")}</span>
       </OrganizationRegisterFormBoxLayout>
