@@ -17,9 +17,12 @@ export const headerSlot = defineSlotRecipe({
     },
     headerWrapper: {
       display: "grid",
-      justifyContent: "space-between",
       alignItems: "center",
       gridTemplateColumns: "auto 1fr auto",
+      gridTemplateAreas: "'logo nav user'",
+      "@media (max-width: 900px)": {
+        gridTemplateAreas: "'nav logo user'",
+      },
     },
   },
 });
