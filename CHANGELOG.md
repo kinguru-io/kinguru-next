@@ -1,3 +1,10 @@
+## [0.34.1](https://github.com/kinguru-io/kinguru-next/compare/v0.34.0...v0.34.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* overlapping migration for organization ([dc90bf7](https://github.com/kinguru-io/kinguru-next/commit/dc90bf77b42ad51eeeeb2e81d14d80fb374efb99))
+
 # [0.34.0](https://github.com/kinguru-io/kinguru-next/compare/v0.33.0...v0.34.0) (2024-03-06)
 
 
