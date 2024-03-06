@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Links } from "./HeaderLinks";
+import { useId } from "react";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { HeaderLinks } from "./HeaderLinks";
 import { UserSection } from "./UserSection";
 import { Link } from "@/navigation";
 import headerLogotype from "~/public/img/logotypes/header-logotype.svg";
-import { css } from "~/styled-system/css";
-import { Container } from "~/styled-system/jsx";
+import { css, cx } from "~/styled-system/css";
+import { Container, GridItem } from "~/styled-system/jsx";
 import { header } from "~/styled-system/recipes";
 
 export function Header() {
@@ -20,12 +22,19 @@ export function Header() {
     { name: t("price"), href: "/price" },
     { name: t("how_it_works"), href: "/#" },
   ];
+
   return (
     <header className={classes.header}>
       <Container className={classes.headerWrapper}>
         <Link
           href="/"
-          className={css({ display: "flex", w: "95px", h: "35px" })}
+          className={css({
+            gridArea: "logo",
+            justifySelf: "center",
+            display: "flex",
+            w: "95px",
+            h: "35px",
+          })}
         >
           <Image
             className={css({ flexShrink: 0 })}
@@ -35,11 +44,64 @@ export function Header() {
             height="35"
           />
         </Link>
-        <nav>
-          <Links navigation={navigation} />
-        </nav>
-        <UserSection />
+        <HeaderNav>
+          <HeaderLinks links={navigation} />
+        </HeaderNav>
+        <GridItem gridArea="user">
+          <UserSection />
+        </GridItem>
       </Container>
     </header>
+  );
+}
+
+function HeaderNav({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("navbar");
+  const navigationId = useId();
+
+  return (
+    <GridItem gridArea="nav">
+      <label
+        className={css({
+          cursor: "pointer",
+          "@media (min-width: 900px)": {
+            display: "none",
+          },
+        })}
+        htmlFor={navigationId}
+      >
+        <RxHamburgerMenu size={32} />
+        <span className={css({ srOnly: true })}>{t("toggle_nav")}</span>
+      </label>
+      <input
+        id={navigationId}
+        className={cx(
+          "peer",
+          css({
+            display: "block",
+            appearance: "none",
+            "@media (min-width: 900px)": {
+              display: "none",
+            },
+          }),
+        )}
+        type="checkbox"
+      />
+      <nav
+        className={css({
+          "@media (max-width: 900px)": {
+            position: "fixed",
+            top: "-10",
+            _peerChecked: {
+              inset: "0",
+              top: "85px",
+              bgColor: "neutral.5",
+            },
+          },
+        })}
+      >
+        {children}
+      </nav>
+    </GridItem>
   );
 }

@@ -1,3 +1,10 @@
+# [0.33.0](https://github.com/kinguru-io/kinguru-next/compare/v0.32.0...v0.33.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-103:** responsiveness for footer/header ([#496](https://github.com/kinguru-io/kinguru-next/issues/496)) ([3c8bc96](https://github.com/kinguru-io/kinguru-next/commit/3c8bc96f0ccc0889442fd1dda9e969fcd9960dc5))
+
 # [0.32.0](https://github.com/kinguru-io/kinguru-next/compare/v0.31.0...v0.32.0) (2024-03-06)
 
 

@@ -52,7 +52,8 @@
     "sign_up": "Регистрация организации",
     "add_organization": "Добавить кабинет организации",
     "sign_in_and_sign_up": "Вход и регистрация",
-    "eventify_logotype": "Логотип Eventify"
+    "eventify_logotype": "Логотип Eventify",
+    "toggle_nav": "Открыть/закрыть меню навигацию"
   },
   "hero": {
     "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",

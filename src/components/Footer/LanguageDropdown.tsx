@@ -1,13 +1,16 @@
 "use client";
+
 import { useTransition } from "react";
 import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { RiLoader2Fill } from "react-icons/ri";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { locales, useRouter, usePathname, lang } from "@/navigation";
+import { languageFormatter } from "@/lib/utils";
+import { locales, useRouter, usePathname, type Locale } from "@/navigation";
+import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
 type LanguageDropdownProps = {
-  locale: string;
+  locale: Locale;
 };
 
 export function LanguageDropdown({ locale }: LanguageDropdownProps) {
@@ -15,7 +18,7 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const currentLang = lang.of(locale);
+  const formatLanguage = languageFormatter(locale);
 
   const onToggleLanguageClick = (newLocale: string) => {
     startTransition(() => {
@@ -28,7 +31,9 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
       <DropdownInitiator>
         <Flex gap="8px" alignItems="center">
           {isPending ? <RiLoader2Fill /> : <BsGlobe />}
-          {currentLang}
+          <span className={css({ textTransform: "capitalize" })}>
+            {formatLanguage.of(locale)}
+          </span>
           <BsChevronDown />
         </Flex>
       </DropdownInitiator>
@@ -36,8 +41,12 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
         {locales
           .filter((code) => code !== locale)
           .map((code) => (
-            <span key={code} onClick={() => onToggleLanguageClick(code)}>
-              {lang.of(code)}
+            <span
+              key={code}
+              className={css({ textTransform: "capitalize" })}
+              onClick={() => onToggleLanguageClick(code)}
+            >
+              {formatLanguage.of(code)}
             </span>
           ))}
       </DropdownMenu>
