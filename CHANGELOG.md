@@ -1,3 +1,10 @@
+# [0.32.0](https://github.com/kinguru-io/kinguru-next/compare/v0.31.0...v0.32.0) (2024-03-06)
+
+
+### Features
+
+* **KINGU-97:** add form for organization registration ([#493](https://github.com/kinguru-io/kinguru-next/issues/493)) ([fdcc7bb](https://github.com/kinguru-io/kinguru-next/commit/fdcc7bb7aa42c1c525a1fe261bb596bf3c1b3e02))
+
 # [0.31.0](https://github.com/kinguru-io/kinguru-next/compare/v0.30.2...v0.31.0) (2024-03-06)
 
 
