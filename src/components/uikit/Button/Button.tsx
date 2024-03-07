@@ -36,10 +36,10 @@ export type ButtonProps = {
 
 export function Button({
   icon = null,
-  variant = "outline",
-  iconPosition = "left",
+  variant,
+  iconPosition,
   colorPalette,
-  size = "sm",
+  size,
   children,
   isLoading = false,
   disabled = false,

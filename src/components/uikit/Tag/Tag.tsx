@@ -60,12 +60,7 @@ type TagProps = RecipeVariantProps<typeof tagStyles> & {
   children: React.ReactNode;
 };
 
-export function Tag({
-  variant,
-  size = "sm",
-  css: cssProp,
-  children,
-}: TagProps) {
+export function Tag({ variant, size, css: cssProp, children }: TagProps) {
   const className = css(tagStyles.raw({ variant, size }), cssProp);
 
   return <span className={className}>{children}</span>;
