@@ -35,3 +35,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DefaultSlider: Story = {};
+
+export const SliderWithOuterButtons: Story = {
+  args: { children: null },
+  render: () => (
+    <Box w="640px" h="180px">
+      <Slider buttonPosition="outer" slidesCount={items.length}>
+        {items.map((item) => (
+          <SliderItem key={item.id} buttonPosition="outer">
+            <AspectRatio ratio={16 / 9} w="320px" h="180px">
+              <Image src={item.src} fill alt="" />
+            </AspectRatio>
+          </SliderItem>
+        ))}
+      </Slider>
+    </Box>
+  ),
+};
