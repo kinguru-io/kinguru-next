@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 "use server";
 
-import { VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
@@ -24,7 +23,14 @@ import { EventMapLayout } from "@/layout/block/EventMapLayout";
 import { EventPopularEventsLayout } from "@/layout/block/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
-import { AspectRatio, Box, Flex, Float, HStack } from "~/styled-system/jsx";
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  Float,
+  HStack,
+  VStack,
+} from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
 
 export default async function EventPage({
