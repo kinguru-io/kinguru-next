@@ -33,6 +33,9 @@ export default async function EventPage({
     include: {
       usersOnEvent: { include: { user: true } },
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
 
   if (!event) {
