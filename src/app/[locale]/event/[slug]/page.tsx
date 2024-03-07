@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-"use server";
-
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
