@@ -15,7 +15,6 @@ export const buttonRecipe = defineRecipe({
     overflow: "hidden",
     transition: "colors",
     outline: "none",
-    "&[data-icon-position=left]": { flexDirection: "row" },
     "&[data-icon-position=right]": { flexDirection: "row-reverse" },
     _disabled: {
       cursor: "not-allowed",
@@ -107,9 +106,5 @@ export const buttonRecipe = defineRecipe({
     variant: "solid",
     size: "sm",
   },
-  staticCss: [
-    { size: ["*"], responsive: true },
-    { variant: ["*"] },
-    { iconPosition: ["*"] },
-  ],
+  staticCss: [{ size: ["*"], responsive: true }, { variant: ["*"] }],
 });
