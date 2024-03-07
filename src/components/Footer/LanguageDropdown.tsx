@@ -6,7 +6,6 @@ import { RiLoader2Fill } from "react-icons/ri";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
 import { languageFormatter } from "@/lib/utils";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
-import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
 type LanguageDropdownProps = {
@@ -31,9 +30,7 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
       <DropdownInitiator>
         <Flex gap="8px" alignItems="center">
           {isPending ? <RiLoader2Fill /> : <BsGlobe />}
-          <span className={css({ textTransform: "capitalize" })}>
-            {formatLanguage.of(locale)}
-          </span>
+          <span>{formatLanguage.of(locale)}</span>
           <BsChevronDown />
         </Flex>
       </DropdownInitiator>
@@ -41,11 +38,7 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
         {locales
           .filter((code) => code !== locale)
           .map((code) => (
-            <span
-              key={code}
-              className={css({ textTransform: "capitalize" })}
-              onClick={() => onToggleLanguageClick(code)}
-            >
+            <span key={code} onClick={() => onToggleLanguageClick(code)}>
               {formatLanguage.of(code)}
             </span>
           ))}
