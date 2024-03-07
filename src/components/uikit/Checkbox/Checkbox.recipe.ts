@@ -6,6 +6,7 @@ export const checkboxSlot = defineSlotRecipe({
   slots: ["root", "checkbox", "label"],
   base: {
     root: {
+      cursor: "pointer",
       display: "inline-flex",
       alignItems: "center",
       gap: "10px",
@@ -36,6 +37,12 @@ export const checkboxSlot = defineSlotRecipe({
           display: "block",
         },
       },
+      _peerCheckedAndDisabled: {
+        backgroundColor: "primary.disabled",
+      },
+      _peerDisabled: {
+        borderColor: "neutral.3",
+      },
       // checkmark icon [✓]
       _after: {
         content: "''",
@@ -49,9 +56,16 @@ export const checkboxSlot = defineSlotRecipe({
         borderBlockStart: "none",
         rotate: "45deg",
         transformOrigin: "center",
+        _peerDisabled: {
+          borderColor: "neutral.2",
+        },
       },
     },
-    label: {},
+    label: {
+      _peerDisabled: {
+        color: "neutral.3",
+      },
+    },
   },
   variants: {
     size: {

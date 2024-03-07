@@ -33,3 +33,10 @@ export const Invalid: Story = {
     "aria-invalid": true,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    ...Basic.args,
+    disabled: true,
+  },
+};
