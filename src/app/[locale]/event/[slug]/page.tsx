@@ -1,35 +1,17 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { FaRegHeart } from "react-icons/fa";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
+import { EventCardView } from "@/components/event/EventCardView";
 import { EventDescription } from "@/components/event/EventDescription";
 import { EventMainInfo } from "@/components/event/EventMainInfo";
 import { EventSpeakersSlider } from "@/components/event/EventSpeakersSlider";
-import {
-  AvatarGroup,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeading,
-  CardInner,
-  Tag,
-} from "@/components/uikit";
+import { AvatarGroup, Button, Tag } from "@/components/uikit";
 import { EventMainInfoLayout } from "@/layout/block/event/EventMainInfoLayout";
 import { EventMapLayout } from "@/layout/block/event/EventMapLayout";
 import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
-import {
-  AspectRatio,
-  Box,
-  Flex,
-  Float,
-  HStack,
-  VStack,
-} from "~/styled-system/jsx";
-import { visuallyHidden } from "~/styled-system/patterns";
+import { AspectRatio, Box, Flex, HStack, VStack } from "~/styled-system/jsx";
 
 export default async function EventPage({
   params: { slug },
@@ -103,7 +85,7 @@ export default async function EventPage({
                 }))}
               />
             </Flex>
-            <Button size="lg" variant="solid">
+            <Button size="lg" variant="solid" colorPalette="primary">
               Присоединиться
             </Button>
           </Flex>
@@ -133,64 +115,15 @@ export default async function EventPage({
         <VStack gap="50px">
           <h2>Популярные события в этой неделе</h2>
           <HStack gap="40px">
-            {popularEvents.map(({ topic, poster, description }) => (
+            {popularEvents.map((popularEvent) => (
               <Box w="310px" key={topic}>
-                <Card variant="event" data-interactive>
-                  <a
-                    className={css({
-                      _before: {
-                        content: "''",
-                        position: "absolute",
-                        inset: 0,
-                      },
-                    })}
-                  >
-                    <span className={visuallyHidden()}>More</span>
-                  </a>
-                  <AspectRatio ratio={16 / 9}>
-                    <Image
-                      src={poster || ""}
-                      width={640}
-                      height={480}
-                      alt="template image"
-                    />
-                    <span className={css({ bgGradient: "cardImage" })} />
-                  </AspectRatio>
-                  <CardInner>
-                    <Float placement="top-end" offset="15px" translate="none">
-                      <Tag variant="tertiary">{event.price}</Tag>
-                    </Float>
-
-                    <CardHeading>
-                      <h4>{topic}</h4>
-                    </CardHeading>
-                    <CardBody>
-                      <p>{description}</p>
-                    </CardBody>
-
-                    <CardFooter>
-                      <Flex alignItems="center" justifyContent="space-between">
-                        <VStack gap="4px" alignItems="baseline">
-                          <span className={css({ textStyle: "body.4" })}>
-                            Уже присоединились
-                          </span>
-                          <AvatarGroup
-                            showCount={3}
-                            avatars={event.usersOnEvent.map(
-                              ({ user: { image, name } }: any) => ({
-                                name: name || "username",
-                                image: image || "",
-                              }),
-                            )}
-                          />
-                        </VStack>
-                        <Button size="md">
-                          <FaRegHeart />
-                        </Button>
-                      </Flex>
-                    </CardFooter>
-                  </CardInner>
-                </Card>
+                <EventCardView
+                  price={popularEvent.price || "free"}
+                  poster={popularEvent.poster || ""}
+                  topic={popularEvent.topic}
+                  description={popularEvent.description}
+                  usersOnEvent={popularEvent.usersOnEvent}
+                />
               </Box>
             ))}
           </HStack>
