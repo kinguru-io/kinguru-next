@@ -91,7 +91,7 @@ function HeaderNav({ children }: { children: React.ReactNode }) {
         className={css({
           "@media (max-width: 900px)": {
             position: "fixed",
-            top: "-10",
+            top: "-100%",
             _peerChecked: {
               inset: "0",
               top: "85px",
