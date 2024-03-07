@@ -20,11 +20,11 @@ export const authOptionsWrapper = (request: NextRequest, context: Context) => {
     request,
     context,
     {
+      ...adapterOptions,
       providers: providers(adapter),
       callbacks: callbacks(request, params),
       jwt: jwt(request, params),
       events,
-      ...adapterOptions,
       pages: {
         signIn: `/auth/signin`,
       },
