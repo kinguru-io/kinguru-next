@@ -8,8 +8,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { EventDescription } from "@/components/event/EventDescription";
 import { EventMainInfo } from "@/components/event/EventMainInfo";
+import { EventSpeakersSlider } from "@/components/event/EventSpeakersSlider";
 import {
-  Avatar,
   AvatarGroup,
   Button,
   Card,
@@ -112,32 +112,7 @@ export default async function EventPage({
           </Flex>
           <VStack gap="20px" alignItems="baseline">
             <h3>Спикеры мероприятия:</h3>
-            {speakersOnEvent.map(
-              ({
-                speaker: {
-                  user: { image, name, position },
-                },
-              }: any) => (
-                <Box w="270px" color="neutral.1" key={name}>
-                  <Card variant="speaker">
-                    <CardBody>
-                      <Flex gap="5px" p="7px 10px">
-                        <Avatar
-                          image={image || ""}
-                          name={name || "speakerName"}
-                        />
-                        <Flex direction="column" gap="3px">
-                          <h4>{name}</h4>
-                          <div className={css({ textStyle: "body.3" })}>
-                            {position}
-                          </div>
-                        </Flex>
-                      </Flex>
-                    </CardBody>
-                  </Card>
-                </Box>
-              ),
-            )}
+            <EventSpeakersSlider speakers={speakersOnEvent} />
           </VStack>
           <EventDescription description={description} />
           <HStack gap="15px" color="black">
