@@ -10,6 +10,7 @@ import { EventMainInfoLayout } from "@/layout/block/event/EventMainInfoLayout";
 import { EventMapLayout } from "@/layout/block/event/EventMapLayout";
 import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
+import defaultEventImage from "~/public/img/defaultImages/event.png";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, Flex, HStack, VStack } from "~/styled-system/jsx";
 
@@ -66,7 +67,7 @@ export default async function EventPage({
             <AspectRatio ratio={16 / 9} w="auto" h="auto">
               <Image
                 className={css({ borderRadius: "8px" })}
-                src={poster || ""}
+                src={poster || defaultEventImage.src}
                 alt={topic}
                 width={755}
                 height={435}
@@ -106,7 +107,7 @@ export default async function EventPage({
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
           <SingleMarkerMap
             mapboxId={place.locationMapboxId}
-            image={poster || ""}
+            image={poster || defaultEventImage.src}
             name={topic}
           />
         </AspectRatio>
@@ -119,7 +120,7 @@ export default async function EventPage({
               <Box w="310px" key={topic}>
                 <EventCardView
                   price={popularEvent.price || "free"}
-                  poster={popularEvent.poster || ""}
+                  poster={popularEvent.poster || defaultEventImage.src}
                   topic={popularEvent.topic}
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
