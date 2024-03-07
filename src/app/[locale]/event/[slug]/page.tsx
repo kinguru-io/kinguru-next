@@ -16,9 +16,9 @@ import {
   CardInner,
   Tag,
 } from "@/components/uikit";
-import { EventMainInfoLayout } from "@/layout/block/EventMainInfoLayout";
-import { EventMapLayout } from "@/layout/block/EventMapLayout";
-import { EventPopularEventsLayout } from "@/layout/block/EventPopularEventsLayout";
+import { EventMainInfoLayout } from "@/layout/block/event/EventMainInfoLayout";
+import { EventMapLayout } from "@/layout/block/event/EventMapLayout";
+import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
 import {
@@ -70,61 +70,54 @@ export default async function EventPage({
   return (
     <>
       <EventMainInfoLayout bgImageSrc={poster || ""}>
-        <Flex direction="column" gap="20px" maxW="1180px">
-          <h2
-            className={css({
-              paddingBottom: "20px",
-              textAlign: "center",
-              w: "100%",
-            })}
-          >
-            {topic}
-          </h2>
-          <Flex justify="space-between" w="100%">
-            <Box w="100%" maxW="755px">
-              <AspectRatio ratio={16 / 9} w="auto" h="auto">
-                <Image
-                  className={css({ borderRadius: "8px" })}
-                  src={poster || ""}
-                  alt={topic}
-                  width={755}
-                  height={435}
-                />
-              </AspectRatio>
-            </Box>
-            <Flex direction="column" justify="space-between">
-              <EventMainInfo
-                starts={starts}
-                mapboxId={place.locationMapboxId}
+        <h2
+          className={css({
+            paddingBottom: "20px",
+            textAlign: "center",
+            w: "100%",
+          })}
+        >
+          {topic}
+        </h2>
+        <Flex justify="space-between" w="100%">
+          <Box w="100%" maxW="755px">
+            <AspectRatio ratio={16 / 9} w="auto" h="auto">
+              <Image
+                className={css({ borderRadius: "8px" })}
+                src={poster || ""}
+                alt={topic}
+                width={755}
+                height={435}
               />
-              <Flex direction="column" gap="20px" align="baseline">
-                <h3>Гости мероприятия:</h3>
-                <AvatarGroup
-                  showCount={5}
-                  avatars={usersOnEvent.map(
-                    ({ user: { image, name } }: any) => ({
-                      name: name || "username",
-                      image: image || "",
-                    }),
-                  )}
-                />
-              </Flex>
-              <Button size="lg" variant="solid">
-                Присоединиться
-              </Button>
+            </AspectRatio>
+          </Box>
+          <Flex direction="column" justify="space-between">
+            <EventMainInfo starts={starts} mapboxId={place.locationMapboxId} />
+            <Flex direction="column" gap="20px" align="baseline">
+              <h3>Гости мероприятия:</h3>
+              <AvatarGroup
+                showCount={5}
+                avatars={usersOnEvent.map(({ user: { image, name } }: any) => ({
+                  name: name || "username",
+                  image: image || "",
+                }))}
+              />
             </Flex>
+            <Button size="lg" variant="solid">
+              Присоединиться
+            </Button>
           </Flex>
-          <VStack gap="20px" alignItems="baseline">
-            <h3>Спикеры мероприятия:</h3>
-            <EventSpeakersSlider speakers={speakersOnEvent} />
-          </VStack>
-          <EventDescription description={description} />
-          <HStack gap="15px" color="black">
-            {tags.map((tag: any) => (
-              <Tag variant="secondary" key={tag}>{`#${tag}`}</Tag>
-            ))}
-          </HStack>
         </Flex>
+        <VStack gap="20px" alignItems="baseline">
+          <h3>Спикеры мероприятия:</h3>
+          <EventSpeakersSlider speakers={speakersOnEvent} />
+        </VStack>
+        <EventDescription description={description} />
+        <HStack gap="15px" color="black">
+          {tags.map((tag: any) => (
+            <Tag variant="secondary" key={tag}>{`#${tag}`}</Tag>
+          ))}
+        </HStack>
       </EventMainInfoLayout>
       <EventMapLayout>
         <h2 className={css({ textAlign: "center" })}>Карта</h2>
@@ -132,7 +125,7 @@ export default async function EventPage({
           <SingleMarkerMap
             mapboxId={place.locationMapboxId}
             image={poster || ""}
-            name={topic || ""}
+            name={topic}
           />
         </AspectRatio>
       </EventMapLayout>

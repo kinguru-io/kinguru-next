@@ -1,4 +1,4 @@
-import { Box, Container } from "~/styled-system/jsx";
+import { Box, Container, Flex } from "~/styled-system/jsx";
 
 export function EventMainInfoLayout({
   bgImageSrc,
@@ -25,7 +25,11 @@ export function EventMainInfoLayout({
       }}
     >
       <Container>
-        <section>{children}</section>
+        <section>
+          <Flex direction="column" gap="20px">
+            {children}
+          </Flex>
+        </section>
       </Container>
     </Box>
   );
