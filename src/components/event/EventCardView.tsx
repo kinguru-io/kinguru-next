@@ -11,6 +11,7 @@ import {
   CardInner,
   Tag,
 } from "../uikit";
+import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Flex, Float, VStack } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
@@ -21,6 +22,7 @@ type EventCardViewProps = {
   description: string;
   price: number | string;
   usersOnEvent: Prisma.UsersOnEventMaxAggregateOutputType[];
+  slug: string;
 };
 
 export function EventCardView({
@@ -29,10 +31,12 @@ export function EventCardView({
   description,
   price,
   usersOnEvent,
+  slug,
 }: EventCardViewProps) {
   return (
     <Card variant="event" data-interactive>
-      <a
+      <Link
+        href={`/events/${slug}`}
         className={css({
           _before: {
             content: "''",
@@ -42,7 +46,7 @@ export function EventCardView({
         })}
       >
         <span className={visuallyHidden()}>More</span>
-      </a>
+      </Link>
       <AspectRatio ratio={16 / 9}>
         <Image
           src={poster || ""}

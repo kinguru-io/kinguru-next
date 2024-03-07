@@ -127,6 +127,7 @@ export default async function EventPage({
                   topic={popularEvent.topic}
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
+                  slug={popularEvent.slug}
                 />
               </Box>
             ))}
