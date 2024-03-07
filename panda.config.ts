@@ -4,6 +4,7 @@ import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { headerSlot } from "./src/components/Header/Header.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
+import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
@@ -43,6 +44,7 @@ export default defineConfig({
         header: headerSlot,
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
+        checkbox: checkboxSlot,
       },
       tokens: {
         gradients: {
