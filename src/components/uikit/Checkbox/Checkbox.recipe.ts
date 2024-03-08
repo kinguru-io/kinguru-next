@@ -13,6 +13,9 @@ export const checkboxSlot = defineSlotRecipe({
       "& input[type=checkbox]": {
         srOnly: true,
       },
+      "& input[type=checkbox]:disabled ~ *": {
+        cursor: "not-allowed",
+      },
     },
     checkbox: {
       display: "inline-flex",
