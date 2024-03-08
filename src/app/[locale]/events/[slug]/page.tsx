@@ -102,7 +102,7 @@ export default async function EventPage({
           <EventSpeakersSlider speakers={speakersOnEvent} />
         </VStack>
         <VStack gap="20px" alignItems="baseline">
-          <h3>Описание мероприятия</h3>
+          <h3>{t("event_description")}</h3>
         </VStack>
         <EventDescription description={description} />
         <HStack gap="15px" color="black">
