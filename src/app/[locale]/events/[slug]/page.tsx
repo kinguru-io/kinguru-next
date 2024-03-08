@@ -83,7 +83,7 @@ export default async function EventPage({
               <h3>Гости мероприятия:</h3>
               <AvatarGroup
                 showCount={5}
-                avatars={usersOnEvent.map(({ user: { image, name } }: any) => ({
+                avatars={usersOnEvent.map(({ user: { image, name } }) => ({
                   name: name || "username",
                   image: image || "",
                 }))}
@@ -100,7 +100,7 @@ export default async function EventPage({
         </VStack>
         <EventDescription description={description} />
         <HStack gap="15px" color="black">
-          {tags.map((tag: any) => (
+          {tags.map((tag) => (
             <Tag variant="secondary" key={tag}>{`#${tag}`}</Tag>
           ))}
         </HStack>
