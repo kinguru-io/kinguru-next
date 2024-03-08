@@ -1,10 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { MdExpandMore } from "react-icons/md";
+import { GrNext } from "react-icons/gr";
 import { Button, TextCollapse } from "../uikit";
 import { css } from "~/styled-system/css";
-import { Flex, VStack } from "~/styled-system/jsx";
+import { Box, VStack } from "~/styled-system/jsx";
 
 type EventDescriptionProps = {
   description: string;
@@ -12,28 +13,43 @@ type EventDescriptionProps = {
 
 export function EventDescription({ description }: EventDescriptionProps) {
   const [isShown, setIsShown] = useState(false);
+  const t = useTranslations("event.future_event_page");
+
+  const handleExpandClick = () => {
+    setIsShown((prevState) => !prevState);
+  };
+
   return (
-    <VStack gap="20px" alignItems="baseline">
-      <h3>Описание мероприятия</h3>
-      <Flex maxW="660px" gap="25px" direction="column" align="baseline">
-        <TextCollapse
-          isShown={isShown}
-          textContent={description}
-          visibleCharsCount={500}
-        />
+    <VStack gap="30px" alignItems="flex-start" maxW="660px">
+      <TextCollapse
+        isShown={isShown}
+        textContent={description}
+        visibleCharsCount={500}
+      />
+      <Box color="neutral.1">
         <Button
           variant="outline"
-          onClick={() => setIsShown(!isShown)}
+          icon={<ExpandStateIcon isShown={isShown} />}
           iconPosition="right"
-          icon={<MdExpandMore fill="neutral.1" />}
+          onClick={handleExpandClick}
         >
-          {isShown ? (
-            <span className={css({ color: "neutral.1" })}>Меньше</span>
-          ) : (
-            <span className={css({ color: "neutral.1" })}>Подробнее</span>
-          )}
+          {isShown ? t("show_less") : t("show_more")}
         </Button>
-      </Flex>
+      </Box>
     </VStack>
+  );
+}
+
+function ExpandStateIcon({ isShown }: { isShown: boolean }) {
+  return (
+    <GrNext
+      className={css({
+        rotate: "90deg",
+        "&[data-expanded=true]": {
+          rotate: "-90deg",
+        },
+      })}
+      data-expanded={isShown}
+    />
   );
 }
