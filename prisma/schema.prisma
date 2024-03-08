@@ -50,6 +50,7 @@ model User {
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
   organizations          Organization[]
+  userLikedEvents        UserLikedEvents[]
 }
 
 enum UserRole {
@@ -62,6 +63,14 @@ enum UserGender {
   male
   female
   notSpecified
+}
+
+model UserLikedEvents {
+  id      String   @id @unique @default(cuid())
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+  event   Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String
 }
 
 model Account {
@@ -193,6 +202,7 @@ model Event {
   ticketIntents          TicketIntent[]
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
+  userLikedEvents        UserLikedEvents[]
 }
 
 enum EventStatus {
