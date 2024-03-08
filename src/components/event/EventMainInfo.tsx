@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import calendarIcon from "~/public/img/calendar.svg";
@@ -20,6 +20,7 @@ export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
   const [placeAddress, setPlaceAddress] = useState("");
   const { retrieve } = useSearchBoxCore({ accessToken });
   const t = useTranslations("event.future_event_page");
+  const locale = useLocale();
 
   useEffect(() => {
     retrieve({ mapbox_id: mapboxId }, (data) => {
@@ -31,7 +32,7 @@ export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
   const mainInfo = [
     {
       iconSrc: calendarIcon.src,
-      text: starts.toLocaleDateString("ru-RU", {
+      text: starts.toLocaleDateString(locale, {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -40,7 +41,7 @@ export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
     },
     {
       iconSrc: timeIcon.src,
-      text: starts.toLocaleTimeString("ru-RU", {
+      text: starts.toLocaleTimeString(locale, {
         hour: "2-digit",
         minute: "2-digit",
       }),
