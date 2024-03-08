@@ -26,7 +26,9 @@ export default async function EventPage({
     where: { slug },
     include: {
       usersOnEvent: { include: { user: true } },
-      speakersOnEvent: { include: { speaker: { include: { user: true } } } },
+      speakersOnEvent: {
+        include: { speaker: { include: { user: true, comments: true } } },
+      },
       place: true,
     },
   });
