@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import calendarIcon from "~/public/img/calendar.svg";
@@ -18,6 +19,7 @@ const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
   const [placeAddress, setPlaceAddress] = useState("");
   const { retrieve } = useSearchBoxCore({ accessToken });
+  const t = useTranslations("event.future_event_page");
 
   useEffect(() => {
     retrieve({ mapbox_id: mapboxId }, (data) => {
@@ -53,7 +55,7 @@ export function EventMainInfo({ starts, mapboxId }: EventMainInfoProps) {
 
   return (
     <Flex direction="column" gap="20px" maxW="360px">
-      <h3>Основная информация:</h3>
+      <h3>{t("main_info")}</h3>
       <Flex gap="5px" direction="column">
         {mainInfo.map(({ iconSrc, text, altText }) => (
           <Flex gap="15px" align="center" key={altText}>

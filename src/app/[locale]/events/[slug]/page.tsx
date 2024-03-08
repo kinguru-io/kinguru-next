@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { EventCardView } from "@/components/event/EventCardView";
 import { EventDescription } from "@/components/event/EventDescription";
@@ -19,6 +20,8 @@ export default async function EventPage({
 }: {
   params: { slug: string };
 }) {
+  const t = await getTranslations("event.future_event_page");
+
   const event = await prisma.event.findFirst({
     where: { slug },
     include: {
@@ -80,7 +83,7 @@ export default async function EventPage({
           <Flex direction="column" justify="space-between" align="baseline">
             <EventMainInfo starts={starts} mapboxId={place.locationMapboxId} />
             <Flex direction="column" gap="20px" align="baseline">
-              <h3>Гости мероприятия:</h3>
+              <h3>{t("event_guests")}</h3>
               <AvatarGroup
                 showCount={5}
                 avatars={usersOnEvent.map(({ user: { image, name } }) => ({
@@ -90,12 +93,12 @@ export default async function EventPage({
               />
             </Flex>
             <Button size="lg" variant="solid" colorPalette="primary">
-              Присоединиться
+              {t("join")}
             </Button>
           </Flex>
         </Flex>
         <VStack gap="20px" alignItems="baseline">
-          <h3>Спикеры мероприятия:</h3>
+          <h3>{t("event_speakers")}</h3>
           <EventSpeakersSlider speakers={speakersOnEvent} />
         </VStack>
         <EventDescription description={description} />
@@ -106,7 +109,7 @@ export default async function EventPage({
         </HStack>
       </EventMainInfoLayout>
       <EventMapLayout>
-        <h2 className={css({ textAlign: "center" })}>Карта</h2>
+        <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
           <SingleMarkerMap
             mapboxId={place.locationMapboxId}
@@ -117,7 +120,7 @@ export default async function EventPage({
       </EventMapLayout>
       <EventPopularEventsLayout>
         <VStack gap="50px">
-          <h2>Популярные события в этой неделе</h2>
+          <h2>{t("popular_event_this_week")}</h2>
           <HStack gap="40px">
             {popularEvents.map((popularEvent) => (
               <Box w="310px" key={topic}>

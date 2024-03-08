@@ -305,5 +305,21 @@
     "from": "от {price}",
     "see_all": "Смотреть все",
     "hide": "Скрыть"
+  },
+  "event": {
+    "future_event_page": {
+      "event_guests": "Гости мероприятия:",
+      "join": "Присоединиться",
+      "event_speakers": "Спикеры мероприятия:",
+      "map": "Карта",
+      "popular_event_this_week": "Популярные события в этой неделе",
+      "event_description": "Описание мероприятия:",
+      "show_more": "Подробнее",
+      "show_less": "Свернуть",
+      "main_info": "Основная информация"
+    },
+    "event_card": {
+      "already_join": "Уже присоединилсь"
+    }
   }
 }

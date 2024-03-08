@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { FaRegHeart } from "react-icons/fa";
 import {
   AvatarGroup,
@@ -33,6 +34,7 @@ export function EventCardView({
   usersOnEvent,
   slug,
 }: EventCardViewProps) {
+  const t = useTranslations("event.event_card");
   return (
     <Card variant="event" data-interactive>
       <Link
@@ -72,7 +74,7 @@ export function EventCardView({
           <Flex alignItems="center" justifyContent="space-between">
             <VStack gap="4px" alignItems="baseline">
               <span className={css({ textStyle: "body.4" })}>
-                Уже присоединились
+                {t("already_join")}
               </span>
               <AvatarGroup
                 showCount={3}
