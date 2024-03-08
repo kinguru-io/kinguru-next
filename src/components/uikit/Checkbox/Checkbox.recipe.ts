@@ -55,9 +55,9 @@ export const checkboxSlot = defineSlotRecipe({
         borderInlineStart: "none",
         borderBlockStart: "none",
         rotate: "45deg",
-        transformOrigin: "center",
+        transformOrigin: "0.25em 0.25em",
         _peerDisabled: {
-          borderColor: "neutral.2",
+          borderColor: "neutral.3",
         },
       },
     },

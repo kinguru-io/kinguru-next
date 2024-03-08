@@ -2,6 +2,7 @@
 import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
+import { VStack } from "~/styled-system/jsx";
 
 const meta = {
   title: "UIKit/Checkbox",
@@ -20,13 +21,6 @@ export const Basic: Story = {
   },
 };
 
-export const Controlled: Story = {
-  args: {
-    ...Basic.args,
-    checked: false,
-  },
-};
-
 export const Invalid: Story = {
   args: {
     ...Basic.args,
@@ -34,9 +28,13 @@ export const Invalid: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    ...Basic.args,
-    disabled: true,
+export const Disabled = {
+  render: () => {
+    return (
+      <VStack alignItems="flex-start">
+        <Checkbox label={faker.hacker.adjective()} checked disabled />
+        <Checkbox label={faker.hacker.adjective()} disabled />
+      </VStack>
+    );
   },
 };
