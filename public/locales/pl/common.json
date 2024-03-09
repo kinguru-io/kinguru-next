@@ -252,7 +252,8 @@
       "event_description": "Description of the event:",
       "show_more": "More",
       "show_less": "Less",
-      "main_info": "General information:"
+      "main_info": "General information:",
+      "free": "Free"
     },
     "event_card": {
       "already_join": "Have already join"

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { EventCardView } from "@/components/event/EventCardView";
 import { EventDescription } from "@/components/event/EventDescription";
@@ -13,7 +15,14 @@ import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEvent
 import prisma from "@/server/prisma";
 import defaultEventImage from "~/public/img/defaultImages/event.png";
 import { css } from "~/styled-system/css";
-import { AspectRatio, Box, Flex, HStack, VStack } from "~/styled-system/jsx";
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  Float,
+  HStack,
+  VStack,
+} from "~/styled-system/jsx";
 
 export default async function EventPage({
   params: { slug },
@@ -56,6 +65,7 @@ export default async function EventPage({
     description,
     tags,
     place,
+    price,
   } = event;
 
   return (
@@ -71,7 +81,27 @@ export default async function EventPage({
           {topic}
         </h2>
         <Flex justify="space-between" w="100%">
-          <Box w="100%" maxW="755px">
+          <Box w="100%" maxW="755px" position="relative">
+            <Float
+              placement="top-end"
+              offset="20px"
+              translate="none"
+              zIndex="1"
+            >
+              <Tag size="lg" variant="primary">
+                {price === 0 ? t("free") : price}
+              </Tag>
+            </Float>
+            <Float
+              placement="bottom-end"
+              offset="20px"
+              translate="none"
+              zIndex="1"
+            >
+              <Button size="lg">
+                {true ? <FaRegHeart /> : <FaHeart fill="red" />}
+              </Button>
+            </Float>
             <AspectRatio ratio={16 / 9} w="auto" h="auto">
               <Image
                 className={css({ borderRadius: "8px" })}

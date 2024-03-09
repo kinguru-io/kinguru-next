@@ -34,7 +34,7 @@ export function EventCardView({
   usersOnEvent,
   slug,
 }: EventCardViewProps) {
-  const t = useTranslations("event.event_card");
+  const t = useTranslations("event");
   return (
     <Card variant="event" data-interactive>
       <Link
@@ -60,7 +60,9 @@ export function EventCardView({
       </AspectRatio>
       <CardInner>
         <Float placement="top-end" offset="15px" translate="none">
-          <Tag variant="tertiary">{price}</Tag>
+          <Tag variant="tertiary">
+            {price === 0 ? t("future_event_page.free") : price}
+          </Tag>
         </Float>
 
         <CardHeading>
@@ -74,7 +76,7 @@ export function EventCardView({
           <Flex alignItems="center" justifyContent="space-between">
             <VStack gap="4px" alignItems="baseline">
               <span className={css({ textStyle: "body.4" })}>
-                {t("already_join")}
+                {t("event_card.already_join")}
               </span>
               <AvatarGroup
                 showCount={3}

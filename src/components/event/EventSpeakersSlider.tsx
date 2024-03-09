@@ -38,7 +38,7 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
                   <Card variant="speaker">
                     <CardBody>
                       <Float
-                        zIndex={1}
+                        zIndex="1"
                         placement="top-start"
                         offsetY="6px"
                         offsetX="34px"
