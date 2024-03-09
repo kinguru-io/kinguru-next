@@ -1,10 +1,9 @@
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { FaRegHeart } from "react-icons/fa";
+import { EventLikeButton } from "./EventLikeButton";
 import {
   AvatarGroup,
-  Button,
   Card,
   CardBody,
   CardFooter,
@@ -24,7 +23,10 @@ type EventCardViewProps = {
   price: number | string;
   usersOnEvent: Prisma.UsersOnEventMaxAggregateOutputType[];
   slug: string;
+  id: string;
 };
+
+const url = process.env.NEXTAUTH_URL;
 
 export function EventCardView({
   poster,
@@ -33,6 +35,7 @@ export function EventCardView({
   price,
   usersOnEvent,
   slug,
+  id,
 }: EventCardViewProps) {
   const t = useTranslations("event");
   return (
@@ -86,9 +89,7 @@ export function EventCardView({
                 }))}
               />
             </VStack>
-            <Button size="md">
-              <FaRegHeart />
-            </Button>
+            <EventLikeButton size="md" id={id} url={url || ""} />
           </Flex>
         </CardFooter>
       </CardInner>

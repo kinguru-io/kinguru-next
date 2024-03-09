@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa6";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { EventCardView } from "@/components/event/EventCardView";
 import { EventDescription } from "@/components/event/EventDescription";
+import { EventLikeButton } from "@/components/event/EventLikeButton";
 import { EventMainInfo } from "@/components/event/EventMainInfo";
 import { EventSpeakersSlider } from "@/components/event/EventSpeakersSlider";
 import { AvatarGroup, Button, Tag } from "@/components/uikit";
@@ -23,6 +22,8 @@ import {
   HStack,
   VStack,
 } from "~/styled-system/jsx";
+
+const url = process.env.NEXTAUTH_URL;
 
 export default async function EventPage({
   params: { slug },
@@ -66,6 +67,7 @@ export default async function EventPage({
     tags,
     place,
     price,
+    id,
   } = event;
 
   return (
@@ -98,9 +100,7 @@ export default async function EventPage({
               translate="none"
               zIndex="1"
             >
-              <Button size="lg">
-                {true ? <FaRegHeart /> : <FaHeart fill="red" />}
-              </Button>
+              <EventLikeButton size="lg" url={url || ""} id={id} />
             </Float>
             <AspectRatio ratio={16 / 9} w="auto" h="auto">
               <Image
@@ -137,7 +137,7 @@ export default async function EventPage({
           <h3>{t("event_description")}</h3>
         </VStack>
         <EventDescription description={description} />
-        <HStack gap="15px" color="black">
+        <HStack gap="15px">
           {tags.map((tag) => (
             <Tag variant="secondary" key={tag}>{`#${tag}`}</Tag>
           ))}
@@ -160,7 +160,8 @@ export default async function EventPage({
             {popularEvents.map((popularEvent) => (
               <Box w="310px" key={topic}>
                 <EventCardView
-                  price={popularEvent.price || "free"}
+                  id={popularEvent.id}
+                  price={popularEvent.price || 0}
                   poster={popularEvent.poster || defaultEventImage.src}
                   topic={popularEvent.topic}
                   description={popularEvent.description}
