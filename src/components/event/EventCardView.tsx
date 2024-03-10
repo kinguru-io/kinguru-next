@@ -26,8 +26,6 @@ type EventCardViewProps = {
   id: string;
 };
 
-const url = process.env.NEXTAUTH_URL;
-
 export function EventCardView({
   poster,
   topic,
@@ -89,7 +87,7 @@ export function EventCardView({
                 }))}
               />
             </VStack>
-            <EventLikeButton size="md" id={id} url={url || ""} />
+            <EventLikeButton size="md" id={id} />
           </Flex>
         </CardFooter>
       </CardInner>

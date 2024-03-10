@@ -23,8 +23,6 @@ import {
   VStack,
 } from "~/styled-system/jsx";
 
-const url = process.env.NEXTAUTH_URL;
-
 export default async function EventPage({
   params: { slug },
 }: {
@@ -100,7 +98,7 @@ export default async function EventPage({
               translate="none"
               zIndex="1"
             >
-              <EventLikeButton size="lg" url={url || ""} id={id} />
+              <EventLikeButton size="lg" id={id} />
             </Float>
             <AspectRatio ratio={16 / 9} w="auto" h="auto">
               <Image

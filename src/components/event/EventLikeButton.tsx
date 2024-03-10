@@ -2,33 +2,28 @@
 import { useEffect, useState, useTransition } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../uikit";
+import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
+import { toggleLikeEvent } from "@/lib/actions/likedEvent/toggleLike";
 
 type EventImageProps = {
   id: string;
-  url: string;
   size: "sm" | "lg" | "md" | "xl";
 };
 
-export function EventLikeButton({ id, url, size }: EventImageProps) {
+export function EventLikeButton({ id, size }: EventImageProps) {
   const [isLike, toggleLike] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const getLikeInfo = async () => {
-    const res = await fetch(`${url}/api/likedEvents`);
-    if (!res) throw new Error();
-    const arr = await res.json();
-
-    toggleLike(arr.some(({ eventId }: { eventId: string }) => eventId === id));
+    const likedEvents = await getLikedEvent();
+    toggleLike(
+      likedEvents.some(({ eventId }: { eventId: string }) => eventId === id),
+    );
   };
 
   const setOrRemoveLike = () => {
-    startTransition(() => {
-      void fetch(`${url}/api/likedEvents`, {
-        method: "POST",
-        body: JSON.stringify({
-          eventId: id,
-        }),
-      });
+    startTransition(async () => {
+      await toggleLikeEvent(id);
     });
   };
 
