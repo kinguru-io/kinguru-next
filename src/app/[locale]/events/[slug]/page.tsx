@@ -8,11 +8,12 @@ import { EventLikeButton } from "@/components/event/EventLikeButton";
 import { EventMainInfo } from "@/components/event/EventMainInfo";
 import { EventSpeakersSlider } from "@/components/event/EventSpeakersSlider";
 import { AvatarGroup, Button, Tag } from "@/components/uikit";
+import { DefaultImage } from "@/components/uikit/DefaultImage/DefaultImage";
 import { EventMainInfoLayout } from "@/layout/block/event/EventMainInfoLayout";
 import { EventMapLayout } from "@/layout/block/event/EventMapLayout";
 import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEventsLayout";
 import prisma from "@/server/prisma";
-import defaultEventImage from "~/public/img/defaultImages/event.png";
+import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
 import {
   AspectRatio,
@@ -98,17 +99,21 @@ export default async function EventPage({
               translate="none"
               zIndex="1"
             >
-              <EventLikeButton size="lg" id={id} />
+              <EventLikeButton id={id} />
             </Float>
-            <AspectRatio ratio={16 / 9} w="auto" h="auto">
-              <Image
-                className={css({ borderRadius: "8px" })}
-                src={poster || defaultEventImage.src}
-                alt={topic}
-                width={755}
-                height={435}
-              />
-            </AspectRatio>
+            {poster ? (
+              <AspectRatio ratio={16 / 9} w="auto" h="auto">
+                <Image
+                  className={css({ borderRadius: "8px" })}
+                  src={poster}
+                  alt={topic}
+                  width={755}
+                  height={435}
+                />
+              </AspectRatio>
+            ) : (
+              <DefaultImage />
+            )}
           </Box>
           <Flex direction="column" justify="space-between" align="baseline">
             <EventMainInfo starts={starts} mapboxId={place.locationMapboxId} />
@@ -118,7 +123,7 @@ export default async function EventPage({
                 showCount={5}
                 avatars={usersOnEvent.map(({ user: { image, name } }) => ({
                   name: name || "username",
-                  image: image || "",
+                  image: image || textLogo.src,
                 }))}
               />
             </Flex>
@@ -146,7 +151,7 @@ export default async function EventPage({
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
           <SingleMarkerMap
             mapboxId={place.locationMapboxId}
-            image={poster || defaultEventImage.src}
+            image={poster || textLogo.src}
             name={topic}
           />
         </AspectRatio>
@@ -160,7 +165,7 @@ export default async function EventPage({
                 <EventCardView
                   id={popularEvent.id}
                   price={popularEvent.price || 0}
-                  poster={popularEvent.poster || defaultEventImage.src}
+                  poster={popularEvent.poster || textLogo.src}
                   topic={popularEvent.topic}
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
