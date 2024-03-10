@@ -87,7 +87,7 @@ export function EventCardView({
                 }))}
               />
             </VStack>
-            <EventLikeButton size="md" id={id} />
+            <EventLikeButton id={id} />
           </Flex>
         </CardFooter>
       </CardInner>

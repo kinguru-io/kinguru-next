@@ -4,13 +4,13 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../uikit";
 import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
 import { toggleLikeEvent } from "@/lib/actions/likedEvent/toggleLike";
+import { Box } from "~/styled-system/jsx";
 
 type EventImageProps = {
   id: string;
-  size: "sm" | "lg" | "md" | "xl";
 };
 
-export function EventLikeButton({ id, size }: EventImageProps) {
+export function EventLikeButton({ id }: EventImageProps) {
   const [isLike, toggleLike] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -31,10 +31,10 @@ export function EventLikeButton({ id, size }: EventImageProps) {
     void getLikeInfo();
   }, [isPending, []]);
   return (
-    <>
-      <Button size={size} onClick={setOrRemoveLike} disabled={isPending}>
+    <Box fontSize="16px">
+      <Button size="iconOnly" onClick={setOrRemoveLike} disabled={isPending}>
         {isLike ? <FaHeart fill="#DC1414" /> : <FaRegHeart />}
       </Button>
-    </>
+    </Box>
   );
 }

@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { GrNext } from "react-icons/gr";
 import { Button, TextCollapse } from "../uikit";
-import { css } from "~/styled-system/css";
+import { ArrowIcon } from "../uikit/ArrowIcon/ArrowIcon";
 import { Box, VStack } from "~/styled-system/jsx";
 
 type EventDescriptionProps = {
@@ -29,7 +28,7 @@ export function EventDescription({ description }: EventDescriptionProps) {
       <Box color="neutral.1">
         <Button
           variant="outline"
-          icon={<ExpandStateIcon isShown={isShown} />}
+          icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
           iconPosition="right"
           onClick={handleExpandClick}
         >
@@ -37,19 +36,5 @@ export function EventDescription({ description }: EventDescriptionProps) {
         </Button>
       </Box>
     </VStack>
-  );
-}
-
-function ExpandStateIcon({ isShown }: { isShown: boolean }) {
-  return (
-    <GrNext
-      className={css({
-        rotate: "90deg",
-        "&[data-expanded=true]": {
-          rotate: "-90deg",
-        },
-      })}
-      data-expanded={isShown}
-    />
   );
 }
