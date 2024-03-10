@@ -56,12 +56,14 @@ export function Button({
       {...restProps}
     >
       {!isLoading && icon && <span aria-hidden>{icon}</span>}
-      <span
-        className={css({ "&[data-loading=true]": { opacity: 0 } })}
-        data-loading={isLoading}
-      >
-        {children}
-      </span>
+      {size === "iconOnly" ? null : (
+        <span
+          className={css({ "&[data-loading=true]": { opacity: 0 } })}
+          data-loading={isLoading}
+        >
+          {children}
+        </span>
+      )}
       {isLoading && <LoaderIcon />}
     </button>
   );

@@ -5,6 +5,7 @@ import { Button } from "../uikit";
 import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
 import { toggleLikeEvent } from "@/lib/actions/likedEvent/toggleLike";
 import { Box } from "~/styled-system/jsx";
+import { token } from "~/styled-system/tokens";
 
 type EventImageProps = {
   id: string;
@@ -32,9 +33,14 @@ export function EventLikeButton({ id }: EventImageProps) {
   }, [isPending, []]);
   return (
     <Box fontSize="16px">
-      <Button size="iconOnly" onClick={setOrRemoveLike} disabled={isPending}>
-        {isLike ? <FaHeart fill="#DC1414" /> : <FaRegHeart />}
-      </Button>
+      <Button
+        size="iconOnly"
+        onClick={setOrRemoveLike}
+        disabled={isPending}
+        icon={
+          isLike ? <FaHeart fill={token("colors.red.1")} /> : <FaRegHeart />
+        }
+      />
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
+import { FaHeart } from "react-icons/fa";
 import { FaAccessibleIcon } from "react-icons/fa6";
 import { Button, buttonColorPalette } from "@/components/uikit";
 import { css } from "~/styled-system/css";
@@ -43,6 +44,13 @@ type Story = StoryObj<typeof meta>;
 export const SolidSM: Story = {
   args: {
     children: "Подробнее",
+  },
+};
+
+export const iconButton: Story = {
+  args: {
+    size: "iconOnly",
+    icon: <FaHeart />,
   },
 };
 
