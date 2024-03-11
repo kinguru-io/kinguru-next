@@ -1,7 +1,7 @@
 import { css } from "~/styled-system/css";
 
 export type CollapseProps = {
-  isShown: boolean;
+  isShown?: boolean;
   children: React.ReactNode;
 };
 
@@ -13,6 +13,10 @@ export function Collapse({ isShown, children }: CollapseProps) {
         gridTemplateRows: "0fr",
         transition: "grid-template-rows 350ms",
         "&[data-shown=true]": {
+          gridTemplateRows: "1fr",
+        },
+        // * in order to use without client's javascript with state resolving with checkbox state
+        _peerChecked: {
           gridTemplateRows: "1fr",
         },
       })}
