@@ -51,7 +51,7 @@ export default async function EventPage({
       place: true,
     },
     orderBy: {
-      createdAt: "asc",
+      createdAt: "desc",
     },
   });
 
