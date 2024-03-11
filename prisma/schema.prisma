@@ -50,7 +50,7 @@ model User {
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
   organizations          Organization[]
-  userLikedEvents        UserLikedEvents[]
+  likedEvents            UserLikedEvents[]
 }
 
 enum UserRole {
@@ -202,7 +202,7 @@ model Event {
   ticketIntents          TicketIntent[]
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
-  userLikedEvents        UserLikedEvents[]
+  usersLiked             UserLikedEvents[]
 }
 
 enum EventStatus {
