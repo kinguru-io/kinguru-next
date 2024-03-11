@@ -7,7 +7,6 @@ import {
   AccordinItemToggle,
   AccordionItemContent,
 } from "@/components/uikit";
-import { css } from "~/styled-system/css";
 
 const meta = {
   title: "UIKit/Accordion",
@@ -28,9 +27,7 @@ export const Basic = {
         {features.map(({ id, title, desc }) => {
           return (
             <AccordionItem key={id}>
-              <AccordinItemToggle
-                titleCss={css.raw({ textStyle: "heading.3" })}
-              >
+              <AccordinItemToggle textStyle="heading.3">
                 {title}
               </AccordinItemToggle>
               <AccordionItemContent>{desc}</AccordionItemContent>

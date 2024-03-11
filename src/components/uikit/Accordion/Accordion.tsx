@@ -1,9 +1,8 @@
 import { useId } from "react";
 import { Collapse } from "@/components/uikit";
 import { css, cx } from "~/styled-system/css";
-import { Box, styled } from "~/styled-system/jsx";
-import { hstack } from "~/styled-system/patterns";
-import { SystemStyleObject } from "~/styled-system/types";
+import { Box, splitCssProps, styled } from "~/styled-system/jsx";
+import { HTMLStyledProps } from "~/styled-system/types";
 
 export const Accordion = styled("div", {
   base: {
@@ -16,44 +15,63 @@ export const Accordion = styled("div", {
 export function AccordionItem({ children }: { children: React.ReactNode }) {
   return (
     <Box
+      bgColor="neutral.5"
       borderColor="neutral.2"
       borderWidth="1px"
       borderRadius="10px"
       paddingInline="30px 15px"
       paddingBlock="9px"
+      transition="colors"
+      _focusWithin={{
+        borderColor: "focus",
+      }}
     >
       {children}
     </Box>
   );
 }
 
-export function AccordinItemToggle({
-  children,
-  titleCss,
-}: {
-  children: React.ReactNode;
-  titleCss?: SystemStyleObject;
-}) {
+export function AccordinItemToggle(props: HTMLStyledProps<"label">) {
   const checkboxId = useId();
+
+  const [cssProps, { children, ...restProps }] = splitCssProps(props);
+  const { css: cssProp, ...styleProps } = cssProps;
   const labelClassName = css(
-    hstack.raw({
+    {
+      position: "relative",
       cursor: "pointer",
-      justifyContent: "space-between",
-    }),
-    titleCss,
+      display: "block",
+      _after: {
+        position: "absolute",
+        content: "''",
+        width: "0.61em",
+        height: "0.61em",
+        borderWidth: "1px",
+        borderStyle: "none solid solid none",
+        borderColor: "neutral.1",
+        top: "50%",
+        right: "1.25rem",
+        transform: "translateY(-75%) rotate(45deg)",
+        transition: "transform",
+        _peerChecked: {
+          transform: "translateY(-25%) rotate(-135deg)",
+        },
+      },
+    },
+    styleProps,
+    cssProp,
   );
 
   return (
     <>
-      <label className={labelClassName} htmlFor={checkboxId}>
-        {children}
-        <span>ArrowIcon</span>
-      </label>
       <input
         id={checkboxId}
         className={cx("peer", css({ srOnly: true }))}
         type="checkbox"
       />
+      <label className={labelClassName} htmlFor={checkboxId} {...restProps}>
+        {children}
+      </label>
     </>
   );
 }
