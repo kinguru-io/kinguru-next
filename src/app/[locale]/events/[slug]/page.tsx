@@ -2,16 +2,20 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
-import { EventCardView } from "@/components/event/EventCardView";
-import { EventDescription } from "@/components/event/EventDescription";
-import { EventLikeButton } from "@/components/event/EventLikeButton";
-import { EventMainInfo } from "@/components/event/EventMainInfo";
-import { EventSpeakersSlider } from "@/components/event/EventSpeakersSlider";
+import {
+  EventCardView,
+  EventDescription,
+  EventLikeButton,
+  EventMainInfo,
+  EventSpeakersSlider,
+} from "@/components/event";
 import { AvatarGroup, Button, Tag } from "@/components/uikit";
 import { DefaultImage } from "@/components/uikit/DefaultImage/DefaultImage";
-import { EventMainInfoLayout } from "@/layout/block/event/EventMainInfoLayout";
-import { EventMapLayout } from "@/layout/block/event/EventMapLayout";
-import { EventPopularEventsLayout } from "@/layout/block/event/EventPopularEventsLayout";
+import {
+  EventMainInfoLayout,
+  EventMapLayout,
+  EventPopularEventsLayout,
+} from "@/layout/block/event";
 import prisma from "@/server/prisma";
 import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
