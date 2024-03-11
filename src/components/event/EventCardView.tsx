@@ -23,6 +23,7 @@ import {
   Input,
   Tag,
 } from "../uikit";
+import { DefaultImage } from "../uikit/DefaultImage/DefaultImage";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import { Link } from "@/navigation";
 import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
@@ -108,15 +109,14 @@ export function EventCardView({
       >
         <span className={visuallyHidden()}>More</span>
       </Link>
-      <AspectRatio ratio={16 / 9}>
-        <Image
-          src={poster || ""}
-          width={640}
-          height={480}
-          alt="template image"
-        />
-        <span className={css({ bgGradient: "cardImage" })} />
-      </AspectRatio>
+      {poster ? (
+        <AspectRatio ratio={16 / 9}>
+          <Image src={poster} width={640} height={480} alt="template image" />
+          <span className={css({ bgGradient: "cardImage" })} />
+        </AspectRatio>
+      ) : (
+        <DefaultImage />
+      )}
       <CardInner>
         <Float placement="top-end" offset="15px" translate="none">
           <Tag variant="tertiary">
