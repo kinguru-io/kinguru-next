@@ -1,16 +1,30 @@
+"use client";
+
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { CiLocationOn } from "react-icons/ci";
+import { IoShareOutline, IoTimeOutline } from "react-icons/io5";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { MdOutlineCalendarMonth } from "react-icons/md";
+import { useClipboard } from "use-clipboard-copy";
 import { EventLikeButton } from "./EventLikeButton";
 import {
   AvatarGroup,
+  Button,
   Card,
   CardBody,
   CardFooter,
   CardHeading,
   CardInner,
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+  Input,
   Tag,
 } from "../uikit";
+import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Flex, Float, VStack } from "~/styled-system/jsx";
@@ -24,7 +38,12 @@ type EventCardViewProps = {
   usersOnEvent: Prisma.UsersOnEventMaxAggregateOutputType[];
   slug: string;
   id: string;
+  url: string;
+  mapboxId: string;
+  starts: Date;
 };
+
+const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function EventCardView({
   poster,
@@ -34,8 +53,48 @@ export function EventCardView({
   usersOnEvent,
   slug,
   id,
+  url,
+  mapboxId,
+  starts,
 }: EventCardViewProps) {
+  const clipboard = useClipboard();
+  const [placeAddress, setPlaceAddress] = useState("");
+  const { retrieve } = useSearchBoxCore({ accessToken });
   const t = useTranslations("event");
+  const locale = useLocale();
+
+  useEffect(() => {
+    retrieve({ mapbox_id: mapboxId }, (data) => {
+      const { address } = data.features[0].properties;
+      setPlaceAddress(address);
+    });
+  }, [mapboxId]);
+
+  const mainInfo = [
+    {
+      icon: <MdOutlineCalendarMonth />,
+      text: starts.toLocaleDateString(locale, {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
+      altText: "Calendar Icon",
+    },
+    {
+      icon: <IoTimeOutline />,
+      text: starts.toLocaleTimeString(locale, {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      altText: "Time Icon",
+    },
+    {
+      icon: <CiLocationOn />,
+      text: placeAddress,
+      altText: "Location Icon",
+    },
+  ];
+
   return (
     <Card variant="event" data-interactive>
       <Link
@@ -44,7 +103,6 @@ export function EventCardView({
           _before: {
             content: "''",
             position: "absolute",
-            inset: 0,
           },
         })}
       >
@@ -65,10 +123,50 @@ export function EventCardView({
             {price === 0 ? t("future_event_page.free") : price}
           </Tag>
         </Float>
-
+        <Float
+          placement="top-end"
+          offsetX="15px"
+          offsetY="145px"
+          translate="none"
+        >
+          <Dropdown size="lg">
+            <DropdownInitiator>
+              <IoShareOutline size="14px" />
+            </DropdownInitiator>
+            <DropdownMenu>
+              <Input
+                type="text"
+                disabled
+                value={`${url}/en/events/${slug}`}
+                ref={clipboard.target}
+              />
+              <Button onClick={clipboard.copy} variant="ghost">
+                {t("event_card.copy_link")}
+              </Button>
+            </DropdownMenu>
+          </Dropdown>
+        </Float>
         <CardHeading>
           <h4>{topic}</h4>
         </CardHeading>
+        <ul
+          className={css({
+            display: "flex",
+            gap: "19px",
+            "& li": {
+              display: "flex",
+              alignItems: "center",
+              gap: "3px",
+            },
+          })}
+        >
+          {mainInfo.map(({ altText, text, icon }) => (
+            <li key={altText}>
+              <span>{icon}</span>
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
         <CardBody>
           <p>{description}</p>
         </CardBody>

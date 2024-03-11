@@ -430,6 +430,10 @@
       "type": "runtime"
     },
     {
+      "name": "use-clipboard-copy",
+      "type": "runtime"
+    },
+    {
       "name": "use-debounce",
       "type": "runtime"
     },

@@ -256,7 +256,8 @@
       "free": "Free"
     },
     "event_card": {
-      "already_join": "Have already join"
+      "already_join": "Have already join",
+      "copy_link": "Copy link"
     }
   }
 }

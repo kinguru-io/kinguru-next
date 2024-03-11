@@ -24,6 +24,8 @@ import {
   VStack,
 } from "~/styled-system/jsx";
 
+const url = process.env.NEXTAUTH_URL;
+
 export default async function EventPage({
   params: { slug },
 }: {
@@ -46,6 +48,7 @@ export default async function EventPage({
     take: 3,
     include: {
       usersOnEvent: { include: { user: true } },
+      place: true,
     },
     orderBy: {
       createdAt: "asc",
@@ -170,6 +173,9 @@ export default async function EventPage({
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
                   slug={popularEvent.slug}
+                  url={url || "eventify.today"}
+                  mapboxId={popularEvent.place.locationMapboxId}
+                  starts={popularEvent.starts}
                 />
               </Box>
             ))}

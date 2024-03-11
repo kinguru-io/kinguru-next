@@ -165,6 +165,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-simple-star-rating",
     "react-intersection-observer",
     "react-cookie-consent",
+    "use-clipboard-copy",
 
     "stripe",
     "@stripe/stripe-js",
