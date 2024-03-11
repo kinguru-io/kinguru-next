@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { IoShareOutline, IoTimeOutline } from "react-icons/io5";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { MdOutlineCalendarMonth } from "react-icons/md";
 import { useClipboard } from "use-clipboard-copy";
 import { EventLikeButton } from "./EventLikeButton";
@@ -26,6 +25,7 @@ import {
 } from "../uikit";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import { Link } from "@/navigation";
+import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Flex, Float, VStack } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
@@ -181,7 +181,7 @@ export function EventCardView({
                 showCount={3}
                 avatars={usersOnEvent.map(({ user: { image, name } }: any) => ({
                   name: name || "username",
-                  image: image || "",
+                  image: image || textLogo.src,
                 }))}
               />
             </VStack>
