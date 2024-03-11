@@ -16,6 +16,9 @@ import {
   EventMapLayout,
   EventPopularEventsLayout,
 } from "@/layout/block/event";
+import { createLikeEvent } from "@/lib/actions/likedEvent/createLike";
+import { deleteLikeEvent } from "@/lib/actions/likedEvent/deleteLike";
+import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
 import prisma from "@/server/prisma";
 import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
@@ -106,7 +109,12 @@ export default async function EventPage({
               translate="none"
               zIndex="1"
             >
-              <EventLikeButton id={id} />
+              <EventLikeButton
+                id={id}
+                getLikedAction={getLikedEvent}
+                createLikeAction={createLikeEvent}
+                deleteLikeAction={deleteLikeEvent}
+              />
             </Float>
             {poster ? (
               <AspectRatio ratio={16 / 9} w="auto" h="auto">
@@ -180,6 +188,9 @@ export default async function EventPage({
                   url={url || "eventify.today"}
                   mapboxId={popularEvent.place.locationMapboxId}
                   starts={popularEvent.starts}
+                  getLikedAction={getLikedEvent}
+                  createLikeAction={createLikeEvent}
+                  deleteLikeAction={deleteLikeEvent}
                 />
               </Box>
             ))}

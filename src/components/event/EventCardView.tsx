@@ -42,6 +42,9 @@ type EventCardViewProps = {
   url: string;
   mapboxId: string;
   starts: Date;
+  getLikedAction: Function;
+  createLikeAction: Function;
+  deleteLikeAction: Function;
 };
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -57,6 +60,9 @@ export function EventCardView({
   url,
   mapboxId,
   starts,
+  getLikedAction,
+  createLikeAction,
+  deleteLikeAction,
 }: EventCardViewProps) {
   const clipboard = useClipboard();
   const [placeAddress, setPlaceAddress] = useState("");
@@ -185,7 +191,12 @@ export function EventCardView({
                 }))}
               />
             </VStack>
-            <EventLikeButton id={id} />
+            <EventLikeButton
+              id={id}
+              getLikedAction={getLikedAction}
+              createLikeAction={createLikeAction}
+              deleteLikeAction={deleteLikeAction}
+            />
           </Flex>
         </CardFooter>
       </CardInner>

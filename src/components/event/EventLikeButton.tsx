@@ -1,36 +1,51 @@
 "use client";
-import { useEffect, useState, useTransition } from "react";
+
+import { useEffect, useOptimistic, useState, useTransition } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../uikit";
-import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
-import { toggleLikeEvent } from "@/lib/actions/likedEvent/toggleLike";
 import { Box } from "~/styled-system/jsx";
 import { token } from "~/styled-system/tokens";
 
 type EventImageProps = {
   id: string;
+  getLikedAction: Function;
+  createLikeAction: Function;
+  deleteLikeAction: Function;
 };
 
-export function EventLikeButton({ id }: EventImageProps) {
+export function EventLikeButton({
+  id,
+  getLikedAction,
+  createLikeAction,
+  deleteLikeAction,
+}: EventImageProps) {
   const [isLike, toggleLike] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [optimisticLike, setOptimisticLike] = useOptimistic(isLike);
 
   const getLikeInfo = async () => {
-    const likedEvents = await getLikedEvent();
+    const likedEvents = await getLikedAction();
     toggleLike(
       likedEvents.some(({ eventId }: { eventId: string }) => eventId === id),
     );
   };
 
-  const setOrRemoveLike = () => {
+  const setOrRemoveLike = async () => {
     startTransition(async () => {
-      await toggleLikeEvent(id);
+      setOptimisticLike(!isLike);
+      if (isLike) {
+        await deleteLikeAction(id);
+      } else {
+        await createLikeAction(id);
+      }
+      toggleLike(!isLike);
     });
   };
 
   useEffect(() => {
     void getLikeInfo();
-  }, [isPending, []]);
+  }, []);
+
   return (
     <Box fontSize="16px">
       <Button
@@ -38,7 +53,11 @@ export function EventLikeButton({ id }: EventImageProps) {
         onClick={setOrRemoveLike}
         disabled={isPending}
         icon={
-          isLike ? <FaHeart fill={token("colors.red.1")} /> : <FaRegHeart />
+          optimisticLike ? (
+            <FaHeart fill={token("colors.red.1")} />
+          ) : (
+            <FaRegHeart />
+          )
         }
       />
     </Box>

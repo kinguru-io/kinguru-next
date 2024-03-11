@@ -1,23 +1,17 @@
 "use server";
 import { getSession } from "@/auth";
 
-export async function toggleLikeEvent(eventId: string) {
+export async function createLikeEvent(eventId: string) {
   const session = await getSession();
   const userId = session?.user?.id;
-  if (userId) {
+  if (session) {
     const likedEvent = await prisma.userLikedEvents.findFirst({
       where: {
         userId: userId,
         eventId: eventId,
       },
     });
-    if (likedEvent) {
-      await prisma.userLikedEvents.delete({
-        where: {
-          id: likedEvent.id,
-        },
-      });
-    } else {
+    if (!likedEvent) {
       await prisma.userLikedEvents.create({
         data: {
           user: {
