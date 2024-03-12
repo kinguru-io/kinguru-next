@@ -38,7 +38,6 @@ type EventCardViewProps = {
   usersOnEvent: Prisma.UsersOnEventMaxAggregateOutputType[];
   slug: string;
   id: string;
-  url: string;
   mapboxId: string;
   starts: Date;
   isLikedAction: Function;
@@ -56,7 +55,6 @@ export function EventCardView({
   usersOnEvent,
   slug,
   id,
-  url,
   mapboxId,
   starts,
   isLikedAction,
@@ -145,7 +143,11 @@ export function EventCardView({
               <Input
                 type="text"
                 disabled
-                value={`${url}/en/events/${slug}`}
+                value={
+                  typeof window !== "undefined"
+                    ? `${window.location.href.split("/").slice(0, -1).join("/")}/${slug}`
+                    : ""
+                }
                 ref={clipboard.target}
               />
               <Button onClick={clipboard.copy} variant="ghost">
