@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { Avatar, Card, CardBody, Slider, SliderItem, Tag } from "../uikit";
+import defaultAvatar from "~/public/img/defaultImages/defaultUserAvatar.svg";
 import { css } from "~/styled-system/css";
 import { Box, Flex, Float } from "~/styled-system/jsx";
 
@@ -48,7 +49,7 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
                       </Float>
                       <Flex gap="5px" p="7px 10px">
                         <Avatar
-                          image={image || ""}
+                          image={image || defaultAvatar.src}
                           name={name || "speakerName"}
                         />
                         <Flex direction="column" gap="3px">

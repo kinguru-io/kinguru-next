@@ -20,6 +20,7 @@ import { createLikeEvent } from "@/lib/actions/likedEvent/createLike";
 import { deleteLikeEvent } from "@/lib/actions/likedEvent/deleteLike";
 import { getLikedEvent } from "@/lib/actions/likedEvent/getLikedEvents";
 import prisma from "@/server/prisma";
+import defaultAvatar from "~/public/img/defaultImages/defaultUserAvatar.svg";
 import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
 import {
@@ -138,7 +139,7 @@ export default async function EventPage({
                 showCount={5}
                 avatars={usersOnEvent.map(({ user: { image, name } }) => ({
                   name: name || "username",
-                  image: image || textLogo.src,
+                  image: image || defaultAvatar.src,
                 }))}
               />
             </Flex>
