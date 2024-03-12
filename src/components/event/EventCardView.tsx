@@ -109,19 +109,22 @@ export function EventCardView({
           _before: {
             content: "''",
             position: "absolute",
+            inset: 0,
           },
         })}
       >
         <span className={visuallyHidden()}>More</span>
       </Link>
-      {poster ? (
-        <AspectRatio ratio={16 / 9}>
-          <Image src={poster} width={640} height={480} alt="template image" />
-          <span className={css({ bgGradient: "cardImage" })} />
-        </AspectRatio>
-      ) : (
-        <DefaultImage />
-      )}
+      <AspectRatio ratio={16 / 9}>
+        {poster ? (
+          <>
+            <Image src={poster} fill alt="template image" />
+            <span className={css({ bgGradient: "cardImage" })} />
+          </>
+        ) : (
+          <DefaultImage />
+        )}
+      </AspectRatio>
       <CardInner>
         <Float placement="top-end" offset="15px" translate="none">
           <Tag variant="tertiary">

@@ -113,8 +113,8 @@ export default async function EventPage({
                 deleteLikeAction={deleteLikeEvent}
               />
             </Float>
-            {poster ? (
-              <AspectRatio ratio={16 / 9} w="auto" h="auto">
+            <AspectRatio ratio={16 / 9} w="auto" h="auto">
+              {poster ? (
                 <Image
                   className={css({ borderRadius: "8px" })}
                   src={poster}
@@ -122,10 +122,10 @@ export default async function EventPage({
                   width={755}
                   height={435}
                 />
-              </AspectRatio>
-            ) : (
-              <DefaultImage />
-            )}
+              ) : (
+                <DefaultImage />
+              )}
+            </AspectRatio>
           </Box>
           <Flex direction="column" justify="space-between" align="baseline">
             <EventMainInfo starts={starts} mapboxId={place.locationMapboxId} />
