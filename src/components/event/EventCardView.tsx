@@ -2,7 +2,7 @@
 
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { IoShareOutline, IoTimeOutline } from "react-icons/io5";
@@ -34,7 +34,7 @@ type EventCardViewProps = {
   poster: string | null;
   topic: string;
   description: string;
-  price: number | string;
+  price: number;
   usersOnEvent: Prisma.UsersOnEventMaxAggregateOutputType[];
   slug: string;
   id: string;
@@ -66,6 +66,7 @@ export function EventCardView({
   const { retrieve } = useSearchBoxCore({ accessToken });
   const t = useTranslations("event");
   const locale = useLocale();
+  const format = useFormatter();
 
   useEffect(() => {
     retrieve({ mapbox_id: mapboxId }, (data) => {
@@ -126,7 +127,12 @@ export function EventCardView({
       <CardInner>
         <Float placement="top-end" offset="15px" translate="none">
           <Tag variant="tertiary">
-            {price === 0 ? t("future_event_page.free") : price}
+            {price === 0 || price === null
+              ? t("future_event_page.free")
+              : format.number(price, {
+                  style: "currency",
+                  currency: "PLN",
+                })}
           </Tag>
         </Float>
         <Float

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import {
   EventCardView,
@@ -33,8 +33,6 @@ export default async function EventPage({
 }: {
   params: { slug: string };
 }) {
-  const t = await getTranslations("event.future_event_page");
-
   const event = await prisma.event.findFirst({
     where: { slug },
     include: {
@@ -58,6 +56,9 @@ export default async function EventPage({
   if (!event) {
     notFound();
   }
+
+  const t = await getTranslations("event.future_event_page");
+  const format = await getFormatter();
 
   const popularEvents = await prisma.event.findMany({
     take: 3,
@@ -104,7 +105,12 @@ export default async function EventPage({
               zIndex="1"
             >
               <Tag size="lg" variant="primary">
-                {price === 0 ? t("free") : price}
+                {price === 0 || price === null
+                  ? t("free")
+                  : format.number(price, {
+                      style: "currency",
+                      currency: "PLN",
+                    })}
               </Tag>
             </Float>
             <Float
