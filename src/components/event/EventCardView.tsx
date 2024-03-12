@@ -116,7 +116,7 @@ export function EventCardView({
       <AspectRatio ratio={16 / 9}>
         {poster ? (
           <>
-            <Image src={poster} fill alt="template image" />
+            <Image src={poster} fill alt={topic} />
             <span className={css({ bgGradient: "cardImage" })} />
           </>
         ) : (
