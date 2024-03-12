@@ -31,7 +31,8 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
             const ratingSum = comments.reduce((acc, item) => {
               return acc + item.rating;
             }, 0);
-            const rating = ratingSum / comments.length;
+            const rating =
+              comments.length === 0 ? 0 : ratingSum / comments.length;
             return (
               <SliderItem key={name} buttonPosition="outer">
                 <Box w="270px" color="neutral.1" key={name}>
@@ -41,12 +42,12 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
                         zIndex="1"
                         placement="top-start"
                         offsetY="6px"
-                        offsetX="34px"
+                        offsetX="30px"
                         translate="none"
                       >
-                        <Tag>{rating}</Tag>
+                        <Tag>{rating.toFixed(1)}</Tag>
                       </Float>
-                      <Flex gap="5px" p="7px 10px">
+                      <Flex gap="10px" p="7px 10px">
                         <Avatar image={image} name={name} />
                         <Flex direction="column" gap="3px">
                           <h4>{name}</h4>
