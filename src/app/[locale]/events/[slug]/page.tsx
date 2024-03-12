@@ -16,11 +16,7 @@ import {
   EventMapLayout,
   EventPopularEventsLayout,
 } from "@/layout/block/event";
-import {
-  createLikeEvent,
-  deleteLikeEvent,
-  isLikedEvent,
-} from "@/lib/actions/event/likes";
+import { createLikeEvent, deleteLikeEvent, isLikedEvent } from "@/lib/actions/";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
 import {
