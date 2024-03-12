@@ -26,13 +26,12 @@ import {
 import { DefaultImage } from "../uikit/DefaultImage/DefaultImage";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import { Link } from "@/navigation";
-import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Flex, Float, VStack } from "~/styled-system/jsx";
 import { visuallyHidden } from "~/styled-system/patterns";
 
 type EventCardViewProps = {
-  poster: string;
+  poster: string | null;
   topic: string;
   description: string;
   price: number | string;
@@ -186,8 +185,8 @@ export function EventCardView({
               <AvatarGroup
                 showCount={3}
                 avatars={usersOnEvent.map(({ user: { image, name } }: any) => ({
-                  name: name || "username",
-                  image: image || textLogo.src,
+                  name: name,
+                  image: image,
                 }))}
               />
             </VStack>

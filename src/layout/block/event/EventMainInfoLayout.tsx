@@ -4,7 +4,7 @@ export function EventMainInfoLayout({
   bgImageSrc,
   children,
 }: {
-  bgImageSrc: string;
+  bgImageSrc: string | null;
   children: React.ReactNode;
 }) {
   return (

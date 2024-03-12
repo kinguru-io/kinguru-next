@@ -22,8 +22,6 @@ import {
   isLikedEvent,
 } from "@/lib/actions/event/likes";
 import prisma from "@/server/prisma";
-import defaultAvatar from "~/public/img/defaultImages/defaultUserAvatar.svg";
-import textLogo from "~/public/img/defaultImages/eventify-logo-text.svg";
 import { css } from "~/styled-system/css";
 import {
   AspectRatio,
@@ -84,7 +82,7 @@ export default async function EventPage({
 
   return (
     <>
-      <EventMainInfoLayout bgImageSrc={poster || ""}>
+      <EventMainInfoLayout bgImageSrc={poster}>
         <h2
           className={css({
             paddingBottom: "20px",
@@ -140,8 +138,8 @@ export default async function EventPage({
               <AvatarGroup
                 showCount={5}
                 avatars={usersOnEvent.map(({ user: { image, name } }) => ({
-                  name: name || "username",
-                  image: image || defaultAvatar.src,
+                  name: name,
+                  image: image,
                 }))}
               />
             </Flex>
@@ -169,7 +167,7 @@ export default async function EventPage({
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
           <SingleMarkerMap
             mapboxId={place.locationMapboxId}
-            image={poster || textLogo.src}
+            image={poster}
             name={topic}
           />
         </AspectRatio>
@@ -183,7 +181,7 @@ export default async function EventPage({
                 <EventCardView
                   id={popularEvent.id}
                   price={popularEvent.price || 0}
-                  poster={popularEvent.poster || textLogo.src}
+                  poster={popularEvent.poster}
                   topic={popularEvent.topic}
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
