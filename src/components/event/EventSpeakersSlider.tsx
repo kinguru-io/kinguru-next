@@ -1,11 +1,20 @@
-import { Prisma } from "@prisma/client";
 import { Avatar, Card, CardBody, Slider, SliderItem, Tag } from "../uikit";
-import defaultAvatar from "~/public/img/defaultImages/defaultUserAvatar.svg";
 import { css } from "~/styled-system/css";
 import { Box, Flex, Float } from "~/styled-system/jsx";
 
 type EventSpeakersSliderProps = {
-  speakers: Prisma.SpeakersOnEventMaxAggregateOutputType[];
+  speakers: {
+    speaker: {
+      user: {
+        name: string | null;
+        image: string | null;
+        position: string | null;
+      };
+      comments: {
+        rating: number;
+      }[];
+    };
+  }[];
 };
 
 export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
@@ -18,21 +27,11 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
               user: { image, name, position },
               comments,
             },
-          }: any) => {
-            const rating = comments.reduce(
-              (
-                acc: number,
-                item: Prisma.SpeakerCommentMaxAggregateOutputType,
-                index: number,
-              ) => {
-                if (index === comments.length - 1) {
-                  return (acc / comments.length).toFixed(1);
-                }
-                if (item.rating !== null) return acc + item.rating;
-                return acc;
-              },
-              0,
-            );
+          }) => {
+            const ratingSum = comments.reduce((acc, item) => {
+              return acc + item.rating;
+            }, 0);
+            const rating = ratingSum / comments.length;
             return (
               <SliderItem key={name} buttonPosition="outer">
                 <Box w="270px" color="neutral.1" key={name}>
@@ -48,10 +47,7 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
                         <Tag>{rating}</Tag>
                       </Float>
                       <Flex gap="5px" p="7px 10px">
-                        <Avatar
-                          image={image || defaultAvatar.src}
-                          name={name || "speakerName"}
-                        />
+                        <Avatar image={image} name={name} />
                         <Flex direction="column" gap="3px">
                           <h4>{name}</h4>
                           <div className={css({ textStyle: "body.3" })}>

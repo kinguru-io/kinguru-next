@@ -28,8 +28,6 @@ import {
   VStack,
 } from "~/styled-system/jsx";
 
-const url = process.env.NEXTAUTH_URL;
-
 export default async function EventPage({
   params: { slug },
 }: {
@@ -40,13 +38,26 @@ export default async function EventPage({
   const event = await prisma.event.findFirst({
     where: { slug },
     include: {
-      usersOnEvent: { include: { user: true } },
+      usersOnEvent: {
+        include: { user: { select: { image: true, name: true } } },
+      },
       speakersOnEvent: {
-        include: { speaker: { include: { user: true, comments: true } } },
+        include: {
+          speaker: {
+            include: {
+              user: { select: { image: true, name: true, position: true } },
+              comments: { select: { rating: true } },
+            },
+          },
+        },
       },
       place: true,
     },
   });
+
+  if (!event) {
+    notFound();
+  }
 
   const popularEvents = await prisma.event.findMany({
     take: 3,
@@ -58,10 +69,6 @@ export default async function EventPage({
       createdAt: "desc",
     },
   });
-
-  if (!event) {
-    notFound();
-  }
 
   const {
     poster,
@@ -133,10 +140,7 @@ export default async function EventPage({
               <h3>{t("event_guests")}</h3>
               <AvatarGroup
                 showCount={5}
-                avatars={usersOnEvent.map(({ user: { image, name } }) => ({
-                  name: name,
-                  image: image,
-                }))}
+                avatars={usersOnEvent.map(({ user }) => user)}
               />
             </Flex>
             <Button size="lg" variant="solid" colorPalette="primary">
@@ -182,7 +186,6 @@ export default async function EventPage({
                   description={popularEvent.description}
                   usersOnEvent={popularEvent.usersOnEvent}
                   slug={popularEvent.slug}
-                  url={url || "eventify.today"}
                   mapboxId={popularEvent.place.locationMapboxId}
                   starts={popularEvent.starts}
                   isLikedAction={isLikedEvent}
