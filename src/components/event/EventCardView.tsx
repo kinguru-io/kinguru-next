@@ -42,7 +42,7 @@ type EventCardViewProps = {
   url: string;
   mapboxId: string;
   starts: Date;
-  getLikedAction: Function;
+  isLikedAction: Function;
   createLikeAction: Function;
   deleteLikeAction: Function;
 };
@@ -60,7 +60,7 @@ export function EventCardView({
   url,
   mapboxId,
   starts,
-  getLikedAction,
+  isLikedAction,
   createLikeAction,
   deleteLikeAction,
 }: EventCardViewProps) {
@@ -193,7 +193,7 @@ export function EventCardView({
             </VStack>
             <EventLikeButton
               id={id}
-              getLikedAction={getLikedAction}
+              isLikedAction={isLikedAction}
               createLikeAction={createLikeAction}
               deleteLikeAction={deleteLikeAction}
             />

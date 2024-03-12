@@ -8,29 +8,26 @@ import { token } from "~/styled-system/tokens";
 
 type EventImageProps = {
   id: string;
-  getLikedAction: Function;
+  isLikedAction: Function;
   createLikeAction: Function;
   deleteLikeAction: Function;
 };
 
 export function EventLikeButton({
   id,
-  getLikedAction,
+  isLikedAction,
   createLikeAction,
   deleteLikeAction,
 }: EventImageProps) {
-  const [isLike, toggleLike] = useState(false);
+  const [isLike, setLike] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [optimisticLike, setOptimisticLike] = useOptimistic(isLike);
 
   const getLikeInfo = async () => {
-    const likedEvents = await getLikedAction();
-    toggleLike(
-      likedEvents.some(({ eventId }: { eventId: string }) => eventId === id),
-    );
+    setLike(await isLikedAction(id));
   };
 
-  const setOrRemoveLike = async () => {
+  const toggleLike = async () => {
     startTransition(async () => {
       setOptimisticLike(!isLike);
       if (isLike) {
@@ -38,7 +35,7 @@ export function EventLikeButton({
       } else {
         await createLikeAction(id);
       }
-      toggleLike(!isLike);
+      setLike(!isLike);
     });
   };
 
@@ -50,7 +47,7 @@ export function EventLikeButton({
     <Box fontSize="16px">
       <Button
         size="iconOnly"
-        onClick={setOrRemoveLike}
+        onClick={toggleLike}
         disabled={isPending}
         icon={
           optimisticLike ? (
