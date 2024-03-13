@@ -2,9 +2,9 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+import { Description } from "@/components/common/description";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { PremiseListing } from "@/components/premise";
-import { VenueDescriptionCollapse } from "@/components/venue";
 import { VenueMainInfoLayout, VenueMapLayout } from "@/layout/block";
 import prisma from "@/server/prisma";
 
@@ -51,7 +51,11 @@ export default async function VenuePage({
             height={461}
           />
         </Box>
-        <VenueDescriptionCollapse description={description} />
+        <Description
+          description={description}
+          showLessTranslate={t("show_less")}
+          showMoreTranslate={t("show_more")}
+        />
       </VenueMainInfoLayout>
 
       <Container paddingBlock="26px 42px">

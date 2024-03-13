@@ -1,25 +1,31 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { Button, TextCollapse } from "../uikit";
-import { ArrowIcon } from "../uikit/ArrowIcon/ArrowIcon";
+import { Button, TextCollapse } from "../../uikit";
+import { ArrowIcon } from "../../uikit/ArrowIcon/ArrowIcon";
 import { Box, VStack } from "~/styled-system/jsx";
 
-type EventDescriptionProps = {
+type DescriptionProps = {
   description: string;
+  maxW?: string;
+  showMoreTranslate: string;
+  showLessTranslate: string;
 };
 
-export function EventDescription({ description }: EventDescriptionProps) {
+export function Description({
+  description,
+  maxW,
+  showLessTranslate,
+  showMoreTranslate,
+}: DescriptionProps) {
   const [isShown, setIsShown] = useState(false);
-  const t = useTranslations("event.future_event_page");
 
   const handleExpandClick = () => {
     setIsShown((prevState) => !prevState);
   };
 
   return (
-    <VStack gap="30px" alignItems="flex-start" maxW="660px">
+    <VStack gap="30px" alignItems="flex-start" maxW={maxW}>
       <TextCollapse
         isShown={isShown}
         textContent={description}
@@ -32,7 +38,7 @@ export function EventDescription({ description }: EventDescriptionProps) {
           iconPosition="right"
           onClick={handleExpandClick}
         >
-          {isShown ? t("show_less") : t("show_more")}
+          {isShown ? showLessTranslate : showMoreTranslate}
         </Button>
       </Box>
     </VStack>

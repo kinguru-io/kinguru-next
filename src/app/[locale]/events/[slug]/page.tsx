@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+import { Description } from "@/components/common/description";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import {
   EventCardView,
-  EventDescription,
   EventLikeButton,
   EventMainInfo,
   EventSpeakersSlider,
@@ -161,7 +161,12 @@ export default async function EventPage({
         <VStack gap="20px" alignItems="baseline">
           <h3>{t("event_description")}</h3>
         </VStack>
-        <EventDescription description={description} />
+        <Description
+          description={description}
+          showLessTranslate={t("show_less")}
+          showMoreTranslate={t("show_more")}
+          maxW="660px"
+        />
         <HStack gap="15px">
           {tags.map((tag) => (
             <Tag variant="secondary" key={tag}>{`#${tag}`}</Tag>
