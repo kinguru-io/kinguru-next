@@ -206,6 +206,8 @@ export function EventCardView({
               isLikedAction={isLikedAction}
               createLikeAction={createLikeAction}
               deleteLikeAction={deleteLikeAction}
+              likeTranslate={t("future_event_page.like_event")}
+              dislikeTranslate={t("future_event_page.dislike_event")}
             />
           </Flex>
         </CardFooter>

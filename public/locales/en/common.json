@@ -455,7 +455,9 @@
       "show_more": "More",
       "show_less": "Less",
       "main_info": "General information:",
-      "free": "Free"
+      "free": "Free",
+      "like_event": "Like",
+      "dislike_event": "Dislike"
     },
     "event_card": {
       "already_join": "Have already join",

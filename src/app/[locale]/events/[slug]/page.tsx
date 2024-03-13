@@ -124,6 +124,8 @@ export default async function EventPage({
                 isLikedAction={isLikedEvent}
                 createLikeAction={createLikeEvent}
                 deleteLikeAction={deleteLikeEvent}
+                likeTranslate={t("like_event")}
+                dislikeTranslate={t("dislike_event")}
               />
             </Float>
             <AspectRatio ratio={16 / 9} w="auto" h="auto">

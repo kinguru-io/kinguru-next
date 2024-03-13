@@ -11,6 +11,8 @@ type EventImageProps = {
   isLikedAction: Function;
   createLikeAction: Function;
   deleteLikeAction: Function;
+  likeTranslate: string;
+  dislikeTranslate: string;
 };
 
 export function EventLikeButton({
@@ -18,6 +20,8 @@ export function EventLikeButton({
   isLikedAction,
   createLikeAction,
   deleteLikeAction,
+  likeTranslate,
+  dislikeTranslate,
 }: EventImageProps) {
   const [isLike, setLike] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -57,7 +61,9 @@ export function EventLikeButton({
             <FaRegHeart />
           )
         }
-      />
+      >
+        {optimisticLike ? dislikeTranslate : likeTranslate}
+      </Button>
     </Box>
   );
 }
