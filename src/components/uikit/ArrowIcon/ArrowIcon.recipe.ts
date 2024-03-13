@@ -6,8 +6,8 @@ export const arrowIconRecipe = defineRecipe({
   base: {
     position: "relative",
     display: "inline-block",
-    width: "8px",
-    height: "8px",
+    width: "0.5em",
+    height: "0.5em",
     borderTop: "2px solid token(colors.neutral.1)",
     borderRight: "2px solid token(colors.neutral.1)",
   },
