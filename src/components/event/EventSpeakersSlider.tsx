@@ -1,10 +1,12 @@
 import { Avatar, Card, CardBody, Slider, SliderItem, Tag } from "../uikit";
+import { assertFulfilled } from "@/utils/settledPromiseProfile";
 import { css } from "~/styled-system/css";
 import { Box, Flex, Float } from "~/styled-system/jsx";
 
 type EventSpeakersSliderProps = {
   speakers: {
     speaker: {
+      id: string;
       user: {
         name: string | null;
         image: string | null;
@@ -17,22 +19,34 @@ type EventSpeakersSliderProps = {
   }[];
 };
 
-export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
+export async function EventSpeakersSlider({
+  speakers,
+}: EventSpeakersSliderProps) {
+  const speakersWithRatingResult = await Promise.allSettled(
+    speakers.map(({ speaker }) =>
+      prisma.speakerComment
+        .aggregate({
+          where: { speakerId: speaker.id },
+          _avg: { rating: true },
+        })
+        .then(({ _avg: { rating } }) => ({ rating })),
+    ),
+  );
+  const profiledSpeakersWithRating =
+    speakersWithRatingResult.filter(assertFulfilled);
+
   return (
     <Box w="740px" h="67px">
       <Slider buttonPosition="outer" slidesCount={speakers.length}>
         {speakers.map(
-          ({
-            speaker: {
-              user: { image, name, position },
-              comments,
+          (
+            {
+              speaker: {
+                user: { image, name, position },
+              },
             },
-          }) => {
-            const rating = comments.reduce((acc, item, index, array) => {
-              if (index === array.length - 1)
-                return acc === 0 ? 0 : acc / array.length;
-              return acc + item.rating;
-            }, 0);
+            i,
+          ) => {
             return (
               <SliderItem key={name} buttonPosition="outer">
                 <Box w="270px" color="neutral.1" key={name}>
@@ -45,7 +59,11 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
                         offsetX="30px"
                         translate="none"
                       >
-                        <Tag>{rating.toFixed(1)}</Tag>
+                        <Tag>
+                          {(
+                            profiledSpeakersWithRating[i].value.rating || 0
+                          ).toFixed(1)}
+                        </Tag>
                       </Float>
                       <Flex gap="10px" p="7px 10px">
                         <Avatar image={image} name={name} />
