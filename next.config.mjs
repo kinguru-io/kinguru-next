@@ -1,4 +1,4 @@
-const withNextIntl = require("next-intl/plugin");
+import withNextIntl from "next-intl/plugin";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -47,12 +47,6 @@ const nextConfig = {
     instrumentationHook: true,
     serverComponentsExternalPackages: ["oslo"],
   },
-  publicRuntimeConfig: {
-    elasticSearchApiKey: process.env.ELASTICSEARCH_API_KEY,
-    elasticSearchEndpoint: process.env.ELASTICSEARCH_ENDPOINT,
-  },
-  productionBrowserSourceMaps: true,
-  transpilePackages: ["@stylexjs/open-props"],
 };
 
-module.exports = withNextIntl()(nextConfig);
+export default withNextIntl()(nextConfig);

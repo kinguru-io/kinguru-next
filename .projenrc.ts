@@ -1,9 +1,9 @@
-const fs = require("fs");
-const { web } = require("projen");
-const {
+import fs from "fs";
+import { web } from "projen";
+import {
   NodePackageManager,
   TypeScriptModuleResolution,
-} = require("projen/lib/javascript");
+} from "projen/lib/javascript";
 
 const project = new web.NextJsTypeScriptProject({
   name: "kinguru-next",
@@ -222,17 +222,22 @@ const project = new web.NextJsTypeScriptProject({
   ],
 });
 
+project.package.addField("type", "module");
+project.eslint?.addExtends("plugin:@next/next/recommended");
+
 project.defaultTask?.reset(
   'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
 );
 project.preCompileTask.exec("npx prisma generate");
 project.postCompileTask.exec(
-  "npx next-sitemap --config next-sitemap.config.js",
+  "npx next-sitemap --config next-sitemap.config.cjs",
 );
-project.eslint?.addExtends("plugin:@next/next/recommended");
 project.addScripts({ prepare: "npx panda codegen" });
 project.addScripts({ storybook: "storybook dev -p 6006" });
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
+project.addScripts({
+  seed: 'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node prisma/seed.ts',
+});
 project.synth();
 
 fs.rmSync("./pages", { recursive: true, force: true });
