@@ -5,10 +5,12 @@ export async function isLikedEvent(eventId: string) {
   const session = await getSession();
   if (!session || !session.user) return false;
 
-  const event = await prisma.userLikedEvents.findFirst({
+  const event = await prisma.userLikedEvents.findUnique({
     where: {
-      userId: session.user.id,
-      eventId: eventId,
+      userId_eventId: {
+        userId: session.user.id,
+        eventId: eventId,
+      },
     },
   });
 

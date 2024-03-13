@@ -12,9 +12,6 @@ type EventSpeakersSliderProps = {
         image: string | null;
         position: string | null;
       };
-      comments: {
-        rating: number;
-      }[];
     };
   }[];
 };
