@@ -450,17 +450,17 @@
       "join": "Join",
       "event_speakers": "Speakers of the event:",
       "map": "Map",
-      "popular_event_this_week": "Popular events this week",
+      "popular_event_this_week": "Popular events for this week",
       "event_description": "Description of the event:",
       "show_more": "More",
       "show_less": "Less",
-      "main_info": "General information:",
+      "main_info": "Main information:",
       "free": "Free",
       "like_event": "Like",
       "dislike_event": "Dislike"
     },
     "event_card": {
-      "already_join": "Have already join",
+      "already_join": "Already join",
       "copy_link": "Copy link"
     }
   }
