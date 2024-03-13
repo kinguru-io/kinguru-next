@@ -45,7 +45,6 @@ export function Button({
   children,
   isLoading = false,
   disabled = false,
-  label = true,
   ...restProps
 }: ButtonProps) {
   const className = cx(css({ colorPalette }), button({ variant, size }));
@@ -61,7 +60,7 @@ export function Button({
       <span
         className={css({ "&[data-loading=true]": { opacity: 0 } })}
         data-loading={isLoading}
-        data-label={label}
+        data-label
       >
         {children}
       </span>
