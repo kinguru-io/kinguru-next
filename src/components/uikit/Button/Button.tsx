@@ -32,7 +32,6 @@ export type ButtonProps = {
   iconPosition?: "left" | "right";
   colorPalette?: (typeof buttonColorPalette)[number];
   isIconButton?: boolean;
-  label?: boolean;
 } & ButtonVariantProps &
   ComponentProps<"button">;
 
