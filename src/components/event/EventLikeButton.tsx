@@ -49,6 +49,7 @@ export function EventLikeButton({
         size="iconOnly"
         onClick={toggleLike}
         disabled={isPending}
+        label={true}
         icon={
           optimisticLike ? (
             <FaHeart fill={token("colors.red.1")} />

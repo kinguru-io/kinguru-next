@@ -32,18 +32,20 @@ export type ButtonProps = {
   iconPosition?: "left" | "right";
   colorPalette?: (typeof buttonColorPalette)[number];
   isIconButton?: boolean;
+  label?: boolean;
 } & ButtonVariantProps &
   ComponentProps<"button">;
 
 export function Button({
   icon = null,
   variant,
-  iconPosition,
+  iconPosition = "left",
   colorPalette,
   size,
   children,
   isLoading = false,
   disabled = false,
+  label = true,
   ...restProps
 }: ButtonProps) {
   const className = cx(css({ colorPalette }), button({ variant, size }));
@@ -56,14 +58,13 @@ export function Button({
       {...restProps}
     >
       {!isLoading && icon && <span aria-hidden>{icon}</span>}
-      {size === "iconOnly" ? null : (
-        <span
-          className={css({ "&[data-loading=true]": { opacity: 0 } })}
-          data-loading={isLoading}
-        >
-          {children}
-        </span>
-      )}
+      <span
+        className={css({ "&[data-loading=true]": { opacity: 0 } })}
+        data-loading={isLoading}
+        data-label={label}
+      >
+        {children}
+      </span>
       {isLoading && <LoaderIcon />}
     </button>
   );

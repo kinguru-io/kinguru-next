@@ -50,6 +50,7 @@ export const SolidSM: Story = {
 export const iconButton: Story = {
   args: {
     size: "iconOnly",
+    children: "Icon button",
     icon: <FaHeart />,
   },
 };

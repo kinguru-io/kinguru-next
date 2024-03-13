@@ -107,6 +107,9 @@ export const buttonRecipe = defineRecipe({
         borderWidth: "1px",
         alignItems: "center",
         justifyContent: "center",
+        "& [data-label]": {
+          srOnly: true,
+        },
       },
     },
   },
