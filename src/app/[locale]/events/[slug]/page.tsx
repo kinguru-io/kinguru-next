@@ -44,7 +44,6 @@ export default async function EventPage({
           speaker: {
             include: {
               user: { select: { image: true, name: true, position: true } },
-              comments: { select: { rating: true } },
             },
           },
         },
