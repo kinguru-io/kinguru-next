@@ -3,29 +3,19 @@ import { getSession } from "@/auth";
 
 export async function createLikeEvent(eventId: string) {
   const session = await getSession();
-  const userId = session?.user?.id;
+  if (!session || !session.user) return;
 
-  if (!session) return;
-  const likedEvent = await prisma.userLikedEvents.findFirst({
+  await prisma.userLikedEvents.upsert({
     where: {
-      userId: userId,
-      eventId: eventId,
+      userId_eventId: {
+        eventId,
+        userId: session.user.id,
+      },
     },
-  });
-
-  if (likedEvent) return;
-  await prisma.userLikedEvents.create({
-    data: {
-      user: {
-        connect: {
-          id: userId,
-        },
-      },
-      event: {
-        connect: {
-          id: eventId,
-        },
-      },
+    update: {},
+    create: {
+      eventId,
+      userId: session.user.id,
     },
   });
 }

@@ -66,11 +66,15 @@ enum UserGender {
 }
 
 model UserLikedEvents {
-  id      String   @id @unique @default(cuid())
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  event   Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  eventId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  
+  @@id([userId, eventId])
 }
 
 model Account {
