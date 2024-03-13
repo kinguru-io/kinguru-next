@@ -1,3 +1,10 @@
+## [0.34.2](https://github.com/kinguru-io/kinguru-next/compare/v0.34.1...v0.34.2) (2024-03-13)
+
+
+### Bug Fixes
+
+* move project to esm modules ([#511](https://github.com/kinguru-io/kinguru-next/issues/511)) ([3f2a5b0](https://github.com/kinguru-io/kinguru-next/commit/3f2a5b04580defa78883d7d58dc65e25b0b2aa2e))
+
 ## [0.34.1](https://github.com/kinguru-io/kinguru-next/compare/v0.34.0...v0.34.1) (2024-03-06)
 
 
