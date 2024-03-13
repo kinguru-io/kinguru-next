@@ -5,6 +5,7 @@ export const arrowIconRecipe = defineRecipe({
   className: "arrowIcon",
   base: {
     position: "relative",
+    display: "inline-block",
     width: "8px",
     height: "8px",
     borderTop: "2px solid token(colors.neutral.1)",
