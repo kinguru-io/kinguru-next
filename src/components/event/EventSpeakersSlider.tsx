@@ -28,11 +28,11 @@ export function EventSpeakersSlider({ speakers }: EventSpeakersSliderProps) {
               comments,
             },
           }) => {
-            const ratingSum = comments.reduce((acc, item) => {
+            const rating = comments.reduce((acc, item, index, array) => {
+              if (index === array.length - 1)
+                return acc === 0 ? 0 : acc / array.length;
               return acc + item.rating;
             }, 0);
-            const rating =
-              comments.length === 0 ? 0 : ratingSum / comments.length;
             return (
               <SliderItem key={name} buttonPosition="outer">
                 <Box w="270px" color="neutral.1" key={name}>
