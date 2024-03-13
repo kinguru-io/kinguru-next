@@ -1,4 +1,5 @@
 "use server";
+
 import { getSession } from "@/auth";
 
 export async function deleteLikeEvent(eventId: string) {
@@ -6,17 +7,11 @@ export async function deleteLikeEvent(eventId: string) {
   const userId = session?.user?.id;
 
   if (!session && !userId) return;
-  const likedEvent = await prisma.userLikedEvents.findFirst({
-    where: {
-      userId: userId,
-      eventId: eventId,
-    },
-  });
 
-  if (!likedEvent) return;
-  await prisma.userLikedEvents.delete({
+  await prisma.userLikedEvents.deleteMany({
     where: {
-      id: likedEvent.id,
+      eventId: eventId,
+      userId: userId,
     },
   });
 }
