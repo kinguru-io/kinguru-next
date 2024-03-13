@@ -47,12 +47,6 @@ const nextConfig = {
     instrumentationHook: true,
     serverComponentsExternalPackages: ["oslo"],
   },
-  publicRuntimeConfig: {
-    elasticSearchApiKey: process.env.ELASTICSEARCH_API_KEY,
-    elasticSearchEndpoint: process.env.ELASTICSEARCH_ENDPOINT,
-  },
-  productionBrowserSourceMaps: true,
-  transpilePackages: ["@stylexjs/open-props"],
 };
 
 export default withNextIntl()(nextConfig);
