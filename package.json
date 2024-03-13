@@ -108,6 +108,7 @@
     "@trpc/react-query": "^10.45.1",
     "@trpc/server": "^10.45.1",
     "chakra-react-select": "^4.7.6",
+    "date-fns": "^3.4.0",
     "formik": "^2.4.5",
     "framer-motion": "^11.0.8",
     "mapbox-gl": "^3.2.0",
