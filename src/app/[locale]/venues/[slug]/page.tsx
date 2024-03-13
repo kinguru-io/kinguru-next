@@ -53,8 +53,8 @@ export default async function VenuePage({
         </Box>
         <Description
           description={description}
-          showLessTranslate={t("show_less")}
-          showMoreTranslate={t("show_more")}
+          showLessLabel={t("show_less")}
+          showMoreLabel={t("show_more")}
         />
       </VenueMainInfoLayout>
 

@@ -165,8 +165,8 @@ export default async function EventPage({
         </VStack>
         <Description
           description={description}
-          showLessTranslate={t("show_less")}
-          showMoreTranslate={t("show_more")}
+          showLessLabel={t("show_less")}
+          showMoreLabel={t("show_more")}
           maxW="660px"
         />
         <HStack gap="15px">

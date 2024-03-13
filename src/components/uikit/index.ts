@@ -10,3 +10,4 @@ export * from "./Select";
 export * from "./Collapse";
 export * from "./PremiseCard";
 export * from "./Slider";
+export * from "./ArrowIcon";

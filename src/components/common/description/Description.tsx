@@ -1,22 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Button, TextCollapse } from "../../uikit";
-import { ArrowIcon } from "../../uikit/ArrowIcon/ArrowIcon";
+import { Button, TextCollapse, ArrowIcon } from "@/components/uikit";
 import { Box, VStack } from "~/styled-system/jsx";
 
 type DescriptionProps = {
   description: string;
   maxW?: string;
-  showMoreTranslate: string;
-  showLessTranslate: string;
+  showMoreLabel: string;
+  showLessLabel: string;
 };
 
 export function Description({
   description,
   maxW,
-  showLessTranslate,
-  showMoreTranslate,
+  showLessLabel,
+  showMoreLabel,
 }: DescriptionProps) {
   const [isShown, setIsShown] = useState(false);
 
@@ -38,7 +37,7 @@ export function Description({
           iconPosition="right"
           onClick={handleExpandClick}
         >
-          {isShown ? showLessTranslate : showMoreTranslate}
+          {isShown ? showLessLabel : showMoreLabel}
         </Button>
       </Box>
     </VStack>
