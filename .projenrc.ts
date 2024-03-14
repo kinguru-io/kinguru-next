@@ -253,6 +253,8 @@ project.buildWorkflow?.addPostBuildJob("stage-deploy", {
     contents: JobPermission.WRITE,
     packages: JobPermission.WRITE,
     idToken: JobPermission.WRITE,
+    issues: JobPermission.WRITE,
+    pullRequests: JobPermission.WRITE,
   },
   env: {
     CI: "true",

@@ -117,6 +117,8 @@ jobs:
       contents: write
       packages: write
       id-token: write
+      issues: write
+      pull-requests: write
     environment:
       name: staging
       url: https://staging.eventify.today
