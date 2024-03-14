@@ -262,7 +262,7 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
   steps: [
     {
       name: "Checkout",
-      uses: "actions/checkout@v3",
+      uses: "actions/checkout@v4",
       with: {
         "fetch-depth": 0,
       },
