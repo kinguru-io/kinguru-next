@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { IoShareOutline, IoTimeOutline } from "react-icons/io5";
 import { MdOutlineCalendarMonth } from "react-icons/md";
-import { useClipboard } from "use-clipboard-copy";
 import { EventLikeButton } from "./EventLikeButton";
 import {
   AvatarGroup,
@@ -20,7 +19,6 @@ import {
   Dropdown,
   DropdownInitiator,
   DropdownMenu,
-  Input,
   Tag,
 } from "../uikit";
 import { DefaultImage } from "../uikit/DefaultImage/DefaultImage";
@@ -61,7 +59,6 @@ export function EventCardView({
   createLikeAction,
   deleteLikeAction,
 }: EventCardViewProps) {
-  const clipboard = useClipboard();
   const [placeAddress, setPlaceAddress] = useState("");
   const { retrieve } = useSearchBoxCore({ accessToken });
   const t = useTranslations("event");
@@ -74,6 +71,11 @@ export function EventCardView({
       setPlaceAddress(address);
     });
   }, [mapboxId]);
+
+  const cardLink =
+    typeof window !== "undefined"
+      ? `${window.location.href.split("/").slice(0, -1).join("/")}/${slug}`
+      : "";
 
   const mainInfo = [
     {
@@ -146,17 +148,10 @@ export function EventCardView({
               <IoShareOutline size="14px" />
             </DropdownInitiator>
             <DropdownMenu>
-              <Input
-                type="text"
-                disabled
-                value={
-                  typeof window !== "undefined"
-                    ? `${window.location.href.split("/").slice(0, -1).join("/")}/${slug}`
-                    : ""
-                }
-                ref={clipboard.target}
-              />
-              <Button onClick={clipboard.copy} variant="ghost">
+              <Button
+                onClick={() => navigator.clipboard.writeText(cardLink)}
+                variant="ghost"
+              >
                 {t("event_card.copy_link")}
               </Button>
             </DropdownMenu>
