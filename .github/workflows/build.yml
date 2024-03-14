@@ -109,8 +109,8 @@ jobs:
           git add .
           git commit -s -m "chore: self mutation"
           git push origin HEAD:$PULL_REQUEST_REF
-  stage-deploy:
-    name: Deploy on staging
+  staging-deploy:
+    name: staging-deploy
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -155,6 +155,9 @@ jobs:
           WERF_ENV: staging
           WERF_SET_1: image.pullSecret=github-cr-secret
           WERF_SET_2: ingress.hostname=staging.eventify.today
+          WERF_SET_3: replicas.default=1
+          WERF_SET_4: replicas.min=1
+          WERF_SET_5: replicas.max=2
           SITE_URL: https://staging.eventify.today
           DATABASE_URL: ${{ secrets.DB_URL }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
