@@ -5,6 +5,7 @@ import { headerSlot } from "./src/components/Header/Header.recipe";
 import { arrowIconRecipe } from "./src/components/uikit/ArrowIcon/ArrowIcon.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
+import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
@@ -45,6 +46,7 @@ export default defineConfig({
         header: headerSlot,
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
+        checkbox: checkboxSlot,
       },
       tokens: {
         gradients: {
@@ -125,6 +127,7 @@ export default defineConfig({
     extend: {
       hoverEnabled: "&:not([disabled]):hover",
       activeEnabled: "&:not([disabled]):active",
+      peerCheckedAndDisabled: ".peer:is(:checked:disabled) ~ &",
     },
   },
 

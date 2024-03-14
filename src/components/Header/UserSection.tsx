@@ -32,12 +32,13 @@ export async function UserSection() {
       <DropdownMenu>
         {session ? (
           <>
-            <SignOutButton>{t("sign_out")}</SignOutButton>
+            <Link href="/dashboard">{t("your_profile")}</Link>
             {session.user?.role === "organization" && (
               <Link href="/profile/organization/register">
                 {t("add_organization")}
               </Link>
             )}
+            <SignOutButton>{t("sign_out")}</SignOutButton>
           </>
         ) : (
           <>

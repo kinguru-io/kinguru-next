@@ -68,12 +68,16 @@ export function HeroContent() {
           </Text>
           <Skeleton isLoaded={status !== "loading"} my={10} marginX={"auto"}>
             {status === "authenticated" ? (
-              <Flex>
+              <Flex
+                direction={["column", "row"]}
+                alignItems={["center", "inherit"]}
+                gap={[2, 0]}
+              >
                 <Button
                   as={Link}
                   variant={"primary"}
                   href={"/places/create"}
-                  mr={3}
+                  mr={[0, 3]}
                 >
                   {t("hero.create_place")}
                 </Button>
