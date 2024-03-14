@@ -10,7 +10,7 @@ import {
   EventSpeakersSlider,
 } from "@/components/event";
 import { EventModal } from "@/components/event/EventModal";
-import { AvatarGroup, Button, Tag } from "@/components/uikit";
+import { AvatarGroup, Tag } from "@/components/uikit";
 import { DefaultImage } from "@/components/uikit/DefaultImage/DefaultImage";
 import {
   EventMainInfoLayout,

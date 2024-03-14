@@ -1,37 +1,51 @@
 import React from "react";
+import { RxCross2 } from "react-icons/rx";
 import { css } from "~/styled-system/css";
+import { Float } from "~/styled-system/jsx";
 
 type ModalProps = {
   children: React.ReactNode;
 };
 
 const DropdownContext = React.createContext({
-  hidden: true,
-  setHidden: (_value: boolean) => {},
+  open: false,
+  setOpen: (_value: boolean) => {},
 });
 
 export function Modal({ children }: ModalProps) {
-  const [hidden, setHidden] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <DropdownContext.Provider value={{ hidden, setHidden }}>
+    <DropdownContext.Provider value={{ open, setOpen }}>
       {children}
     </DropdownContext.Provider>
   );
 }
 
 export function ModalInitiator({ children }: ModalProps) {
-  const { setHidden, hidden } = React.useContext(DropdownContext);
-  return <div onClick={() => setHidden(!hidden)}>{children}</div>;
+  const { setOpen, open } = React.useContext(DropdownContext);
+  return <div onClick={() => setOpen(!open)}>{children}</div>;
 }
 
 export function ModalWindow({ children }: ModalProps) {
-  const { hidden } = React.useContext(DropdownContext);
+  const { open, setOpen } = React.useContext(DropdownContext);
   return (
     <dialog
-      open={hidden}
-      className={css({ bg: "gray", w: "300px", m: "auto", h: "100px" })}
+      open={open}
+      className={css({
+        zIndex: "modal",
+        bg: "neutral.3",
+        position: "fixed",
+        borderRadius: "10px",
+        top: "50%",
+        left: "50%",
+        transform: "translateX(-50%) translateY(-50%)",
+        p: "18px",
+      })}
     >
+      <Float placement="top-end" offset="18px" translate="none">
+        <RxCross2 size="20px" onClick={() => setOpen(!open)} />
+      </Float>
       {children}
     </dialog>
   );

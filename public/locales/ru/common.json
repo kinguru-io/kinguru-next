@@ -319,7 +319,8 @@
       "main_info": "Основная информация",
       "free": "Бесплатно",
       "like_event": "Нравится",
-      "dislike_event": "Не нравится"
+      "dislike_event": "Не нравится",
+      "buy_a_ticket": "Покупка билета на мероприятие"
     },
     "event_card": {
       "already_join": "Уже присоединились",

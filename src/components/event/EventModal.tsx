@@ -7,6 +7,7 @@ import CheckoutForm from "../common/checkout/CheckoutForm";
 import { Button } from "../uikit";
 import { Modal, ModalInitiator, ModalWindow } from "../uikit/Modal";
 import { getTicketIntent } from "@/lib/actions/event/joinEvent/ticketIntent";
+import { Box, VStack } from "~/styled-system/jsx";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
@@ -21,7 +22,7 @@ export function EventModal({ eventId }: EventModalProps) {
   const [clientSecret, setClientSecret] = useState("");
 
   const joinEvent = async () => {
-    const { clientSecret: secret, id } = await getTicketIntent(eventId);
+    const { clientSecret: secret } = await getTicketIntent(eventId);
     setClientSecret(secret);
   };
 
@@ -40,10 +41,14 @@ export function EventModal({ eventId }: EventModalProps) {
             </Button>
           </ModalInitiator>
           <ModalWindow>
-            <h1>asdasdas</h1>
-            <Elements stripe={stripePromise} options={{ clientSecret }}>
-              <CheckoutForm succeedRefetch={() => {}} />
-            </Elements>
+            <VStack gap="12px">
+              <h4>{t("buy_a_ticket")}</h4>
+              <Box bg="neutral.5" borderRadius="10px">
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                  <CheckoutForm succeedRefetch={() => {}} />
+                </Elements>
+              </Box>
+            </VStack>
           </ModalWindow>
         </Modal>
       ) : (
