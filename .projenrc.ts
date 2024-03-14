@@ -242,8 +242,8 @@ project.addScripts({
   seed: 'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node prisma/seed.ts',
 });
 
-project.buildWorkflow?.addPostBuildJob("stage-deploy", {
-  name: "Deploy on staging",
+project.buildWorkflow?.addPostBuildJob("staging-deploy", {
+  name: "staging-deploy",
   runsOn: ["ubuntu-latest"],
   environment: {
     name: "staging",
@@ -297,6 +297,9 @@ werf converge --atomic`,
         WERF_ENV: "staging",
         WERF_SET_1: "image.pullSecret=github-cr-secret",
         WERF_SET_2: "ingress.hostname=staging.eventify.today",
+        WERF_SET_3: "replicas.default=1",
+        WERF_SET_4: "replicas.min=1",
+        WERF_SET_5: "replicas.max=2",
         SITE_URL: "https://staging.eventify.today",
         DATABASE_URL: "${{ secrets.DB_URL }}",
         NEXT_PUBLIC_GA_ID: "${{ secrets.GA_ID }}",
