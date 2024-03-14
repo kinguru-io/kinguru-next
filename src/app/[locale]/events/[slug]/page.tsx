@@ -9,6 +9,7 @@ import {
   EventMainInfo,
   EventSpeakersSlider,
 } from "@/components/event";
+import { EventModal } from "@/components/event/EventModal";
 import { AvatarGroup, Button, Tag } from "@/components/uikit";
 import { DefaultImage } from "@/components/uikit/DefaultImage/DefaultImage";
 import {
@@ -150,9 +151,7 @@ export default async function EventPage({
                 avatars={usersOnEvent.map(({ user }) => user)}
               />
             </Flex>
-            <Button size="lg" variant="solid" colorPalette="primary">
-              {t("join")}
-            </Button>
+            <EventModal eventId={id} />
           </Flex>
         </Flex>
         <VStack gap="20px" alignItems="baseline">
