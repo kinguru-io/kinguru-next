@@ -6,7 +6,8 @@ node_modules
 .env
 CHANGELOG.md
 docker-compose.yml
+LICENSE
 README.md
-release.config.js
+release.config.cjs
 setup-debezium.http
 public/mockServiceWorker.js
