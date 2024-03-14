@@ -167,5 +167,5 @@ jobs:
       - name: Create linked comment on PR
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          issue-number: ${{ github.event.number }}
           body: "Staging deployed successfully: https://staging.eventify.today"
