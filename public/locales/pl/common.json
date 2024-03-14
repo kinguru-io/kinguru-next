@@ -256,7 +256,8 @@
       "free": "Free",
       "like_event": "Like",
       "dislike_event": "Dislike",
-      "buy_a_ticket": "Buying a ticket to the event"
+      "buy_a_ticket": "Buying a ticket to the event",
+      "leave": "Leave"
     },
     "event_card": {
       "already_join": "Already join",

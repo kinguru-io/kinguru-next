@@ -7,7 +7,7 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-const DropdownContext = React.createContext({
+export const ModalContext = React.createContext({
   open: false,
   setOpen: (_value: boolean) => {},
 });
@@ -16,24 +16,20 @@ export function Modal({ children }: ModalProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <DropdownContext.Provider value={{ open, setOpen }}>
+    <ModalContext.Provider value={{ open, setOpen }}>
       {children}
-    </DropdownContext.Provider>
+    </ModalContext.Provider>
   );
 }
 
 export function ModalInitiator({ children }: ModalProps) {
-  const { setOpen, open } = React.useContext(DropdownContext);
-  if (open) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+  const { setOpen, open } = React.useContext(ModalContext);
+
   return <div onClick={() => setOpen(!open)}>{children}</div>;
 }
 
 export function ModalWindow({ children }: ModalProps) {
-  const { open, setOpen } = React.useContext(DropdownContext);
+  const { open, setOpen } = React.useContext(ModalContext);
   return (
     <dialog
       open={open}

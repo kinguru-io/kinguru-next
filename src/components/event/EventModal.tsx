@@ -2,7 +2,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckoutForm from "../common/checkout/CheckoutForm";
 import { Button } from "../uikit";
 import { Modal, ModalInitiator, ModalWindow } from "../uikit/Modal";
@@ -15,52 +15,85 @@ const stripePromise = loadStripe(
 
 type EventModalProps = {
   eventId: string;
+  joinEventAction: Function;
+  leaveEventAction: Function;
+  isJoinEventAction: Function;
 };
 
-export function EventModal({ eventId }: EventModalProps) {
+export function EventModal({
+  eventId,
+  joinEventAction,
+  leaveEventAction,
+  isJoinEventAction,
+}: EventModalProps) {
   const t = useTranslations("event.future_event_page");
   const [clientSecret, setClientSecret] = useState("");
+  const [isJoin, setJoin] = useState(false);
 
-  const joinEvent = async () => {
+  const reloadPage = () => {
+    typeof window !== "undefined" ? window.location.reload() : null;
+  };
+
+  const successPay = async () => {
+    await joinEventAction(eventId);
+    setJoin(true);
+    reloadPage();
+  };
+
+  const getIsJoinInfo = async () => {
+    setJoin(await isJoinEventAction(eventId));
+  };
+
+  const leaveFromEvent = async () => {
+    await leaveEventAction(eventId);
+    setJoin(false);
+    reloadPage();
+  };
+
+  const getClientSecret = async () => {
     const { clientSecret: secret } = await getTicketIntent(eventId);
     setClientSecret(secret);
   };
 
+  useEffect(() => {
+    void getIsJoinInfo();
+  }, []);
+
   return (
-    <>
-      {clientSecret !== "" ? (
-        <Modal>
-          <ModalInitiator>
-            <Button
-              size="lg"
-              variant="solid"
-              colorPalette="primary"
-              onClick={joinEvent}
-            >
-              {t("join")}
-            </Button>
-          </ModalInitiator>
-          <ModalWindow>
-            <VStack gap="12px">
-              <h4>{t("buy_a_ticket")}</h4>
-              <Box bg="neutral.5" borderRadius="10px">
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm succeedRefetch={() => {}} />
-                </Elements>
-              </Box>
-            </VStack>
-          </ModalWindow>
-        </Modal>
+    <Modal>
+      {!isJoin ? (
+        <ModalInitiator>
+          <Button
+            size="lg"
+            variant="solid"
+            colorPalette="primary"
+            onClick={getClientSecret}
+          >
+            {t("join")}
+          </Button>
+        </ModalInitiator>
       ) : (
         <Button
           size="lg"
           variant="solid"
           colorPalette="primary"
-          onClick={joinEvent}
+          onClick={leaveFromEvent}
         >
-          {t("join")}
+          {t("leave")}
         </Button>
       )}
-    </>
+      {clientSecret !== "" ? (
+        <ModalWindow>
+          <VStack gap="12px">
+            <h4>{t("buy_a_ticket")}</h4>
+            <Box bg="neutral.5" borderRadius="10px">
+              <Elements stripe={stripePromise} options={{ clientSecret }}>
+                <CheckoutForm succeedRefetch={successPay} />
+              </Elements>
+            </Box>
+          </VStack>
+        </ModalWindow>
+      ) : null}
+    </Modal>
   );
 }
