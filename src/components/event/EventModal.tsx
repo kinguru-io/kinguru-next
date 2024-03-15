@@ -2,7 +2,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import CheckoutForm from "../common/checkout/CheckoutForm";
 import { Button } from "../uikit";
 import { Modal, ModalInitiator, ModalWindow } from "../uikit/Modal";
@@ -29,6 +29,7 @@ export function EventModal({
   const t = useTranslations("event.future_event_page");
   const [clientSecret, setClientSecret] = useState("");
   const [isJoin, setJoin] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const reloadPage = () => {
     typeof window !== "undefined" ? window.location.reload() : null;
@@ -45,14 +46,18 @@ export function EventModal({
   };
 
   const leaveFromEvent = async () => {
-    await leaveEventAction(eventId);
-    setJoin(false);
-    reloadPage();
+    startTransition(async () => {
+      await leaveEventAction(eventId);
+      setJoin(false);
+      reloadPage();
+    });
   };
 
-  const getClientSecret = async () => {
-    const { clientSecret: secret } = await getTicketIntent(eventId);
-    setClientSecret(secret);
+  const getClientSecret = () => {
+    startTransition(async () => {
+      const { clientSecret: secret } = await getTicketIntent(eventId);
+      setClientSecret(secret);
+    });
   };
 
   useEffect(() => {
@@ -67,6 +72,7 @@ export function EventModal({
             size="lg"
             variant="solid"
             colorPalette="primary"
+            isLoading={isPending}
             onClick={getClientSecret}
           >
             {t("join")}
@@ -77,6 +83,7 @@ export function EventModal({
           size="lg"
           variant="solid"
           colorPalette="primary"
+          disabled={isPending}
           onClick={leaveFromEvent}
         >
           {t("leave")}
