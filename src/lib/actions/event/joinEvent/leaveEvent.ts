@@ -1,8 +1,10 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { getSession } from "@/auth";
 
 export async function leaveEvent(eventId: string) {
+  revalidateTag("eventJoin");
   const session = await getSession();
 
   if (!session || !session.user?.id) {

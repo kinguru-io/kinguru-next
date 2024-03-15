@@ -4,8 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, useTransition } from "react";
 import CheckoutForm from "../common/checkout/CheckoutForm";
-import { Button } from "../uikit";
-import { Modal, ModalInitiator, ModalWindow } from "../uikit/Modal";
+import { Button, Modal, ModalInitiator, ModalWindow } from "../uikit";
 import { getTicketIntent } from "@/lib/actions/event/joinEvent/ticketIntent";
 import { Box, VStack } from "~/styled-system/jsx";
 
@@ -31,14 +30,10 @@ export function EventModal({
   const [isJoin, setJoin] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const reloadPage = () => {
-    typeof window !== "undefined" ? window.location.reload() : null;
-  };
-
-  const successPay = async () => {
-    await joinEventAction(eventId);
+  const joinEvent = async () => {
+    await joinEventAction(eventId, { next: { tags: ["eventJoin"] } });
     setJoin(true);
-    reloadPage();
+    setClientSecret("");
   };
 
   const getIsJoinInfo = async () => {
@@ -47,9 +42,8 @@ export function EventModal({
 
   const leaveFromEvent = async () => {
     startTransition(async () => {
-      await leaveEventAction(eventId);
+      await leaveEventAction(eventId, { next: { tags: ["eventJoin"] } });
       setJoin(false);
-      reloadPage();
     });
   };
 
@@ -95,7 +89,7 @@ export function EventModal({
             <h4>{t("buy_a_ticket")}</h4>
             <Box bg="neutral.5" borderRadius="10px">
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm succeedRefetch={successPay} />
+                <CheckoutForm succeedRefetch={joinEvent} />
               </Elements>
             </Box>
           </VStack>

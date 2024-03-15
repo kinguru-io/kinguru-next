@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
 import { css } from "~/styled-system/css";
@@ -7,7 +8,7 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-export const ModalContext = React.createContext({
+const ModalContext = React.createContext({
   open: false,
   setOpen: (_value: boolean) => {},
 });
