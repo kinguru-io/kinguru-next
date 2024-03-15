@@ -37,7 +37,7 @@ export function TimeSlot({
       gap: "3px",
       borderRadius: "6px",
       padding: "4px",
-      color: "neutral.1",
+      color: "neutral.0",
       bgColor: "neutral.5",
       fontWeight: "normal",
       _hoverEnabled: {
@@ -70,14 +70,16 @@ export function TimeSlot({
       />
       <span
         className={css({
-          colorPalette,
           textStyle: "body.3",
           borderRadius: "3px",
           paddingInline: "2px",
-          bgColor:
-            colorPalette === "secondary" ? "transparent" : "colorPalette",
-          color: colorPalette === "secondary" ? "neutral.1" : "neutral.5",
+          "&[data-colored=true]": {
+            colorPalette,
+            bgColor: "colorPalette",
+            color: "neutral.5",
+          },
         })}
+        data-colored={colorPalette !== "secondary"}
       >
         {priceFormatter.format(price)}
       </span>
