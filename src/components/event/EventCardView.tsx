@@ -72,11 +72,6 @@ export function EventCardView({
     });
   }, [mapboxId]);
 
-  const cardLink =
-    typeof window !== "undefined"
-      ? `${window.location.href.split("/").slice(0, -1).join("/")}/${slug}`
-      : "";
-
   const mainInfo = [
     {
       icon: <MdOutlineCalendarMonth />,
@@ -149,7 +144,10 @@ export function EventCardView({
             </DropdownInitiator>
             <DropdownMenu>
               <Button
-                onClick={() => navigator.clipboard.writeText(cardLink)}
+                onClick={async () => {
+                  const link = `${globalThis.location.origin}/${locale}/events/${slug}`;
+                  await navigator.clipboard.writeText(link);
+                }}
                 variant="ghost"
               >
                 {t("event_card.copy_link")}
