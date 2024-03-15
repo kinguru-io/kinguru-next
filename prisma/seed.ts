@@ -114,7 +114,7 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
 };
 
 async function main() {
-  const events = new Array(1000)
+  const events = new Array(50)
     .fill({})
     .map(
       () =>
@@ -288,7 +288,7 @@ async function main() {
                 participant: {
                   create: pickUniqueValues(
                     eventsCreated,
-                    Math.round(Math.random() * (eventsCreated.length - 400)),
+                    Math.round(Math.random() * (eventsCreated.length - 20)),
                   ).map((unique) => ({
                     event: {
                       connect: {
