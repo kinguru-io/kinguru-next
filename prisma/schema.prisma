@@ -383,6 +383,7 @@ model Venue {
 
 model Premise {
   id          String             @id @default(cuid())
+  slug        String             
   venue       Venue              @relation(fields: [venueId], references: [id])
   venueId     String
   name        String

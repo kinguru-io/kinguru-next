@@ -80,28 +80,34 @@ const premiseOpenHoursSchema = (idx: number) => {
 
 const premiseSchemaWithVenueConnection = (
   venueId: string,
-): Prisma.PremiseCreateInput => ({
-  name: `${faker.commerce.department()} room`,
-  description: faker.lorem.paragraph(5),
-  area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
-  venue: {
-    connect: {
-      id: venueId,
+): Prisma.PremiseCreateInput => {
+  const name = `${faker.commerce.department()} room`;
+  return {
+    name: name,
+    slug: slugify(name),
+    description: faker.lorem.paragraph(5),
+    area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
+    venue: {
+      connect: {
+        id: venueId,
+      },
     },
-  },
-  resources: {
-    createMany: {
-      data: Array.from({ length: 5 }, () => ({
-        url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
-      })),
+    resources: {
+      createMany: {
+        data: Array.from({ length: 5 }, () => ({
+          url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
+        })),
+      },
     },
-  },
-  openHours: {
-    createMany: {
-      data: Array.from({ length: 7 }, (_, idx) => premiseOpenHoursSchema(idx)),
+    openHours: {
+      createMany: {
+        data: Array.from({ length: 7 }, (_, idx) =>
+          premiseOpenHoursSchema(idx),
+        ),
+      },
     },
-  },
-});
+  };
+};
 
 const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   return Array.from(
