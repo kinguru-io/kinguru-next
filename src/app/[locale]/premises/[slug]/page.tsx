@@ -1,8 +1,13 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PremiseAttributes } from "@/components/premise/PremiseAttributes";
+import { getTranslations } from "next-intl/server";
+import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
+import { PremiseAttributes } from "@/components/premise/";
 import { Slider, SliderItem } from "@/components/uikit";
-import { PremiseMainInfoLayout } from "@/layout/block/premise/PremiseMainInfoLayout";
+import {
+  PremiseMainInfoLayout,
+  PremiseMapLayout,
+} from "@/layout/block/premise/";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, VStack } from "~/styled-system/jsx";
 
@@ -27,6 +32,7 @@ export default async function PremisePage({
   }
 
   const { name, venue, resources, openHours } = premise;
+  const t = await getTranslations("premise");
 
   const hoursWithMinPrices = await Promise.allSettled(
     openHours.map((openHour) =>
@@ -67,7 +73,19 @@ export default async function PremisePage({
         </Box>
         {/*TODO: insert dropdown component */}
       </PremiseMainInfoLayout>
+
       <PremiseAttributes mapboxId={venue.locationMapboxId} price={100} />
+
+      <PremiseMapLayout>
+        <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
+        <AspectRatio ratio={16 / 9} marginBlockStart="50px">
+          <SingleMarkerMap
+            mapboxId={venue.locationMapboxId}
+            image={venue.image}
+            name={name}
+          />
+        </AspectRatio>
+      </PremiseMapLayout>
     </>
   );
 }

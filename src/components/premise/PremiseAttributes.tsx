@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { BsGeoAlt } from "react-icons/bs";
 import { IoServerOutline } from "react-icons/io5";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
-import { PremiseAttributesLayout } from "@/layout/block/premise/PremiseAttributesLayout";
+import { PremiseAttributesLayout } from "@/layout/block/premise";
 import { HStack } from "~/styled-system/jsx";
 
 type PremiseAttributesProps = {
