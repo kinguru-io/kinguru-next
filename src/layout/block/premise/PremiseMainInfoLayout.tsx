@@ -1,4 +1,4 @@
-import { Container, VStack } from "~/styled-system/jsx";
+import { Container, VStack, Box } from "~/styled-system/jsx";
 
 export function PremiseMainInfoLayout({
   children,
@@ -6,10 +6,12 @@ export function PremiseMainInfoLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Container paddingBlock="60px 34px">
-      <section>
-        <VStack gap="30px">{children}</VStack>
-      </section>
-    </Container>
+    <Box bg="neutral.4" width="100%">
+      <Container paddingBlock="60px 34px">
+        <section>
+          <VStack gap="30px">{children}</VStack>
+        </section>
+      </Container>
+    </Box>
   );
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { PremiseAttributes } from "@/components/premise/PremiseAttributes";
 import { Slider, SliderItem } from "@/components/uikit";
 import { PremiseMainInfoLayout } from "@/layout/block/premise/PremiseMainInfoLayout";
 import { css } from "~/styled-system/css";
@@ -17,6 +18,7 @@ export default async function PremisePage({
     include: {
       venue: true,
       resources: true,
+      openHours: { include: { pricing: { select: { priceForHour: true } } } },
     },
   });
 
@@ -24,7 +26,27 @@ export default async function PremisePage({
     notFound();
   }
 
-  const { name, venue, resources } = premise;
+  const { name, venue, resources, openHours } = premise;
+
+  const hoursWithMinPrices = await Promise.allSettled(
+    openHours.map((openHour) =>
+      prisma.premisePricing
+        .aggregate({
+          where: {
+            premiseOpenHoursId: openHour.id,
+          },
+          _min: { priceForHour: true },
+        })
+        .then(({ _min: { priceForHour } }) => ({ priceForHour })),
+    ),
+  );
+
+  // TODO: add profilling
+
+  // const minPrice = Math.min(
+  //   ...profilingHoursWithMinPrices.map((hour) => hour.value.priceForHour),
+  // );
+
   return (
     <>
       <PremiseMainInfoLayout>
@@ -45,6 +67,7 @@ export default async function PremisePage({
         </Box>
         {/*TODO: insert dropdown component */}
       </PremiseMainInfoLayout>
+      <PremiseAttributes mapboxId={venue.locationMapboxId} price={100} />
     </>
   );
 }
