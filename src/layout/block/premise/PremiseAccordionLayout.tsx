@@ -6,7 +6,7 @@ export function PremiseAccordionLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Container paddingBlock="74px 152px" maxW="6xl">
+    <Container paddingBlock="74px 152px">
       <section>
         <VStack w="100%" gap="15px">
           {children}

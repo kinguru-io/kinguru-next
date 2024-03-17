@@ -13,6 +13,7 @@ import {
 } from "@/components/uikit";
 import {
   PremiseAccordionLayout,
+  PremiseCalendarLayout,
   PremiseMainInfoLayout,
   PremiseMapLayout,
 } from "@/layout/block/premise/";
@@ -115,6 +116,11 @@ export default async function PremisePage({
           ))}
         </Accordion>
       </PremiseAccordionLayout>
+
+      <PremiseCalendarLayout>
+        <></>
+        // TODO: insert calendar component
+      </PremiseCalendarLayout>
 
       <PremiseMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
