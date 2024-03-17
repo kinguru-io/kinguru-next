@@ -247,6 +247,10 @@
     "from": "from {price}",
     "see_all": "See all",
     "hide": "Hide",
-    "map": "Map"
+    "map": "Map",
+    "amenities_and_facilities": "Amenities and facilities",
+    "booking_cancellation_terms": "Booking cancellation terms",
+    "premise_rules": "Premise rules",
+    "how_to_get_there": "How to get there"
   }
 }

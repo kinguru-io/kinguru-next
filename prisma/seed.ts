@@ -87,6 +87,26 @@ const premiseSchemaWithVenueConnection = (
     slug: slugify(name),
     description: faker.lorem.paragraph(5),
     area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
+    amenities: faker.helpers.arrayElements(
+      [
+        "Wi-FI",
+        "Экран проекционный",
+        "Микрофон",
+        "Колонки",
+        "Маркеры",
+        "Флипчарт",
+        "Wi-FI",
+        "Экран проекционный",
+        "Микрофон",
+        "Колонки",
+        "Маркеры",
+        "Флипчарт",
+      ],
+      { min: 3, max: 12 },
+    ),
+    direction: faker.lorem.paragraph(5),
+    rules: faker.lorem.paragraph(5),
+    bookingCancelTerm: faker.lorem.paragraph(5),
     venue: {
       connect: {
         id: venueId,

@@ -305,6 +305,10 @@
     "from": "от {price}",
     "see_all": "Смотреть все",
     "hide": "Скрыть",
-    "map": "Карта"
+    "map": "Карта",
+    "amenities_and_facilities": "Оснащения и удобства",
+    "booking_cancellation_terms": "Условия отмены бронирования",
+    "premise_rules": "Правила зала",
+    "how_to_get_there": "Как добраться"
   }
 }

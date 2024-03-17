@@ -2,9 +2,17 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
-import { PremiseAttributes } from "@/components/premise/";
-import { Slider, SliderItem } from "@/components/uikit";
+import { PremiseAttributes, PremiseAmenities } from "@/components/premise/";
 import {
+  AccordinItemToggle,
+  Accordion,
+  AccordionItem,
+  AccordionItemContent,
+  Slider,
+  SliderItem,
+} from "@/components/uikit";
+import {
+  PremiseAccordionLayout,
   PremiseMainInfoLayout,
   PremiseMapLayout,
 } from "@/layout/block/premise/";
@@ -31,7 +39,16 @@ export default async function PremisePage({
     notFound();
   }
 
-  const { name, venue, resources, openHours } = premise;
+  const {
+    name,
+    venue,
+    resources,
+    openHours,
+    rules,
+    amenities,
+    direction,
+    bookingCancelTerm,
+  } = premise;
   const t = await getTranslations("premise");
 
   const hoursWithMinPrices = await Promise.allSettled(
@@ -52,6 +69,16 @@ export default async function PremisePage({
   // const minPrice = Math.min(
   //   ...profilingHoursWithMinPrices.map((hour) => hour.value.priceForHour),
   // );
+
+  const accordionItems = [
+    {
+      title: t("amenities_and_facilities"),
+      description: <PremiseAmenities amenities={amenities} />,
+    },
+    { title: t("booking_cancellation_terms"), description: bookingCancelTerm },
+    { title: t("premise_rules"), description: rules },
+    { title: t("how_to_get_there"), description: direction },
+  ];
 
   return (
     <>
@@ -75,6 +102,19 @@ export default async function PremisePage({
       </PremiseMainInfoLayout>
 
       <PremiseAttributes mapboxId={venue.locationMapboxId} price={100} />
+
+      <PremiseAccordionLayout>
+        <Accordion>
+          {accordionItems.map(({ title, description }) => (
+            <AccordionItem key={title}>
+              <AccordinItemToggle textStyle="heading.3">
+                {title}
+              </AccordinItemToggle>
+              <AccordionItemContent>{description}</AccordionItemContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </PremiseAccordionLayout>
 
       <PremiseMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
