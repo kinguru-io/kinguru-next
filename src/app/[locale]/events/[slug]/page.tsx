@@ -18,11 +18,7 @@ import {
   EventPopularEventsLayout,
 } from "@/layout/block/event";
 import { createLikeEvent, deleteLikeEvent, isLikedEvent } from "@/lib/actions/";
-import {
-  isJoinEvent,
-  joinEvent,
-  leaveEvent,
-} from "@/lib/actions/event/joinEvent";
+import { isJoinEvent, leaveEvent } from "@/lib/actions/event/joinEvent";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
 import {
@@ -159,7 +155,6 @@ export default async function EventPage({
             <EventModal
               eventId={id}
               isJoinEventAction={isJoinEvent}
-              joinEventAction={joinEvent}
               leaveEventAction={leaveEvent}
             />
           </Flex>

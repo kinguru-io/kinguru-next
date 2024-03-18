@@ -14,14 +14,12 @@ const stripePromise = loadStripe(
 
 type EventModalProps = {
   eventId: string;
-  joinEventAction: Function;
   leaveEventAction: Function;
   isJoinEventAction: Function;
 };
 
 export function EventModal({
   eventId,
-  joinEventAction,
   leaveEventAction,
   isJoinEventAction,
 }: EventModalProps) {
@@ -31,7 +29,6 @@ export function EventModal({
   const [isPending, startTransition] = useTransition();
 
   const joinEvent = async () => {
-    await joinEventAction(eventId, { next: { tags: ["eventJoin"] } });
     setJoin(true);
     setClientSecret("");
   };
