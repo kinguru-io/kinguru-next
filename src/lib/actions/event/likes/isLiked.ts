@@ -1,7 +1,8 @@
 "use server";
 import { getSession } from "@/auth";
+import prisma from "@/server/prisma.ts";
 
-export async function isLikedEvent(eventId: string) {
+export async function isLikedAction(eventId: string) {
   const session = await getSession();
   if (!session || !session.user) return false;
 
@@ -16,3 +17,5 @@ export async function isLikedEvent(eventId: string) {
 
   return !!event;
 }
+
+export type IsLikedAction = typeof isLikedAction;

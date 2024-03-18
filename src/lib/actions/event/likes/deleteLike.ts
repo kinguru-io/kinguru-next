@@ -1,8 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getSession } from "@/auth";
+import prisma from "@/server/prisma.ts";
 
-export async function deleteLikeEvent(eventId: string) {
+export async function deleteLikeAction(eventId: string) {
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -16,4 +18,8 @@ export async function deleteLikeEvent(eventId: string) {
       },
     },
   });
+
+  revalidatePath("/[locale]/events/[slug]", "page");
 }
+
+export type DeleteLikeAction = typeof deleteLikeAction;

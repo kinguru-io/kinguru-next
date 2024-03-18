@@ -1,22 +1,25 @@
 "use server";
 
 import { getSession } from "@/auth";
+import prisma from "@/server/prisma.ts";
 
-export async function isJoinEvent(eventId: string) {
+export async function isJoinedAction(eventId: string) {
   const session = await getSession();
-
-  if (!session || !session.user?.id) {
+  const userId = session?.user?.id;
+  if (!userId) {
     return false;
   }
 
   const userOnEvent = await prisma.usersOnEvent.findUnique({
     where: {
       userId_eventId: {
-        userId: session.user.id,
-        eventId: eventId,
+        userId,
+        eventId,
       },
     },
   });
 
   return !!userOnEvent;
 }
+
+export type IsJoinedAction = typeof isJoinedAction;

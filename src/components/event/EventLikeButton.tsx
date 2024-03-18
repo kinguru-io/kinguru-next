@@ -2,15 +2,20 @@
 
 import { useEffect, useOptimistic, useState, useTransition } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { Button } from "../uikit";
+import { Button } from "@/components/uikit";
+import {
+  CreateLikeAction,
+  DeleteLikeAction,
+  IsLikedAction,
+} from "@/lib/actions";
 import { Box } from "~/styled-system/jsx";
 import { token } from "~/styled-system/tokens";
 
 type EventImageProps = {
   id: string;
-  isLikedAction: Function;
-  createLikeAction: Function;
-  deleteLikeAction: Function;
+  isLikedAction: IsLikedAction;
+  createLikeAction: CreateLikeAction;
+  deleteLikeAction: DeleteLikeAction;
   likeTranslate: string;
   dislikeTranslate: string;
 };

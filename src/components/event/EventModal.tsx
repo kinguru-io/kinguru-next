@@ -2,10 +2,15 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import { useEffect, useState, useTransition } from "react";
-import CheckoutForm from "../common/checkout/CheckoutForm";
+import { useState, useTransition } from "react";
 import { Button, Modal, ModalInitiator, ModalWindow } from "../uikit";
-import { getTicketIntent } from "@/lib/actions/event/joinEvent/ticketIntent";
+import CheckoutForm from "@/components/common/checkout/CheckoutForm";
+import {
+  GetTicketIntentAction,
+  IsJoinedAction,
+  LeaveEventAction,
+  RefreshOrderAction,
+} from "@/lib/actions/event/order";
 import { Box, VStack } from "~/styled-system/jsx";
 
 const stripePromise = loadStripe(
@@ -14,53 +19,45 @@ const stripePromise = loadStripe(
 
 type EventModalProps = {
   eventId: string;
-  joinEventAction: Function;
-  leaveEventAction: Function;
-  isJoinEventAction: Function;
+  isJoined: boolean;
+  refreshOrderAction: RefreshOrderAction;
+  isJoinedAction: IsJoinedAction;
+  getTicketIntentAction: GetTicketIntentAction;
+  leaveEventAction: LeaveEventAction;
 };
 
 export function EventModal({
   eventId,
-  joinEventAction,
+  isJoined,
+  getTicketIntentAction,
+  refreshOrderAction,
   leaveEventAction,
-  isJoinEventAction,
 }: EventModalProps) {
   const t = useTranslations("event.future_event_page");
   const [clientSecret, setClientSecret] = useState("");
-  const [isJoin, setJoin] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const joinEvent = async () => {
-    await joinEventAction(eventId, { next: { tags: ["eventJoin"] } });
-    setJoin(true);
+  const paymentSucceed = () => {
     setClientSecret("");
-  };
-
-  const getIsJoinInfo = async () => {
-    setJoin(await isJoinEventAction(eventId));
+    void refreshOrderAction();
   };
 
   const leaveFromEvent = async () => {
     startTransition(async () => {
-      await leaveEventAction(eventId, { next: { tags: ["eventJoin"] } });
-      setJoin(false);
+      await leaveEventAction(eventId);
     });
   };
 
   const getClientSecret = () => {
     startTransition(async () => {
-      const { clientSecret: secret } = await getTicketIntent(eventId);
+      const { clientSecret: secret } = await getTicketIntentAction(eventId);
       setClientSecret(secret);
     });
   };
 
-  useEffect(() => {
-    void getIsJoinInfo();
-  }, []);
-
   return (
     <Modal>
-      {!isJoin ? (
+      {!isJoined ? (
         <ModalInitiator>
           <Button
             size="lg"
@@ -89,7 +86,7 @@ export function EventModal({
             <h4>{t("buy_a_ticket")}</h4>
             <Box bg="neutral.5" borderRadius="10px">
               <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm succeedRefetch={joinEvent} />
+                <CheckoutForm succeedRefetch={paymentSucceed} />
               </Elements>
             </Box>
           </VStack>

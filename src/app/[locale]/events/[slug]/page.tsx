@@ -8,21 +8,17 @@ import {
   EventLikeButton,
   EventMainInfo,
   EventSpeakersSlider,
+  EventModal,
 } from "@/components/event";
-import { EventModal } from "@/components/event/EventModal";
-import { AvatarGroup, Tag } from "@/components/uikit";
-import { DefaultImage } from "@/components/uikit/DefaultImage/DefaultImage";
+import { AvatarGroup, Tag, DefaultImage } from "@/components/uikit";
 import {
   EventMainInfoLayout,
   EventMapLayout,
   EventPopularEventsLayout,
 } from "@/layout/block/event";
-import { createLikeEvent, deleteLikeEvent, isLikedEvent } from "@/lib/actions/";
-import {
-  isJoinEvent,
-  joinEvent,
-  leaveEvent,
-} from "@/lib/actions/event/joinEvent";
+import * as likesActions from "@/lib/actions/event/likes";
+import * as orderActions from "@/lib/actions/event/order";
+import { isJoinedAction } from "@/lib/actions/event/order";
 import prisma from "@/server/prisma";
 import { css } from "~/styled-system/css";
 import {
@@ -54,10 +50,13 @@ export default async function EventPage({
           },
         },
       },
-      place: true,
+      place: {
+        select: {
+          locationMapboxId: true,
+        },
+      },
     },
   });
-
   if (!event) {
     notFound();
   }
@@ -75,6 +74,8 @@ export default async function EventPage({
       createdAt: "desc",
     },
   });
+
+  const isJoined = await isJoinedAction(event.id);
 
   const {
     poster,
@@ -126,9 +127,7 @@ export default async function EventPage({
             >
               <EventLikeButton
                 id={id}
-                isLikedAction={isLikedEvent}
-                createLikeAction={createLikeEvent}
-                deleteLikeAction={deleteLikeEvent}
+                {...likesActions}
                 likeTranslate={t("like_event")}
                 dislikeTranslate={t("dislike_event")}
               />
@@ -156,12 +155,7 @@ export default async function EventPage({
                 avatars={usersOnEvent.map(({ user }) => user)}
               />
             </Flex>
-            <EventModal
-              eventId={id}
-              isJoinEventAction={isJoinEvent}
-              joinEventAction={joinEvent}
-              leaveEventAction={leaveEvent}
-            />
+            <EventModal eventId={id} isJoined={isJoined} {...orderActions} />
           </Flex>
         </Flex>
         <VStack gap="20px" alignItems="baseline">
@@ -209,9 +203,7 @@ export default async function EventPage({
                   slug={popularEvent.slug}
                   mapboxId={popularEvent.place.locationMapboxId}
                   starts={popularEvent.starts}
-                  isLikedAction={isLikedEvent}
-                  createLikeAction={createLikeEvent}
-                  deleteLikeAction={deleteLikeEvent}
+                  {...likesActions}
                 />
               </Box>
             ))}

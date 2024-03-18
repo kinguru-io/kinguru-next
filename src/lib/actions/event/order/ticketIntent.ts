@@ -2,22 +2,22 @@
 
 import Stripe from "stripe";
 import { getSession } from "@/auth";
+import { redirect } from "@/navigation.ts";
+import prisma from "@/server/prisma.ts";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-10-16",
 });
 
-export async function getTicketIntent(eventId: string) {
+export async function getTicketIntentAction(eventId: string) {
   const session = await getSession();
-
-  if (!session || !session.user?.id) {
-    throw new Error("BAD_REQUEST");
+  const userId = session?.user?.id;
+  if (!userId) {
+    return redirect(`/auth/signin`);
   }
 
   const event = await prisma.event.findUnique({
-    where: {
-      id: eventId,
-    },
+    where: { id: eventId },
   });
 
   if (!event || !event.price) {
@@ -40,10 +40,12 @@ export async function getTicketIntent(eventId: string) {
     data: {
       id,
       eventId,
-      userId: session.user?.id,
+      userId,
       status: "progress",
     },
   });
 
   return { clientSecret, id };
 }
+
+export type GetTicketIntentAction = typeof getTicketIntentAction;

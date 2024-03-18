@@ -20,9 +20,14 @@ import {
   DropdownInitiator,
   DropdownMenu,
   Tag,
-} from "../uikit";
-import { DefaultImage } from "../uikit/DefaultImage/DefaultImage";
+  DefaultImage,
+} from "@/components/uikit";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
+import {
+  CreateLikeAction,
+  DeleteLikeAction,
+  IsLikedAction,
+} from "@/lib/actions";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Flex, Float, VStack } from "~/styled-system/jsx";
@@ -38,9 +43,9 @@ type EventCardViewProps = {
   id: string;
   mapboxId: string;
   starts: Date;
-  isLikedAction: Function;
-  createLikeAction: Function;
-  deleteLikeAction: Function;
+  isLikedAction: IsLikedAction;
+  createLikeAction: CreateLikeAction;
+  deleteLikeAction: DeleteLikeAction;
 };
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;

@@ -236,6 +236,9 @@ project.preCompileTask.exec("npx prisma generate");
 project.postCompileTask.exec(
   "npx next-sitemap --config next-sitemap.config.cjs",
 );
+project.addScripts({
+  "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook",
+});
 project.addScripts({ prepare: "npx panda codegen" });
 project.addScripts({ storybook: "storybook dev -p 6006" });
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
