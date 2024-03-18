@@ -1,1 +1,1 @@
-export { TimeSlot } from "./TimeSlot";
+export { TimeSlot, type TimeSlotInfo } from "./TimeSlot";

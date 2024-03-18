@@ -12,9 +12,12 @@ export const timeSlotCondition = {
 
 type Condition = keyof typeof timeSlotCondition;
 
-type TimeSlotProps = {
+export type TimeSlotInfo = {
   price: number;
   time: Date;
+};
+
+type TimeSlotProps = TimeSlotInfo & {
   onClick: () => void;
   condition?: Condition;
   selected?: boolean;
