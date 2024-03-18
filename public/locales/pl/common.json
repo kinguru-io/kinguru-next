@@ -241,5 +241,27 @@
     "price": "Price",
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
+  },
+  "organization": {
+    "basic_info_page": {
+      "heading": "Basic organization information"
+    },
+    "basic_info_form": {
+      "main_heading": "Main",
+      "name": "Company name",
+      "foundationDate": "Year founded",
+      "activitySphere": "Select a field of activity",
+      "aboutCompany": "Tell more about your organization...",
+      "credentials_heading": "Credentials*",
+      "email": "Email",
+      "extra_heading": "Extra",
+      "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
+      "submit": "Save"
+    },
+    "main_page": {
+      "hello": "Hello!",
+      "collected_all_important_things": "On this page we have collected all the important things for you.",
+      "add_venue": "Add venue"
+    }
   }
 }
