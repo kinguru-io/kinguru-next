@@ -7,7 +7,7 @@ export function OrganizationWelcomeLayout({
 }) {
   return (
     <Box mb="75px">
-      <Container>
+      <Container maxW="5xl">
         <section>
           <VStack gap="25px" w="100%">
             {children}
