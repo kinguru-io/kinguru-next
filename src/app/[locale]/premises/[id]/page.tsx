@@ -4,7 +4,7 @@ import { groupBy } from "@/lib/utils/array";
 import {
   generateBookedTimeSlots,
   generateTimeSlots,
-} from "@/lib/utils/datetime";
+} from "@/lib/utils/premise-time-slots";
 import type { Locale } from "@/navigation";
 import prisma from "@/server/prisma";
 import { Container } from "~/styled-system/jsx";
