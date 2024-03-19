@@ -16,6 +16,7 @@ export function WeekView({
   locale,
   todayDate,
   timeSlotsGroup,
+  bookedSlots,
 }: {
   locale: Locale;
   todayDate: Date;
@@ -23,6 +24,7 @@ export function WeekView({
     $Enums.DayOfTheWeek,
     Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }>
   >;
+  bookedSlots: Set<string>;
 }) {
   const {
     originDate,
@@ -78,10 +80,9 @@ export function WeekView({
             const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
 
             return (
-              <VStack gap="15px">
+              <VStack gap="15px" key={weekdayInfo.weekdayShort}>
                 <Box
                   alignSelf="stretch"
-                  key={weekdayInfo.weekdayShort}
                   borderBlockEnd="4px solid token(colors.primary.disabled)"
                   paddingBlockEnd="3px"
                   marginBlockEnd="5px"
@@ -113,20 +114,26 @@ export function WeekView({
                     const slotTime = set(weekdayInfo.day, {
                       hours: time.getHours(),
                       minutes: time.getMinutes(),
-                      seconds: time.getSeconds(),
-                      milliseconds: time.getMilliseconds(),
+                      seconds: 0,
+                      milliseconds: 0,
                     });
 
                     if (isPast(slotTime)) return null;
 
+                    const slotISOString = slotTime.toISOString();
+
                     return (
                       <TimeSlot
-                        key={slotTime.toISOString()}
+                        key={slotISOString}
                         price={price}
                         time={slotTime}
                         onClick={() => {
-                          console.log(slotTime);
+                          console.log(slotISOString);
                         }}
+                        condition={
+                          // ! DEBUG-only condition
+                          bookedSlots.has(slotISOString) ? "max" : "regular"
+                        }
                       />
                     );
                   });

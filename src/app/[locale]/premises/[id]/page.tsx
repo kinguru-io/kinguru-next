@@ -1,7 +1,10 @@
-import { eachHourOfInterval, isWithinInterval, subHours } from "date-fns";
 import { notFound } from "next/navigation";
-import { WeekView } from "@/components/week-view";
+import { WeekView } from "@/components/calendar";
 import { groupBy } from "@/lib/utils/array";
+import {
+  generateBookedTimeSlots,
+  generateTimeSlots,
+} from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
 import prisma from "@/server/prisma";
 import { Container } from "~/styled-system/jsx";
@@ -15,6 +18,7 @@ export default async function PremisePage({
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
+      slots: true,
       openHours: {
         include: {
           pricing: true,
@@ -27,33 +31,12 @@ export default async function PremisePage({
     notFound();
   }
 
-  const timeSlots = premise.openHours.map(
-    ({ openTime, closeTime, day, pricing }) => {
-      return {
-        day,
-        timeSlots: eachHourOfInterval({
-          start: openTime,
-          end: subHours(closeTime, 1), // do not count the last hour as an interval
-        }).map((time) => {
-          const { priceForHour } =
-            pricing.find(
-              ({ startTime: pricingStartTime, endTime: pricingEndTime }) =>
-                isWithinInterval(time, {
-                  start: pricingStartTime,
-                  end: pricingEndTime,
-                }),
-            ) || {};
-
-          return {
-            time,
-            price: priceForHour || 0,
-          };
-        }),
-      };
-    },
+  const timeSlots = premise.openHours.map((openHoursRecord) =>
+    generateTimeSlots(openHoursRecord),
   );
 
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
+  const bookedSlots = generateBookedTimeSlots(premise.slots);
 
   return (
     <Container>
@@ -61,6 +44,7 @@ export default async function PremisePage({
         locale={locale}
         todayDate={new Date()}
         timeSlotsGroup={timeSlotsGroup}
+        bookedSlots={bookedSlots}
       />
     </Container>
   );
