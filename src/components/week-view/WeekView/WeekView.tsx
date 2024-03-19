@@ -1,13 +1,14 @@
 "use client";
 
-import { $Enums } from "@prisma/client";
+import type { $Enums } from "@prisma/client";
 import { isPast, lightFormat, set } from "date-fns";
 import { GrNext } from "react-icons/gr";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
-import { Button, TimeSlot, TimeSlotInfo } from "@/components/uikit";
+import { Button, TimeSlot, type TimeSlotInfo } from "@/components/uikit";
+import { DAYS_OF_WEEK_ORDERED } from "@/lib/utils/array";
 import { getWeekViewData } from "@/lib/utils/datetime";
-import { Locale } from "@/navigation";
+import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Box, Grid, GridItem, VStack } from "~/styled-system/jsx";
 
@@ -35,7 +36,6 @@ export function WeekView({
   } = useOriginDate({ initialDate: todayDate });
 
   const weekViewData = getWeekViewData({ locale, originDate });
-  const daysOfTheWeek = Object.values($Enums.DayOfTheWeek);
 
   return (
     <Box>
@@ -75,6 +75,8 @@ export function WeekView({
 
         <Grid gridTemplateColumns="7" gap="10px">
           {weekViewData.map((weekdayInfo, idx) => {
+            const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
+
             return (
               <VStack gap="15px">
                 <Box
@@ -106,7 +108,7 @@ export function WeekView({
                   </time>
                 </Box>
 
-                {timeSlotsGroup[daysOfTheWeek[idx]].map(({ timeSlots }) => {
+                {timeSlotsGroup[dayOfWeekGroupKey].map(({ timeSlots }) => {
                   return timeSlots.flatMap(({ price, time }) => {
                     const slotTime = set(weekdayInfo.day, {
                       hours: time.getHours(),

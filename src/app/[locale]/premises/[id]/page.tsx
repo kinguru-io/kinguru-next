@@ -2,7 +2,7 @@ import { eachHourOfInterval, isWithinInterval, subHours } from "date-fns";
 import { notFound } from "next/navigation";
 import { WeekView } from "@/components/week-view";
 import { groupBy } from "@/lib/utils/array";
-import { Locale } from "@/navigation";
+import type { Locale } from "@/navigation";
 import prisma from "@/server/prisma";
 import { Container } from "~/styled-system/jsx";
 

@@ -1,7 +1,7 @@
 import { differenceInCalendarMonths, eachMonthOfInterval } from "date-fns";
 import { memo } from "react";
 import { Select } from "@/components/uikit";
-import { Locale } from "@/navigation";
+import type { Locale } from "@/navigation";
 import { Box } from "~/styled-system/jsx";
 
 export const MonthSelect = memo(function MonthSelect({
