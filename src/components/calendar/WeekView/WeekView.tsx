@@ -13,12 +13,12 @@ import { Box, Flex, Grid, GridItem, VStack } from "~/styled-system/jsx";
 
 export function WeekView({
   locale,
-  todayDate,
+  nowDate,
   timeSlotsGroup,
   bookedSlots,
 }: {
   locale: Locale;
-  todayDate: Date;
+  nowDate: Date;
   timeSlotsGroup: Record<
     $Enums.DayOfTheWeek,
     Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }>
@@ -34,7 +34,7 @@ export function WeekView({
     canGoNext,
     currentMonthNumber,
     lastAllowedDate,
-  } = useOriginDate({ initialDate: todayDate });
+  } = useOriginDate({ initialDate: nowDate });
 
   const weekViewData = getWeekViewData({ locale, originDate });
 
@@ -49,7 +49,7 @@ export function WeekView({
           locale={locale}
           monthNumber={currentMonthNumber}
           changeMonth={changeMonth}
-          initialDate={todayDate}
+          initialDate={nowDate}
           endDate={lastAllowedDate}
         />
       </GridItem>
@@ -127,10 +127,11 @@ export function WeekView({
                     seconds: 0,
                     milliseconds: 0,
                   });
-
-                  if (isPast(slotTime)) return null;
-
                   const slotISOString = slotTime.toISOString();
+
+                  if (isPast(slotTime) || bookedSlots.has(slotISOString)) {
+                    return null;
+                  }
 
                   return (
                     <TimeSlot
@@ -140,10 +141,6 @@ export function WeekView({
                       onClick={() => {
                         console.log(slotISOString);
                       }}
-                      condition={
-                        // ! DEBUG-only condition
-                        bookedSlots.has(slotISOString) ? "max" : "regular"
-                      }
                     />
                   );
                 });

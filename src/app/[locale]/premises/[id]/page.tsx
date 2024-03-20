@@ -13,12 +13,16 @@ export default async function PremisePage({
   params: { id, locale },
 }: {
   params: { id: string; locale: Locale };
-  searchParams: { originDate?: string };
 }) {
+  const nowDate = new Date();
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
-      slots: true,
+      slots: {
+        where: {
+          date: { gte: nowDate.toISOString() },
+        },
+      },
       openHours: {
         include: {
           pricing: true,
@@ -42,7 +46,7 @@ export default async function PremisePage({
     <Container>
       <WeekView
         locale={locale}
-        todayDate={new Date()}
+        nowDate={nowDate}
         timeSlotsGroup={timeSlotsGroup}
         bookedSlots={bookedSlots}
       />
