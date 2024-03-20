@@ -34,10 +34,6 @@
       "type": "build"
     },
     {
-      "name": "@sindresorhus/slugify",
-      "type": "build"
-    },
-    {
       "name": "@storybook/addon-essentials",
       "type": "build"
     },

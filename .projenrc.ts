@@ -211,7 +211,6 @@ const project = new web.NextJsTypeScriptProject({
     "storybook-addon-module-mock",
     "storybook-addon-turbo-build",
 
-    "@sindresorhus/slugify",
     "prisma",
     "@faker-js/faker",
     "@types/gtag.js",

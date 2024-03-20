@@ -19,6 +19,7 @@
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook",
     "prepare": "npx panda codegen",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook",
