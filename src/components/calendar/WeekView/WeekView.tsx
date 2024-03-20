@@ -42,8 +42,7 @@ export function WeekView({
     <Grid
       gap="0"
       gridTemplateColumns="auto 1fr auto"
-      gridTemplateRows="repeat(3, auto)"
-      gridTemplateAreas="'prev-week month-select next-week' 'prev-week week-view next-week'"
+      gridTemplateAreas="'. month-select .' 'prev-week week-view next-week'"
     >
       <GridItem gridArea="month-select">
         <MonthSelect
@@ -54,7 +53,7 @@ export function WeekView({
           endDate={lastAllowedDate}
         />
       </GridItem>
-      <GridItem gridArea="prev-week" gridRow="2 / 2">
+      <GridItem gridArea="prev-week">
         <Button
           type="button"
           variant="ghost"
@@ -64,7 +63,7 @@ export function WeekView({
           <GrNext size={30} className={css({ rotate: "180deg" })} />
         </Button>
       </GridItem>
-      <GridItem gridArea="next-week" gridRow="2 / 2">
+      <GridItem gridArea="next-week">
         <Button
           type="button"
           variant="ghost"
