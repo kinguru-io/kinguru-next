@@ -100,6 +100,16 @@ export const buttonRecipe = defineRecipe({
         py: "17.6px",
         borderWidth: "3px",
       },
+      iconOnly: {
+        h: "2.5em",
+        w: "2.5em",
+        borderWidth: "1px",
+        alignItems: "center",
+        justifyContent: "center",
+        "& [data-label]": {
+          srOnly: true,
+        },
+      },
     },
   },
   defaultVariants: {

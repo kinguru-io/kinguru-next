@@ -305,5 +305,27 @@
     "from": "от {price}",
     "see_all": "Смотреть все",
     "hide": "Скрыть"
+  },
+  "event": {
+    "future_event_page": {
+      "event_guests": "Гости мероприятия:",
+      "join": "Присоединиться",
+      "event_speakers": "Спикеры мероприятия:",
+      "map": "Карта",
+      "popular_event_this_week": "Популярные события в этой неделе",
+      "event_description": "Описание мероприятия:",
+      "show_more": "Подробнее",
+      "show_less": "Свернуть",
+      "main_info": "Основная информация",
+      "free": "Бесплатно",
+      "like_event": "Нравится",
+      "dislike_event": "Не нравится",
+      "buy_a_ticket": "Покупка билета на мероприятие",
+      "leave": "Покинуть"
+    },
+    "event_card": {
+      "already_join": "Уже присоединились",
+      "copy_link": "Копировать ссылку"
+    }
   }
 }

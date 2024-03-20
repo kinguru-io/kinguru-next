@@ -3,18 +3,22 @@
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { useSnapCarousel } from "react-snap-carousel";
 import { cx } from "~/styled-system/css";
-import { slider } from "~/styled-system/recipes";
+import { SliderVariantProps, slider } from "~/styled-system/recipes";
 
 type SliderProps = {
   slidesCount: number;
   children: React.ReactNode;
-};
+} & SliderVariantProps;
 
 type SliderItemProps = {
   children: React.ReactNode;
-};
+} & SliderVariantProps;
 
-export function Slider({ slidesCount, children }: SliderProps) {
+export function Slider({
+  slidesCount,
+  children,
+  buttonPosition = "inner",
+}: SliderProps) {
   const { scrollRef, prev, next, activePageIndex, goTo } = useSnapCarousel();
 
   const nextSlide = () => {
@@ -33,7 +37,7 @@ export function Slider({ slidesCount, children }: SliderProps) {
     }
   };
 
-  const classes = slider();
+  const classes = slider({ buttonPosition });
 
   return (
     <div className={classes.slider}>
@@ -58,8 +62,11 @@ export function Slider({ slidesCount, children }: SliderProps) {
   );
 }
 
-export function SliderItem({ children }: SliderItemProps) {
-  const classes = slider();
+export function SliderItem({
+  children,
+  buttonPosition = "inner",
+}: SliderItemProps) {
+  const classes = slider({ buttonPosition });
 
   return <li className={classes.item}>{children}</li>;
 }

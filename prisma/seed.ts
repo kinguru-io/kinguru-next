@@ -114,7 +114,7 @@ const pickUniqueValues = <T>(array: T[], count: number): T[] => {
 };
 
 async function main() {
-  const events = new Array(1000)
+  const events = new Array(50)
     .fill({})
     .map(
       () =>
@@ -136,6 +136,7 @@ async function main() {
               location: faker.location.city(),
               coordsLat: faker.location.latitude(),
               coordsLng: faker.location.longitude(),
+              locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
               owner: {
                 create: userSchema(),
               },
@@ -143,6 +144,35 @@ async function main() {
           },
         }) as Prisma.EventCreateInput,
     )
+    .map(() => {
+      const topic = faker.commerce.productName();
+      return {
+        topic: topic,
+        slug: slugify(topic),
+        description: faker.lorem.paragraph(),
+        status: "active",
+        starts: faker.date.future(),
+        duration: faker.date.future(),
+        poster: faker.image.urlLoremFlickr(),
+        price: parseFloat(faker.finance.amount(0, 20)),
+        tags: faker.lorem.words().split(" "),
+        initiator: {
+          create: userSchema(),
+        },
+        place: {
+          create: {
+            tel: faker.phone.number(),
+            location: faker.location.city(),
+            coordsLat: faker.location.latitude(),
+            coordsLng: faker.location.longitude(),
+            locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
+            owner: {
+              create: userSchema(),
+            },
+          },
+        },
+      } as Prisma.EventCreateInput;
+    })
     .map((event) => {
       return Math.random() > 0.5
         ? event
@@ -154,6 +184,7 @@ async function main() {
                 location: faker.location.city(),
                 coordsLat: faker.location.latitude(),
                 coordsLng: faker.location.longitude(),
+                locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
                 owner: {
                   create: userSchema(),
                 },
@@ -257,7 +288,7 @@ async function main() {
                 participant: {
                   create: pickUniqueValues(
                     eventsCreated,
-                    Math.round(Math.random() * (eventsCreated.length - 400)),
+                    Math.round(Math.random() * (eventsCreated.length - 20)),
                   ).map((unique) => ({
                     event: {
                       connect: {

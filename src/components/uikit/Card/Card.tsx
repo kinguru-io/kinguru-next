@@ -42,6 +42,7 @@ export const Card = styled(
         },
         event: {
           flexDirection: "column",
+          minH: "452px",
         },
       },
     },

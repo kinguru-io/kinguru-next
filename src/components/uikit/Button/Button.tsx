@@ -47,7 +47,11 @@ export function Button({
           {icon}
         </span>
       )}
-      <span className={css({ _loading: { opacity: 0 } })} aria-busy={isLoading}>
+      <span
+        className={css({ _loading: { opacity: 0 } })}
+        aria-busy={isLoading}
+        data-label
+      >
         {children}
       </span>
       {isLoading && <LoaderIcon />}

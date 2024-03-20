@@ -39,6 +39,7 @@
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
+    "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
     "your_profile": "Your profile",
     "sign_out": "Sign out",
@@ -51,7 +52,8 @@
     "sign_up": "Sign up",
     "add_organization": "Add an organization account",
     "sign_in_and_sign_up": "Sign in and sign up",
-    "eventify_logotype": "Eventify logotype"
+    "eventify_logotype": "Eventify logotype",
+    "toggle_nav": "Open/close navigation menu"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
@@ -241,5 +243,27 @@
     "price": "Price",
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
+  },
+  "event": {
+    "future_event_page": {
+      "event_guests": "Guests of the event:",
+      "join": "Join",
+      "event_speakers": "Speakers of the event:",
+      "map": "Map",
+      "popular_event_this_week": "Popular events for this week",
+      "event_description": "Description of the event:",
+      "show_more": "More",
+      "show_less": "Less",
+      "main_info": "Main information:",
+      "free": "Free",
+      "like_event": "Like",
+      "dislike_event": "Dislike",
+      "buy_a_ticket": "Buying a ticket to the event",
+      "leave": "Leave"
+    },
+    "event_card": {
+      "already_join": "Already join",
+      "copy_link": "Copy link"
+    }
   }
 }
