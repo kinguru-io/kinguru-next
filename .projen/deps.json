@@ -284,6 +284,10 @@
       "type": "runtime"
     },
     {
+      "name": "@t3-oss/env-nextjs",
+      "type": "runtime"
+    },
+    {
       "name": "@tanstack/react-query-devtools",
       "version": "^4.18.0",
       "type": "runtime"

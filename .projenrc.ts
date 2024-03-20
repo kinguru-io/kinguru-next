@@ -1,6 +1,6 @@
 import fs from "fs";
 import { web } from "projen";
-import { JobPermission } from "projen/lib/github/workflows-model";
+import { JobPermission } from "projen/lib/github/workflows-model.js";
 import {
   NodePackageManager,
   TypeScriptModuleResolution,
@@ -86,9 +86,10 @@ const project = new web.NextJsTypeScriptProject({
       baseUrl: ".",
       rootDir: ".",
       module: "esnext",
-      moduleResolution: TypeScriptModuleResolution.NODE,
+      moduleResolution: TypeScriptModuleResolution.BUNDLER,
       forceConsistentCasingInFileNames: true,
       noEmit: true,
+      declaration: false,
       esModuleInterop: true,
       resolveJsonModule: true,
       isolatedModules: true,
@@ -183,6 +184,7 @@ const project = new web.NextJsTypeScriptProject({
     "@opentelemetry/sdk-trace-node",
     "@opentelemetry/resources",
 
+    "@t3-oss/env-nextjs",
     "react-hook-form",
     "@hookform/resolvers",
     "zod-form-data",
