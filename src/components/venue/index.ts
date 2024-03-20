@@ -1,1 +1,0 @@
-export { VenueDescriptionCollapse } from "./VenueDescriptionCollapse";

@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.3.0...chart-v1.4.0) (2024-03-20)
+
+
+### Features
+
+* **KINGU-100:** create event page ([#498](https://github.com/kinguru-io/kinguru-next/issues/498)) ([9353516](https://github.com/kinguru-io/kinguru-next/commit/9353516c2e8f78f871e0dba6f667913cc9e2c762))
+
 # [1.3.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.2.18...chart-v1.3.0) (2024-02-22)
 
 

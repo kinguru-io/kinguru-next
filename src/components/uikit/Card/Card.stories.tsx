@@ -33,7 +33,7 @@ export const CardTemplate: Story = {
   render: () => {
     return (
       <Box w="310px">
-        <Card>
+        <Card variant="event" data-interactive>
           <a
             className={css({
               _before: {

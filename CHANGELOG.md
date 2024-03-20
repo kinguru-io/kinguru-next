@@ -1,3 +1,10 @@
+# [0.35.0](https://github.com/kinguru-io/kinguru-next/compare/v0.34.2...v0.35.0) (2024-03-20)
+
+
+### Features
+
+* **KINGU-100:** create event page ([#498](https://github.com/kinguru-io/kinguru-next/issues/498)) ([9353516](https://github.com/kinguru-io/kinguru-next/commit/9353516c2e8f78f871e0dba6f667913cc9e2c762))
+
 ## [0.34.2](https://github.com/kinguru-io/kinguru-next/compare/v0.34.1...v0.34.2) (2024-03-13)
 
 

@@ -22,7 +22,7 @@ export function SingleMarkerMap({
   name,
 }: {
   mapboxId: string;
-  image: string;
+  image: string | null;
   name: string;
 }) {
   const { retrieve } = useSearchBoxCore({ accessToken });

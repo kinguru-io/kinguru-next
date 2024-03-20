@@ -1,5 +1,6 @@
 import fs from "fs";
 import { web } from "projen";
+import { JobPermission } from "projen/lib/github/workflows-model";
 import {
   NodePackageManager,
   TypeScriptModuleResolution,
@@ -23,6 +24,8 @@ const project = new web.NextJsTypeScriptProject({
   depsUpgradeOptions: {
     target: "latest",
   },
+
+  artifactsDirectory: ".next",
 
   workflowBootstrapSteps: [
     {
@@ -233,12 +236,97 @@ project.preCompileTask.exec("npx prisma generate");
 project.postCompileTask.exec(
   "npx next-sitemap --config next-sitemap.config.cjs",
 );
+project.addScripts({
+  "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook",
+});
 project.addScripts({ prepare: "npx panda codegen" });
 project.addScripts({ storybook: "storybook dev -p 6006" });
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
 project.addScripts({
   seed: 'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node prisma/seed.ts',
 });
+
+project.buildWorkflow?.addPostBuildJob("staging-deploy", {
+  name: "staging-deploy",
+  runsOn: ["ubuntu-latest"],
+  environment: {
+    name: "staging",
+    url: "https://staging.eventify.today",
+  },
+  permissions: {
+    contents: JobPermission.WRITE,
+    packages: JobPermission.WRITE,
+    idToken: JobPermission.WRITE,
+    issues: JobPermission.WRITE,
+    pullRequests: JobPermission.WRITE,
+  },
+  env: {
+    CI: "true",
+  },
+  steps: [
+    {
+      name: "Checkout",
+      uses: "actions/checkout@v4",
+      with: {
+        "fetch-depth": 0,
+      },
+    },
+    {
+      uses: "vbem/kubeconfig4sa@v1",
+      with: {
+        server:
+          "https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443",
+        "ca-base64": "${{ secrets.K8S_CA_BASE64 }}",
+        token: "${{ secrets.K8S_SA_TOKEN }}",
+        namespace: "persistence",
+      },
+    },
+    {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "pod/postgres-cluster-1",
+        mappings: "5432:5432",
+        options: "--address=0.0.0.0",
+      },
+    },
+    {
+      uses: "werf/actions/install@v1.2",
+    },
+    {
+      name: "Run stage deployment",
+      run: `. $(werf ci-env github --as-file)
+werf cr login -u \${{ github.actor }} -p \${{ secrets.GITHUB_TOKEN }} ghcr.io
+werf converge --atomic`,
+      env: {
+        WERF_ENV: "staging",
+        WERF_SET_1: "image.pullSecret=github-cr-secret",
+        WERF_SET_2: "ingress.hostname=staging.eventify.today",
+        WERF_SET_3: "replicas.default=1",
+        WERF_SET_4: "replicas.min=1",
+        WERF_SET_5: "replicas.max=2",
+        SITE_URL: "https://staging.eventify.today",
+        DATABASE_URL: "${{ secrets.DB_URL }}",
+        NEXT_PUBLIC_GA_ID: "${{ secrets.GA_ID }}",
+        NEXT_PUBLIC_MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
+        NEXT_PUBLIC_ELASTICSEARCH_API_KEY:
+          "${{ secrets.ELASTICSEARCH_API_KEY }}",
+        NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT:
+          "${{ secrets.ELASTICSEARCH_ENDPOINT }}",
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+          "${{ secrets.STRIPE_PUBLISHABLE_KEY }}",
+      },
+    },
+    {
+      name: "Create linked comment on PR",
+      uses: "peter-evans/create-or-update-comment@v4",
+      with: {
+        "issue-number": "${{ github.event.number }}",
+        body: "Staging deployed successfully: https://staging.eventify.today",
+      },
+    },
+  ],
+});
+
 project.synth();
 
 fs.rmSync("./pages", { recursive: true, force: true });

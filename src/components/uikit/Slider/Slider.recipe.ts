@@ -25,23 +25,13 @@ export const sliderSlot = defineSlotRecipe({
       w: "35px",
       borderRadius: "50%",
       cursor: "pointer",
-      bg: "token(colors.neutral.5)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      _hover: {
-        bg: "token(colors.neutral.4)",
-      },
-      _focus: {
+      _focusVisible: {
         outline: "none",
         border: "1px solid token(colors.focus)",
       },
-    },
-    prevButton: {
-      left: "6px",
-    },
-    nextButton: {
-      right: "6px",
     },
     sliderOptions: {
       position: "relative",
@@ -49,17 +39,50 @@ export const sliderSlot = defineSlotRecipe({
       overflow: "auto",
       scrollSnapType: "x mandatory",
       h: "100%",
-      w: "auto",
       borderRadius: "12px",
       _scrollbar: {
         display: "none",
       },
     },
     item: {
-      flexShrink: 0,
-      w: "100%",
-      h: "100%",
       scrollSnapAlign: "start",
+    },
+  },
+  variants: {
+    buttonPosition: {
+      inner: {
+        sliderButton: {
+          bg: "token(colors.neutral.5)",
+          _hover: {
+            bg: "token(colors.neutral.4)",
+          },
+        },
+        prevButton: {
+          left: "6px",
+        },
+        nextButton: {
+          right: "6px",
+        },
+        item: {
+          flexShrink: "0",
+          w: "100%",
+          h: "100%",
+        },
+      },
+      outer: {
+        prevButton: {
+          left: "-35px",
+        },
+        nextButton: {
+          right: "-35px",
+        },
+        item: {
+          w: "max-content",
+        },
+        sliderOptions: {
+          gap: "10px",
+        },
+      },
     },
   },
 });

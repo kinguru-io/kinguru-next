@@ -2,6 +2,7 @@
 import { defineConfig } from "@pandacss/dev";
 import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { headerSlot } from "./src/components/Header/Header.recipe";
+import { arrowIconRecipe } from "./src/components/uikit/ArrowIcon/ArrowIcon.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
@@ -36,6 +37,7 @@ export default defineConfig({
         button: buttonRecipe,
         input: inputRecipe,
         avatar: avatarRecipe,
+        arrowIcon: arrowIconRecipe,
       },
       slotRecipes: {
         dropdown: dropdownSlot,
@@ -62,6 +64,7 @@ export default defineConfig({
         zIndex: {
           dropdown: { value: "100" },
           header: { value: "10" },
+          modal: { value: "110" },
         },
         colors: {
           "yellow.1": { value: "#FFD800" },

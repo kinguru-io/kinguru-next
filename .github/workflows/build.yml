@@ -69,6 +69,15 @@ jobs:
           echo "::error::Files were changed during build (see build log). If this was triggered from a fork, you will need to update your branch."
           cat .repo.patch
           exit 1
+      - name: Backup artifact permissions
+        run: cd .next && getfacl -R . > permissions-backup.acl
+        continue-on-error: true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: .next
+          overwrite: true
   self-mutation:
     needs: build
     runs-on: ubuntu-latest
@@ -100,3 +109,68 @@ jobs:
           git add .
           git commit -s -m "chore: self mutation"
           git push origin HEAD:$PULL_REQUEST_REF
+  staging-deploy:
+    name: staging-deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      issues: write
+      pull-requests: write
+    environment:
+      name: staging
+      url: https://staging.eventify.today
+    env:
+      CI: "true"
+    if: "! needs.build.outputs.self_mutation_happened"
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+          path: .next
+      - name: Restore build artifact permissions
+        run: cd .next && setfacl --restore=permissions-backup.acl
+        continue-on-error: true
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: vbem/kubeconfig4sa@v1
+        with:
+          server: https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443
+          ca-base64: ${{ secrets.K8S_CA_BASE64 }}
+          token: ${{ secrets.K8S_SA_TOKEN }}
+          namespace: persistence
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: pod/postgres-cluster-1
+          mappings: 5432:5432
+          options: --address=0.0.0.0
+      - uses: werf/actions/install@v1.2
+      - name: Run stage deployment
+        env:
+          WERF_ENV: staging
+          WERF_SET_1: image.pullSecret=github-cr-secret
+          WERF_SET_2: ingress.hostname=staging.eventify.today
+          WERF_SET_3: replicas.default=1
+          WERF_SET_4: replicas.min=1
+          WERF_SET_5: replicas.max=2
+          SITE_URL: https://staging.eventify.today
+          DATABASE_URL: ${{ secrets.DB_URL }}
+          NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+        run: |-
+          . $(werf ci-env github --as-file)
+          werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
+          werf converge --atomic
+      - name: Create linked comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.number }}
+          body: "Staging deployed successfully: https://staging.eventify.today"
