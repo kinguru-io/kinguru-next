@@ -1,3 +1,10 @@
+# [0.36.0](https://github.com/kinguru-io/kinguru-next/compare/v0.35.0...v0.36.0) (2024-03-21)
+
+
+### Features
+
+* **KINGU-93:** week view time slots calendar ([#510](https://github.com/kinguru-io/kinguru-next/issues/510)) ([f0708e5](https://github.com/kinguru-io/kinguru-next/commit/f0708e5603b44047d57bcb247e83c96b82ca4fed))
+
 # [0.35.0](https://github.com/kinguru-io/kinguru-next/compare/v0.34.2...v0.35.0) (2024-03-20)
 
 
