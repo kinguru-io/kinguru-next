@@ -68,8 +68,7 @@ export const Controlled = {
               key={slot.id}
               {...slot}
               onClick={() => toggleSlot(slot.id)}
-              condition={getTimeSlotCondition({
-                price: slot.price,
+              condition={getTimeSlotCondition(slot.price, {
                 minPrice,
                 maxPrice,
               })}
