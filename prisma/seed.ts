@@ -138,8 +138,10 @@ const premiseSchemaWithVenueConnection = (
   },
   openHours: {
     createMany: {
-      data: Array.from({ length: 7 }, (_, idx) =>
-        premiseOpenHoursSchema(idx),
+      data: Array.from(
+        // * simluates a sitatuion when a premise doesn't have working hours on saturday, sunday or both
+        { length: faker.number.int({ min: 5, max: 7 }) },
+        (_, idx) => premiseOpenHoursSchema(idx),
       ).flat(),
     },
   },

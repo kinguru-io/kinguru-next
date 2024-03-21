@@ -27,7 +27,7 @@ export function WeekView({
   nowDate: Date;
   timeSlotsGroup: Record<
     $Enums.DayOfTheWeek,
-    Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }>
+    Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }> | undefined
   >;
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
@@ -72,6 +72,7 @@ export function WeekView({
       >
         {weekViewData.map((weekdayInfo, idx) => {
           const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
+          const weekDayTimeSlots = timeSlotsGroup[dayOfWeekGroupKey] || [];
 
           return (
             <VStack
@@ -109,7 +110,7 @@ export function WeekView({
                 </time>
               </Box>
 
-              {timeSlotsGroup[dayOfWeekGroupKey].map(({ timeSlots }) => {
+              {weekDayTimeSlots.map(({ timeSlots }) => {
                 return timeSlots.flatMap(({ price, time }) => {
                   const slotTime = set(weekdayInfo.day, {
                     hours: time.getHours(),
