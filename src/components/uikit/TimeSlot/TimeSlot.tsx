@@ -90,15 +90,16 @@ export function TimeSlot({
   );
 }
 
-export function getTimeSlotCondition({
-  price,
-  minPrice,
-  maxPrice,
-}: {
-  price: number;
-  minPrice: number;
-  maxPrice: number;
-}): Condition {
+export type AggregatedPrices = {
+  minPrice?: number;
+  maxPrice?: number;
+};
+
+export function getTimeSlotCondition(
+  price: number,
+  { minPrice = price, maxPrice = price }: AggregatedPrices,
+): Condition {
+  if (minPrice === maxPrice) return "regular";
   if (price === maxPrice) return "max";
   if (price === minPrice) return "min";
   return "regular";

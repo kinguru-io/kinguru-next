@@ -35,6 +35,16 @@ export default async function PremisePage({
     notFound();
   }
 
+  const pricings = await prisma.premisePricing.findMany({
+    where: {
+      premiseOpenHoursId: {
+        in: premise.openHours.map((openHoursRecord) => openHoursRecord.id),
+      },
+    },
+    orderBy: { priceForHour: "asc" },
+    select: { priceForHour: true },
+  });
+
   const timeSlots = premise.openHours.map((openHoursRecord) =>
     generateTimeSlots(openHoursRecord),
   );
@@ -49,6 +59,10 @@ export default async function PremisePage({
         nowDate={nowDate}
         timeSlotsGroup={timeSlotsGroup}
         bookedSlots={bookedSlots}
+        aggregatedPrices={{
+          minPrice: pricings.at(0)?.priceForHour,
+          maxPrice: pricings.at(-1)?.priceForHour,
+        }}
       />
     </Container>
   );

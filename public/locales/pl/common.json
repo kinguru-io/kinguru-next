@@ -265,5 +265,9 @@
       "already_join": "Already join",
       "copy_link": "Copy link"
     }
+  },
+  "calendar": {
+    "prev_week_btn_label": "Previous week",
+    "next_week_btn_label": "Next week"
   }
 }

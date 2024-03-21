@@ -327,5 +327,9 @@
       "already_join": "Уже присоединились",
       "copy_link": "Копировать ссылку"
     }
+  },
+  "calendar": {
+    "prev_week_btn_label": "Предыдущая неделя",
+    "next_week_btn_label": "Следующая неделя"
   }
 }

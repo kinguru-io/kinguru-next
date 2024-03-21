@@ -2,20 +2,26 @@
 
 import type { $Enums } from "@prisma/client";
 import { isPast, lightFormat, set } from "date-fns";
-import { GrNext } from "react-icons/gr";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
-import { Button, TimeSlot, type TimeSlotInfo } from "@/components/uikit";
+import { WeekControls } from "./WeekContols";
+import {
+  type TimeSlotInfo,
+  TimeSlot,
+  type AggregatedPrices,
+  getTimeSlotCondition,
+} from "@/components/uikit";
 import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { Box, Flex, Grid, GridItem, VStack } from "~/styled-system/jsx";
+import { Box, Flex, Grid, VStack } from "~/styled-system/jsx";
 
 export function WeekView({
   locale,
   nowDate,
   timeSlotsGroup,
   bookedSlots,
+  aggregatedPrices,
 }: {
   locale: Locale;
   nowDate: Date;
@@ -24,6 +30,7 @@ export function WeekView({
     Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }>
   >;
   bookedSlots: Set<string>;
+  aggregatedPrices: AggregatedPrices;
 }) {
   const {
     originDate,
@@ -44,36 +51,19 @@ export function WeekView({
       gridTemplateColumns="auto 1fr auto"
       gridTemplateAreas="'. month-select .' 'prev-week week-view next-week'"
     >
-      <GridItem gridArea="month-select">
-        <MonthSelect
-          locale={locale}
-          monthNumber={currentMonthNumber}
-          changeMonth={changeMonth}
-          initialDate={nowDate}
-          endDate={lastAllowedDate}
-        />
-      </GridItem>
-      <GridItem gridArea="prev-week">
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={prevWeek}
-          disabled={canGoPrev}
-        >
-          <GrNext size={30} className={css({ rotate: "180deg" })} />
-        </Button>
-      </GridItem>
-      <GridItem gridArea="next-week">
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={nextWeek}
-          disabled={canGoNext}
-        >
-          <GrNext size={30} />
-        </Button>
-      </GridItem>
-
+      <MonthSelect
+        locale={locale}
+        monthNumber={currentMonthNumber}
+        changeMonth={changeMonth}
+        initialDate={nowDate}
+        endDate={lastAllowedDate}
+      />
+      <WeekControls
+        nextWeek={nextWeek}
+        prevWeek={prevWeek}
+        canGoNext={canGoNext}
+        canGoPrev={canGoPrev}
+      />
       <Flex
         gridArea="week-view"
         gap="10px"
@@ -100,7 +90,7 @@ export function WeekView({
                 css={{
                   textAlign: "center",
                   _selected: {
-                    borderColor: "primary",
+                    borderBlockEndColor: "primary",
                   },
                 }}
               >
@@ -141,6 +131,7 @@ export function WeekView({
                       onClick={() => {
                         console.log(slotISOString);
                       }}
+                      condition={getTimeSlotCondition(price, aggregatedPrices)}
                     />
                   );
                 });
