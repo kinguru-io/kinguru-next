@@ -79,7 +79,11 @@ export async function PremiseView({ id }: { id: string }) {
           </PremiseTitleWrapper>
           <PremiseDescription>{description}</PremiseDescription>
         </PremiseTextContent>
-        <Link className={button({ variant: "outline", size: "md" })} href="#">
+        <Link
+          className={button({ variant: "outline", size: "md" })}
+          // TODO slug to be replaced with id (KINGU-101)
+          href={`/premises/${id}`}
+        >
           {t("more")}
         </Link>
       </PremiseContent>

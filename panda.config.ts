@@ -79,6 +79,7 @@ export default defineConfig({
           "green.2": { value: "#60B253" },
           "green.3": { value: "#90C987" },
           "green.4": { value: "#C0E0BB" },
+          "neutral.0": { value: "#000000" },
           "neutral.1": { value: "#212529" },
           "neutral.2": { value: "#AFAFAF" },
           "neutral.3": { value: "#D9D9D9" },

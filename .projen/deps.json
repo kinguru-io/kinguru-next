@@ -318,6 +318,10 @@
       "type": "runtime"
     },
     {
+      "name": "date-fns",
+      "type": "runtime"
+    },
+    {
       "name": "formik",
       "type": "runtime"
     },
