@@ -1,10 +1,11 @@
 "use client";
 
 import type { $Enums } from "@prisma/client";
-import { isPast, lightFormat, set } from "date-fns";
+import { isEqual, isPast, lightFormat, set } from "date-fns";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
 import { WeekControls } from "./WeekContols";
+import { useBookingView } from "../BookingViewContext";
 import {
   type TimeSlotInfo,
   TimeSlot,
@@ -42,6 +43,7 @@ export function WeekView({
     currentMonthNumber,
     lastAllowedDate,
   } = useOriginDate({ initialDate: nowDate });
+  const { selectedSlots, toggleSlot } = useBookingView();
 
   const weekViewData = getWeekViewData({ locale, originDate });
 
@@ -124,15 +126,18 @@ export function WeekView({
                     return null;
                   }
 
+                  const isSlotSelected = selectedSlots.some(
+                    ({ time: selectedTime }) => isEqual(selectedTime, slotTime),
+                  );
+
                   return (
                     <TimeSlot
                       key={slotISOString}
                       price={price}
                       time={slotTime}
-                      onClick={() => {
-                        console.log(slotISOString);
-                      }}
+                      onClick={() => toggleSlot({ time: slotTime, price })}
                       condition={getTimeSlotCondition(price, aggregatedPrices)}
+                      selected={isSlotSelected}
                     />
                   );
                 });

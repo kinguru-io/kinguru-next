@@ -8,7 +8,6 @@ export const checkboxSlot = defineSlotRecipe({
     root: {
       cursor: "pointer",
       display: "inline-flex",
-      alignItems: "center",
       gap: "10px",
       "& input[type=checkbox]": {
         srOnly: true,
@@ -18,6 +17,7 @@ export const checkboxSlot = defineSlotRecipe({
       },
     },
     checkbox: {
+      flexShrink: "0",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
@@ -74,8 +74,8 @@ export const checkboxSlot = defineSlotRecipe({
     size: {
       default: {
         checkbox: {
-          width: "1.125em",
-          height: "1.125em",
+          width: "1.4em",
+          height: "1.4em",
         },
       },
     },

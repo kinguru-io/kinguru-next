@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { WeekView } from "@/components/calendar";
+import {
+  BookingViewCard,
+  BookingViewProvider,
+  WeekView,
+} from "@/components/calendar";
 import { groupBy } from "@/lib/utils/array";
 import {
   generateBookedTimeSlots,
@@ -7,7 +11,7 @@ import {
 } from "@/lib/utils/premise-time-slots";
 import type { Locale } from "@/navigation";
 import prisma from "@/server/prisma";
-import { Container } from "~/styled-system/jsx";
+import { Container, Grid } from "~/styled-system/jsx";
 
 export default async function PremisePage({
   params: { id, locale },
@@ -54,16 +58,23 @@ export default async function PremisePage({
 
   return (
     <Container>
-      <WeekView
-        locale={locale}
-        nowDate={nowDate}
-        timeSlotsGroup={timeSlotsGroup}
-        bookedSlots={bookedSlots}
-        aggregatedPrices={{
-          minPrice: pricings.at(0)?.priceForHour,
-          maxPrice: pricings.at(-1)?.priceForHour,
-        }}
-      />
+      {/* // TODO Container is a placeholder. To be removed once the page in merged */}
+      <Container h="500px" />
+      <BookingViewProvider>
+        <Grid gap="20px" gridTemplateColumns="1fr 260px">
+          <WeekView
+            locale={locale}
+            nowDate={nowDate}
+            timeSlotsGroup={timeSlotsGroup}
+            bookedSlots={bookedSlots}
+            aggregatedPrices={{
+              minPrice: pricings.at(0)?.priceForHour,
+              maxPrice: pricings.at(-1)?.priceForHour,
+            }}
+          />
+          <BookingViewCard />
+        </Grid>
+      </BookingViewProvider>
     </Container>
   );
 }
