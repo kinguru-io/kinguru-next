@@ -1,30 +1,21 @@
-ARG DEBEZIUM_VERSION
-FROM quay.io/debezium/connect:${DEBEZIUM_VERSION}
-ENV KAFKA_CONNECT_JDBC_DIR=$KAFKA_CONNECT_PLUGINS_DIR/kafka-connect-jdbc \
-    KAFKA_CONNECT_ES_DIR=$KAFKA_CONNECT_PLUGINS_DIR/kafka-connect-elasticsearch
-
-ARG POSTGRES_VERSION=42.5.1
-ARG KAFKA_JDBC_VERSION=5.3.2
-ARG KAFKA_ELASTICSEARCH_VERSION=5.3.2
-
-# Deploy PostgreSQL JDBC Driver
-RUN cd /kafka/libs && curl -sO https://jdbc.postgresql.org/download/postgresql-$POSTGRES_VERSION.jar
-
-# Deploy Kafka Connect JDBC
-RUN mkdir $KAFKA_CONNECT_JDBC_DIR && cd $KAFKA_CONNECT_JDBC_DIR &&\
-	curl -sO https://packages.confluent.io/maven/io/confluent/kafka-connect-jdbc/$KAFKA_JDBC_VERSION/kafka-connect-jdbc-$KAFKA_JDBC_VERSION.jar
-
-# Deploy Confluent Elasticsearch sink connector
-RUN mkdir $KAFKA_CONNECT_ES_DIR && cd $KAFKA_CONNECT_ES_DIR &&\
-        curl -sO https://packages.confluent.io/maven/io/confluent/kafka-connect-elasticsearch/$KAFKA_ELASTICSEARCH_VERSION/kafka-connect-elasticsearch-$KAFKA_ELASTICSEARCH_VERSION.jar && \
-        curl -sO https://repo1.maven.org/maven2/io/searchbox/jest/6.3.1/jest-6.3.1.jar && \
-        curl -sO https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore-nio/4.4.4/httpcore-nio-4.4.4.jar && \
-        curl -sO https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1.jar && \
-        curl -sO https://repo1.maven.org/maven2/org/apache/httpcomponents/httpasyncclient/4.1.1/httpasyncclient-4.1.1.jar && \
-        curl -sO https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar && \
-        curl -sO https://repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar && \
-        curl -sO https://repo1.maven.org/maven2/commons-codec/commons-codec/1.9/commons-codec-1.9.jar && \
-        curl -sO https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar && \
-        curl -sO https://repo1.maven.org/maven2/io/searchbox/jest-common/6.3.1/jest-common-6.3.1.jar && \
-        curl -sO https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar && \
-        curl -sO https://repo1.maven.org/maven2/com/google/guava/guava/31.0.1-jre/guava-31.0.1-jre.jar
+FROM confluentinc/cp-kafka-connect:7.6.0
+USER root
+ENV CONNECT_PLUGIN_PATH /usr/share/confluent-hub-components/                             
+ENV CONNECT_BOOTSTRAP_SERVERS localhost:9092
+ENV CONNECT_GROUP_ID localhost
+ENV CONNECT_CONFIG_STORAGE_TOPIC config-storage
+ENV CONNECT_OFFSET_STORAGE_TOPIC offset-storage
+ENV CONNECT_STATUS_STORAGE_TOPIC status-storage
+ENV CONNECT_INTERNAL_KEY_CONVERTER org.apache.kafka.connect.storage.StringConverter
+ENV CONNECT_INTERNAL_VALUE_CONVERTER org.apache.kafka.connect.json.JsonConverter
+ENV CONNECT_KEY_CONVERTER org.apache.kafka.connect.storage.StringConverter
+ENV CONNECT_VALUE_CONVERTER org.apache.kafka.connect.json.JsonConverter
+ENV CONNECT_REST_ADVERTISED_HOST_NAME localhost
+ENV CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR "1"
+ENV CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR "1"
+ENV CONNECT_STATUS_STORAGE_REPLICATION_FACTOR "1"
+RUN curl -O https://client.hub.confluent.io/confluent-hub-client-latest.tar.gz
+RUN mkdir confluent-hub-client-latest
+RUN tar -xf confluent-hub-client-latest.tar.gz -C confluent-hub-client-latest
+RUN ./confluent-hub-client-latest/bin/confluent-hub install --no-prompt --verbose --component-dir /usr/share/confluent-hub-components confluentinc/kafka-connect-elasticsearch:14.0.5
+RUN ./confluent-hub-client-latest/bin/confluent-hub install --no-prompt --verbose --component-dir /usr/share/confluent-hub-components debezium/debezium-connector-postgresql:latest

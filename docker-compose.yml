@@ -9,13 +9,13 @@ services:
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: kinguru
   zookeeper:
-    image: quay.io/debezium/zookeeper:2.3.2.Final
+    image: quay.io/debezium/zookeeper:2.5.3.Final
     ports:
       - "2181:2181"
       - "2888:2888"
       - "3888:3888"
   kafka:
-    image: quay.io/debezium/kafka:2.3.2.Final
+    image: quay.io/debezium/kafka:2.5.3.Final
     ports:
       - "9092:9092"
     links:
@@ -23,7 +23,7 @@ services:
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
     ports:
       - "9200:9200"
     environment:
@@ -31,17 +31,13 @@ services:
       xpack.security.enabled: 'false'
       transport.host: 127.0.0.1
       http.host: 0.0.0.0
-      http.cors.allow-origin: "*"
       http.cors.enabled: true
       http.cors.allow-credentials: true
       http.cors.allow-methods: OPTIONS, POST
       http.cors.allow-headers: x-elastic-client-meta, X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization, Access-Control-Allow-Headers, Accept
   connect:
-    image: debezium/connect-jdbc-es:2.3.2.Final
     build:
       context: .docker
-      args:
-        DEBEZIUM_VERSION: 2.3.2.Final
     ports:
       - "8083:8083"
       - "5005:5005"
@@ -50,18 +46,4 @@ services:
       - db
       - elastic
     environment:
-      - BOOTSTRAP_SERVERS=kafka:9092
-      - GROUP_ID=1
-      - CONFIG_STORAGE_TOPIC=my_connect_configs
-      - OFFSET_STORAGE_TOPIC=my_connect_offsets
-      - STATUS_STORAGE_TOPIC=my_source_connect_statuses
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    restart: "no"
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:9092"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    depends_on:
-      - "kafka"
+      - CONNECT_BOOTSTRAP_SERVERS=kafka:9092
