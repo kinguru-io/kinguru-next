@@ -2,7 +2,7 @@
 
 import { compareAsc, lightFormat } from "date-fns";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useState } from "react";
 
 import { LiaCalendar } from "react-icons/lia";
 import { useBookingView } from "../BookingViewContext";
@@ -21,12 +21,17 @@ import { Box, Center, Flex, Grid, HStack } from "~/styled-system/jsx";
 export function BookingViewCard() {
   const t = useTranslations("booking_view");
   const { selectedSlots } = useBookingView();
+  const [isUserAwareOfRules, setAwarenessState] = useState(false);
 
   const areThereNoSlots = selectedSlots.length === 0;
   const total = selectedSlots.reduce(
     (totalPrice, { price }) => totalPrice + price,
     0,
   );
+
+  const checboxChanged = () => {
+    setAwarenessState((prevState) => !prevState);
+  };
 
   return (
     <Card
@@ -55,10 +60,17 @@ export function BookingViewCard() {
           {!areThereNoSlots && (
             <>
               <PriceBlock price={{ total }} />
-              <Checkbox label={t("rules_agreement")} required />
+              <Checkbox
+                checked={isUserAwareOfRules}
+                onChange={checboxChanged}
+                label={t("rules_agreement")}
+                required
+              />
             </>
           )}
-          <Button size="md">{t("pay_btn")}</Button>
+          <Button size="md" disabled={!isUserAwareOfRules || areThereNoSlots}>
+            {t("pay_btn")}
+          </Button>
         </CardFooter>
       </CardInner>
     </Card>
