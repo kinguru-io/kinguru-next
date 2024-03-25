@@ -108,6 +108,7 @@ export default async function PremisePage({
           <h1>{name}</h1>
           <span className={css({ textStyle: "body.1" })}>{venue.name}</span>
         </VStack>
+        <PremiseAttributes mapboxId={venue.locationMapboxId} price={minPrice} />
         <Box w="100%">
           <Slider slidesCount={resources.length}>
             {resources.map((resource) => (
@@ -119,10 +120,8 @@ export default async function PremisePage({
             ))}
           </Slider>
         </Box>
-        {/*TODO: insert dropdown component */}
+        {/* TODO insert dropdown component */}
       </PremiseMainInfoLayout>
-
-      <PremiseAttributes mapboxId={venue.locationMapboxId} price={minPrice} />
 
       <PremiseAccordionLayout>
         <Accordion>
@@ -138,6 +137,7 @@ export default async function PremisePage({
       </PremiseAccordionLayout>
 
       <PremiseCalendarLayout>
+        <h2>{t("calendar_heading")}</h2>
         <BookingViewProvider>
           <Grid gap="20px" gridTemplateColumns="1fr 260px">
             <WeekView

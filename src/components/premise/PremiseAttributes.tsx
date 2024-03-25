@@ -2,10 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { BsGeoAlt } from "react-icons/bs";
-import { IoServerOutline } from "react-icons/io5";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
-import { PremiseAttributesLayout } from "@/layout/block/premise";
 import { priceFormatter } from "@/lib/utils";
 import { HStack } from "~/styled-system/jsx";
 
@@ -29,21 +26,16 @@ export function PremiseAttributes({ mapboxId, price }: PremiseAttributesProps) {
   }, [mapboxId]);
 
   return (
-    <PremiseAttributesLayout>
+    <HStack textStyle="heading.extra.1">
+      {placeAddress && <address>{placeAddress}</address>}
+      {placeAddress && price && <span>|</span>}
       {price && (
-        <HStack gap="20px" borderRadius="76px" bg="neutral.5" p="36.5px 24.5px">
-          <IoServerOutline />
-          <span>
-            {t("from", {
-              price: priceFormatter.format(price),
-            })}
-          </span>
-        </HStack>
+        <span>
+          {t("from", {
+            price: priceFormatter.format(price),
+          })}
+        </span>
       )}
-      <HStack gap="20px" borderRadius="51px" bg="neutral.5" p="16px 49px">
-        <BsGeoAlt />
-        <span>{placeAddress}</span>
-      </HStack>
-    </PremiseAttributesLayout>
+    </HStack>
   );
 }

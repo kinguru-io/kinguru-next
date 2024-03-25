@@ -309,7 +309,8 @@
     "amenities_and_facilities": "Оснащения и удобства",
     "booking_cancellation_terms": "Условия отмены бронирования",
     "premise_rules": "Правила зала",
-    "how_to_get_there": "Как добраться"
+    "how_to_get_there": "Как добраться",
+    "calendar_heading": "Календарь площадки"
   },
   "event": {
     "future_event_page": {

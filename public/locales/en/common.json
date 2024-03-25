@@ -447,7 +447,8 @@
     "amenities_and_facilities": "Amenities and facilities",
     "booking_cancellation_terms": "Booking cancellation terms",
     "premise_rules": "Premise rules",
-    "how_to_get_there": "How to get there"
+    "how_to_get_there": "How to get there",
+    "calendar_heading": "Premise calendar"
   },
   "event": {
     "future_event_page": {
