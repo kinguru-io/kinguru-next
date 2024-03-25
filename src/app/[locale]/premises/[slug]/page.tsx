@@ -1,8 +1,14 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+
+import {
+  BookingViewCard,
+  BookingViewProvider,
+  WeekView,
+} from "@/components/calendar";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
-import { PremiseAttributes, PremiseAmenities } from "@/components/premise/";
+import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
 import {
   AccordinItemToggle,
   Accordion,
@@ -16,23 +22,39 @@ import {
   PremiseCalendarLayout,
   PremiseMainInfoLayout,
   PremiseMapLayout,
-} from "@/layout/block/premise/";
+} from "@/layout/block/premise";
+import { groupBy } from "@/lib/utils/array";
+import {
+  generateBookedTimeSlots,
+  generateTimeSlots,
+} from "@/lib/utils/premise-time-slots";
+import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { AspectRatio, Box, VStack } from "~/styled-system/jsx";
+import { AspectRatio, Box, Grid, VStack } from "~/styled-system/jsx";
 
 export default async function PremisePage({
-  params: { slug },
+  params: { slug, locale },
 }: {
-  params: { slug: string };
+  params: { slug: string; locale: Locale };
 }) {
-  const premise = await prisma.premise.findFirst({
+  const nowDate = new Date();
+  const premise = await prisma.premise.findUnique({
     where: {
       slug: slug,
     },
     include: {
       venue: true,
       resources: true,
-      openHours: { include: { pricing: { select: { priceForHour: true } } } },
+      slots: {
+        where: {
+          date: { gte: nowDate.toISOString() },
+        },
+      },
+      openHours: {
+        include: {
+          pricing: true,
+        },
+      },
     },
   });
 
@@ -40,36 +62,32 @@ export default async function PremisePage({
     notFound();
   }
 
+  const t = await getTranslations("premise");
   const {
     name,
     venue,
     resources,
+    slots,
     openHours,
     rules,
     amenities,
     direction,
     bookingCancelTerm,
   } = premise;
-  const t = await getTranslations("premise");
 
-  const hoursWithMinPrices = await Promise.allSettled(
-    openHours.map((openHour) =>
-      prisma.premisePricing
-        .aggregate({
-          where: {
-            premiseOpenHoursId: openHour.id,
-          },
-          _min: { priceForHour: true },
-        })
-        .then(({ _min: { priceForHour } }) => ({ priceForHour })),
-    ),
-  );
+  const pricings = await prisma.premisePricing.findMany({
+    where: {
+      premiseOpenHoursId: {
+        in: openHours.map((openHoursRecord) => openHoursRecord.id),
+      },
+    },
+    orderBy: { priceForHour: "asc" },
+    select: { priceForHour: true },
+  });
 
-  // TODO: add profilling
-
-  // const minPrice = Math.min(
-  //   ...profilingHoursWithMinPrices.map((hour) => hour.value.priceForHour),
-  // );
+  const timeSlots = openHours.map((record) => generateTimeSlots(record));
+  const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
+  const bookedSlots = generateBookedTimeSlots(slots);
 
   const accordionItems = [
     {
@@ -118,8 +136,21 @@ export default async function PremisePage({
       </PremiseAccordionLayout>
 
       <PremiseCalendarLayout>
-        <></>
-        // TODO: insert calendar component
+        <BookingViewProvider>
+          <Grid gap="20px" gridTemplateColumns="1fr 260px">
+            <WeekView
+              locale={locale}
+              nowDate={nowDate}
+              timeSlotsGroup={timeSlotsGroup}
+              bookedSlots={bookedSlots}
+              aggregatedPrices={{
+                minPrice: pricings.at(0)?.priceForHour,
+                maxPrice: pricings.at(-1)?.priceForHour,
+              }}
+            />
+            <BookingViewCard />
+          </Grid>
+        </BookingViewProvider>
       </PremiseCalendarLayout>
 
       <PremiseMapLayout>

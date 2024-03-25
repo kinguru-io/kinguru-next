@@ -16,13 +16,13 @@ import {
   SliderItem,
 } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
-import { Link } from "@/navigation";
+import { Link, type Locale } from "@/navigation";
 import prisma from "@/server/prisma";
 import { button } from "~/styled-system/recipes";
 
 export async function PremiseView({ id }: { id: string }) {
   const t = await getTranslations("premise");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
@@ -58,7 +58,7 @@ export async function PremiseView({ id }: { id: string }) {
     },
   });
 
-  const { name, description, area, resources } = premise;
+  const { slug, name, description, area, resources } = premise;
 
   return (
     <PremiseCard>
@@ -81,8 +81,7 @@ export async function PremiseView({ id }: { id: string }) {
         </PremiseTextContent>
         <Link
           className={button({ variant: "outline", size: "md" })}
-          // TODO slug to be replaced with id (KINGU-101)
-          href={`/premises/${id}`}
+          href={`/premises/${slug}`}
         >
           {t("more")}
         </Link>
