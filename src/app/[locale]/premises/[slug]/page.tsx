@@ -84,6 +84,8 @@ export default async function PremisePage({
     orderBy: { priceForHour: "asc" },
     select: { priceForHour: true },
   });
+  const minPrice = pricings.at(0)?.priceForHour;
+  const maxPrice = pricings.at(-1)?.priceForHour;
 
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
@@ -120,7 +122,7 @@ export default async function PremisePage({
         {/*TODO: insert dropdown component */}
       </PremiseMainInfoLayout>
 
-      <PremiseAttributes mapboxId={venue.locationMapboxId} price={100} />
+      <PremiseAttributes mapboxId={venue.locationMapboxId} price={minPrice} />
 
       <PremiseAccordionLayout>
         <Accordion>
@@ -144,8 +146,8 @@ export default async function PremisePage({
               timeSlotsGroup={timeSlotsGroup}
               bookedSlots={bookedSlots}
               aggregatedPrices={{
-                minPrice: pricings.at(0)?.priceForHour,
-                maxPrice: pricings.at(-1)?.priceForHour,
+                minPrice,
+                maxPrice,
               }}
             />
             <BookingViewCard />
