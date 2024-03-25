@@ -398,7 +398,7 @@ model Venue {
 
 model Premise {
   id                String             @id @default(cuid())
-  slug              String             
+  slug              String             @unique
   venue             Venue              @relation(fields: [venueId], references: [id])
   venueId           String
   name              String

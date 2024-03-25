@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import { $Enums, PremiseOpenHours, Prisma, PrismaClient } from "@prisma/client";
-import slugify from "@sindresorhus/slugify";
+import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
@@ -118,13 +118,16 @@ const premiseOpenHoursSchema = (idx: number) => {
         },
       ] as Prisma.PremiseOpenHoursCreateInput[]);
 };
+
+const slugifyCount = slugifyWithCounter();
+
 const premiseSchemaWithVenueConnection = (
   venueId: string,
 ): Prisma.PremiseCreateInput => {
   const name = `${faker.commerce.department()} ${faker.helpers.arrayElement(ROOM_WORD_SYNONYMS)}`;
   return {
     name: name,
-    slug: slugify(name),
+    slug: slugifyCount(name),
     description: faker.lorem.paragraph(5),
     area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
     amenities: faker.helpers.arrayElements(
@@ -222,7 +225,7 @@ async function main() {
         starts: faker.date.future(),
         duration: faker.date.future(),
         poster: faker.image.urlLoremFlickr(),
-        price: parseFloat(faker.finance.amount(0, 20)),
+        price: parseFloat(faker.finance.amount({ min: 0, max: 20 })),
         tags: faker.lorem.words().split(" "),
         initiator: {
           create: userSchema(),
