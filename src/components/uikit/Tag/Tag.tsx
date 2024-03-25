@@ -25,6 +25,10 @@ export const tagStyles = cva({
         bg: "neutral.5",
         color: "neutral.1",
       },
+      additional: {
+        bg: "neutral.3",
+        color: "neutral.1",
+      },
     },
     size: {
       xs: {
