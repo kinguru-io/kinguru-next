@@ -1,16 +1,19 @@
-import { addHours, lightFormat } from "date-fns";
+import { addHours } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { RxCross1 } from "react-icons/rx";
 import { Button, Card, Tag, type TimeSlotInfo } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
 import { Divider } from "~/styled-system/jsx";
 
 type TimeSlotCardProps = TimeSlotInfo & {
+  timeZone?: string;
   onClick: () => void;
   buttonLabel: string;
 };
 
 export function TimeSlotCard({
   time,
+  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
   price,
   onClick,
   buttonLabel,
@@ -29,7 +32,7 @@ export function TimeSlotCard({
       }}
     >
       <Tag size="sm" variant="secondaryLighter" css={{ flexShrink: "0" }}>
-        {`${lightFormat(time, "H:mm")} - ${lightFormat(addHours(time, 1), "H:mm")}`}
+        {`${formatInTimeZone(time, timeZone, "H:mm")} - ${formatInTimeZone(addHours(time, 1), timeZone, "H:mm")}`}
       </Tag>
       <span data-price>{priceFormatter.format(price)}</span>
       <Divider orientation="vertical" color="neutral.2" borderStyle="dashed" />

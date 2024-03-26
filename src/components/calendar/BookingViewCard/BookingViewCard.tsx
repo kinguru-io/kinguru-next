@@ -1,12 +1,14 @@
 "use client";
 
-import { compareAsc, lightFormat } from "date-fns";
+import { compareAsc } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import { LiaCalendar } from "react-icons/lia";
 import { useBookingView } from "../BookingViewContext";
 import { TimeSlotCard } from "../TimeSlotCard";
+import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
   Button,
   Card,
@@ -80,12 +82,13 @@ export function BookingViewCard() {
 function BookingSlotsListing() {
   const t = useTranslations("booking_view");
   const { selectedSlots, toggleSlot } = useBookingView();
+  const timeZone = useSearchBoxTimeZone();
 
   const groupedSlots = groupBy(
     Array.from(selectedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
     ),
-    ({ time }) => lightFormat(time, "dd.MM.yyyy"),
+    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
   );
 
   return (
@@ -104,6 +107,7 @@ function BookingSlotsListing() {
             {slots.map((timeSlotInfo) => (
               <TimeSlotCard
                 key={"booking-view" + timeSlotInfo.time.toISOString()}
+                timeZone={timeZone}
                 onClick={() => toggleSlot(timeSlotInfo)}
                 buttonLabel={t("remove_timeslot_btn")}
                 {...timeSlotInfo}

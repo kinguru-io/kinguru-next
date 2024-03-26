@@ -7,6 +7,7 @@ import {
   BookingViewProvider,
   WeekView,
 } from "@/components/calendar";
+import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
 import {
@@ -39,9 +40,7 @@ export default async function PremisePage({
 }) {
   const nowDate = new Date();
   const premise = await prisma.premise.findUnique({
-    where: {
-      slug: slug,
-    },
+    where: { slug },
     include: {
       venue: true,
       resources: true,
@@ -102,13 +101,13 @@ export default async function PremisePage({
   ];
 
   return (
-    <>
+    <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
       <PremiseMainInfoLayout>
         <VStack gap="0">
           <h1>{name}</h1>
           <span className={css({ textStyle: "body.1" })}>{venue.name}</span>
         </VStack>
-        <PremiseAttributes mapboxId={venue.locationMapboxId} price={minPrice} />
+        <PremiseAttributes price={minPrice} />
         <Box w="100%">
           <Slider slidesCount={resources.length}>
             {resources.map((resource) => (
@@ -165,6 +164,6 @@ export default async function PremisePage({
           />
         </AspectRatio>
       </PremiseMapLayout>
-    </>
+    </MapboxSearchBoxResponseProvider>
   );
 }

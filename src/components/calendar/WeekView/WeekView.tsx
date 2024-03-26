@@ -1,18 +1,24 @@
 "use client";
 
 import type { $Enums } from "@prisma/client";
-import { isEqual, isPast, lightFormat, set } from "date-fns";
+import { isEqual, isSameDay, set } from "date-fns";
+import { formatInTimeZone, utcToZonedTime } from "date-fns-tz";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
 import { WeekControls } from "./WeekContols";
 import { useBookingView } from "../BookingViewContext";
+import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
   type TimeSlotInfo,
   TimeSlot,
   type AggregatedPrices,
   getTimeSlotCondition,
 } from "@/components/uikit";
-import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
+import {
+  getWeekViewData,
+  DAYS_OF_WEEK_ORDERED,
+  isBeforeZoned,
+} from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Box, Flex, Grid, VStack } from "~/styled-system/jsx";
@@ -33,6 +39,7 @@ export function WeekView({
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
 }) {
+  const timeZone = useSearchBoxTimeZone();
   const {
     originDate,
     changeMonth,
@@ -42,7 +49,7 @@ export function WeekView({
     canGoNext,
     currentMonthNumber,
     lastAllowedDate,
-  } = useOriginDate({ initialDate: nowDate });
+  } = useOriginDate({ initialDate: nowDate, timeZone });
   const { selectedSlots, toggleSlot } = useBookingView();
 
   const weekViewData = getWeekViewData({ locale, originDate });
@@ -75,6 +82,10 @@ export function WeekView({
         {weekViewData.map((weekdayInfo, idx) => {
           const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
           const weekDayTimeSlots = timeSlotsGroup[dayOfWeekGroupKey] || [];
+          const isToday = isSameDay(
+            utcToZonedTime(nowDate, timeZone),
+            utcToZonedTime(weekdayInfo.day, timeZone),
+          );
 
           return (
             <VStack
@@ -86,15 +97,13 @@ export function WeekView({
             >
               <Box
                 alignSelf="stretch"
+                textAlign="center"
                 borderBlockEnd="4px solid token(colors.primary.disabled)"
                 paddingBlockEnd="3px"
                 marginBlockEnd="5px"
-                aria-selected={weekdayInfo.isToday}
-                css={{
-                  textAlign: "center",
-                  _selected: {
-                    borderBlockEndColor: "primary",
-                  },
+                aria-selected={isToday}
+                _selected={{
+                  borderBlockEndColor: "primary",
                 }}
               >
                 <time
@@ -103,12 +112,16 @@ export function WeekView({
                     textTransform: "capitalize",
                     whiteSpace: "pre",
                   })}
-                  dateTime={lightFormat(weekdayInfo.day, "yyyy-MM-dd")}
+                  dateTime={formatInTimeZone(
+                    weekdayInfo.day,
+                    timeZone,
+                    "yyyy-MM-dd",
+                  )}
                   suppressHydrationWarning
                 >
                   {weekdayInfo.weekdayShort}
                   {"\n"}
-                  {lightFormat(weekdayInfo.day, "d")}
+                  {formatInTimeZone(weekdayInfo.day, timeZone, "d")}
                 </time>
               </Box>
 
@@ -122,7 +135,10 @@ export function WeekView({
                   });
                   const slotISOString = slotTime.toISOString();
 
-                  if (isPast(slotTime) || bookedSlots.has(slotISOString)) {
+                  if (
+                    isBeforeZoned(slotTime, nowDate, timeZone) ||
+                    bookedSlots.has(slotISOString)
+                  ) {
                     return null;
                   }
 
@@ -135,6 +151,7 @@ export function WeekView({
                       key={slotISOString}
                       price={price}
                       time={slotTime}
+                      timeZone={timeZone}
                       onClick={() => toggleSlot({ time: slotTime, price })}
                       condition={getTimeSlotCondition(price, aggregatedPrices)}
                       selected={isSlotSelected}
