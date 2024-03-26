@@ -20,8 +20,40 @@ Content-Type: application/json
   }
 }
 
+### Show ES indecies
+GET http://localhost:9200/_cat/indices
+
 ### Create ES index
 GET http://localhost:9200/_cat/indices
+
+### Get index mapping
+GET http://localhost:9200/kinguru.public.event/_mapping
+
+### Delete index
+DELETE http://localhost:9200/kinguru.public.event/
+
+### Dynamic mapping
+PUT http://localhost:9200/_template/kafkaconnect/
+Content-Type: application/json
+
+{
+  "template": "*",
+  "settings": { "number_of_shards": 1, "number_of_replicas": 0 },
+  "mappings": {
+    "_default_": {
+      "dynamic_templates": [
+        {
+          "dates": {
+            "match": "*At",
+            "mapping": {
+              "type": "date"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
 
 ### Get es content
 GET http://localhost:9200/kinguru.public.event/_search

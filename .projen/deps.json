@@ -204,6 +204,10 @@
       "type": "runtime"
     },
     {
+      "name": "@elastic/elasticsearch",
+      "type": "runtime"
+    },
+    {
       "name": "@elastic/react-search-ui",
       "type": "runtime"
     },

@@ -125,6 +125,7 @@ const project = new web.NextJsTypeScriptProject({
   deps: [
     "@aws-sdk/client-s3",
     "@aws-sdk/s3-request-presigner",
+    "@elastic/elasticsearch",
 
     "@prisma/client",
     "@trpc/client",
