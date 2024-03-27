@@ -191,6 +191,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-snap-carousel",
     "@sindresorhus/slugify",
     "date-fns",
+    "date-fns-tz",
   ],
   devDeps: [
     "@pandacss/dev",

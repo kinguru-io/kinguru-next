@@ -1,5 +1,5 @@
-import { addDays, differenceInDays, isToday, startOfWeek } from "date-fns";
-import { Locale } from "@/navigation";
+import { addDays, differenceInDays, startOfWeek } from "date-fns";
+import type { Locale } from "@/navigation";
 
 type Options = {
   locale?: Locale;
@@ -25,12 +25,9 @@ export function getWeekViewData({
     // using `5` to get the range [`Monday`, `Tuesday`, ..., `Sunday`]
     unixStartTime.setDate(5 + idx);
 
-    const day = addDays(originDate, idx - weekdayOffset);
-
     return {
-      isToday: isToday(day),
+      day: addDays(originDate, idx - weekdayOffset),
       weekdayShort: weekdayFormatter.format(unixStartTime),
-      day,
     };
   });
 }

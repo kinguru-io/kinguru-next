@@ -52,21 +52,15 @@ export const Card = styled(
   },
 );
 
-export function CardInner({ children }: CardProps) {
-  return (
-    <div
-      className={css({
-        display: "flex",
-        flex: "1",
-        flexDirection: "column",
-        p: "15px",
-        gap: "8px",
-      })}
-    >
-      {children}
-    </div>
-  );
-}
+export const CardInner = styled("div", {
+  base: {
+    display: "flex",
+    flex: "1",
+    flexDirection: "column",
+    p: "15px",
+    gap: "8px",
+  },
+});
 
 export function CardHeading({ children }: CardProps) {
   return <div data-card="heading">{children}</div>;
@@ -76,6 +70,8 @@ export function CardBody({ children }: CardProps) {
   return <div className={css({ lineClamp: "4", mt: "3px" })}>{children}</div>;
 }
 
-export function CardFooter({ children }: CardProps) {
-  return <div className={css({ mt: "auto" })}>{children}</div>;
-}
+export const CardFooter = styled("div", {
+  base: {
+    marginBlockStart: "auto",
+  },
+});

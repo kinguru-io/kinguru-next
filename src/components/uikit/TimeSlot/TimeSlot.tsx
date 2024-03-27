@@ -1,4 +1,4 @@
-import { lightFormat } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { priceFormatter } from "@/lib/utils";
 import { css, cx } from "~/styled-system/css";
 import { divider } from "~/styled-system/patterns";
@@ -18,6 +18,7 @@ export type TimeSlotInfo = {
 };
 
 type TimeSlotProps = TimeSlotInfo & {
+  timeZone?: string;
   onClick: () => void;
   condition?: Condition;
   selected?: boolean;
@@ -26,6 +27,7 @@ type TimeSlotProps = TimeSlotInfo & {
 export function TimeSlot({
   price,
   time,
+  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
   onClick,
   condition = "regular",
   selected = false,
@@ -66,7 +68,7 @@ export function TimeSlot({
         className={css({ textStyle: "body.1" })}
         dateTime={time.toISOString()}
       >
-        {lightFormat(time, "H:mm")}
+        {formatInTimeZone(time, timeZone, "H:mm")}
       </time>
       <span
         className={divider({ orientation: "horizontal", minWidth: "40px" })}

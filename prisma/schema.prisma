@@ -397,17 +397,22 @@ model Venue {
 }
 
 model Premise {
-  id          String             @id @default(cuid())
-  venue       Venue              @relation(fields: [venueId], references: [id])
-  venueId     String
-  name        String
-  description String
-  area        Float?
-  slots       PremiseSlot[]
-  openHours   PremiseOpenHours[]
-  resources   PremiseResource[]
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  id                String             @id @default(cuid())
+  slug              String             @unique
+  venue             Venue              @relation(fields: [venueId], references: [id])
+  venueId           String
+  name              String
+  description       String
+  area              Float?
+  slots             PremiseSlot[]
+  openHours         PremiseOpenHours[]
+  resources         PremiseResource[]
+  rules             String?            @default("Rules")
+  amenities         String[]
+  direction         String?            @default("Direction")
+  bookingCancelTerm String?            @default("Booking cancel term")
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model PremiseOpenHours {

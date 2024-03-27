@@ -1,4 +1,5 @@
 import { differenceInCalendarMonths, eachMonthOfInterval } from "date-fns";
+import { useTranslations } from "next-intl";
 import { memo } from "react";
 import { Select } from "@/components/uikit";
 import type { Locale } from "@/navigation";
@@ -17,6 +18,7 @@ export const MonthSelect = memo(function MonthSelect({
   initialDate: Date;
   endDate: Date;
 }) {
+  const t = useTranslations("calendar");
   // using of `{ year: 'numeric' }` for full year is omitted
   // since there is a literal for some locale (e.g. `ru-*` locale)
   const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
@@ -37,7 +39,7 @@ export const MonthSelect = memo(function MonthSelect({
       >
         <Select
           value={monthNumber}
-          placeholder="Choose month"
+          placeholder={t("select_choose_month")}
           onChange={optionChanged}
         >
           {eachMonthOfInterval({

@@ -304,7 +304,13 @@
     "more": "Подробнее",
     "from": "от {price}",
     "see_all": "Смотреть все",
-    "hide": "Скрыть"
+    "hide": "Скрыть",
+    "map": "Карта",
+    "amenities_and_facilities": "Оснащения и удобства",
+    "booking_cancellation_terms": "Условия отмены бронирования",
+    "premise_rules": "Правила зала",
+    "how_to_get_there": "Как добраться",
+    "calendar_heading": "Календарь площадки"
   },
   "event": {
     "future_event_page": {
@@ -330,6 +336,19 @@
   },
   "calendar": {
     "prev_week_btn_label": "Предыдущая неделя",
-    "next_week_btn_label": "Следующая неделя"
+    "next_week_btn_label": "Следующая неделя",
+    "select_choose_month": "Выберите месяц"
+  },
+  "booking_view": {
+    "card_heading": "Ваше бронирование",
+    "no_selected_slots": "Здесь будет отображаться ваше бронирование",
+    "pay_btn": "Оплатить",
+    "rules_agreement": "Я ознакомился и согласен с правилами зала",
+    "remove_timeslot_btn": "Удалить время бронирования"
+  },
+  "price": {
+    "total": "Итого",
+    "full_price": "Цена без учета скидки",
+    "discount": "Скидка"
   }
 }

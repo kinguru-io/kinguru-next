@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import { $Enums, PremiseOpenHours, Prisma, PrismaClient } from "@prisma/client";
-import slugify from "@sindresorhus/slugify";
+import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
@@ -118,34 +118,61 @@ const premiseOpenHoursSchema = (idx: number) => {
         },
       ] as Prisma.PremiseOpenHoursCreateInput[]);
 };
+
+const slugifyCount = slugifyWithCounter();
+
 const premiseSchemaWithVenueConnection = (
   venueId: string,
-): Prisma.PremiseCreateInput => ({
-  name: `${faker.commerce.department()} ${faker.helpers.arrayElement(ROOM_WORD_SYNONYMS)}`,
-  description: faker.lorem.paragraph(5),
-  area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
-  venue: {
-    connect: {
-      id: venueId,
+): Prisma.PremiseCreateInput => {
+  const name = `${faker.commerce.department()} ${faker.helpers.arrayElement(ROOM_WORD_SYNONYMS)}`;
+  return {
+    name: name,
+    slug: slugifyCount(name),
+    description: faker.lorem.paragraph(5),
+    area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
+    amenities: faker.helpers.arrayElements(
+      [
+        "Wi-FI",
+        "Экран проекционный",
+        "Микрофон",
+        "Колонки",
+        "Маркеры",
+        "Флипчарт",
+        "Wi-FI",
+        "Экран проекционный",
+        "Микрофон",
+        "Колонки",
+        "Маркеры",
+        "Флипчарт",
+      ],
+      { min: 3, max: 12 },
+    ),
+    direction: faker.lorem.paragraph(5),
+    rules: faker.lorem.paragraph(5),
+    bookingCancelTerm: faker.lorem.paragraph(5),
+    venue: {
+      connect: {
+        id: venueId,
+      },
     },
-  },
-  resources: {
-    createMany: {
-      data: Array.from({ length: 5 }, () => ({
-        url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
-      })),
+    resources: {
+      createMany: {
+        data: Array.from({ length: 5 }, () => ({
+          url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
+        })),
+      },
     },
-  },
-  openHours: {
-    createMany: {
-      data: Array.from(
-        // * simluates a sitatuion when a premise doesn't have working hours on saturday, sunday or both
-        { length: faker.number.int({ min: 5, max: 7 }) },
-        (_, idx) => premiseOpenHoursSchema(idx),
-      ).flat(),
+    openHours: {
+      createMany: {
+        data: Array.from(
+          // * simluates a sitatuion when a premise doesn't have working hours on saturday, sunday or both
+          { length: faker.number.int({ min: 5, max: 7 }) },
+          (_, idx) => premiseOpenHoursSchema(idx),
+        ).flat(),
+      },
     },
-  },
-});
+  };
+};
 
 const pickUniqueValues = <T>(array: T[], count: number): T[] => {
   return Array.from(
@@ -198,7 +225,7 @@ async function main() {
         starts: faker.date.future(),
         duration: faker.date.future(),
         poster: faker.image.urlLoremFlickr(),
-        price: parseFloat(faker.finance.amount(0, 20)),
+        price: parseFloat(faker.finance.amount({ min: 0, max: 20 })),
         tags: faker.lorem.words().split(" "),
         initiator: {
           create: userSchema(),

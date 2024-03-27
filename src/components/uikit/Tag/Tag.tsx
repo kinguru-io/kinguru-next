@@ -17,8 +17,16 @@ export const tagStyles = cva({
         bg: "secondary",
         color: "neutral.5",
       },
+      secondaryLighter: {
+        bg: "neutral.4",
+        color: "neutral.1",
+      },
       tertiary: {
         bg: "neutral.5",
+        color: "neutral.1",
+      },
+      additional: {
+        bg: "neutral.3",
         color: "neutral.1",
       },
     },
