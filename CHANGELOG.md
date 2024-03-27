@@ -1,3 +1,10 @@
+# [0.37.0](https://github.com/kinguru-io/kinguru-next/compare/v0.36.0...v0.37.0) (2024-03-27)
+
+
+### Features
+
+* **KINGU-93:** booking view card ([#523](https://github.com/kinguru-io/kinguru-next/issues/523)) ([2a4f50c](https://github.com/kinguru-io/kinguru-next/commit/2a4f50c92943fd183e6469fcf2b14a5957d3fd34))
+
 # [0.36.0](https://github.com/kinguru-io/kinguru-next/compare/v0.35.0...v0.36.0) (2024-03-21)
 
 
