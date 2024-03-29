@@ -1,26 +1,41 @@
 "use client";
 
-import { compareAsc } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
+import type { Premise } from "@prisma/client";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import { useState, useTransition } from "react";
 
-import { LiaCalendar } from "react-icons/lia";
+import { BookingSlotsListing } from "./BookingSlotsListing";
+import { NoBookingsNotice } from "./NoBookingsNotice";
+import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
-import { TimeSlotCard } from "../TimeSlotCard";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
+import CheckoutForm from "@/components/common/checkout/CheckoutForm";
 import {
   Button,
   Card,
   CardFooter,
   CardInner,
   Checkbox,
+  Modal,
+  ModalWindow,
+  useModal,
 } from "@/components/uikit";
-import { priceFormatter } from "@/lib/utils";
-import { groupBy } from "@/lib/utils/array";
-import { Box, Center, Flex, Grid, HStack } from "~/styled-system/jsx";
+import type {
+  CreatePremiseSlotsIntent,
+  RevalidatePremisePage,
+} from "@/lib/actions/booking";
+import { Box, VStack } from "~/styled-system/jsx";
 
-export function BookingViewCard() {
+export function BookingViewCard({
+  premiseId,
+  createIntent,
+  revalidateFn,
+}: {
+  premiseId: Premise["id"];
+  createIntent: CreatePremiseSlotsIntent;
+  revalidateFn: RevalidatePremisePage;
+}) {
   const t = useTranslations("booking_view");
   const { selectedSlots } = useBookingView();
   const [isUserAwareOfRules, setAwarenessState] = useState(false);
@@ -34,7 +49,6 @@ export function BookingViewCard() {
   const checboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
   };
-
   return (
     <Card
       border="1px solid"
@@ -70,96 +84,91 @@ export function BookingViewCard() {
               />
             </>
           )}
-          <Button size="md" disabled={!isUserAwareOfRules || areThereNoSlots}>
-            {t("pay_btn")}
-          </Button>
+          <Modal>
+            <PayButton
+              premiseId={premiseId}
+              createIntent={createIntent}
+              revalidateFn={revalidateFn}
+              buttonLabel={t("pay_btn")}
+              modalHeading={t("booking_modal_heading")}
+              isInactive={!isUserAwareOfRules || areThereNoSlots}
+            />
+          </Modal>
         </CardFooter>
       </CardInner>
     </Card>
   );
 }
 
-function BookingSlotsListing() {
-  const t = useTranslations("booking_view");
-  const { selectedSlots, toggleSlot } = useBookingView();
-  const timeZone = useSearchBoxTimeZone();
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
 
-  const groupedSlots = groupBy(
-    Array.from(selectedSlots).sort((slotA, slotB) =>
-      compareAsc(slotA.time, slotB.time),
-    ),
-    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
-  );
+function PayButton({
+  premiseId,
+  buttonLabel,
+  modalHeading,
+  isInactive,
+  createIntent,
+  revalidateFn,
+}: {
+  premiseId: Premise["id"];
+  buttonLabel: string;
+  modalHeading: string;
+  isInactive: boolean;
+  createIntent: CreatePremiseSlotsIntent;
+  revalidateFn: RevalidatePremisePage;
+}) {
+  const { selectedSlots, resetSlots } = useBookingView();
+  const [isPending, startTransition] = useTransition();
+  const [secret, setSecret] = useState<string | null>(null);
+  const { setOpen } = useModal();
 
-  return (
-    <Grid
-      alignSelf="stretch"
-      gridAutoFlow="row"
-      marginBlock="30px 40px"
-      gap="30px"
-    >
-      {Object.entries(groupedSlots).map(([date, slots]) => {
-        return (
-          <Grid gap="10px" gridAutoFlow="row">
-            <HStack gap="3px">
-              <LiaCalendar size="1.125em" /> <time dateTime={date}>{date}</time>
-            </HStack>
-            {slots.map((timeSlotInfo) => (
-              <TimeSlotCard
-                key={"booking-view" + timeSlotInfo.time.toISOString()}
-                timeZone={timeZone}
-                onClick={() => toggleSlot(timeSlotInfo)}
-                buttonLabel={t("remove_timeslot_btn")}
-                {...timeSlotInfo}
-              />
-            ))}
-          </Grid>
-        );
-      })}
-    </Grid>
-  );
-}
+  const payBtnClicked = () => {
+    startTransition(async () => {
+      const clientSecret = await createIntent({
+        premiseId,
+        slots: selectedSlots,
+      });
 
-function NoBookingsNotice({ label }: { label: string }) {
-  return (
-    <Center
-      flexBasis="full"
-      maxWidth="156px"
-      textStyle="body.2"
-      textAlign="center"
-      color="neutral.2"
-    >
-      <span>{label}</span>
-    </Center>
-  );
-}
-
-// TODO initial implementation. Should be moved out there
-type PriceBlockProps = {
-  price: {
-    total: number;
+      if (clientSecret) {
+        setSecret(clientSecret);
+        setOpen(true);
+      }
+    });
   };
-};
 
-function PriceBlock({ price }: PriceBlockProps) {
-  const t = useTranslations("price");
-
-  const { total } = price;
+  const paymentSucceed = () => {
+    setOpen(false);
+    resetSlots();
+    void revalidateFn();
+  };
 
   return (
-    <Box
-      alignSelf="stretch"
-      paddingBlockStart="10px"
-      marginBlockStart="auto"
-      borderBlockStart="1px solid"
-      borderColor="neutral.2"
-      textStyle="body.3"
-      css={{ "& > [data-total=true]": { textStyle: "heading.4" } }}
-    >
-      <Flex justifyContent="space-between" data-total={true}>
-        <span>{t("total")}</span>
-        <span>{priceFormatter.format(total)}</span>
-      </Flex>
-    </Box>
+    <>
+      <Button
+        size="md"
+        isLoading={isPending}
+        disabled={isInactive}
+        onClick={payBtnClicked}
+      >
+        {buttonLabel}
+      </Button>
+      <ModalWindow>
+        {secret && (
+          <VStack gap="12px" minHeight="350px">
+            <h4>{modalHeading}</h4>
+            <Box bg="neutral.5" borderRadius="10px">
+              <Elements
+                stripe={stripePromise}
+                options={{ clientSecret: secret }}
+              >
+                <CheckoutForm succeedRefetch={paymentSucceed} />
+              </Elements>
+            </Box>
+          </VStack>
+        )}
+      </ModalWindow>
+    </>
   );
 }

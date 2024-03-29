@@ -5,15 +5,16 @@ export function groupBy<T, R extends PropertyKey>(
   return rawArray.reduce(
     (group, curr, i, array) => {
       const groupKey = groupKeyFn(curr, i, array);
+      const groupItem = group[groupKey];
 
-      if (group[groupKey]) {
-        group[groupKey].push(curr);
+      if (groupItem) {
+        groupItem.push(curr);
       } else {
         group[groupKey] = [curr];
       }
 
       return group;
     },
-    {} as Record<R, T[]>,
+    {} as Record<R, T[] | undefined>,
   );
 }

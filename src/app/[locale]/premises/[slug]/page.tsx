@@ -24,6 +24,10 @@ import {
   PremiseMainInfoLayout,
   PremiseMapLayout,
 } from "@/layout/block/premise";
+import {
+  createPremiseSlotsIntent,
+  revalidatePremisePage,
+} from "@/lib/actions/booking";
 import { groupBy } from "@/lib/utils/array";
 import {
   generateBookedTimeSlots,
@@ -149,7 +153,11 @@ export default async function PremisePage({
                 maxPrice,
               }}
             />
-            <BookingViewCard />
+            <BookingViewCard
+              premiseId={premise.id}
+              createIntent={createPremiseSlotsIntent}
+              revalidateFn={revalidatePremisePage}
+            />
           </Grid>
         </BookingViewProvider>
       </PremiseCalendarLayout>

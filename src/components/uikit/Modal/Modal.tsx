@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
 import { css } from "~/styled-system/css";
@@ -13,6 +14,11 @@ const ModalContext = React.createContext({
   setOpen: (_value: boolean) => {},
 });
 
+export function useModal() {
+  const context = React.useContext(ModalContext);
+  return context;
+}
+
 export function Modal({ children }: ModalProps) {
   const [open, setOpen] = React.useState(false);
 
@@ -24,13 +30,14 @@ export function Modal({ children }: ModalProps) {
 }
 
 export function ModalInitiator({ children }: ModalProps) {
-  const { setOpen, open } = React.useContext(ModalContext);
+  const { setOpen, open } = useModal();
 
   return <div onClick={() => setOpen(!open)}>{children}</div>;
 }
 
 export function ModalWindow({ children }: ModalProps) {
-  const { open, setOpen } = React.useContext(ModalContext);
+  const { open, setOpen } = useModal();
+
   return (
     <dialog
       open={open}

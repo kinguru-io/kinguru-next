@@ -51,6 +51,7 @@ model User {
   purchaseNotification   PurchaseNotification[]
   organizations          Organization[]
   likedEvents            UserLikedEvents[]
+  slots                  PremiseSlot[]
 }
 
 enum UserRole {
@@ -73,7 +74,6 @@ model UserLikedEvents {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  
   @@id([userId, eventId])
 }
 
@@ -151,16 +151,15 @@ model SpeakerFollower {
 }
 
 model PurchaseNotification {
-  id      String             @id @default(cuid())
-  user    User?              @relation(fields: [userId], references: [id])
-  userId  String?
-  event   Event?             @relation(fields: [eventId], references: [id])
-  eventId String?
-  viewed  Boolean            @default(false)
-  status  TicketIntentStatus @default(progress)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String             @id @default(cuid())
+  user      User?              @relation(fields: [userId], references: [id])
+  userId    String?
+  event     Event?             @relation(fields: [eventId], references: [id])
+  eventId   String?
+  viewed    Boolean            @default(false)
+  status    TicketIntentStatus @default(progress)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
 }
 
 model ModerationNotification {
@@ -426,12 +425,16 @@ model PremiseOpenHours {
 }
 
 model PremiseSlot {
-  id        String   @id @default(cuid())
-  premise   Premise  @relation(fields: [premiseId], references: [id])
-  premiseId String
-  date      DateTime
-  startTime DateTime
-  endTime   DateTime
+  id              String             @id @default(cuid())
+  premise         Premise            @relation(fields: [premiseId], references: [id])
+  premiseId       String
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  paymentIntentId String
+  date            DateTime
+  startTime       DateTime
+  endTime         DateTime
+  status          TicketIntentStatus
 }
 
 model PremisePricing {

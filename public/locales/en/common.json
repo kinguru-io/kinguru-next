@@ -483,7 +483,8 @@
     "no_selected_slots": "Your booking will be shown here",
     "pay_btn": "Pay",
     "rules_agreement": "I have read and agree with the rules of the premise",
-    "remove_timeslot_btn": "Delete booking time"
+    "remove_timeslot_btn": "Delete booking time",
+    "booking_modal_heading": "Time slots booking"
   },
   "price": {
     "total": "Total",
