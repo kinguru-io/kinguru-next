@@ -2,7 +2,7 @@
 
 import Stripe from "stripe";
 import { getSession } from "@/auth";
-import type { StripeMetadataExtended } from "@/lib/shared";
+import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 

@@ -30,7 +30,7 @@ import {
 } from "@/lib/actions/booking";
 import { groupBy } from "@/lib/utils/array";
 import {
-  generateBookedTimeSlots,
+  prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
 import type { Locale } from "@/navigation";
@@ -92,7 +92,7 @@ export default async function PremisePage({
 
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
-  const bookedSlots = generateBookedTimeSlots(slots);
+  const bookedSlots = prepareBookedSlots(slots);
 
   const accordionItems = [
     {

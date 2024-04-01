@@ -5,10 +5,10 @@ import { addHours, startOfDay } from "date-fns";
 import Stripe from "stripe";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
-import type { StripeMetadataExtended } from "@/lib/shared";
+import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import { groupBy } from "@/lib/utils/array";
 import {
-  generateBookedTimeSlots,
+  prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
 import { redirect } from "@/navigation";
@@ -50,7 +50,7 @@ export async function createPremiseSlotsIntent({
 
   if (!premise) return;
 
-  const bookedSlots = generateBookedTimeSlots(premise.slots);
+  const bookedSlots = prepareBookedSlots(premise.slots);
   const timeSlotsGroup = groupBy(
     premise.openHours.map((record) => generateTimeSlots(record)),
     ({ day }) => day,

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-import type { StripeMetadataExtended } from "@/lib/shared";
+import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import prisma from "@/server/prisma.ts";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;

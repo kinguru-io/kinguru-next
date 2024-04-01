@@ -39,7 +39,7 @@ export function chooseTimeSlotPrice(time: Date, priceList: PremisePricing[]) {
   return priceForHour || 0;
 }
 
-export function generateBookedTimeSlots(slots: PremiseSlot[]) {
+export function prepareBookedSlots(slots: PremiseSlot[]) {
   const bookedTimeSlots = slots
     .flatMap((slot) =>
       eachHourOfInterval({

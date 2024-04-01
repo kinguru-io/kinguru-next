@@ -49,6 +49,7 @@ export function BookingViewCard({
   const checboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
   };
+
   return (
     <Card
       border="1px solid"
@@ -134,6 +135,7 @@ function PayButton({
       if (clientSecret) {
         setSecret(clientSecret);
         setOpen(true);
+        void revalidateFn();
       }
     });
   };
