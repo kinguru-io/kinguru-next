@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Meta, StoryObj } from "@storybook/react";
-import { Modal, ModalInitiator, ModalWindow } from "./Modal";
-import { Button } from "../Button";
+import { Modal, ModalInitiator, Button } from "@/components/uikit";
+// using renaming to obtain the original since ModalWindow is being exported as next.js dynamic()
+import { _ModalWindow as ModalWindow } from "@/components/uikit/Modal/ModalWindow";
 
 const meta = {
   title: "UIKit/Modal",
