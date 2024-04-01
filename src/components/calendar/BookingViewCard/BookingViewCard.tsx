@@ -17,7 +17,6 @@ import {
   CardFooter,
   CardInner,
   Checkbox,
-  Modal,
   ModalWindow,
   useModal,
 } from "@/components/uikit";
@@ -27,114 +26,58 @@ import type {
 } from "@/lib/actions/booking";
 import { Box, VStack } from "~/styled-system/jsx";
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
+
 export function BookingViewCard({
   premiseId,
   createIntent,
   revalidateFn,
+  inModal = false,
 }: {
   premiseId: Premise["id"];
   createIntent: CreatePremiseSlotsIntent;
   revalidateFn: RevalidatePremisePage;
+  inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
-  const { selectedSlots } = useBookingView();
-  const [isUserAwareOfRules, setAwarenessState] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const { selectedSlots, resetSlots } = useBookingView();
+  const { open, setOpen, setClosable } = useModal();
+  const [isUserAwareOfRules, setAwarenessState] = useState(inModal);
+  const [intentResponse, setIntentResponse] = useState<{
+    clientSecret: string;
+    paymentIntentId: string;
+  } | null>(null);
 
   const areThereNoSlots = selectedSlots.length === 0;
+  const isOutsideModal = open && !inModal;
   const total = selectedSlots.reduce(
     (totalPrice, { price }) => totalPrice + price,
     0,
   );
 
-  const checboxChanged = () => {
+  const checkboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
   };
 
-  return (
-    <Card
-      border="1px solid"
-      borderColor="neutral.2"
-      alignSelf="flex-start"
-      minHeight="352px"
-      position="sticky"
-      top="100px" // header height + 15px
-    >
-      <CardInner padding="25px 18px" alignItems="center" gap="0px">
-        <h4>{t("card_heading")}</h4>
-        {areThereNoSlots ? (
-          <NoBookingsNotice label={t("no_selected_slots")} />
-        ) : (
-          <BookingSlotsListing />
-        )}
-        <CardFooter
-          width="full"
-          display="flex"
-          gap="20px"
-          flexDirection="column"
-          alignItems="center"
-          css={{ "& .button": { width: "min-content" } }}
-        >
-          {!areThereNoSlots && (
-            <>
-              <PriceBlock price={{ total }} />
-              <Checkbox
-                checked={isUserAwareOfRules}
-                onChange={checboxChanged}
-                label={t("rules_agreement")}
-                required
-              />
-            </>
-          )}
-          <Modal>
-            <PayButton
-              premiseId={premiseId}
-              createIntent={createIntent}
-              revalidateFn={revalidateFn}
-              buttonLabel={t("pay_btn")}
-              modalHeading={t("booking_modal_heading")}
-              isInactive={!isUserAwareOfRules || areThereNoSlots}
-            />
-          </Modal>
-        </CardFooter>
-      </CardInner>
-    </Card>
-  );
-}
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-);
-
-function PayButton({
-  premiseId,
-  buttonLabel,
-  modalHeading,
-  isInactive,
-  createIntent,
-  revalidateFn,
-}: {
-  premiseId: Premise["id"];
-  buttonLabel: string;
-  modalHeading: string;
-  isInactive: boolean;
-  createIntent: CreatePremiseSlotsIntent;
-  revalidateFn: RevalidatePremisePage;
-}) {
-  const { selectedSlots, resetSlots } = useBookingView();
-  const [isPending, startTransition] = useTransition();
-  const [secret, setSecret] = useState<string | null>(null);
-  const { setOpen } = useModal();
-
   const payBtnClicked = () => {
+    if (!open) {
+      setOpen(true);
+      return;
+    }
+
     startTransition(async () => {
-      const clientSecret = await createIntent({
+      const response = await createIntent({
         premiseId,
         slots: selectedSlots,
       });
 
-      if (clientSecret) {
-        setSecret(clientSecret);
-        setOpen(true);
+      if (response) {
+        setClosable(false);
+        setIntentResponse(response);
+
         void revalidateFn();
       }
     });
@@ -143,34 +86,86 @@ function PayButton({
   const paymentSucceed = () => {
     setOpen(false);
     resetSlots();
+
     void revalidateFn();
   };
 
+  if (inModal && intentResponse?.clientSecret) {
+    return (
+      <VStack gap="12px" minHeight="350px">
+        <h4>{t("booking_modal_heading")}</h4>
+        <Box bg="neutral.5" borderRadius="10px">
+          <Elements
+            stripe={stripePromise}
+            options={{ clientSecret: intentResponse?.clientSecret }}
+          >
+            <CheckoutForm succeedRefetch={paymentSucceed} />
+          </Elements>
+        </Box>
+      </VStack>
+    );
+  }
+
   return (
     <>
-      <Button
-        size="md"
-        isLoading={isPending}
-        disabled={isInactive}
-        onClick={payBtnClicked}
+      <Card
+        border="1px solid"
+        borderColor="neutral.2"
+        alignSelf="flex-start"
+        minHeight="352px"
+        position="sticky"
+        top="100px" // header height + 15px
       >
-        {buttonLabel}
-      </Button>
-      <ModalWindow>
-        {secret && (
-          <VStack gap="12px" minHeight="350px">
-            <h4>{modalHeading}</h4>
-            <Box bg="neutral.5" borderRadius="10px">
-              <Elements
-                stripe={stripePromise}
-                options={{ clientSecret: secret }}
-              >
-                <CheckoutForm succeedRefetch={paymentSucceed} />
-              </Elements>
-            </Box>
-          </VStack>
-        )}
-      </ModalWindow>
+        <CardInner padding="25px 18px" alignItems="center" gap="0px">
+          <h4>{t("card_heading")}</h4>
+          {areThereNoSlots ? (
+            <NoBookingsNotice label={t("no_selected_slots")} />
+          ) : (
+            <BookingSlotsListing />
+          )}
+          <CardFooter
+            width="full"
+            display="flex"
+            gap="20px"
+            flexDirection="column"
+            alignItems="center"
+            css={{ "& .button": { width: "min-content" } }}
+          >
+            {!areThereNoSlots && (
+              <>
+                <PriceBlock price={{ total }} />
+                <Checkbox
+                  checked={isUserAwareOfRules}
+                  disabled={isOutsideModal}
+                  onChange={checkboxChanged}
+                  label={t("rules_agreement")}
+                  required
+                />
+              </>
+            )}
+            <Button
+              size="md"
+              isLoading={isPending}
+              disabled={
+                isOutsideModal || !isUserAwareOfRules || areThereNoSlots
+              }
+              onClick={payBtnClicked}
+            >
+              {t("pay_btn")}
+            </Button>
+          </CardFooter>
+        </CardInner>
+      </Card>
+      {!inModal && (
+        <ModalWindow>
+          <BookingViewCard
+            premiseId={premiseId}
+            createIntent={createIntent}
+            revalidateFn={revalidateFn}
+            inModal={true}
+          />
+        </ModalWindow>
+      )}
     </>
   );
 }

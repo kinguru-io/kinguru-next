@@ -15,6 +15,7 @@ import {
   Accordion,
   AccordionItem,
   AccordionItemContent,
+  Modal,
   Slider,
   SliderItem,
 } from "@/components/uikit";
@@ -153,11 +154,13 @@ export default async function PremisePage({
                 maxPrice,
               }}
             />
-            <BookingViewCard
-              premiseId={premise.id}
-              createIntent={createPremiseSlotsIntent}
-              revalidateFn={revalidatePremisePage}
-            />
+            <Modal>
+              <BookingViewCard
+                premiseId={premise.id}
+                createIntent={createPremiseSlotsIntent}
+                revalidateFn={revalidatePremisePage}
+              />
+            </Modal>
           </Grid>
         </BookingViewProvider>
       </PremiseCalendarLayout>
