@@ -1,165 +1,171 @@
 "use client";
 
-import { compareAsc } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
+import type { Premise } from "@prisma/client";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import { useState, useTransition } from "react";
 
-import { LiaCalendar } from "react-icons/lia";
+import { BookingSlotsListing } from "./BookingSlotsListing";
+import { NoBookingsNotice } from "./NoBookingsNotice";
+import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
-import { TimeSlotCard } from "../TimeSlotCard";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
+import CheckoutForm from "@/components/common/checkout/CheckoutForm";
 import {
   Button,
   Card,
   CardFooter,
   CardInner,
   Checkbox,
+  ModalWindow,
+  useModal,
 } from "@/components/uikit";
-import { priceFormatter } from "@/lib/utils";
-import { groupBy } from "@/lib/utils/array";
-import { Box, Center, Flex, Grid, HStack } from "~/styled-system/jsx";
+import type {
+  CreatePremiseSlotsIntent,
+  RevalidatePremisePage,
+} from "@/lib/actions/booking";
+import { Box, VStack } from "~/styled-system/jsx";
 
-export function BookingViewCard() {
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
+
+export function BookingViewCard({
+  premiseId,
+  createIntent,
+  revalidateFn,
+  inModal = false,
+}: {
+  premiseId: Premise["id"];
+  createIntent: CreatePremiseSlotsIntent;
+  revalidateFn: RevalidatePremisePage;
+  inModal?: boolean;
+}) {
   const t = useTranslations("booking_view");
-  const { selectedSlots } = useBookingView();
-  const [isUserAwareOfRules, setAwarenessState] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const { selectedSlots, resetSlots } = useBookingView();
+  const { open, setOpen, setClosable } = useModal();
+  const [isUserAwareOfRules, setAwarenessState] = useState(inModal);
+  const [intentResponse, setIntentResponse] = useState<{
+    clientSecret: string;
+    paymentIntentId: string;
+  } | null>(null);
 
   const areThereNoSlots = selectedSlots.length === 0;
+  const isOutsideModal = open && !inModal;
   const total = selectedSlots.reduce(
     (totalPrice, { price }) => totalPrice + price,
     0,
   );
 
-  const checboxChanged = () => {
+  const checkboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
   };
 
-  return (
-    <Card
-      border="1px solid"
-      borderColor="neutral.2"
-      alignSelf="flex-start"
-      minHeight="352px"
-      position="sticky"
-      top="100px" // header height + 15px
-    >
-      <CardInner padding="25px 18px" alignItems="center" gap="0px">
-        <h4>{t("card_heading")}</h4>
-        {areThereNoSlots ? (
-          <NoBookingsNotice label={t("no_selected_slots")} />
-        ) : (
-          <BookingSlotsListing />
-        )}
-        <CardFooter
-          width="full"
-          display="flex"
-          gap="20px"
-          flexDirection="column"
-          alignItems="center"
-          css={{ "& .button": { width: "min-content" } }}
-        >
-          {!areThereNoSlots && (
-            <>
-              <PriceBlock price={{ total }} />
-              <Checkbox
-                checked={isUserAwareOfRules}
-                onChange={checboxChanged}
-                label={t("rules_agreement")}
-                required
-              />
-            </>
-          )}
-          <Button size="md" disabled={!isUserAwareOfRules || areThereNoSlots}>
-            {t("pay_btn")}
-          </Button>
-        </CardFooter>
-      </CardInner>
-    </Card>
-  );
-}
+  const payBtnClicked = () => {
+    if (!open) {
+      setOpen(true);
+      return;
+    }
 
-function BookingSlotsListing() {
-  const t = useTranslations("booking_view");
-  const { selectedSlots, toggleSlot } = useBookingView();
-  const timeZone = useSearchBoxTimeZone();
+    startTransition(async () => {
+      const response = await createIntent({
+        premiseId,
+        slots: selectedSlots,
+      });
 
-  const groupedSlots = groupBy(
-    Array.from(selectedSlots).sort((slotA, slotB) =>
-      compareAsc(slotA.time, slotB.time),
-    ),
-    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
-  );
+      if (response) {
+        setClosable(false);
+        setIntentResponse(response);
 
-  return (
-    <Grid
-      alignSelf="stretch"
-      gridAutoFlow="row"
-      marginBlock="30px 40px"
-      gap="30px"
-    >
-      {Object.entries(groupedSlots).map(([date, slots]) => {
-        return (
-          <Grid gap="10px" gridAutoFlow="row">
-            <HStack gap="3px">
-              <LiaCalendar size="1.125em" /> <time dateTime={date}>{date}</time>
-            </HStack>
-            {slots.map((timeSlotInfo) => (
-              <TimeSlotCard
-                key={"booking-view" + timeSlotInfo.time.toISOString()}
-                timeZone={timeZone}
-                onClick={() => toggleSlot(timeSlotInfo)}
-                buttonLabel={t("remove_timeslot_btn")}
-                {...timeSlotInfo}
-              />
-            ))}
-          </Grid>
-        );
-      })}
-    </Grid>
-  );
-}
-
-function NoBookingsNotice({ label }: { label: string }) {
-  return (
-    <Center
-      flexBasis="full"
-      maxWidth="156px"
-      textStyle="body.2"
-      textAlign="center"
-      color="neutral.2"
-    >
-      <span>{label}</span>
-    </Center>
-  );
-}
-
-// TODO initial implementation. Should be moved out there
-type PriceBlockProps = {
-  price: {
-    total: number;
+        void revalidateFn();
+      }
+    });
   };
-};
 
-function PriceBlock({ price }: PriceBlockProps) {
-  const t = useTranslations("price");
+  const paymentSucceed = () => {
+    setOpen(false);
+    resetSlots();
 
-  const { total } = price;
+    void revalidateFn();
+  };
+
+  if (inModal && intentResponse?.clientSecret) {
+    return (
+      <VStack gap="12px" minHeight="350px">
+        <h4>{t("booking_modal_heading")}</h4>
+        <Box bg="neutral.5" borderRadius="10px">
+          <Elements
+            stripe={stripePromise}
+            options={{ clientSecret: intentResponse?.clientSecret }}
+          >
+            <CheckoutForm succeedRefetch={paymentSucceed} />
+          </Elements>
+        </Box>
+      </VStack>
+    );
+  }
 
   return (
-    <Box
-      alignSelf="stretch"
-      paddingBlockStart="10px"
-      marginBlockStart="auto"
-      borderBlockStart="1px solid"
-      borderColor="neutral.2"
-      textStyle="body.3"
-      css={{ "& > [data-total=true]": { textStyle: "heading.4" } }}
-    >
-      <Flex justifyContent="space-between" data-total={true}>
-        <span>{t("total")}</span>
-        <span>{priceFormatter.format(total)}</span>
-      </Flex>
-    </Box>
+    <>
+      <Card
+        border="1px solid"
+        borderColor="neutral.2"
+        alignSelf="flex-start"
+        minHeight="352px"
+        position="sticky"
+        top="100px" // header height + 15px
+      >
+        <CardInner padding="25px 18px" alignItems="center" gap="0px">
+          <h4>{t("card_heading")}</h4>
+          {areThereNoSlots ? (
+            <NoBookingsNotice label={t("no_selected_slots")} />
+          ) : (
+            <BookingSlotsListing />
+          )}
+          <CardFooter
+            width="full"
+            display="flex"
+            gap="20px"
+            flexDirection="column"
+            alignItems="center"
+            css={{ "& .button": { width: "min-content" } }}
+          >
+            {!areThereNoSlots && (
+              <>
+                <PriceBlock price={{ total }} />
+                <Checkbox
+                  checked={isUserAwareOfRules}
+                  disabled={isOutsideModal}
+                  onChange={checkboxChanged}
+                  label={t("rules_agreement")}
+                  required
+                />
+              </>
+            )}
+            <Button
+              size="md"
+              isLoading={isPending}
+              disabled={
+                isOutsideModal || !isUserAwareOfRules || areThereNoSlots
+              }
+              onClick={payBtnClicked}
+            >
+              {t("pay_btn")}
+            </Button>
+          </CardFooter>
+        </CardInner>
+      </Card>
+      {!inModal && (
+        <ModalWindow>
+          <BookingViewCard
+            premiseId={premiseId}
+            createIntent={createIntent}
+            revalidateFn={revalidateFn}
+            inModal={true}
+          />
+        </ModalWindow>
+      )}
+    </>
   );
 }

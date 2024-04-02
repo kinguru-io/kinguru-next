@@ -2,6 +2,7 @@
 
 import Stripe from "stripe";
 import { getSession } from "@/auth";
+import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
@@ -30,6 +31,7 @@ export async function getTicketIntentAction(eventId: string) {
       currency: "PLN",
       customer: session.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
+      metadata: { source: "event-join" } as StripeMetadataExtended,
     });
 
   if (!clientSecret) {

@@ -344,7 +344,8 @@
     "no_selected_slots": "Здесь будет отображаться ваше бронирование",
     "pay_btn": "Оплатить",
     "rules_agreement": "Я ознакомился и согласен с правилами зала",
-    "remove_timeslot_btn": "Удалить время бронирования"
+    "remove_timeslot_btn": "Удалить время бронирования",
+    "booking_modal_heading": "Бронирование"
   },
   "price": {
     "total": "Итого",
