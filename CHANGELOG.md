@@ -1,3 +1,10 @@
+# [0.38.0](https://github.com/kinguru-io/kinguru-next/compare/v0.37.0...v0.38.0) (2024-04-02)
+
+
+### Features
+
+* **KINGU-93:** booking action ([#531](https://github.com/kinguru-io/kinguru-next/issues/531)) ([7b6df04](https://github.com/kinguru-io/kinguru-next/commit/7b6df048ae89f6f03c58c1608288cda68a275aa1))
+
 # [0.37.0](https://github.com/kinguru-io/kinguru-next/compare/v0.36.0...v0.37.0) (2024-03-27)
 
 
