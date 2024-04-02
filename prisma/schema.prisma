@@ -406,6 +406,7 @@ model Premise {
   slots             PremiseSlot[]
   openHours         PremiseOpenHours[]
   resources         PremiseResource[]
+  discounts         PremiseDiscount[]
   rules             String?            @default("Rules")
   amenities         String[]
   direction         String?            @default("Direction")
@@ -455,4 +456,12 @@ model PremiseResource {
   url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model PremiseDiscount {
+  id                 String  @id @default(cuid())
+  premise            Premise @relation(fields: [premiseId], references: [id])
+  premiseId          String
+  duration           Int
+  discountPercentage Float
 }
