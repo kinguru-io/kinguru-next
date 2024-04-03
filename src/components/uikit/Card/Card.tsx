@@ -1,5 +1,6 @@
 import { css } from "~/styled-system/css";
 import { styled } from "~/styled-system/jsx";
+import type { JsxStyleProps } from "~/styled-system/types";
 
 type CardProps = {
   children: React.ReactNode;
@@ -62,8 +63,15 @@ export const CardInner = styled("div", {
   },
 });
 
-export function CardHeading({ children }: CardProps) {
-  return <div data-card="heading">{children}</div>;
+export function CardHeading({
+  children,
+  ...props
+}: JsxStyleProps & { children: React.ReactNode }) {
+  return (
+    <styled.div data-card="heading" {...props}>
+      {children}
+    </styled.div>
+  );
 }
 
 export function CardBody({ children }: CardProps) {

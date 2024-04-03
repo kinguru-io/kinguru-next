@@ -5,8 +5,8 @@ import { divider } from "~/styled-system/patterns";
 import { button } from "~/styled-system/recipes";
 
 export const timeSlotCondition = {
-  min: "success",
   regular: "secondary",
+  min: "success",
   max: "danger",
 } as const;
 

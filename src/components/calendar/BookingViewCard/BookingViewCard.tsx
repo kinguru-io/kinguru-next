@@ -113,8 +113,6 @@ export function BookingViewCard({
         borderColor="neutral.2"
         alignSelf="flex-start"
         minHeight="352px"
-        position="sticky"
-        top="100px" // header height + 15px
       >
         <CardInner padding="25px 18px" alignItems="center" gap="0px">
           <h4>{t("card_heading")}</h4>

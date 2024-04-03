@@ -350,6 +350,14 @@
   "price": {
     "total": "Итого",
     "full_price": "Цена без учета скидки",
-    "discount": "Скидка"
+    "discount": "Скидка",
+    "min": "низкая цена",
+    "max": "высокая цена",
+    "regular": "стандартная цена"
+  },
+  "discount_info": {
+    "card_heading": "Предусмотрены скидки*",
+    "per_day_notice": "* - в рамках одного дня",
+    "duration": "{hours} и более"
   }
 }

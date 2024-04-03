@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-
 import {
   BookingViewCard,
   BookingViewProvider,
   WeekView,
+  DiscountViewCard,
+  PriceDescription,
 } from "@/components/calendar";
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
@@ -49,6 +50,11 @@ export default async function PremisePage({
     include: {
       venue: true,
       resources: true,
+      discounts: {
+        orderBy: {
+          duration: "asc",
+        },
+      },
       slots: {
         where: {
           date: { gte: nowDate.toISOString() },
@@ -71,6 +77,7 @@ export default async function PremisePage({
     name,
     venue,
     resources,
+    discounts,
     slots,
     openHours,
     rules,
@@ -154,13 +161,23 @@ export default async function PremisePage({
                 maxPrice,
               }}
             />
-            <Modal>
-              <BookingViewCard
-                premiseId={premise.id}
-                createIntent={createPremiseSlotsIntent}
-                revalidateFn={revalidatePremisePage}
-              />
-            </Modal>
+            <Grid
+              gap="30px"
+              gridAutoFlow="row"
+              position="sticky"
+              top="100px" // header height + 15px
+              height="min-content"
+            >
+              <Modal>
+                <BookingViewCard
+                  premiseId={premise.id}
+                  createIntent={createPremiseSlotsIntent}
+                  revalidateFn={revalidatePremisePage}
+                />
+              </Modal>
+              <DiscountViewCard discounts={discounts} locale={locale} />
+              <PriceDescription />
+            </Grid>
           </Grid>
         </BookingViewProvider>
       </PremiseCalendarLayout>
