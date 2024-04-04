@@ -12,7 +12,7 @@ import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/Mapbox
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
 import {
-  AccordinItemToggle,
+  AccordionItemToggle,
   Accordion,
   AccordionItem,
   AccordionItemContent,
@@ -35,6 +35,7 @@ import {
   prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
+import { prepareDiscountRangeMap } from "@/lib/utils/price";
 import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { AspectRatio, Box, Grid, VStack } from "~/styled-system/jsx";
@@ -86,7 +87,7 @@ export default async function PremisePage({
     bookingCancelTerm,
   } = premise;
 
-  const pricings = await prisma.premisePricing.findMany({
+  const pricingRecords = await prisma.premisePricing.findMany({
     where: {
       premiseOpenHoursId: {
         in: openHours.map((openHoursRecord) => openHoursRecord.id),
@@ -95,12 +96,13 @@ export default async function PremisePage({
     orderBy: { priceForHour: "asc" },
     select: { priceForHour: true },
   });
-  const minPrice = pricings.at(0)?.priceForHour;
-  const maxPrice = pricings.at(-1)?.priceForHour;
+  const minPrice = pricingRecords.at(0)?.priceForHour;
+  const maxPrice = pricingRecords.at(-1)?.priceForHour;
 
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
   const bookedSlots = prepareBookedSlots(slots);
+  const discountMap = prepareDiscountRangeMap(discounts);
 
   const accordionItems = [
     {
@@ -138,9 +140,9 @@ export default async function PremisePage({
         <Accordion>
           {accordionItems.map(({ title, description }) => (
             <AccordionItem key={title}>
-              <AccordinItemToggle textStyle="heading.3">
+              <AccordionItemToggle textStyle="heading.3">
                 {title}
-              </AccordinItemToggle>
+              </AccordionItemToggle>
               <AccordionItemContent>{description}</AccordionItemContent>
             </AccordionItem>
           ))}
@@ -173,6 +175,7 @@ export default async function PremisePage({
                   premiseId={premise.id}
                   createIntent={createPremiseSlotsIntent}
                   revalidateFn={revalidatePremisePage}
+                  discountsMap={discountMap}
                 />
               </Modal>
               <DiscountViewCard discounts={discounts} locale={locale} />

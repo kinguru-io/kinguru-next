@@ -281,8 +281,8 @@
   },
   "price": {
     "total": "Total",
-    "full_price": "Price without discount",
-    "discount": "Discount",
+    "full_price": "Full price",
+    "discount": "Discount -{percentage}%",
     "min": "low price",
     "max": "high price",
     "regular": "regular price"

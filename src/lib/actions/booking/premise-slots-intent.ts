@@ -1,7 +1,12 @@
 "use server";
 
-import { type PremiseSlot, TicketIntentStatus } from "@prisma/client";
-import { addHours, startOfDay } from "date-fns";
+import {
+  type PremiseSlot,
+  TicketIntentStatus,
+  PremiseDiscount,
+} from "@prisma/client";
+import { addHours, compareAsc, startOfDay } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import Stripe from "stripe";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
@@ -11,12 +16,14 @@ import {
   prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
+import { prepareDiscountRangeMap, processDiscounts } from "@/lib/utils/price";
 import { redirect } from "@/navigation";
 
 type BookTimeSlotsActionData = {
   premiseId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
+  timeZone: string;
 };
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -26,18 +33,33 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function createPremiseSlotsIntent({
   premiseId,
   slots,
+  timeZone,
 }: BookTimeSlotsActionData) {
   const session = await getSession();
   const userId = session?.user?.id;
 
   if (!userId) return redirect("/auth/signin");
 
-  const { totalPrice, isValid } = await validatePaymentIntentData({
+  const { isValid, editedSlots, discounts } = await validatePaymentIntentData({
     premiseId,
     slots,
   });
 
-  if (!isValid) return;
+  if (!isValid || editedSlots.length === 0) {
+    // TODO invalid data provided notification
+    return;
+  }
+
+  const groupedSlots = groupBy(
+    Array.from(editedSlots).sort((slotA, slotB) =>
+      compareAsc(slotA.time, slotB.time),
+    ),
+    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
+  );
+  const { totalPrice } = processDiscounts(
+    groupedSlots,
+    prepareDiscountRangeMap(discounts),
+  );
 
   const { id: paymentIntentId, client_secret: clientSecret } =
     await stripe.paymentIntents.create({
@@ -87,9 +109,13 @@ export async function cancelPreliminaryBooking({
 async function validatePaymentIntentData({
   premiseId,
   slots,
-}: BookTimeSlotsActionData) {
-  if (!premiseId || slots.length === 0) {
-    return { totalPrice: 0, isValid: false };
+}: Partial<BookTimeSlotsActionData>): Promise<{
+  isValid: boolean;
+  editedSlots: TimeSlotInfoExtended[];
+  discounts: PremiseDiscount[];
+}> {
+  if (!premiseId || !slots || slots.length === 0) {
+    return { isValid: false, editedSlots: [], discounts: [] };
   }
 
   const premise = await prisma.premise.findUnique({
@@ -100,6 +126,11 @@ async function validatePaymentIntentData({
           date: { gte: startOfDay(new Date()).toISOString() },
         },
       },
+      discounts: {
+        orderBy: {
+          duration: "asc",
+        },
+      },
       openHours: {
         include: {
           pricing: true,
@@ -108,7 +139,7 @@ async function validatePaymentIntentData({
     },
   });
 
-  if (!premise) return { totalPrice: 0, isValid: false };
+  if (!premise) return { isValid: false, editedSlots: [], discounts: [] };
 
   const bookedSlots = prepareBookedSlots(premise.slots);
   const timeSlotsGroup = groupBy(
@@ -121,13 +152,13 @@ async function validatePaymentIntentData({
       if (!aggregations.isValid) return aggregations;
       // the slot is booked already or is under payment process
       if (bookedSlots.has(slot.time.toISOString())) {
-        return { totalPrice: 0, isValid: false };
+        return { isValid: false, editedSlots: [] };
       }
 
       const dayTimeInfo = timeSlotsGroup[slot.day];
 
       // a premise doesn't have open hours for that weekday
-      if (!dayTimeInfo) return { totalPrice: 0, isValid: false };
+      if (!dayTimeInfo) return { isValid: false, editedSlots: [] };
 
       const slotFound = dayTimeInfo
         .flatMap(({ timeSlots }) => timeSlots)
@@ -139,16 +170,22 @@ async function validatePaymentIntentData({
         });
 
       // a premise have such working hours for a given weekday but the doesn't have the slot
-      if (!slotFound) return { totalPrice: 0, isValid: false };
+      if (!slotFound) return { isValid: false, editedSlots: [] };
 
-      aggregations.totalPrice += slotFound.price;
+      // edited slots are basically same slots as given ones but with the price from the server
+      const editedSlot: TimeSlotInfoExtended = {
+        ...slot,
+        price: slotFound.price,
+      };
+
+      aggregations.editedSlots.push(editedSlot);
 
       return aggregations;
     },
-    { totalPrice: 0, isValid: true },
+    { isValid: true, editedSlots: [] as TimeSlotInfoExtended[] },
   );
 
-  return result;
+  return { ...result, discounts: premise.discounts };
 }
 
 export type CreatePremiseSlotsIntent = typeof createPremiseSlotsIntent;
