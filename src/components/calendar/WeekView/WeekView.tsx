@@ -14,6 +14,7 @@ import {
   type AggregatedPrices,
   getTimeSlotCondition,
 } from "@/components/uikit";
+import type { Group } from "@/lib/utils/array";
 import {
   getWeekViewData,
   DAYS_OF_WEEK_ORDERED,
@@ -32,9 +33,9 @@ export function WeekView({
 }: {
   locale: Locale;
   nowDate: Date;
-  timeSlotsGroup: Record<
+  timeSlotsGroup: Group<
     $Enums.DayOfTheWeek,
-    Array<{ day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }> | undefined
+    { day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }
   >;
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
