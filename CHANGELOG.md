@@ -1,3 +1,10 @@
+# [0.39.0](https://github.com/kinguru-io/kinguru-next/compare/v0.38.0...v0.39.0) (2024-04-04)
+
+
+### Features
+
+* **KINGU-93:** discounts post-processing ([#537](https://github.com/kinguru-io/kinguru-next/issues/537)) ([bb4026a](https://github.com/kinguru-io/kinguru-next/commit/bb4026aa59779a9bc11af48de1db392ed7644fd5))
+
 # [0.38.0](https://github.com/kinguru-io/kinguru-next/compare/v0.37.0...v0.38.0) (2024-04-02)
 
 
