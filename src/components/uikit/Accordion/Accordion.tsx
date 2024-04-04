@@ -31,7 +31,7 @@ export function AccordionItem({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function AccordinItemToggle(props: HTMLStyledProps<"label">) {
+export function AccordionItemToggle(props: HTMLStyledProps<"label">) {
   const checkboxId = useId();
 
   const [cssProps, { children, ...restProps }] = splitCssProps(props);
