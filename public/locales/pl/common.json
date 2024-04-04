@@ -281,8 +281,11 @@
   },
   "price": {
     "total": "Total",
-    "full_price": "Price without discount",
-    "discount": "Discount"
+    "full_price": "Full price",
+    "discount": "Discount -{percentage}%",
+    "min": "low price",
+    "max": "high price",
+    "regular": "regular price"
   },
   "premise": {
     "more": "More",
@@ -295,5 +298,10 @@
     "premise_rules": "Premise rules",
     "how_to_get_there": "How to get there",
     "calendar_heading": "Premise calendar"
+  },
+  "discount_info": {
+    "card_heading": "There are discounts*",
+    "per_day_notice": "* - per day",
+    "duration": "{hours} and more"
   }
 }

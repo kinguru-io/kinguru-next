@@ -1,0 +1,1 @@
+export { DiscountViewCard } from "./DiscountViewCard";

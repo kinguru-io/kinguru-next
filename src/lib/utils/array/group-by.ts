@@ -1,6 +1,8 @@
-export function groupBy<T, R extends PropertyKey>(
+export type Group<Key extends PropertyKey, T> = Record<Key, T[] | undefined>;
+
+export function groupBy<T, Key extends PropertyKey>(
   rawArray: T[],
-  groupKeyFn: (currentValue: T, currentIndex: number, array: T[]) => R,
+  groupKeyFn: (currentValue: T, currentIndex: number, array: T[]) => Key,
 ) {
   return rawArray.reduce(
     (group, curr, i, array) => {
@@ -15,6 +17,6 @@ export function groupBy<T, R extends PropertyKey>(
 
       return group;
     },
-    {} as Record<R, T[] | undefined>,
+    {} as Group<Key, T>,
   );
 }

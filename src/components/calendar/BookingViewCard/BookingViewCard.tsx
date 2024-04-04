@@ -3,6 +3,8 @@
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { compareAsc } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 
@@ -11,6 +13,7 @@ import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
 import CheckoutForm from "@/components/common/checkout/CheckoutForm";
+import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
   Button,
   Card,
@@ -24,6 +27,8 @@ import type {
   CreatePremiseSlotsIntent,
   RevalidatePremisePage,
 } from "@/lib/actions/booking";
+import { groupBy } from "@/lib/utils/array";
+import { processDiscounts } from "@/lib/utils/price";
 import { Box, VStack } from "~/styled-system/jsx";
 
 const stripePromise = loadStripe(
@@ -34,14 +39,17 @@ export function BookingViewCard({
   premiseId,
   createIntent,
   revalidateFn,
+  discountsMap,
   inModal = false,
 }: {
   premiseId: Premise["id"];
   createIntent: CreatePremiseSlotsIntent;
   revalidateFn: RevalidatePremisePage;
+  discountsMap: Record<number, number | undefined>;
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
+  const timeZone = useSearchBoxTimeZone();
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
@@ -53,10 +61,14 @@ export function BookingViewCard({
 
   const areThereNoSlots = selectedSlots.length === 0;
   const isOutsideModal = open && !inModal;
-  const total = selectedSlots.reduce(
-    (totalPrice, { price }) => totalPrice + price,
-    0,
+
+  const groupedSlots = groupBy(
+    Array.from(selectedSlots).sort((slotA, slotB) =>
+      compareAsc(slotA.time, slotB.time),
+    ),
+    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
   );
+  const priceInfo = processDiscounts(groupedSlots, discountsMap);
 
   const checkboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
@@ -72,6 +84,7 @@ export function BookingViewCard({
       const response = await createIntent({
         premiseId,
         slots: selectedSlots,
+        timeZone,
       });
 
       if (response) {
@@ -113,15 +126,13 @@ export function BookingViewCard({
         borderColor="neutral.2"
         alignSelf="flex-start"
         minHeight="352px"
-        position="sticky"
-        top="100px" // header height + 15px
       >
         <CardInner padding="25px 18px" alignItems="center" gap="0px">
           <h4>{t("card_heading")}</h4>
           {areThereNoSlots ? (
             <NoBookingsNotice label={t("no_selected_slots")} />
           ) : (
-            <BookingSlotsListing />
+            <BookingSlotsListing groupedSlots={groupedSlots} />
           )}
           <CardFooter
             width="full"
@@ -133,7 +144,7 @@ export function BookingViewCard({
           >
             {!areThereNoSlots && (
               <>
-                <PriceBlock price={{ total }} />
+                <PriceBlock priceInfo={priceInfo} />
                 <Checkbox
                   checked={isUserAwareOfRules}
                   disabled={isOutsideModal}
@@ -162,6 +173,7 @@ export function BookingViewCard({
             premiseId={premiseId}
             createIntent={createIntent}
             revalidateFn={revalidateFn}
+            discountsMap={discountsMap}
             inModal={true}
           />
         </ModalWindow>

@@ -488,7 +488,15 @@
   },
   "price": {
     "total": "Total",
-    "full_price": "Price without discount",
-    "discount": "Discount"
+    "full_price": "Full price",
+    "discount": "Discount -{percentage}%",
+    "min": "low price",
+    "max": "high price",
+    "regular": "regular price"
+  },
+  "discount_info": {
+    "card_heading": "There are discounts*",
+    "per_day_notice": "* - per day",
+    "duration": "{hours} and more"
   }
 }
