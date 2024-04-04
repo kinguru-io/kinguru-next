@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react";
 import {
   Accordion,
   AccordionItem,
-  AccordinItemToggle,
+  AccordionItemToggle,
   AccordionItemContent,
 } from "@/components/uikit";
 
@@ -27,9 +27,9 @@ export const Basic = {
         {features.map(({ id, title, desc }) => {
           return (
             <AccordionItem key={id}>
-              <AccordinItemToggle textStyle="heading.3">
+              <AccordionItemToggle textStyle="heading.3">
                 {title}
-              </AccordinItemToggle>
+              </AccordionItemToggle>
               <AccordionItemContent>{desc}</AccordionItemContent>
             </AccordionItem>
           );
