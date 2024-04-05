@@ -6,7 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { ModalProps, useModal } from "./Modal";
 import { Button } from "@/components/uikit";
 import { css } from "~/styled-system/css";
-import { Float } from "~/styled-system/jsx";
+import { Box, Float } from "~/styled-system/jsx";
 
 export function _ModalWindow({ children }: ModalProps) {
   const { open, setOpen, closable } = useModal();
@@ -32,6 +32,7 @@ export function _ModalWindow({ children }: ModalProps) {
       className={css({
         bg: "neutral.3",
         borderRadius: "10px",
+        position: "fixed",
         top: "50%",
         left: "50%",
         transform: "translateX(-50%) translateY(-50%)",
@@ -39,7 +40,9 @@ export function _ModalWindow({ children }: ModalProps) {
         overflow: "initial",
       })}
     >
-      {children}
+      <Box overflowY="auto" maxHeight="90vh">
+        {children}
+      </Box>
       {closable && (
         <Float
           placement="top-end"
