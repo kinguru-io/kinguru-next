@@ -20,13 +20,17 @@ export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
         {fullPrice !== totalPrice && (
           <PricingRow label={t("full_price")} amount={fullPrice} />
         )}
-        {Object.entries(discountsMeta).map(([percentage, discountAmount]) => (
-          <PricingRow
-            key={percentage}
-            label={t("discount", { percentage })}
-            amount={discountAmount}
-          />
-        ))}
+        {Object.entries(discountsMeta).map(([percentage, discountAmount]) => {
+          if (!discountAmount) return null;
+
+          return (
+            <PricingRow
+              key={percentage}
+              label={t("discount", { percentage })}
+              amount={discountAmount * -1}
+            />
+          );
+        })}
       </Flex>
       <PricingRow label={t("total")} amount={totalPrice} isTotal />
     </Box>
@@ -39,11 +43,9 @@ function PricingRow({
   isTotal = false,
 }: {
   label: string;
-  amount: number | undefined;
+  amount: number;
   isTotal?: boolean;
 }) {
-  if (!amount) return null;
-
   return (
     <Flex
       justifyContent="space-between"
