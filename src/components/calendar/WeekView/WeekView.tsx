@@ -2,7 +2,7 @@
 
 import type { $Enums } from "@prisma/client";
 import { isEqual, isSameDay, set } from "date-fns";
-import { formatInTimeZone, utcToZonedTime } from "date-fns-tz";
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
 import { WeekControls } from "./WeekContols";
@@ -84,8 +84,8 @@ export function WeekView({
           const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
           const weekDayTimeSlots = timeSlotsGroup[dayOfWeekGroupKey] || [];
           const isToday = isSameDay(
-            utcToZonedTime(nowDate, timeZone),
-            utcToZonedTime(weekdayInfo.day, timeZone),
+            toZonedTime(nowDate, timeZone),
+            toZonedTime(weekdayInfo.day, timeZone),
           );
 
           return (
