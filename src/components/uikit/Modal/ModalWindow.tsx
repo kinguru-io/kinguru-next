@@ -28,7 +28,7 @@ export function _ModalWindow({ children }: ModalProps) {
     setOpen(false);
   };
 
-  const modalClosed = (e: React.SyntheticEvent<HTMLDialogElement>) => {
+  const modalCancelled = (e: React.SyntheticEvent<HTMLDialogElement>) => {
     if (closable) {
       setOpen(false);
     } else {
@@ -39,7 +39,7 @@ export function _ModalWindow({ children }: ModalProps) {
   return createPortal(
     <dialog
       ref={dialogRef}
-      onCancel={modalClosed}
+      onCancel={modalCancelled}
       className={css({
         bg: "neutral.3",
         borderRadius: "10px",
