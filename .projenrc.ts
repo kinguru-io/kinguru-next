@@ -192,6 +192,7 @@ const project = new web.NextJsTypeScriptProject({
     "@sindresorhus/slugify",
     "date-fns",
     "date-fns-tz",
+    "react-hot-toast",
   ],
   devDeps: [
     "@pandacss/dev",

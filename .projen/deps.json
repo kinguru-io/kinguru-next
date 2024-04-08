@@ -394,6 +394,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-hot-toast",
+      "type": "runtime"
+    },
+    {
       "name": "react-icons",
       "type": "runtime"
     },
