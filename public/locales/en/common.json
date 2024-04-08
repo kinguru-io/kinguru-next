@@ -484,7 +484,9 @@
     "pay_btn": "Pay",
     "rules_agreement": "I have read and agree with the rules of the premise",
     "remove_timeslot_btn": "Delete booking time",
-    "booking_modal_heading": "Time slots booking"
+    "booking_modal_heading": "Time slots booking",
+    "action_successful_booking": "Successfully booked!",
+    "action_invalid_data": "Invalid data"
   },
   "price": {
     "total": "Total",

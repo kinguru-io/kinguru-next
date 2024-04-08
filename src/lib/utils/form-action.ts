@@ -1,3 +1,4 @@
+import { NestedKeyOf } from "next-intl";
 import { ZodEffects, ZodType, ZodTypeDef } from "zod";
 
 export type AuthFormResponse = {
@@ -6,6 +7,16 @@ export type AuthFormResponse = {
 };
 export type AuthFormState = AuthFormResponse | null;
 export type ActionType<T> = (data: T) => Promise<AuthFormState>;
+
+export type ActionResponse<
+  T,
+  Key extends keyof IntlMessages = keyof IntlMessages,
+> = Promise<{
+  status: "success" | "error";
+  message?: string;
+  messageIntlKey?: NestedKeyOf<IntlMessages[Key]>;
+  response: T | null;
+}>;
 
 export function createFormAction<
   I,

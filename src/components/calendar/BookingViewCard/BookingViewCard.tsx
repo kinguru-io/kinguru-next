@@ -8,6 +8,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 
+import { toast } from "react-hot-toast";
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
@@ -81,7 +82,7 @@ export function BookingViewCard({
     }
 
     startTransition(async () => {
-      const response = await createIntent({
+      const { status, messageIntlKey, response } = await createIntent({
         premiseId,
         slots: selectedSlots,
         timeZone,
@@ -93,6 +94,10 @@ export function BookingViewCard({
 
         void revalidateFn();
       }
+
+      if (status === "error" && messageIntlKey) {
+        toast.error(t(messageIntlKey));
+      }
     });
   };
 
@@ -101,6 +106,7 @@ export function BookingViewCard({
     resetSlots();
 
     void revalidateFn();
+    toast.success(t("action_successful_booking"));
   };
 
   if (inModal && intentResponse?.clientSecret) {

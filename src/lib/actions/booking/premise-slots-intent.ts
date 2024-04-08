@@ -11,6 +11,7 @@ import Stripe from "stripe";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
 import type { StripeMetadataExtended } from "@/lib/shared/stripe";
+import type { ActionResponse } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import {
   prepareBookedSlots,
@@ -34,7 +35,13 @@ export async function createPremiseSlotsIntent({
   premiseId,
   slots,
   timeZone,
-}: BookTimeSlotsActionData) {
+}: BookTimeSlotsActionData): ActionResponse<
+  {
+    clientSecret: string;
+    paymentIntentId: string;
+  },
+  "booking_view"
+> {
   const session = await getSession();
   const userId = session?.user?.id;
 
@@ -46,8 +53,11 @@ export async function createPremiseSlotsIntent({
   });
 
   if (!isValid || editedSlots.length === 0) {
-    // TODO invalid data provided notification
-    return;
+    return {
+      status: "error",
+      messageIntlKey: "action_invalid_data",
+      response: null,
+    };
   }
 
   const groupedSlots = groupBy(
@@ -71,8 +81,11 @@ export async function createPremiseSlotsIntent({
     });
 
   if (!clientSecret) {
-    // TODO error
-    return;
+    return {
+      status: "error",
+      messageIntlKey: "action_invalid_data",
+      response: null,
+    };
   }
 
   await prisma.premiseSlot.createMany({
@@ -87,7 +100,13 @@ export async function createPremiseSlotsIntent({
     })),
   });
 
-  return { clientSecret, paymentIntentId };
+  return {
+    status: "success",
+    response: {
+      clientSecret,
+      paymentIntentId,
+    },
+  };
 }
 
 export async function cancelPreliminaryBooking({
