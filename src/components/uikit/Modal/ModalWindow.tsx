@@ -13,12 +13,14 @@ export function _ModalWindow({ children }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (!dialogRef.current) return;
+    const dialogElement = dialogRef.current;
+
+    if (!dialogElement) return;
 
     if (open) {
-      dialogRef.current.showModal();
+      dialogElement.showModal();
     } else {
-      dialogRef.current.close();
+      dialogElement.close();
     }
   }, [open]);
 
@@ -26,9 +28,18 @@ export function _ModalWindow({ children }: ModalProps) {
     setOpen(false);
   };
 
+  const modalClosed = (e: React.SyntheticEvent<HTMLDialogElement>) => {
+    if (closable) {
+      setOpen(false);
+    } else {
+      e.preventDefault();
+    }
+  };
+
   return createPortal(
     <dialog
       ref={dialogRef}
+      onCancel={modalClosed}
       className={css({
         bg: "neutral.3",
         borderRadius: "10px",
