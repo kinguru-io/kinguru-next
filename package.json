@@ -65,7 +65,7 @@
     "msw-storybook-addon": "canary",
     "prettier": "^3.2.5",
     "prisma": "^5.12.1",
-    "projen": "^0.80.19",
+    "projen": "^0.80.20",
     "semantic-release-plus": "^20.0.0",
     "storybook": "^8.0.6",
     "storybook-addon-module-mock": "^1.1.5",
