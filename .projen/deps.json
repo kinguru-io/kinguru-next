@@ -314,6 +314,10 @@
       "type": "runtime"
     },
     {
+      "name": "bullmq",
+      "type": "runtime"
+    },
+    {
       "name": "chakra-react-select",
       "type": "runtime"
     },

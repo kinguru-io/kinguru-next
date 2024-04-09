@@ -23,7 +23,8 @@
     "prepare": "npx panda codegen",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook",
-    "seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node prisma/seed.ts"
+    "seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node prisma/seed.ts",
+    "scheduler:run": "npx --yes tsx scheduler/main.ts"
   },
   "author": {
     "name": "Maksim Yersh",
@@ -109,6 +110,7 @@
     "@trpc/next": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",
+    "bullmq": "^5.7.0",
     "chakra-react-select": "^4.7.6",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^v3.0.0",
