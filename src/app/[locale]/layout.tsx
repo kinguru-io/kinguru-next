@@ -1,6 +1,8 @@
 import { NextIntlClientProvider, useMessages } from "next-intl";
+
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { Toaster } from "@/components/notifications";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
 import { Grid } from "~/styled-system/jsx";
@@ -30,6 +32,7 @@ export default function RootLayout({
           <Grid gridTemplateRows="auto 1fr auto" gap="0" minHeight="full">
             <Header />
             <main>{children}</main>
+            <Toaster />
             <Footer />
           </Grid>
         </body>

@@ -32,7 +32,7 @@ import NextImage from "next/image";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import CheckoutForm from "@/components/common/checkout/CheckoutForm.tsx";
+import { CheckoutForm } from "@/components/common/checkout";
 import { Link } from "@/navigation.ts";
 import * as gtag from "@/utils/gtag.ts";
 import { trpc } from "@/utils/trpc.ts";
