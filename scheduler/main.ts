@@ -17,7 +17,7 @@ await prismaQueue.add(
   { repeat: { pattern: CRON_EXPRESSION.EVERY_TEN_SECONDS } },
 );
 
-new Worker(
+const worker = new Worker(
   PRISMA_QUEUE,
   async (job) => {
     console.log(job.queueName);
@@ -29,3 +29,13 @@ new Worker(
     },
   },
 );
+
+const gracefulShutdown = async (signal: string) => {
+  console.log(`Received ${signal}, closing server...`);
+  await worker.close();
+  // Other asynchronous closings
+  process.exit(0);
+};
+
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
