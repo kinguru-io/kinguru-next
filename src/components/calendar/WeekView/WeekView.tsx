@@ -5,7 +5,7 @@ import { isEqual, isSameDay, set } from "date-fns";
 import { formatInTimeZone, utcToZonedTime } from "date-fns-tz";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
-import { WeekControls } from "./WeekContols";
+import { WeekControls } from "./WeekControls";
 import { useBookingView } from "../BookingViewContext";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
@@ -60,6 +60,7 @@ export function WeekView({
       gap="0"
       gridTemplateColumns="auto 1fr auto"
       gridTemplateAreas="'. month-select .' 'prev-week week-view next-week'"
+      gridAutoRows="min-content"
     >
       <MonthSelect
         locale={locale}
