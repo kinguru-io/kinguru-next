@@ -195,6 +195,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-hot-toast",
 
     "bullmq",
+    "dotenv",
   ],
   devDeps: [
     "@pandacss/dev",
@@ -250,7 +251,8 @@ project.addScripts({
   seed: 'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node prisma/seed.ts',
 });
 project.addScripts({
-  "scheduler:run": "npx --yes tsx scheduler/main.ts",
+  "scheduler:run":
+    'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node scheduler/main.ts',
 });
 
 project.buildWorkflow?.addPostBuildJob("staging-deploy", {

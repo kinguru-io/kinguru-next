@@ -330,6 +330,10 @@
       "type": "runtime"
     },
     {
+      "name": "dotenv",
+      "type": "runtime"
+    },
+    {
       "name": "formik",
       "type": "runtime"
     },

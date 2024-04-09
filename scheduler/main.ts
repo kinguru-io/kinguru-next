@@ -1,4 +1,7 @@
 import { Queue, Worker } from "bullmq";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const PRISMA_QUEUE = "PRISMA";
 const CRON_EXPRESSION = {
@@ -21,8 +24,8 @@ new Worker(
   },
   {
     connection: {
-      host: "localhost",
-      port: 6379,
+      host: process.env.REDIS_HOST,
+      port: parseInt(process.env.REDIS_PORT || ""),
     },
   },
 );

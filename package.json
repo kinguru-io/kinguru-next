@@ -24,7 +24,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook",
     "seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node prisma/seed.ts",
-    "scheduler:run": "npx --yes tsx scheduler/main.ts"
+    "scheduler:run": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node scheduler/main.ts"
   },
   "author": {
     "name": "Maksim Yersh",
@@ -114,6 +114,7 @@
     "chakra-react-select": "^4.7.6",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^v3.0.0",
+    "dotenv": "^16.4.5",
     "formik": "^2.4.5",
     "framer-motion": "^11.0.25",
     "mapbox-gl": "^3.2.0",
