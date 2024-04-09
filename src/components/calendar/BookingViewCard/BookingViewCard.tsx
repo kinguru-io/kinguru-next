@@ -6,15 +6,16 @@ import { loadStripe } from "@stripe/stripe-js";
 import { compareAsc } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 
 import { toast } from "react-hot-toast";
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
-import CheckoutForm from "@/components/common/checkout/CheckoutForm";
+import { CheckoutForm } from "@/components/common/checkout";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
+import { Timer } from "@/components/common/timer";
 import {
   Button,
   Card,
@@ -25,6 +26,7 @@ import {
   useModal,
 } from "@/components/uikit";
 import type {
+  CancelPremiseSlotsIntent,
   CreatePremiseSlotsIntent,
   RevalidatePremisePage,
 } from "@/lib/actions/booking";
@@ -39,12 +41,14 @@ const stripePromise = loadStripe(
 export function BookingViewCard({
   premiseId,
   createIntent,
+  cancelIntent,
   revalidateFn,
   discountsMap,
   inModal = false,
 }: {
   premiseId: Premise["id"];
   createIntent: CreatePremiseSlotsIntent;
+  cancelIntent: CancelPremiseSlotsIntent;
   revalidateFn: RevalidatePremisePage;
   discountsMap: Record<number, number | undefined>;
   inModal?: boolean;
@@ -109,10 +113,29 @@ export function BookingViewCard({
     toast.success(t("action_successful_booking"));
   };
 
+  const paymentCancelled = useCallback(async () => {
+    if (!intentResponse?.paymentIntentId) return;
+
+    const { status, messageIntlKey } = await cancelIntent({
+      paymentIntentId: intentResponse?.paymentIntentId,
+    });
+
+    if (status === "error" && messageIntlKey) {
+      toast.error(t(messageIntlKey));
+    }
+
+    setOpen(false);
+    setClosable(true);
+    setIntentResponse(null);
+
+    void revalidateFn();
+  }, [intentResponse?.paymentIntentId]);
+
   if (inModal && intentResponse?.clientSecret) {
     return (
       <VStack gap="12px" minHeight="350px">
         <h4>{t("booking_modal_heading")}</h4>
+        <Timer minutes={10} callback={paymentCancelled} />
         <Box bg="neutral.5" borderRadius="10px">
           <Elements
             stripe={stripePromise}
@@ -178,6 +201,7 @@ export function BookingViewCard({
           <BookingViewCard
             premiseId={premiseId}
             createIntent={createIntent}
+            cancelIntent={cancelIntent}
             revalidateFn={revalidateFn}
             discountsMap={discountsMap}
             inModal={true}

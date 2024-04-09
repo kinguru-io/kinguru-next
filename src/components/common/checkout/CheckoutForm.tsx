@@ -1,25 +1,29 @@
-import { Alert, AlertIcon, Button } from "@chakra-ui/react";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { ErrorIcon } from "react-hot-toast";
+import { Button } from "@/components/uikit";
+import { css } from "~/styled-system/css";
+import { HStack } from "~/styled-system/jsx";
 
-export default function CheckoutForm({
+export function CheckoutForm({
   succeedRefetch,
 }: {
   succeedRefetch: () => void;
 }) {
-  const t = useTranslations();
+  const t = useTranslations("stripe_checkout_form");
   const stripe = useStripe();
   const elements = useElements();
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const formSubmitted = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
@@ -28,9 +32,7 @@ export default function CheckoutForm({
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: "",
-      },
+      confirmParams: { return_url: "" },
       redirect: "if_required",
     });
 
@@ -40,40 +42,42 @@ export default function CheckoutForm({
       return;
     }
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message || "");
-    } else {
-      setMessage("An unexpected error occured.");
-    }
+    const errorMessage =
+      error.type === "card_error" || error.type === "validation_error"
+        ? error.message || null
+        : t("unexpected_error_msg");
 
+    setMessage(errorMessage);
     setIsProcessing(false);
   };
 
   return (
     <form
       id="payment-form"
-      onSubmit={handleSubmit}
-      style={{
+      onSubmit={formSubmitted}
+      className={css({
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
         padding: "10px",
-        textAlign: "center",
-      }}
+      })}
     >
       {message && (
-        <Alert status="error" mb={7}>
-          <AlertIcon />
+        <HStack maxWidth="310px">
+          <ErrorIcon className={css({ flexShrink: "0" })} />
           {message}
-        </Alert>
+        </HStack>
       )}
       <PaymentElement id="payment-element" />
       <Button
-        isLoading={isProcessing || !stripe || !elements}
-        type={"submit"}
         id="submit"
-        variant={"primary"}
-        color={"black"}
-        mt={10}
+        type="submit"
+        size="md"
+        variant="ghost"
+        isLoading={isProcessing || !stripe || !elements}
       >
-        {t("events.pay_now")}
+        {t("pay_now")}
       </Button>
     </form>
   );

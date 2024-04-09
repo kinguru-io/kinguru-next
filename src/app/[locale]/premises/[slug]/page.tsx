@@ -27,6 +27,7 @@ import {
   PremiseMapLayout,
 } from "@/layout/block/premise";
 import {
+  cancelPremiseSlotsIntent,
   createPremiseSlotsIntent,
   revalidatePremisePage,
 } from "@/lib/actions/booking";
@@ -174,6 +175,7 @@ export default async function PremisePage({
                 <BookingViewCard
                   premiseId={premise.id}
                   createIntent={createPremiseSlotsIntent}
+                  cancelIntent={cancelPremiseSlotsIntent}
                   revalidateFn={revalidatePremisePage}
                   discountsMap={discountMap}
                 />

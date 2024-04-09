@@ -109,20 +109,31 @@ export async function createPremiseSlotsIntent({
   };
 }
 
-export async function cancelPreliminaryBooking({
+export async function cancelPremiseSlotsIntent({
   paymentIntentId,
-}: Pick<PremiseSlot, "paymentIntentId">) {
+}: Pick<PremiseSlot, "paymentIntentId">): ActionResponse<null, "booking_view"> {
   const session = await getSession();
   const userId = session?.user?.id;
 
   if (!userId) return redirect("/auth/signin");
-  if (!paymentIntentId) return;
+  if (!paymentIntentId) {
+    return {
+      status: "error",
+      messageIntlKey: "action_invalid_data",
+      response: null,
+    };
+  }
 
   const { count } = await prisma.premiseSlot.deleteMany({
-    where: { paymentIntentId },
+    where: { paymentIntentId, userId },
   });
 
-  return count;
+  return {
+    status: "error",
+    messageIntlKey:
+      count > 0 ? "action_payment_cancelled" : "action_invalid_data",
+    response: null,
+  };
 }
 
 async function validatePaymentIntentData({
@@ -208,4 +219,4 @@ async function validatePaymentIntentData({
 }
 
 export type CreatePremiseSlotsIntent = typeof createPremiseSlotsIntent;
-export type CancelPreliminaryBooking = typeof cancelPreliminaryBooking;
+export type CancelPremiseSlotsIntent = typeof cancelPremiseSlotsIntent;

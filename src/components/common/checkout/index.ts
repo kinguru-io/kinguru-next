@@ -1,1 +1,1 @@
-export * from "./CheckoutForm.tsx";
+export { CheckoutForm } from "./CheckoutForm";

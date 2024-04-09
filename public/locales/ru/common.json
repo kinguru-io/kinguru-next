@@ -347,7 +347,8 @@
     "remove_timeslot_btn": "Удалить время бронирования",
     "booking_modal_heading": "Бронирование",
     "action_successful_booking": "Забронировано успешно!",
-    "action_invalid_data": "Некорректные данные"
+    "action_invalid_data": "Некорректные данные",
+    "action_payment_cancelled": "Оплата была отменена"
   },
   "price": {
     "total": "Итого",
@@ -361,5 +362,9 @@
     "card_heading": "Предусмотрены скидки*",
     "per_day_notice": "* - в рамках одного дня",
     "duration": "{hours} и более"
+  },
+  "stripe_checkout_form": {
+    "pay_now": "Оплатить",
+    "unexpected_error_msg": "Произошла непредвиденная ошибка."
   }
 }

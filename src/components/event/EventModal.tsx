@@ -3,8 +3,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
-import { Button, Modal, ModalInitiator, ModalWindow } from "../uikit";
-import CheckoutForm from "@/components/common/checkout/CheckoutForm";
+import { CheckoutForm } from "@/components/common/checkout";
+import { Button, Modal, ModalInitiator, ModalWindow } from "@/components/uikit";
 import {
   GetTicketIntentAction,
   IsJoinedAction,

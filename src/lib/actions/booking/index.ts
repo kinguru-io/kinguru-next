@@ -1,8 +1,8 @@
 export {
   createPremiseSlotsIntent,
-  cancelPreliminaryBooking,
+  cancelPremiseSlotsIntent,
   type CreatePremiseSlotsIntent,
-  type CancelPreliminaryBooking,
+  type CancelPremiseSlotsIntent,
 } from "./premise-slots-intent";
 
 export {
