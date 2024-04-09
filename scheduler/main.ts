@@ -14,10 +14,10 @@ await prismaQueue.add(
   { repeat: { pattern: CRON_EXPRESSION.EVERY_TEN_SECONDS } },
 );
 
-const worker = new Worker(
+new Worker(
   PRISMA_QUEUE,
   async (job) => {
-    console.log("RUN");
+    console.log(job.queueName);
   },
   {
     connection: {
