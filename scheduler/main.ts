@@ -12,8 +12,13 @@ const PRISMA_QUEUE = {
   removePendingSlots: "remove_pending_slots",
 } as const;
 
+const connection = {
+  host: process.env.REDIS_HOST,
+  port: parseInt(process.env.REDIS_PORT || "6379"),
+} as const;
+
 const prisma = new PrismaClient();
-const prismaQueue = new Queue(PRISMA_QUEUE.queueName);
+const prismaQueue = new Queue(PRISMA_QUEUE.queueName, { connection });
 
 // cleanup old if exist
 await removeRepeatableJobs(prismaQueue);
@@ -66,12 +71,7 @@ const worker = new Worker(
       console.log("something went wrong\n");
     }
   },
-  {
-    connection: {
-      host: process.env.REDIS_HOST,
-      port: parseInt(process.env.REDIS_PORT || "6379"),
-    },
-  },
+  { connection },
 );
 
 const gracefulShutdown = async (signal: string) => {
