@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.4.0...chart-v1.5.0) (2024-04-10)
+
+
+### Features
+
+* add scheduled jobs support ([#544](https://github.com/kinguru-io/kinguru-next/issues/544)) ([9cea592](https://github.com/kinguru-io/kinguru-next/commit/9cea592eab245302355e446f2a80d8c431d64480))
+
 # [1.4.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.3.0...chart-v1.4.0) (2024-03-20)
 
 
