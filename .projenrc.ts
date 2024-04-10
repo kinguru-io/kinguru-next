@@ -59,7 +59,7 @@ const project = new web.NextJsTypeScriptProject({
     {
       uses: "vbem/k8s-port-forward@v1",
       with: {
-        workload: "pod/postgres-cluster-1",
+        workload: "pod/postgres-cluster-0",
         mappings: "5432:5432",
       },
     },
