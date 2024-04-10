@@ -193,6 +193,9 @@ const project = new web.NextJsTypeScriptProject({
     "date-fns",
     "date-fns-tz",
     "react-hot-toast",
+
+    "bullmq",
+    "dotenv",
   ],
   devDeps: [
     "@pandacss/dev",
@@ -246,6 +249,10 @@ project.addScripts({ storybook: "storybook dev -p 6006" });
 project.addScripts({ "build-storybook": "storybook build -o dist/storybook" });
 project.addScripts({
   seed: 'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node prisma/seed.ts',
+});
+project.addScripts({
+  "scheduler:run":
+    'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node scheduler/main.ts',
 });
 
 project.buildWorkflow?.addPostBuildJob("staging-deploy", {

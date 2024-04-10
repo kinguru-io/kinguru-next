@@ -55,13 +55,7 @@ services:
       - CONFIG_STORAGE_TOPIC=my_connect_configs
       - OFFSET_STORAGE_TOPIC=my_connect_offsets
       - STATUS_STORAGE_TOPIC=my_source_connect_statuses
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    restart: "no"
+  redis:
+    image: redis:7.2.4-alpine
     ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:9092"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    depends_on:
-      - "kafka"
+      - "6379:6379"

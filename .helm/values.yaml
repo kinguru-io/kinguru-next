@@ -18,3 +18,19 @@ resources:
   limits:
     cpu: 500m
     memory: 768Mi
+
+schedulerResources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 768Mi
+
+redisResources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 768Mi

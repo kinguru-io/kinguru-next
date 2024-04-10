@@ -314,6 +314,10 @@
       "type": "runtime"
     },
     {
+      "name": "bullmq",
+      "type": "runtime"
+    },
+    {
       "name": "chakra-react-select",
       "type": "runtime"
     },
@@ -323,6 +327,10 @@
     },
     {
       "name": "date-fns-tz",
+      "type": "runtime"
+    },
+    {
+      "name": "dotenv",
       "type": "runtime"
     },
     {

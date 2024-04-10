@@ -40,6 +40,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/next-env.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/nextauth.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/scheduler ./scheduler
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 USER nextjs

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-scheduler
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}-scheduler
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}-scheduler
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}
+      containers:
+        - name: {{ .Release.Name }}-scheduler
+          image: {{ .Values.werf.image.kinguru }}
+          imagePullPolicy: IfNotPresent
+          command: [ "npm" ]
+          args: [ "run", "scheduler:run" ]
+          env:
+            - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
+              value: "http://tempo.observability.svc.cluster.local:4318/"
+          envFrom:
+            - secretRef:
+                name: kr-prod-environment-vars
+          resources:
+            {{- toYaml .Values.schedulerResources | nindent 12 }}

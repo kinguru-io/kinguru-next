@@ -436,6 +436,7 @@ model PremiseSlot {
   startTime       DateTime
   endTime         DateTime
   status          TicketIntentStatus
+  createdAt       DateTime           @default(now())
 }
 
 model PremisePricing {
