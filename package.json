@@ -75,8 +75,8 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.550.0",
-    "@aws-sdk/s3-request-presigner": "^3.550.0",
+    "@aws-sdk/client-s3": "^3.552.0",
+    "@aws-sdk/s3-request-presigner": "^3.552.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
@@ -137,7 +137,7 @@
     "react-simple-star-rating": "^5.1.7",
     "react-snap-carousel": "^0.4.0",
     "sharp": "^0.33.3",
-    "stripe": "^14.24.0",
+    "stripe": "^14.25.0",
     "superjson": "^2.2.1",
     "trpc-shield": "^0.4.3",
     "use-debounce": "^10.0.0",
