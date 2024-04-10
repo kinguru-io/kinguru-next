@@ -1,3 +1,10 @@
+## [0.40.1](https://github.com/kinguru-io/kinguru-next/compare/v0.40.0...v0.40.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* migrate from readonly database ([addcc1e](https://github.com/kinguru-io/kinguru-next/commit/addcc1ef0a87fcbd4a5b8b00a7d300b69803a92e))
+
 # [0.40.0](https://github.com/kinguru-io/kinguru-next/compare/v0.39.0...v0.40.0) (2024-04-10)
 
 
