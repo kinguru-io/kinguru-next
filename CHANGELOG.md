@@ -1,3 +1,10 @@
+# [0.40.0](https://github.com/kinguru-io/kinguru-next/compare/v0.39.0...v0.40.0) (2024-04-10)
+
+
+### Features
+
+* add scheduled jobs support ([#544](https://github.com/kinguru-io/kinguru-next/issues/544)) ([9cea592](https://github.com/kinguru-io/kinguru-next/commit/9cea592eab245302355e446f2a80d8c431d64480))
+
 # [0.39.0](https://github.com/kinguru-io/kinguru-next/compare/v0.38.0...v0.39.0) (2024-04-04)
 
 
