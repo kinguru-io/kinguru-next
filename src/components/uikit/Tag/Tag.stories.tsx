@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { tagStyles } from "./Tag";
-import { Tag } from "@/components/uikit/Tag";
-import { css } from "~/styled-system/css";
+import { Tag } from "@/components/uikit";
+import { Box } from "~/styled-system/jsx";
 
 const meta = {
   title: "UIKit/Tag",
@@ -55,29 +55,21 @@ export const TagTertiary: Story = {
 };
 
 export const TagOuterCss: Story = {
-  name: "Tag with an outer CSS prop",
+  name: "Tag with outer CSS",
   render: () => {
-    const outerCss = css.raw({
-      position: "absolute",
-      top: "1",
-      right: "1",
-    });
-
     return (
-      <div
-        className={css({
-          w: "10rem",
-          h: "10rem",
-          p: "1",
-          bgColor: "neutral.3",
-          borderRadius: "6px",
-          position: "relative",
-        })}
+      <Box
+        w="10rem"
+        h="10rem"
+        p="1"
+        bgColor="neutral.3"
+        borderRadius="6px"
+        position="relative"
       >
-        <Tag variant="tertiary" css={outerCss}>
+        <Tag variant="tertiary" position="absolute" top="1" right="1">
           $42
         </Tag>
-      </div>
+      </Box>
     );
   },
 };

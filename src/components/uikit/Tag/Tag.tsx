@@ -1,5 +1,5 @@
-import { css, cva, type RecipeVariantProps } from "~/styled-system/css";
-import { SystemStyleObject } from "~/styled-system/types";
+import { cva } from "~/styled-system/css";
+import { styled } from "~/styled-system/jsx";
 
 export const tagStyles = cva({
   base: {
@@ -63,13 +63,4 @@ export const tagStyles = cva({
   },
 });
 
-type TagProps = RecipeVariantProps<typeof tagStyles> & {
-  css?: SystemStyleObject;
-  children: React.ReactNode;
-};
-
-export function Tag({ variant, size, css: cssProp, children }: TagProps) {
-  const className = css(tagStyles.raw({ variant, size }), cssProp);
-
-  return <span className={className}>{children}</span>;
-}
+export const Tag = styled("span", tagStyles);
