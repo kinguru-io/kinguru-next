@@ -505,5 +505,30 @@
   "stripe_checkout_form": {
     "pay_now": "Pay now",
     "unexpected_error_msg": "An unexpected error occurred."
+  },
+  "profile": {
+    "link_labels": {
+      "main": "Home",
+      "edit": "Profile",
+      "events": "My events",
+      "premises": "My premises",
+      "notifications": "My notifications",
+      "settings": "Settings"
+    },
+    "faq_link_labels": {
+      "add_venue": "How to add a venue to the platform",
+      "add_event": "How to organize an event in your location",
+      "change_profile_photo": "How to change profile photo",
+      "cooperation": "What are the terms of cooperation",
+      "see_more": "See more",
+      "ask": "Ask a question"
+    },
+    "user_greeting": "Hello!",
+    "page_tip": "On this page, we've collected all the most important things for you.",
+    "add_premise_btn_label": "Add a premise",
+    "faq_heading": "Do you have any questions? Let's figure it out!",
+    "notifications_heading": "Notifications",
+    "profile_completeness_label": "Information about profile completeness will be displayed here shortly",
+    "calendar_label": "Your premises calendar will be displayed here shortly"
   }
 }

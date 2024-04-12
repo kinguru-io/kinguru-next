@@ -1,0 +1,1 @@
+export { ProfileFAQ } from "./ProfileFAQ";

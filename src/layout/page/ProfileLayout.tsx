@@ -2,11 +2,10 @@ import { Container, Grid } from "~/styled-system/jsx";
 
 export function ProfileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Container>
+    <Container marginInline="0">
       <Grid
         columnGap="1.25rem"
         rowGap="70px"
-        paddingBlock="83px 40px"
         gridTemplateColumns="repeat(6, 1fr)"
         gridTemplateRows="repeat(2, auto)"
         css={{
