@@ -159,6 +159,8 @@ export default defineConfig({
           };
         },
       },
+      // JSX <span /> component. As simple as the `Box` component
+      inlineBox: { jsxElement: "span", transform: (props) => props },
     },
   },
 });
