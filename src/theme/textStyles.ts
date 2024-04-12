@@ -45,6 +45,13 @@ export const additionalTextStyles = defineTextStyles({
         textDecoration: "underline",
       },
     },
+    6: {
+      value: {
+        fontSize: "20px",
+        fontWeight: "700",
+        lineHeight: "1.35",
+      },
+    },
     extra: {
       1: {
         value: {
