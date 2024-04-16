@@ -20,12 +20,14 @@ import { css } from "~/styled-system/css";
 type ProfileImagePickerProps = InputFileProps & {
   imageSrc?: string;
   name?: string;
+  groupKey?: string;
 };
 
 export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   {
     imageSrc: propsImageSrc = "",
     name: propsName,
+    groupKey = "undefined_key",
     onChange,
     ...restProps
   }: ProfileImagePickerProps,
@@ -51,10 +53,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     }
 
     startTransition(async () => {
-      const presignedUrl = await uploadProfileImage(
-        uploadImageData,
-        "test-uploads",
-      );
+      const presignedUrl = await uploadProfileImage(uploadImageData, groupKey);
       const response = await fetch(presignedUrl, {
         method: "PUT",
         body: image,
@@ -132,6 +131,8 @@ function PickerTag() {
     </span>
   );
 }
+
+// TODO split component in order to use different placeholders
 
 function AvatarPickerPlaceholder({
   imageSrc,
