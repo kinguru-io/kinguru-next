@@ -14,7 +14,7 @@ import { HStack } from "~/styled-system/jsx";
 export function Breadcrumbs({ rootPath = "" }: { rootPath?: string }) {
   const segments = useSelectedLayoutSegments();
 
-  if (segments.length < 2) return null;
+  if (!segments || segments.length < 2) return null;
 
   const mainHref = rootPath ? `/${rootPath}/` : "/";
 
