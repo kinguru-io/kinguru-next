@@ -1,3 +1,10 @@
+## [0.40.2](https://github.com/kinguru-io/kinguru-next/compare/v0.40.1...v0.40.2) (2024-04-16)
+
+
+### Bug Fixes
+
+* readonly replica usage ([738abba](https://github.com/kinguru-io/kinguru-next/commit/738abba549d67078aea16867672d2782e0f4a6ee))
+
 ## [0.40.1](https://github.com/kinguru-io/kinguru-next/compare/v0.40.0...v0.40.1) (2024-04-10)
 
 

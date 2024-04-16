@@ -293,7 +293,7 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
     {
       uses: "vbem/k8s-port-forward@v1",
       with: {
-        workload: "pod/postgres-cluster-1",
+        workload: "pod/postgres-cluster-0",
         mappings: "5432:5432",
         options: "--address=0.0.0.0",
       },
