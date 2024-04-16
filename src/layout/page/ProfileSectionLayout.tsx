@@ -1,6 +1,13 @@
 import { Container, Grid } from "~/styled-system/jsx";
 
-export function ProfileLayout({ children }: { children: React.ReactNode }) {
+/**
+ * @param {React.ReactNode} children - Basically to use as the content of the section consisting of a heading and a section. To apply common styles for heading add the className `.heading` to `<h[1,2,3,4,5,6]>` tag
+ */
+export function ProfileSectionLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Container marginInline="0">
       <Grid

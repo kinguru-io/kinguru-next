@@ -316,7 +316,7 @@
       "main": "Home",
       "edit": "Profile",
       "events": "My events",
-      "premises": "My premises",
+      "venues": "My venues",
       "notifications": "My notifications",
       "settings": "Settings"
     },
@@ -334,6 +334,29 @@
     "faq_heading": "Do you have any questions? Let's figure it out!",
     "notifications_heading": "Notifications",
     "profile_completeness_label": "Information about profile completeness will be displayed here shortly",
-    "calendar_label": "Your premises calendar will be displayed here shortly"
+    "calendar_label": "Your premises calendar will be displayed here shortly",
+    "venues": {
+      "heading": "My venues",
+      "no_premises": "Venue is inactive. A hall needs to be added.",
+      "add": {
+        "heading": "Register a new venue",
+        "submit_btn_label": "Save venue",
+        "next_group_btn_label": "Next",
+        "groups": {
+          "main_info": "Main information",
+          "photo": "Photo",
+          "location": "Address",
+          "additional": "Additional",
+          "contacts": "Contacts"
+        },
+        "fields": {
+          "name": "Name",
+          "name_placeholder": "Name",
+          "description": "Description",
+          "description_placeholder": "Add a description for your venue",
+          "photo_tip": "Add one photo that will be displayed on the venue page."
+        }
+      }
+    }
   }
 }

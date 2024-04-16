@@ -45,6 +45,11 @@ export const Card = styled(
           flexDirection: "column",
           minH: "452px",
         },
+        "profile-venue": {
+          flexDirection: "column",
+          maxWidth: "310px",
+          minHeight: "330px",
+        },
       },
     },
   },

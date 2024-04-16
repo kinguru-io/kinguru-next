@@ -12,6 +12,7 @@ type NavLink = {
   segment: string;
 };
 
+// TODO add an access by a role
 const profileNavLinks: readonly NavLink[] = [
   {
     href: "/profile",
@@ -27,6 +28,11 @@ const profileNavLinks: readonly NavLink[] = [
     href: "/profile/events",
     labelIntlCode: "events",
     segment: "events",
+  },
+  {
+    href: "/profile/venues",
+    labelIntlCode: "venues",
+    segment: "venues",
   },
   {
     href: "/profile/notifications",
@@ -52,7 +58,8 @@ export function ProfileNavigation() {
         gap: "13px",
         height: "fit-content",
         position: "sticky",
-        top: "100px",
+        top: "100px", // header height + 15px
+        marginBlockStart: "130px", // 200px = 130px + layout padding
       })}
     >
       {profileNavLinks.map((navItem) => {
