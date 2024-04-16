@@ -369,6 +369,7 @@ model Organization {
   activitySphere String[]
   logotype       String?
   places         Place[]
+  venues         Venue[]
   resources      OrganizationResourse[]
 }
 
@@ -384,15 +385,17 @@ model OrganizationResourse {
 }
 
 model Venue {
-  id               String    @id @default(cuid())
-  slug             String    @unique
+  id               String       @id @default(cuid())
+  slug             String       @unique
   name             String
   image            String
   description      String
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String
   premises         Premise[]
   locationMapboxId String
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
 
 model Premise {
