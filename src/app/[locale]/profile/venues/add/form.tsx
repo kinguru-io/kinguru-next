@@ -1,18 +1,36 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import type { SearchBoxSuggestion } from "@mapbox/search-js-core";
+import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { UseFormRegister, UseFormReturn, useForm } from "react-hook-form";
+import {
+  type UseFormRegister,
+  type UseFormReturn,
+  type UseFormSetValue,
+  useForm,
+} from "react-hook-form";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { AccordionGroup, Button, Input, Textarea } from "@/components/uikit";
+import {
+  AccordionGroup,
+  Button,
+  Dropdown,
+  DropdownMenu,
+  Input,
+  Textarea,
+  useDropdown,
+} from "@/components/uikit";
+import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import { type CreateVenueInput, createVenueSchema } from "@/lib/actions/venue";
-import { Box, VStack } from "~/styled-system/jsx";
+import type { Locale } from "@/navigation";
+import { Box, InlineBox, VStack } from "~/styled-system/jsx";
 
 export function AddVenueForm() {
   const {
     register,
     formState: { isValid, dirtyFields },
+    setValue,
   } = useForm<CreateVenueInput>({
     mode: "onChange",
     resolver: zodResolver(createVenueSchema),
@@ -22,6 +40,7 @@ export function AddVenueForm() {
     <form action={console.log}>
       <AddVenueFormInner
         register={register}
+        setValue={setValue}
         isValid={isValid}
         dirtyFields={dirtyFields}
       />
@@ -31,10 +50,12 @@ export function AddVenueForm() {
 
 function AddVenueFormInner({
   register,
+  setValue,
   isValid,
   dirtyFields,
 }: {
   register: UseFormRegister<CreateVenueInput>;
+  setValue: UseFormSetValue<CreateVenueInput>;
   isValid: boolean;
   dirtyFields: UseFormReturn<CreateVenueInput>["formState"]["dirtyFields"];
 }) {
@@ -84,6 +105,29 @@ function AddVenueFormInner({
       ),
       isNextBtnDisabled: !dirtyFields.image,
     },
+    {
+      title: t("groups.location"),
+      content: (
+        <VStack gap="20px">
+          <Dropdown size="full">
+            <SearchLocation
+              setValue={setValue}
+              name="locationMapboxId"
+              placeholder={t("fields.locationMapboxId_placeholder")}
+            />
+          </Dropdown>
+          <p>{t("fields.locationTutorial_tip")}</p>
+          <Textarea
+            placeholder={t("fields.locationTutorial_placeholder")}
+            rows={9}
+            {...register("locationTutorial")}
+          />
+        </VStack>
+      ),
+      isNextBtnDisabled: !(
+        dirtyFields.locationMapboxId && dirtyFields.locationTutorial
+      ),
+    },
   ];
 
   return (
@@ -98,5 +142,56 @@ function AddVenueFormInner({
         {t("submit_btn_label")}
       </Button>
     </Box>
+  );
+}
+
+function SearchLocation({
+  name,
+  placeholder,
+  setValue,
+}: {
+  name: keyof CreateVenueInput;
+  placeholder: string;
+  setValue: UseFormSetValue<CreateVenueInput>;
+}) {
+  const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
+  const [textFieldValue, setTextFieldValue] = useState<string>("");
+  const locale = useLocale() as Locale;
+  const { fetchSuggestions } = useSearchBoxCore({ language: locale });
+  const { setHidden } = useDropdown();
+
+  const inputChanged = (searchValue: string) => {
+    setHidden(false);
+    setTextFieldValue(searchValue);
+    fetchSuggestions(searchValue, setPlaces);
+  };
+
+  const suggestionClicked = (suggestion: SearchBoxSuggestion) => {
+    setHidden(true);
+    setTextFieldValue(suggestion.full_address || suggestion.place_formatted);
+
+    setValue(name, suggestion.mapbox_id, { shouldDirty: true });
+  };
+
+  return (
+    <>
+      <Input
+        type="text"
+        placeholder={placeholder}
+        value={textFieldValue}
+        onChange={(e) => inputChanged(e.target.value)}
+      />
+      <DropdownMenu shouldCloseOnClick={false}>
+        {places.map((place) => (
+          <InlineBox
+            key={place.mapbox_id}
+            onClick={() => suggestionClicked(place)}
+          >
+            <b>{place.name}</b>
+            <address>{place.full_address || place.place_formatted}</address>
+          </InlineBox>
+        ))}
+      </DropdownMenu>
+    </>
   );
 }

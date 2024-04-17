@@ -5,6 +5,8 @@ export const createVenueSchema = zfd.formData({
   name: zfd.text(z.string()),
   description: zfd.text(z.string()),
   image: zfd.text(z.string()),
+  locationMapboxId: zfd.text(z.string()),
+  locationTutorial: zfd.text(z.string()),
 
   // TODO add more fields
 });

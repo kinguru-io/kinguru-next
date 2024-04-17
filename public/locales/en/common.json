@@ -549,7 +549,10 @@
           "name_placeholder": "Name",
           "description": "Description",
           "description_placeholder": "Add a description for your venue",
-          "photo_tip": "Add one photo that will be displayed on the venue page."
+          "photo_tip": "Add one photo that will be displayed on the venue page.",
+          "locationMapboxId_placeholder": "Enter the address",
+          "locationTutorial_tip": "Write a guide on how to get to you. It will be visible to all users and it will be easier for them to find you.",
+          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs."
         }
       }
     }
