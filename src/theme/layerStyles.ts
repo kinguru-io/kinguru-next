@@ -26,4 +26,12 @@ export const layerStyles = defineLayerStyles({
       paddingBlockEnd: "60px",
     },
   },
+  dashedWrapper: {
+    value: {
+      borderWidth: "2px",
+      borderStyle: "dashed",
+      borderColor: "neutral.3",
+      borderRadius: "10px",
+    },
+  },
 });

@@ -96,14 +96,11 @@ function AddVenueLink() {
   return (
     <Link
       className={css({
-        maxWidth: "310px",
-        minHeight: "330px",
-        borderWidth: "2px",
-        borderStyle: "dotted",
-        borderColor: "neutral.3",
-        borderRadius: "10px",
+        layerStyle: "dashedWrapper",
         display: "grid",
         placeItems: "center",
+        maxWidth: "310px",
+        minHeight: "330px",
       })}
       href="/profile/venues/add"
     >

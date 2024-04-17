@@ -5,22 +5,26 @@ import { useTranslations } from "next-intl";
 import { ForwardedRef, forwardRef, useState, useTransition } from "react";
 import { FaPenAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
+import { RxCross1 } from "react-icons/rx";
 import {
   InputFile,
   type InputFileProps,
 } from "@/components/common/form/InputFile";
-import { AvatarWrapper } from "@/components/uikit";
 import {
   imageSchema,
   uploadProfileImage,
   type ProfileImageActionData,
 } from "@/lib/actions/file-upload";
 import { css } from "~/styled-system/css";
+import { avatar } from "~/styled-system/recipes";
+
+type PlaceholderVariant = "circle" | "rectangle";
 
 type ProfileImagePickerProps = InputFileProps & {
   imageSrc?: string;
   name?: string;
   groupKey?: string;
+  placeholderWrapper?: PlaceholderVariant;
 };
 
 export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
@@ -28,6 +32,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     imageSrc: propsImageSrc = "",
     name: propsName,
     groupKey = "undefined_key",
+    placeholderWrapper = "circle",
     onChange,
     ...restProps
   }: ProfileImagePickerProps,
@@ -80,21 +85,12 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         accept="image/*"
         disabled={isPending}
       >
-        <PickerTag />
-        <AvatarWrapper size="lg">
-          <AvatarPickerPlaceholder imageSrc={imageSrc} isPending={isPending} />
-          {isPending && (
-            <ImSpinner8
-              className={css({
-                position: "absolute",
-                animation: "spin",
-                width: "25%",
-                height: "25%",
-                color: "neutral.2",
-              })}
-            />
-          )}
-        </AvatarWrapper>
+        {placeholderWrapper === "circle" && <PickerTag />}
+        <PickerPlaceholder
+          imageSrc={imageSrc}
+          isPending={isPending}
+          placeholderVariant={placeholderWrapper}
+        />
       </InputFile>
       <input
         ref={ref}
@@ -132,42 +128,94 @@ function PickerTag() {
   );
 }
 
-// TODO split component in order to use different placeholders
+const placeholderVariantMap: Record<
+  PlaceholderVariant,
+  {
+    wrapperClassName: string;
+    imageParams: { width: number; height: number };
+    noImageContent?: React.ReactNode;
+  }
+> = {
+  circle: {
+    wrapperClassName: avatar({ size: "lg" }),
+    imageParams: { width: 175, height: 175 },
+  },
+  rectangle: {
+    wrapperClassName: css({
+      display: "grid",
+      placeItems: "center",
+      layerStyle: "dashedWrapper",
+      overflow: "hidden",
+      position: "relative",
+      width: "400px",
+      height: "225px",
+    }),
+    imageParams: { width: 400, height: 225 },
+    noImageContent: (
+      <RxCross1
+        className={css({
+          color: "primary",
+          rotate: "45deg",
+          fontSize: "5.625em",
+        })}
+      />
+    ),
+  },
+};
 
-function AvatarPickerPlaceholder({
+function PickerPlaceholder({
   imageSrc,
   isPending,
+  placeholderVariant,
 }: {
   imageSrc: string;
   isPending: boolean;
+  placeholderVariant: PlaceholderVariant;
 }) {
   const t = useTranslations("form.common");
 
-  if (imageSrc) {
-    return (
-      <Image
-        src={imageSrc}
-        alt={t("uploaded_photo")}
-        width={175}
-        height={175}
-        style={{ height: "100%", objectFit: "cover" }}
-      />
-    );
-  }
+  const {
+    wrapperClassName,
+    imageParams,
+    noImageContent = t("upload_photo"),
+  } = placeholderVariantMap[placeholderVariant];
 
   return (
-    <span
-      className={css({
-        display: "grid",
-        placeItems: "center",
-        width: "full",
-        height: "full",
-        bgColor: "neutral.4",
-        color: isPending ? "transparent" : "neutral.2",
-        textStyle: "body.2",
-      })}
-    >
-      {t("upload_photo")}
+    <span className={wrapperClassName}>
+      {imageSrc ? (
+        <Image
+          src={imageSrc}
+          alt={t("uploaded_photo")}
+          style={{ height: "100%", objectFit: "cover" }}
+          {...imageParams}
+        />
+      ) : (
+        <span
+          className={css({
+            display: "grid",
+            placeItems: "center",
+            width: "full",
+            height: "full",
+            bgColor:
+              placeholderVariant === "rectangle" ? "neutral.5" : "neutral.4",
+            color: isPending ? "transparent" : "neutral.2",
+            textStyle: "body.2",
+          })}
+        >
+          {!isPending && noImageContent}
+        </span>
+      )}
+      {isPending && (
+        <ImSpinner8
+          className={css({
+            position: "absolute",
+            animation: "spin",
+            width: "25%",
+            height: "25%",
+            color: "neutral.2",
+          })}
+        />
+      )}
     </span>
   );
 }

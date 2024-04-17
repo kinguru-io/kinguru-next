@@ -75,7 +75,11 @@ function AddVenueFormInner({
       content: (
         <VStack gap="30px" marginBlockEnd="20px">
           <p>{t("fields.photo_tip")}</p>
-          <ProfileImagePicker groupKey="venues" {...register("image")} />
+          <ProfileImagePicker
+            groupKey="venues"
+            placeholderWrapper="rectangle"
+            {...register("image")}
+          />
         </VStack>
       ),
       isNextBtnDisabled: !dirtyFields.image,
