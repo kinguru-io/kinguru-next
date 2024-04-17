@@ -1,1 +1,6 @@
-export { Dropdown, DropdownInitiator, DropdownMenu } from "./Dropdown";
+export {
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+  useDropdown,
+} from "./Dropdown";

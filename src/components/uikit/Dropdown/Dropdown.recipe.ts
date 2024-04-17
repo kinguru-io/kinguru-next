@@ -32,6 +32,7 @@ export const dropdownSlot = defineSlotRecipe({
       sm: { menu: { maxW: "110px" } },
       md: { menu: { maxW: "157px" } },
       lg: { menu: { maxW: "259px" } },
+      full: { menu: { width: "full" }, dropdown: { width: "full" } },
     },
   },
   staticCss: [{ size: ["*"] }],
