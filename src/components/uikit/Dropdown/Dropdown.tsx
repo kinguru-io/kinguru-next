@@ -53,7 +53,7 @@ export function DropdownMenu({
 
   return (
     <div
-      className={cx(dropdownSlot.menu, customDivider({}))}
+      className={cx(dropdownSlot.menu, customDivider({ thickness: "1px" }))}
       data-hidden={hidden}
       onClickCapture={() => setHidden(shouldCloseOnClick)}
     >

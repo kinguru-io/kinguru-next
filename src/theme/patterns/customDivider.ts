@@ -12,21 +12,25 @@ export const customDividerPattern: PatternConfig = {
     const {
       color = "token(colors.neutral.4)",
       thickness = "1px",
-      indent = "-5px",
       ...rest
     } = props;
     return {
+      "& > *": { paddingInline: "10px", paddingBlock: "5px" },
+      "& > *:first-child": { paddingBlockStart: "10px" },
+      "& > *:last-child": { paddingBlockEnd: "10px" },
       "& > *:not(:last-child)": {
         position: "relative",
-      },
-      "& > *:not(:last-child)::after": {
-        content: '""',
-        display: "block",
-        height: thickness,
-        backgroundColor: color,
-        bottom: indent,
-        position: "absolute",
-        width: "100%",
+        marginBlockEnd: parseInt(thickness) + "px",
+        _after: {
+          content: '""',
+          display: "block",
+          height: thickness,
+          backgroundColor: color,
+          bottom: parseInt(thickness) * -1 + "px",
+          position: "absolute",
+          insetInlineStart: "10px",
+          width: "calc(100% - 20px)",
+        },
       },
       ...rest,
     };
