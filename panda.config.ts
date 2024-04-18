@@ -9,6 +9,7 @@ import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
+import { radioSlot } from "./src/components/uikit/Radio/Radio.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
@@ -47,6 +48,7 @@ export default defineConfig({
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
         checkbox: checkboxSlot,
+        radio: radioSlot,
       },
       tokens: {
         gradients: {

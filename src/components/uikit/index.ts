@@ -16,3 +16,4 @@ export * from "./ArrowIcon";
 export * from "./Modal";
 export * from "./DefaultImage";
 export * from "./TimeSlot";
+export * from "./Radio";
