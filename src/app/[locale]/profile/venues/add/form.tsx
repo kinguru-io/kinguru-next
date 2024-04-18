@@ -5,12 +5,7 @@ import type { SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import {
-  type UseFormRegister,
-  type UseFormReturn,
-  type UseFormSetValue,
-  useForm,
-} from "react-hook-form";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
 import {
   AccordionGroup,
@@ -27,40 +22,32 @@ import type { Locale } from "@/navigation";
 import { Box, InlineBox, VStack } from "~/styled-system/jsx";
 
 export function AddVenueForm() {
-  const {
-    register,
-    formState: { isValid, dirtyFields },
-    setValue,
-  } = useForm<CreateVenueInput>({
+  const methods = useForm<CreateVenueInput>({
     mode: "onChange",
     resolver: zodResolver(createVenueSchema),
   });
 
   return (
-    <form action={console.log}>
-      <AddVenueFormInner
-        register={register}
-        setValue={setValue}
-        isValid={isValid}
-        dirtyFields={dirtyFields}
-      />
-    </form>
+    <FormProvider {...methods}>
+      <form action={console.log}>
+        <AddVenueFormInner />
+      </form>
+    </FormProvider>
   );
 }
 
-function AddVenueFormInner({
-  register,
-  setValue,
-  isValid,
-  dirtyFields,
-}: {
-  register: UseFormRegister<CreateVenueInput>;
-  setValue: UseFormSetValue<CreateVenueInput>;
-  isValid: boolean;
-  dirtyFields: UseFormReturn<CreateVenueInput>["formState"]["dirtyFields"];
-}) {
+function AddVenueFormInner() {
+  const {
+    register,
+    setValue,
+    formState: { dirtyFields, isValid },
+  } = useFormContext<CreateVenueInput>();
   const { pending } = useFormStatus();
   const t = useTranslations("profile.venues.add");
+
+  const locationIdChanged = (id: string) => {
+    setValue("locationMapboxId", id, { shouldDirty: true });
+  };
 
   const formGroupItems = [
     {
@@ -111,8 +98,7 @@ function AddVenueFormInner({
         <VStack gap="20px">
           <Dropdown size="full">
             <SearchLocation
-              setValue={setValue}
-              name="locationMapboxId"
+              changeLocationId={locationIdChanged}
               placeholder={t("fields.locationMapboxId_placeholder")}
             />
           </Dropdown>
@@ -146,13 +132,11 @@ function AddVenueFormInner({
 }
 
 function SearchLocation({
-  name,
   placeholder,
-  setValue,
+  changeLocationId,
 }: {
-  name: keyof CreateVenueInput;
   placeholder: string;
-  setValue: UseFormSetValue<CreateVenueInput>;
+  changeLocationId: (id: string) => void;
 }) {
   const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
   const [textFieldValue, setTextFieldValue] = useState<string>("");
@@ -170,7 +154,7 @@ function SearchLocation({
     setHidden(true);
     setTextFieldValue(suggestion.full_address || suggestion.place_formatted);
 
-    setValue(name, suggestion.mapbox_id, { shouldDirty: true });
+    changeLocationId(suggestion.mapbox_id);
   };
 
   return (
