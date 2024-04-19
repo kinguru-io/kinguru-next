@@ -394,6 +394,11 @@ model Venue {
   organizationId   String
   premises         Premise[]
   locationMapboxId String
+  locationTutorial String
+  featureCCTV      Boolean
+  featureParking   Boolean
+  featureAge       Int
+  manager          Manager[]
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 }
@@ -468,4 +473,14 @@ model PremiseDiscount {
   premiseId          String
   duration           Int
   discountPercentage Float
+}
+
+model Manager {
+  id          String @id @default(cuid())
+  firstname   String
+  lastname    String
+  email       String
+  phoneNumber String
+  venue       Venue  @relation(fields: [venueId], references: [id])
+  venueId     String
 }

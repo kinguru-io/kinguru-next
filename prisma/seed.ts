@@ -9,6 +9,7 @@ import {
 } from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
+import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const prisma = new PrismaClient();
@@ -63,8 +64,12 @@ const venueSchema = (
       height: 720,
     }),
     description: faker.lorem.paragraph(30),
-    locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
     organizationId,
+    locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
+    locationTutorial: faker.lorem.paragraphs({ min: 2, max: 4 }),
+    featureCCTV: Math.random() < 0.5,
+    featureParking: Math.random() < 0.5,
+    featureAge: faker.helpers.arrayElement(ageRestrictionList),
   };
 };
 
@@ -442,9 +447,21 @@ async function main() {
     await Promise.allSettled(
       Array.from({ length: 15 }, () =>
         prisma.venue.create({
-          data: venueSchema(
-            faker.helpers.arrayElement(createdOrganizations).id,
-          ),
+          data: {
+            ...venueSchema(faker.helpers.arrayElement(createdOrganizations).id),
+            manager: {
+              createMany: {
+                data: [
+                  {
+                    firstname: faker.person.firstName(),
+                    lastname: faker.person.lastName(),
+                    email: faker.internet.email(),
+                    phoneNumber: faker.phone.number(),
+                  },
+                ],
+              },
+            },
+          },
         }),
       ),
     )
