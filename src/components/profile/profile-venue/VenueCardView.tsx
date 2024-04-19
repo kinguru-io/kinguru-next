@@ -28,7 +28,10 @@ export function VenueCardView({
     <Card variant="profile-venue" data-interactive>
       <Link
         className={css({
-          marginBlockStart: "-1rem", // hiding by pushing out of the wrapper
+          // hiding by pushing out of the wrapper
+          fontSize: "1px",
+          lineHeight: "1px",
+          marginBlockStart: "-1px",
           _before: {
             zIndex: "1", // to be clickable over the image
             content: "''",
