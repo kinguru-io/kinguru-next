@@ -28,14 +28,18 @@ export function VenueCardView({
     <Card variant="profile-venue" data-interactive>
       <Link
         className={css({
+          marginBlockStart: "-1rem", // hiding by pushing out of the wrapper
           _before: {
+            zIndex: "1", // to be clickable over the image
             content: "''",
             position: "absolute",
             inset: 0,
           },
         })}
-        href="#"
-      />
+        href={`/profile/venues/${venue.id}`}
+      >
+        {venue.name}
+      </Link>
       <AspectRatio ratio={16 / 9}>
         <Image src={venue.image} width={310} height={174} alt="" />
       </AspectRatio>
