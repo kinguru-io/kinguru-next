@@ -18,4 +18,5 @@ export const additionalGlobalCss = defineGlobalStyles({
   h3: { textStyle: "heading.3" },
   h4: { textStyle: "heading.4" },
   h5: { textStyle: "heading.5" },
+  address: { fontStyle: "normal" },
 });
