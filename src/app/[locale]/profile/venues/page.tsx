@@ -1,94 +1,64 @@
-import type { Premise, Venue } from "@prisma/client";
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { ErrorIcon } from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 import { getSession } from "@/auth";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeading,
-  CardInner,
-} from "@/components/uikit";
+import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
+import { WarningNotice } from "@/components/profile";
+import { VenueCardView } from "@/components/profile/profile-venue";
 import { ProfileSectionLayout } from "@/layout/page";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { AspectRatio, GridItem, HStack } from "~/styled-system/jsx";
+import { GridItem } from "~/styled-system/jsx";
 
 export default async function VenuesPage() {
   const t = await getTranslations("profile.venues");
   const session = await getSession();
-  const organizationId = session?.user?.organizations.at(0)?.id;
-  const venues = organizationId
-    ? await prisma.venue.findMany({
-        where: { organizationId },
-        orderBy: { updatedAt: "desc" },
-        include: { premises: true },
-      })
-    : [];
+  const organization = session?.user?.organizations.at(0);
 
   return (
     <ProfileSectionLayout>
       <h1 className="heading">{t("heading")}</h1>
-      <GridItem
-        gridColumn="1 / -1"
-        display="grid"
-        gap="30px"
-        gridTemplateColumns="repeat(auto-fit, minmax(310px, 1fr))"
-      >
-        {venues.map((venue) => (
-          <VenueCardView
-            key={venue.id}
-            venue={venue}
-            noPremiseLabel={t("no_premises")}
-          />
-        ))}
-        <AddVenueLink />
-      </GridItem>
+      {organization ? (
+        <VenueCardListing organizationId={organization.id} />
+      ) : (
+        <WarningNotice
+          noticeText={t("no_organization_warn_msg")}
+          href="/profile/organization/register"
+          linkLabel={t("no_organization_link_label")}
+        />
+      )}
     </ProfileSectionLayout>
   );
 }
 
-function VenueCardView({
-  venue,
-  noPremiseLabel,
+async function VenueCardListing({
+  organizationId,
 }: {
-  venue: Venue & { premises: Premise[] };
-  noPremiseLabel: string;
+  organizationId: string;
 }) {
+  const t = await getTranslations("profile.venues");
+  const venues = await prisma.venue.findMany({
+    where: { organizationId },
+    orderBy: { updatedAt: "desc" },
+    include: { premises: true },
+  });
+
   return (
-    <Card variant="profile-venue" data-interactive>
-      <Link
-        className={css({
-          _before: {
-            content: "''",
-            position: "absolute",
-            inset: 0,
-          },
-        })}
-        href="#"
-      />
-      <AspectRatio ratio={16 / 9}>
-        <Image src={venue.image} width={310} height={174} alt="" />
-      </AspectRatio>
-      <CardInner>
-        <CardHeading lineClamp="3">
-          <h4>{venue.name}</h4>
-        </CardHeading>
-        <CardBody>
-          <p>{venue.organizationId}</p>
-        </CardBody>
-        <CardFooter>
-          {venue.premises.length === 0 && (
-            <HStack gap="5px" color="danger" textStyle="body.extra.3">
-              <ErrorIcon className={css({ flexShrink: "0" })} />
-              {noPremiseLabel}
-            </HStack>
-          )}
-        </CardFooter>
-      </CardInner>
-    </Card>
+    <GridItem
+      gridColumn="1 / -1"
+      display="grid"
+      gap="30px"
+      gridTemplateColumns="repeat(auto-fill, minmax(310px, 1fr))"
+    >
+      {venues.map((venue) => (
+        <MapboxSearchBoxResponseProvider
+          key={venue.id}
+          mapboxId={venue.locationMapboxId}
+        >
+          <VenueCardView venue={venue} noPremiseLabel={t("no_premises")} />
+        </MapboxSearchBoxResponseProvider>
+      ))}
+      <AddVenueLink />
+    </GridItem>
   );
 }
 

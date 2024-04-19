@@ -1,9 +1,11 @@
 "use client";
 
 import type { SearchBoxFeatureSuggestion } from "@mapbox/search-js-core";
+import { useLocale } from "next-intl";
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
+import type { Locale } from "@/navigation";
 
 type MapboxSearchBoxContextType = {
   searchResponse:
@@ -48,18 +50,25 @@ async function fetchTimeZone(data: SearchBoxFeatureSuggestion) {
 export function MapboxSearchBoxResponseProvider({
   mapboxId,
   children,
+  locale: propsLocale,
+  shouldFetchTimeZone = true,
 }: {
   mapboxId: string;
   children: React.ReactNode;
+  locale?: Locale;
+  shouldFetchTimeZone?: boolean;
 }) {
+  const locale = useLocale() as Locale;
   const [searchResponse, setResponse] =
     useState<MapboxSearchBoxContextType["searchResponse"]>(null);
-  const { retrieve } = useSearchBoxCore({});
+  const { retrieve } = useSearchBoxCore({ language: propsLocale || locale });
 
   useEffect(() => {
     retrieve({ mapbox_id: mapboxId }, async (data) => {
       const mapboxFeatureRecord = data.features[0];
-      const timeZone = await fetchTimeZone(mapboxFeatureRecord);
+      const timeZone = shouldFetchTimeZone
+        ? await fetchTimeZone(mapboxFeatureRecord)
+        : "";
 
       setResponse({
         ...mapboxFeatureRecord,

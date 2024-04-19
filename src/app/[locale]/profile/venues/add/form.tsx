@@ -1,35 +1,57 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { SearchBoxSuggestion } from "@mapbox/search-js-core";
-import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { InputSearchLocation } from "@/components/common/form/InputSearchLocation";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
 import {
   AccordionGroup,
   Button,
   Dropdown,
-  DropdownMenu,
   Input,
+  Radio,
+  Select,
   Textarea,
-  useDropdown,
 } from "@/components/uikit";
-import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
-import { type CreateVenueInput, createVenueSchema } from "@/lib/actions/venue";
-import type { Locale } from "@/navigation";
-import { Box, InlineBox, VStack } from "~/styled-system/jsx";
+import {
+  createVenueSchema,
+  type CreateVenueInput,
+  type CreateVenueAction,
+} from "@/lib/actions/venue";
+import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
+import type { AuthFormState } from "@/lib/utils";
+import { Box, Flex, InlineBox, VStack } from "~/styled-system/jsx";
 
-export function AddVenueForm() {
+export function AddVenueForm({
+  createVenue,
+}: {
+  createVenue: CreateVenueAction;
+}) {
   const methods = useForm<CreateVenueInput>({
     mode: "onChange",
     resolver: zodResolver(createVenueSchema),
   });
 
+  const [response, formAction] = useFormState<AuthFormState, FormData>(
+    createVenue,
+    null,
+  );
+
+  useEffect(() => {
+    if (!response) return;
+
+    response.status === "success"
+      ? toast.success(response.message)
+      : toast.error(response.message);
+  }, [response]);
+
   return (
     <FormProvider {...methods}>
-      <form action={console.log}>
+      <form action={formAction}>
         <AddVenueFormInner />
       </form>
     </FormProvider>
@@ -39,15 +61,11 @@ export function AddVenueForm() {
 function AddVenueFormInner() {
   const {
     register,
-    setValue,
+    control,
     formState: { dirtyFields, isValid },
   } = useFormContext<CreateVenueInput>();
   const { pending } = useFormStatus();
   const t = useTranslations("profile.venues.add");
-
-  const locationIdChanged = (id: string) => {
-    setValue("locationMapboxId", id, { shouldDirty: true });
-  };
 
   const formGroupItems = [
     {
@@ -97,8 +115,9 @@ function AddVenueFormInner() {
       content: (
         <VStack gap="20px">
           <Dropdown size="full">
-            <SearchLocation
-              changeLocationId={locationIdChanged}
+            <InputSearchLocation
+              name={"locationMapboxId"}
+              control={control}
               placeholder={t("fields.locationMapboxId_placeholder")}
             />
           </Dropdown>
@@ -112,6 +131,86 @@ function AddVenueFormInner() {
       ),
       isNextBtnDisabled: !(
         dirtyFields.locationMapboxId && dirtyFields.locationTutorial
+      ),
+    },
+    {
+      title: t("groups.additional"),
+      content: (
+        <Flex justifyContent="space-between" flexWrap="wrap" gap="20px">
+          <VStack alignItems="flex-start" gap="10px">
+            <span>{t("fields.featureCCTV_tip")}</span>
+            <Radio label={t("fields.yes_label")} {...register("featureCCTV")} />
+            <Radio label={t("fields.no_label")} {...register("featureCCTV")} />
+          </VStack>
+
+          <VStack alignItems="flex-start" gap="10px">
+            <span>{t("fields.featureParking_tip")}</span>
+            <Radio
+              label={t("fields.yes_label")}
+              {...register("featureParking")}
+            />
+            <Radio
+              label={t("fields.no_label")}
+              {...register("featureParking")}
+            />
+          </VStack>
+
+          <VStack alignItems="stretch" gap="10px">
+            <span>{t("fields.featureAge_tip")}</span>
+            <Select
+              placeholder={t("fields.featureAge_placeholder")}
+              {...register("featureAge")}
+            >
+              {ageRestrictionList.map((age) => (
+                <option key={age} value={age}>
+                  {age}+
+                </option>
+              ))}
+            </Select>
+          </VStack>
+        </Flex>
+      ),
+      isNextBtnDisabled: !(
+        dirtyFields.featureCCTV &&
+        dirtyFields.featureAge &&
+        dirtyFields.featureAge
+      ),
+    },
+    {
+      title: t("groups.contacts"),
+      content: (
+        <Flex justifyContent="space-around" flexWrap="wrap" gap="20px">
+          <InlineBox flexBasis="full">{t("fields.contacts_tip")}</InlineBox>
+          <VStack alignItems="flex-start" gap="10px" width="35%">
+            <Input
+              placeholder={t("fields.firstname_placeholder")}
+              {...register("manager.firstname")}
+            />
+            <Input
+              placeholder={t("fields.lastname_placeholder")}
+              {...register("manager.lastname")}
+            />
+          </VStack>
+          <VStack alignItems="flex-start" gap="10px" width="35%">
+            <Input
+              type="email"
+              placeholder={t("fields.email_placeholder")}
+              {...register("manager.email")}
+            />
+            <Input
+              type="text"
+              placeholder={t("fields.phoneNumber_placeholder")}
+              inputMode="numeric"
+              {...register("manager.phoneNumber")}
+            />
+          </VStack>
+        </Flex>
+      ),
+      isNextBtnDisabled: !(
+        dirtyFields.manager?.firstname &&
+        dirtyFields.manager?.lastname &&
+        dirtyFields.manager?.email &&
+        dirtyFields.manager?.phoneNumber
       ),
     },
   ];
@@ -128,54 +227,5 @@ function AddVenueFormInner() {
         {t("submit_btn_label")}
       </Button>
     </Box>
-  );
-}
-
-function SearchLocation({
-  placeholder,
-  changeLocationId,
-}: {
-  placeholder: string;
-  changeLocationId: (id: string) => void;
-}) {
-  const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
-  const [textFieldValue, setTextFieldValue] = useState<string>("");
-  const locale = useLocale() as Locale;
-  const { fetchSuggestions } = useSearchBoxCore({ language: locale });
-  const { setHidden } = useDropdown();
-
-  const inputChanged = (searchValue: string) => {
-    setHidden(false);
-    setTextFieldValue(searchValue);
-    fetchSuggestions(searchValue, setPlaces);
-  };
-
-  const suggestionClicked = (suggestion: SearchBoxSuggestion) => {
-    setHidden(true);
-    setTextFieldValue(suggestion.full_address || suggestion.place_formatted);
-
-    changeLocationId(suggestion.mapbox_id);
-  };
-
-  return (
-    <>
-      <Input
-        type="text"
-        placeholder={placeholder}
-        value={textFieldValue}
-        onChange={(e) => inputChanged(e.target.value)}
-      />
-      <DropdownMenu shouldCloseOnClick={false}>
-        {places.map((place) => (
-          <InlineBox
-            key={place.mapbox_id}
-            onClick={() => suggestionClicked(place)}
-          >
-            <b>{place.name}</b>
-            <address>{place.full_address || place.place_formatted}</address>
-          </InlineBox>
-        ))}
-      </DropdownMenu>
-    </>
   );
 }

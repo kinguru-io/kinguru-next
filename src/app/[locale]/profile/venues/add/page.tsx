@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { AddVenueForm } from "./form";
 import { ProfileSectionLayout } from "@/layout/page";
+import { createVenueAction } from "@/lib/actions/venue";
 
 export default async function AddVenuePage() {
   const t = await getTranslations("profile.venues.add");
@@ -9,7 +10,7 @@ export default async function AddVenuePage() {
     <ProfileSectionLayout>
       <h1 className="heading">{t("heading")}</h1>
       <section>
-        <AddVenueForm />
+        <AddVenueForm createVenue={createVenueAction} />
       </section>
     </ProfileSectionLayout>
   );

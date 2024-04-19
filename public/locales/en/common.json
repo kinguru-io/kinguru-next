@@ -533,6 +533,8 @@
     "venues": {
       "heading": "My venues",
       "no_premises": "Venue is inactive. A hall needs to be added.",
+      "no_organization_warn_msg": "To be able to add venues and halls, please fill out your personal information in the \"Profile\" section.",
+      "no_organization_link_label": "Go to the section \"Profile\"",
       "add": {
         "heading": "Register a new venue",
         "submit_btn_label": "Save venue",
@@ -552,7 +554,18 @@
           "photo_tip": "Add one photo that will be displayed on the venue page.",
           "locationMapboxId_placeholder": "Enter the address",
           "locationTutorial_tip": "Write a guide on how to get to you. It will be visible to all users and it will be easier for them to find you.",
-          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs."
+          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs.",
+          "featureCCTV_tip": "CCTV",
+          "featureParking_tip": "Parking",
+          "featureAge_tip": "Age restrictions",
+          "featureAge_placeholder": "Select age",
+          "yes_label": "Yes",
+          "no_label": "No",
+          "contacts_tip": "Enter venue manager's contact information",
+          "firstname_placeholder": "First name",
+          "lastname_placeholder": "Last name",
+          "email_placeholder": "Email",
+          "phoneNumber_placeholder": "Phone number"
         }
       }
     }

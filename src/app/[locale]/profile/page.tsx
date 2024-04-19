@@ -31,14 +31,14 @@ export default async function ProfilePage() {
         </InlineBox>
         <Link
           className={button({ size: "md", variant: "solid" })}
-          href="/profile"
+          href="/profile/venues/add"
         >
           {t("add_premise_btn_label")}
         </Link>
       </VStack>
       <Grid gridTemplateColumns="6" gridTemplateRows="3" gap="1.25rem">
         <GridItem
-          // TODO In progress
+          // * in progress (2nd part)
           layerStyle="outlineSecondaryWrapper"
           gridColumn="1 / 3"
           gridRow="1 / -1"
@@ -59,7 +59,7 @@ export default async function ProfilePage() {
         </ProfileLayoutItem>
 
         <GridItem
-          // TODO In progress
+          // * in progress (2nd part)
           layerStyle="outlineSecondaryWrapper"
           gridColumn="3 / -1"
           backgroundColor="neutral.4"
