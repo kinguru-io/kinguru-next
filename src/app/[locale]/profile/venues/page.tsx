@@ -1,12 +1,10 @@
 import { getTranslations } from "next-intl/server";
-import { RxCross1 } from "react-icons/rx";
 import { getSession } from "@/auth";
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { WarningNotice } from "@/components/profile";
+import { AddItemLink } from "@/components/profile/AddItemLink";
 import { VenueCardView } from "@/components/profile/profile-venue";
 import { ProfileSectionLayout } from "@/layout/page";
-import { Link } from "@/navigation";
-import { css } from "~/styled-system/css";
 import { GridItem } from "~/styled-system/jsx";
 
 export default async function VenuesPage() {
@@ -57,30 +55,11 @@ async function VenueCardListing({
           <VenueCardView venue={venue} noPremiseLabel={t("no_premises")} />
         </MapboxSearchBoxResponseProvider>
       ))}
-      <AddVenueLink />
-    </GridItem>
-  );
-}
-
-function AddVenueLink() {
-  return (
-    <Link
-      className={css({
-        layerStyle: "dashedWrapper",
-        display: "grid",
-        placeItems: "center",
-        maxWidth: "310px",
-        minHeight: "330px",
-      })}
-      href="/profile/venues/add"
-    >
-      <RxCross1
-        className={css({
-          color: "primary",
-          rotate: "45deg",
-          fontSize: "10em",
-        })}
+      <AddItemLink
+        maxWidth="310px"
+        minHeight="330px"
+        href="/profile/venues/add"
       />
-    </Link>
+    </GridItem>
   );
 }
