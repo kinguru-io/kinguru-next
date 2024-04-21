@@ -110,7 +110,7 @@
     "@trpc/next": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",
-    "bullmq": "^5.7.2",
+    "bullmq": "^5.7.3",
     "chakra-react-select": "^4.7.6",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^v3.1.3",
