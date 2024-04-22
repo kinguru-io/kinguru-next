@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
-import { getSession } from "@/auth";
+import { getSession } from "@/auth.ts";
 import { WarningNotice } from "@/components/profile";
 import { ProfileSectionLayout } from "@/layout/page";
-import { redirect } from "@/navigation";
-import prisma from "@/server/prisma";
+import { redirect } from "@/navigation.ts";
+import prisma from "@/server/prisma.ts";
 
 export default async function CreatedNoticePage({
   searchParams: { venueId },

@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { AddVenueForm } from "./form";
+import { AddVenueForm } from "./form.tsx";
 import { ProfileSectionLayout } from "@/layout/page";
 import { createVenueAction } from "@/lib/actions/venue";
 

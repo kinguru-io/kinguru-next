@@ -22,7 +22,7 @@ import {
   type CreateVenueInput,
   type CreateVenueAction,
 } from "@/lib/actions/venue";
-import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
+import { ageRestrictionList } from "@/lib/shared/config/age-restriction.ts";
 import type { AuthFormState } from "@/lib/utils";
 import { Box, Flex, InlineBox, VStack } from "~/styled-system/jsx";
 
