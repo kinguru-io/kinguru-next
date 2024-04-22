@@ -1,4 +1,3 @@
-import { Breadcrumbs } from "./_breadcrumbs";
 import { getSession } from "@/auth";
 import { ProfileNavigation } from "@/components/profile/profile-navigation";
 import { redirect } from "@/navigation";
@@ -18,7 +17,7 @@ export default async function Layout({
       <Grid gap="0" paddingBlock="70px" gridTemplateColumns="272px 1fr">
         <ProfileNavigation />
         <GridItem>
-          <Breadcrumbs rootPath="profile" />
+          {/*<Breadcrumbs rootPath="profile" />*/}
           {children}
         </GridItem>
       </Grid>
