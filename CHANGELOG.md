@@ -1,3 +1,10 @@
+# [0.41.0](https://github.com/kinguru-io/kinguru-next/compare/v0.40.2...v0.41.0) (2024-04-22)
+
+
+### Features
+
+* **KINGU-107:** personal page with navigation ([#548](https://github.com/kinguru-io/kinguru-next/issues/548)) ([bae065d](https://github.com/kinguru-io/kinguru-next/commit/bae065dd8fc95afa68d882a1566f92d3d307741e))
+
 ## [0.40.2](https://github.com/kinguru-io/kinguru-next/compare/v0.40.1...v0.40.2) (2024-04-16)
 
 
