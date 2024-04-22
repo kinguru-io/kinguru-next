@@ -22,6 +22,7 @@ export function ProfileSectionLayout({
             justifySelf: "center",
             gridRow: "1 / 2",
             gridColumn: "1 / -1",
+            whiteSpace: "pre",
           },
           "& section": {
             gridColumn: "2 / -2",
