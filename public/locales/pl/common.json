@@ -372,6 +372,11 @@
           "email_placeholder": "Email",
           "phoneNumber_placeholder": "Phone number"
         }
+      },
+      "created": {
+        "heading": "Congratulations!\nYou have successfully registered the venue.",
+        "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
+        "no_premise_link_label": "Go to premise registration"
       }
     }
   }

@@ -42,11 +42,11 @@ export function AddVenueForm({
   );
 
   useEffect(() => {
-    if (!response) return;
+    if (!response || response.status !== "error") return;
 
-    response.status === "success"
-      ? toast.success(response.message)
-      : toast.error(response.message);
+    const toastId = toast.error(response.message);
+
+    return () => toast.remove(toastId);
   }, [response]);
 
   return (

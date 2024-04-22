@@ -4,6 +4,8 @@ import slugify from "@sindresorhus/slugify";
 import { type CreateVenueInput, createVenueSchema } from "./validation";
 import { getSession } from "@/auth";
 import { type AuthFormState, createFormAction } from "@/lib/utils";
+import { redirect } from "@/navigation";
+import prisma from "@/server/prisma";
 
 async function createVenue({
   manager,
@@ -36,7 +38,7 @@ async function createVenue({
     ? `${potentialSlug}-${organization.name}`
     : potentialSlug;
 
-  const result = await prisma.venue.create({
+  const createdVenue = await prisma.venue.create({
     data: {
       ...restVenueInput,
       slug,
@@ -49,10 +51,9 @@ async function createVenue({
     },
   });
 
-  return {
-    status: "success",
-    message: `${result.name} is created`,
-  };
+  redirect(`/profile/venues/created?venueId=${createdVenue.id}`);
+
+  return null;
 }
 
 export const createVenueAction = createFormAction(
