@@ -369,6 +369,7 @@ model Organization {
   activitySphere String[]
   logotype       String?
   places         Place[]
+  venues         Venue[]
   resources      OrganizationResourse[]
 }
 
@@ -384,15 +385,22 @@ model OrganizationResourse {
 }
 
 model Venue {
-  id               String    @id @default(cuid())
-  slug             String    @unique
+  id               String       @id @default(cuid())
+  slug             String       @unique
   name             String
   image            String
   description      String
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String
   premises         Premise[]
   locationMapboxId String
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  locationTutorial String
+  featureCCTV      Boolean
+  featureParking   Boolean
+  featureAge       Int
+  manager          Manager[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
 
 model Premise {
@@ -465,4 +473,14 @@ model PremiseDiscount {
   premiseId          String
   duration           Int
   discountPercentage Float
+}
+
+model Manager {
+  id          String @id @default(cuid())
+  firstname   String
+  lastname    String
+  email       String
+  phoneNumber String
+  venue       Venue  @relation(fields: [venueId], references: [id])
+  venueId     String
 }

@@ -18,7 +18,7 @@ export function InputFile({ children, disabled, ...props }: InputFileProps) {
         "&[data-disabled=true]": {
           cursor: "not-allowed",
         },
-        borderRadius: "full",
+        borderRadius: "10px",
         transition: "shadow",
         _focusWithin: {
           boxShadow: "0 0 0 2px token(colors.focus)",

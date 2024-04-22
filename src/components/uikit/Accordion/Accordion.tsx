@@ -1,8 +1,8 @@
-import { useId } from "react";
+import { type ComponentProps, useId } from "react";
 import { Collapse } from "@/components/uikit";
 import { css, cx } from "~/styled-system/css";
 import { Box, splitCssProps, styled } from "~/styled-system/jsx";
-import { HTMLStyledProps } from "~/styled-system/types";
+import type { HTMLStyledProps } from "~/styled-system/types";
 
 export const Accordion = styled("div", {
   base: {
@@ -12,35 +12,42 @@ export const Accordion = styled("div", {
   },
 });
 
-export function AccordionItem({ children }: { children: React.ReactNode }) {
-  return (
-    <Box
-      bgColor="neutral.5"
-      borderColor="neutral.2"
-      borderWidth="1px"
-      borderRadius="10px"
-      paddingInline="30px 15px"
-      paddingBlock="9px"
-      transition="colors"
-      _focusWithin={{
-        borderColor: "focus",
-      }}
-    >
-      {children}
-    </Box>
-  );
-}
+export const AccordionItem = styled("div", {
+  base: {
+    bgColor: "neutral.5",
+    borderColor: "neutral.2",
+    borderWidth: "1px",
+    borderRadius: "10px",
+    paddingInline: "30px 15px",
+    paddingBlock: "9px",
+    transition: "colors",
+    _focusWithin: {
+      borderColor: "focus",
+    },
+  },
+});
 
-export function AccordionItemToggle(props: HTMLStyledProps<"label">) {
+export function AccordionItemToggle(
+  props: HTMLStyledProps<"label"> & {
+    checkboxProps?: Omit<
+      ComponentProps<"input">,
+      "id" | "className" | "type" | "style"
+    >;
+  },
+) {
   const checkboxId = useId();
 
-  const [cssProps, { children, ...restProps }] = splitCssProps(props);
+  const [cssProps, { children, checkboxProps, ...labelProps }] =
+    splitCssProps(props);
   const { css: cssProp, ...styleProps } = cssProps;
   const labelClassName = css(
     {
       position: "relative",
       cursor: "pointer",
       display: "block",
+      _peerDisabled: {
+        cursor: "not-allowed",
+      },
       _after: {
         position: "absolute",
         content: "''",
@@ -68,8 +75,9 @@ export function AccordionItemToggle(props: HTMLStyledProps<"label">) {
         id={checkboxId}
         className={cx("peer", css({ srOnly: true }))}
         type="checkbox"
+        {...checkboxProps}
       />
-      <label className={labelClassName} htmlFor={checkboxId} {...restProps}>
+      <label className={labelClassName} htmlFor={checkboxId} {...labelProps}>
         {children}
       </label>
     </>

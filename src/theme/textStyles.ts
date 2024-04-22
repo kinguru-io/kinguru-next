@@ -7,6 +7,9 @@ export const additionalTextStyles = defineTextStyles({
     2: { value: { fontSize: "16px" } },
     3: { value: { fontSize: "12px" } },
     4: { value: { fontSize: "8px" } },
+    extra: {
+      3: { value: { fontSize: "10px" } },
+    },
   },
   heading: {
     1: {
@@ -43,6 +46,13 @@ export const additionalTextStyles = defineTextStyles({
         fontWeight: "700",
         lineHeight: "1.35",
         textDecoration: "underline",
+      },
+    },
+    6: {
+      value: {
+        fontSize: "20px",
+        fontWeight: "700",
+        lineHeight: "1.35",
       },
     },
     extra: {

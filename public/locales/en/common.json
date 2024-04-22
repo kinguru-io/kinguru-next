@@ -505,5 +505,77 @@
   "stripe_checkout_form": {
     "pay_now": "Pay now",
     "unexpected_error_msg": "An unexpected error occurred."
+  },
+  "profile": {
+    "link_labels": {
+      "main": "Home",
+      "edit": "Profile",
+      "events": "My events",
+      "venues": "My venues",
+      "notifications": "My notifications",
+      "settings": "Settings"
+    },
+    "faq_link_labels": {
+      "add_venue": "How to add a venue to the platform",
+      "add_event": "How to organize an event in your location",
+      "change_profile_photo": "How to change profile photo",
+      "cooperation": "What are the terms of cooperation",
+      "see_more": "See more",
+      "ask": "Ask a question"
+    },
+    "user_greeting": "Hello!",
+    "page_tip": "On this page, we've collected all the most important things for you.",
+    "add_premise_btn_label": "Add a premise",
+    "faq_heading": "Do you have any questions? Let's figure it out!",
+    "notifications_heading": "Notifications",
+    "profile_completeness_label": "Information about profile completeness will be displayed here shortly",
+    "calendar_label": "Your premises calendar will be displayed here shortly",
+    "venues": {
+      "heading": "My venues",
+      "no_premises": "Venue is inactive. A hall needs to be added.",
+      "no_organization_warn_msg": "To be able to add venues and halls, please fill out your personal information in the \"Profile\" section.",
+      "no_organization_link_label": "Go to the section \"Profile\"",
+      "add": {
+        "heading": "Register a new venue",
+        "submit_btn_label": "Save venue",
+        "next_group_btn_label": "Next",
+        "groups": {
+          "main_info": "Main information",
+          "photo": "Photo",
+          "location": "Address",
+          "additional": "Additional",
+          "contacts": "Contacts"
+        },
+        "fields": {
+          "name": "Name",
+          "name_placeholder": "Name",
+          "description": "Description",
+          "description_placeholder": "Add a description for your venue",
+          "photo_tip": "Add one photo that will be displayed on the venue page.",
+          "locationMapboxId_placeholder": "Enter the address",
+          "locationTutorial_tip": "Write a guide on how to get to you. It will be visible to all users and it will be easier for them to find you.",
+          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs.",
+          "featureCCTV_tip": "CCTV",
+          "featureParking_tip": "Parking",
+          "featureAge_tip": "Age restrictions",
+          "featureAge_placeholder": "Select age",
+          "yes_label": "Yes",
+          "no_label": "No",
+          "contacts_tip": "Enter venue manager's contact information",
+          "firstname_placeholder": "First name",
+          "lastname_placeholder": "Last name",
+          "email_placeholder": "Email",
+          "phoneNumber_placeholder": "Phone number"
+        }
+      },
+      "created": {
+        "heading": "Congratulations!\nYou have successfully registered the venue.",
+        "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
+        "no_premise_link_label": "Go to premise registration"
+      },
+      "add_premise": {
+        "heading": "Premise registration"
+      }
+    }
   }
 }

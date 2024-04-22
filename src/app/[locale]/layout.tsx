@@ -2,7 +2,7 @@ import { NextIntlClientProvider, useMessages } from "next-intl";
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { Toaster } from "@/components/notifications";
+import { Toaster } from "@/components/notifications/hot-toast-toaster";
 import { NotoSans } from "@/fontLoader.ts";
 import { css } from "~/styled-system/css";
 import { Grid } from "~/styled-system/jsx";

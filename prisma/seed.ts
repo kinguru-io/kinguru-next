@@ -1,8 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
-import { $Enums, PremiseOpenHours, Prisma, PrismaClient } from "@prisma/client";
+import {
+  $Enums,
+  PrismaClient,
+  type Organization,
+  type PremiseOpenHours,
+  type Prisma,
+} from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
+import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const prisma = new PrismaClient();
@@ -20,6 +27,8 @@ const ROOM_WORD_SYNONYMS = [
   "place",
   "area",
   "territory",
+  "space",
+  "dwelling",
 ] as const;
 
 const userSchema = (): Prisma.UserCreateInput => ({
@@ -40,18 +49,27 @@ const userSchema = (): Prisma.UserCreateInput => ({
   interests: faker.lorem.words().split(" "),
 });
 
-const venueSchema = (): Prisma.VenueCreateInput => {
+const slugifyVenueNameWithCounter = slugifyWithCounter();
+
+const venueSchema = (
+  organizationId: Organization["id"],
+): Prisma.VenueCreateManyInput => {
   const name = faker.company.name();
 
   return {
     name,
-    slug: slugify(name),
+    slug: slugifyVenueNameWithCounter(name),
     image: faker.image.urlLoremFlickr({
       width: 1280,
       height: 720,
     }),
     description: faker.lorem.paragraph(30),
+    organizationId,
     locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
+    locationTutorial: faker.lorem.paragraphs({ min: 2, max: 4 }),
+    featureCCTV: Math.random() < 0.5,
+    featureParking: Math.random() < 0.5,
+    featureAge: faker.helpers.arrayElement(ageRestrictionList),
   };
 };
 
@@ -119,7 +137,7 @@ const premiseOpenHoursSchema = (idx: number) => {
       ] as Prisma.PremiseOpenHoursCreateInput[]);
 };
 
-const slugifyCount = slugifyWithCounter();
+const slugifyPremiseNameWithCounter = slugifyWithCounter();
 
 const premiseSchemaWithVenueConnection = (
   venueId: string,
@@ -127,7 +145,7 @@ const premiseSchemaWithVenueConnection = (
   const name = `${faker.commerce.department()} ${faker.helpers.arrayElement(ROOM_WORD_SYNONYMS)}`;
   return {
     name: name,
-    slug: slugifyCount(name),
+    slug: slugifyPremiseNameWithCounter(name),
     description: faker.lorem.paragraph(5),
     area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
     amenities: faker.helpers.arrayElements(
@@ -165,7 +183,7 @@ const premiseSchemaWithVenueConnection = (
     openHours: {
       createMany: {
         data: Array.from(
-          // * simluates a sitatuion when a premise doesn't have working hours on saturday, sunday or both
+          // * simulates a situation when a premise doesn't have working hours on saturday, sunday or both
           { length: faker.number.int({ min: 5, max: 7 }) },
           (_, idx) => premiseOpenHoursSchema(idx),
         ).flat(),
@@ -420,10 +438,31 @@ async function main() {
   });
 
   // * ------------------------------------ Venues START
+  const createdOrganizations = await prisma.organization.findMany({
+    select: { id: true },
+  });
+  console.log(`* ${createdOrganizations.length} Organization records found`);
+
   (
     await Promise.allSettled(
       Array.from({ length: 15 }, () =>
-        prisma.venue.create({ data: venueSchema() }),
+        prisma.venue.create({
+          data: {
+            ...venueSchema(faker.helpers.arrayElement(createdOrganizations).id),
+            manager: {
+              createMany: {
+                data: [
+                  {
+                    firstname: faker.person.firstName(),
+                    lastname: faker.person.lastName(),
+                    email: faker.internet.email(),
+                    phoneNumber: faker.phone.number(),
+                  },
+                ],
+              },
+            },
+          },
+        }),
       ),
     )
   ).forEach((result) => {
