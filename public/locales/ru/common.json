@@ -368,6 +368,7 @@
     "unexpected_error_msg": "Произошла непредвиденная ошибка."
   },
   "profile": {
+    "go_back_btn_label": "Назад",
     "link_labels": {
       "main": "Главная",
       "edit": "Личный профиль",

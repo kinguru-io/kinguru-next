@@ -12,10 +12,10 @@ export const arrowIconRecipe = defineRecipe({
   },
   variants: {
     direction: {
-      left: { transform: "rotate(-135deg)" },
-      right: { transform: "rotate(45deg)" },
+      left: { transform: "rotate(-135deg) translate(0%, 25%)" },
+      right: { transform: "rotate(45deg) translate(-25%, 0%)" },
       up: { transform: "rotate(315deg)" },
-      down: { transform: "rotate(135deg)" },
+      down: { transform: "rotate(135deg) translate(-25%, 25%)" },
     },
   },
   defaultVariants: {

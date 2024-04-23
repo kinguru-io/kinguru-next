@@ -1,4 +1,6 @@
+import { getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
+import { GoBackButton } from "@/components/common";
 import { ProfileNavigation } from "@/components/profile/profile-navigation";
 import { redirect } from "@/navigation";
 import { Container, Grid, GridItem } from "~/styled-system/jsx";
@@ -9,6 +11,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
+  const t = await getTranslations("profile");
 
   if (!session) return redirect("/auth/signin");
 
@@ -17,7 +20,11 @@ export default async function Layout({
       <Grid gap="0" paddingBlock="70px" gridTemplateColumns="272px 1fr">
         <ProfileNavigation />
         <GridItem>
-          {/*<Breadcrumbs rootPath="profile" />*/}
+          <GoBackButton
+            label={t("go_back_btn_label")}
+            display="block"
+            marginBlockStart="-25px"
+          />
           {children}
         </GridItem>
       </Grid>
