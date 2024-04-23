@@ -12,7 +12,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     avatars: {
-      control: "none",
+      control: false,
     },
   },
 } satisfies Meta<typeof AvatarGroup>;

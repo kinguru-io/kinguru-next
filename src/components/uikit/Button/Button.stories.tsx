@@ -29,7 +29,7 @@ const meta = {
     },
     colorPalette: {
       description: buttonColorPalette.join(" | "),
-      options: buttonColorPalette,
+      options: buttonColorPalette as unknown as any[],
       control: { type: "radio" },
     },
     iconPosition: { description: "left | right" },
