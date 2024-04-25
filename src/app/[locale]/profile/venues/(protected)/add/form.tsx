@@ -172,7 +172,7 @@ function AddVenueFormInner() {
       ),
       isNextBtnDisabled: !(
         dirtyFields.featureCCTV &&
-        dirtyFields.featureAge &&
+        dirtyFields.featureParking &&
         dirtyFields.featureAge
       ),
     },
