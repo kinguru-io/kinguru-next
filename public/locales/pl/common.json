@@ -378,10 +378,160 @@
         "heading": "Congratulations!\nYou have successfully registered the venue.",
         "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
         "no_premise_link_label": "Go to premise registration"
-      },
-      "add_premise": {
-        "heading": "Premise registration"
+      }
+    },
+    "premises": {
+      "add": {
+        "heading": "Premise registration",
+        "submit_btn_label": "Save premise",
+        "next_group_btn_label": "Next",
+        "groups": {
+          "main_info": "Main",
+          "photo": "Photo",
+          "amenities": "Parameters and amenities",
+          "open_hours": "Opening hours and pricing",
+          "rules": "Premise rules",
+          "booking_cancel_terms": "Booking Cancellation Terms"
+        },
+        "fields": {
+          "name_and_description": "Name and description",
+          "name_placeholder": "Enter premise name",
+          "description_placeholder": "Tell us about the premise",
+          "address": "Address",
+          "address_tip": "The premise address is the same as the venue location address. To make it easier for visitors to find a specific premise, provide additional address information.",
+          "room_placeholder": "Room",
+          "floor_placeholder": "Floor",
+          "photo": "Photo",
+          "photo_tip": "Add photos of your premise",
+          "premise_parameters": "Premise parameters and amenities",
+          "type_placeholder": "Select premise type",
+          "area_prefix": "Area",
+          "area_literal": "m",
+          "capacity_prefix": "Capacity up to",
+          "capacity_literal": "people",
+          "amenities": "Amenities",
+          "amenities_tip": "Select at least 5 amenities available in your premise. The more amenities you select, the more users can find your premise."
+        }
       }
     }
+  },
+  "amenities": {
+    "internet_group": "Internet",
+    "internet": {
+      "wifi": "Wi-Fi"
+    },
+    "food_group": "Food and drinks",
+    "food": {
+      "coffee": "Coffee",
+      "catering": "Catering",
+      "waiter": "Waiter",
+      "cutlery": "Cutlery",
+      "tablecloth": "Tablecloth",
+      "kitchen": "Kitchen",
+      "water": "Water",
+      "tea": "Tea",
+      "snacks": "Snacks"
+    },
+    "common_group": "Common",
+    "common": {
+      "heating": "Heating",
+      "public_transport": "Public Transport",
+      "cloakroom": "Cloakroom",
+      "cctv": "CCTV",
+      "security": "Security",
+      "soundproofing": "Soundproofing",
+      "cleaning_service": "Cleaning service",
+      "wc": "WC",
+      "changing_room": "Changing room",
+      "tech_elevators": "Freight elevators",
+      "storage": "Storage/Lockers",
+      "open_area": "Open space",
+      "access_24": "Access 24 hour",
+      "accessible": "Accessible environment"
+    },
+    "audio_video_group": "Audio and video",
+    "audio_video": {
+      "projector": "Projector",
+      "screen": "Screen",
+      "speaker": "Speaker",
+      "monitor": "Monitor",
+      "speaker_bt": "BT speaker",
+      "speaker_wired": "Wired speaker",
+      "apple_tv": "Apple TV",
+      "vfx_expert": "VFX expert",
+      "micro": "Microphone",
+      "conference_phone": "Conference phone",
+      "audio_system": "Audio system",
+      "video_equipment": "Video equipment"
+    },
+    "lightning_group": "Light",
+    "lightning": {
+      "light_equipment": "Light equipment",
+      "natural_light": "Natural light",
+      "blackout": "Blackout curtains"
+    },
+    "inventory_group": "Inventory",
+    "inventory": {
+      "magnet_board": "Magnetic board",
+      "chairs": "Chairs",
+      "chalk_board": "Chalk board",
+      "meeting_room": "Meeting room",
+      "flipcharts": "Flipcharts",
+      "office_equipment": "Office equipment",
+      "printer": "Printer",
+      "private_phone_booths": "Private phone booths",
+      "tables": "Tables"
+    },
+    "lang_group": "Languages",
+    "lang": {
+      "pl": "PL",
+      "ua": "UKR",
+      "en": "ENG",
+      "by": "BLR",
+      "ru": "RUS"
+    },
+    "sports_inventory_group": "Sports inventory",
+    "sports_inventory": {
+      "yoga_mat": "Yoga mat",
+      "yoga_blocks": "Yoga blocks",
+      "gym_bars": "Gym bars",
+      "gym_bands": "Gym bands",
+      "gym_gears": "Gym gears",
+      "mirrors": "Mirrors",
+      "balls": "Balls",
+      "hoop": "Hoop",
+      "ballet_stand": "Ballet stand",
+      "feetball": "Feetball"
+    },
+    "else_group": "Else",
+    "else": {
+      "air_freshener": "Air freshener",
+      "green_bg": "Green background",
+      "white_bg": "White background",
+      "scene": "Scene",
+      "good_view": "Beautiful view",
+      "mansard_windows": "Roof windows"
+    }
+  },
+  "premise_types": {
+    "dance_halls": "Dance halls",
+    "gyms": "Gyms",
+    "photo_studios": "Photo studios",
+    "cafe": "Cafe",
+    "bars": "Bars",
+    "restaurants": "Restaurants",
+    "coworking": "Coworking",
+    "game_rooms": "Game rooms",
+    "event_spaces": "Event spaces",
+    "banquet_halls": "Banquet halls",
+    "conference_rooms": "Conference rooms",
+    "beauty_salons": "Beauty salons",
+    "workshops": "Workshops",
+    "galleries": "Galleries",
+    "cinemas": "Cinemas",
+    "garages": "Garages",
+    "community_centers": "Community centers (foundations, organizations)",
+    "special_events_etc": "Banquet halls, estates for weddings, etc",
+    "commercial_kitchens": "Commercial kitchens"
   }
 }

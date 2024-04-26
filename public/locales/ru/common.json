@@ -434,10 +434,160 @@
         "heading": "Поздравляем!\nВы успешно зарегистрировали площадку.",
         "no_premise_warn_msg": "Далее вам необходимо зарегистрировать на этой площадке как минимум один зал, который будет сдаваться в аренду.",
         "no_premise_link_label": "Перейти к регистрации зала"
-      },
-      "add_premise": {
-        "heading": "Регистрация зала"
+      }
+    },
+    "premises": {
+      "add": {
+        "heading": "Регистрация зала",
+        "submit_btn_label": "Сохранить зал",
+        "next_group_btn_label": "Далее",
+        "groups": {
+          "main_info": "Основное",
+          "photo": "Фото",
+          "amenities": "Параметры и оснащения",
+          "open_hours": "Режим работы и стоимость",
+          "rules": "Правила зала",
+          "booking_cancel_terms": "Условия отмены бронирования"
+        },
+        "fields": {
+          "name_and_description": "Название и описание",
+          "name_placeholder": "Ведите название зала",
+          "description_placeholder": "Расскажите о зале",
+          "address": "Адрес",
+          "address_tip": "Адрес зала полностью совпадает с адресом площадки. Чтобы посетителям было проще найти конкретный зал, заполните дополнительные адресные данные.",
+          "room_placeholder": "Помещение",
+          "floor_placeholder": "Этаж",
+          "photo": "Фото",
+          "photo_tip": "Добавьте фотографии вашего зала",
+          "premise_parameters": "Параметры зала",
+          "type_placeholder": "Выберите тип помещения",
+          "area_prefix": "Площадь",
+          "area_literal": "м",
+          "capacity_prefix": "Вместительность до",
+          "capacity_literal": "человек",
+          "amenities": "Оснащения и удобства",
+          "amenities_tip": "Отметьте как минимум 5 удобств, которые есть в вашем зале. Чем больше удобств Вы отметите, тем больше пользователей смогут найти ваш зал."
+        }
       }
     }
+  },
+  "amenities": {
+    "internet_group": "Интернет",
+    "internet": {
+      "wifi": "Wi-Fi"
+    },
+    "food_group": "Еда и напитки",
+    "food": {
+      "coffee": "Кофе",
+      "catering": "Кейтеринг",
+      "waiter": "Официант",
+      "cutlery": "Тарелки и столовые приборы",
+      "tablecloth": "Скатерти",
+      "kitchen": "Кухня",
+      "water": "Вода",
+      "tea": "Чай",
+      "snacks": "Снеки"
+    },
+    "common_group": "Общие",
+    "common": {
+      "heating": "Отопление",
+      "public_transport": "Близость общественного транспорта",
+      "cloakroom": "Гардероб",
+      "cctv": "Видеонаблюдение",
+      "security": "Охрана",
+      "soundproofing": "Звукоизоляция",
+      "cleaning_service": "Услуги по уборке помещений",
+      "wc": "WC",
+      "changing_room": "Раздевалка",
+      "tech_elevators": "Грузовые лифты",
+      "storage": "Хранение/Шкафчики",
+      "open_area": "Открытая площадка",
+      "access_24": "Круглосуточный доступ ",
+      "accessible": "Доступная среда"
+    },
+    "audio_video_group": "Аудио и видео",
+    "audio_video": {
+      "projector": "Проектор",
+      "screen": "Экран",
+      "speaker": "Динамики",
+      "monitor": "Монитор",
+      "speaker_bt": "Колонка с Bluetooth",
+      "speaker_wired": "Колонка обычная",
+      "apple_tv": "Apple TV",
+      "vfx_expert": "Специалист по аудиовизуальной технике",
+      "micro": "Микрофон",
+      "conference_phone": "Конференц-телефон",
+      "audio_system": "Аудиосистема",
+      "video_equipment": "Видеооборудование"
+    },
+    "lightning_group": "Освещение",
+    "lightning": {
+      "light_equipment": "Световое оборудование",
+      "natural_light": "Естественный свет",
+      "blackout": "Занавески блокирующие свет"
+    },
+    "inventory_group": "Рабочий инвентарь",
+    "inventory": {
+      "magnet_board": "Магнитная доска",
+      "chairs": "Стулья",
+      "chalk_board": "Меловая доска",
+      "meeting_room": "Комната для переговоров",
+      "flipcharts": "Флипчарты",
+      "office_equipment": "Офисные принадлежности",
+      "printer": "Принтер",
+      "private_phone_booths": "Приватные телефонные будки",
+      "tables": "Столы"
+    },
+    "lang_group": "Языки",
+    "lang": {
+      "pl": "PL",
+      "ua": "UKR",
+      "en": "ENG",
+      "by": "BLR",
+      "ru": "RUS"
+    },
+    "sports_inventory_group": "Спортивный инвентарь",
+    "sports_inventory": {
+      "yoga_mat": "Коврик для йоги",
+      "yoga_blocks": "Блоки для йоги",
+      "gym_bars": "Штанги",
+      "gym_bands": "Резинки",
+      "gym_gears": "Гантели",
+      "mirrors": "Зеркала",
+      "balls": "Мячи",
+      "hoop": "Обруч",
+      "ballet_stand": "Балетный станок",
+      "feetball": "Фитбол"
+    },
+    "else_group": "Другое",
+    "else": {
+      "air_freshener": "Освежитель воздуха",
+      "green_bg": "Зеленый фон",
+      "white_bg": "Белый фон",
+      "scene": "Сцена",
+      "good_view": "Красивый вид",
+      "mansard_windows": "Мансардные окна"
+    }
+  },
+  "premise_types": {
+    "dance_halls": "Танцевальные залы",
+    "gyms": "Спортивные залы",
+    "photo_studios": "Фотостудии",
+    "cafe": "Кафе",
+    "bars": "Бары",
+    "restaurants": "Рестораны",
+    "coworking": "Коворкинги",
+    "game_rooms": "Игровые комнаты",
+    "event_spaces": "Ивент-спейсы",
+    "banquet_halls": "Банкетные залы",
+    "conference_rooms": "Конференц-залы",
+    "beauty_salons": "Салоны красоты",
+    "workshops": "Мастерские",
+    "galleries": "Галереи",
+    "cinemas": "Кинотеатры",
+    "garages": "Гаражи",
+    "community_centers": "Community centers (фонды, организации)",
+    "special_events_etc": "Банкетные залы, поместья для свадеб и ДР",
+    "commercial_kitchens": "Сommercial kitchens"
   }
 }

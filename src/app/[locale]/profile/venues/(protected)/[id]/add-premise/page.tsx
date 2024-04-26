@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
+import { AddPremiseForm } from "./_form/form";
 import { getSession } from "@/auth.ts";
 import { ProfileSectionLayout } from "@/layout/page";
+import { createPremiseAction } from "@/lib/actions/premise";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
@@ -25,11 +27,14 @@ export default async function AddPremisePage({
     return redirect("/profile/venues");
   }
 
-  const t = await getTranslations("profile.venues.add_premise");
+  const t = await getTranslations("profile.premises.add");
 
   return (
     <ProfileSectionLayout>
       <h1 className="heading">{t("heading")}</h1>
+      <section>
+        <AddPremiseForm createPremiseAction={createPremiseAction} />
+      </section>
     </ProfileSectionLayout>
   );
 }
