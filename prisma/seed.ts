@@ -10,8 +10,11 @@ import {
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
+import { amenitiesTags } from "@/lib/shared/config/amenities";
+import { premiseTypes } from "@/lib/shared/config/premise-types";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
+const allAmenities = Object.values(amenitiesTags).flat();
 const prisma = new PrismaClient();
 
 const cafeMapboxIds = [
@@ -147,24 +150,15 @@ const premiseSchemaWithVenueConnection = (
     name: name,
     slug: slugifyPremiseNameWithCounter(name),
     description: faker.lorem.paragraph(5),
+    room: `${faker.number.int({ min: 1, max: 1000 })}`,
+    floor: `${faker.number.int({ min: 0, max: 128 })}`,
+    type: faker.helpers.arrayElement(premiseTypes),
+    capacity: faker.number.int({ min: 3, max: 200 }),
     area: faker.number.float({ min: 15, max: 100, fractionDigits: 1 }),
-    amenities: faker.helpers.arrayElements(
-      [
-        "Wi-FI",
-        "Экран проекционный",
-        "Микрофон",
-        "Колонки",
-        "Маркеры",
-        "Флипчарт",
-        "Wi-FI",
-        "Экран проекционный",
-        "Микрофон",
-        "Колонки",
-        "Маркеры",
-        "Флипчарт",
-      ],
-      { min: 3, max: 12 },
-    ),
+    amenities: faker.helpers.arrayElements(allAmenities, {
+      min: 5,
+      max: allAmenities.length,
+    }),
     direction: faker.lorem.paragraph(5),
     rules: faker.lorem.paragraph(5),
     bookingCancelTerm: faker.lorem.paragraph(5),
