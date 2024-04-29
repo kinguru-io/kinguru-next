@@ -21,3 +21,4 @@ tsconfig.tsbuildinfo
 /.next/
 /.gitattributes
 /.projenrc.ts
+/projenrc
