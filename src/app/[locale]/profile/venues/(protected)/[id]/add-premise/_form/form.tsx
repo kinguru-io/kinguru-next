@@ -42,6 +42,9 @@ export function AddPremiseForm({
   const methods = useForm<CreatePremiseSchema>({
     mode: "onChange",
     resolver: zodResolver(createPremiseSchema),
+    defaultValues: {
+      amenities: getDefaultFormAmenities(),
+    },
   });
 
   const formSubmitted = async (payload: CreatePremiseSchema) => {
