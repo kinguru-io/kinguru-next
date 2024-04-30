@@ -1,5 +1,6 @@
 import { cva } from "~/styled-system/css";
 import { styled } from "~/styled-system/jsx";
+import type { StyledVariantProps } from "~/styled-system/types";
 
 export const tagStyles = cva({
   base: {
@@ -11,6 +12,10 @@ export const tagStyles = cva({
     variant: {
       primary: {
         bg: "primary",
+        color: "neutral.1",
+      },
+      primaryLighter: {
+        bg: "primary.active",
         color: "neutral.1",
       },
       secondary: {
@@ -64,3 +69,4 @@ export const tagStyles = cva({
 });
 
 export const Tag = styled("span", tagStyles);
+export type TagVariantProps = StyledVariantProps<typeof Tag>;
