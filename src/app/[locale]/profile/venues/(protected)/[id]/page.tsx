@@ -40,6 +40,7 @@ export default async function ProfileVenuePage({
             fontSize="8px" // for the plus icon to be smaller
             href={`/profile/venues/${id}/add-premise?venueId=${id}`}
             borderRadius="27px"
+            minHeight="225px"
           />
         </Grid>
       </section>
