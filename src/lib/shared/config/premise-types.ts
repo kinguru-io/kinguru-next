@@ -1,4 +1,6 @@
-export const premiseTypes: Array<keyof IntlMessages["premise_types"]> = [
+export type PremiseType = keyof IntlMessages["premise_types"];
+
+export const premiseTypes: Array<PremiseType> = [
   "dance_halls",
   "gyms",
   "photo_studios",

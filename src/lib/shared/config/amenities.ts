@@ -4,7 +4,7 @@ export type AmenityGroup = Exclude<
   keyof IntlMessages["amenities"],
   `${string}_group`
 >;
-type Amenity = NestedKeyOf<IntlMessages["amenities"][AmenityGroup]>;
+export type Amenity = NestedKeyOf<IntlMessages["amenities"][AmenityGroup]>;
 
 /**
  * @description Amenities tags are formed exactly from the translation shape. See `/public/locales/[locale]/common.json`:
