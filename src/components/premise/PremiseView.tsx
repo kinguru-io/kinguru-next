@@ -18,9 +18,18 @@ import {
 import { priceFormatter } from "@/lib/utils";
 import { Link, type Locale } from "@/navigation";
 import prisma from "@/server/prisma";
+import { AspectRatio } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
-export async function PremiseView({ id }: { id: string }) {
+export async function PremiseView({
+  id,
+  href,
+  linkLabel,
+}: {
+  id: string;
+  href?: string;
+  linkLabel?: string;
+}) {
   const t = await getTranslations("premise");
   const locale = useLocale() as Locale;
   const premise = await prisma.premise.findUnique({
@@ -44,7 +53,7 @@ export async function PremiseView({ id }: { id: string }) {
     notFound();
   }
 
-  // looking for the minimal price beetwen all working hours
+  // looking for the minimal price between all working hours
   const {
     _min: { priceForHour },
   } = await prisma.premisePricing.aggregate({
@@ -80,10 +89,14 @@ export async function PremiseView({ id }: { id: string }) {
           <PremiseDescription>{description}</PremiseDescription>
         </PremiseTextContent>
         <Link
-          className={button({ variant: "outline", size: "md" })}
-          href={`/premises/${slug}`}
+          className={button({
+            // TODO add button variants to props in case anything other is needed
+            variant: linkLabel ? "solid" : "outline",
+            size: "md",
+          })}
+          href={href || `/premises/${slug}`}
         >
-          {t("more")}
+          {linkLabel || t("more")}
         </Link>
       </PremiseContent>
       <PremiseSlider>
@@ -91,7 +104,9 @@ export async function PremiseView({ id }: { id: string }) {
           {resources.map((item) => {
             return (
               <SliderItem key={item.id}>
-                <Image src={item.url} width={391} height={220} alt="" />
+                <AspectRatio ratio={16 / 9}>
+                  <Image src={item.url} width={391} height={220} alt="" />
+                </AspectRatio>
               </SliderItem>
             );
           })}

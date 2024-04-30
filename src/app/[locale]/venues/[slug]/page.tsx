@@ -9,7 +9,7 @@ import { VenueMainInfoLayout, VenueMapLayout } from "@/layout/block";
 import prisma from "@/server/prisma";
 
 import { css } from "~/styled-system/css";
-import { AspectRatio, Box, Container } from "~/styled-system/jsx";
+import { AspectRatio, Container } from "~/styled-system/jsx";
 
 export default async function VenuePage({
   params: { slug },
@@ -37,7 +37,8 @@ export default async function VenuePage({
     <>
       <VenueMainInfoLayout bgImageSrc={image}>
         <h1 className={css({ textAlign: "center" })}>{name}</h1>
-        <Box
+        <AspectRatio
+          ratio={16 / 9}
           maxWidth="820px"
           marginInline="auto"
           marginBlock="30px 60px"
@@ -50,7 +51,7 @@ export default async function VenuePage({
             width={820}
             height={461}
           />
-        </Box>
+        </AspectRatio>
         <Description
           description={description}
           showLessLabel={t("show_less")}
