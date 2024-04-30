@@ -1,10 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { Premise } from "@prisma/client";
 import { useTranslations } from "next-intl";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AmenitySelector } from "./AmenitySelector";
+import { BookingCancelTermsRadioGroup } from "./BookingCancelTermsRadioGroup";
+import { OpenHoursSelector } from "./OpenHoursSelector";
 import { PremiseImageSelector } from "./PremiseImageSelector";
 import { SubmitOrNextTabButton } from "./SubmitOrNextTabButton";
 import { TabInnerSection } from "@/components/profile/profile-premise";
@@ -22,35 +25,27 @@ import {
   type CreatePremiseAction,
   type CreatePremiseSchema,
 } from "@/lib/actions/premise";
+import { amenitiesTags } from "@/lib/shared/config/amenities";
 import { premiseTypes } from "@/lib/shared/config/premise-types";
+import { useRouter } from "@/navigation";
+import { css } from "~/styled-system/css";
 import { HStack, Stack } from "~/styled-system/jsx";
 
 export function AddPremiseForm({
   createPremiseAction,
+  venueId,
 }: {
   createPremiseAction: CreatePremiseAction;
+  venueId: string;
 }) {
+  const { push } = useRouter();
   const methods = useForm<CreatePremiseSchema>({
     mode: "onChange",
     resolver: zodResolver(createPremiseSchema),
-    defaultValues: {
-      name: "New premise",
-      description: "New description",
-      room: "1",
-      floor: "1",
-      resources: Array.from({ length: 11 }, () => ({
-        url: "",
-      })).concat({
-        url: "https://kinguru-storage.s3.pl-waw.scw.cloud/undefined_key/48f27243-8da7-40b2-ab38-1526da5bb29f.png",
-      }),
-      type: "dance_halls",
-      capacity: 1,
-      area: 31.5,
-    },
   });
 
   const formSubmitted = async (payload: CreatePremiseSchema) => {
-    const response = await createPremiseAction(payload);
+    const response = await createPremiseAction(payload, venueId);
     if (!response) return;
 
     const { status, message } = response;
@@ -61,6 +56,7 @@ export function AddPremiseForm({
 
     if (status === "success") {
       toast.success(message);
+      push(`/profile/venues/${venueId}`);
     }
   };
 
@@ -147,7 +143,7 @@ function AddPremiseFormInner() {
                 {t("fields.area_prefix")}
                 <Input
                   type="number"
-                  inputMode="numeric"
+                  inputMode="decimal"
                   step="0.01"
                   placeholder="1000"
                   {...register("area", { min: 0, valueAsNumber: true })}
@@ -175,6 +171,51 @@ function AddPremiseFormInner() {
             <AmenitySelector />
           </TabInnerSection>
         </>
+      ),
+    },
+    {
+      label: t("groups.open_hours"),
+      content: (
+        <>
+          <TabInnerSection>
+            <h3>{t("fields.open_hours")}</h3>
+            <p
+              className={css({
+                whiteSpace: "pre-line",
+                "& > b": { fontSize: "18px" },
+              })}
+            >
+              {t.rich("fields.open_hours_example", {
+                bold: (chunks) => <b>{chunks}</b>,
+              })}
+            </p>
+          </TabInnerSection>
+          <OpenHoursSelector />
+        </>
+      ),
+    },
+    {
+      label: t("groups.rules"),
+      content: (
+        <TabInnerSection>
+          <h3>{t("fields.rules")}</h3>
+          <p className="subheading">{t("fields.rules_tip")}</p>
+          <Textarea
+            placeholder={t("fields.rules_placeholder")}
+            rows={12}
+            {...register("rules")}
+          />
+        </TabInnerSection>
+      ),
+    },
+    {
+      label: t("groups.booking_cancel_terms"),
+      content: (
+        <TabInnerSection>
+          <h3>{t("fields.booking_cancel_terms")}</h3>
+          <p className="subheading">{t("fields.booking_cancel_terms_tip")}</p>
+          <BookingCancelTermsRadioGroup />
+        </TabInnerSection>
       ),
     },
   ];
@@ -206,4 +247,16 @@ function PremiseTypeSelectOptions() {
       {t(premiseType)}
     </option>
   ));
+}
+
+function getDefaultFormAmenities(premiseAmenities?: Premise["amenities"]) {
+  return Object.values(amenitiesTags)
+    .flat()
+    .reduce(
+      (defaultAmenities, amenity) => {
+        defaultAmenities[amenity] = premiseAmenities?.includes(amenity);
+        return defaultAmenities;
+      },
+      {} as CreatePremiseSchema["amenities"],
+    );
 }

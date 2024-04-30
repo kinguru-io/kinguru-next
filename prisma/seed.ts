@@ -11,6 +11,7 @@ import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { addHours } from "date-fns";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
 import { amenitiesTags } from "@/lib/shared/config/amenities";
+import { bookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
 import { premiseTypes } from "@/lib/shared/config/premise-types";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
@@ -161,7 +162,7 @@ const premiseSchemaWithVenueConnection = (
     }),
     direction: faker.lorem.paragraph(5),
     rules: faker.lorem.paragraph(5),
-    bookingCancelTerm: faker.lorem.paragraph(5),
+    bookingCancelTerm: faker.helpers.arrayElement(bookingCancelTerms),
     venue: {
       connect: {
         id: venueId,

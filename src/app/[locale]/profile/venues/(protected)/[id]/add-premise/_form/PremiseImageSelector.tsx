@@ -1,5 +1,3 @@
-"use client";
-
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { RxCross1 } from "react-icons/rx";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";

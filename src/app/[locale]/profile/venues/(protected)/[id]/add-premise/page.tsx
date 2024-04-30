@@ -33,7 +33,10 @@ export default async function AddPremisePage({
     <ProfileSectionLayout>
       <h1 className="heading">{t("heading")}</h1>
       <section>
-        <AddPremiseForm createPremiseAction={createPremiseAction} />
+        <AddPremiseForm
+          createPremiseAction={createPremiseAction}
+          venueId={venue.id}
+        />
       </section>
     </ProfileSectionLayout>
   );
