@@ -43,6 +43,7 @@ export function AddPremiseForm({
     mode: "onChange",
     resolver: zodResolver(createPremiseSchema),
     defaultValues: {
+      resources: Array.from({ length: 12 }, () => ({ url: "" })),
       amenities: getDefaultFormAmenities(),
     },
   });

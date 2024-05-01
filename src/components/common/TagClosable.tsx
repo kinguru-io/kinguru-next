@@ -1,28 +1,21 @@
-import { addHours } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
 import { RxCross1 } from "react-icons/rx";
-import { Button, Card, Tag, type TimeSlotInfo } from "@/components/uikit";
+import { Button, Card, Tag } from "@/components/uikit";
 import type { TagVariantProps } from "@/components/uikit/Tag";
-import { priceFormatter } from "@/lib/utils";
 import { Divider } from "~/styled-system/jsx";
 
-type TimeSlotCardProps = TimeSlotInfo & {
-  endTime?: Date;
-  timeZone?: string;
+export function TagClosable({
+  variant = "secondaryLighter",
+  content,
+  helper,
+  onClick,
+  buttonLabel,
+}: {
   onClick: () => void;
   buttonLabel: string;
   variant?: TagVariantProps["variant"];
-};
-
-export function TimeSlotCard({
-  time,
-  endTime = addHours(time, 1),
-  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
-  price,
-  onClick,
-  buttonLabel,
-  variant = "secondaryLighter",
-}: TimeSlotCardProps) {
+  content: React.ReactNode;
+  helper?: React.ReactNode;
+}) {
   return (
     <Card
       flexShrink="0"
@@ -33,13 +26,13 @@ export function TimeSlotCard({
       textStyle="body.2"
       css={{
         "& > .button": { fontSize: "9px" },
-        "& > [data-price]": { marginInline: "auto" },
+        "& > [data-helper]": { marginInline: "auto" },
       }}
     >
       <Tag size="sm" variant={variant} css={{ flexShrink: "0" }}>
-        {`${formatInTimeZone(time, timeZone, "H:mm")} - ${formatInTimeZone(endTime, timeZone, "H:mm")}`}
+        {content}
       </Tag>
-      <span data-price>{priceFormatter.format(price)}</span>
+      <span data-helper>{helper}</span>
       <Divider orientation="vertical" color="neutral.2" borderStyle="dashed" />
       <Button
         variant="ghost"

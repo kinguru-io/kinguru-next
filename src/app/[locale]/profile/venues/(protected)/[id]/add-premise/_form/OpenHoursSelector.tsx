@@ -1,11 +1,13 @@
 import { compareAsc } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { useLocale, useTranslations } from "next-intl";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AddOpenHoursRecord } from "./AddOpenHoursRecord";
-import { TimeSlotCard } from "@/components/calendar/TimeSlotCard";
+import { TagClosable } from "@/components/common";
 import { Button } from "@/components/uikit";
 import type { CreatePremiseSchema } from "@/lib/actions/premise";
+import { priceFormatter } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import { DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
 import { Grid, GridItem, HStack, InlineBox, Stack } from "~/styled-system/jsx";
@@ -78,18 +80,20 @@ export function OpenHoursSelector() {
               {t("open_hours_operating_mode")}
             </InlineBox>
             {fieldsPerDay.length > 0 ? (
-              fieldsPerDay.map((field) => (
-                <TimeSlotCard
-                  key={field.id}
-                  time={new Date(field.startTime)}
-                  endTime={new Date(field.endTime)}
-                  timeZone="UTC"
-                  price={field.price}
-                  buttonLabel="X"
-                  variant="primaryLighter"
-                  onClick={() => remove(field.index)}
-                />
-              ))
+              fieldsPerDay.map((field) => {
+                const tagContent = `${formatInTimeZone(field.startTime, "UTC", "H:mm")} - ${formatInTimeZone(field.endTime, "UTC", "H:mm")}`;
+
+                return (
+                  <TagClosable
+                    key={field.id}
+                    content={tagContent}
+                    helper={priceFormatter.format(field.price)}
+                    buttonLabel="X"
+                    variant="primaryLighter"
+                    onClick={() => remove(field.index)}
+                  />
+                );
+              })
             ) : (
               <InlineBox
                 textStyle="body.3"

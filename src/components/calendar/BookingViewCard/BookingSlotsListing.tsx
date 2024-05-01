@@ -1,13 +1,15 @@
 "use client";
 
+import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { LiaCalendar } from "react-icons/lia";
 import {
   type TimeSlotInfoExtended,
   useBookingView,
 } from "../BookingViewContext";
-import { TimeSlotCard } from "../TimeSlotCard";
+import { TagClosable } from "@/components/common";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
+import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
 import { Grid, HStack } from "~/styled-system/jsx";
 
@@ -35,12 +37,16 @@ export function BookingSlotsListing({
             </HStack>
             {slots &&
               slots.map((timeSlotInfo) => (
-                <TimeSlotCard
+                <TagClosable
                   key={"booking-view" + timeSlotInfo.time.toISOString()}
-                  timeZone={timeZone}
+                  content={formatInTimeZone(
+                    timeSlotInfo.time,
+                    timeZone,
+                    "H:mm",
+                  )}
+                  helper={priceFormatter.format(timeSlotInfo.price)}
                   onClick={() => toggleSlot(timeSlotInfo)}
                   buttonLabel={t("remove_timeslot_btn")}
-                  {...timeSlotInfo}
                 />
               ))}
           </Grid>

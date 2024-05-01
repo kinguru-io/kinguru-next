@@ -70,7 +70,10 @@ export default async function VenuePage({
 
       <VenueMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
-        <AspectRatio ratio={16 / 9} marginBlockStart="50px">
+        <AspectRatio
+          ratio={{ base: 4 / 3, md: 16 / 9 }}
+          marginBlockStart="50px"
+        >
           <SingleMarkerMap
             mapboxId={venue.locationMapboxId}
             image={image}
