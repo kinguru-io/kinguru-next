@@ -1,16 +1,16 @@
-import { Tag } from "../uikit";
+import { getTranslations } from "next-intl/server";
+import { Tag } from "@/components/uikit";
+import type { Amenity } from "@/lib/shared/config/amenities";
 import { Flex } from "~/styled-system/jsx";
 
-type PremiseAmenitiesProps = {
-  amenities: string[];
-};
+export async function PremiseAmenities({ amenities }: { amenities: string[] }) {
+  const t = await getTranslations("amenities");
 
-export function PremiseAmenities({ amenities }: PremiseAmenitiesProps) {
   return (
     <Flex gap="23px" wrap="wrap">
-      {amenities.map((elem, i) => (
-        <Tag variant="additional" size="md" key={i}>
-          {elem}
+      {amenities.map((amenity) => (
+        <Tag key={amenity} variant="additional" size="md">
+          {t(amenity as Amenity)}
         </Tag>
       ))}
     </Flex>

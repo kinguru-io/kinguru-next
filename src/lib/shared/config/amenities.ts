@@ -1,14 +1,6 @@
-import type { NestedKeyOf } from "next-intl";
+export type AmenityGroup = keyof IntlMessages["amenities"]["group"];
+export type Amenity = keyof Omit<IntlMessages["amenities"], "group">;
 
-export type AmenityGroup = Exclude<
-  keyof IntlMessages["amenities"],
-  `${string}_group`
->;
-export type Amenity = NestedKeyOf<IntlMessages["amenities"][AmenityGroup]>;
-
-/**
- * @description Amenities tags are formed exactly from the translation shape. See `/public/locales/[locale]/common.json`:
- */
 export const amenitiesTags: Record<AmenityGroup, Amenity[]> = {
   internet: ["wifi"],
   food: [

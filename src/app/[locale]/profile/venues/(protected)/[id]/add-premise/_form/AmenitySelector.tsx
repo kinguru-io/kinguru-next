@@ -1,4 +1,4 @@
-import { useTranslations, type MessageKeys } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 import { Checkbox } from "@/components/uikit";
 import type { CreatePremiseSchema } from "@/lib/actions/premise";
@@ -24,7 +24,7 @@ export function AmenitySelector() {
         },
       }}
     >
-      <h5>{t(`${amenityGroup}_group`)}</h5>
+      <h5>{t(`group.${amenityGroup}`)}</h5>
       <Flex
         flexWrap="wrap"
         justifyContent="space-between"
@@ -40,7 +40,7 @@ export function AmenitySelector() {
         {amenitiesTags[amenityGroup].map((amenity) => (
           <Checkbox
             key={amenity}
-            label={t(`${amenityGroup}.${amenity}` as MessageKeys<never, never>)}
+            label={t(amenity)}
             {...register(`amenities.${amenity}`)}
           />
         ))}
