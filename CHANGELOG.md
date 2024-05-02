@@ -1,3 +1,10 @@
+# [0.42.0](https://github.com/kinguru-io/kinguru-next/compare/v0.41.0...v0.42.0) (2024-05-02)
+
+
+### Features
+
+* **KINGU-107:** profile page. venues section part ([#560](https://github.com/kinguru-io/kinguru-next/issues/560)) ([32cd48f](https://github.com/kinguru-io/kinguru-next/commit/32cd48fb17e48fcd44d031b9d2df2978034e4a5b))
+
 # [0.41.0](https://github.com/kinguru-io/kinguru-next/compare/v0.40.2...v0.41.0) (2024-04-22)
 
 
