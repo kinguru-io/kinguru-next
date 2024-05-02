@@ -28,7 +28,7 @@ export const checkboxSlot = defineSlotRecipe({
       borderRadius: "3px",
       transition: "colors",
       backgroundColor: "neutral.5",
-      _peerFocus: {
+      _peerFocusVisible: {
         borderColor: "focus",
       },
       _peerInvalid: {
@@ -74,8 +74,8 @@ export const checkboxSlot = defineSlotRecipe({
     size: {
       default: {
         checkbox: {
-          width: "1.4em",
-          height: "1.4em",
+          width: "1.125em",
+          height: "1.125em",
         },
       },
     },

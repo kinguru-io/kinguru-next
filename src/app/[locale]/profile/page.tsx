@@ -33,7 +33,7 @@ export default async function ProfilePage() {
           className={button({ size: "md", variant: "solid" })}
           href="/profile/venues/add"
         >
-          {t("add_premise_btn_label")}
+          {t("add_venue_btn_label")}
         </Link>
       </VStack>
       <Grid gridTemplateColumns="6" gridTemplateRows="3" gap="1.25rem">

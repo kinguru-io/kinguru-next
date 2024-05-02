@@ -1,0 +1,1 @@
+export { TabInnerSection } from "./TabInnerSection";

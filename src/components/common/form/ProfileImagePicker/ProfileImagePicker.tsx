@@ -18,7 +18,7 @@ import {
 import { css } from "~/styled-system/css";
 import { avatar } from "~/styled-system/recipes";
 
-type PlaceholderVariant = "circle" | "rectangle";
+type PlaceholderVariant = "circle" | "rectangle" | "rectangle-smaller";
 
 type ProfileImagePickerProps = InputFileProps & {
   imageSrc?: string;
@@ -161,6 +161,27 @@ const placeholderVariantMap: Record<
       />
     ),
   },
+  "rectangle-smaller": {
+    wrapperClassName: css({
+      display: "grid",
+      placeItems: "center",
+      layerStyle: "dashedWrapper",
+      overflow: "hidden",
+      position: "relative",
+      width: "240px",
+      height: "135px",
+    }),
+    imageParams: { width: 240, height: 135 },
+    noImageContent: (
+      <RxCross1
+        className={css({
+          color: "primary",
+          rotate: "45deg",
+          fontSize: "4.25em",
+        })}
+      />
+    ),
+  },
 };
 
 function PickerPlaceholder({
@@ -196,8 +217,12 @@ function PickerPlaceholder({
             placeItems: "center",
             width: "full",
             height: "full",
-            bgColor:
-              placeholderVariant === "rectangle" ? "neutral.5" : "neutral.4",
+            // TODO Needs refactor
+            bgColor: ["rectangle", "rectangle-smaller"].includes(
+              placeholderVariant,
+            )
+              ? "neutral.5"
+              : "neutral.4",
             color: isPending ? "transparent" : "neutral.2",
             textStyle: "body.2",
           })}

@@ -13,7 +13,11 @@ export function PremiseCard({ children }: PremiseCardProps) {
 }
 
 export function PremiseDescription({ children }: PremiseCardProps) {
-  return <p className={css({ textStyle: "body.3" })}>{children}</p>;
+  return (
+    <p className={css({ textStyle: "body.3", marginInlineEnd: "14%" })}>
+      {children}
+    </p>
+  );
 }
 
 export function PremiseSlider({ children }: PremiseCardProps) {
@@ -36,7 +40,12 @@ export function PremiseContent({ children }: PremiseCardProps) {
 
 export function PremiseTitleSize({ children }: PremiseCardProps) {
   return (
-    <span className={css({ textStyle: "body.2", marginInline: "10px" })}>
+    <span
+      className={css({
+        textStyle: "body.2",
+        whiteSpace: "nowrap",
+      })}
+    >
       {children}
     </span>
   );
@@ -47,7 +56,11 @@ export function PremiseTitle({ children }: PremiseCardProps) {
 }
 
 export function PremiseTitleWrapper({ children }: PremiseCardProps) {
-  return <Flex align="baseline">{children}</Flex>;
+  return (
+    <Flex gap="10px" alignItems="baseline" flexWrap="wrap">
+      {children}
+    </Flex>
+  );
 }
 
 export function PremiseTextContent({ children }: PremiseCardProps) {

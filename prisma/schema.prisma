@@ -410,7 +410,11 @@ model Premise {
   venueId           String
   name              String
   description       String
+  room              String?
+  floor             String?
+  type              String?            @default("")
   area              Float?
+  capacity          Int?
   slots             PremiseSlot[]
   openHours         PremiseOpenHours[]
   resources         PremiseResource[]

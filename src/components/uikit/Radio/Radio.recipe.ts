@@ -29,7 +29,7 @@ export const radioSlot = defineSlotRecipe({
       borderRadius: "full",
       transition: "colors",
       backgroundColor: "neutral.5",
-      _peerFocus: {
+      _peerFocusVisible: {
         borderColor: "focus",
       },
       _peerInvalid: {
