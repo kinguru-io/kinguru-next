@@ -66,7 +66,8 @@ export function AccordionItemToggle(
       },
     },
     styleProps,
-    cssProp,
+    // TODO leave just `cssProp` once `@pandacss/dev` is updated from 0.38.0
+    ...(Array.isArray(cssProp) ? cssProp : [cssProp]),
   );
 
   return (
