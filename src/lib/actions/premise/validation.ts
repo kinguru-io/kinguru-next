@@ -17,6 +17,11 @@ export const openHoursSchema = z
     path: ["startTime"],
   });
 
+export const discountsSchema = z.object({
+  duration: z.number().step(1).min(1).max(23),
+  discountPercentage: z.number().step(0.1).min(0.1).max(100),
+});
+
 export const createPremiseSchema = z.object({
   name: z.string(),
   description: z.string(),
@@ -44,6 +49,12 @@ export const createPremiseSchema = z.object({
     ),
   rules: z.string(),
   openHours: z.array(openHoursSchema).min(1),
+  discounts: z
+    .array(discountsSchema)
+    .refine(
+      (fields) =>
+        new Set(fields.map(({ duration }) => duration)).size === fields.length,
+    ),
   bookingCancelTerm: z
     .custom<BookingCancelTerm>()
     .refine((type) => z.string().safeParse(type).success),
@@ -51,3 +62,4 @@ export const createPremiseSchema = z.object({
 
 export type OpenHoursSchema = z.infer<typeof openHoursSchema>;
 export type CreatePremiseSchema = z.infer<typeof createPremiseSchema>;
+export type DiscountsSchema = z.infer<typeof discountsSchema>;

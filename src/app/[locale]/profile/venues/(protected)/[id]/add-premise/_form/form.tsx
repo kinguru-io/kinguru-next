@@ -7,6 +7,7 @@ import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AmenitySelector } from "./AmenitySelector";
 import { BookingCancelTermsRadioGroup } from "./BookingCancelTermsRadioGroup";
+import { DiscountsSelector } from "./DiscountsSelector";
 import { OpenHoursSelector } from "./OpenHoursSelector";
 import { PremiseImageSelector } from "./PremiseImageSelector";
 import { SubmitOrNextTabButton } from "./SubmitOrNextTabButton";
@@ -45,8 +46,11 @@ export function AddPremiseForm({
     defaultValues: {
       resources: Array.from({ length: 12 }, () => ({ url: "" })),
       amenities: getDefaultFormAmenities(),
+      discounts: [],
     },
   });
+
+  console.log(methods.getValues());
 
   const formSubmitted = async (payload: CreatePremiseSchema) => {
     const response = await createPremiseAction(payload, venueId);
@@ -195,6 +199,7 @@ function AddPremiseFormInner() {
             </p>
           </TabInnerSection>
           <OpenHoursSelector />
+          <DiscountsSelector />
         </>
       ),
     },

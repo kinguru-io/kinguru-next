@@ -51,7 +51,7 @@ export async function createPremiseAction(
     };
   }
 
-  const { openHours, amenities, resources, ...restPremiseInput } =
+  const { openHours, amenities, resources, discounts, ...restPremiseInput } =
     parseResult.data;
 
   const potentialSlug = slugify(restPremiseInput.name);
@@ -83,6 +83,11 @@ export async function createPremiseAction(
               openTime: startTime,
               closeTime: endTime,
             })),
+          },
+        },
+        discounts: {
+          createMany: {
+            data: discounts,
           },
         },
       },
