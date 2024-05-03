@@ -4,11 +4,9 @@ import {
   $Enums,
   PrismaClient,
   type Organization,
-  type PremiseOpenHours,
   type Prisma,
 } from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
-import { addHours } from "date-fns";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
 import { amenitiesTags } from "@/lib/shared/config/amenities";
 import { bookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
@@ -77,66 +75,34 @@ const venueSchema = (
   };
 };
 
-const premiseOpenHoursPricingSchema = ({
-  id,
-  openTime,
-  closeTime,
-}: PremiseOpenHours) =>
-  Math.random() > 0.5
-    ? ([
-        {
-          premiseOpenHours: { connect: { id } },
-          priceForHour: faker.number.float({
-            min: 0,
-            max: 30,
-            fractionDigits: 2,
-          }),
-          startTime: openTime,
-          endTime: closeTime,
-        },
-      ] as Prisma.PremisePricingCreateInput[])
-    : ([
-        {
-          premiseOpenHours: { connect: { id } },
-          priceForHour: faker.number.float({
-            min: 0,
-            max: 30,
-            fractionDigits: 2,
-          }),
-          startTime: openTime,
-          endTime: addHours(openTime, 2),
-        },
-        {
-          premiseOpenHours: { connect: { id } },
-          priceForHour: faker.number.float({
-            min: 0,
-            max: 30,
-            fractionDigits: 2,
-          }),
-          startTime: addHours(openTime, 2),
-          endTime: closeTime,
-        },
-      ] as Prisma.PremisePricingCreateInput[]);
-
 const premiseOpenHoursSchema = (idx: number) => {
+  const price = faker.number.float({
+    min: 2,
+    max: 200,
+    fractionDigits: 2,
+  });
+
   return Math.random() > 0.5
     ? ([
         {
           day: dayOfTheWeek[idx],
-          openTime: "2020-01-01T06:00:00.000Z",
-          closeTime: "2020-01-01T20:00:00.000Z",
+          openTime: "1970-01-01T06:00:00.000Z",
+          closeTime: "1970-01-01T20:00:00.000Z",
+          price,
         },
       ] as Prisma.PremiseOpenHoursCreateInput[])
     : ([
         {
           day: dayOfTheWeek[idx],
-          openTime: "2020-01-01T06:00:00.000Z",
-          closeTime: "2020-01-01T11:00:00.000Z",
+          openTime: "1970-01-01T06:00:00.000Z",
+          closeTime: "1970-01-01T11:00:00.000Z",
+          price,
         },
         {
           day: dayOfTheWeek[idx],
-          openTime: "2020-01-01T12:00:00.000Z",
-          closeTime: "2020-01-01T20:00:00.000Z",
+          openTime: "1970-01-01T12:00:00.000Z",
+          closeTime: "1970-01-01T20:00:00.000Z",
+          price: price + faker.number.int({ min: 10, max: 100 }),
         },
       ] as Prisma.PremiseOpenHoursCreateInput[]);
 };
@@ -484,31 +450,6 @@ async function main() {
     await Promise.allSettled(
       // Premises creation and connection with Venues
       premisesData.map((data) => prisma.premise.create({ data })),
-    )
-  ).forEach((result) => {
-    if (result.status === "rejected") {
-      console.log(result);
-    }
-  });
-
-  const allOpenHours = await prisma.premiseOpenHours.findMany();
-  console.log(`* ${allOpenHours.length} PremiseOpenHours records found`);
-
-  const pricingData = allOpenHours
-    .reduce((acc, openHoursRecord) => {
-      acc.push(premiseOpenHoursPricingSchema(openHoursRecord));
-
-      return acc;
-    }, [] as Prisma.PremisePricingCreateInput[][])
-    .flat();
-  console.log(
-    `* ${pricingData.length} PremisePricing records should be generated`,
-  );
-
-  (
-    await Promise.allSettled(
-      // PremisePricing creation and connection with PremiseOpenHours
-      pricingData.map((data) => prisma.premisePricing.create({ data })),
     )
   ).forEach((result) => {
     if (result.status === "rejected") {

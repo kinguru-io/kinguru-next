@@ -1,42 +1,24 @@
-import type {
-  PremiseOpenHours,
-  PremisePricing,
-  PremiseSlot,
-} from "@prisma/client";
-import { eachHourOfInterval, isWithinInterval, subHours } from "date-fns";
+import type { PremiseOpenHours, PremiseSlot } from "@prisma/client";
+import { eachHourOfInterval, subHours } from "date-fns";
 
 export function generateTimeSlots({
   day,
   openTime,
   closeTime,
-  pricing,
-}: PremiseOpenHours & { pricing: PremisePricing[] }) {
+  price,
+}: PremiseOpenHours) {
   const rawTimeSlots = eachHourOfInterval({
     start: openTime,
     end: subHours(closeTime, 1), // do not count the last hour as an interval
   });
 
-  const timeSlots = rawTimeSlots.map((time) => ({
-    time,
-    price: chooseTimeSlotPrice(time, pricing),
-  }));
-
   return {
     day,
-    timeSlots,
+    timeSlots: rawTimeSlots.map((time) => ({
+      time,
+      price,
+    })),
   };
-}
-
-export function chooseTimeSlotPrice(time: Date, priceList: PremisePricing[]) {
-  const { priceForHour } =
-    priceList.find(({ startTime: pricingStartTime, endTime: pricingEndTime }) =>
-      isWithinInterval(time, {
-        start: pricingStartTime,
-        end: pricingEndTime,
-      }),
-    ) || {};
-
-  return priceForHour || 0;
 }
 
 export function prepareBookedSlots(slots: PremiseSlot[]) {
