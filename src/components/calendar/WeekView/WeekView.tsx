@@ -40,7 +40,7 @@ export function WeekView({
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
 }) {
-  const timeZone = useSearchBoxTimeZone();
+  const timeZone = useSearchBoxTimeZone() || "UTC";
   const {
     originDate,
     changeMonth,

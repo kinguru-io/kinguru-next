@@ -5,6 +5,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AddOpenHoursRecord } from "./AddOpenHoursRecord";
 import { TagClosable } from "@/components/common";
+import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Button } from "@/components/uikit";
 import type { CreatePremiseSchema } from "@/lib/actions/premise";
 import { priceFormatter } from "@/lib/utils";
@@ -23,6 +24,7 @@ export function OpenHoursSelector() {
     control,
     name: "openHours",
   });
+  const timeZone = useSearchBoxTimeZone() || "UTC";
 
   const groupedFields = groupBy(
     fields
@@ -81,12 +83,17 @@ export function OpenHoursSelector() {
             </InlineBox>
             {fieldsPerDay.length > 0 ? (
               fieldsPerDay.map((field) => {
-                const tagContent = `${formatInTimeZone(field.startTime, "UTC", "H:mm")} - ${formatInTimeZone(field.endTime, "UTC", "H:mm")}`;
+                const start = formatInTimeZone(
+                  field.startTime,
+                  timeZone,
+                  "H:mm",
+                );
+                const end = formatInTimeZone(field.endTime, timeZone, "H:mm");
 
                 return (
                   <TagClosable
                     key={field.id}
-                    content={tagContent}
+                    content={`${start} - ${end}`}
                     helper={priceFormatter.format(field.price)}
                     buttonLabel="X"
                     variant="primaryLighter"

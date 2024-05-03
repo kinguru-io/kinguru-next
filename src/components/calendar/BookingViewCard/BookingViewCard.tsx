@@ -54,7 +54,7 @@ export function BookingViewCard({
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
-  const timeZone = useSearchBoxTimeZone();
+  const timeZone = useSearchBoxTimeZone() || "UTC";
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots } = useBookingView();
   const { open, setOpen, setClosable } = useModal();

@@ -36,6 +36,7 @@ export default async function AddPremisePage({
         <AddPremiseForm
           createPremiseAction={createPremiseAction}
           venueId={venue.id}
+          mapboxId={venue.locationMapboxId}
         />
       </section>
     </ProfileSectionLayout>

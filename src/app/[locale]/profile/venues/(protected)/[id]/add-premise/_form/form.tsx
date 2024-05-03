@@ -11,6 +11,7 @@ import { DiscountsSelector } from "./DiscountsSelector";
 import { OpenHoursSelector } from "./OpenHoursSelector";
 import { PremiseImageSelector } from "./PremiseImageSelector";
 import { SubmitOrNextTabButton } from "./SubmitOrNextTabButton";
+import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { TabInnerSection } from "@/components/profile/profile-premise";
 import {
   Tab,
@@ -35,9 +36,11 @@ import { HStack, Stack } from "~/styled-system/jsx";
 export function AddPremiseForm({
   createPremiseAction,
   venueId,
+  mapboxId,
 }: {
   createPremiseAction: CreatePremiseAction;
   venueId: string;
+  mapboxId: string;
 }) {
   const { push } = useRouter();
   const methods = useForm<CreatePremiseSchema>({
@@ -49,8 +52,6 @@ export function AddPremiseForm({
       discounts: [],
     },
   });
-
-  console.log(methods.getValues());
 
   const formSubmitted = async (payload: CreatePremiseSchema) => {
     const response = await createPremiseAction(payload, venueId);
@@ -76,14 +77,14 @@ export function AddPremiseForm({
         onSubmit={methods.handleSubmit(formSubmitted)}
       >
         <TabsWrapper>
-          <AddPremiseFormInner />
+          <AddPremiseFormInner mapboxId={mapboxId} />
         </TabsWrapper>
       </form>
     </FormProvider>
   );
 }
 
-function AddPremiseFormInner() {
+function AddPremiseFormInner({ mapboxId }: { mapboxId: string }) {
   const { register } = useFormContext<CreatePremiseSchema>();
   const t = useTranslations("profile.premises.add");
 
@@ -198,7 +199,9 @@ function AddPremiseFormInner() {
               })}
             </p>
           </TabInnerSection>
-          <OpenHoursSelector />
+          <MapboxSearchBoxResponseProvider mapboxId={mapboxId}>
+            <OpenHoursSelector />
+          </MapboxSearchBoxResponseProvider>
           <DiscountsSelector />
         </>
       ),

@@ -23,6 +23,8 @@ export function BookingSlotsListing({
   const { toggleSlot } = useBookingView();
   const timeZone = useSearchBoxTimeZone();
 
+  if (!timeZone) return null;
+
   return (
     <Grid
       alignSelf="stretch"
