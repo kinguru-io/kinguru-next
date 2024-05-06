@@ -22,6 +22,7 @@ export function Button({
   icon = null,
   variant,
   iconPosition = "left",
+  centered,
   colorPalette,
   size,
   children,
@@ -29,7 +30,10 @@ export function Button({
   disabled = false,
   ...restProps
 }: ButtonProps) {
-  const className = cx(css({ colorPalette }), button({ variant, size }));
+  const className = cx(
+    css({ colorPalette }),
+    button({ variant, size, centered }),
+  );
 
   return (
     <button
