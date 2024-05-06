@@ -18,11 +18,13 @@ type EssentialItemParts = {
 export function AccordionGroup<T extends EssentialItemParts>({
   items,
   btnLabel,
+  allowAll = false,
 }: {
   items: T[];
   btnLabel: string;
+  allowAll?: boolean;
 }) {
-  const [activeIdx, setActiveIdx] = useState<number>(0);
+  const [activeIdx, setActiveIdx] = useState<number>(allowAll ? -1 : 0);
   const doneIdxList = useRef<Set<number>>(new Set());
 
   const nextItemChosen = (nextIdx: number) => {
@@ -31,7 +33,7 @@ export function AccordionGroup<T extends EssentialItemParts>({
   };
 
   const checkboxChanged = (idx: number) => {
-    if (!doneIdxList.current.has(idx)) return;
+    if (!allowAll && !doneIdxList.current.has(idx)) return;
 
     setActiveIdx((prevIdx) => (prevIdx === idx ? -1 : idx));
   };
@@ -40,7 +42,8 @@ export function AccordionGroup<T extends EssentialItemParts>({
     <Accordion>
       {items.map(({ title, content, isNextBtnDisabled = false }, index) => {
         const isActive = activeIdx === index;
-        const isDisabledYet = !isActive && !doneIdxList.current.has(index);
+        const isDisabledYet =
+          !allowAll && !isActive && !doneIdxList.current.has(index);
 
         return (
           <AccordionItem
@@ -65,12 +68,15 @@ export function AccordionGroup<T extends EssentialItemParts>({
             </AccordionItemToggle>
             <AccordionItemContent>
               {content}
-              <Button
-                onClick={() => nextItemChosen(index + 1)}
-                disabled={isNextBtnDisabled || isDisabledYet || !isActive}
-              >
-                {btnLabel}
-              </Button>
+              {!allowAll && (
+                <Button
+                  type="button"
+                  onClick={() => nextItemChosen(index + 1)}
+                  disabled={isNextBtnDisabled || isDisabledYet || !isActive}
+                >
+                  {btnLabel}
+                </Button>
+              )}
             </AccordionItemContent>
           </AccordionItem>
         );

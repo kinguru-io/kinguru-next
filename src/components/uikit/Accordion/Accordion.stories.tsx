@@ -41,5 +41,8 @@ export const Basic = {
 };
 
 export const ControlledGroup = {
-  render: () => <AccordionGroup items={features} btnLabel="Next" />,
+  args: { allowAll: false },
+  render: ({ allowAll }: { allowAll: boolean }) => (
+    <AccordionGroup items={features} btnLabel="Next" allowAll={allowAll} />
+  ),
 };
