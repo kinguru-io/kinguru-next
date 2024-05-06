@@ -4,12 +4,12 @@ import slugify from "@sindresorhus/slugify";
 import { revalidatePath } from "next/cache";
 import { createPremiseSchema, type CreatePremiseSchema } from "./validation";
 import { getSession } from "@/auth";
-import type { AuthFormState } from "@/lib/utils";
+import type { FormActionState } from "@/lib/utils";
 
 export async function createPremiseAction(
   payload: CreatePremiseSchema,
   venueId: string,
-): Promise<AuthFormState> {
+): Promise<FormActionState> {
   const session = await getSession();
 
   if (!session || !session.user || !session.user.email) {

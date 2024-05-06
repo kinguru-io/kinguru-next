@@ -1,12 +1,12 @@
 import { NestedKeyOf } from "next-intl";
 import { ZodEffects, ZodType, ZodTypeDef } from "zod";
 
-export type AuthFormResponse = {
+export type FormActionResponse = {
   status: "success" | "error";
   message: string;
 };
-export type AuthFormState = AuthFormResponse | null;
-export type ActionType<T> = (data: T) => Promise<AuthFormState>;
+export type FormActionState = FormActionResponse | null;
+export type ActionType<T> = (data: T) => Promise<FormActionState>;
 
 export type ActionResponse<
   T,
@@ -24,9 +24,9 @@ export function createFormAction<
   T extends ZodEffects<ZodType<O, ZodTypeDef, I>>,
 >(action: ActionType<O>, schema: T) {
   return async function processAction(
-    _prevState: AuthFormState,
+    _prevState: FormActionState,
     data: FormData,
-  ): Promise<AuthFormState> {
+  ): Promise<FormActionState> {
     const parsedSchema = schema.safeParse(data);
     if (!parsedSchema.success) {
       return {

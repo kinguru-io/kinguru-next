@@ -7,7 +7,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useForm, type UseFormRegister } from "react-hook-form";
 import { Button, Input } from "@/components/uikit";
 import { type ResetPasswordAction } from "@/lib/actions";
-import { AuthFormState } from "@/lib/utils";
+import { FormActionState } from "@/lib/utils";
 import { resetFormSchema, type ResetFormInput } from "@/lib/validations";
 import { VStack } from "~/styled-system/jsx";
 
@@ -24,7 +24,7 @@ export function ResetForm({
     resolver: zodResolver(resetFormSchema),
   });
   // TODO `state` might be used for notifications?
-  const [state, formAction] = useFormState<AuthFormState, FormData>(
+  const [state, formAction] = useFormState<FormActionState, FormData>(
     resetPassword,
     null,
   );

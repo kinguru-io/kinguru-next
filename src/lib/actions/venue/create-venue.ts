@@ -3,14 +3,14 @@
 import slugify from "@sindresorhus/slugify";
 import { type CreateVenueInput, createVenueSchema } from "./validation";
 import { getSession } from "@/auth";
-import { type AuthFormState, createFormAction } from "@/lib/utils";
+import { type FormActionState, createFormAction } from "@/lib/utils";
 import { redirect } from "@/navigation";
 import prisma from "@/server/prisma";
 
 async function createVenue({
   manager,
   ...restVenueInput
-}: CreateVenueInput): Promise<AuthFormState> {
+}: CreateVenueInput): Promise<FormActionState> {
   const session = await getSession();
 
   if (!session || !session.user || !session.user.email) {
@@ -35,7 +35,7 @@ async function createVenue({
   });
 
   const slug = foundVenue
-    ? `${potentialSlug}-${organization.name}`
+    ? `${slugify(organization.name)}-${potentialSlug}`
     : potentialSlug;
 
   const createdVenue = await prisma.venue.create({

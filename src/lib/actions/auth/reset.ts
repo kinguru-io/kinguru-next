@@ -1,8 +1,8 @@
-import { AuthFormState, createFormAction } from "@/lib/utils";
+import { FormActionState, createFormAction } from "@/lib/utils";
 import { ResetFormInput, resetFormSchema } from "@/lib/validations";
 
 const resetPasswordHandler =
-  async ({}: ResetFormInput): Promise<AuthFormState> => {
+  async ({}: ResetFormInput): Promise<FormActionState> => {
     return null;
   };
 
