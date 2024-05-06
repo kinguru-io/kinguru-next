@@ -5,6 +5,7 @@ import type { StyledVariantProps } from "~/styled-system/types";
 export const tagStyles = cva({
   base: {
     display: "inline-block",
+    flexShrink: "0",
     borderRadius: "6px",
     fontWeight: "bold",
   },
@@ -30,9 +31,10 @@ export const tagStyles = cva({
         bg: "neutral.5",
         color: "neutral.1",
       },
-      additional: {
+      ellipse: {
         bg: "neutral.3",
         color: "neutral.1",
+        borderRadius: "full",
       },
     },
     size: {
@@ -59,6 +61,13 @@ export const tagStyles = cva({
         lineHeight: "38px",
         px: "13px",
         py: "6px",
+      },
+      ellipse: {
+        fontSize: "20px",
+        fontWeight: "normal",
+        lineHeight: "22.5px",
+        px: "19px",
+        py: "8.5px",
       },
     },
   },
