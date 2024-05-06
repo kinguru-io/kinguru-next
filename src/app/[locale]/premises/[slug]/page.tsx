@@ -19,6 +19,7 @@ import {
   Modal,
   Slider,
   SliderItem,
+  Tag,
 } from "@/components/uikit";
 import {
   PremiseAccordionLayout,
@@ -31,15 +32,23 @@ import {
   createPremiseSlotsIntent,
   revalidatePremisePage,
 } from "@/lib/actions/booking";
+import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 import { groupBy } from "@/lib/utils/array";
 import {
   prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
 import { prepareDiscountRangeMap } from "@/lib/utils/price";
-import type { Locale } from "@/navigation";
+import { Link, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { AspectRatio, Box, Grid, VStack } from "~/styled-system/jsx";
+import {
+  AspectRatio,
+  Box,
+  Grid,
+  InlineBox,
+  Stack,
+  VStack,
+} from "~/styled-system/jsx";
 
 export default async function PremisePage({
   params: { slug, locale },
@@ -75,6 +84,7 @@ export default async function PremisePage({
   }
 
   const t = await getTranslations("premise");
+  const translationsBCT = await getTranslations("booking_cancel_terms");
   const {
     name,
     venue,
@@ -84,8 +94,9 @@ export default async function PremisePage({
     openHours,
     rules,
     amenities,
-    direction,
     bookingCancelTerm,
+    area,
+    capacity,
   } = premise;
 
   const minPrice = openHours.at(0)?.price;
@@ -101,9 +112,34 @@ export default async function PremisePage({
       title: t("amenities_and_facilities"),
       description: <PremiseAmenities amenities={amenities} />,
     },
-    { title: t("booking_cancellation_terms"), description: bookingCancelTerm },
+    {
+      title: t("area_and_capacity"),
+      description: (
+        <Stack alignItems="flex-start" gap="15px">
+          <Tag variant="secondaryLighter" size="md" fontWeight="normal">
+            {t("area", { area })}
+          </Tag>
+          <Tag variant="secondaryLighter" size="md" fontWeight="normal">
+            {t("capacity", { capacity })}
+          </Tag>
+        </Stack>
+      ),
+    },
+    {
+      title: t("booking_cancellation_terms"),
+      description: bookingCancelTerm && (
+        <Stack gap="20px" color="neutral.0">
+          <InlineBox textStyle="body.1">
+            {translationsBCT(bookingCancelTerm as BookingCancelTerm)}
+          </InlineBox>
+          <p>
+            {translationsBCT(`${bookingCancelTerm as BookingCancelTerm}_desc`)}
+          </p>
+        </Stack>
+      ),
+    },
     { title: t("premise_rules"), description: rules },
-    { title: t("how_to_get_there"), description: direction },
+    { title: t("how_to_get_there"), description: venue.locationTutorial },
   ];
 
   return (
@@ -111,7 +147,18 @@ export default async function PremisePage({
       <PremiseMainInfoLayout>
         <VStack gap="0">
           <h1>{name}</h1>
-          <span className={css({ textStyle: "body.1" })}>{venue.name}</span>
+          <Link
+            className={css({
+              textStyle: "body.1",
+              textDecoration: {
+                _hover: "underline",
+                _focus: "underline",
+              },
+            })}
+            href={`/venues/${venue.slug}`}
+          >
+            {venue.name}
+          </Link>
         </VStack>
         <PremiseAttributes price={minPrice} />
         <Box w="100%">
@@ -119,7 +166,7 @@ export default async function PremisePage({
             {resources.map((resource) => (
               <SliderItem key={resource.id}>
                 <AspectRatio ratio={16 / 9}>
-                  <Image src={resource.url} fill alt={name} />
+                  <Image src={resource.url} fill alt="" />
                 </AspectRatio>
               </SliderItem>
             ))}
@@ -132,7 +179,7 @@ export default async function PremisePage({
         <Accordion>
           {accordionItems.map(({ title, description }) => (
             <AccordionItem key={title}>
-              <AccordionItemToggle textStyle="heading.3">
+              <AccordionItemToggle textStyle="heading.3" fontWeight="bold">
                 {title}
               </AccordionItemToggle>
               <AccordionItemContent>{description}</AccordionItemContent>
@@ -144,7 +191,10 @@ export default async function PremisePage({
       <PremiseCalendarLayout>
         <h2>{t("calendar_heading")}</h2>
         <BookingViewProvider>
-          <Grid gap="20px" gridTemplateColumns="1fr 260px">
+          <Grid
+            gap="20px"
+            gridTemplateColumns={{ base: "1fr", md: "1fr 260px" }}
+          >
             <WeekView
               locale={locale}
               nowDate={nowDate}
@@ -180,7 +230,10 @@ export default async function PremisePage({
 
       <PremiseMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
-        <AspectRatio ratio={16 / 9} marginBlockStart="50px">
+        <AspectRatio
+          ratio={{ base: 4 / 3, md: 16 / 9 }}
+          marginBlockStart="50px"
+        >
           <SingleMarkerMap
             mapboxId={venue.locationMapboxId}
             image={venue.image}
