@@ -263,14 +263,15 @@
       "email_placeholder": "Введите email",
       "password_placeholder": "Пароль",
       "password_confirm_placeholder": "Повтор пароля",
-      "submit": "Зарегестрироваться",
-      "helper": "Нажимая на кнопку \"Зарегестрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
+      "submit": "Зарегистрироваться",
+      "helper": "Нажимая на кнопку \"Зарегистрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
     }
   },
   "form": {
     "common": {
       "upload_photo": "Загрузите фото",
-      "uploaded_photo": "Загруженное фото"
+      "uploaded_photo": "Загруженное фото",
+      "updated": "Данные обновлены"
     }
   },
   "organization": {
@@ -307,6 +308,9 @@
     "hide": "Скрыть",
     "map": "Карта",
     "amenities_and_facilities": "Оснащения и удобства",
+    "area_and_capacity": "Площадь и вместительность",
+    "area": "Площадь: {area} м²",
+    "capacity": "Вместительность: {capacity}",
     "booking_cancellation_terms": "Условия отмены бронирования",
     "premise_rules": "Правила зала",
     "how_to_get_there": "Как добраться",
@@ -394,6 +398,7 @@
     "calendar_label": "Чуть позже здесь будет отображаться календарь ваших площадок",
     "venues": {
       "heading": "Мои площадки",
+      "premises_heading": "Залы",
       "no_premises": "Площадка неактивна. Необходимо добавить зал.",
       "no_organization_warn_msg": "Чтобы получить возможность регистрировать площадки и залы, заполните свои реквизиты в разделе \"Личный профиль\".",
       "no_organization_link_label": "Перейти в раздел \"Личный профиль\"",
@@ -401,6 +406,7 @@
       "add": {
         "heading": "Регистрация новой площадки",
         "submit_btn_label": "Сохранить площадку",
+        "edit_btn_label": "Сохранить изменения",
         "next_group_btn_label": "Далее",
         "groups": {
           "main_info": "Основная информация",
@@ -441,6 +447,7 @@
       "add": {
         "heading": "Регистрация зала",
         "submit_btn_label": "Сохранить зал",
+        "edit_btn_label": "Сохранить изменения",
         "next_group_btn_label": "Далее",
         "groups": {
           "main_info": "Основное",
@@ -452,6 +459,7 @@
         },
         "fields": {
           "name_and_description": "Название и описание",
+          "name_and_description_editing": "Описание",
           "name_placeholder": "Ведите название зала",
           "description_placeholder": "Расскажите о зале",
           "address": "Адрес",

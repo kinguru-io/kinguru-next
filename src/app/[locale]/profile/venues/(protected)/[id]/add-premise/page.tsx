@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { AddPremiseForm } from "./_form/form";
+import { AddPremiseForm } from "./form";
 import { getSession } from "@/auth.ts";
 import { ProfileSectionLayout } from "@/layout/page";
 import { createPremiseAction } from "@/lib/actions/premise";

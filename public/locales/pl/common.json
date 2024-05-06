@@ -244,6 +244,13 @@
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
   },
+  "form": {
+    "common": {
+      "upload_photo": "Upload a photo",
+      "uploaded_photo": "Uploaded photo",
+      "updated": "Updated"
+    }
+  },
   "event": {
     "future_event_page": {
       "event_guests": "Guests of the event:",
@@ -297,6 +304,9 @@
     "hide": "Hide",
     "map": "Map",
     "amenities_and_facilities": "Amenities and facilities",
+    "area_and_capacity": "Area and capacity",
+    "area": "Area: {area} m²",
+    "capacity": "Capacity: {capacity}",
     "booking_cancellation_terms": "Booking cancellation terms",
     "premise_rules": "Premise rules",
     "how_to_get_there": "How to get there",
@@ -339,6 +349,7 @@
     "edit_premise_link_label": "Edit",
     "venues": {
       "heading": "My venues",
+      "premises_heading": "Premises",
       "no_premises": "Venue is inactive. A hall needs to be added.",
       "no_organization_warn_msg": "To be able to add venues and halls, please fill out your personal information in the \"Profile\" section.",
       "no_organization_link_label": "Go to the section \"Profile\"",
@@ -346,6 +357,7 @@
       "add": {
         "heading": "Register a new venue",
         "submit_btn_label": "Save venue",
+        "edit_btn_label": "Save changes",
         "next_group_btn_label": "Next",
         "groups": {
           "main_info": "Main information",
@@ -386,6 +398,7 @@
       "add": {
         "heading": "Premise registration",
         "submit_btn_label": "Save premise",
+        "edit_btn_label": "Save changes",
         "next_group_btn_label": "Next",
         "groups": {
           "main_info": "Main",
@@ -397,6 +410,7 @@
         },
         "fields": {
           "name_and_description": "Name and description",
+          "name_and_description_editing": "Description",
           "name_placeholder": "Enter premise name",
           "description_placeholder": "Tell us about the premise",
           "address": "Address",

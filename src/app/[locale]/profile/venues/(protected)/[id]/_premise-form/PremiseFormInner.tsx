@@ -1,10 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { Premise } from "@prisma/client";
 import { useTranslations } from "next-intl";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import toast from "react-hot-toast";
+import { useFormContext } from "react-hook-form";
 import { AmenitySelector } from "./AmenitySelector";
 import { BookingCancelTermsRadioGroup } from "./BookingCancelTermsRadioGroup";
 import { DiscountsSelector } from "./DiscountsSelector";
@@ -21,70 +18,20 @@ import {
   Textarea,
   Input,
   Select,
+  Button,
 } from "@/components/uikit";
-import {
-  createPremiseSchema,
-  type CreatePremiseAction,
-  type CreatePremiseSchema,
-} from "@/lib/actions/premise";
-import { amenitiesTags } from "@/lib/shared/config/amenities";
+import type { CreatePremiseSchema } from "@/lib/actions/premise";
 import { premiseTypes } from "@/lib/shared/config/premise-types";
-import { useRouter } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { HStack, Stack } from "~/styled-system/jsx";
 
-export function AddPremiseForm({
-  createPremiseAction,
-  venueId,
+export function PremiseFormInner({
   mapboxId,
+  isEditing = false,
 }: {
-  createPremiseAction: CreatePremiseAction;
-  venueId: string;
   mapboxId: string;
+  isEditing?: boolean;
 }) {
-  const { push } = useRouter();
-  const methods = useForm<CreatePremiseSchema>({
-    mode: "onChange",
-    resolver: zodResolver(createPremiseSchema),
-    defaultValues: {
-      resources: Array.from({ length: 12 }, () => ({ url: "" })),
-      amenities: getDefaultFormAmenities(),
-      discounts: [],
-    },
-  });
-
-  const formSubmitted = async (payload: CreatePremiseSchema) => {
-    const response = await createPremiseAction(payload, venueId);
-    if (!response) return;
-
-    const { status, message } = response;
-
-    if (status === "error") {
-      toast.error(message);
-    }
-
-    if (status === "success") {
-      toast.success(message);
-      push(`/profile/venues/${venueId}`);
-    }
-  };
-
-  return (
-    <FormProvider {...methods}>
-      <form
-        // `action` prop isn't working as expected since <TabsContent /> is rendering only the current tab
-        // The form is really complex, so `display: none` isn't used. Btw `next/submit` button requires JS too
-        onSubmit={methods.handleSubmit(formSubmitted)}
-      >
-        <TabsWrapper>
-          <AddPremiseFormInner mapboxId={mapboxId} />
-        </TabsWrapper>
-      </form>
-    </FormProvider>
-  );
-}
-
-function AddPremiseFormInner({ mapboxId }: { mapboxId: string }) {
   const { register } = useFormContext<CreatePremiseSchema>();
   const t = useTranslations("profile.premises.add");
 
@@ -94,9 +41,17 @@ function AddPremiseFormInner({ mapboxId }: { mapboxId: string }) {
       content: (
         <>
           <TabInnerSection>
-            <h3>{t("fields.name_and_description")}</h3>
+            <h3>
+              {t(
+                isEditing
+                  ? "fields.name_and_description_editing"
+                  : "fields.name_and_description",
+              )}
+            </h3>
             <Input
               placeholder={t("fields.name_placeholder")}
+              readOnly={isEditing}
+              hidden={isEditing}
               {...register("name")}
             />
             <Textarea
@@ -233,7 +188,7 @@ function AddPremiseFormInner({ mapboxId }: { mapboxId: string }) {
   ];
 
   return (
-    <>
+    <TabsWrapper>
       <TabList overflowX="auto" marginBlockEnd="50px">
         {tabs.map(({ label }, i) => (
           <Tab key={label} tabIdx={i} label={label} variant="line-below" />
@@ -246,8 +201,33 @@ function AddPremiseFormInner({ mapboxId }: { mapboxId: string }) {
         gap="40px"
         marginBlockEnd="40px"
       />
-      <SubmitOrNextTabButton lastTabIdx={tabs.length - 1} />
-    </>
+      {isEditing ? (
+        <SaveChangesButton />
+      ) : (
+        <SubmitOrNextTabButton lastTabIdx={tabs.length - 1} />
+      )}
+    </TabsWrapper>
+  );
+}
+
+function SaveChangesButton() {
+  const {
+    formState: { isValid, dirtyFields, isSubmitting },
+  } = useFormContext();
+  const t = useTranslations("profile.premises.add");
+
+  const isSubmitEnabled = isValid && Object.values(dirtyFields).some(Boolean);
+
+  return (
+    <Button
+      type="submit"
+      size="md"
+      isLoading={isSubmitting}
+      disabled={!isSubmitEnabled}
+      centered
+    >
+      {t("edit_btn_label")}
+    </Button>
   );
 }
 
@@ -259,16 +239,4 @@ function PremiseTypeSelectOptions() {
       {t(premiseType)}
     </option>
   ));
-}
-
-function getDefaultFormAmenities(premiseAmenities?: Premise["amenities"]) {
-  return Object.values(amenitiesTags)
-    .flat()
-    .reduce(
-      (defaultAmenities, amenity) => {
-        defaultAmenities[amenity] = premiseAmenities?.includes(amenity);
-        return defaultAmenities;
-      },
-      {} as CreatePremiseSchema["amenities"],
-    );
 }
