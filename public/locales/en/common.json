@@ -536,6 +536,9 @@
     "profile_completeness_label": "Information about profile completeness will be displayed here shortly",
     "calendar_label": "Your premises calendar will be displayed here shortly",
     "edit_premise_link_label": "Edit",
+    "notifications": {
+      "heading": "My notifications"
+    },
     "venues": {
       "heading": "My venues",
       "premises_heading": "Premises",

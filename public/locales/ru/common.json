@@ -396,6 +396,9 @@
     "notifications_heading": "Уведомления",
     "profile_completeness_label": "Чуть позже здесь будет отображаться информация о наполненности профиля",
     "calendar_label": "Чуть позже здесь будет отображаться календарь ваших площадок",
+    "notifications": {
+      "heading": "Мои уведомления"
+    },
     "venues": {
       "heading": "Мои площадки",
       "premises_heading": "Залы",
