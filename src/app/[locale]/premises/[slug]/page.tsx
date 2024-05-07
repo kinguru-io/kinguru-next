@@ -63,8 +63,8 @@ export default async function PremisePage({
         },
       },
       openHours: {
-        include: {
-          pricing: true,
+        orderBy: {
+          price: "asc",
         },
       },
     },
@@ -88,17 +88,8 @@ export default async function PremisePage({
     bookingCancelTerm,
   } = premise;
 
-  const pricingRecords = await prisma.premisePricing.findMany({
-    where: {
-      premiseOpenHoursId: {
-        in: openHours.map((openHoursRecord) => openHoursRecord.id),
-      },
-    },
-    orderBy: { priceForHour: "asc" },
-    select: { priceForHour: true },
-  });
-  const minPrice = pricingRecords.at(0)?.priceForHour;
-  const maxPrice = pricingRecords.at(-1)?.priceForHour;
+  const minPrice = openHours.at(0)?.price;
+  const maxPrice = openHours.at(-1)?.price;
 
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);

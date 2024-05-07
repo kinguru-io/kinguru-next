@@ -435,6 +435,7 @@ model PremiseOpenHours {
   day       DayOfTheWeek
   openTime  DateTime
   closeTime DateTime
+  price     Float /// @description currently is used for 1 hour intervals
 }
 
 model PremiseSlot {
@@ -451,6 +452,7 @@ model PremiseSlot {
   createdAt       DateTime           @default(now())
 }
 
+/// @deprecated pricing is set directly to the `PremiseOpenHours` model
 model PremisePricing {
   id                 String           @id @default(cuid())
   premiseOpenHours   PremiseOpenHours @relation(fields: [premiseOpenHoursId], references: [id])

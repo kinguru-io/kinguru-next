@@ -78,10 +78,11 @@ export async function createPremiseAction(
         },
         openHours: {
           createMany: {
-            data: openHours.map(({ day, startTime, endTime }) => ({
+            data: openHours.map(({ day, startTime, endTime, price }) => ({
               day,
               openTime: startTime,
               closeTime: endTime,
+              price,
             })),
           },
         },
@@ -91,28 +92,6 @@ export async function createPremiseAction(
           },
         },
       },
-      include: { openHours: true },
-    });
-
-    await prisma.premisePricing.createMany({
-      data: createdPremise.openHours.map(({ id, openTime, closeTime }) => {
-        const priceForHour = openHours.find(
-          ({ startTime, endTime }) =>
-            new Date(startTime).getTime() === openTime.getTime() &&
-            new Date(endTime).getTime() === closeTime.getTime(),
-        )?.price;
-
-        if (!priceForHour && priceForHour !== 0) {
-          throw new Error("Unexpected error occurred");
-        }
-
-        return {
-          premiseOpenHoursId: id,
-          startTime: openTime,
-          endTime: closeTime,
-          priceForHour,
-        };
-      }),
     });
 
     revalidatePath("[locale]/profile/venues/(protected)/[id]", "page");
