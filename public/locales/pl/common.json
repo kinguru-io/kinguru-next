@@ -310,7 +310,9 @@
     "booking_cancellation_terms": "Booking cancellation terms",
     "premise_rules": "Premise rules",
     "how_to_get_there": "How to get there",
-    "calendar_heading": "Premise calendar"
+    "calendar_heading": "Premise calendar",
+    "show_more": "More",
+    "show_less": "Less"
   },
   "discount_info": {
     "card_heading": "There are discounts*",

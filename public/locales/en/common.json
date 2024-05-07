@@ -452,7 +452,9 @@
     "capacity": "Capacity: {capacity}",
     "premise_rules": "Premise rules",
     "how_to_get_there": "How to get there",
-    "calendar_heading": "Premise calendar"
+    "calendar_heading": "Premise calendar",
+    "show_more": "More",
+    "show_less": "Less"
   },
   "event": {
     "future_event_page": {

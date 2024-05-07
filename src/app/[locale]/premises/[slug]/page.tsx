@@ -8,6 +8,7 @@ import {
   DiscountViewCard,
   PriceDescription,
 } from "@/components/calendar";
+import { Description } from "@/components/common/description";
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
@@ -116,10 +117,10 @@ export default async function PremisePage({
       title: t("area_and_capacity"),
       description: (
         <Stack alignItems="flex-start" gap="15px">
-          <Tag variant="secondaryLighter" size="md" fontWeight="normal">
+          <Tag variant="secondaryLighter" size="md" fontWeight="500">
             {t("area", { area })}
           </Tag>
-          <Tag variant="secondaryLighter" size="md" fontWeight="normal">
+          <Tag variant="secondaryLighter" size="md" fontWeight="500">
             {t("capacity", { capacity })}
           </Tag>
         </Stack>
@@ -161,7 +162,7 @@ export default async function PremisePage({
           </Link>
         </VStack>
         <PremiseAttributes price={minPrice} />
-        <Box w="100%">
+        <Box width="full" marginBlockEnd="30px">
           <Slider slidesCount={resources.length}>
             {resources.map((resource) => (
               <SliderItem key={resource.id}>
@@ -172,14 +173,18 @@ export default async function PremisePage({
             ))}
           </Slider>
         </Box>
-        {/* TODO insert dropdown component */}
+        <Description
+          description={premise.description}
+          showMoreLabel={t("show_more")}
+          showLessLabel={t("show_less")}
+        />
       </PremiseMainInfoLayout>
 
       <PremiseAccordionLayout>
         <Accordion>
           {accordionItems.map(({ title, description }) => (
             <AccordionItem key={title}>
-              <AccordionItemToggle textStyle="heading.3" fontWeight="bold">
+              <AccordionItemToggle textStyle="heading.6" fontWeight="bold">
                 {title}
               </AccordionItemToggle>
               <AccordionItemContent>{description}</AccordionItemContent>

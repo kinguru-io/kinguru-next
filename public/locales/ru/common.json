@@ -314,7 +314,9 @@
     "booking_cancellation_terms": "Условия отмены бронирования",
     "premise_rules": "Правила зала",
     "how_to_get_there": "Как добраться",
-    "calendar_heading": "Календарь площадки"
+    "calendar_heading": "Календарь площадки",
+    "show_more": "Подробнее",
+    "show_less": "Свернуть"
   },
   "event": {
     "future_event_page": {
