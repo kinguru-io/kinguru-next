@@ -42,9 +42,8 @@ export async function PremiseView({
         },
       },
       openHours: {
-        select: {
-          id: true,
-        },
+        select: { price: true },
+        orderBy: { price: "asc" },
       },
     },
   });
@@ -53,21 +52,8 @@ export async function PremiseView({
     notFound();
   }
 
-  // looking for the minimal price between all working hours
-  const {
-    _min: { priceForHour },
-  } = await prisma.premisePricing.aggregate({
-    where: {
-      premiseOpenHoursId: {
-        in: premise.openHours.map((dayInfo) => dayInfo.id),
-      },
-    },
-    _min: {
-      priceForHour: true,
-    },
-  });
-
-  const { slug, name, description, area, resources } = premise;
+  const { slug, name, description, area, resources, openHours } = premise;
+  const minPrice = openHours.at(0)?.price;
 
   return (
     <PremiseCard>
@@ -111,9 +97,9 @@ export async function PremiseView({
             );
           })}
         </Slider>
-        {priceForHour && (
+        {minPrice && (
           <PremisePrice>
-            {t("from", { price: priceFormatter.format(priceForHour) })}
+            {t("from", { price: priceFormatter.format(minPrice) })}
           </PremisePrice>
         )}
       </PremiseSlider>

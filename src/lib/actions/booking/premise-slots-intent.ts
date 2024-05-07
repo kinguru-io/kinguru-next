@@ -161,11 +161,7 @@ async function validatePaymentIntentData({
           duration: "asc",
         },
       },
-      openHours: {
-        include: {
-          pricing: true,
-        },
-      },
+      openHours: true,
     },
   });
 
