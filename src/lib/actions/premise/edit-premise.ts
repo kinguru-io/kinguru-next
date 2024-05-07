@@ -67,8 +67,14 @@ export async function editPremiseAction(
       message: "Premise doesn't associated with your venue",
     };
   }
-  const { openHours, discounts, resources, amenities, ...restPremiseInput } =
-    parseResult.data;
+  const {
+    name: _unused,
+    openHours,
+    discounts,
+    resources,
+    amenities,
+    ...restPremiseInput
+  } = parseResult.data;
 
   const requests = [
     prisma.premise.update({
