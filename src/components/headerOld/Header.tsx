@@ -57,7 +57,7 @@ export function Header() {
 
 function HeaderNav({ children }: { children: React.ReactNode }) {
   const t = useTranslations("navbar");
-  const navigationId = useId();
+  const navigationId = useId() + "navigation";
 
   return (
     <GridItem gridArea="nav">
