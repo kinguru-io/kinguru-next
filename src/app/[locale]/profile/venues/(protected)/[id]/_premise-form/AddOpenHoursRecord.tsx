@@ -42,7 +42,9 @@ export function AddOpenHoursRecord({
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
-  const timeZone = useSearchBoxTimeZone() || "UTC";
+  const timeZone = useSearchBoxTimeZone();
+
+  if (!timeZone) return null;
 
   const addButtonClicked = (input: OpenHoursSchema) => {
     const openHours = getValues("openHours");
@@ -54,7 +56,6 @@ export function AddOpenHoursRecord({
         areIntervalsOverlapping(
           { start: input.startTime, end: input.endTime },
           { start: field.startTime, end: field.endTime },
-          { inclusive: true },
         ),
     );
     if (foundRecord) {
