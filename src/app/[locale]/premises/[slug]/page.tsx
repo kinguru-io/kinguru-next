@@ -109,9 +109,6 @@ export default async function PremisePage({
     return borders;
   }, {} as AggregatedPrices);
 
-  console.log(aggregatedPrices);
-  console.log(openHours);
-
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
   const bookedSlots = prepareBookedSlots(slots);
