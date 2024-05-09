@@ -44,9 +44,9 @@ export function AddOpenHoursRecord({
   });
   const timeZone = useSearchBoxTimeZone();
 
-  if (!timeZone) return null;
-
   const addButtonClicked = (input: OpenHoursSchema) => {
+    if (!timeZone) return;
+
     const openHours = getValues("openHours");
 
     // checking if a user is trying to add the range intersecting with an existing range
@@ -113,7 +113,7 @@ export function AddOpenHoursRecord({
         type="button"
         variant="outline"
         onClick={handleSubmit(addButtonClicked)}
-        disabled={!isValid}
+        disabled={!isValid || !timeZone}
       >
         {t("open_hours_add_record_btn_label")}
       </Button>
@@ -138,7 +138,7 @@ function TimeSelectOptions({
 
   if (!timeZone) return null;
 
-  return Array.from({ length: 24 }, (_, i) => {
+  return Array.from({ length: 25 }, (_, i) => {
     const date = new Date(0);
 
     // to avoid timezone offset issues and to leave consistency between all DB records

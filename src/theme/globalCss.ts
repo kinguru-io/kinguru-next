@@ -5,11 +5,12 @@ export const additionalGlobalCss = defineGlobalStyles({
   // TODO ? Consider adding conditional `textStyle: ["body.X"]`
   html: {
     fontSize: "16px",
-    height: "full",
-    minHeight: "full",
+    scrollBehavior: {
+      base: "smooth",
+      _motionReduce: "auto",
+    },
   },
   body: {
-    minHeight: "100vh",
     color: "neutral.1",
     lineHeight: "1.25",
   },
