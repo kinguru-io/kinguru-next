@@ -21,6 +21,7 @@ import {
   Slider,
   SliderItem,
   Tag,
+  type AggregatedPrices,
 } from "@/components/uikit";
 import {
   PremiseAccordionLayout,
@@ -62,21 +63,13 @@ export default async function PremisePage({
     include: {
       venue: true,
       resources: true,
-      discounts: {
-        orderBy: {
-          duration: "asc",
-        },
-      },
       slots: {
         where: {
           date: { gte: nowDate.toISOString() },
         },
       },
-      openHours: {
-        orderBy: {
-          price: "asc",
-        },
-      },
+      discounts: { orderBy: { duration: "asc" } },
+      openHours: { orderBy: { openTime: "asc" } },
     },
   });
 
@@ -100,8 +93,24 @@ export default async function PremisePage({
     capacity,
   } = premise;
 
-  const minPrice = openHours.at(0)?.price;
-  const maxPrice = openHours.at(-1)?.price;
+  const aggregatedPrices = openHours.reduce((borders, { price }) => {
+    if (borders.minPrice === undefined || borders.maxPrice === undefined) {
+      return { minPrice: price, maxPrice: price };
+    }
+
+    if (borders.minPrice >= price) {
+      borders.minPrice = price;
+    }
+
+    if (borders.maxPrice <= price) {
+      borders.maxPrice = price;
+    }
+
+    return borders;
+  }, {} as AggregatedPrices);
+
+  console.log(aggregatedPrices);
+  console.log(openHours);
 
   const timeSlots = openHours.map((record) => generateTimeSlots(record));
   const timeSlotsGroup = groupBy(timeSlots, ({ day }) => day);
@@ -161,7 +170,7 @@ export default async function PremisePage({
             {venue.name}
           </Link>
         </VStack>
-        <PremiseAttributes price={minPrice} />
+        <PremiseAttributes price={aggregatedPrices.minPrice} />
         <Box width="full" marginBlockEnd="30px">
           <Slider slidesCount={resources.length}>
             {resources.map((resource) => (
@@ -205,10 +214,7 @@ export default async function PremisePage({
               nowDate={nowDate}
               timeSlotsGroup={timeSlotsGroup}
               bookedSlots={bookedSlots}
-              aggregatedPrices={{
-                minPrice,
-                maxPrice,
-              }}
+              aggregatedPrices={aggregatedPrices}
             />
             <Grid
               gap="30px"
