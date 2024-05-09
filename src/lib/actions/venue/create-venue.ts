@@ -1,6 +1,7 @@
 "use server";
 
 import slugify from "@sindresorhus/slugify";
+import { revalidatePath } from "next/cache";
 import { type CreateVenueInput, createVenueSchema } from "./validation";
 import { getSession } from "@/auth";
 import { type FormActionState, createFormAction } from "@/lib/utils";
@@ -51,6 +52,7 @@ async function createVenue({
     },
   });
 
+  revalidatePath("[locale]/profile/venues/(protected)", "layout");
   redirect(`/profile/venues/created?venueId=${createdVenue.id}`);
 
   return null;

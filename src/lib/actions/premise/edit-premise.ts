@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import type { UseFormReturn } from "react-hook-form";
 import { prepareAmenityList } from "./prepare-amenity-list";
 import { createPremiseSchema, type CreatePremiseSchema } from "./validation";
@@ -131,6 +132,7 @@ export async function editPremiseAction(
   }
 
   await prisma.$transaction(requests);
+  revalidatePath(`[locale]/profile/venues/${venue.id}`, "page");
 
   return null;
 }

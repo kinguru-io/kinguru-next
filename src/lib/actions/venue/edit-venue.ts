@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { type CreateVenueInput, createVenueSchema } from "./validation";
 import { getSession } from "@/auth";
 import { type FormActionState, createFormAction } from "@/lib/utils";
@@ -52,6 +53,8 @@ async function editVenue({
     prisma.venue.update({ where: { id: venueId }, data: restVenueInput }),
     prisma.manager.update({ where: { id: managerId }, data: manager }),
   ]);
+
+  revalidatePath(`[locale]/profile/venues/${venue.id}`, "page");
 
   return {
     status: "success",
