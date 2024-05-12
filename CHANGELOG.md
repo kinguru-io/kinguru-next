@@ -1,3 +1,10 @@
+## [0.42.1](https://github.com/kinguru-io/kinguru-next/compare/v0.42.0...v0.42.1) (2024-05-12)
+
+
+### Bug Fixes
+
+* fixed mocking s3 url presigner ([#576](https://github.com/kinguru-io/kinguru-next/issues/576)) ([9d2c82d](https://github.com/kinguru-io/kinguru-next/commit/9d2c82dcb0aa215d62ec4ee0ea64eb42012822a1))
+
 # [0.42.0](https://github.com/kinguru-io/kinguru-next/compare/v0.41.0...v0.42.0) (2024-05-02)
 
 
