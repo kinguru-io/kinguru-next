@@ -1,8 +1,8 @@
 "use server";
 
-import { randomUUID } from "crypto";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { v4 as uuid } from "uuid";
 import { imageSchema } from "./validation";
 import { s3client } from "@/s3client";
 
@@ -16,7 +16,7 @@ export async function uploadProfileImage(
   const imageExtension = data.type.split("/").pop();
   const command = new PutObjectCommand({
     Bucket: process.env.S3_UPLOAD_BUCKET,
-    Key: `${groupKey}/${randomUUID()}.${imageExtension}`,
+    Key: `${groupKey}/${uuid()}.${imageExtension}`,
     ContentType: data.type,
   });
 

@@ -450,6 +450,10 @@
       "type": "runtime"
     },
     {
+      "name": "uuid",
+      "type": "runtime"
+    },
+    {
       "name": "zod",
       "type": "runtime"
     },
