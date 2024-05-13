@@ -1,3 +1,11 @@
+# [0.43.0](https://github.com/kinguru-io/kinguru-next/compare/v0.42.1...v0.43.0) (2024-05-13)
+
+
+### Features
+
+* added venue/premise edit forms ([69e0d9a](https://github.com/kinguru-io/kinguru-next/commit/69e0d9a7e89aa80a8470940d3c96894b66361c0f))
+* initial notifications page ([526de55](https://github.com/kinguru-io/kinguru-next/commit/526de5526f73f22ccd58699223388c55e2656e35))
+
 ## [0.42.1](https://github.com/kinguru-io/kinguru-next/compare/v0.42.0...v0.42.1) (2024-05-12)
 
 
