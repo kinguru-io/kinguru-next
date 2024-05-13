@@ -187,6 +187,7 @@ const project = new web.NextJsTypeScriptProject({
     "@hookform/resolvers",
     "zod-form-data",
     "oslo",
+    "uuid",
 
     "react-snap-carousel",
     "@sindresorhus/slugify",

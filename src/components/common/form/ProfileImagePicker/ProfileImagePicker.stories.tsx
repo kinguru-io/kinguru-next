@@ -1,12 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import * as s3RequestPresignerModule from "@aws-sdk/s3-request-presigner";
 import { faker } from "@faker-js/faker";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { HttpResponse, delay, http } from "msw";
 import { NextIntlClientProvider } from "next-intl";
 import { createMock } from "storybook-addon-module-mock";
 import { ProfileImagePicker } from "./ProfileImagePicker";
-
-import * as fileUploadModule from "@/lib/actions/file-upload";
 
 import enLocaleMessages from "~/public/locales/en/common.json";
 
@@ -15,7 +14,7 @@ const meta = {
   component: ProfileImagePicker,
   decorators: [
     (Story) => (
-      <NextIntlClientProvider locale="ru" messages={enLocaleMessages}>
+      <NextIntlClientProvider locale="en" messages={enLocaleMessages}>
         <Story />
       </NextIntlClientProvider>
     ),
@@ -38,8 +37,8 @@ export const MockedImageResponse: Story = {
     moduleMock: {
       mock: () => {
         const mockImageUpload = createMock(
-          fileUploadModule,
-          "uploadProfileImage",
+          s3RequestPresignerModule,
+          "getSignedUrl",
         );
         mockImageUpload.mockReturnValue(Promise.resolve(responseSRC));
 
