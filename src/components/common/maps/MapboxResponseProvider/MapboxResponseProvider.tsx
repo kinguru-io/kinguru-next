@@ -26,9 +26,7 @@ export function useSearchBoxResponse() {
 
 export function useSearchBoxTimeZone() {
   const { searchResponse } = useContext(MapboxSearchBoxContext);
-  return searchResponse
-    ? searchResponse.properties.timeZone
-    : Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return searchResponse && searchResponse.properties.timeZone;
 }
 
 async function fetchTimeZone(data: SearchBoxFeatureSuggestion) {

@@ -2,14 +2,14 @@
 
 import moment from "moment";
 import { getSession } from "@/auth.ts";
-import { AuthFormState, createFormAction } from "@/lib/utils";
+import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 const orgRegisterHandler = async (
   props: OrgRegisterInput,
-): Promise<AuthFormState> => {
+): Promise<FormActionState> => {
   const session = await getSession();
   if (!session || !session.user || !session.user.email) {
     return {

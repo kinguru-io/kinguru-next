@@ -2,7 +2,7 @@
 
 import { getLocale } from "next-intl/server";
 import { Argon2id } from "oslo/password";
-import { AuthFormState, createFormAction } from "@/lib/utils";
+import { FormActionState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
@@ -10,7 +10,7 @@ import prisma from "@/server/prisma.ts";
 const signUpHandler = async ({
   email,
   password,
-}: SignupFormInput): Promise<AuthFormState> => {
+}: SignupFormInput): Promise<FormActionState> => {
   if (
     await prisma.user.findUnique({
       where: { email },

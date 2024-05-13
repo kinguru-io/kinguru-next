@@ -8,7 +8,7 @@ import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker"
 import { Button, Select, Input, Textarea } from "@/components/uikit";
 import { FormInnerLayout } from "@/layout/block";
 import { OrgRegisterAction } from "@/lib/actions/auth";
-import { AuthFormState } from "@/lib/utils";
+import { FormActionState } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 import { Flex } from "~/styled-system/jsx";
 
@@ -25,7 +25,7 @@ export function OrganizationRegisterForm({
     resolver: zodResolver(orgRegisterSchema),
   });
   // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<AuthFormState, FormData>(
+  const [_state, formAction] = useFormState<FormActionState, FormData>(
     orgRegister,
     null,
   );

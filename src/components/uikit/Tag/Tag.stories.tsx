@@ -41,6 +41,14 @@ export const TagSecondary: Story = {
   },
 };
 
+export const TagEllipse: Story = {
+  args: {
+    variant: "ellipse",
+    size: "ellipse",
+    children: "Apple TV",
+  },
+};
+
 export const TagTertiary: Story = {
   parameters: {
     backgrounds: {

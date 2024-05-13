@@ -6,7 +6,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input, InputPassword } from "@/components/uikit";
 import { type SignUpAction } from "@/lib/actions";
-import { AuthFormState } from "@/lib/utils";
+import { FormActionState } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
@@ -26,7 +26,7 @@ export function SignupForm({ signUp }: { signUp: SignUpAction }) {
     resolver: zodResolver(signupFormSchema),
   });
   // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<AuthFormState, FormData>(
+  const [_state, formAction] = useFormState<FormActionState, FormData>(
     signUp,
     null,
   );

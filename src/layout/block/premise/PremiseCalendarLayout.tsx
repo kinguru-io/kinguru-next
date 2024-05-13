@@ -7,7 +7,7 @@ export function PremiseCalendarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box bg="neutral.4" width="100%">
+    <Box bg="neutral.3" width="full">
       <Container paddingBlock="70px">
         <section
           className={css({

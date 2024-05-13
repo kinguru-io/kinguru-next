@@ -9,7 +9,7 @@ export async function PremiseAmenities({ amenities }: { amenities: string[] }) {
   return (
     <Flex gap="23px" wrap="wrap">
       {amenities.map((amenity) => (
-        <Tag key={amenity} variant="additional" size="md">
+        <Tag key={amenity} variant="ellipse" size="ellipse">
           {t(amenity as Amenity)}
         </Tag>
       ))}

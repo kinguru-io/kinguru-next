@@ -34,7 +34,7 @@ export default async function CreatedNoticePage({
         <WarningNotice
           noticeText={t("no_premise_warn_msg")}
           linkLabel={t("no_premise_link_label")}
-          href={`/profile/venues/${venueId}`}
+          href={`/profile/venues/${venueId}/add-premise?venueId=${venueId}`}
         />
       </section>
     </ProfileSectionLayout>

@@ -96,7 +96,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         ref={ref}
         type="text"
         name={propsName}
-        value={imageSrc}
+        defaultValue={imageSrc}
         required={restProps.required}
         readOnly
         hidden

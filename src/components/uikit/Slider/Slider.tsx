@@ -1,7 +1,7 @@
 "use client";
 
-import { GrPrevious, GrNext } from "react-icons/gr";
 import { useSnapCarousel } from "react-snap-carousel";
+import { ArrowIcon } from "@/components/uikit";
 import { cx } from "~/styled-system/css";
 import { SliderVariantProps, slider } from "~/styled-system/recipes";
 
@@ -44,20 +44,24 @@ export function Slider({
       <ul className={classes.sliderOptions} ref={scrollRef}>
         {children}
       </ul>
-      <button
-        type="button"
-        className={cx(classes.sliderButton, classes.prevButton)}
-        onClick={prevSlide}
-      >
-        <GrPrevious />
-      </button>
-      <button
-        type="button"
-        className={cx(classes.sliderButton, classes.nextButton)}
-        onClick={nextSlide}
-      >
-        <GrNext />
-      </button>
+      {slidesCount > 1 && (
+        <>
+          <button
+            type="button"
+            className={cx(classes.sliderButton, classes.prevButton)}
+            onClick={prevSlide}
+          >
+            <ArrowIcon direction="left" />
+          </button>
+          <button
+            type="button"
+            className={cx(classes.sliderButton, classes.nextButton)}
+            onClick={nextSlide}
+          >
+            <ArrowIcon direction="right" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

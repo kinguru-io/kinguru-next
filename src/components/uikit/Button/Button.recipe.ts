@@ -111,6 +111,7 @@ export const buttonRecipe = defineRecipe({
         },
       },
     },
+    centered: { true: { marginInline: "auto" } },
   },
   defaultVariants: {
     variant: "solid",

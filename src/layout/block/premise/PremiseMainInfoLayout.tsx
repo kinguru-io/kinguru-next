@@ -7,7 +7,7 @@ export function PremiseMainInfoLayout({
 }) {
   return (
     <Box bg="neutral.4" width="100%">
-      <Container paddingBlock="60px 34px">
+      <Container paddingBlock="60px 50px">
         <section>
           <VStack gap="30px">{children}</VStack>
         </section>

@@ -23,7 +23,7 @@ import {
   type CreateVenueAction,
 } from "@/lib/actions/venue";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction.ts";
-import type { AuthFormState } from "@/lib/utils";
+import type { FormActionState } from "@/lib/utils";
 import { Box, Flex, InlineBox, VStack } from "~/styled-system/jsx";
 
 export function AddVenueForm({
@@ -36,7 +36,7 @@ export function AddVenueForm({
     resolver: zodResolver(createVenueSchema),
   });
 
-  const [response, formAction] = useFormState<AuthFormState, FormData>(
+  const [response, formAction] = useFormState<FormActionState, FormData>(
     createVenue,
     null,
   );
@@ -58,11 +58,15 @@ export function AddVenueForm({
   );
 }
 
-function AddVenueFormInner() {
+export function AddVenueFormInner({
+  isEditing = false,
+}: {
+  isEditing?: boolean;
+}) {
   const {
     register,
     control,
-    formState: { dirtyFields, isValid },
+    formState: { dirtyFields, isValid, defaultValues },
   } = useFormContext<CreateVenueInput>();
   const { pending } = useFormStatus();
   const t = useTranslations("profile.venues.add");
@@ -81,9 +85,11 @@ function AddVenueFormInner() {
             },
           }}
         >
-          <span>{t("fields.name")}</span>
+          {!isEditing && <span>{t("fields.name")}</span>}
           <Input
             placeholder={t("fields.name_placeholder")}
+            readOnly={isEditing}
+            hidden={isEditing}
             {...register("name")}
           />
           <span>{t("fields.description")}</span>
@@ -102,6 +108,7 @@ function AddVenueFormInner() {
         <VStack gap="30px" marginBlockEnd="20px">
           <p>{t("fields.photo_tip")}</p>
           <ProfileImagePicker
+            imageSrc={defaultValues?.image}
             groupKey="venues"
             placeholderWrapper="rectangle"
             {...register("image")}
@@ -139,18 +146,32 @@ function AddVenueFormInner() {
         <Flex justifyContent="space-between" flexWrap="wrap" gap="20px">
           <VStack alignItems="flex-start" gap="10px">
             <span>{t("fields.featureCCTV_tip")}</span>
-            <Radio label={t("fields.yes_label")} {...register("featureCCTV")} />
-            <Radio label={t("fields.no_label")} {...register("featureCCTV")} />
+            <Radio
+              value="1"
+              defaultChecked={defaultValues?.featureCCTV === true}
+              label={t("fields.yes_label")}
+              {...register("featureCCTV")}
+            />
+            <Radio
+              value="0"
+              defaultChecked={defaultValues?.featureCCTV === false}
+              label={t("fields.no_label")}
+              {...register("featureCCTV")}
+            />
           </VStack>
 
           <VStack alignItems="flex-start" gap="10px">
             <span>{t("fields.featureParking_tip")}</span>
             <Radio
+              value="1"
+              defaultChecked={defaultValues?.featureParking === true}
               label={t("fields.yes_label")}
               {...register("featureParking")}
             />
             <Radio
+              value="0"
               label={t("fields.no_label")}
+              defaultChecked={defaultValues?.featureParking === false}
               {...register("featureParking")}
             />
           </VStack>
@@ -194,13 +215,14 @@ function AddVenueFormInner() {
           <VStack alignItems="flex-start" gap="10px" width="35%">
             <Input
               type="email"
+              inputMode="email"
               placeholder={t("fields.email_placeholder")}
               {...register("manager.email")}
             />
             <Input
               type="text"
+              inputMode="tel"
               placeholder={t("fields.phoneNumber_placeholder")}
-              inputMode="numeric"
               {...register("manager.phoneNumber")}
             />
           </VStack>
@@ -215,6 +237,10 @@ function AddVenueFormInner() {
     },
   ];
 
+  const isSubmitEnabled = isEditing
+    ? isValid && Object.values(dirtyFields).some(Boolean)
+    : isValid;
+
   return (
     <Box
       css={{ "& .button": { marginInline: "auto", marginBlockStart: "20px" } }}
@@ -222,9 +248,15 @@ function AddVenueFormInner() {
       <AccordionGroup
         items={formGroupItems}
         btnLabel={t("next_group_btn_label")}
+        allowAll={isEditing}
       />
-      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
-        {t("submit_btn_label")}
+      <Button
+        type="submit"
+        size="md"
+        isLoading={pending}
+        disabled={!isSubmitEnabled}
+      >
+        {t(isEditing ? "edit_btn_label" : "submit_btn_label")}
       </Button>
     </Box>
   );

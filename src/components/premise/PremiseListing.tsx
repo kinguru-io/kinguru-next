@@ -11,7 +11,11 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
   const hiddenPremiseIdList = premiseIdList.slice(3);
 
   return (
-    <Stack gap="20px" marginBlockStart="50px">
+    <Stack
+      gap="20px"
+      marginBlockStart="50px"
+      css={{ "& > .button": { alignSelf: "center" } }}
+    >
       <PremiseStack premiseIdList={visiblePremiseIdList} />
       {hiddenPremiseIdList.length > 0 && (
         <PremiseCollapse>

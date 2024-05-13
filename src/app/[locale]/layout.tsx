@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
-          <Grid gridTemplateRows="auto 1fr auto" gap="0" minHeight="full">
+          <Grid gridTemplateRows="auto 1fr auto" gap="0" minHeight="100vh">
             <Header />
             <main>{children}</main>
             <Toaster />

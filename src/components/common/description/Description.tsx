@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, TextCollapse, ArrowIcon } from "@/components/uikit";
-import { Box, VStack } from "~/styled-system/jsx";
+import { Box, Stack } from "~/styled-system/jsx";
 
 type DescriptionProps = {
   description: string;
@@ -24,22 +24,24 @@ export function Description({
   };
 
   return (
-    <VStack gap="30px" alignItems="flex-start" maxW={maxW}>
+    <Stack gap="30px" maxW={maxW} alignSelf="stretch">
       <TextCollapse
         isShown={isShown}
         textContent={description}
         visibleCharsCount={500}
       />
-      <Box color="neutral.1">
-        <Button
-          variant="outline"
-          icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
-          iconPosition="right"
-          onClick={handleExpandClick}
-        >
-          {isShown ? showLessLabel : showMoreLabel}
-        </Button>
-      </Box>
-    </VStack>
+      {description.length > 500 && (
+        <Box color="neutral.1">
+          <Button
+            variant="outline"
+            icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
+            iconPosition="right"
+            onClick={handleExpandClick}
+          >
+            {isShown ? showLessLabel : showMoreLabel}
+          </Button>
+        </Box>
+      )}
+    </Stack>
   );
 }

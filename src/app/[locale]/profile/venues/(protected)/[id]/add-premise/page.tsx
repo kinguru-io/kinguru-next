@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { AddPremiseForm } from "./_form/form";
+import { AddPremiseForm } from "./form";
 import { getSession } from "@/auth.ts";
 import { ProfileSectionLayout } from "@/layout/page";
 import { createPremiseAction } from "@/lib/actions/premise";
@@ -36,6 +36,7 @@ export default async function AddPremisePage({
         <AddPremiseForm
           createPremiseAction={createPremiseAction}
           venueId={venue.id}
+          mapboxId={venue.locationMapboxId}
         />
       </section>
     </ProfileSectionLayout>

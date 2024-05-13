@@ -35,7 +35,7 @@ export function AccordionItemToggle(
     >;
   },
 ) {
-  const checkboxId = useId();
+  const checkboxId = useId() + "accordion-item";
 
   const [cssProps, { children, checkboxProps, ...labelProps }] =
     splitCssProps(props);

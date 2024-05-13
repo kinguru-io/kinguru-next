@@ -4,7 +4,14 @@ import { ProfileNotifications } from "@/components/notifications/profile-notific
 import { ProfileFAQ } from "@/components/profile/profile-faq";
 import { Avatar } from "@/components/uikit";
 import { Link, redirect } from "@/navigation";
-import { Float, Grid, GridItem, InlineBox, VStack } from "~/styled-system/jsx";
+import {
+  Float,
+  Grid,
+  GridItem,
+  InlineBox,
+  Stack,
+  VStack,
+} from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
 export default async function ProfilePage() {
@@ -55,7 +62,9 @@ export default async function ProfilePage() {
         </ProfileLayoutItem>
         <ProfileLayoutItem>
           <h3>{t("notifications_heading")}</h3>
-          <ProfileNotifications notifications={notifications} />
+          <Stack gap="5px">
+            <ProfileNotifications notifications={notifications} />
+          </Stack>
         </ProfileLayoutItem>
 
         <GridItem

@@ -2,14 +2,15 @@
 
 import slugify from "@sindresorhus/slugify";
 import { revalidatePath } from "next/cache";
+import { prepareAmenityList } from "./prepare-amenity-list";
 import { createPremiseSchema, type CreatePremiseSchema } from "./validation";
 import { getSession } from "@/auth";
-import type { AuthFormState } from "@/lib/utils";
+import type { FormActionState } from "@/lib/utils";
 
 export async function createPremiseAction(
   payload: CreatePremiseSchema,
   venueId: string,
-): Promise<AuthFormState> {
+): Promise<FormActionState> {
   const session = await getSession();
 
   if (!session || !session.user || !session.user.email) {
@@ -109,13 +110,3 @@ export async function createPremiseAction(
 }
 
 export type CreatePremiseAction = typeof createPremiseAction;
-
-function prepareAmenityList(amenities: CreatePremiseSchema["amenities"]) {
-  return Object.entries(amenities).reduce((list, [amenityTag, toggled]) => {
-    if (toggled) {
-      list.push(amenityTag);
-    }
-
-    return list;
-  }, [] as string[]);
-}
