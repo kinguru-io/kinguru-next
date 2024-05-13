@@ -3,6 +3,7 @@ import { zfd } from "zod-form-data";
 
 export const signupFormSchema = zfd
   .formData({
+    name: zfd.text(),
     email: zfd.text(z.string().email()),
     password: zfd.text(z.string()),
     confirmPassword: zfd.text(z.string()),

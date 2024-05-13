@@ -264,6 +264,7 @@
     },
     "signup_form": {
       "heading": "Зарегистрируйте свою организацию",
+      "name_placeholder": "Ведите название компании",
       "email_placeholder": "Введите email",
       "password_placeholder": "Пароль",
       "password_confirm_placeholder": "Повтор пароля",

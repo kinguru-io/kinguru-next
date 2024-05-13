@@ -1,15 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RichTranslationValues, useTranslations } from "next-intl";
+import { type RichTranslationValues, useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
-import { UseFormRegister, useForm } from "react-hook-form";
+import { type UseFormRegister, useForm } from "react-hook-form";
 import { Button, Input, InputPassword } from "@/components/uikit";
-import { type SignUpAction } from "@/lib/actions";
-import { FormActionState } from "@/lib/utils";
-import { SignupFormInput, signupFormSchema } from "@/lib/validations";
+import type { SignUpAction } from "@/lib/actions";
+import { type SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
-import { VStack } from "~/styled-system/jsx";
+import { Stack } from "~/styled-system/jsx";
+import { stack } from "~/styled-system/patterns";
 
 const translationValues: RichTranslationValues = {
   partnerAgreement: (chunks) => <Link href="#">{chunks}</Link>,
@@ -22,14 +22,10 @@ export function SignupForm({ signUp }: { signUp: SignUpAction }) {
     register,
     formState: { isValid },
   } = useForm<SignupFormInput>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: zodResolver(signupFormSchema),
   });
-  // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<FormActionState, FormData>(
-    signUp,
-    null,
-  );
+  const [_state, formAction] = useFormState(signUp, null);
 
   return (
     <form action={formAction}>
@@ -49,29 +45,40 @@ function SignupFormInner({
   const { pending } = useFormStatus();
 
   return (
-    <VStack gap="0">
-      <VStack gap="15px">
+    <Stack gap="0">
+      <fieldset className={stack({ gap: "15px" })} disabled={pending}>
         <Input
+          type="text"
+          variant="outline"
+          placeholder={t("name_placeholder")}
+          {...register("name")}
+        />
+        <Input
+          type="email"
+          inputMode="numeric"
           variant="outline"
           placeholder={t("email_placeholder")}
-          disabled={pending}
           {...register("email")}
         />
         <InputPassword
           placeholder={t("password_placeholder")}
-          disabled={pending}
           {...register("password")}
         />
         <InputPassword
           placeholder={t("password_confirm_placeholder")}
-          disabled={pending}
           {...register("confirmPassword")}
         />
-      </VStack>
-      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
+      </fieldset>
+      <Button
+        type="submit"
+        size="md"
+        isLoading={pending}
+        disabled={!isValid}
+        centered
+      >
         {t("submit")}
       </Button>
       <p>{t.rich("helper", translationValues)}</p>
-    </VStack>
+    </Stack>
   );
 }
