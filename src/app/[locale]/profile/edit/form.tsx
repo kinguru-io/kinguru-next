@@ -5,16 +5,17 @@ import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { Button, Select, Input, Textarea } from "@/components/uikit";
+import { Button, Input, Textarea } from "@/components/uikit";
 import { FormInnerLayout } from "@/layout/block";
 import { OrgRegisterAction } from "@/lib/actions/auth";
-import { FormActionState } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 import { Flex } from "~/styled-system/jsx";
 
-export function OrganizationRegisterForm({
+export function EditProfileForm({
+  companyName,
   orgRegister,
 }: {
+  companyName: string;
   orgRegister: OrgRegisterAction;
 }) {
   const {
@@ -23,12 +24,9 @@ export function OrganizationRegisterForm({
   } = useForm<OrgRegisterInput>({
     mode: "onChange",
     resolver: zodResolver(orgRegisterSchema),
+    defaultValues: { name: companyName },
   });
-  // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<FormActionState, FormData>(
-    orgRegister,
-    null,
-  );
+  const [_state, formAction] = useFormState(orgRegister, null);
 
   return (
     <form action={formAction}>
@@ -51,26 +49,18 @@ function OrganizationRegisterFormInner({
       <OrganizationRegisterFormBoxLayout>
         <h3>{t("main_heading")}</h3>
         <OrganizationRegisterFormGroupLayout>
-          <Flex direction="column" gap="20px">
-            <Input
-              placeholder={t("name")}
-              disabled={pending}
-              {...register("name")}
-            />
+          <Flex direction="column" gap="20px" flexBasis="255px">
+            <Input placeholder={t("name")} readOnly {...register("name")} />
             <Input
               type="number"
+              min="1900"
+              max={new Date().getFullYear()}
+              step="1"
               inputMode="numeric"
               disabled={pending}
               placeholder={t("foundationDate")}
               {...register("foundationDate")}
             />
-            <Select
-              placeholder={t("activitySphere")}
-              disabled={pending}
-              {...register("activitySphere")}
-            >
-              <option>Hello</option>
-            </Select>
           </Flex>
           <ProfileImagePicker disabled={pending} {...register("logotype")} />
         </OrganizationRegisterFormGroupLayout>
@@ -134,9 +124,9 @@ function OrganizationRegisterFormGroupLayout({
 }) {
   return (
     <Flex
-      justifyContent="space-between"
+      justifyContent="space-around"
       alignItems="center"
-      flexWrap="wrap"
+      flexWrap="wrap-reverse"
       width="full"
       maxWidth="600px"
       gap="20px"

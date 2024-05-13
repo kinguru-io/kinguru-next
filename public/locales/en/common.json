@@ -406,6 +406,31 @@
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
   },
+  "auth": {
+    "reset_form": {
+      "heading": "Forgot your password?",
+      "email_placeholder": "Enter email",
+      "submit": "Submit",
+      "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
+    },
+    "signin_form": {
+      "heading": "User Log In",
+      "heading_org": "Organization Log In",
+      "email_placeholder": "Enter email",
+      "password_placeholder": "Password",
+      "submit": "Log In",
+      "forgot_password": "Forgot password?"
+    },
+    "signup_form": {
+      "heading": "Register your company",
+      "name_placeholder": "Enter company name",
+      "email_placeholder": "Enter email",
+      "password_placeholder": "Password",
+      "password_confirm_placeholder": "Confirm password",
+      "submit": "Register",
+      "helper": "By clicking the \"Register\" button, you accept the <partnerAgreement>Partner Agreement</partnerAgreement>, confirm that you have read the <personalDataPolicy>Personal Data Processing Policy</personalDataPolicy>, and give <personalDataProcess>Consent to the processing of personal data</personalDataProcess>"
+    }
+  },
   "form": {
     "common": {
       "upload_photo": "Upload a photo",
