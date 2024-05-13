@@ -31,6 +31,7 @@ export const InputPassword = forwardRef(function InputPassword(
       />
       <button
         type="button"
+        tabIndex={-1}
         className={css({
           position: "absolute",
           top: "50%",
