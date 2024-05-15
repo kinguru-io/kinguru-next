@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ForwardedRef, forwardRef, useState, useTransition } from "react";
-import { FaPenAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { RxCross1 } from "react-icons/rx";
 import {
@@ -85,7 +84,6 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         accept="image/*"
         disabled={isPending}
       >
-        {placeholderWrapper === "circle" && <PickerTag />}
         <PickerPlaceholder
           imageSrc={imageSrc}
           isPending={isPending}
@@ -106,28 +104,6 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   );
 });
 
-function PickerTag() {
-  return (
-    <span
-      className={css({
-        zIndex: "1", // due to hiding an overflow at wrapper
-        position: "absolute",
-        top: "5px",
-        right: "11px",
-        bgColor: "primary",
-        width: "27px",
-        height: "27px",
-        fontSize: "13px",
-        padding: "7px",
-        borderRadius: "full",
-      })}
-      aria-hidden
-    >
-      <FaPenAlt />
-    </span>
-  );
-}
-
 const placeholderVariantMap: Record<
   PlaceholderVariant,
   {
@@ -138,7 +114,7 @@ const placeholderVariantMap: Record<
 > = {
   circle: {
     wrapperClassName: avatar({ size: "lg" }),
-    imageParams: { width: 175, height: 175 },
+    imageParams: { width: 185, height: 185 },
   },
   rectangle: {
     wrapperClassName: css({
@@ -207,7 +183,7 @@ function PickerPlaceholder({
         <Image
           src={imageSrc}
           alt={t("uploaded_photo")}
-          style={{ height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "auto", objectFit: "cover" }}
           {...imageParams}
         />
       ) : (
