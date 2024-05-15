@@ -17,6 +17,8 @@ import {
 } from "@/lib/actions/file-upload";
 import { css } from "~/styled-system/css";
 import { avatar } from "~/styled-system/recipes";
+import { ErrorField } from "@/components/uikit";
+import { Container, Flex } from "~/styled-system/jsx";
 
 type PlaceholderVariant = "circle" | "rectangle" | "rectangle-smaller";
 
@@ -25,6 +27,7 @@ type ProfileImagePickerProps = InputFileProps & {
   name?: string;
   groupKey?: string;
   placeholderWrapper?: PlaceholderVariant;
+  errors: any;
 };
 
 export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
@@ -34,6 +37,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     groupKey = "undefined_key",
     placeholderWrapper = "circle",
     onChange,
+    errors,
     ...restProps
   }: ProfileImagePickerProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -79,7 +83,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   };
 
   return (
-    <>
+    <Container>
       <InputFile
         onChange={handleFileChange}
         accept="image/*"
@@ -102,7 +106,8 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         hidden
         {...restProps}
       />
-    </>
+      <ErrorField errors={errors} fieldName={propsName} />
+    </Container>
   );
 });
 

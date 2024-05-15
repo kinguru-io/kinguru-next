@@ -40,6 +40,7 @@ function MainApp({
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
+
   return (
     <>
       <style jsx global>

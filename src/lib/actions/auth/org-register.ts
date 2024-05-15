@@ -11,6 +11,7 @@ const orgRegisterHandler = async (
   props: OrgRegisterInput,
 ): Promise<AuthFormState> => {
   const session = await getSession();
+
   if (!session || !session.user || !session.user.email) {
     return {
       status: "error",
@@ -23,6 +24,7 @@ const orgRegisterHandler = async (
       email: session.user.email,
     },
   });
+
   if (!user) {
     return {
       status: "error",

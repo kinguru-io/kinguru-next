@@ -18,7 +18,7 @@ export const theme = extendTheme({
         brand: {
           field: {
             border: "1px solid",
-            borderColor: "gray.200",
+            borderColor: "red.200",
             _focus: {
               border: "2px solid",
               borderColor: "brand.primary",

@@ -1,0 +1,38 @@
+{
+  "main": [
+    {
+      "name": "name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "foundationDate",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "activitySphere",
+      "type": "select",
+      "options": [
+        {
+          "text": "Hello"
+        }
+      ],
+      "required": true
+    }
+  ],
+  "credentials": [
+    {
+      "name": "requisitesUrl",
+      "type": "url",
+      "required": true
+    }
+  ],
+  "extra": [
+    {
+      "name": "aboutCompany",
+      "type": "textarea",
+      "required": true
+    }
+  ]
+}

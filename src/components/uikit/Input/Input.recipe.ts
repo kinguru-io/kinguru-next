@@ -26,6 +26,9 @@ export const inputRecipe = defineRecipe({
       borderColor: "neutral.3",
       cursor: "not-allowed",
     },
+    _invalid: {
+      borderColor: "danger",
+    },
   },
   variants: {
     variant: {
@@ -38,6 +41,9 @@ export const inputRecipe = defineRecipe({
         borderRadius: "full",
         px: "25px",
         py: "8px",
+      },
+      danger: {
+        borderColor: "red",
       },
     },
   },
