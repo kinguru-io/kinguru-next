@@ -27,10 +27,7 @@ export function SigninForm({ callbackUrl }: { callbackUrl?: string }) {
     });
 
     if (response && response.ok) {
-      if (callbackUrl) {
-        router.push(callbackUrl);
-      }
-
+      router.push(callbackUrl || "/");
       return;
     }
 
