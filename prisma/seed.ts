@@ -5,6 +5,7 @@ import {
   PrismaClient,
   type Organization,
   type Prisma,
+  type SocialNetwork,
 } from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
@@ -32,6 +33,15 @@ const ROOM_WORD_SYNONYMS = [
   "space",
   "dwelling",
 ] as const;
+
+const fakeSocialLinks: Array<{ network: SocialNetwork; url: string }> = [
+  { network: "linkedin", url: "https://linkedin.com/test" },
+  { network: "facebook", url: "https://facebook.com/test" },
+  {
+    network: "instagram",
+    url: "https://instagram.com/test",
+  },
+];
 
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
@@ -241,14 +251,52 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
-                    owner: {
-                      create: userSchema(),
-                    },
-                    foundationDate: faker.date.past(),
-                    requisitesUrl: faker.internet.url(),
-                    aboutCompany: faker.company.catchPhrase(),
-                    activitySphere: faker.company.buzzPhrase().split(" "),
+                    owner: { create: userSchema() },
                     logotype: faker.image.avatar(),
+                    foundationDate: faker.number.int({
+                      min: 1900,
+                      max: new Date().getFullYear(),
+                    }),
+                    country: faker.location.country(),
+                    city: faker.location.city(),
+                    businessName: faker.company.name(),
+                    NIP: faker.string.numeric({ length: 10 }),
+                    bankName: faker.company.name(),
+                    IBAN: faker.finance.iban(),
+                    address: {
+                      createMany: {
+                        data: [
+                          {
+                            country: faker.location.country(),
+                            city: faker.location.city(),
+                            street: faker.location.street(),
+                            building: faker.location.buildingNumber(),
+                            room: faker.string.numeric({
+                              length: { min: 0, max: 4 },
+                            }),
+                            zipCode: faker.location.zipCode(),
+                          },
+                          {
+                            country: faker.location.country(),
+                            city: faker.location.city(),
+                            street: faker.location.street(),
+                            building: faker.location.buildingNumber(),
+                            room: faker.string.numeric({
+                              length: { min: 0, max: 4 },
+                            }),
+                            zipCode: faker.location.zipCode(),
+                          },
+                        ],
+                      },
+                    },
+                    socialLinks: {
+                      createMany: {
+                        data: faker.helpers.arrayElements(fakeSocialLinks, {
+                          min: 1,
+                          max: fakeSocialLinks.length,
+                        }),
+                      },
+                    },
                     resources: {
                       createMany: {
                         data: [

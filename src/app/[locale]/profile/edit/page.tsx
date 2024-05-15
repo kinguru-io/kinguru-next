@@ -13,19 +13,25 @@ export default async function EditProfilePage() {
   }
   const user = await prisma.user.findUnique({
     where: { id: session?.user?.id },
-    select: { company: true },
+    include: {
+      organizations: { include: { socialLinks: true, address: true } },
+    },
   });
 
   if (!user) {
     return redirect("/");
   }
 
+  const organizationData = user.organizations.at(0);
+  const companyName = organizationData?.name || user.company || "";
+
   return (
     <ProfileSectionLayout>
       <h1 className="heading">{t("heading")}</h1>
       <section>
         <EditProfileForm
-          companyName={user.company || ""}
+          companyName={companyName}
+          companyData={organizationData}
           orgRegister={orgRegister}
         />
       </section>

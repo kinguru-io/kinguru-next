@@ -1,15 +1,17 @@
 "use server";
 
-import moment from "moment";
+import type { SocialNetwork } from "@prisma/client";
 import { getSession } from "@/auth.ts";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
-const orgRegisterHandler = async (
-  props: OrgRegisterInput,
-): Promise<FormActionState> => {
+const orgRegisterHandler = async ({
+  socialLinks,
+  address,
+  ...restInput
+}: OrgRegisterInput): Promise<FormActionState> => {
   const session = await getSession();
   if (!session || !session.user || !session.user.email) {
     return {
@@ -19,9 +21,8 @@ const orgRegisterHandler = async (
   }
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
+    where: { email: session.user.email },
+    include: { organizations: { select: { id: true } } },
   });
   if (!user) {
     return {
@@ -30,18 +31,47 @@ const orgRegisterHandler = async (
     };
   }
 
-  await prisma.organization.create({
-    data: {
-      ...props,
-      foundationDate: moment(props.foundationDate, "YYYY").toDate(),
-      activitySphere: [props.activitySphere],
+  const organization = user.organizations.at(0);
+
+  await prisma.organization.upsert({
+    where: { id: organization?.id },
+    update: {
+      ...restInput,
+      socialLinks: {
+        deleteMany: {},
+        createMany: { data: prepareSocialLinks(socialLinks) },
+      },
+      address: { deleteMany: {}, createMany: { data: address } },
+    },
+    create: {
+      ...restInput,
       ownerId: user.id,
+      socialLinks: {
+        createMany: { data: prepareSocialLinks(socialLinks) },
+      },
+      address: { createMany: { data: address } },
     },
   });
 
-  redirect("/");
-  return null;
+  // redirecting in case it was a registration
+  if (!organization) {
+    redirect("/profile");
+  }
+
+  return { status: "success", message: "" };
 };
+
+function prepareSocialLinks(links: OrgRegisterInput["socialLinks"]) {
+  return links.reduce(
+    (preparedLinks, { network, url }) => {
+      if (url) {
+        preparedLinks.push({ network, url });
+      }
+      return preparedLinks;
+    },
+    [] as Array<{ network: SocialNetwork; url: string }>,
+  );
+}
 
 export const orgRegister = createFormAction(
   orgRegisterHandler,

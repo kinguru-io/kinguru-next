@@ -440,19 +440,35 @@
   },
   "organization": {
     "basic_info_page": {
-      "heading": "Basic organization information"
+      "heading": "Profile"
     },
     "basic_info_form": {
-      "main_heading": "Main",
+      "group": {
+        "main": "Main",
+        "credentials": "Credentials*",
+        "social": "Social networks"
+      },
+      "column": {
+        "business": "Company information:",
+        "bank": "Bank details:",
+        "postAddress": "Post address:",
+        "billingAddress": "Billing address:"
+      },
+      "country": "Country",
+      "city": "City",
       "name": "Company name",
+      "street": "Street",
+      "building": "Building number",
+      "room": "Room",
+      "zipCode": "Zip code",
       "foundationDate": "Year founded",
-      "activitySphere": "Select a field of activity",
-      "aboutCompany": "Tell more about your organization...",
-      "credentials_heading": "Credentials*",
-      "email": "Email",
-      "extra_heading": "Extra",
+      "businessName": "Business name",
+      "bankName": "Bank name",
+      "same_addresses_label": "Billing address matches post address",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
-      "submit": "Save"
+      "social_helper": "Specify your social networks for us to be able to verify your profile."
     }
   },
   "venue": {
