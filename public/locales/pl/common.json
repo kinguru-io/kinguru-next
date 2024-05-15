@@ -248,6 +248,39 @@
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
   },
+  "organization": {
+    "basic_info_page": {
+      "heading": "Profile"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Main",
+        "credentials": "Credentials*",
+        "social": "Social networks"
+      },
+      "column": {
+        "business": "Company information:",
+        "bank": "Bank details:",
+        "postAddress": "Post address:",
+        "billingAddress": "Billing address:"
+      },
+      "country": "Country",
+      "city": "City",
+      "name": "Company name",
+      "street": "Street",
+      "building": "Building number",
+      "room": "Room",
+      "zipCode": "Zip code",
+      "foundationDate": "Year founded",
+      "businessName": "Business name",
+      "bankName": "Bank name",
+      "same_addresses_label": "Billing address matches post address",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
+      "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
+      "social_helper": "Specify your social networks for us to be able to verify your profile."
+    }
+  },
   "auth": {
     "reset_form": {
       "heading": "Forgot your password?",

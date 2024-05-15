@@ -281,20 +281,35 @@
   },
   "organization": {
     "basic_info_page": {
-      "heading": "Основная информация об организации"
+      "heading": "Личный профиль"
     },
     "basic_info_form": {
-      "main_heading": "Главное",
+      "group": {
+        "main": "Главное",
+        "credentials": "Реквизиты*",
+        "social": "Социальные сети"
+      },
+      "column": {
+        "business": "Данные о компании:",
+        "bank": "Банковские данные:",
+        "postAddress": "Почтовый адрес:",
+        "billingAddress": "Юридический адрес:"
+      },
+      "country": "Страна",
+      "city": "Город",
       "name": "Имя компании",
+      "street": "Улица",
+      "building": "Дом",
+      "room": "Помещение",
+      "zipCode": "Индекс",
       "foundationDate": "Год основания",
-      "activitySphere": "Выберите сферу деятельности",
-      "aboutCompany": "Расскажите о вашей организации поподробнее...",
-      "credentials_heading": "Реквизиты*",
-      "email": "Email",
-      "requisites_url": "Ссылка на документ с реквизитами",
-      "extra_heading": "Дополнительно",
+      "businessName": "Наименование компании",
+      "bankName": "Название банка",
+      "same_addresses_label": "юридический адрес совпадает с почтовым адресом",
+      "social_link_placeholder": "Cсылка на аккаунт {social}",
+      "submit": "Сохранить",
       "credentials_asterisk_helper": "* вся указанная информация будет использоваться исключительно в рамках внутренних рабочих процессов",
-      "submit": "Сохранить"
+      "social_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт."
     }
   },
   "venue": {
