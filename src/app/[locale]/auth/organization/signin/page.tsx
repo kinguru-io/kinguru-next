@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { SigninForm } from "./form";
 import { getSession } from "@/auth.ts";
+import { revalidateAll } from "@/lib/actions";
 import { redirect } from "@/navigation.ts";
 
 export default async function Page({
@@ -18,7 +19,7 @@ export default async function Page({
   return (
     <>
       <h1>{t("heading_org")}</h1>
-      <SigninForm callbackUrl={callbackUrl} />
+      <SigninForm callbackUrl={callbackUrl} revalidateAll={revalidateAll} />
     </>
   );
 }
