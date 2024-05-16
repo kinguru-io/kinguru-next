@@ -2,8 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type RichTranslationValues, useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { type UseFormRegister, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Button, Input, InputPassword } from "@/components/uikit";
 import type { SignUpAction } from "@/lib/actions";
 import { type SignupFormInput, signupFormSchema } from "@/lib/validations";
@@ -25,7 +27,16 @@ export function SignupForm({ signUp }: { signUp: SignUpAction }) {
     mode: "onChange",
     resolver: zodResolver(signupFormSchema),
   });
-  const [_state, formAction] = useFormState(signUp, null);
+  const [response, formAction] = useFormState(signUp, null);
+
+  useEffect(() => {
+    if (!response) return;
+    const { status, message } = response;
+
+    if (status === "error") {
+      toast.error(message);
+    }
+  }, [response]);
 
   return (
     <form action={formAction}>
