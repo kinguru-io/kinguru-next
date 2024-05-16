@@ -34,7 +34,7 @@ const orgRegisterHandler = async ({
   const organization = user.organizations.at(0);
 
   await prisma.organization.upsert({
-    where: { id: organization?.id },
+    where: { id: organization?.id || "" },
     update: {
       ...restInput,
       socialLinks: {
