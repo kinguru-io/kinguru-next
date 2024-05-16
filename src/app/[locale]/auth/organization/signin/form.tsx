@@ -6,13 +6,20 @@ import { useTranslations } from "next-intl";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button, Input, InputPassword } from "@/components/uikit";
+import type { RevalidateAll } from "@/lib/actions/auth";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link, useRouter } from "@/navigation";
 import { VStack } from "~/styled-system/jsx";
 import { vstack } from "~/styled-system/patterns";
 import { button } from "~/styled-system/recipes";
 
-export function SigninForm({ callbackUrl }: { callbackUrl?: string }) {
+export function SigninForm({
+  callbackUrl,
+  revalidateAll,
+}: {
+  callbackUrl?: string;
+  revalidateAll: RevalidateAll;
+}) {
   const router = useRouter();
   const methods = useForm<SigninFormInput>({
     mode: "onBlur",
@@ -27,7 +34,8 @@ export function SigninForm({ callbackUrl }: { callbackUrl?: string }) {
     });
 
     if (response && response.ok) {
-      router.push(callbackUrl || "/");
+      await revalidateAll();
+      router.replace(callbackUrl || "/");
       return;
     }
 
