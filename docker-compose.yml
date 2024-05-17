@@ -1,5 +1,20 @@
 version: "3"
 services:
+  # consumer:
+  #   image: node:20
+  #   command:
+  #   - bash
+  #   - -c
+  #   - |
+  #     npx prisma migrate dev
+  #     node consumer/main.js
+  #   links:
+  #     - kafka
+  #   working_dir: /app
+  #   volumes:
+  #     - ./:/app
+  #   env_file:
+  #     - .env
   db:
     image: debezium/postgres:16-alpine
     ports:
