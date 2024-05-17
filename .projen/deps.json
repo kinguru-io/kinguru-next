@@ -204,6 +204,11 @@
       "type": "runtime"
     },
     {
+      "name": "@elastic/elasticsearch",
+      "version": "7.8.0",
+      "type": "runtime"
+    },
+    {
       "name": "@elastic/react-search-ui",
       "type": "runtime"
     },
@@ -339,6 +344,10 @@
     },
     {
       "name": "framer-motion",
+      "type": "runtime"
+    },
+    {
+      "name": "kafkajs",
       "type": "runtime"
     },
     {

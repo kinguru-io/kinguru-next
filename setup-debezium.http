@@ -12,7 +12,7 @@ Content-Type: application/json
     "database.password": "qwerty",
     "database.dbname": "kinguru",
     "database.server.name": "kinguru",
-    "table.include.list": "public.Event,public.User,public.Place",
+    "table.include.list": "public.Event,public.User,public.Place,public.Premise",
     "topic.prefix": "kinguru",
     "transforms": "unwrap",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
@@ -24,7 +24,7 @@ Content-Type: application/json
 GET http://localhost:9200/_cat/indices
 
 ### Get es content
-GET http://localhost:9200/kinguru.public.event/_search
+GET http://localhost:9200/kinguru.public.premise_fulfilled/_search
 Content-Type: application/json
 
 {
