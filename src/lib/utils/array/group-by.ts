@@ -1,4 +1,7 @@
-export type Group<Key extends PropertyKey, T> = Record<Key, T[] | undefined>;
+export type Group<Key extends PropertyKey, T> = Record<
+  Key,
+  [T, ...T[]] | undefined
+>;
 
 export function groupBy<T, Key extends PropertyKey>(
   rawArray: T[],
