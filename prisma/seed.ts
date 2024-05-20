@@ -7,10 +7,10 @@ import {
   type Prisma,
 } from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
-import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
-import { amenitiesTags } from "@/lib/shared/config/amenities";
-import { bookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
-import { premiseTypes } from "@/lib/shared/config/premise-types";
+import { ageRestrictionList } from "../src/lib/shared/config/age-restriction";
+import { amenitiesTags } from "../src/lib/shared/config/amenities";
+import { bookingCancelTerms } from "../src/lib/shared/config/booking-cancel-terms";
+import { premiseTypes } from "../src/lib/shared/config/premise-types";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const allAmenities = Object.values(amenitiesTags).flat();
