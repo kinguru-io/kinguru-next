@@ -34,7 +34,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/package-lock.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/global.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.ts ./
-COPY --from=builder --chown=nextjs:nodejs /app/src/lib/shared/config ./src/lib/shared/config
+COPY --from=builder --chown=nextjs:nodejs /app/src/lib/shared ./src/lib/shared
 COPY --from=builder --chown=nextjs:nodejs /app/src/instrumentation.node.ts ./src/instrumentation.node.ts
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
 COPY --from=builder --chown=nextjs:nodejs /app/next-env.d.ts ./

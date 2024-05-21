@@ -4,8 +4,8 @@ import mapbox, { type SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { PrismaClient } from "@prisma/client";
 import * as dotenv from "dotenv";
 import { Kafka } from "kafkajs";
-import { groupBy } from "../src/lib/utils/array";
-import { DAYS_OF_WEEK_ORDERED } from "../src/lib/utils/datetime";
+import { groupBy } from "../src/lib/shared/utils/array";
+import { DAYS_OF_WEEK_ORDERED } from "../src/lib/shared/utils/datetime";
 
 dotenv.config();
 
