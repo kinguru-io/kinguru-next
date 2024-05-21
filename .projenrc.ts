@@ -151,6 +151,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-map-gl",
     "mapbox-gl",
     "@mapbox/search-js-react",
+    "@mapbox/search-js-core",
     "use-debounce",
     "framer-motion",
     "formik",
