@@ -9,6 +9,7 @@ import { DAYS_OF_WEEK_ORDERED } from "../src/lib/utils/datetime";
 
 dotenv.config();
 
+const esApiKey = process.env.ES_CLIENT_API_KEY;
 const mapboxAccessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const premiseFulfilledIndex =
   process.env.ES_INDEX_PREMISE_FULFILLED || "kinguru.public.premise_fulfilled";
@@ -18,17 +19,12 @@ const premiseTopicRegex = /.*\.public\.Premise/;
 const prisma = new PrismaClient();
 const kafka = new Kafka({
   clientId: "my-app",
-  brokers: ["localhost:9092"],
+  brokers: [process.env.KAFKA_BROKER || ""],
   connectionTimeout: 3000,
 });
 const esClient = new Client({
-  node: "http://localhost:9200",
-  // auth: {
-  //   apiKey: {
-  //     id: "foo",
-  //     api_key: "bar",
-  //   },
-  // },
+  node: process.env.ES_CLIENT_NODE,
+  ...(esApiKey && { auth: { apiKey: esApiKey } }),
 });
 const searchBox = new mapbox.SearchBoxCore({
   accessToken: mapboxAccessToken,
