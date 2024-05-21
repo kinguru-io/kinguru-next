@@ -28,8 +28,34 @@ GET http://localhost:9200/kinguru.public.premise_fulfilled/_search
 Content-Type: application/json
 
 {
-  "query": {
-    "match_all": {}
+  "aggs": {
+    "cities": {
+      "terms": {
+        "field": "location.city.keyword"
+      }
+    },
+    "minPrice": { "min": { "field": "minPrice" } },
+    "maxPrice": { "max": { "field": "maxPrice" } },
+    "type": {
+      "terms": {
+        "field": "type.keyword"
+      }
+    },
+    "amenities": {
+      "terms": {
+        "field": "amenities.keyword"
+      }
+    },
+    "minCapacity": {
+      "min": {
+        "field": "capacity"
+      }
+    },
+    "maxCapacity": {
+      "max": {
+        "field": "capacity"
+      }
+    }
   }
 }
 
@@ -99,4 +125,4 @@ DELETE http://localhost:8083/connectors/inventory-connector
 DELETE http://localhost:8083/connectors/elastic-sink
 
 ### Delete ES index
-DELETE http://localhost:9200/kinguru.public.event
+DELETE http://localhost:9200/kinguru.public.premise_fulfilled
