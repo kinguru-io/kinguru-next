@@ -205,7 +205,6 @@
     },
     {
       "name": "@elastic/elasticsearch",
-      "version": "7.8.0",
       "type": "runtime"
     },
     {
