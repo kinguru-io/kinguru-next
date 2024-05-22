@@ -258,6 +258,10 @@ project.addScripts({
   "scheduler:run":
     'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node scheduler/main.ts',
 });
+project.addScripts({
+  "consumer:run":
+    'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node consumer/main.ts',
+});
 
 project.buildWorkflow?.addPostBuildJob("staging-deploy", {
   name: "staging-deploy",
