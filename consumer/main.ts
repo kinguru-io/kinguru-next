@@ -1,5 +1,5 @@
 import { Client } from "@elastic/elasticsearch";
-import { ResponseError } from "@elastic/elasticsearch/lib/errors";
+import { ResponseError } from "@elastic/transport/lib/errors";
 // ! do not forget to uncomment when using the mapbox service
 // import mapbox, { type SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { PrismaClient } from "@prisma/client";
@@ -16,7 +16,7 @@ const esApiKey = process.env.ES_CLIENT_API_KEY;
 const premiseFulfilledIndex =
   process.env.ES_INDEX_PREMISE_FULFILLED || "kinguru.public.premise_fulfilled";
 
-const premiseTopicRegex = /.*\.public\.Premise/;
+const premiseTopicRegex = /^.*\.public\.Premise$/m;
 
 const prisma = new PrismaClient();
 const kafka = new Kafka({
@@ -50,7 +50,7 @@ async function init() {
     });
   } catch (e) {
     if (e instanceof ResponseError) {
-      if (e.meta.body.error.type === "index_not_found_exception") {
+      if (e.body?.error.type === "index_not_found_exception") {
         await esClient.indices.create({
           index: premiseFulfilledIndex,
         });
