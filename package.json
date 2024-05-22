@@ -24,7 +24,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o dist/storybook",
     "seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node prisma/seed.ts",
-    "scheduler:run": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node scheduler/main.ts"
+    "scheduler:run": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node scheduler/main.ts",
+    "consumer:run": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));'  --experimental-specifier-resolution=node consumer/main.ts"
   },
   "author": {
     "name": "Maksim Yersh",
