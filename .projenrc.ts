@@ -199,7 +199,7 @@ const project = new web.NextJsTypeScriptProject({
     "bullmq",
     "dotenv",
     "kafkajs",
-    "@elastic/elasticsearch",
+    "@elastic/elasticsearch@7.17.0",
   ],
   devDeps: [
     "@pandacss/dev",

@@ -84,7 +84,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@chakra-ui/theme-tools": "^2.1.2",
     "@egjs/react-flicking": "^4.11.2",
-    "@elastic/elasticsearch": "8.13.1",
+    "@elastic/elasticsearch": "7.17.0",
     "@elastic/react-search-ui": "^1.21.4",
     "@elastic/react-search-ui-views": "^1.21.4",
     "@elastic/search-ui": "^1.21.4",
