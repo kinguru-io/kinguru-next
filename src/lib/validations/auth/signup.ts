@@ -8,6 +8,9 @@ export const signupFormSchema = zfd
     password: zfd.text(z.string()),
     confirmPassword: zfd.text(z.string()),
   })
-  .refine(({ password, confirmPassword }) => password === confirmPassword);
+  .refine(({ password, confirmPassword }) => password === confirmPassword, {
+    message: "The passwords you entered did not match, please try again",
+    path: ["confirmPassword"],
+  });
 
 export type SignupFormInput = z.infer<typeof signupFormSchema>;

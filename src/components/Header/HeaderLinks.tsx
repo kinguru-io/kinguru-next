@@ -28,6 +28,12 @@ export function HeaderLinks({ links }: LinksProps) {
             textStyle:
               selectedSegment === href.slice(1) ? "heading.4" : "body.2",
             padding: "5px",
+            _hover: {
+              transformOrigin: "center center",
+              transform: "scale(1.05)",
+              transition: "0.1s ease",
+              textShadow: "-.25px -.25px 0 black, .25px .25px black",
+            },
           })}
         >
           {name}

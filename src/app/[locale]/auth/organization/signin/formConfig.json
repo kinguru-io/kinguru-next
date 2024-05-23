@@ -1,0 +1,13 @@
+{
+  "fieldsVariant": "outline",
+  "main": [
+    {
+      "name": "email",
+      "type": "email"
+    },
+    {
+      "name": "password",
+      "type": "password"
+    }
+  ]
+}

@@ -27,6 +27,9 @@ export const inputRecipe = defineRecipe({
       borderColor: "neutral.3",
       cursor: "not-allowed",
     },
+    _invalid: {
+      borderColor: "danger!important",
+    },
   },
   variants: {
     variant: {

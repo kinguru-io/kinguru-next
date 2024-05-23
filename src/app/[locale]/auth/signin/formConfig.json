@@ -1,0 +1,9 @@
+{
+  "fieldsVariant": "outline",
+  "main": [
+    {
+      "name": "email",
+      "type": "email"
+    }
+  ]
+}

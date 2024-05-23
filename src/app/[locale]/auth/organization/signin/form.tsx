@@ -5,7 +5,8 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Button, Input, InputPassword } from "@/components/uikit";
+import formConfig from "./formConfig.json";
+import { BaseForm, Button } from "@/components/uikit";
 import type { RevalidateAll } from "@/lib/actions/auth";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link, useRouter } from "@/navigation";
@@ -54,31 +55,21 @@ export function SigninForm({
 function SigninFormInner() {
   const t = useTranslations("auth.signin_form");
   const {
-    register,
-    formState: { isSubmitting, isValid },
+    formState: { isSubmitting },
   } = useFormContext();
 
   return (
     <VStack gap="0">
       <fieldset className={vstack({ gap: "15px" })} disabled={isSubmitting}>
-        <Input
-          type="email"
-          inputMode="email"
+        <BaseForm<SigninFormInput>
+          config={formConfig.main}
+          schema={signinFormSchema}
+          outlinedFields={true}
+          translationsKey="auth.signin_form"
           variant="outline"
-          placeholder={t("email_placeholder")}
-          {...register("email")}
-        />
-        <InputPassword
-          placeholder={t("password_placeholder")}
-          {...register("password")}
         />
       </fieldset>
-      <Button
-        type="submit"
-        size="md"
-        isLoading={isSubmitting}
-        disabled={!isValid}
-      >
+      <Button type="submit" size="md" isLoading={isSubmitting}>
         {t("submit")}
       </Button>
       <Link
