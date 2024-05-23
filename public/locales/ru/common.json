@@ -260,10 +260,10 @@
     },
     "signup_form": {
       "heading": "Зарегистрируйте свою организацию",
-      "name_placeholder": "Ведите название компании",
-      "email_placeholder": "Введите email",
-      "password_placeholder": "Пароль",
-      "password_confirm_placeholder": "Повтор пароля",
+      "name": "Ведите название компании",
+      "email": "Введите email",
+      "password": "Пароль",
+      "confirmPassword": "Повтор пароля",
       "submit": "Зарегистрироваться",
       "helper": "Нажимая на кнопку \"Зарегистрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
     }
@@ -300,6 +300,8 @@
       "zipCode": "Индекс",
       "foundationDate": "Год основания",
       "businessName": "Наименование компании",
+      "NIP": "NIP(XXXXXXXXX)",
+      "IBAN": "IBAN",
       "bankName": "Название банка",
       "same_addresses_label": "юридический адрес совпадает с почтовым адресом",
       "social_link_placeholder": "Cсылка на аккаунт {social}",

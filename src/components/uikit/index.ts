@@ -18,3 +18,4 @@ export * from "./DefaultImage";
 export * from "./TimeSlot";
 export * from "./Radio";
 export * from "./Tabs";
+export * from "./Forms";

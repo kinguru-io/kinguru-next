@@ -8,14 +8,14 @@ import { signinFormSchema } from "@/lib/validations";
 import prisma from "@/server/prisma.ts";
 
 export const providers = (adapter: Adapter) => [
-  GitHubProvider({
-    clientId: process.env.GITHUB_ID as string,
-    clientSecret: process.env.GITHUB_SECRET as string,
-  }),
-  GoogleProvider({
-    clientId: process.env.GOOGLE_CLIENT_ID as string,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-  }),
+  // GitHubProvider({
+  //   clientId: process.env.GITHUB_ID as string,
+  //   clientSecret: process.env.GITHUB_SECRET as string,
+  // }),
+  // GoogleProvider({
+  //   clientId: process.env.GOOGLE_CLIENT_ID as string,
+  //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+  // }),
   EmailProvider({
     server: {
       host: process.env.EMAIL_SERVER_HOST,
