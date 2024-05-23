@@ -81,7 +81,7 @@ Content-Type: application/json
   }
 }
 
-### Update connector
+### Update PSQL connector
 PUT http://localhost:8083/connectors/inventory-connector/config
 Content-Type: application/json
 
@@ -93,14 +93,14 @@ Content-Type: application/json
   "database.password": "qwerty",
   "database.dbname": "postgres",
   "database.server.name": "kinguru",
-  "table.include.list": "public.Event",
+  "table.include.list": "public.Event,public.Premise",
   "topic.prefix": "kinguru",
   "transforms": "unwrap",
   "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
   "transforms.unwrap.drop.tombstones": "false"
 }
 
-### Update connector
+### Update ES connector
 PUT http://localhost:8083/connectors/elastic-sink/config
 Content-Type: application/json
 
@@ -119,10 +119,10 @@ Content-Type: application/json
   "behavior.on.null.values": "delete"
 }
 
-### Delete connector
+### Delete PSQL connector
 DELETE http://localhost:8083/connectors/inventory-connector
-### Delete connector
+### Delete ES connector
 DELETE http://localhost:8083/connectors/elastic-sink
 
-### Delete ES index
+### Delete ES premise_fulfilled index
 DELETE http://localhost:9200/kinguru.public.premise_fulfilled
