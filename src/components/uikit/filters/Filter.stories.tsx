@@ -1,4 +1,4 @@
-import { Filter, FilterItem } from "./filter";
+import { Filter, FilterGroup } from "./filter";
 import { Box } from "~/styled-system/jsx";
 
 export default {
@@ -10,11 +10,11 @@ export const FilterExample = {
     return (
       <Box maxWidth="284px">
         <Filter heading="All filters">
-          <FilterItem heading="Country">0</FilterItem>
-          <FilterItem heading="City">1</FilterItem>
-          <FilterItem heading="Amenities">2</FilterItem>
-          <FilterItem heading="Time">3</FilterItem>
-          <FilterItem heading="Date">4</FilterItem>
+          <FilterGroup heading="Country">0</FilterGroup>
+          <FilterGroup heading="City">1</FilterGroup>
+          <FilterGroup heading="Amenities">2</FilterGroup>
+          <FilterGroup heading="Time">3</FilterGroup>
+          <FilterGroup heading="Date">4</FilterGroup>
         </Filter>
       </Box>
     );
