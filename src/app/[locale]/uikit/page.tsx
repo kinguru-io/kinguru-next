@@ -1,9 +1,9 @@
 import { Container } from "~/styled-system/jsx";
 
-export default async function Uikit() {
+export default async function Uikit({ searchParams }: { searchParams: any }) {
   return (
     <Container>
-      <p>Page example</p>
+      <pre>{JSON.stringify(searchParams, null, 2)}</pre>
     </Container>
   );
 }

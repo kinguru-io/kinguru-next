@@ -13,6 +13,7 @@ export function Filter({
       borderRadius="27px"
       paddingBlock="15px 10px"
       gap="0"
+      height="min-content"
     >
       <InlineBox textStyle="heading.6" paddingInline="25px">
         {heading}
@@ -22,7 +23,7 @@ export function Filter({
   );
 }
 
-export function FilterItem({
+export function FilterGroup({
   heading,
   children,
 }: {

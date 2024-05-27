@@ -569,5 +569,27 @@
     "default_30_desc": "Bookings can be cancelled by guests up to 30 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 30-7 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 7 days of the event are not eligible for a refund.",
     "default_90": "Standard (90 days)",
     "default_90_desc": "Bookings can be cancelled by guests up to 90 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 90-14 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 14 days of the event are not eligible for a refund."
+  },
+  "filters": {
+    "all": "All filters",
+    "reset_btn_label": "Reset all filters",
+    "range_from_label": "From",
+    "range_to_label": "to",
+    "show_all_btn_label": "Show all filters",
+    "hide_btn_label": "Show less",
+    "group": {
+      "countryCode": "Country",
+      "city": "City",
+      "price": "Price",
+      "type": "Premise type",
+      "capacity": "Capacity",
+      "area": "Area",
+      "amenities": "Amenities and facilities"
+    },
+    "literal": {
+      "price": "zł",
+      "area": "m²",
+      "capacity": "ppl."
+    }
   }
 }
