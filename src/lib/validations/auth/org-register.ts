@@ -18,8 +18,6 @@ const regexNIP = /^\d{10}$/m; // NIP is a 10 number string
 const regexIBAN =
   /^([A-Z]{2}[ '+'\\\\'+'-]?[0-9]{2})(?=(?:[ '+'\\\\'+'-]?[A-Z0-9]){9,30}$)((?:[ '+'\\\\'+'-]?[A-Z0-9]{3,5}){2,7})([ '+'\\\\'+'-]?[A-Z0-9]{1,3})?$/m;
 
-const regexFoundationDate = /^(19[0-9][0-9]|20[0-1][0-9]|202[0-4])$/;
-
 const addressSchema = z.object({
   country: zfd.text(),
   city: zfd.text().nullish(),
@@ -36,14 +34,6 @@ const socialLinkSchema = z.object({
 
 export const orgRegisterSchema = zfd.formData({
   name: zfd.text(z.string().min(3).max(50)),
-  // foundationDate: zfd.text(
-  //   z.string().regex(regexIBAN).min(1900).max(new Date().getFullYear()),
-  // ),
-  // foundationDate: zfd.text(
-  //   z.string().regex(regexFoundationDate, {
-  //     message: "Foundation date must be between 1900 and 2024",
-  //   }),
-  // ),
   foundationDate: zfd.numeric(
     z.number().min(1900).step(1).max(new Date().getFullYear()),
   ),

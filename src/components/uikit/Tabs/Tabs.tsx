@@ -22,6 +22,11 @@ type TabsContextType = {
 
 const TabsContext = createContext<TabsContextType | null>(null);
 
+export const PassActiveTabProvider: TabsContextType = {
+  activeTabIdx: 0,
+  setActiveTabIdx: () => {},
+};
+
 export function useTabs() {
   const context = useContext(TabsContext);
 
@@ -34,6 +39,9 @@ export function useTabs() {
 
 export function TabsWrapper({ children }: { children: React.ReactNode }) {
   const [activeTabIdx, setActiveTabIdx] = useState(0);
+
+  PassActiveTabProvider.activeTabIdx = activeTabIdx;
+  PassActiveTabProvider.setActiveTabIdx = setActiveTabIdx;
 
   return (
     <TabsContext.Provider value={{ activeTabIdx, setActiveTabIdx }}>
@@ -84,15 +92,26 @@ type TabProps = StyledVariantProps<typeof TabButton> &
   Omit<HTMLStyledProps<"button">, "type" | "onClick" | "aria-selected"> & {
     tabIdx: number;
     label: string;
+    setActiveForm: (tabIdx: number) => void;
   };
 
-export function Tab({ tabIdx, label, ...buttonProps }: TabProps) {
+export function Tab({
+  tabIdx,
+  label,
+  setActiveForm,
+  ...buttonProps
+}: TabProps) {
   const { activeTabIdx, setActiveTabIdx } = useTabs();
+
+  const handleActiveTab = () => {
+    setActiveTabIdx(tabIdx);
+    setActiveForm(tabIdx);
+  };
 
   return (
     <TabButton
       type="button"
-      onClick={() => setActiveTabIdx(tabIdx)}
+      onClick={handleActiveTab}
       aria-selected={tabIdx === activeTabIdx}
       {...buttonProps}
     >

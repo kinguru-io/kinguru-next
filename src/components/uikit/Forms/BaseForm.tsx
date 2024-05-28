@@ -1,11 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import React, { memo } from "react";
-import { useFormContext } from "react-hook-form";
 import { ZodSchema } from "zod";
-import { ErrorField, Input, InputPassword } from "@/components/uikit";
-import { getOptionalFields } from "@/utils/getOptionalFieldsFromSchema";
+import { FormField } from "./Elements/FormField";
 import { InputVariant } from "~/styled-system/recipes";
 
 // Types for the config prop
@@ -46,82 +42,3 @@ export function BaseForm<T>({
     </>
   );
 }
-
-interface FormFieldProps {
-  name: string;
-  customName?: string;
-  type: string;
-  options?: { text: string }[];
-  schema: ZodSchema<any>;
-  variant: InputVariant;
-  translationsKey?: string;
-}
-
-const FormField = memo(
-  <T,>({
-    name,
-    customName,
-    type,
-    schema,
-    translationsKey,
-    variant,
-  }: FormFieldProps): JSX.Element => {
-    const {
-      register,
-      formState: { errors },
-    } = useFormContext<T>();
-
-    const t = useTranslations(translationsKey);
-
-    const fieldName = customName || name;
-
-    const getError = () => {
-      if (customName) {
-        const [mainKey, indexStr, secondName] = fieldName.split(".");
-        const index = parseInt(indexStr);
-        return errors?.[mainKey]?.[index]?.[secondName];
-      }
-      return errors?.[fieldName];
-    };
-
-    const error = getError();
-
-    const optionalFields = getOptionalFields(schema);
-    const markRequiredField = optionalFields.includes(fieldName) ? "" : "*";
-    const placeholder = `${t(name)}${markRequiredField}`;
-
-    const commonProps = {
-      placeholder,
-      ...register(fieldName),
-      "data-invalid": error,
-    };
-
-    if (variant) {
-      commonProps.variant = "outline";
-    }
-
-    let field;
-    switch (type) {
-      case "text":
-        field = <Input type={type} {...commonProps} />;
-        break;
-      case "number":
-      case "email":
-        field = <Input type={type} inputMode="numeric" {...commonProps} />;
-        break;
-      case "password":
-        field = <InputPassword {...commonProps} />;
-        break;
-      // Add more cases as needed
-      default:
-        field = null;
-    }
-
-    return (
-      <div style={{ width: "100%" }}>
-        {field}
-        <ErrorField error={error} />
-      </div>
-    );
-  },
-);

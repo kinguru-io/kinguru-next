@@ -50,6 +50,7 @@ export function EditPremiseForm({
   };
 }) {
   const t = useTranslations("form.common");
+
   const methods = useForm<CreatePremiseSchema>({
     mode: "onChange",
     resolver: zodResolver(createPremiseSchema),
