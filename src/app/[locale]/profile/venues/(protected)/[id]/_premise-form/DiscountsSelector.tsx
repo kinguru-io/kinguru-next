@@ -10,21 +10,21 @@ import {
 } from "react-hook-form";
 import { TagClosable } from "@/components/common";
 import { Button, Input, Select } from "@/components/uikit";
-import { type CreatePremiseSchema } from "@/lib/actions/premise";
 import {
-  discountsSchema,
   type DiscountsSchema,
-} from "@/lib/actions/premise/validation";
+  discountsSchema,
+} from "@/lib/actions/premise/tabs/openHoursAndPrices";
+import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { hoursFormatter } from "@/lib/utils";
 import type { Locale } from "@/navigation";
 import { Grid, GridItem, HStack, InlineBox, Stack } from "~/styled-system/jsx";
 
 export function DiscountsSelector() {
   const t = useTranslations("profile.premises.add.fields");
-  const { control, getValues } = useFormContext<CreatePremiseSchema>();
+  const { control, getValues } = useFormContext<CreatePremiseFormSchemaProps>();
   const { fields, append, update, remove } = useFieldArray({
     control,
-    name: "discounts",
+    name: "openHoursAndPrice.discounts",
   });
 
   return (
@@ -101,9 +101,15 @@ function AddOpenHoursDiscountRecord({
   update,
   getValues,
 }: {
-  append: UseFieldArrayAppend<CreatePremiseSchema, "discounts">;
-  update: UseFieldArrayUpdate<CreatePremiseSchema, "discounts">;
-  getValues: UseFormGetValues<CreatePremiseSchema>;
+  append: UseFieldArrayAppend<
+    CreatePremiseFormSchemaProps,
+    "openHoursAndPrice.discounts"
+  >;
+  update: UseFieldArrayUpdate<
+    CreatePremiseFormSchemaProps,
+    "openHoursAndPrice.discounts"
+  >;
+  getValues: UseFormGetValues<CreatePremiseFormSchemaProps>;
 }) {
   const locale = useLocale() as Locale;
   const t = useTranslations("profile.premises.add.fields");
@@ -120,7 +126,7 @@ function AddOpenHoursDiscountRecord({
   const formatter = hoursFormatter(locale);
 
   const addButtonClicked = (input: DiscountsSchema) => {
-    const discounts = getValues("discounts");
+    const discounts = getValues("openHoursAndPrice.discounts");
 
     const index = discounts.findIndex(
       (discount) => discount.duration === input.duration,

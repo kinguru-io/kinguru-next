@@ -1,4 +1,7 @@
-export { createPremiseSchema, type CreatePremiseSchema } from "./validation";
+export {
+  createPremiseFormSchema,
+  type CreatePremiseFormSchemaProps,
+} from "./validation";
 export {
   createPremiseAction,
   type CreatePremiseAction,

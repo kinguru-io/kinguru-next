@@ -19,6 +19,7 @@ import {
   Input,
   Select,
   Button,
+  ErrorField,
 } from "@/components/uikit";
 import type { CreatePremiseSchema } from "@/lib/actions/premise";
 import { premiseTypes } from "@/lib/shared/config/premise-types";
@@ -32,7 +33,10 @@ export function PremiseFormInner({
   mapboxId: string;
   isEditing?: boolean;
 }) {
-  const { register } = useFormContext<CreatePremiseSchema>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<CreatePremiseSchema>();
   const t = useTranslations("profile.premises.add");
 
   const tabs = [
@@ -48,33 +52,49 @@ export function PremiseFormInner({
                   : "fields.name_and_description",
               )}
             </h3>
-            <Input
-              placeholder={t("fields.name_placeholder")}
-              readOnly={isEditing}
-              hidden={isEditing}
-              {...register("name")}
-            />
-            <Textarea
-              placeholder={t("fields.description_placeholder")}
-              rows={9}
-              {...register("description")}
-            />
+            <div>
+              <Input
+                placeholder={t("fields.name_placeholder")}
+                readOnly={isEditing}
+                hidden={isEditing}
+                data-invalid={errors}
+                {...register("name")}
+              />
+              {errors.name && <ErrorField error={errors.name} />}
+            </div>
+            <div>
+              <Textarea
+                placeholder={t("fields.description_placeholder")}
+                rows={9}
+                data-invalid={errors}
+                {...register("description")}
+              />
+              {errors.description && <ErrorField error={errors.description} />}
+            </div>
           </TabInnerSection>
           <TabInnerSection>
             <h3>{t("fields.address")}</h3>
             <p>{t("fields.address_tip")}</p>
             <HStack
               justifyContent="space-between"
-              css={{ "& > .input": { flexBasis: "38%" } }}
+              css={{ "& > div": { flexBasis: "38%" } }}
             >
-              <Input
-                placeholder={t("fields.room_placeholder")}
-                {...register("room")}
-              />
-              <Input
-                placeholder={t("fields.floor_placeholder")}
-                {...register("floor")}
-              />
+              <div>
+                <Input
+                  placeholder={t("fields.room_placeholder")}
+                  data-invalid={errors}
+                  {...register("room")}
+                />
+                {errors.room && <ErrorField error={errors.room} />}
+              </div>
+              <div>
+                <Input
+                  placeholder={t("fields.floor_placeholder")}
+                  data-invalid={errors}
+                  {...register("floor")}
+                />
+                {errors.floor && <ErrorField error={errors.floor} />}
+              </div>
             </HStack>
           </TabInnerSection>
         </>
@@ -103,6 +123,7 @@ export function PremiseFormInner({
               >
                 <PremiseTypeSelectOptions />
               </Select>
+              {errors.type && <ErrorField error={errors.type} />}
               <HStack gap="10px">
                 {t("fields.area_prefix")}
                 <Input
@@ -112,6 +133,7 @@ export function PremiseFormInner({
                   placeholder="1000"
                   {...register("area", { min: 0, valueAsNumber: true })}
                 />
+                {errors.area && <ErrorField error={errors.area.message} />}
                 <span>
                   {t("fields.area_literal")}
                   <sup>2</sup>
@@ -125,6 +147,7 @@ export function PremiseFormInner({
                   placeholder="1000"
                   {...register("capacity", { min: 0, valueAsNumber: true })}
                 />
+                {errors.capacity && <ErrorField error={errors.capacity} />}
                 {t("fields.capacity_literal")}
               </HStack>
             </Stack>
@@ -172,6 +195,7 @@ export function PremiseFormInner({
             rows={12}
             {...register("rules")}
           />
+          {errors.rules && <ErrorField error={errors.rules} />}
         </TabInnerSection>
       ),
     },
