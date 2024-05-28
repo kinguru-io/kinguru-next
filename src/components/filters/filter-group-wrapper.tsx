@@ -1,4 +1,5 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -6,7 +7,7 @@ import { usePathname, useRouter } from "@/navigation";
 import { Stack } from "~/styled-system/jsx";
 
 export function FilterGroupWrapper({
-  shouldReplace = true,
+  shouldReplace = false,
   children,
 }: {
   shouldReplace?: boolean;
@@ -17,23 +18,17 @@ export function FilterGroupWrapper({
   const searchParams = useSearchParams();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  // solution was provided to synchronize the search params the first page load
-  // basically for keeping away from react props and continuous rerender while changing props
-  // * doesn't work as expected
   useEffect(() => {
-    if (!searchParams || searchParams.size === 0) return;
+    if (!searchParams) return;
     if (!wrapperRef.current) return;
 
-    for (const [name, value] of searchParams.entries()) {
-      const input = wrapperRef.current.querySelector<HTMLInputElement>(
-        `input[name="${name}"][value="${value}"]`,
-      );
+    const inputs =
+      wrapperRef.current.querySelectorAll<HTMLInputElement>("input");
 
-      if (input) {
-        input.checked = true;
-      }
-    }
-  }, [wrapperRef]);
+    inputs.forEach((input) => {
+      input.checked = searchParams.has(input.name, input.value);
+    });
+  }, [wrapperRef, searchParams]);
 
   const updateGroupedSearchParams = useDebouncedCallback(
     (name: string, value: string, checked: boolean) => {

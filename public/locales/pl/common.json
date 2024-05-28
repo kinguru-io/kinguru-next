@@ -573,6 +573,7 @@
   "filters": {
     "all": "All filters",
     "reset_btn_label": "Reset all filters",
+    "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
     "range_from_label": "From",
     "range_to_label": "to",
     "show_all_btn_label": "Show all filters",
@@ -590,6 +591,11 @@
       "price": "zł",
       "area": "m²",
       "capacity": "ppl."
+    },
+    "sorting": {
+      "label": "Sortuj",
+      "asc": "Cena rosnąco",
+      "desc": "Cena malejąco"
     }
   }
 }

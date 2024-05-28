@@ -26,7 +26,7 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
   );
 }
 
-function PremiseStack({ premiseIdList }: PremiseListingProps) {
+export function PremiseStack({ premiseIdList }: PremiseListingProps) {
   return (
     <Stack gap="20px">
       {premiseIdList.map(({ id }) => (
