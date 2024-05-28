@@ -1,7 +1,8 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { RangeItem, TermsItem } from "./_filter-atoms";
-import { FilterCollapse } from "./_filter-collapse";
-import { FilterGroupWrapper } from "./_filter-group-wrapper";
+import { RangeItem, TermsItem } from "./filter-atoms";
+import { FilterCollapse } from "./filter-collapse";
+import { FilterGroupWrapper } from "./filter-group-wrapper";
+import type { GlobalAgg, TermsAgg } from "@/lib/actions/premise-filter";
 import { filterDefaults } from "@/lib/shared/config/filters";
 import { Stack } from "~/styled-system/jsx";
 
@@ -27,23 +28,6 @@ type FilterMeta =
 export type FilterConfig<T> = {
   aggKey: keyof T;
 } & FilterMeta;
-
-type Bucket = {
-  key: string;
-  doc_count: number;
-};
-
-type TermsAgg = {
-  doc_count_error_upper_bound: number;
-  sum_other_doc_count: number;
-  buckets: Bucket[];
-};
-
-type GlobalAgg = {
-  doc_count: number;
-  min: { value: number };
-  max: { value: number };
-};
 
 function isRanged(
   behavior: GroupedType | RangedType,

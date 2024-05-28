@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ArrowIcon } from "@/components/uikit";
 import { css } from "~/styled-system/css";
-import { Box } from "~/styled-system/jsx";
 
 export function FilterCollapse({
   children,
@@ -25,7 +24,9 @@ export function FilterCollapse({
 
   return (
     <>
-      <Box srOnly={!isShown}>{children}</Box>
+      <fieldset className={css({ srOnly: !isShown })} disabled={!isShown}>
+        {children}
+      </fieldset>
       <button
         className={css({
           alignSelf: "start",
@@ -33,12 +34,11 @@ export function FilterCollapse({
           gap: "15px",
           alignItems: "baseline",
           fontSize: "20px",
-          whiteSpace: "nowrap",
         })}
         type="button"
         onClick={collapseClicked}
       >
-        <span className={css({ textStyle: "body.2" })}>
+        <span className={css({ textStyle: "body.2", whiteSpace: "nowrap" })}>
           {isShown ? hideLabel : `${showLabel} (${count})`}
         </span>
         <ArrowIcon direction={isShown ? "up" : "down"} />
