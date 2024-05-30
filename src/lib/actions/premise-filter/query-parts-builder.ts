@@ -1,3 +1,8 @@
+export const defaultSizings = {
+  size: 10,
+  from: 0,
+};
+
 type MaybeArray<T> = T | T[];
 
 function numericResolver(key: string) {
@@ -8,7 +13,7 @@ function numericResolver(key: string) {
   };
 }
 
-const searchQueryResolverMap = {
+const filterKeysResolverMap = {
   amenities: (terms: MaybeArray<string>) => ({
     terms_set: {
       amenities: {
@@ -25,25 +30,33 @@ const searchQueryResolverMap = {
   capacity: numericResolver("capacity"),
 };
 
+function isFilterKey(key: string): key is keyof typeof filterKeysResolverMap {
+  return key in filterKeysResolverMap;
+}
+
 export function buildQueryParts(searchParams: Record<string, any>) {
   return Object.entries(searchParams).reduce(
-    (parts, [agg, values]) => {
+    (parts, [key, values]) => {
       if (!values) return parts;
-      if (!(agg in searchQueryResolverMap)) {
-        if (agg === "sort") {
-          parts.sort.push({ minPrice: values });
-        }
 
-        return parts;
+      if (isFilterKey(key)) {
+        const resolver = filterKeysResolverMap[key];
+        parts.must.push(resolver(values));
       }
 
-      const resolver =
-        searchQueryResolverMap[agg as keyof typeof searchQueryResolverMap];
+      if (key === "sort") {
+        parts.sort.push({ minPrice: values });
+      }
 
-      parts.must.push(resolver(values));
+      if (key === "size") {
+        parts.size = Number(values);
+      }
 
       return parts;
     },
-    { must: [], sort: [] } as Record<"must" | "sort", any[]>,
+    { must: [], sort: [], size: defaultSizings.size } as Record<
+      "must" | "sort" | "size",
+      any | any[]
+    >,
   );
 }

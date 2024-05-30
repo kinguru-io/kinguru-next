@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { SortToggler } from "../../../components/filters/sort-toggler";
+import { LoadMoreLink } from "@/components/filters";
 import { PremiseStack } from "@/components/premise";
-import { getPremises } from "@/lib/actions/premise-filter";
+import { getPremises, defaultSizings } from "@/lib/actions/premise-filter";
 import { HStack, InlineBox, Stack } from "~/styled-system/jsx";
 
 export async function Listing({
@@ -14,7 +15,9 @@ export async function Listing({
     hits,
   } = await getPremises(searchParams);
   const t = await getTranslations("filters");
-  const { sort = "label" } = searchParams;
+
+  const sort: keyof IntlMessages["filters"]["sorting"] =
+    searchParams.sort || "label";
   const sortItems = [
     {
       value: "asc",
@@ -36,12 +39,18 @@ export async function Listing({
           pathname="/premises"
           searchParams={searchParams}
           items={sortItems}
-          defaultLabel={t(
-            `sorting.${sort as keyof IntlMessages["filters"]["sorting"]}`,
-          )}
+          defaultLabel={t(`sorting.${sort}`)}
         />
       </HStack>
       <PremiseStack premiseIdList={hits.map(({ _source }) => _source)} />
+      <LoadMoreLink
+        take={defaultSizings.size}
+        initialSize={defaultSizings.size}
+        total={total}
+        pathname="/premises"
+        searchParams={searchParams}
+        label={t("show_more")}
+      />
     </Stack>
   );
 }
