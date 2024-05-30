@@ -691,7 +691,25 @@
           "rules_tip": "Describe all rules of your hall",
           "rules_placeholder": "e.g. No alcohol is allowed.",
           "booking_cancel_terms":"Booking Cancellation Terms",
-          "booking_cancel_terms_tip": "Choose one cancellation term"
+          "booking_cancel_terms_tip": "Choose one cancellation term",
+          "errors": {
+            "name_required": "Name is required",
+            "description_required": "Description is required",
+            "room_required": "Room is required",
+            "floor_required": "Floor is required.",
+            "photos_required": "At least one photo is required",
+            "type_required": "Please, select a valid type",
+            "area_required": "Area is required",
+            "areaMin_required": "The area must be at least 3 square meter",
+            "areaMax_required": "The area must be no more than 100000 square meters",
+            "capacity_required": "Capacity is required",
+            "capacityMin_required": "The capacity must be at least 1",
+            "capacityMax_required": "The capacity must be a positive number",
+            "openHours_required": "You must add working hours and price for at least one day",
+            "amenities_required": "Should be chosen at least 5 amenities",
+            "rulesMin_required": "The amount of symbols for rules should be at least 10",
+            "bookingCancelTerm_required": "Booking Cancellation Terms are required"
+          }
         }
       }
     }

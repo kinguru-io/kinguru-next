@@ -55,6 +55,7 @@ export function EditPremiseForm({
   };
 }) {
   const t = useTranslations("form.common");
+  const formT = useTranslations("profile.premises.add");
 
   const defaultValues = {
     formType: CreatePremiseFormTypeEnum.MainInformation,
@@ -99,7 +100,7 @@ export function EditPremiseForm({
 
   const methods = useForm<CreatePremiseFormSchemaProps>({
     mode: "all",
-    resolver: zodResolver(createPremiseFormSchema),
+    resolver: zodResolver(createPremiseFormSchema(formT)),
     defaultValues,
   });
 
@@ -130,7 +131,7 @@ export function EditPremiseForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(formSubmitted)}>
-        <PremiseFormInner key="edit-premise_form" mapboxId={mapboxId} />
+        <PremiseFormInner mapboxId={mapboxId} />
       </form>
     </FormProvider>
   );

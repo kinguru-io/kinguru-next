@@ -1,5 +1,7 @@
 "use client";
 
+import { IconButton } from "@chakra-ui/react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   createContext,
@@ -9,6 +11,7 @@ import {
   useState,
   useEffect,
 } from "react";
+import IconFormFieldSuccess from "~/public/img/icon_form_field_succes.svg";
 import {
   Box,
   BoxProps,
@@ -154,6 +157,11 @@ export function Tab({
     }
   };
 
+  const showSuccessIcon =
+    !isDisabled &&
+    tabsVisited.includes(activeTabIdx) &&
+    activeTabIdx !== tabIdx;
+
   return (
     <TabButton
       type="button"
@@ -166,6 +174,21 @@ export function Tab({
       {...buttonProps}
     >
       {label}
+      {showSuccessIcon && (
+        <IconButton
+          isRound={true}
+          variant="solid"
+          colorScheme="teal"
+          aria-label="Done"
+          fontSize="20px"
+          position="absolute"
+          top="0"
+          right="5%"
+          icon={
+            <Image src={IconFormFieldSuccess} alt="" width={10} height={10} />
+          }
+        />
+      )}
     </TabButton>
   );
 }

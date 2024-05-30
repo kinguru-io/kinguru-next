@@ -23,7 +23,7 @@ export function AmenitySelector() {
   // Filter the amenities to get only those that are checked (i.e., have a true value) and get the count.
   const checkedAmenitiesCount = () => {
     const amenities = getValues().parametersAndAmenities.amenities;
-    return Object.values(amenities).filter((value) => value).length;
+    return Object.values(amenities).filter(Boolean).length;
   };
 
   return (Object.keys(amenitiesTags) as AmenityGroup[]).map((amenityGroup) => (

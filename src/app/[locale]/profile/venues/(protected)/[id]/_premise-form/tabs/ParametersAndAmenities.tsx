@@ -42,9 +42,7 @@ export default function ParametersAndAmenities() {
                 step="0.01"
                 placeholder="1000"
                 data-invalid={getError(errors, `${formFieldPath}.area`)}
-                {...register(`${formFieldPath}.area`, {
-                  valueAsNumber: true,
-                })}
+                {...register(`${formFieldPath}.area`)}
               />
               <span>
                 {t("fields.area_literal")}

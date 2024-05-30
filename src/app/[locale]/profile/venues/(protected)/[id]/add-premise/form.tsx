@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { getDefaultFormAmenities } from "../_premise-form/default-form-amenities";
@@ -27,10 +28,11 @@ export function AddPremiseForm({
   mapboxId,
 }: AddPremiseFormProps) {
   const { push } = useRouter();
+  const t = useTranslations("profile.premises.add");
 
   const methods = useForm<CreatePremiseFormSchemaProps>({
     mode: "onChange",
-    resolver: zodResolver(createPremiseFormSchema),
+    resolver: zodResolver(createPremiseFormSchema(t)),
     defaultValues: {
       formType: CreatePremiseFormTypeEnum.MainInformation,
       resources: {
@@ -75,7 +77,7 @@ export function AddPremiseForm({
         // The form is really complex, so `display: none` isn't used. Btw `next/submit` button requires JS too
         onSubmit={handleSubmit(formSubmit)}
       >
-        <PremiseFormInner key="add-premise_form" mapboxId={mapboxId} />
+        <PremiseFormInner mapboxId={mapboxId} />
       </form>
     </FormProvider>
   );
