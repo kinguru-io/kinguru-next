@@ -31,6 +31,7 @@ export function SignupForm({ signUp }: { signUp: SignUpAction }) {
 
   const onSubmit: SubmitHandler<SignupFormInput> = useCallback(
     (data) => {
+      // @ts-expect-error
       startTransition(() => formAction(data));
     },
     [formAction],

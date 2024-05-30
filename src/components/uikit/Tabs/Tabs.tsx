@@ -127,7 +127,7 @@ type TabProps = StyledVariantProps<typeof TabButton> &
     tabIdx: number;
     label: string;
     setActiveForm: (tabIdx: number) => void;
-    isDisabled: boolean;
+    isDisabled?: boolean;
   };
 
 export function Tab({

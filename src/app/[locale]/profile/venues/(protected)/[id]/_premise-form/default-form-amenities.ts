@@ -1,5 +1,5 @@
 import type { Premise } from "@prisma/client";
-import type { CreatePremiseSchema } from "@/lib/actions/premise";
+import type { CreatePremiseFormSchemaProps } from "@/lib/actions/premise";
 import { amenitiesTags } from "@/lib/shared/config/amenities";
 
 export function getDefaultFormAmenities(
@@ -12,6 +12,6 @@ export function getDefaultFormAmenities(
         defaultAmenities[amenity] = premiseAmenities?.includes(amenity);
         return defaultAmenities;
       },
-      {} as CreatePremiseSchema["amenities"],
+      {} as CreatePremiseFormSchemaProps["parametersAndAmenities"]["amenities"],
     );
 }

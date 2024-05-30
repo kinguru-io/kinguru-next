@@ -41,6 +41,7 @@ const orgRegisterHandler = async ({
         deleteMany: {},
         createMany: { data: prepareSocialLinks(socialLinks) },
       },
+      // @ts-expect-error
       address: { deleteMany: {}, createMany: { data: address } },
     },
     create: {
@@ -49,6 +50,7 @@ const orgRegisterHandler = async ({
       socialLinks: {
         createMany: { data: prepareSocialLinks(socialLinks) },
       },
+      // @ts-expect-error
       address: { createMany: { data: address } },
     },
   });

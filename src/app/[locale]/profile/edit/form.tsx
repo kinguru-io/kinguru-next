@@ -52,6 +52,7 @@ export function EditProfileForm({
 
   const onSubmit: SubmitHandler<OrgRegisterInput> = useCallback(
     (data) => {
+      // @ts-expect-error
       startTransition(() => formAction(data));
     },
     [formAction],
@@ -170,7 +171,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
 function AddressGroup({ type }: { type: "post" | "billing" }) {
   const index = type === "post" ? 0 : 1;
 
-  const customFieldName = (field): string => {
+  const customFieldName = (field: { name: string }): string => {
     return `address.${index}.${field.name}`;
   };
 

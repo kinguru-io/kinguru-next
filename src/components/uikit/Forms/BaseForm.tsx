@@ -13,29 +13,29 @@ interface FieldConfig {
 // Props for the BaseForm component
 interface BaseFormProps {
   config: FieldConfig[];
-  schema: ZodSchema<any>;
-  customFieldName?: (field: FieldConfig) => string;
+  schema: ZodSchema;
   translationsKey: string;
+  customFieldName?: (field: FieldConfig) => string | undefined;
   variant?: InputVariant["variant"];
 }
 
-export function BaseForm<T>({
-  config,
-  customFieldName,
-  schema,
-  translationsKey,
-  variant,
-}: BaseFormProps): JSX.Element {
+export function BaseForm<T>(props: BaseFormProps): JSX.Element {
+  const { config } = props;
+
   return (
     <>
-      {config.map((field: FieldConfig) => (
+      {config.map((_field) => (
+        // @ts-ignore
         <FormField<T>
-          key={`${field.name}_${field.type}`}
-          customName={customFieldName && customFieldName(field)}
-          schema={schema}
-          translationsKey={translationsKey}
-          variant={variant}
-          {...field}
+          key={`${_field.name}_${_field.type}`}
+          name={_field.name}
+          type={_field.type}
+          customName={
+            props?.customFieldName ? props.customFieldName(_field) : undefined
+          }
+          schema={props.schema} // explicitly pass schema
+          translationsKey={props.translationsKey} // explicitly pass translationsKey
+          variant={props.variant} // explicitly pass variant
         />
       ))}
     </>

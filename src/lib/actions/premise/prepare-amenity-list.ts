@@ -1,7 +1,7 @@
-import type { CreatePremiseSchema } from "./validation";
+import type { CreatePremiseFormSchemaProps } from "./validation";
 
 export function prepareAmenityList(
-  amenities: CreatePremiseSchema["amenities"],
+  amenities: CreatePremiseFormSchemaProps["parametersAndAmenities"]["amenities"],
 ) {
   return Object.entries(amenities).reduce((list, [amenityTag, toggled]) => {
     if (toggled) {
