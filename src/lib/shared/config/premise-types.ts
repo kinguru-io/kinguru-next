@@ -20,4 +20,4 @@ export const premiseTypes: Array<PremiseType> = [
   "community_centers",
   "special_events_etc",
   "commercial_kitchens",
-] as const;
+];

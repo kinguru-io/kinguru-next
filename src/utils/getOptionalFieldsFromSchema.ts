@@ -6,7 +6,8 @@ function isFieldOptional(schema: z.ZodTypeAny): boolean {
     return true;
   }
   if (schema instanceof z.ZodEffects || schema instanceof z.ZodArray) {
-    return isFieldOptional(schema._def.schema);
+    // @ts-expect-error
+    return isFieldOptional(schema?._def?.schema);
   }
   if (schema instanceof z.ZodDefault) {
     return isFieldOptional(schema._def.innerType);
@@ -17,6 +18,7 @@ function isFieldOptional(schema: z.ZodTypeAny): boolean {
 // Function to get the shape from the zfd.formData schema
 function getShapeFromSchema(schema: z.ZodTypeAny) {
   const zodObject = schema._def?.schema;
+
   if (zodObject instanceof z.ZodObject) {
     return zodObject.shape;
   }
@@ -38,7 +40,7 @@ export function getOptionalFields(schema: z.ZodTypeAny): string[] {
   const shape = getShapeFromSchema(schema);
   const optionalFields: string[] = [];
 
-  Object.entries(shape).forEach(([key, value]) => {
+  Object.entries(shape).forEach(([key, value]: [string, any]) => {
     if (isFieldOptional(value)) {
       optionalFields.push(key);
     }

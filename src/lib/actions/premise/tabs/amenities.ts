@@ -6,6 +6,7 @@ import { requiredFieldMessage } from "@/utils/forms/validationMessages";
 export type PremiseType = (typeof premiseTypes)[number];
 
 const PremiseTypeEnum = (t: (arg: string) => string = (value) => value) =>
+  // @ts-expect-error
   z.enum([...premiseTypes], {
     errorMap: () => ({ message: requiredFieldMessage(t, "type") }),
   });

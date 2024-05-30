@@ -24,7 +24,13 @@ export const Basic = {
       <TabsWrapper>
         <TabList marginBlockEnd="50px">
           {tabsContent.map(({ label }, i) => (
-            <Tab key={label} tabIdx={i} label={label} variant="line-below" />
+            <Tab
+              key={label}
+              tabIdx={i}
+              label={label}
+              variant="line-below"
+              setActiveForm={() => {}}
+            />
           ))}
         </TabList>
         <TabContent
@@ -60,7 +66,13 @@ export const BasicWithNextButton = {
       <TabsWrapper>
         <TabList overflowX="auto" marginBlockEnd="50px">
           {tabsContent.map(({ label }, i) => (
-            <Tab key={label} tabIdx={i} label={label} variant="line-below" />
+            <Tab
+              key={label}
+              tabIdx={i}
+              label={label}
+              variant="line-below"
+              setActiveForm={() => {}}
+            />
           ))}
         </TabList>
         <TabContent

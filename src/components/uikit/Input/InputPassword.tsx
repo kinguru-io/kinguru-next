@@ -23,11 +23,7 @@ export const InputPassword = forwardRef(function InputPassword(
       position="relative"
       css={{ "& input[type=password]": { color: "neutral.2" } }}
     >
-      <Input
-        type={passwordShown ? "text" : "password"}
-        ref={ref}
-        {...props}
-      />
+      <Input type={passwordShown ? "text" : "password"} ref={ref} {...props} />
       <button
         type="button"
         tabIndex={-1}

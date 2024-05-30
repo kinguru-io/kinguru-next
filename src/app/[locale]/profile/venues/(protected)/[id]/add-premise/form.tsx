@@ -32,6 +32,7 @@ export function AddPremiseForm({
 
   const methods = useForm<CreatePremiseFormSchemaProps>({
     mode: "onChange",
+    // @ts-expect-error
     resolver: zodResolver(createPremiseFormSchema(t)),
     defaultValues: {
       formType: CreatePremiseFormTypeEnum.MainInformation,

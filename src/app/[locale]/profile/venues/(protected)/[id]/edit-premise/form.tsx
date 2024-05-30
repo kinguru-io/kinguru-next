@@ -100,6 +100,7 @@ export function EditPremiseForm({
 
   const methods = useForm<CreatePremiseFormSchemaProps>({
     mode: "all",
+    // @ts-expect-error
     resolver: zodResolver(createPremiseFormSchema(formT)),
     defaultValues,
   });

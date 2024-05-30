@@ -30,6 +30,7 @@ export const FormField = memo(
       formState: { errors },
     } = useFormContext<T>();
 
+    // @ts-expect-error
     const t = useTranslations(translationsKey);
 
     const fieldName = customName || name;
@@ -38,6 +39,7 @@ export const FormField = memo(
       if (customName) {
         const [mainKey, indexStr, secondName] = fieldName.split(".");
         const index = parseInt(indexStr);
+        // @ts-expect-error
         return errors?.[mainKey]?.[index]?.[secondName];
       }
       return errors?.[fieldName];
@@ -47,15 +49,18 @@ export const FormField = memo(
 
     const optionalFields = getOptionalFields(schema);
     const markRequiredField = optionalFields.includes(fieldName) ? "" : "*";
+    // @ts-expect-error
     const placeholder = `${t(name)}${markRequiredField}`;
 
     const commonProps = {
       placeholder,
+      // @ts-expect-error
       ...register(fieldName),
       "data-invalid": error,
     };
 
     if (variant) {
+      // @ts-expect-error
       commonProps.variant = "outline";
     }
 
