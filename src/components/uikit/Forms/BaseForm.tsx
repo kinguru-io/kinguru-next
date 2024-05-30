@@ -16,7 +16,6 @@ interface BaseFormProps {
   schema: ZodSchema<any>;
   customFieldName?: (field: FieldConfig) => string;
   translationsKey: string;
-  outlinedFields?: boolean;
   variant?: InputVariant["variant"];
 }
 

@@ -53,7 +53,7 @@ function ResetFormInner({
   return (
     <VStack gap="0">
       <Input
-        variant="outline"
+        // variant="outline"
         placeholder={t("email_placeholder")}
         disabled={pending}
         {...register("email")}

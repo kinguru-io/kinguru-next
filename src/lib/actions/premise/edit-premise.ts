@@ -3,12 +3,12 @@
 import { revalidatePath } from "next/cache";
 import type { UseFormReturn } from "react-hook-form";
 import { prepareAmenityList } from "./prepare-amenity-list";
-import { createPremiseSchema, type CreatePremiseSchema } from "./validation";
+import { mergedSchema, type MergedFormSchemaProps } from "./validation";
 import { getSession } from "@/auth";
 import type { FormActionState } from "@/lib/utils";
 
 export async function editPremiseAction(
-  payload: CreatePremiseSchema,
+  payload: MergedFormSchemaProps,
   {
     venueId,
     premiseId,
@@ -16,7 +16,7 @@ export async function editPremiseAction(
   }: {
     venueId: string;
     premiseId: string;
-    changedFields: UseFormReturn<CreatePremiseSchema>["formState"]["dirtyFields"];
+    changedFields: UseFormReturn<MergedFormSchemaProps>["formState"]["dirtyFields"];
   },
 ): Promise<FormActionState> {
   const session = await getSession();
@@ -36,7 +36,7 @@ export async function editPremiseAction(
     };
   }
 
-  const parseResult = createPremiseSchema.safeParse(payload);
+  const parseResult = mergedSchema.safeParse(payload);
 
   if (parseResult.error) {
     return {

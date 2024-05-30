@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { TabInnerSection } from "@/components/profile/profile-premise";
 import { ErrorField, Textarea } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
+import { getError } from "@/utils/forms/errors";
 
 export default function Rules() {
   const {
@@ -19,6 +20,7 @@ export default function Rules() {
         <Textarea
           placeholder={t("fields.rules_placeholder")}
           rows={12}
+          data-invalid={getError(errors, "rules.rules")}
           {...register("rules.rules")}
         />
         <ErrorField error={errors?.rules?.rules} />

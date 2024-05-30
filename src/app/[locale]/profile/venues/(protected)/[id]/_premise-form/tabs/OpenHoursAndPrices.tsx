@@ -24,7 +24,7 @@ export default function OpenHoursAndPrices({ mapboxId }: { mapboxId: string }) {
         </p>
       </TabInnerSection>
       <MapboxSearchBoxResponseProvider mapboxId={mapboxId}>
-        <OpenHoursSelector />
+        <OpenHoursSelector key="OpenHoursSelector" />
       </MapboxSearchBoxResponseProvider>
       <DiscountsSelector />
     </>

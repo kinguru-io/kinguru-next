@@ -440,6 +440,9 @@
       "upload_photo": "Upload a photo",
       "uploaded_photo": "Uploaded photo",
       "updated": "Updated"
+    },
+    "multi_step": {
+      "complete_current_step": "Please complete the current step to unlock access to the next steps."
     }
   },
   "organization": {

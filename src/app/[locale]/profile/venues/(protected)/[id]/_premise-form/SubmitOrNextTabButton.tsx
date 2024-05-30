@@ -3,9 +3,16 @@ import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Button, useTabs } from "@/components/uikit";
 
-export function SubmitOrNextTabButton({ lastTabIdx }: { lastTabIdx: number }) {
-  const { activeTabIdx } = useTabs();
+export function SubmitOrNextTabButton({
+  lastTabIdx,
+  tabs,
+}: {
+  lastTabIdx: number;
+  tabs: any;
+}) {
+  const { activeTabIdx, setActiveTabIdx, setTabsVisited } = useTabs();
   const {
+    setValue,
     formState: { isValid, isSubmitting },
   } = useFormContext();
   const t = useTranslations("profile.premises.add");
@@ -13,18 +20,34 @@ export function SubmitOrNextTabButton({ lastTabIdx }: { lastTabIdx: number }) {
   const isLastTab = activeTabIdx === lastTabIdx;
 
   useEffect(() => {
-    if (isValid) {
-      // using an effect to scroll to the top when the next tab is shown
-      window.scrollTo({ top: 0 });
-    }
+    // using an effect to scroll to the top when the next tab is shown
+    window.scrollTo({ top: 0 });
   }, [activeTabIdx]);
+
+  function setActiveForm() {
+    const nextTabIdx = activeTabIdx + 1;
+    setValue("formType", tabs[nextTabIdx].formType);
+    setActiveTabIdx((prevIdx) => prevIdx + 1);
+    setTabsVisited((prev) => [...prev, nextTabIdx]);
+  }
+
+  const buttonClicked = (e: React.PointerEvent<HTMLButtonElement>) => {
+    if (isValid) {
+      if (!isLastTab) {
+        e.preventDefault();
+        setActiveForm();
+      } else {
+        return;
+      }
+    }
+  };
 
   return (
     <Button
       size="md"
       type="submit"
+      onClick={buttonClicked}
       isLoading={isSubmitting}
-      // disabled={isLastTab && !isValid}
       centered
     >
       {t(isLastTab ? "submit_btn_label" : "next_group_btn_label")}

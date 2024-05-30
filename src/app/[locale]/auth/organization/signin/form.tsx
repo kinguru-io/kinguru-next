@@ -64,9 +64,8 @@ function SigninFormInner() {
         <BaseForm<SigninFormInput>
           config={formConfig.main}
           schema={signinFormSchema}
-          outlinedFields={true}
           translationsKey="auth.signin_form"
-          variant="outline"
+          // variant="outline"
         />
       </fieldset>
       <Button type="submit" size="md" isLoading={isSubmitting}>

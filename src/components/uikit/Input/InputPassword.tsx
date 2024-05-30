@@ -25,7 +25,6 @@ export const InputPassword = forwardRef(function InputPassword(
     >
       <Input
         type={passwordShown ? "text" : "password"}
-        variant="outline"
         ref={ref}
         {...props}
       />

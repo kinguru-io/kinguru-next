@@ -30,8 +30,6 @@ export async function createPremiseAction(
 
   const parseResult = mergedSchema.safeParse(payload);
 
-  console.log("parseResult", parseResult);
-
   if (parseResult.error) {
     return {
       status: "error",

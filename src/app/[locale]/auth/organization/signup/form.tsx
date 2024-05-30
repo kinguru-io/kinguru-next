@@ -63,9 +63,8 @@ function SignupFormInner({ isPending }: { isPending: boolean }) {
         <BaseForm<SignupFormInput>
           config={formConfig.main}
           schema={signupFormSchema}
-          outlinedFields={true}
           translationsKey="auth.signup_form"
-          variant="outline"
+          // variant="outline"
         />
       </fieldset>
       <Button type="submit" size="md" isLoading={isPending} centered>
