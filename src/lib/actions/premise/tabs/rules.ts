@@ -1,7 +1,9 @@
 import { z } from "zod";
+import { requiredFieldMessage } from "@/utils/forms/validationMessages";
 
-export const rulesSchema = z.object({
-  rules: z.string().min(1, "Rules is required"),
-});
+export const rulesSchema = (t: (arg: string) => string = (value) => value) =>
+  z.object({
+    rules: z.string().min(10, { message: requiredFieldMessage(t, "rulesMin") }),
+  });
 
-export type RulesFormSchemaProps = z.infer<typeof rulesSchema>;
+export type RulesFormSchemaProps = z.infer<ReturnType<typeof rulesSchema>>;

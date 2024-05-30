@@ -515,7 +515,25 @@
           "rules_tip": "Opisz wszystkie zasady obowiązujące w twojej sali",
           "rules_placeholder": "Na przykład: spożywanie alkoholu jest zabronione.",
           "booking_cancel_terms": "Warunki anulowania rezerwacji",
-          "booking_cancel_terms_tip": "Wybierz jedną z opcji"
+          "booking_cancel_terms_tip": "Wybierz jedną z opcji",
+          "errors": {
+            "name_required": "Nazwa jest wymagana.",
+            "description_required": "Opis jest wymagany",
+            "room_required": "Pomieszczenie jest wymagane",
+            "floor_required": "Piętro jest wymagane",
+            "photos_required": "Wymagane jest co najmniej jedno zdjęcie",
+            "type_required": "Proszę wybrać właściwy typ",
+            "area_required": "Powierzchnia jest wymagana",
+            "areaMin_required": "Powierzchnia musi być co najmniej 3 metry kwadratowe",
+            "areaMax_required": "Powierzchnia nie może przekraczać 100 000 metrów kwadratowych",
+            "capacity_required": "Pojemność jest wymagana",
+            "capacityMin_required": "Pojemność musi wynosić co najmniej 1",
+            "capacityMax_required": "Pojemność musi być liczbą dodatnią",
+            "openHours_required": "Należy dodać godziny otwarcia i cenę przynajmniej na jeden dzień",
+            "amenities_required": "Należy wybrać co najmniej 5 udogodnień",
+            "rulesMin_required": "Liczba znaków dla zasad musi być co najmniej 10",
+            "bookingCancelTerm_required": "Warunki anulacji rezerwacji są wymagane"
+          }
         }
       }
     }
