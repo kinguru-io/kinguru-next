@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   createContext,
   type Dispatch,
   type SetStateAction,
   useContext,
   useState,
+  useEffect,
 } from "react";
 import {
   Box,
@@ -18,13 +20,22 @@ import type { StyledVariantProps } from "~/styled-system/types";
 type TabsContextType = {
   activeTabIdx: number;
   setActiveTabIdx: Dispatch<SetStateAction<number>>;
+  tabsVisited: number[];
+  setTabsVisited: Dispatch<SetStateAction<number[]>>;
+  resetTabsVisited?: any;
 };
 
 const TabsContext = createContext<TabsContextType | null>(null);
 
-export const PassActiveTabProvider: TabsContextType = {
-  activeTabIdx: 0,
-  setActiveTabIdx: () => {},
+export const PassVisitedTabsProvider: Omit<
+  TabsContextType,
+  "activeTabIdx" | "setActiveTabIdx"
+> = {
+  tabsVisited: [],
+  setTabsVisited: () => {},
+  resetTabsVisited: () => {
+    PassVisitedTabsProvider.tabsVisited = [0];
+  },
 };
 
 export function useTabs() {
@@ -39,12 +50,28 @@ export function useTabs() {
 
 export function TabsWrapper({ children }: { children: React.ReactNode }) {
   const [activeTabIdx, setActiveTabIdx] = useState(0);
+  const [tabsVisited, setTabsVisited] = useState<number[]>([0]);
 
-  PassActiveTabProvider.activeTabIdx = activeTabIdx;
-  PassActiveTabProvider.setActiveTabIdx = setActiveTabIdx;
+  useEffect(() => {
+    PassVisitedTabsProvider.tabsVisited = tabsVisited;
+    PassVisitedTabsProvider.setTabsVisited = setTabsVisited;
+  }, [tabsVisited]);
+
+  useEffect(() => {
+    return () => {
+      PassVisitedTabsProvider.resetTabsVisited();
+    };
+  }, []);
 
   return (
-    <TabsContext.Provider value={{ activeTabIdx, setActiveTabIdx }}>
+    <TabsContext.Provider
+      value={{
+        activeTabIdx,
+        setActiveTabIdx,
+        tabsVisited,
+        setTabsVisited,
+      }}
+    >
       {children}
     </TabsContext.Provider>
   );
@@ -82,6 +109,10 @@ const TabButton = styled("button", {
         },
         _selected: { color: "neutral.1", _after: { bgColor: "primary" } },
         _focusVisible: { outline: "none", _after: { bgColor: "focus" } },
+        _disabled: {
+          cursor: "not-allowed",
+          "pointer-events": "all !important",
+        },
       },
     },
   },
@@ -93,19 +124,34 @@ type TabProps = StyledVariantProps<typeof TabButton> &
     tabIdx: number;
     label: string;
     setActiveForm: (tabIdx: number) => void;
+    isDisabled: boolean;
   };
 
 export function Tab({
   tabIdx,
   label,
   setActiveForm,
+  isDisabled = false,
   ...buttonProps
 }: TabProps) {
-  const { activeTabIdx, setActiveTabIdx } = useTabs();
+  const t = useTranslations("form.multi_step");
+  const { activeTabIdx, setActiveTabIdx, tabsVisited, setTabsVisited } =
+    useTabs();
+
+  PassVisitedTabsProvider.tabsVisited = tabsVisited;
+  PassVisitedTabsProvider.setTabsVisited = setTabsVisited;
 
   const handleActiveTab = () => {
-    setActiveTabIdx(tabIdx);
-    setActiveForm(tabIdx);
+    if (!isDisabled) {
+      // Only set active tab if the tab is not disabled
+      setActiveTabIdx(tabIdx);
+      setActiveForm(tabIdx);
+
+      // Update tabsVisited state
+      if (!tabsVisited.includes(tabIdx)) {
+        setTabsVisited((prev) => [...prev, tabIdx]);
+      }
+    }
   };
 
   return (
@@ -113,6 +159,10 @@ export function Tab({
       type="button"
       onClick={handleActiveTab}
       aria-selected={tabIdx === activeTabIdx}
+      disabled={isDisabled}
+      {...(isDisabled && {
+        title: t("complete_current_step"),
+      })}
       {...buttonProps}
     >
       {label}

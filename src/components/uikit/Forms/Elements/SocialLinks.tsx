@@ -6,6 +6,8 @@ import { useFormContext } from "react-hook-form";
 import { ErrorField, Input } from "@/components/uikit";
 import { OrgRegisterInput } from "@/lib/validations";
 
+import { getError } from "@/utils/forms/errors";
+
 import fbIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedInIcon from "~/public/img/footerIcons/LinkedIn.svg";
@@ -43,16 +45,6 @@ export function SocialLinks() {
     formState: { errors },
   } = useFormContext<OrgRegisterInput>();
 
-  const getError = (fieldName: string) => {
-    const [mainKey, indexStr, secondName] = fieldName.split(".");
-    const index = parseInt(indexStr);
-
-    return (
-      errors?.[mainKey]?.[index]?.[secondName] ||
-      errors?.[mainKey]?.[mainKey]?.[index]?.url
-    );
-  };
-
   return (
     <Stack gap="20px" flexBasis="460px">
       {socialNetworkList.map(({ network, label, iconSrc }, idx) => (
@@ -73,21 +65,20 @@ export function SocialLinks() {
                 defaultValue={network}
                 readOnly
                 hidden
-                data-invalid={getError(`socialLinks.${idx}.network`)}
                 {...register(`socialLinks.${idx}.network`)}
               />
               <Input
                 type="text"
                 variant="outline"
                 placeholder={t("social_link_placeholder", { social: label })}
-                data-invalid={getError(`socialLinks.${idx}.url`)}
+                data-invalid={getError(errors, `socialLinks.${idx}.url`)}
                 {...register(`socialLinks.${idx}.url`)}
               />
-              <ErrorField error={getError(`socialLinks.${idx}.url`)} />
             </Flex>
           </HStack>
         </React.Fragment>
       ))}
+      <ErrorField error={errors?.socialLinks} />
     </Stack>
   );
 }

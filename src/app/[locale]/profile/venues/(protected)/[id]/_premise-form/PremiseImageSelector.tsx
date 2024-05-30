@@ -68,7 +68,7 @@ export function PremiseImageSelector() {
         })}
       </Flex>
       <Flex paddingInline="25px">
-        <ErrorField error={errors?.resources?.resources?.root} />
+        <ErrorField error={errors?.resources?.resources} />
       </Flex>
     </>
   );

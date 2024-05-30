@@ -2,16 +2,16 @@ import { SocialNetwork } from "@prisma/client";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
-const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
-  if (issue.code === z.ZodIssueCode.invalid_type) {
-    if (issue.expected === "string" || issue.expected === "number") {
-      return { message: "" };
-    }
-  }
-  return { message: ctx.defaultError };
-};
+// const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+//   if (issue.code === z.ZodIssueCode.invalid_type) {
+//     if (issue.expected === "string" || issue.expected === "number") {
+//       return { message: "" };
+//     }
+//   }
+//   return { message: ctx.defaultError };
+// };
 
-z.setErrorMap(customErrorMap);
+// z.setErrorMap(customErrorMap);
 
 const regexNIP = /^\d{10}$/m; // NIP is a 10 number string
 // https://gist.github.com/akndmr/7ba7af0c07a3ec517c651bc6f1c508d5
@@ -62,7 +62,6 @@ export const orgRegisterSchema = zfd.formData({
         ),
       {
         message: "At least one social network should be provided",
-        path: ["socialLinks", "0", "url"],
       },
     ),
 });

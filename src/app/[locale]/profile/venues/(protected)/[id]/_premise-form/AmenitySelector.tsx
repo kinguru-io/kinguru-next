@@ -13,8 +13,18 @@ export function AmenitySelector() {
   const t = useTranslations("amenities");
   const {
     register,
+    clearErrors,
+    getValues,
     formState: { errors },
   } = useFormContext<CreatePremiseFormSchemaProps>();
+
+  const formFieldPath = "parametersAndAmenities";
+
+  // Filter the amenities to get only those that are checked (i.e., have a true value) and get the count.
+  const checkedAmenitiesCount = () => {
+    const amenities = getValues().parametersAndAmenities.amenities;
+    return Object.values(amenities).filter((value) => value).length;
+  };
 
   return (Object.keys(amenitiesTags) as AmenityGroup[]).map((amenityGroup) => (
     <>
@@ -48,9 +58,15 @@ export function AmenitySelector() {
               label={t(amenity)}
               data-invalid={getError(
                 errors,
-                `parametersAndAmenities.amenities.${amenity}`,
+                `${formFieldPath}.amenities.${amenity}`,
               )}
-              {...register(`parametersAndAmenities.amenities.${amenity}`)}
+              {...register(`${formFieldPath}.amenities.${amenity}`, {
+                onChange: () => {
+                  if (checkedAmenitiesCount() === 5) {
+                    clearErrors(formFieldPath);
+                  }
+                },
+              })}
             />
           ))}
         </Flex>

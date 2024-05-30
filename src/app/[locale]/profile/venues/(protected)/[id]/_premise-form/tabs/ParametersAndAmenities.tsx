@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { AmenitySelector } from "../AmenitySelector";
@@ -7,26 +6,17 @@ import { TabInnerSection } from "@/components/profile/profile-premise";
 import { Input, Select, ErrorField } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { premiseTypes } from "@/lib/shared/config/premise-types";
-import { CLEAR_ERROR_TIMEOUT_DURATION, getError } from "@/utils/forms/errors";
+import { getError } from "@/utils/forms/errors";
 import { HStack, Stack } from "~/styled-system/jsx";
 
 export default function ParametersAndAmenities() {
   const {
     register,
-    clearErrors,
     formState: { errors },
   } = useFormContext<CreatePremiseFormSchemaProps>();
   const t = useTranslations("profile.premises.add");
 
   const formFieldPath = "parametersAndAmenities";
-
-  useEffect(() => {
-    const errorTimeout = setTimeout(
-      () => clearErrors(`${formFieldPath}.amenities`),
-      CLEAR_ERROR_TIMEOUT_DURATION,
-    );
-    return () => clearTimeout(errorTimeout);
-  }, [errors]);
 
   return (
     <>
@@ -85,9 +75,7 @@ export default function ParametersAndAmenities() {
         <h3>{t("fields.amenities")}</h3>
         <p className="subheading">{t("fields.amenities_tip")}</p>
         <AmenitySelector />
-        <ErrorField
-          error={errors?.parametersAndAmenities?.amenities?.amenitiesError}
-        />
+        <ErrorField error={errors?.parametersAndAmenities?.amenities} />
       </TabInnerSection>
     </>
   );

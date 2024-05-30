@@ -1,7 +1,6 @@
 import { compareAsc } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AddOpenHoursRecord } from "./AddOpenHoursRecord";
@@ -12,7 +11,6 @@ import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { priceFormatter } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import { DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
-import { CLEAR_ERROR_TIMEOUT_DURATION } from "@/utils/forms/errors";
 import { Grid, GridItem, HStack, InlineBox, Stack } from "~/styled-system/jsx";
 
 export function OpenHoursSelector() {
@@ -28,21 +26,12 @@ export function OpenHoursSelector() {
   const {
     control,
     getValues,
-    clearErrors,
     formState: { errors },
   } = useFormContext<CreatePremiseFormSchemaProps>();
   const { fields, append, remove, replace } = useFieldArray({
     control,
     name: formFieldPath,
   });
-
-  useEffect(() => {
-    const errorTimeout = setTimeout(
-      () => clearErrors(formFieldPath),
-      CLEAR_ERROR_TIMEOUT_DURATION,
-    );
-    return () => clearTimeout(errorTimeout);
-  }, [errors]);
 
   const timeZone = useSearchBoxTimeZone() || "UTC";
 

@@ -34,6 +34,9 @@ export const Textarea = forwardRef(function Textarea(
           borderColor: "neutral.3",
           cursor: "not-allowed",
         },
+        _invalid: {
+          borderColor: "danger!important",
+        },
       })}
       {...restProps}
     >

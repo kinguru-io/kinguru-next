@@ -17,7 +17,6 @@ export const parametersAndAmenitiesSchema = z.object({
       (amenities) => Object.values(amenities).filter(Boolean).length >= 5,
       {
         message: "Should be chosen at least 5 amenities",
-        path: ["amenitiesError"],
       },
     ),
 });
