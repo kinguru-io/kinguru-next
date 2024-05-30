@@ -761,6 +761,7 @@
   },
   "filters": {
     "all": "All filters",
+    "show_more": "Show more",
     "reset_btn_label": "Reset all filters",
     "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
     "range_from_label": "From",

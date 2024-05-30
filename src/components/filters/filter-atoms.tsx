@@ -50,6 +50,8 @@ export function RangeItem({
         edge === "to" ? `${from}-${value || max}` : `${value || min}-${to}`;
 
       params.set(fieldName, newState);
+      // resetting size in case any of filter aggs was changed
+      params.delete("size");
       router.push(`${pathname}?${params}`, { scroll: false });
     },
     300,

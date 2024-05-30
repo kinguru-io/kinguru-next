@@ -29,6 +29,7 @@ export function SortToggler<T extends { value: string; label: string }>({
       <DropdownMenu>
         {items.map(({ value, label }) => (
           <Link
+            key={value}
             href={{
               pathname,
               query: { ...searchParams, sort: value },
