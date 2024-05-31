@@ -28,33 +28,25 @@ GET http://localhost:9200/kinguru.public.premise_fulfilled/_search
 Content-Type: application/json
 
 {
-  "aggs": {
-    "cities": {
-      "terms": {
-        "field": "location.city.keyword"
-      }
-    },
-    "minPrice": { "min": { "field": "minPrice" } },
-    "maxPrice": { "max": { "field": "maxPrice" } },
-    "type": {
-      "terms": {
-        "field": "type.keyword"
-      }
-    },
-    "amenities": {
-      "terms": {
-        "field": "amenities.keyword"
-      }
-    },
-    "minCapacity": {
-      "min": {
-        "field": "capacity"
-      }
-    },
-    "maxCapacity": {
-      "max": {
-        "field": "capacity"
-      }
+  "_source": {
+    "includes": ["openHours"]
+  },
+  "query": {
+    "bool": {
+      "must": [
+          {
+            "script": {
+              "script": {
+                "source": "boolean isOpenMatch = false; boolean isCloseMatch = false; for (open in doc['openHours.' + params.day +'.open']) { isOpenMatch = open <= params.open } for (close in doc['openHours.' + params.day + '.close']) { isCloseMatch = close >= params.close } return isOpenMatch && isCloseMatch;",
+                  "params": {
+                    "open": 11,
+                    "close": 12,
+                    "day": 7
+                  }
+              }
+          }
+        }
+      ]
     }
   }
 }
