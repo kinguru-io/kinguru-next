@@ -90,8 +90,8 @@ async function init() {
             select: { name: true, description: true, locationMapboxId: true },
           },
           openHours: {
-            orderBy: { openTime: "asc" },
-            select: { day: true, openTime: true, price: true },
+            orderBy: { price: "asc" },
+            select: { day: true, openTime: true, closeTime: true, price: true },
           },
         },
       });
@@ -106,35 +106,18 @@ async function init() {
 
       const { venue, openHours, ...restPremise } = premise;
 
-      const aggregatedPrices = openHours.reduce(
-        (borders, { price }) => {
-          if (
-            borders.minPrice === undefined ||
-            borders.maxPrice === undefined
-          ) {
-            return { minPrice: price, maxPrice: price };
-          }
+      // mapping to the form `{ open: number; close: number }` instead of date string
+      const mappedOpenHours = openHours.map(({ day, openTime, closeTime }) => ({
+        day,
+        open: openTime.getUTCHours(),
+        close: closeTime.getUTCHours(),
+      }));
 
-          if (borders.minPrice > price) {
-            borders.minPrice = price;
-          }
-
-          if (borders.maxPrice < price) {
-            borders.maxPrice = price;
-          }
-
-          return borders;
-        },
-        {} as { minPrice?: number; maxPrice?: number },
+      // grouping like that in order to get rid of ES nested fields
+      const groupedOpenHours = groupBy(
+        mappedOpenHours,
+        ({ day }) => DAYS_OF_WEEK_ORDERED.indexOf(day) + 1,
       );
-
-      const groupedOpenHours = groupBy(openHours, ({ day }) => day);
-      const plainOpenHours = DAYS_OF_WEEK_ORDERED.map((day) => {
-        const openHour = groupedOpenHours[day];
-        // if a `day` key exists, there is at least one item in the array
-        // the first item is the very beginning of the day since the response is originally sorted by `openTime` in the ASC order
-        return openHour ? openHour[0].openTime : null;
-      });
 
       const location = await prepareIndexLocation(venue.locationMapboxId);
 
@@ -143,9 +126,10 @@ async function init() {
         id: restPremise.id,
         body: {
           ...restPremise,
-          ...aggregatedPrices,
           ...location,
-          openHours: plainOpenHours,
+          minPrice: openHours.at(0)?.price,
+          maxPrice: openHours.at(-1)?.price,
+          openHours: groupedOpenHours,
           "venue.name": venue.name,
           "venue.description": venue.description,
         },
