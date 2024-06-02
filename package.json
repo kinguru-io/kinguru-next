@@ -64,7 +64,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "msw": "latest",
     "msw-storybook-addon": "canary",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.0",
     "prisma": "^5.14.0",
     "projen": "^0.82.2",
     "semantic-release-plus": "^20.0.0",
