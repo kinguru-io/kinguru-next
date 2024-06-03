@@ -40,14 +40,15 @@ export function EditProfileForm({
 }: EditProfileFormProps) {
   const [isPending, startTransition] = useTransition();
   const defaultValues = companyData || { name: companyName };
+  const t = useTranslations("form.common");
+  const formT = useTranslations("organization.basic_info_form");
 
   const methods = useForm<OrgRegisterInput>({
     mode: "all",
-    resolver: zodResolver(orgRegisterSchema),
+    resolver: zodResolver(orgRegisterSchema(formT)),
     defaultValues,
   });
 
-  const t = useTranslations("form.common");
   const [response, formAction] = useFormState(orgRegister, null);
 
   const onSubmit: SubmitHandler<OrgRegisterInput> = useCallback(
@@ -109,7 +110,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
           <FormColumn>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.main}
-              schema={orgRegisterSchema}
+              schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
           </FormColumn>
@@ -124,7 +125,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.business")}
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.business}
-              schema={orgRegisterSchema}
+              schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
           </FormColumn>
@@ -132,7 +133,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.bank")}
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.bank}
-              schema={orgRegisterSchema}
+              schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
           </FormColumn>
@@ -169,6 +170,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
 }
 
 function AddressGroup({ type }: { type: "post" | "billing" }) {
+  const t = useTranslations("organization.basic_info_form");
   const index = type === "post" ? 0 : 1;
 
   const customFieldName = (field: { name: string }): string => {
@@ -178,7 +180,7 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
   return (
     <BaseForm<OrgRegisterInput>
       config={formFieldsConfig.credentials.postAddress}
-      schema={orgRegisterSchema}
+      schema={orgRegisterSchema(t)}
       customFieldName={customFieldName}
       translationsKey="organization.basic_info_form"
     />

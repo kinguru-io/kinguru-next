@@ -473,7 +473,14 @@
       "social_link_placeholder": "{social} account link",
       "submit": "Save",
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
-      "social_helper": "Specify your social networks for us to be able to verify your profile."
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "NIP_required": "NIP must be exactly 10 digits",
+          "socialLinks_required": "At least one social network should be provided",
+          "socialLink_required": "Invalid URL format"
+        }
+      }
     }
   },
   "venue": {

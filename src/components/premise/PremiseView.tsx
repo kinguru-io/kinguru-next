@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { useLocale } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   PremiseCard,
   PremiseContent,
@@ -31,7 +31,7 @@ export async function PremiseView({
   linkLabel?: string;
 }) {
   const t = await getTranslations("premise");
-  const locale = useLocale() as Locale;
+  const locale = await getLocale();
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
