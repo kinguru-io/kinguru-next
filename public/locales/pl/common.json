@@ -280,7 +280,14 @@
       "social_link_placeholder": "{social} account link",
       "submit": "Save",
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
-      "social_helper": "Specify your social networks for us to be able to verify your profile."
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "NIP_required": "NIP musi mieć dokładnie 10 cyfr",
+          "socialLinks_required": "Należy podać przynajmniej jedną sieć społecznościową",
+          "socialLink_required": "Nieprawidłowy format URL"
+        }
+      }
     }
   },
   "auth": {

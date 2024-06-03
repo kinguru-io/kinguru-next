@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { useLocale } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
   PremiseCard,

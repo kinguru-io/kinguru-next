@@ -45,6 +45,13 @@ export function SocialLinks() {
     formState: { errors },
   } = useFormContext<OrgRegisterInput>();
 
+  const getErrorFromArr = (fieldName: string) => {
+    const [mainKey, indexStr, secondName] = fieldName.split(".");
+    const index = parseInt(indexStr);
+    // @ts-expect-error
+    return errors?.[mainKey]?.[index]?.[secondName];
+  };
+
   return (
     <Stack gap="20px" flexBasis="460px">
       {socialNetworkList.map(({ network, label, iconSrc }, idx) => (
@@ -71,9 +78,10 @@ export function SocialLinks() {
                 type="text"
                 variant="outline"
                 placeholder={t("social_link_placeholder", { social: label })}
-                data-invalid={getError(errors, `socialLinks.${idx}.url`)}
+                data-invalid={getErrorFromArr(`socialLinks.${idx}.url`)}
                 {...register(`socialLinks.${idx}.url`)}
               />
+              <ErrorField error={getErrorFromArr(`socialLinks.${idx}.url`)} />
             </Flex>
           </HStack>
         </React.Fragment>

@@ -77,6 +77,6 @@ function prepareSocialLinks(links: OrgRegisterInput["socialLinks"]) {
 
 export const orgRegister = createFormAction(
   orgRegisterHandler,
-  orgRegisterSchema,
+  orgRegisterSchema(),
 );
 export type OrgRegisterAction = typeof orgRegister;
