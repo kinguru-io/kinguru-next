@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowIcon } from "@/components/uikit";
 import { css } from "~/styled-system/css";
 
@@ -16,15 +16,27 @@ export function FilterCollapse({
   hideLabel: string;
 }) {
   const [isShown, setShownState] = useState(false);
+  const collapsedRef = useRef<HTMLFieldSetElement | null>(null);
+
+  const scrollBack = () => {
+    if (isShown && collapsedRef.current) {
+      window.scrollBy({ top: -collapsedRef.current.clientHeight });
+    }
+  };
 
   const collapseClicked = (e: React.PointerEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setShownState((prevState) => !prevState);
+    scrollBack();
   };
 
   return (
     <>
-      <fieldset className={css({ srOnly: !isShown })} disabled={!isShown}>
+      <fieldset
+        ref={collapsedRef}
+        className={css({ srOnly: !isShown })}
+        disabled={!isShown}
+      >
         {children}
       </fieldset>
       <button
