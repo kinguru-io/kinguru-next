@@ -1,6 +1,7 @@
 import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
+import GoogleProvider from "next-auth/providers/google";
 import { Argon2id } from "oslo/password";
 import { signinFormSchema } from "@/lib/validations";
 import prisma from "@/server/prisma.ts";
@@ -9,10 +10,6 @@ export const providers = (adapter: Adapter) => [
   // GitHubProvider({
   //   clientId: process.env.GITHUB_ID as string,
   //   clientSecret: process.env.GITHUB_SECRET as string,
-  // }),
-  // GoogleProvider({
-  //   clientId: process.env.GOOGLE_CLIENT_ID as string,
-  //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
   // }),
   EmailProvider({
     server: {
@@ -24,6 +21,10 @@ export const providers = (adapter: Adapter) => [
       },
     },
     from: process.env.EMAIL_FROM,
+  }),
+  GoogleProvider({
+    clientId: process.env.GOOGLE_CLIENT_ID as string,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
   }),
   CredentialsProvider({
     credentials: {

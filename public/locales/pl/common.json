@@ -298,21 +298,21 @@
       "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
     },
     "signin_form": {
-      "heading": "User Log In",
-      "heading_org": "Organization Log In",
-      "email_placeholder": "Enter email",
-      "password_placeholder": "Password",
-      "submit": "Log In",
-      "forgot_password": "Forgot password?"
+      "heading": "Logowanie użytkownika",
+      "heading_org": "Logowanie organizacji",
+      "email": "Email",
+      "password": "Hasło",
+      "submit": "Zaloguj się",
+      "forgot_password": "Zapomniałeś hasła?"
     },
     "signup_form": {
-      "heading": "Register your company",
-      "name": "Enter company name",
-      "email": "Enter email",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "submit": "Register",
-      "helper": "By clicking the \"Register\" button, you accept the <partnerAgreement>Partner Agreement</partnerAgreement>, confirm that you have read the <personalDataPolicy>Personal Data Processing Policy</personalDataPolicy>, and give <personalDataProcess>Consent to the processing of personal data</personalDataProcess>"
+      "heading": "Zarejestruj swoją firmę",
+      "name": "Nazwa firmy",
+      "email": "Email",
+      "password": "Hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "submit": "Zarejestruj się",
+      "helper": "Klikając przycisk \"Zarejestruj się\", akceptujesz <partnerAgreement>Umowę partnerską</partnerAgreement>, potwierdzasz, że zapoznałeś się z <personalDataPolicy>Polityką przetwarzania danych osobowych</personalDataPolicy> i wyrażasz <personalDataProcess>Zgodę na przetwarzanie danych osobowych</personalDataProcess>"
     }
   },
   "form": {
