@@ -6,7 +6,9 @@ import {
   createContext,
   useContext,
   useState,
+  useRef,
 } from "react";
+import { useClickOutside } from "@/hooks/use-click-outside";
 import { css, cx } from "~/styled-system/css";
 import { customDivider } from "~/styled-system/patterns";
 import { dropdown, type DropdownVariantProps } from "~/styled-system/recipes";
@@ -55,10 +57,14 @@ export function DropdownMenu({
   shouldCloseOnClick?: boolean;
   likeList?: boolean;
 }) {
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const { hidden, dropdownSlot, setHidden } = useContext(DropdownContext);
+
+  useClickOutside([menuRef], (isOutside) => setHidden(isOutside));
 
   return (
     <div
+      ref={menuRef}
       className={cx(
         dropdownSlot.menu,
         likeList && customDivider({ thickness: "1px" }),
