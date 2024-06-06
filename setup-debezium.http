@@ -12,7 +12,7 @@ Content-Type: application/json
     "database.password": "qwerty",
     "database.dbname": "kinguru",
     "database.server.name": "kinguru",
-    "table.include.list": "public.Event,public.User,public.Place,public.Premise",
+    "table.include.list": "public.Event,public.User,public.Place,public.Premise,public.PremiseSlot",
     "topic.prefix": "kinguru",
     "transforms": "unwrap",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
@@ -23,27 +23,21 @@ Content-Type: application/json
 ### Create ES index
 GET http://localhost:9200/_cat/indices
 
+### Get mappings
+GET http://localhost:9200/kinguru.public.premise_fulfilled/_mappings
+Content-Type: application/json
+
 ### Get es content
 GET http://localhost:9200/kinguru.public.premise_fulfilled/_search
 Content-Type: application/json
 
 {
-  "_source": {
-    "includes": ["openHours"]
-  },
   "query": {
     "bool": {
       "must": [
-          {
-            "script": {
-              "script": {
-                "source": "boolean isOpenMatch = false; boolean isCloseMatch = false; for (open in doc['openHours.' + params.day +'.open']) { isOpenMatch = open <= params.open } for (close in doc['openHours.' + params.day + '.close']) { isCloseMatch = close >= params.close } return isOpenMatch && isCloseMatch;",
-                  "params": {
-                    "open": 11,
-                    "close": 12,
-                    "day": 7
-                  }
-              }
+        {
+          "term": {
+            "booked_slots": "premise_slot"
           }
         }
       ]
@@ -85,7 +79,7 @@ Content-Type: application/json
   "database.password": "qwerty",
   "database.dbname": "postgres",
   "database.server.name": "kinguru",
-  "table.include.list": "public.Event,public.Premise",
+  "table.include.list": "public.Event,public.Premise,public.PremiseSlot",
   "topic.prefix": "kinguru",
   "transforms": "unwrap",
   "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",

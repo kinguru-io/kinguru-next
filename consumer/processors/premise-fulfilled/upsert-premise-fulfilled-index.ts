@@ -1,0 +1,61 @@
+import type { Client } from "@elastic/elasticsearch";
+// import type { SearchBoxCore } from "@mapbox/search-js-core";
+import type { PrismaClient } from "@prisma/client";
+import type { Logger } from "kafkajs";
+import { prepareClosedHours } from "./prepare-closed-hours";
+import { prepareDocumentLocation } from "./prepare-document-location";
+
+export async function upsertPremiseFulfilledIndex({
+  id,
+  index,
+  prisma,
+  esClient,
+  logger,
+  // searchBox,
+}: {
+  id: string;
+  index: string;
+  prisma: PrismaClient;
+  esClient: Client;
+  logger: Logger;
+  // searchBox: SearchBoxCore;
+}) {
+  const premise = await prisma.premise.findUnique({
+    where: { id },
+    include: {
+      openHours: { orderBy: { price: "asc" } },
+      venue: {
+        select: { name: true, description: true, locationMapboxId: true },
+      },
+    },
+  });
+
+  if (!premise) {
+    logger.error(`no Premise record exists with id: ${id}`);
+    return;
+  }
+
+  const { venue, openHours, ...restPremise } = premise;
+  const location = await prepareDocumentLocation({
+    mapboxId: venue.locationMapboxId,
+  });
+  const closedHours = prepareClosedHours({
+    timeZone: location["location.timeZone"],
+    openHours,
+  });
+
+  await esClient.index({
+    index,
+    id: restPremise.id,
+    body: {
+      ...restPremise,
+      ...location,
+      minPrice: openHours.at(0)?.price,
+      maxPrice: openHours.at(-1)?.price,
+      closedHours,
+      "venue.name": venue.name,
+      "venue.description": venue.description,
+      booked_slots: { name: "premise" },
+    },
+  });
+}
