@@ -317,9 +317,9 @@
   },
   "form": {
     "common": {
-      "upload_photo": "Upload a photo",
-      "uploaded_photo": "Uploaded photo",
-      "updated": "Updated"
+      "upload_photo": "Prześlij zdjęcie",
+      "uploaded_photo": "Zdjęcie przesłane",
+      "updated": "Zaktualizowano"
     },
     "multi_step": {
       "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."
@@ -427,44 +427,49 @@
       "heading": "My notifications"
     },
     "venues": {
-      "heading": "My venues",
-      "premises_heading": "Premises",
-      "no_premises": "Venue is inactive. A hall needs to be added.",
-      "no_organization_warn_msg": "To be able to add venues and halls, please fill out your personal information in the \"Profile\" section.",
-      "no_organization_link_label": "Go to the section \"Profile\"",
-      "edit_premise_link_label": "Edit",
+      "heading": "Moje miejsca",
+      "premises_heading": "Pomieszczenia",
+      "no_premises": "Miejsce jest nieaktywne. Należy dodać salę.",
+      "no_organization_warn_msg": "Aby móc dodawać miejsca i sale, proszę wypełnić swoje dane osobowe w sekcji \"Profil\".",
+      "no_organization_link_label": "Przejdź do sekcji \"Profil\"",
+      "edit_premise_link_label": "Edytuj",
       "add": {
-        "heading": "Register a new venue",
-        "submit_btn_label": "Save venue",
-        "edit_btn_label": "Save changes",
-        "next_group_btn_label": "Next",
+        "heading": "Zarejestruj nowe miejsce",
+        "submit_btn_label": "Zapisz miejsce",
+        "edit_btn_label": "Zapisz zmiany",
+        "next_group_btn_label": "Dalej",
         "groups": {
-          "main_info": "Main information",
-          "photo": "Photo",
-          "location": "Address",
-          "additional": "Additional",
-          "contacts": "Contacts"
+          "main_info": "Podstawowe informacje",
+          "photo": "Zdjęcie",
+          "location": "Adres",
+          "additional": "Dodatkowe",
+          "contacts": "Kontakty"
         },
         "fields": {
-          "name": "Name",
-          "name_placeholder": "Name",
-          "description": "Description",
-          "description_placeholder": "Add a description for your venue",
-          "photo_tip": "Add one photo that will be displayed on the venue page.",
-          "locationMapboxId_placeholder": "Enter the address",
-          "locationTutorial_tip": "Write a guide on how to get to you. It will be visible to all users and it will be easier for them to find you.",
-          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs.",
-          "featureCCTV_tip": "CCTV",
+          "name": "Nazwa",
+          "name_placeholder": "Nazwa",
+          "description": "Opis",
+          "description_placeholder": "Dodaj opis swojego miejsca",
+          "photo_tip": "Dodaj jedno zdjęcie, które będzie wyświetlane na stronie miejsca.",
+          "locationMapboxId_placeholder": "Wprowadź adres",
+          "locationTutorial_tip": "Napisz przewodnik, jak do Ciebie dotrzeć. Będzie widoczny dla wszystkich użytkowników i ułatwi im znalezienie Ciebie.",
+          "locationTutorial_placeholder": "Na przykład: Można dojechać tramwajem #2 i #5. Od przystanku \"Ozernaya\" idź do dużego ceglastego budynku. Wejście od tyłu. Na trzecim piętrze skręć w prawo i podążaj za znakami.",
+          "featureCCTV_tip": "Monitoring",
           "featureParking_tip": "Parking",
-          "featureAge_tip": "Age restrictions",
-          "featureAge_placeholder": "Select age",
-          "yes_label": "Yes",
-          "no_label": "No",
-          "contacts_tip": "Enter venue manager's contact information",
-          "firstname_placeholder": "First name",
-          "lastname_placeholder": "Last name",
+          "featureAge_tip": "Ograniczenia wiekowe",
+          "featureAge_placeholder": "Wybierz wiek",
+          "yes_label": "Tak",
+          "no_label": "Nie",
+          "contacts_tip": "Wprowadź dane kontaktowe menedżera miejsca",
+          "firstname_placeholder": "Imię",
+          "lastname_placeholder": "Nazwisko",
           "email_placeholder": "Email",
-          "phoneNumber_placeholder": "Phone number"
+          "phoneNumber_placeholder": "Numer telefonu",
+          "errors": {
+            "alreadyExistsError": "Miejsce o tej nazwie już istnieje",
+            "photo_required": "Zdjęcie jest wymagane",
+            "email_required": "To nie jest prawidłowy email"
+          }
         }
       },
       "created": {

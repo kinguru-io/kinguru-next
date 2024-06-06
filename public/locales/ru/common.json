@@ -471,7 +471,12 @@
           "firstname_placeholder": "Имя",
           "lastname_placeholder": "Фамилия",
           "email_placeholder": "Email",
-          "phoneNumber_placeholder": "Телефон"
+          "phoneNumber_placeholder": "Телефон",
+          "errors": {
+            "alreadyExistsError": "Площадка с таким названием уже существует",
+            "photo_required": "Фото обязательно",
+            "email_required": "Введенный email некорректный"
+          }
         }
       },
       "created": {

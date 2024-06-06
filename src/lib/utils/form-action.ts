@@ -4,6 +4,7 @@ import { ZodEffects, ZodType, ZodTypeDef } from "zod";
 export type FormActionResponse = {
   status: "success" | "error";
   message: string;
+  redirectUrl?: string | null;
 };
 export type FormActionState = FormActionResponse | null;
 export type ActionType<T> = (data: T) => Promise<FormActionState>;
@@ -28,12 +29,14 @@ export function createFormAction<
     data: FormData,
   ): Promise<FormActionState> {
     const parsedSchema = schema.safeParse(data);
+
     if (!parsedSchema.success) {
       return {
         status: "error",
         message: JSON.stringify(parsedSchema.error),
       };
     }
+
     return action(parsedSchema.data);
   };
 }

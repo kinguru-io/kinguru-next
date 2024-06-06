@@ -636,7 +636,12 @@
           "firstname_placeholder": "First name",
           "lastname_placeholder": "Last name",
           "email_placeholder": "Email",
-          "phoneNumber_placeholder": "Phone number"
+          "phoneNumber_placeholder": "Phone number",
+          "errors": {
+            "alreadyExistsError": "A venue with this name already exists",
+            "photo_required": "Photo is required",
+            "email_required": "This is not a valid email"
+          }
         }
       },
       "created": {
