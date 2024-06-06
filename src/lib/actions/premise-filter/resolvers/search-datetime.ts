@@ -36,14 +36,15 @@ export function premiseSlotResolver(ranges: string[]) {
 export function closedHoursResolver(ranges: string[]) {
   const fromHour = getHours(ranges[0]);
   const toHour = getHours(ranges[1]);
+  const dayNumber = getDay(ranges[0]);
+
+  // since `0` is Sunday (elastic docs has numbers 1-7)
+  const docNumber = dayNumber === 0 ? 7 : dayNumber;
+
   const hoursRange = Array.from(
     { length: toHour - fromHour },
     (_, i) => i + fromHour,
   );
 
-  return {
-    terms: {
-      [`closedHours.${getDay(ranges[0])}`]: hoursRange,
-    },
-  };
+  return { terms: { [`closedHours.${docNumber}`]: hoursRange } };
 }
