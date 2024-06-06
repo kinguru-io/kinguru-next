@@ -407,6 +407,10 @@
       "type": "runtime"
     },
     {
+      "name": "react-day-picker",
+      "type": "runtime"
+    },
+    {
       "name": "react-dom",
       "type": "runtime"
     },

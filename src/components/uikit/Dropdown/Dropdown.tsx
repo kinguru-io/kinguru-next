@@ -7,7 +7,7 @@ import {
   useContext,
   useState,
 } from "react";
-import { cx } from "~/styled-system/css";
+import { css, cx } from "~/styled-system/css";
 import { customDivider } from "~/styled-system/patterns";
 import { dropdown, type DropdownVariantProps } from "~/styled-system/recipes";
 
@@ -33,10 +33,11 @@ export function useDropdown() {
 export function Dropdown({
   children,
   size = "sm",
+  anchor,
   hiddenState = true,
 }: DropdownProps) {
   const [hidden, setHidden] = useState(hiddenState);
-  const dropdownSlot = dropdown({ size });
+  const dropdownSlot = dropdown({ size, anchor });
 
   return (
     <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
@@ -48,12 +49,20 @@ export function Dropdown({
 export function DropdownMenu({
   children,
   shouldCloseOnClick = true,
-}: DropdownProps & { shouldCloseOnClick?: boolean }) {
+  likeList = true,
+}: {
+  children: React.ReactNode;
+  shouldCloseOnClick?: boolean;
+  likeList?: boolean;
+}) {
   const { hidden, dropdownSlot, setHidden } = useContext(DropdownContext);
 
   return (
     <div
-      className={cx(dropdownSlot.menu, customDivider({ thickness: "1px" }))}
+      className={cx(
+        dropdownSlot.menu,
+        likeList && customDivider({ thickness: "1px" }),
+      )}
       data-hidden={hidden}
       onClickCapture={() => setHidden(shouldCloseOnClick)}
     >
@@ -67,6 +76,7 @@ export function DropdownInitiator({ children }: DropdownProps) {
 
   return (
     <div
+      className={css({ cursor: "pointer" })}
       role="button"
       tabIndex={0}
       onClick={() => setHidden((prevState) => !prevState)}
