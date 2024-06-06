@@ -60,7 +60,7 @@ export function DropdownMenu({
   const menuRef = useRef<HTMLDivElement | null>(null);
   const { hidden, dropdownSlot, setHidden } = useContext(DropdownContext);
 
-  useClickOutside([menuRef], (isOutside) => setHidden(isOutside));
+  useClickOutside([menuRef], (isOutside) => !hidden && setHidden(isOutside));
 
   return (
     <div
