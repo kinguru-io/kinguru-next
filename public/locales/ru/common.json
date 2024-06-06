@@ -646,6 +646,12 @@
       "label": "Сортировка",
       "asc": "Цена по возрастанию",
       "desc": "Цена по убыванию"
+    },
+    "time_range": {
+      "search_btn_label": "Поиск",
+      "date_label": "Дата",
+      "from_label": "С",
+      "to_label": "До"
     }
   }
 }
