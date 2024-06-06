@@ -194,6 +194,7 @@ const project = new web.NextJsTypeScriptProject({
     "@sindresorhus/slugify",
     "date-fns",
     "date-fns-tz",
+    "react-day-picker",
     "react-hot-toast",
 
     "bullmq",

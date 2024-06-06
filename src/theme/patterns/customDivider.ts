@@ -15,7 +15,13 @@ export const customDividerPattern: PatternConfig = {
       ...rest
     } = props;
     return {
-      "& > *": { paddingInline: "10px", paddingBlock: "5px" },
+      "& > *": {
+        paddingInline: "10px",
+        paddingBlock: "5px",
+        _hover: {
+          backgroundColor: "primary.disabled",
+        },
+      },
       "& > *:first-child": { paddingBlockStart: "10px" },
       "& > *:last-child": { paddingBlockEnd: "10px" },
       "& > *:not(:last-child)": {

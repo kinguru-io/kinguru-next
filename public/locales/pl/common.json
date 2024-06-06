@@ -597,6 +597,12 @@
       "label": "Sortuj",
       "asc": "Cena rosnąco",
       "desc": "Cena malejąco"
+    },
+    "time_range": {
+      "search_btn_label": "Search",
+      "date_label": "Date",
+      "from_label": "From",
+      "to_label": "To"
     }
   }
 }
