@@ -12,7 +12,7 @@ export function ProfileSectionLayout({
     <Container marginInline="0">
       <Grid
         columnGap="1.25rem"
-        rowGap="70px"
+        rowGap="45px"
         gridTemplateColumns="repeat(6, 1fr)"
         gridTemplateRows="repeat(2, auto)"
         css={{
@@ -23,6 +23,9 @@ export function ProfileSectionLayout({
             gridRow: "1 / 2",
             gridColumn: "1 / -1",
             whiteSpace: "pre",
+          },
+          "& .venue_name": {
+            textStyle: "heading.3",
           },
           "& section": {
             gridColumn: "2 / -2",

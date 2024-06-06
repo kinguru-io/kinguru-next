@@ -29,7 +29,11 @@ export default async function CreatedNoticePage({
 
   return (
     <ProfileSectionLayout>
-      <h1 className="heading">{t("heading")}</h1>
+      <h1 className="heading">
+        {t("heading")}
+        <br />
+        <span className="venue_name">({venue?.name})</span>
+      </h1>
       <section>
         <WarningNotice
           noticeText={t("no_premise_warn_msg")}

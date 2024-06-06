@@ -6,8 +6,6 @@ import { useFormContext } from "react-hook-form";
 import { ErrorField, Input } from "@/components/uikit";
 import { OrgRegisterInput } from "@/lib/validations";
 
-import { getError } from "@/utils/forms/errors";
-
 import fbIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
 import linkedInIcon from "~/public/img/footerIcons/LinkedIn.svg";

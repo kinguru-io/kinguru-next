@@ -45,6 +45,7 @@ export function EditProfileForm({
 
   const methods = useForm<OrgRegisterInput>({
     mode: "all",
+    // @ts-expect-error
     resolver: zodResolver(orgRegisterSchema(formT)),
     defaultValues,
   });
@@ -110,6 +111,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
           <FormColumn>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.main}
+              // @ts-expect-error
               schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
@@ -125,6 +127,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.business")}
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.business}
+              // @ts-expect-error
               schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
@@ -133,6 +136,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.bank")}
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.bank}
+              // @ts-expect-error
               schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
@@ -180,6 +184,7 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
   return (
     <BaseForm<OrgRegisterInput>
       config={formFieldsConfig.credentials.postAddress}
+      // @ts-expect-error
       schema={orgRegisterSchema(t)}
       customFieldName={customFieldName}
       translationsKey="organization.basic_info_form"

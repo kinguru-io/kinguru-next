@@ -1,39 +1,55 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
+import { useCallback, useEffect, useTransition } from "react";
+import { useFormState } from "react-dom";
+import {
+  useForm,
+  FormProvider,
+  useFormContext,
+  SubmitHandler,
+} from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { InputSearchLocation } from "@/components/common/form/InputSearchLocation";
-import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
 import {
-  AccordionGroup,
-  Button,
-  Dropdown,
-  Input,
-  Radio,
-  Select,
-  Textarea,
-} from "@/components/uikit";
+  AdditionalGroup,
+  ContactsGroup,
+  LocationGroup,
+  MainInfoGroup,
+  PhotoGroup,
+} from "../_add-venue-form-tabs";
+import { AccordionGroup, Button } from "@/components/uikit";
 import {
-  createVenueSchema,
-  type CreateVenueInput,
+  createVenueFormSchema,
+  type CreateVenueFormSchemaProps,
   type CreateVenueAction,
 } from "@/lib/actions/venue";
+import {
+  CreateVenueFormTypeEnum,
+  MergedVenueFormSchemaProps,
+} from "@/lib/actions/venue/validation";
 import { ageRestrictionList } from "@/lib/shared/config/age-restriction.ts";
-import type { FormActionState } from "@/lib/utils";
-import { Box, Flex, InlineBox, VStack } from "~/styled-system/jsx";
+import { FormActionState } from "@/lib/utils";
+import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
+import { Box } from "~/styled-system/jsx";
 
 export function AddVenueForm({
   createVenue,
 }: {
   createVenue: CreateVenueAction;
 }) {
-  const methods = useForm<CreateVenueInput>({
-    mode: "onChange",
-    resolver: zodResolver(createVenueSchema),
+  const router = useRouter();
+  const t = useTranslations("profile.venues.add");
+  const [_isPending, startTransition] = useTransition();
+
+  const methods = useForm<CreateVenueFormSchemaProps>({
+    mode: "all",
+    // @ts-expect-error
+    resolver: zodResolver(createVenueFormSchema(t)),
+    defaultValues: {
+      formType: CreateVenueFormTypeEnum.MainInfo,
+    },
   });
 
   const [response, formAction] = useFormState<FormActionState, FormData>(
@@ -42,16 +58,40 @@ export function AddVenueForm({
   );
 
   useEffect(() => {
-    if (!response || response.status !== "error") return;
+    if (!response) return;
+
+    if (response.status === "success" && response.redirectUrl) {
+      router.push(response.redirectUrl);
+    }
+
+    if (response.status !== "error") return;
 
     const toastId = toast.error(response.message);
 
     return () => toast.remove(toastId);
   }, [response]);
 
+  const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> = useCallback(
+    (data) => {
+      if (!methods.formState.isValid) return;
+      const formData = {
+        ...methods.getValues(),
+        ...data,
+      };
+
+      const multiFormPayload = transformMultiFormPayload<
+        CreateVenueFormSchemaProps,
+        MergedVenueFormSchemaProps
+      >(formData);
+      // @ts-expect-error
+      startTransition(() => formAction(multiFormPayload));
+    },
+    [formAction],
+  );
+
   return (
     <FormProvider {...methods}>
-      <form action={formAction}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <AddVenueFormInner />
       </form>
     </FormProvider>
@@ -64,182 +104,63 @@ export function AddVenueFormInner({
   isEditing?: boolean;
 }) {
   const {
-    register,
     control,
-    formState: { dirtyFields, isValid, defaultValues },
-  } = useFormContext<CreateVenueInput>();
-  const { pending } = useFormStatus();
+    setValue,
+    trigger,
+    watch,
+    formState: { isValid, defaultValues, isSubmitting },
+  } = useFormContext<CreateVenueFormSchemaProps>();
+
   const t = useTranslations("profile.venues.add");
 
   const formGroupItems = [
     {
       title: t("groups.main_info"),
-      content: (
-        <VStack
-          gap="20px"
-          css={{
-            "& span": {
-              textStyle: "heading.6",
-              color: "neutral.0",
-              marginBlockStart: "10px",
-            },
-          }}
-        >
-          {!isEditing && <span>{t("fields.name")}</span>}
-          <Input
-            placeholder={t("fields.name_placeholder")}
-            readOnly={isEditing}
-            hidden={isEditing}
-            {...register("name")}
-          />
-          <span>{t("fields.description")}</span>
-          <Textarea
-            placeholder={t("fields.description_placeholder")}
-            rows={9}
-            {...register("description")}
-          />
-        </VStack>
-      ),
-      isNextBtnDisabled: !(dirtyFields.name && dirtyFields.description),
+      content: <MainInfoGroup isEditing={isEditing} />,
+      formType: CreateVenueFormTypeEnum.MainInfo,
     },
     {
       title: t("groups.photo"),
-      content: (
-        <VStack gap="30px" marginBlockEnd="20px">
-          <p>{t("fields.photo_tip")}</p>
-          <ProfileImagePicker
-            imageSrc={defaultValues?.image}
-            groupKey="venues"
-            placeholderWrapper="rectangle"
-            {...register("image")}
-          />
-        </VStack>
-      ),
-      isNextBtnDisabled: !dirtyFields.image,
+      content: <PhotoGroup defaultValues={defaultValues?.image} />,
+      formType: CreateVenueFormTypeEnum.Image,
     },
     {
       title: t("groups.location"),
-      content: (
-        <VStack gap="20px">
-          <Dropdown size="full">
-            <InputSearchLocation
-              name={"locationMapboxId"}
-              control={control}
-              placeholder={t("fields.locationMapboxId_placeholder")}
-            />
-          </Dropdown>
-          <p>{t("fields.locationTutorial_tip")}</p>
-          <Textarea
-            placeholder={t("fields.locationTutorial_placeholder")}
-            rows={9}
-            {...register("locationTutorial")}
-          />
-        </VStack>
-      ),
-      isNextBtnDisabled: !(
-        dirtyFields.locationMapboxId && dirtyFields.locationTutorial
-      ),
+      content: <LocationGroup control={control} />,
+      formType: CreateVenueFormTypeEnum.Location,
     },
     {
       title: t("groups.additional"),
       content: (
-        <Flex justifyContent="space-between" flexWrap="wrap" gap="20px">
-          <VStack alignItems="flex-start" gap="10px">
-            <span>{t("fields.featureCCTV_tip")}</span>
-            <Radio
-              value="1"
-              defaultChecked={defaultValues?.featureCCTV === true}
-              label={t("fields.yes_label")}
-              {...register("featureCCTV")}
-            />
-            <Radio
-              value="0"
-              defaultChecked={defaultValues?.featureCCTV === false}
-              label={t("fields.no_label")}
-              {...register("featureCCTV")}
-            />
-          </VStack>
-
-          <VStack alignItems="flex-start" gap="10px">
-            <span>{t("fields.featureParking_tip")}</span>
-            <Radio
-              value="1"
-              defaultChecked={defaultValues?.featureParking === true}
-              label={t("fields.yes_label")}
-              {...register("featureParking")}
-            />
-            <Radio
-              value="0"
-              label={t("fields.no_label")}
-              defaultChecked={defaultValues?.featureParking === false}
-              {...register("featureParking")}
-            />
-          </VStack>
-
-          <VStack alignItems="stretch" gap="10px">
-            <span>{t("fields.featureAge_tip")}</span>
-            <Select
-              placeholder={t("fields.featureAge_placeholder")}
-              {...register("featureAge")}
-            >
-              {ageRestrictionList.map((age) => (
-                <option key={age} value={age}>
-                  {age}+
-                </option>
-              ))}
-            </Select>
-          </VStack>
-        </Flex>
+        <AdditionalGroup
+          defaultValues={defaultValues?.features}
+          ageRestrictionList={Array.from(ageRestrictionList)}
+        />
       ),
-      isNextBtnDisabled: !(
-        dirtyFields.featureCCTV &&
-        dirtyFields.featureParking &&
-        dirtyFields.featureAge
-      ),
+      formType: CreateVenueFormTypeEnum.Features,
     },
     {
       title: t("groups.contacts"),
-      content: (
-        <Flex justifyContent="space-around" flexWrap="wrap" gap="20px">
-          <InlineBox flexBasis="full">{t("fields.contacts_tip")}</InlineBox>
-          <VStack alignItems="flex-start" gap="10px" width="35%">
-            <Input
-              placeholder={t("fields.firstname_placeholder")}
-              {...register("manager.firstname")}
-            />
-            <Input
-              placeholder={t("fields.lastname_placeholder")}
-              {...register("manager.lastname")}
-            />
-          </VStack>
-          <VStack alignItems="flex-start" gap="10px" width="35%">
-            <Input
-              type="email"
-              inputMode="email"
-              placeholder={t("fields.email_placeholder")}
-              {...register("manager.email")}
-            />
-            <Input
-              type="text"
-              inputMode="tel"
-              placeholder={t("fields.phoneNumber_placeholder")}
-              {...register("manager.phoneNumber")}
-            />
-          </VStack>
-        </Flex>
-      ),
-      isNextBtnDisabled: !(
-        dirtyFields.manager?.firstname &&
-        dirtyFields.manager?.lastname &&
-        dirtyFields.manager?.email &&
-        dirtyFields.manager?.phoneNumber
-      ),
+      content: <ContactsGroup />,
+      formType: CreateVenueFormTypeEnum.Manager,
     },
   ];
 
-  const isSubmitEnabled = isEditing
-    ? isValid && Object.values(dirtyFields).some(Boolean)
-    : isValid;
+  function setActiveForm(tabIdx: number) {
+    setValue(
+      "formType",
+      formGroupItems?.[tabIdx]?.formType || formGroupItems?.[0]?.formType,
+    );
+  }
+
+  const validateFormType = async (callbackNextStep?: () => void) => {
+    const formType = watch("formType");
+    const isValidForm = await trigger(formType);
+
+    if (callbackNextStep && isValidForm) {
+      callbackNextStep();
+    }
+  };
 
   return (
     <Box
@@ -249,13 +170,11 @@ export function AddVenueFormInner({
         items={formGroupItems}
         btnLabel={t("next_group_btn_label")}
         allowAll={isEditing}
+        isValid={isValid}
+        setActiveForm={setActiveForm}
+        validateFormType={validateFormType}
       />
-      <Button
-        type="submit"
-        size="md"
-        isLoading={pending}
-        disabled={!isSubmitEnabled}
-      >
+      <Button type="submit" size="md" isLoading={isSubmitting}>
         {t(isEditing ? "edit_btn_label" : "submit_btn_label")}
       </Button>
     </Box>

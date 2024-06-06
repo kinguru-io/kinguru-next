@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { useLocale } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import {
   PremiseCard,
@@ -16,7 +15,7 @@ import {
   SliderItem,
 } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
-import { Link, type Locale } from "@/navigation";
+import { Link } from "@/navigation";
 import prisma from "@/server/prisma";
 import { AspectRatio } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";

@@ -182,8 +182,8 @@ export function Tab({
           aria-label="Done"
           fontSize="20px"
           position="absolute"
-          top="0"
-          right="5%"
+          bottom="10px"
+          right="9px"
           icon={
             <Image src={IconFormFieldSuccess} alt="" width={10} height={10} />
           }
