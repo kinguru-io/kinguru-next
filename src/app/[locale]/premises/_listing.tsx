@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { SortToggler } from "../../../components/filters/sort-toggler";
-import { LoadMoreLink } from "@/components/filters";
+import { LoadMoreLink, SortToggler } from "@/components/filters";
 import { PremiseStack } from "@/components/premise";
 import { getPremises, defaultSizings } from "@/lib/actions/premise-filter";
 import { HStack, InlineBox, Stack } from "~/styled-system/jsx";
@@ -12,7 +11,7 @@ export async function Listing({
 }) {
   const {
     total: { value: total },
-    hits,
+    hits = [],
   } = await getPremises(searchParams);
   const t = await getTranslations("filters");
 
