@@ -81,9 +81,9 @@ export function EditVenueForm({
     if (!response) return;
     const { status, message } = response;
 
-    // @ts-expect-error
-    const errorMsg = handleFormErrorMsg(message, t);
     if (status === "error") {
+      // @ts-expect-error
+      const errorMsg = handleFormErrorMsg(message, t);
       toast.error(() => (
         <span style={{ wordBreak: "break-all" }}>{errorMsg}</span>
       ));

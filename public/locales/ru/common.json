@@ -253,15 +253,15 @@
     "signin_form": {
       "heading": "Вход в кабинет пользователя",
       "heading_org": "Вход в кабинет организации",
-      "email_placeholder": "Введите email",
-      "password_placeholder": "Пароль",
+      "email": "Email",
+      "password": "Пароль",
       "submit": "Войти",
       "forgot_password": "Забыли пароль?"
     },
     "signup_form": {
       "heading": "Зарегистрируйте свою организацию",
-      "name": "Ведите название компании",
-      "email": "Введите email",
+      "name": "Название компании",
+      "email": "Email",
       "password": "Пароль",
       "confirmPassword": "Повтор пароля",
       "submit": "Зарегистрироваться",

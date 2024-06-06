@@ -65,7 +65,6 @@ function SigninFormInner() {
           config={formConfig.main}
           schema={signinFormSchema}
           translationsKey="auth.signin_form"
-          // variant="outline"
         />
       </fieldset>
       <Button type="submit" size="md" isLoading={isSubmitting}>

@@ -416,15 +416,15 @@
     "signin_form": {
       "heading": "User Log In",
       "heading_org": "Organization Log In",
-      "email": "Enter email",
+      "email": "Email",
       "password": "Password",
       "submit": "Log In",
-      "forgotPassword": "Forgot password?"
+      "forgot_password": "Forgot password?"
     },
     "signup_form": {
       "heading": "Register your company",
-      "name": "Enter company name",
-      "email": "Enter email",
+      "name": "Company name",
+      "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
       "submit": "Register",
