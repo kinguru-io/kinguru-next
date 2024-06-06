@@ -12,16 +12,20 @@ type SelectProps = SelectVariantProps &
   };
 
 export const Select = forwardRef(function Select(
-  { placeholder, children, ...props }: SelectProps,
+  { placeholder, children, value, defaultValue, ...props }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>,
 ) {
   const { outerWrapper, selectRoot } = select();
   const selectClass = cx(input(), selectRoot);
 
+  const valueProp = value
+    ? { value: value || "" }
+    : { defaultValue: defaultValue || "" };
+
   return (
     <div className={outerWrapper}>
-      <select ref={ref} className={selectClass} defaultValue={""} {...props}>
-        <option disabled={true} value="">
+      <select ref={ref} className={selectClass} {...valueProp} {...props}>
+        <option value="" disabled>
           {placeholder}
         </option>
         {children}
