@@ -1,41 +1,20 @@
+import { isValid } from "date-fns";
+import {
+  closedHoursResolver,
+  premiseSlotResolver,
+} from "./resolvers/search-datetime";
+import { filterKeysResolverMap, isFilterKey } from "./resolvers/simple-keys";
+
+const premisePredicate = { term: { booked_slots: "premise" } } as const; // only Premise documents matter
 export const defaultSizings = {
   size: 10,
   from: 0,
 };
 
-type MaybeArray<T> = T | T[];
-
-function numericResolver(key: string) {
-  return (value: string) => {
-    const [from, to] = value.split("-");
-
-    return { range: { [key]: { gte: Number(from), lte: Number(to) } } };
-  };
-}
-
-const filterKeysResolverMap = {
-  amenities: (terms: MaybeArray<string>) => ({
-    terms_set: {
-      amenities: {
-        terms: Array.isArray(terms) ? terms : [terms],
-        minimum_should_match_script: { source: "params.num_terms" },
-      },
-    },
-  }),
-  type: (type: MaybeArray<string>) => ({
-    terms: { type: Array.isArray(type) ? type : [type] },
-  }),
-  price: numericResolver("minPrice"),
-  area: numericResolver("area"),
-  capacity: numericResolver("capacity"),
-};
-
-function isFilterKey(key: string): key is keyof typeof filterKeysResolverMap {
-  return key in filterKeysResolverMap;
-}
-
 export function buildQueryParts(searchParams: Record<string, any>) {
-  return Object.entries(searchParams).reduce(
+  return Object.entries(searchParams).reduce<
+    Record<"must" | "must_not" | "sort" | "size", any>
+  >(
     (parts, [key, values]) => {
       if (!values) return parts;
 
@@ -52,11 +31,23 @@ export function buildQueryParts(searchParams: Record<string, any>) {
         parts.size = Number(values);
       }
 
+      if (key === "search_datetime") {
+        const isoRanges: string[] = values.split(",");
+        if (isoRanges.some((range) => !isValid(new Date(range)))) return parts;
+
+        parts.must_not.push(
+          premiseSlotResolver(isoRanges),
+          closedHoursResolver(isoRanges),
+        );
+      }
+
       return parts;
     },
-    { must: [], sort: [], size: defaultSizings.size } as Record<
-      "must" | "sort" | "size",
-      any | any[]
-    >,
+    {
+      must: [premisePredicate],
+      must_not: [],
+      sort: [],
+      size: defaultSizings.size,
+    },
   );
 }
