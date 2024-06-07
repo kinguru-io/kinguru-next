@@ -37,7 +37,7 @@ Content-Type: application/json
       "must": [
         {
           "term": {
-            "booked_slots": "premise_slot"
+            "booked_slots": "premise"
           }
         }
       ]
