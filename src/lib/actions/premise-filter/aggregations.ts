@@ -1,10 +1,9 @@
 "use server";
 
-import type { ApiResponse, RequestParams } from "@elastic/elasticsearch";
 import type { ElasticAggs } from "./es-types";
 import { esClient } from "@/esClient";
 
-const premiseAggs = {
+const premiseAggregationsQuery = {
   price: {
     global: {},
     aggs: {
@@ -52,21 +51,20 @@ const premiseAggs = {
   },
 };
 
-export type PremiseAggregations = typeof premiseAggs;
+export type PremiseAggregations = typeof premiseAggregationsQuery;
 
-const aggregationsSearch: RequestParams.Search<{ aggs: PremiseAggregations }> =
-  {
-    index: process.env.ES_INDEX_PREMISE_FULFILLED,
-    filter_path: "aggregations",
-    size: 0,
-    body: { aggs: premiseAggs },
-  };
+const aggregationsSearch = {
+  index: process.env.ES_INDEX_PREMISE_FULFILLED,
+  filter_path: "aggregations",
+  size: 0,
+  body: { aggs: premiseAggregationsQuery },
+};
 
 export async function getPremiseAggregations() {
-  const {
-    body: { aggregations },
-  }: ApiResponse<ElasticAggs<PremiseAggregations>> =
-    await esClient.search(aggregationsSearch);
+  const response = await esClient.search<
+    PremiseAggregations,
+    ElasticAggs<PremiseAggregations>
+  >(aggregationsSearch);
 
-  return aggregations;
+  return response.aggregations || {};
 }

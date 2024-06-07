@@ -45,28 +45,6 @@ Content-Type: application/json
   }
 }
 
-### Create connector ES
-POST http://localhost:8083/connectors
-Content-Type: application/json
-
-{
-  "name": "elastic-sink",
-  "config": {
-    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-    "tasks.max": "1",
-    "topics": "kinguru.public.Event",
-    "connection.url": "http://elastic:9200",
-    "transforms": "InsertKey,ExtractId",
-    "transforms.InsertKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-    "transforms.InsertKey.fields": "id",
-    "transforms.ExtractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-    "transforms.ExtractId.field": "id",
-    "key.ignore": "false",
-    "type.name": "events",
-    "behavior.on.null.values": "delete"
-  }
-}
-
 ### Update PSQL connector
 PUT http://localhost:8083/connectors/inventory-connector/config
 Content-Type: application/json
@@ -86,29 +64,8 @@ Content-Type: application/json
   "transforms.unwrap.drop.tombstones": "false"
 }
 
-### Update ES connector
-PUT http://localhost:8083/connectors/elastic-sink/config
-Content-Type: application/json
-
-{
-  "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-  "tasks.max": "1",
-  "topics": "kinguru.public.Event",
-  "connection.url": "http://elastic:9200",
-  "transforms": "InsertKey,ExtractId",
-  "transforms.InsertKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-  "transforms.InsertKey.fields": "id",
-  "transforms.ExtractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-  "transforms.ExtractId.field": "id",
-  "key.ignore": "false",
-  "type.name": "events",
-  "behavior.on.null.values": "delete"
-}
-
 ### Delete PSQL connector
 DELETE http://localhost:8083/connectors/inventory-connector
-### Delete ES connector
-DELETE http://localhost:8083/connectors/elastic-sink
 
 ### Delete ES premise_fulfilled index
 DELETE http://localhost:9200/kinguru.public.premise_fulfilled

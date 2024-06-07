@@ -9,10 +9,7 @@ export async function Listing({
 }: {
   searchParams: Record<string, any>;
 }) {
-  const {
-    total: { value: total },
-    hits = [],
-  } = await getPremises(searchParams);
+  const { total, hits } = await getPremises(searchParams);
   const t = await getTranslations("filters");
 
   const sort: keyof IntlMessages["filters"]["sorting"] =
@@ -41,7 +38,7 @@ export async function Listing({
           defaultLabel={t(`sorting.${sort}`)}
         />
       </HStack>
-      <PremiseStack premiseIdList={hits.map(({ _source }) => _source)} />
+      <PremiseStack premiseIdList={hits} />
       <LoadMoreLink
         take={defaultSizings.size}
         initialSize={defaultSizings.size}
