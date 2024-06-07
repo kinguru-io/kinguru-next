@@ -1,20 +1,5 @@
 version: "3"
 services:
-  # consumer:
-  #   image: node:20
-  #   command:
-  #   - bash
-  #   - -c
-  #   - |
-  #     npx prisma migrate dev
-  #     node consumer/main.js
-  #   links:
-  #     - kafka
-  #   working_dir: /app
-  #   volumes:
-  #     - ./:/app
-  #   env_file:
-  #     - .env
   db:
     image: debezium/postgres:16-alpine
     ports:
@@ -38,7 +23,7 @@ services:
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.1
     ports:
       - "9200:9200"
     environment:
@@ -46,11 +31,6 @@ services:
       xpack.security.enabled: 'false'
       transport.host: 127.0.0.1
       http.host: 0.0.0.0
-      http.cors.allow-origin: "*"
-      http.cors.enabled: true
-      http.cors.allow-credentials: true
-      http.cors.allow-methods: OPTIONS, POST
-      http.cors.allow-headers: x-elastic-client-meta, X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization, Access-Control-Allow-Headers, Accept
   connect:
     image: debezium/connect-jdbc-es:2.3.2.Final
     build:

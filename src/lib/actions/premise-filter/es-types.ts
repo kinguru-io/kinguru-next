@@ -16,11 +16,9 @@ export type GlobalAgg = {
 };
 
 export type ElasticAggs<T> = {
-  aggregations: {
-    [Key in keyof T]?: "terms" extends keyof T[Key]
-      ? TermsAgg
-      : "global" extends keyof T[Key]
-        ? GlobalAgg
-        : never;
-  };
+  [Key in keyof T]?: "terms" extends keyof T[Key]
+    ? TermsAgg
+    : "global" extends keyof T[Key]
+      ? GlobalAgg
+      : never;
 };

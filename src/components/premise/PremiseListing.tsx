@@ -3,7 +3,7 @@ import { PremiseView } from "./PremiseView";
 import { Stack } from "~/styled-system/jsx";
 
 type PremiseListingProps = {
-  premiseIdList: { id: string }[];
+  premiseIdList: { id: string | undefined }[];
 };
 
 export function PremiseListing({ premiseIdList }: PremiseListingProps) {
@@ -29,9 +29,7 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
 export function PremiseStack({ premiseIdList }: PremiseListingProps) {
   return (
     <Stack gap="20px">
-      {premiseIdList.map(({ id }) => (
-        <PremiseView key={id} id={id} />
-      ))}
+      {premiseIdList.map(({ id }) => id && <PremiseView key={id} id={id} />)}
     </Stack>
   );
 }
