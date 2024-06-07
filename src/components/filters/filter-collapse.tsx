@@ -34,7 +34,7 @@ export function FilterCollapse({
     <>
       <fieldset
         ref={collapsedRef}
-        className={css({ srOnly: !isShown })}
+        className={css({ minWidth: "unset", srOnly: !isShown })}
         disabled={!isShown}
       >
         {children}
