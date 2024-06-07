@@ -1,5 +1,5 @@
 import { Client } from "@elastic/elasticsearch";
-import { ResponseError } from "@elastic/transport/lib/errors";
+import { ElasticsearchClientError } from "@elastic/transport/lib/errors";
 // ! do not forget to uncomment when using the mapbox service
 // import mapbox, { type SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { PrismaClient } from "@prisma/client";
@@ -45,39 +45,40 @@ async function init() {
   });
 
   try {
-    await esClient.indices.get({
+    const isPresent = await esClient.indices.exists({
       index: premiseFulfilledIndex,
     });
-  } catch (e) {
-    if (e instanceof ResponseError) {
-      if (e.body?.error.type === "index_not_found_exception") {
-        const { statusCode } = await esClient.indices.create({
-          index: premiseFulfilledIndex,
-        });
 
-        if (statusCode && [200, 201].includes(statusCode)) {
-          await esClient.indices.putMapping({
-            index: premiseFulfilledIndex,
-            body: {
-              properties: {
-                booked_slots: {
-                  type: "join",
-                  relations: {
-                    premise: "premise_slot",
-                  },
+    // es index do not exist
+    if (!isPresent) {
+      await esClient.indices.create({
+        index: premiseFulfilledIndex,
+        body: {
+          mappings: {
+            properties: {
+              booked_slots: {
+                type: "join",
+                eager_global_ordinals: true,
+                relations: {
+                  premise: "premise_slot",
                 },
               },
             },
-          });
-        }
-      }
+          },
+        },
+      });
     }
+  } catch (e) {
+    if (e instanceof ElasticsearchClientError) {
+      logger.error(e.message);
+    }
+    logger.error(`Unknown error: ${JSON.stringify(e)}`);
   }
 
   await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
+    eachMessage: async ({ topic, message }) => {
       if (message.key === null) {
-        logger.warn("empty key");
+        logger.warn("Empty key. Processing skipped.");
         return;
       }
 
@@ -96,7 +97,7 @@ async function init() {
             id,
           });
         } catch (e) {
-          if (e instanceof ResponseError) {
+          if (e instanceof ElasticsearchClientError) {
             logger.error(e.message);
           }
         }
@@ -155,6 +156,11 @@ void init();
 
 const errorTypes = ["unhandledRejection", "uncaughtException"];
 const signalTraps = ["SIGTERM", "SIGINT", "SIGUSR2"];
+const quitPromises = [
+  consumer.stop(),
+  consumer.disconnect(),
+  prisma.$disconnect(),
+];
 
 errorTypes.forEach((type) => {
   process.on(type, async (e) => {
@@ -162,8 +168,7 @@ errorTypes.forEach((type) => {
       console.log(`process.on ${type}`);
       console.error(e);
 
-      await consumer.stop();
-      await Promise.allSettled([consumer.disconnect, prisma.$disconnect]);
+      await Promise.allSettled(quitPromises);
 
       process.exit(0);
     } catch (_) {
@@ -176,8 +181,7 @@ signalTraps.forEach((type) => {
   process.once(type, async () => {
     console.log("\nExiting...");
     try {
-      await consumer.stop();
-      await Promise.allSettled([consumer.disconnect(), prisma.$disconnect()]);
+      await Promise.allSettled(quitPromises);
     } finally {
       console.log("\nExited");
       process.kill(process.pid, type);
