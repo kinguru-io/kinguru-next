@@ -64,6 +64,10 @@
     "create_event": "Create event",
     "create_place": "Create a place"
   },
+  "main": {
+    "heading": "Znajdź idealną lokalizację",
+    "heading_popular": "Popularne oferty"
+  },
   "events": {
     "upcoming_events": "Upcoming events",
     "recent_events": "Recent events",

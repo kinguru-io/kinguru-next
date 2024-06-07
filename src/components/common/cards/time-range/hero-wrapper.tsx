@@ -20,7 +20,13 @@ export function TimeRangeHero({
     >
       <Box>
         {heading && (
-          <h1 className={css({ color: "neutral.5", marginBlockEnd: "45px" })}>
+          <h1
+            className={css({
+              color: "neutral.5",
+              marginBlockEnd: "45px",
+              textAlign: "center",
+            })}
+          >
             {heading}
           </h1>
         )}
