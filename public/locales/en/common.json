@@ -72,6 +72,10 @@
     "create_event": "Create an event",
     "create_place": "Create a place"
   },
+  "main": {
+    "heading": "Find your ideal event space",
+    "heading_popular": "Popular offers"
+  },
   "events": {
     "upcoming_events": "Upcoming events",
     "recent_events": "Recent events",
