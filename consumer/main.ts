@@ -1,5 +1,5 @@
 import { Client } from "@elastic/elasticsearch";
-import { ElasticsearchClientError } from "@elastic/transport/lib/errors";
+import { ElasticsearchClientError } from "@elastic/transport/lib/errors.js";
 // ! do not forget to uncomment when using the mapbox service
 // import mapbox, { type SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { PrismaClient } from "@prisma/client";
