@@ -13,6 +13,7 @@ export const premiseCardSlot = defineSlotRecipe({
       display: "flex",
       flexWrap: "wrap-reverse",
       gap: "2rem",
+      animation: "fadein 200ms linear",
     },
     premiseContent: {
       flex: "1",
