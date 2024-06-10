@@ -58,7 +58,7 @@ export default function PremiseListingPage({
 function ListingSkeletons({ size }: { size: number }) {
   return (
     <Stack gap="20px">
-      {Array.from({ length: size }, (_, i) => (
+      {Array.from({ length: size }, (_) => (
         <PremiseCard>
           <PremiseContent>
             <PremiseTextContent>
