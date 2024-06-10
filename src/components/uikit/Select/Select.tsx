@@ -6,7 +6,7 @@ import {
   type SelectVariantProps,
 } from "~/styled-system/recipes";
 
-type SelectProps = SelectVariantProps &
+export type SelectProps = SelectVariantProps &
   ComponentPropsWithoutRef<"select"> & {
     placeholder?: string;
   };

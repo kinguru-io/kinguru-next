@@ -50,7 +50,7 @@ export const orgRegisterSchema = (
     foundationDate: zfd.numeric(
       z.number().min(1900).step(1).max(new Date().getFullYear()),
     ),
-    country: zfd.text(z.string().min(3).max(50).nullish()).nullish(),
+    country: zfd.text(),
     city: zfd.text(),
     businessName: zfd.text(),
     NIP: zfd.text(

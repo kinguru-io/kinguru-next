@@ -10,7 +10,7 @@
     },
     {
       "name": "country",
-      "type": "text"
+      "type": "country-select"
     },
     {
       "name": "city",
@@ -41,7 +41,7 @@
     "postAddress": [
       {
         "name": "country",
-        "type": "text"
+        "type": "country-select"
       },
       {
         "name": "city",
@@ -67,7 +67,7 @@
     "billingAddress": [
       {
         "name": "country",
-        "type": "text"
+        "type": "country-select"
       },
       {
         "name": "city",
