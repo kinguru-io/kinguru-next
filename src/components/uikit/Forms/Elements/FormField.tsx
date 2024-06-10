@@ -2,14 +2,24 @@ import { useTranslations } from "next-intl";
 import React, { memo } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { ZodSchema } from "zod";
+import { CountrySelect } from "@/components/common/form/country-select";
 import { ErrorField, Input, InputPassword } from "@/components/uikit";
 import { getOptionalFields } from "@/utils/getOptionalFieldsFromSchema";
+import { Box } from "~/styled-system/jsx";
 import { InputVariant } from "~/styled-system/recipes";
+
+type FieldType =
+  | "text"
+  | "number"
+  | "email"
+  | "password"
+  | "select"
+  | "country-select";
 
 interface FormFieldProps {
   name: string;
   customName?: string;
-  type: string;
+  type: FieldType;
   options?: { text: string }[];
   schema: ZodSchema<any>;
   variant: InputVariant;
@@ -64,28 +74,36 @@ export const FormField = memo(
       commonProps.variant = "outline";
     }
 
-    let field;
+    let field = null;
     switch (type) {
       case "text":
         field = <Input type={type} {...commonProps} />;
         break;
       case "number":
       case "email":
-        field = <Input type={type} inputMode="numeric" {...commonProps} />;
+        field = (
+          <Input
+            type={type}
+            inputMode={type === "email" ? "email" : "numeric"}
+            {...commonProps}
+          />
+        );
         break;
       case "password":
         field = <InputPassword {...commonProps} />;
         break;
+      case "country-select":
+        field = <CountrySelect {...commonProps} />;
+        break;
       // Add more cases as needed
       default:
-        field = null;
     }
 
     return (
-      <div style={{ width: "100%" }}>
+      <Box width="full">
         {field}
         <ErrorField error={error} />
-      </div>
+      </Box>
     );
   },
 );

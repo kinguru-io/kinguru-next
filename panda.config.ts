@@ -57,6 +57,9 @@ export default defineConfig({
         radio: radioSlot,
       },
       tokens: {
+        animations: {
+          "fade-in": { value: "fadein 150ms linear" },
+        },
         gradients: {
           cardImage: {
             value:

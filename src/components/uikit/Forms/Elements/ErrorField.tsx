@@ -1,4 +1,3 @@
-import { Fade } from "@chakra-ui/react";
 import { Flex } from "~/styled-system/jsx";
 
 export function ErrorField({ error }: { error: any }) {
@@ -6,11 +5,9 @@ export function ErrorField({ error }: { error: any }) {
 
   return (
     errorFromKey && (
-      <Fade in={true}>
-        <Flex grow="1" fontSize="14px" color="danger">
-          {errorFromKey?.message}
-        </Flex>
-      </Fade>
+      <Flex grow="1" fontSize="0.875rem" color="danger" animation="fade-in">
+        {errorFromKey?.message}
+      </Flex>
     )
   );
 }
