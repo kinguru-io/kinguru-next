@@ -64,6 +64,13 @@ const project = new web.NextJsTypeScriptProject({
       },
     },
     {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "svc/elastic-es-default",
+        mappings: "9200:9200",
+      },
+    },
+    {
       uses: "actions/cache@v3",
       with: {
         path: "~/.npm\n${{ github.workspace }}/.next/cache",
@@ -309,6 +316,14 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
       },
     },
     {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "svc/elastic-es-default",
+        mappings: "9200:9200",
+        options: "--address=0.0.0.0",
+      },
+    },
+    {
       uses: "werf/actions/install@v1.2",
     },
     {
@@ -325,6 +340,9 @@ werf converge --atomic`,
         WERF_SET_5: "replicas.max=2",
         SITE_URL: "https://staging.eventify.today",
         DATABASE_URL: "${{ secrets.DB_URL }}",
+        ES_CLIENT_NODE: "http://172.17.0.1:9200/",
+        ES_CLIENT_API_KEY: "${{ secrets.ELASTICSEARCH_API_KEY }}",
+        ES_INDEX_PREMISE_FULFILLED: "kinguru-stage.public.premise.fulfilled",
         NEXT_PUBLIC_GA_ID: "${{ secrets.GA_ID }}",
         NEXT_PUBLIC_MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
         NEXT_PUBLIC_ELASTICSEARCH_API_KEY:
