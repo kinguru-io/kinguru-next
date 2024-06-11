@@ -20,7 +20,7 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
 
   const formatLanguage = languageFormatter(locale);
 
-  const onToggleLanguageClick = (newLocale: string) => {
+  const onToggleLanguageClick = (newLocale: Locale) => {
     startTransition(() => {
       router.replace(pathname, { locale: newLocale });
     });
