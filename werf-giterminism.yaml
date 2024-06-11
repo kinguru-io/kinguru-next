@@ -4,6 +4,9 @@ config:
     allowEnvVariables:
       - SITE_URL
       - DATABASE_URL
+      - ES_CLIENT_NODE
+      - ES_CLIENT_API_KEY
+      - ES_INDEX_PREMISE_FULFILLED
       - NEXT_PUBLIC_GA_ID
       - NEXT_PUBLIC_MAPBOX_TOKEN
       - NEXT_PUBLIC_ELASTICSEARCH_API_KEY
