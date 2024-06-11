@@ -41,6 +41,15 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "DATABASE_URL=\${{ secrets.DB_URL }}" >> $GITHUB_ENV`,
     },
     {
+      run: `echo "ES_CLIENT_NODE=http://172.17.0.1:9200/" >> $GITHUB_ENV`,
+    },
+    {
+      run: `echo "ES_CLIENT_API_KEY=\${{ secrets.ELASTICSEARCH_API_KEY }}" >> $GITHUB_ENV`,
+    },
+    {
+      run: `echo "ES_INDEX_PREMISE_FULFILLED=kinguru-stage.public.premise.fulfilled" >> $GITHUB_ENV`,
+    },
+    {
       run: `echo "NEXT_PUBLIC_GA_ID=\${{ secrets.GA_ID }}" >> $GITHUB_ENV`,
     },
     {
