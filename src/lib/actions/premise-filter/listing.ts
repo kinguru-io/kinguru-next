@@ -19,7 +19,8 @@ export async function getPremises(searchParams: Record<string, any>) {
     filter_path: "hits.total.value,hits.hits._source",
     size,
     from: defaultSizings.from,
-    body: { query: { bool: { must, must_not } }, sort },
+    query: { bool: { must, must_not } },
+    sort,
   });
 
   const hits = response.hits.hits || []; // expect `undefined` since `filter_path`
