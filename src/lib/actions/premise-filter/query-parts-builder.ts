@@ -5,7 +5,7 @@ import {
 } from "./resolvers/search-datetime";
 import { filterKeysResolverMap, isFilterKey } from "./resolvers/simple-keys";
 
-const premisePredicate = { term: { booked_slots: "premise" } } as const; // only Premise documents matter
+const premisePredicate = { term: { "booked_slots.name": "premise" } } as const; // only Premise documents matter
 export const defaultSizings = {
   size: 10,
   from: 0,
