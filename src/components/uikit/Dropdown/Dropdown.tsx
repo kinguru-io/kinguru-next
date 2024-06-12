@@ -7,6 +7,7 @@ import {
   useContext,
   useState,
   useRef,
+  useEffect,
 } from "react";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { css, cx } from "~/styled-system/css";
@@ -32,6 +33,28 @@ export function useDropdown() {
   return useContext(DropdownContext);
 }
 
+export const useOutsideClick = (callback: () => void) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    };
+
+    document.addEventListener("mouseup", handleClickOutside);
+    document.addEventListener("touchend", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+      document.removeEventListener("touchend", handleClickOutside);
+    };
+  }, [callback]);
+
+  return ref;
+};
+
 export function Dropdown({
   children,
   size = "sm",
@@ -41,9 +64,16 @@ export function Dropdown({
   const [hidden, setHidden] = useState(hiddenState);
   const dropdownSlot = dropdown({ size, anchor });
 
+  const ref = useOutsideClick(() => {
+    if (hidden) return;
+    setHidden(!hidden);
+  });
+
   return (
     <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
-      <div className={dropdownSlot.dropdown}>{children}</div>
+      <div className={dropdownSlot.dropdown} ref={ref}>
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 }
@@ -86,6 +116,7 @@ export function DropdownInitiator({ children }: DropdownProps) {
       role="button"
       tabIndex={0}
       onClick={() => setHidden((prevState) => !prevState)}
+      style={{ cursor: "pointer" }}
     >
       {children}
     </div>

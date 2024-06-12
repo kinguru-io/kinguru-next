@@ -149,13 +149,15 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.billingAddress")}
             <AddressGroup type="billing" />
           </FormColumn>
+          <FormRow>
+            <Checkbox
+              label={t("same_addresses_label")}
+              defaultChecked={false}
+              onChange={({ target }) => sameAddressStateChanged(target.checked)}
+            />
+            <span className="helper">{t("credentials_asterisk_helper")}</span>
+          </FormRow>
         </OrganizationRegisterFormGroupLayout>
-        <Checkbox
-          label={t("same_addresses_label")}
-          defaultChecked={false}
-          onChange={({ target }) => sameAddressStateChanged(target.checked)}
-        />
-        <span className="helper">{t("credentials_asterisk_helper")}</span>
       </OrganizationRegisterFormBoxLayout>
 
       <OrganizationRegisterFormBoxLayout>
@@ -283,8 +285,21 @@ function FormColumn({ children }: { children: React.ReactNode }) {
     <Flex
       direction="column"
       gap="20px"
-      flexBasis="256px"
+      flexGrow="1"
       justifyContent="flex-start"
+    >
+      {children}
+    </Flex>
+  );
+}
+
+function FormRow({ children }: { children: React.ReactNode }) {
+  return (
+    <Flex
+      direction="column"
+      flexGrow="1"
+      justifyContent="flex-start"
+      gap="25px"
     >
       {children}
     </Flex>

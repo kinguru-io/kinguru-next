@@ -4,7 +4,6 @@ import type { SocialNetwork } from "@prisma/client";
 import { getSession } from "@/auth.ts";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
-import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 const orgRegisterHandler = async ({
@@ -54,11 +53,6 @@ const orgRegisterHandler = async ({
       address: { createMany: { data: address } },
     },
   });
-
-  // redirecting in case it was a registration
-  if (!organization) {
-    redirect("/profile");
-  }
 
   return { status: "success", message: "" };
 };

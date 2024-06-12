@@ -59,7 +59,11 @@ export async function PremiseView({
       <PremiseContent>
         <PremiseTextContent>
           <PremiseTitleWrapper>
-            <PremiseTitle>{name}</PremiseTitle>
+            <PremiseTitle>
+              <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
+                {name}
+              </Link>
+            </PremiseTitle>
             {area && (
               <PremiseTitleSize>
                 (
@@ -85,17 +89,19 @@ export async function PremiseView({
         </Link>
       </PremiseContent>
       <PremiseSlider>
-        <Slider slidesCount={resources.length}>
-          {resources.map((item) => {
-            return (
-              <SliderItem key={item.id}>
-                <AspectRatio ratio={16 / 9}>
-                  <Image src={item.url} width={391} height={220} alt="" />
-                </AspectRatio>
-              </SliderItem>
-            );
-          })}
-        </Slider>
+        <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
+          <Slider slidesCount={resources.length}>
+            {resources.map((item) => {
+              return (
+                <SliderItem key={item.id}>
+                  <AspectRatio ratio={16 / 9}>
+                    <Image src={item.url} width={391} height={220} alt="" />
+                  </AspectRatio>
+                </SliderItem>
+              );
+            })}
+          </Slider>
+        </Link>
         {minPrice && (
           <PremisePrice>
             {t("from", { price: priceFormatter.format(minPrice) })}

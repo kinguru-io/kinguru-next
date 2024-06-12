@@ -386,7 +386,8 @@
     "how_to_get_there": "How to get there",
     "calendar_heading": "Premise calendar",
     "show_more": "More",
-    "show_less": "Less"
+    "show_less": "Less",
+    "go_to_premise_page": "Przejdź do strony lokalu"
   },
   "discount_info": {
     "card_heading": "There are discounts*",
@@ -475,7 +476,8 @@
       "created": {
         "heading": "Congratulations!\nYou have successfully registered the venue.",
         "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
-        "no_premise_link_label": "Go to premise registration"
+        "no_premise_link_label": "Go to premise registration",
+        "check_venue": "Zobacz stronę {venueName}"
       }
     },
     "premises": {

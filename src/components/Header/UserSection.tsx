@@ -29,9 +29,9 @@ export async function UserSection() {
         {session ? (
           <>
             <Link href="/profile">{t("your_profile")}</Link>
-            {session.user?.role === "organization" && (
+            {/* {session.user?.role === "organization" && (
               <Link href="/profile/edit">{t("add_organization")}</Link>
-            )}
+            )} */}
             <SignOutButton>{t("sign_out")}</SignOutButton>
           </>
         ) : (
