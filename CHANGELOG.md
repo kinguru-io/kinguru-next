@@ -1,3 +1,10 @@
+# [0.44.0](https://github.com/kinguru-io/kinguru-next/compare/v0.43.0...v0.44.0) (2024-06-12)
+
+
+### Features
+
+* Add functionality to filter/find premises and frontend form validations ([#608](https://github.com/kinguru-io/kinguru-next/issues/608)) ([9379f76](https://github.com/kinguru-io/kinguru-next/commit/9379f766fe94e8d192a337e5d48b69249dd7ffa5))
+
 # [0.43.0](https://github.com/kinguru-io/kinguru-next/compare/v0.42.1...v0.43.0) (2024-05-13)
 
 
