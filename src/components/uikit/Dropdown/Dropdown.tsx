@@ -6,8 +6,11 @@ import {
   createContext,
   useContext,
   useState,
+  useRef,
+  useEffect,
 } from "react";
-import { cx } from "~/styled-system/css";
+import { useClickOutside } from "@/hooks/use-click-outside";
+import { css, cx } from "~/styled-system/css";
 import { customDivider } from "~/styled-system/patterns";
 import { dropdown, type DropdownVariantProps } from "~/styled-system/recipes";
 
@@ -30,17 +33,47 @@ export function useDropdown() {
   return useContext(DropdownContext);
 }
 
+export const useOutsideClick = (callback: () => void) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    };
+
+    document.addEventListener("mouseup", handleClickOutside);
+    document.addEventListener("touchend", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+      document.removeEventListener("touchend", handleClickOutside);
+    };
+  }, [callback]);
+
+  return ref;
+};
+
 export function Dropdown({
   children,
   size = "sm",
+  anchor,
   hiddenState = true,
 }: DropdownProps) {
   const [hidden, setHidden] = useState(hiddenState);
-  const dropdownSlot = dropdown({ size });
+  const dropdownSlot = dropdown({ size, anchor });
+
+  const ref = useOutsideClick(() => {
+    if (hidden) return;
+    setHidden(!hidden);
+  });
 
   return (
     <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
-      <div className={dropdownSlot.dropdown}>{children}</div>
+      <div className={dropdownSlot.dropdown} ref={ref}>
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 }
@@ -48,12 +81,24 @@ export function Dropdown({
 export function DropdownMenu({
   children,
   shouldCloseOnClick = true,
-}: DropdownProps & { shouldCloseOnClick?: boolean }) {
+  likeList = true,
+}: {
+  children: React.ReactNode;
+  shouldCloseOnClick?: boolean;
+  likeList?: boolean;
+}) {
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const { hidden, dropdownSlot, setHidden } = useContext(DropdownContext);
+
+  useClickOutside([menuRef], (isOutside) => !hidden && setHidden(isOutside));
 
   return (
     <div
-      className={cx(dropdownSlot.menu, customDivider({ thickness: "1px" }))}
+      ref={menuRef}
+      className={cx(
+        dropdownSlot.menu,
+        likeList && customDivider({ thickness: "1px" }),
+      )}
       data-hidden={hidden}
       onClickCapture={() => setHidden(shouldCloseOnClick)}
     >
@@ -67,9 +112,11 @@ export function DropdownInitiator({ children }: DropdownProps) {
 
   return (
     <div
+      className={css({ cursor: "pointer" })}
       role="button"
       tabIndex={0}
       onClick={() => setHidden((prevState) => !prevState)}
+      style={{ cursor: "pointer" }}
     >
       {children}
     </div>

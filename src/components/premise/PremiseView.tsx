@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { useLocale } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   PremiseCard,
   PremiseContent,
@@ -16,7 +15,7 @@ import {
   SliderItem,
 } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
-import { Link, type Locale } from "@/navigation";
+import { Link } from "@/navigation";
 import prisma from "@/server/prisma";
 import { AspectRatio } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
@@ -31,7 +30,7 @@ export async function PremiseView({
   linkLabel?: string;
 }) {
   const t = await getTranslations("premise");
-  const locale = useLocale() as Locale;
+  const locale = await getLocale();
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
@@ -60,7 +59,11 @@ export async function PremiseView({
       <PremiseContent>
         <PremiseTextContent>
           <PremiseTitleWrapper>
-            <PremiseTitle>{name}</PremiseTitle>
+            <PremiseTitle>
+              <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
+                {name}
+              </Link>
+            </PremiseTitle>
             {area && (
               <PremiseTitleSize>
                 (
@@ -86,17 +89,19 @@ export async function PremiseView({
         </Link>
       </PremiseContent>
       <PremiseSlider>
-        <Slider slidesCount={resources.length}>
-          {resources.map((item) => {
-            return (
-              <SliderItem key={item.id}>
-                <AspectRatio ratio={16 / 9}>
-                  <Image src={item.url} width={391} height={220} alt="" />
-                </AspectRatio>
-              </SliderItem>
-            );
-          })}
-        </Slider>
+        <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
+          <Slider slidesCount={resources.length}>
+            {resources.map((item) => {
+              return (
+                <SliderItem key={item.id}>
+                  <AspectRatio ratio={16 / 9}>
+                    <Image src={item.url} width={391} height={220} alt="" />
+                  </AspectRatio>
+                </SliderItem>
+              );
+            })}
+          </Slider>
+        </Link>
         {minPrice && (
           <PremisePrice>
             {t("from", { price: priceFormatter.format(minPrice) })}

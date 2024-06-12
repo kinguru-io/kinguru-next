@@ -64,6 +64,10 @@
     "create_event": "Create event",
     "create_place": "Create a place"
   },
+  "main": {
+    "heading": "Znajdź idealną lokalizację",
+    "heading_popular": "Popularne oferty"
+  },
   "events": {
     "upcoming_events": "Upcoming events",
     "recent_events": "Recent events",
@@ -244,11 +248,113 @@
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
   },
+  "organization": {
+    "basic_info_page": {
+      "heading": "Profile"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Main",
+        "credentials": "Credentials*",
+        "social": "Social networks"
+      },
+      "column": {
+        "business": "Company information:",
+        "bank": "Bank details:",
+        "postAddress": "Post address:",
+        "billingAddress": "Billing address:"
+      },
+      "country": "Country",
+      "city": "City",
+      "name": "Company name",
+      "street": "Street",
+      "building": "Building number",
+      "room": "Room",
+      "zipCode": "Zip code",
+      "foundationDate": "Year founded",
+      "businessName": "Business name",
+      "NIP": "NIP(XXXXXXXXX)",
+      "IBAN": "IBAN",
+      "bankName": "Bank name",
+      "same_addresses_label": "Billing address matches post address",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
+      "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "NIP_required": "NIP musi mieć dokładnie 10 cyfr",
+          "socialLinks_required": "Należy podać przynajmniej jedną sieć społecznościową",
+          "socialLink_required": "Nieprawidłowy format URL"
+        }
+      }
+    }
+  },
+  "user": {
+    "basic_info_page": {
+      "heading": "Profile"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Main",
+        "social": "Social networks"
+      },
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "phoneNumber": "Phone",
+      "country": "Country",
+      "city": "City",
+      "birthdate": "Birthday",
+      "description": "Extra information",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "firstname_required": "First name should contain at least 2 characters",
+          "lastname_required": "Last name should contain at least 2 characters",
+          "email_required": "To nie jest prawidłowy email",
+          "birthdate_required": "Incorrect date format",
+          "socialLinks_required": "Należy podać przynajmniej jedną sieć społecznościową",
+          "socialLink_required": "Nieprawidłowy format URL"
+        }
+      }
+    }
+  },
+  "auth": {
+    "reset_form": {
+      "heading": "Forgot your password?",
+      "email_placeholder": "Enter email",
+      "submit": "Submit",
+      "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
+    },
+    "signin_form": {
+      "heading": "Logowanie użytkownika",
+      "heading_org": "Logowanie organizacji",
+      "email": "Email",
+      "password": "Hasło",
+      "submit": "Zaloguj się",
+      "forgot_password": "Zapomniałeś hasła?"
+    },
+    "signup_form": {
+      "heading": "Zarejestruj swoją firmę",
+      "name": "Nazwa firmy",
+      "email": "Email",
+      "password": "Hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "submit": "Zarejestruj się",
+      "helper": "Klikając przycisk \"Zarejestruj się\", akceptujesz <partnerAgreement>Umowę partnerską</partnerAgreement>, potwierdzasz, że zapoznałeś się z <personalDataPolicy>Polityką przetwarzania danych osobowych</personalDataPolicy> i wyrażasz <personalDataProcess>Zgodę na przetwarzanie danych osobowych</personalDataProcess>"
+    }
+  },
   "form": {
     "common": {
-      "upload_photo": "Upload a photo",
-      "uploaded_photo": "Uploaded photo",
-      "updated": "Updated"
+      "upload_photo": "Prześlij zdjęcie",
+      "uploaded_photo": "Zdjęcie przesłane",
+      "updated": "Zaktualizowano"
+    },
+    "multi_step": {
+      "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."
     }
   },
   "event": {
@@ -312,7 +418,8 @@
     "how_to_get_there": "How to get there",
     "calendar_heading": "Premise calendar",
     "show_more": "More",
-    "show_less": "Less"
+    "show_less": "Less",
+    "go_to_premise_page": "Przejdź do strony lokalu"
   },
   "discount_info": {
     "card_heading": "There are discounts*",
@@ -353,106 +460,130 @@
       "heading": "My notifications"
     },
     "venues": {
-      "heading": "My venues",
-      "premises_heading": "Premises",
-      "no_premises": "Venue is inactive. A hall needs to be added.",
-      "no_organization_warn_msg": "To be able to add venues and halls, please fill out your personal information in the \"Profile\" section.",
-      "no_organization_link_label": "Go to the section \"Profile\"",
-      "edit_premise_link_label": "Edit",
+      "heading": "Moje miejsca",
+      "premises_heading": "Pomieszczenia",
+      "no_premises": "Miejsce jest nieaktywne. Należy dodać salę.",
+      "no_organization_warn_msg": "Aby móc dodawać miejsca i sale, proszę wypełnić swoje dane osobowe w sekcji \"Profil\".",
+      "no_organization_link_label": "Przejdź do sekcji \"Profil\"",
+      "edit_premise_link_label": "Edytuj",
       "add": {
-        "heading": "Register a new venue",
-        "submit_btn_label": "Save venue",
-        "edit_btn_label": "Save changes",
-        "next_group_btn_label": "Next",
+        "heading": "Zarejestruj nowe miejsce",
+        "submit_btn_label": "Zapisz miejsce",
+        "edit_btn_label": "Zapisz zmiany",
+        "next_group_btn_label": "Dalej",
         "groups": {
-          "main_info": "Main information",
-          "photo": "Photo",
-          "location": "Address",
-          "additional": "Additional",
-          "contacts": "Contacts"
+          "main_info": "Podstawowe informacje",
+          "photo": "Zdjęcie",
+          "location": "Adres",
+          "additional": "Dodatkowe",
+          "contacts": "Kontakty"
         },
         "fields": {
-          "name": "Name",
-          "name_placeholder": "Name",
-          "description": "Description",
-          "description_placeholder": "Add a description for your venue",
-          "photo_tip": "Add one photo that will be displayed on the venue page.",
-          "locationMapboxId_placeholder": "Enter the address",
-          "locationTutorial_tip": "Write a guide on how to get to you. It will be visible to all users and it will be easier for them to find you.",
-          "locationTutorial_placeholder": "For example: You can get there by taking the tram #2 and #5. From the stop \"Ozernaya\" walk to the large brick building. Enter from the back. On the third floor turn right and follow the signs.",
-          "featureCCTV_tip": "CCTV",
+          "name": "Nazwa",
+          "name_placeholder": "Nazwa",
+          "description": "Opis",
+          "description_placeholder": "Dodaj opis swojego miejsca",
+          "photo_tip": "Dodaj jedno zdjęcie, które będzie wyświetlane na stronie miejsca.",
+          "locationMapboxId_placeholder": "Wprowadź adres",
+          "locationTutorial_tip": "Napisz przewodnik, jak do Ciebie dotrzeć. Będzie widoczny dla wszystkich użytkowników i ułatwi im znalezienie Ciebie.",
+          "locationTutorial_placeholder": "Na przykład: Można dojechać tramwajem #2 i #5. Od przystanku \"Ozernaya\" idź do dużego ceglastego budynku. Wejście od tyłu. Na trzecim piętrze skręć w prawo i podążaj za znakami.",
+          "featureCCTV_tip": "Monitoring",
           "featureParking_tip": "Parking",
-          "featureAge_tip": "Age restrictions",
-          "featureAge_placeholder": "Select age",
-          "yes_label": "Yes",
-          "no_label": "No",
-          "contacts_tip": "Enter venue manager's contact information",
-          "firstname_placeholder": "First name",
-          "lastname_placeholder": "Last name",
+          "featureAge_tip": "Ograniczenia wiekowe",
+          "featureAge_placeholder": "Wybierz wiek",
+          "yes_label": "Tak",
+          "no_label": "Nie",
+          "contacts_tip": "Wprowadź dane kontaktowe menedżera miejsca",
+          "firstname_placeholder": "Imię",
+          "lastname_placeholder": "Nazwisko",
           "email_placeholder": "Email",
-          "phoneNumber_placeholder": "Phone number"
+          "phoneNumber_placeholder": "Numer telefonu",
+          "errors": {
+            "alreadyExistsError": "Miejsce o tej nazwie już istnieje",
+            "photo_required": "Zdjęcie jest wymagane",
+            "email_required": "To nie jest prawidłowy email"
+          }
         }
       },
       "created": {
         "heading": "Congratulations!\nYou have successfully registered the venue.",
         "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
-        "no_premise_link_label": "Go to premise registration"
+        "no_premise_link_label": "Go to premise registration",
+        "check_venue": "Zobacz stronę {venueName}"
       }
     },
     "premises": {
       "add": {
-        "heading": "Premise registration",
-        "submit_btn_label": "Save premise",
-        "edit_btn_label": "Save changes",
-        "next_group_btn_label": "Next",
+        "heading": "Rejestracja sali",
+        "submit_btn_label": "Zapisz salę",
+        "edit_btn_label": "Zapisz zmiany",
+        "next_group_btn_label": "Dalej",
         "groups": {
-          "main_info": "Main",
-          "photo": "Photo",
-          "amenities": "Parameters and amenities",
-          "open_hours": "Opening hours and pricing",
-          "rules": "Premise rules",
-          "booking_cancel_terms": "Booking Cancellation Terms"
+          "main_info": "Podstawowe informacje",
+          "photo": "Zdjęcie",
+          "amenities": "Parametry i wyposażenie",
+          "open_hours": "Godziny otwarcia i ceny",
+          "rules": "Zasady sali",
+          "booking_cancel_terms": "Warunki anulowania rezerwacji"
         },
         "fields": {
-          "name_and_description": "Name and description",
-          "name_and_description_editing": "Description",
-          "name_placeholder": "Enter premise name",
-          "description_placeholder": "Tell us about the premise",
-          "address": "Address",
-          "address_tip": "The premise address is the same as the venue location address. To make it easier for visitors to find a specific premise, provide additional address information.",
-          "room_placeholder": "Room",
-          "floor_placeholder": "Floor",
-          "photo": "Photo",
-          "photo_tip": "Add photos of your premise",
-          "premise_parameters": "Premise parameters and amenities",
-          "type_placeholder": "Select premise type",
-          "area_prefix": "Area",
+          "name_and_description": "Nazwa i opis",
+          "name_and_description_editing": "Opis",
+          "name_placeholder": "Wprowadź nazwę sali",
+          "description_placeholder": "Opisz salę",
+          "address": "Adres",
+          "address_tip": "Adres sali jest taki sam jak adres obiektu. Aby odwiedzającym łatwiej było znaleźć konkretną salę, uzupełnij dodatkowe dane adresowe.",
+          "room_placeholder": "Pomieszczenie",
+          "floor_placeholder": "Piętro",
+          "photo": "Zdjęcie",
+          "photo_tip": "Dodaj zdjęcia swojej sali",
+          "premise_parameters": "Parametry sali",
+          "type_placeholder": "Wybierz rodzaj pomieszczenia",
+          "area_prefix": "Powierzchnia",
           "area_literal": "m",
-          "capacity_prefix": "Capacity up to",
-          "capacity_literal": "people",
-          "amenities": "Amenities",
-          "amenities_tip": "Select at least 5 amenities available in your premise. The more amenities you select, the more users can find your premise.",
-          "open_hours": "Opening hours and pricing",
-          "open_hours_example": "This form allows you to specify the cost of your hall per hour. It means that you can set different prices for different time intervals.\n\nFor example:\n<bold>10:00-14:00 - 50 zl</bold>,\n<bold>14:00-23:00 - 70 zl</bold>.\n\nIf the cost of your hall does not change during the day, it is recommended to fill it in like this:\n<bold>10:00-23:00 - 50 zl</bold>",
-          "open_hours_price_label": "Price per 1 hour:",
-          "open_hours_add_record_btn_label": "Add",
-          "open_hours_existing_range_error_msg": "Cannot add. Intersection with existing interval: {start} - {end}",
-          "open_hours_operating_mode": "Operating hours:",
-          "open_hours_empty_notice": "To display operating hours for a specific day, fill in the required fields on the left side of the screen",
-          "open_hours_spread_mode": "You can set these operating hours for the rest of the week",
-          "open_hours_spread_mode_btn_label": "Set up",
-          "open_hours_discounts_heading": "Do you plan to offer discounts during a single day?",
-          "open_hours_discounts_tip": "If you plan to offer a discount, specify its conditions. The discount is given only for bookings of several hours and is valid only for one day.",
-          "open_hours_discounts_form": "Discount calculation",
-          "open_hours_discounts_input": "Discount for <noWrap><hoursSelector>X hours</hoursSelector> - <percentageSelector>X</percentageSelector>%</noWrap>",
-          "open_hours_discounts": "Discount:",
-          "open_hours_discounts_helper": "For bookings of \n{duration, plural, =1 {# hour} other {# hours}} or more",
-          "open_hours_discounts_empty_notice": "To display the discount for the specified time interval, fill in the required fields on the left side of the screen",
-          "rules": "Premise rules",
-          "rules_tip": "Describe all rules of your hall",
-          "rules_placeholder": "e.g. No alcohol is allowed.",
-          "booking_cancel_terms": "Booking Cancellation Terms",
-          "booking_cancel_terms_tip": "Choose one cancellation term"
+          "capacity_prefix": "Pojemność do",
+          "capacity_literal": "osób",
+          "amenities": "Wyposażenie i udogodnienia",
+          "amenities_tip": "Zaznacz co najmniej 5 udogodnień dostępnych w twojej sali. Im więcej udogodnień zaznaczysz, tym więcej użytkowników znajdzie twoją salę.",
+          "open_hours": "Godziny otwarcia i ceny",
+          "open_hours_example": "Ta forma pozwala na określenie kosztu wynajmu sali za 1 godzinę. Oznacza to, że możesz podać różne ceny dla różnych przedziałów czasowych.\n\nNa przykład:\n<bold>10:00-14:00 - 50 zł</bold>,\n<bold>14:00-23:00 - 70 zł</bold>.\n\nJeśli koszt wynajmu sali jest stały przez cały dzień, zaleca się wypełnić formularz w następujący sposób:\n<bold>10:00-23:00 - 50 zł</bold>",
+          "open_hours_price_label": "Koszt za 1 godzinę:",
+          "open_hours_add_record_btn_label": "Dodaj",
+          "open_hours_existing_range_error_msg": "Nie można dodać. Nakładanie się z istniejącym przedziałem: {start} - {end}",
+          "open_hours_operating_mode": "Godziny otwarcia:",
+          "open_hours_empty_notice": "Aby wyświetlić godziny otwarcia w wybrany dzień, wypełnij odpowiednie pola po lewej stronie ekranu",
+          "open_hours_spread_mode": "Możesz ustawić te godziny otwarcia na pozostałe dni tygodnia",
+          "open_hours_spread_mode_btn_label": "Ustaw",
+          "open_hours_discounts_heading": "Czy planujesz rabaty w ramach jednego dnia?",
+          "open_hours_discounts_tip": "Jeśli planujesz rabat, wypełnij warunki jego zastosowania. Rabat dotyczy tylko kilku godzin i jest ważny tylko w ramach jednego dnia.",
+          "open_hours_discounts_form": "Kalkulacja rabatu",
+          "open_hours_discounts_input": "Rabat za <noWrap><hoursSelector>X godzin</hoursSelector> - <percentageSelector>X</percentageSelector>%</noWrap>",
+          "open_hours_discounts": "Rabat:",
+          "open_hours_discounts_helper": "Przy rezerwacji na \n{duration, plural, =1 {# godzinę} =21 {# godzinę} other {# godzin}} lub więcej",
+          "open_hours_discounts_empty_notice": "Aby wyświetlić rabat w wybranym przedziale czasowym, wypełnij odpowiednie pola po lewej stronie ekranu",
+          "rules": "Zasady sali",
+          "rules_tip": "Opisz wszystkie zasady obowiązujące w twojej sali",
+          "rules_placeholder": "Na przykład: spożywanie alkoholu jest zabronione.",
+          "booking_cancel_terms": "Warunki anulowania rezerwacji",
+          "booking_cancel_terms_tip": "Wybierz jedną z opcji",
+          "errors": {
+            "name_required": "Nazwa jest wymagana.",
+            "description_required": "Opis jest wymagany",
+            "room_required": "Pomieszczenie jest wymagane",
+            "floor_required": "Piętro jest wymagane",
+            "photos_required": "Wymagane jest co najmniej jedno zdjęcie",
+            "type_required": "Proszę wybrać właściwy typ",
+            "area_required": "Powierzchnia jest wymagana",
+            "areaMin_required": "Powierzchnia musi być co najmniej 3 metry kwadratowe",
+            "areaMax_required": "Powierzchnia nie może przekraczać 100 000 metrów kwadratowych",
+            "capacity_required": "Pojemność jest wymagana",
+            "capacityMin_required": "Pojemność musi wynosić co najmniej 1",
+            "capacityMax_required": "Pojemność musi być liczbą dodatnią",
+            "openHours_required": "Należy dodać godziny otwarcia i cenę przynajmniej na jeden dzień",
+            "amenities_required": "Należy wybrać co najmniej 5 udogodnień",
+            "rulesMin_required": "Liczba znaków dla zasad musi być co najmniej 10",
+            "bookingCancelTerm_required": "Warunki anulacji rezerwacji są wymagane"
+          }
         }
       }
     }
@@ -569,5 +700,40 @@
     "default_30_desc": "Bookings can be cancelled by guests up to 30 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 30-7 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 7 days of the event are not eligible for a refund.",
     "default_90": "Standard (90 days)",
     "default_90_desc": "Bookings can be cancelled by guests up to 90 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 90-14 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 14 days of the event are not eligible for a refund."
+  },
+  "filters": {
+    "all": "All filters",
+    "show_more": "Show more",
+    "reset_btn_label": "Reset all filters",
+    "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
+    "range_from_label": "From",
+    "range_to_label": "to",
+    "show_all_btn_label": "Show all filters",
+    "hide_btn_label": "Show less",
+    "group": {
+      "countryCode": "Country",
+      "city": "City",
+      "price": "Price",
+      "type": "Premise type",
+      "capacity": "Capacity",
+      "area": "Area",
+      "amenities": "Amenities and facilities"
+    },
+    "literal": {
+      "price": "zł",
+      "area": "m²",
+      "capacity": "ppl."
+    },
+    "sorting": {
+      "label": "Sortuj",
+      "asc": "Cena rosnąco",
+      "desc": "Cena malejąco"
+    },
+    "time_range": {
+      "search_btn_label": "Search",
+      "date_label": "Date",
+      "from_label": "From",
+      "to_label": "To"
+    }
   }
 }

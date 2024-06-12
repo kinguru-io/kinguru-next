@@ -32,6 +32,12 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      keyframes: {
+        fadein: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
       layerStyles,
       textStyles: additionalTextStyles,
       recipes: {
@@ -51,6 +57,9 @@ export default defineConfig({
         radio: radioSlot,
       },
       tokens: {
+        animations: {
+          "fade-in": { value: "fadein 150ms linear" },
+        },
         gradients: {
           cardImage: {
             value:

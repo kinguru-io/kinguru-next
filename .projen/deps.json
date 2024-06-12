@@ -204,6 +204,11 @@
       "type": "runtime"
     },
     {
+      "name": "@elastic/elasticsearch",
+      "version": "8.13.1",
+      "type": "runtime"
+    },
+    {
       "name": "@elastic/react-search-ui",
       "type": "runtime"
     },
@@ -220,6 +225,11 @@
       "type": "runtime"
     },
     {
+      "name": "@elastic/transport",
+      "version": "8.4.1",
+      "type": "runtime"
+    },
+    {
       "name": "@emotion/react",
       "type": "runtime"
     },
@@ -229,6 +239,10 @@
     },
     {
       "name": "@hookform/resolvers",
+      "type": "runtime"
+    },
+    {
+      "name": "@mapbox/search-js-core",
       "type": "runtime"
     },
     {
@@ -342,6 +356,10 @@
       "type": "runtime"
     },
     {
+      "name": "kafkajs",
+      "type": "runtime"
+    },
+    {
       "name": "mapbox-gl",
       "type": "runtime"
     },
@@ -391,6 +409,10 @@
     },
     {
       "name": "react-cookie-consent",
+      "type": "runtime"
+    },
+    {
+      "name": "react-day-picker",
       "type": "runtime"
     },
     {

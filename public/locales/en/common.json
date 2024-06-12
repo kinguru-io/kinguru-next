@@ -72,6 +72,10 @@
     "create_event": "Create an event",
     "create_place": "Create a place"
   },
+  "main": {
+    "heading": "Find your ideal event space",
+    "heading_popular": "Popular offers"
+  },
   "events": {
     "upcoming_events": "Upcoming events",
     "recent_events": "Recent events",
@@ -406,28 +410,113 @@
     "follow_us": "Follow us on {social}",
     "eventify_logotype": "Eventify logotype"
   },
+  "auth": {
+    "reset_form": {
+      "heading": "Forgot your password?",
+      "email_placeholder": "Enter email",
+      "submit": "Submit",
+      "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
+    },
+    "signin_form": {
+      "heading": "User Log In",
+      "heading_org": "Organization Log In",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log In",
+      "forgot_password": "Forgot password?"
+    },
+    "signup_form": {
+      "heading": "Register your company",
+      "name": "Company name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Register",
+      "helper": "By clicking the \"Register\" button, you accept the <partnerAgreement>Partner Agreement</partnerAgreement>, confirm that you have read the <personalDataPolicy>Personal Data Processing Policy</personalDataPolicy>, and give <personalDataProcess>Consent to the processing of personal data</personalDataProcess>"
+    }
+  },
   "form": {
     "common": {
       "upload_photo": "Upload a photo",
       "uploaded_photo": "Uploaded photo",
       "updated": "Updated"
+    },
+    "multi_step": {
+      "complete_current_step": "Please complete the current step to unlock access to the next steps."
     }
   },
   "organization": {
     "basic_info_page": {
-      "heading": "Basic organization information"
+      "heading": "Profile"
     },
     "basic_info_form": {
-      "main_heading": "Main",
+      "group": {
+        "main": "Main",
+        "credentials": "Credentials*",
+        "social": "Social networks"
+      },
+      "column": {
+        "business": "Company information:",
+        "bank": "Bank details:",
+        "postAddress": "Post address:",
+        "billingAddress": "Billing address:"
+      },
+      "country": "Country",
+      "city": "City",
       "name": "Company name",
+      "street": "Street",
+      "building": "Building number",
+      "room": "Room",
+      "zipCode": "Zip code",
       "foundationDate": "Year founded",
-      "activitySphere": "Select a field of activity",
-      "aboutCompany": "Tell more about your organization...",
-      "credentials_heading": "Credentials*",
-      "email": "Email",
-      "extra_heading": "Extra",
+      "businessName": "Business name",
+      "NIP": "NIP(XXXXXXXXX)",
+      "IBAN": "IBAN",
+      "bankName": "Bank name",
+      "same_addresses_label": "Billing address matches post address",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
-      "submit": "Save"
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "NIP_required": "NIP must be exactly 10 digits",
+          "socialLinks_required": "At least one social network should be provided",
+          "socialLink_required": "Invalid URL format"
+        }
+      }
+    }
+  },
+  "user": {
+    "basic_info_page": {
+      "heading": "Profile"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Main",
+        "social": "Social networks"
+      },
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "phoneNumber": "Phone",
+      "country": "Country",
+      "city": "City",
+      "birthdate": "Birthday",
+      "description": "Extra information",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "firstname_required": "First name should contain at least 2 characters",
+          "lastname_required": "Last name should contain at least 2 characters",
+          "email_required": "This is not a valid email",
+          "birthdate_required": "Incorrect date format",
+          "socialLinks_required": "At least one social network should be provided",
+          "socialLink_required": "Invalid URL format"
+        }
+      }
     }
   },
   "venue": {
@@ -454,7 +543,8 @@
     "how_to_get_there": "How to get there",
     "calendar_heading": "Premise calendar",
     "show_more": "More",
-    "show_less": "Less"
+    "show_less": "Less",
+    "go_to_premise_page": "Go to the premise page"
   },
   "event": {
     "future_event_page": {
@@ -579,13 +669,19 @@
           "firstname_placeholder": "First name",
           "lastname_placeholder": "Last name",
           "email_placeholder": "Email",
-          "phoneNumber_placeholder": "Phone number"
+          "phoneNumber_placeholder": "Phone number",
+          "errors": {
+            "alreadyExistsError": "A venue with this name already exists",
+            "photo_required": "Photo is required",
+            "email_required": "This is not a valid email"
+          }
         }
       },
       "created": {
         "heading": "Congratulations!\nYou have successfully registered the venue.",
         "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
-        "no_premise_link_label": "Go to premise registration"
+        "no_premise_link_label": "Go to premise registration",
+        "check_venue": "Check the {venueName} page"
       }
     },
     "premises": {
@@ -641,7 +737,25 @@
           "rules_tip": "Describe all rules of your hall",
           "rules_placeholder": "e.g. No alcohol is allowed.",
           "booking_cancel_terms":"Booking Cancellation Terms",
-          "booking_cancel_terms_tip": "Choose one cancellation term"
+          "booking_cancel_terms_tip": "Choose one cancellation term",
+          "errors": {
+            "name_required": "Name is required",
+            "description_required": "Description is required",
+            "room_required": "Room is required",
+            "floor_required": "Floor is required.",
+            "photos_required": "At least one photo is required",
+            "type_required": "Please, select a valid type",
+            "area_required": "Area is required",
+            "areaMin_required": "The area must be at least 3 square meter",
+            "areaMax_required": "The area must be no more than 100000 square meters",
+            "capacity_required": "Capacity is required",
+            "capacityMin_required": "The capacity must be at least 1",
+            "capacityMax_required": "The capacity must be a positive number",
+            "openHours_required": "You must add working hours and price for at least one day",
+            "amenities_required": "Should be chosen at least 5 amenities",
+            "rulesMin_required": "The amount of symbols for rules should be at least 10",
+            "bookingCancelTerm_required": "Booking Cancellation Terms are required"
+          }
         }
       }
     }
@@ -758,5 +872,40 @@
     "default_30_desc": "Bookings can be cancelled by guests up to 30 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 30-7 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 7 days of the event are not eligible for a refund.",
     "default_90": "Standard (90 days)",
     "default_90_desc": "Bookings can be cancelled by guests up to 90 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 90-14 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 14 days of the event are not eligible for a refund."
+  },
+  "filters": {
+    "all": "All filters",
+    "show_more": "Show more",
+    "reset_btn_label": "Reset all filters",
+    "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
+    "range_from_label": "From",
+    "range_to_label": "to",
+    "show_all_btn_label": "Show all filters",
+    "hide_btn_label": "Show less",
+    "group": {
+      "countryCode": "Country",
+      "city": "City",
+      "price": "Price",
+      "type": "Premise type",
+      "capacity": "Capacity",
+      "area": "Area",
+      "amenities": "Amenities and facilities"
+    },
+    "literal": {
+      "price": "zł",
+      "area": "m²",
+      "capacity": "ppl."
+    },
+    "sorting": {
+      "label": "Sorting",
+      "asc": "Price increasing",
+      "desc": "Price decreasing"
+    },
+    "time_range": {
+      "search_btn_label": "Search",
+      "date_label": "Date",
+      "from_label": "From",
+      "to_label": "To"
+    }
   }
 }

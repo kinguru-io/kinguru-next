@@ -12,7 +12,7 @@ Content-Type: application/json
     "database.password": "qwerty",
     "database.dbname": "kinguru",
     "database.server.name": "kinguru",
-    "table.include.list": "public.Event,public.User,public.Place",
+    "table.include.list": "public.Event,public.User,public.Place,public.Premise,public.PremiseSlot",
     "topic.prefix": "kinguru",
     "transforms": "unwrap",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
@@ -23,39 +23,29 @@ Content-Type: application/json
 ### Create ES index
 GET http://localhost:9200/_cat/indices
 
+### Get mappings
+GET http://localhost:9200/kinguru.public.premise_fulfilled/_mappings
+Content-Type: application/json
+
 ### Get es content
-GET http://localhost:9200/kinguru.public.event/_search
+GET http://localhost:9200/kinguru.public.premise_fulfilled/_search
 Content-Type: application/json
 
 {
   "query": {
-    "match_all": {}
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "booked_slots": "premise"
+          }
+        }
+      ]
+    }
   }
 }
 
-### Create connector ES
-POST http://localhost:8083/connectors
-Content-Type: application/json
-
-{
-  "name": "elastic-sink",
-  "config": {
-    "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-    "tasks.max": "1",
-    "topics": "kinguru.public.Event",
-    "connection.url": "http://elastic:9200",
-    "transforms": "InsertKey,ExtractId",
-    "transforms.InsertKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-    "transforms.InsertKey.fields": "id",
-    "transforms.ExtractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-    "transforms.ExtractId.field": "id",
-    "key.ignore": "false",
-    "type.name": "events",
-    "behavior.on.null.values": "delete"
-  }
-}
-
-### Update connector
+### Update PSQL connector
 PUT http://localhost:8083/connectors/inventory-connector/config
 Content-Type: application/json
 
@@ -67,36 +57,15 @@ Content-Type: application/json
   "database.password": "qwerty",
   "database.dbname": "postgres",
   "database.server.name": "kinguru",
-  "table.include.list": "public.Event",
+  "table.include.list": "public.Event,public.Premise,public.PremiseSlot",
   "topic.prefix": "kinguru",
   "transforms": "unwrap",
   "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
   "transforms.unwrap.drop.tombstones": "false"
 }
 
-### Update connector
-PUT http://localhost:8083/connectors/elastic-sink/config
-Content-Type: application/json
-
-{
-  "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
-  "tasks.max": "1",
-  "topics": "kinguru.public.Event",
-  "connection.url": "http://elastic:9200",
-  "transforms": "InsertKey,ExtractId",
-  "transforms.InsertKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
-  "transforms.InsertKey.fields": "id",
-  "transforms.ExtractId.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
-  "transforms.ExtractId.field": "id",
-  "key.ignore": "false",
-  "type.name": "events",
-  "behavior.on.null.values": "delete"
-}
-
-### Delete connector
+### Delete PSQL connector
 DELETE http://localhost:8083/connectors/inventory-connector
-### Delete connector
-DELETE http://localhost:8083/connectors/elastic-sink
 
-### Delete ES index
-DELETE http://localhost:9200/kinguru.public.event
+### Delete ES premise_fulfilled index
+DELETE http://localhost:9200/kinguru.public.premise_fulfilled

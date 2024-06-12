@@ -10,6 +10,7 @@ export const inputRecipe = defineRecipe({
     lineHeight: "1.25",
     bg: "neutral.5",
     border: "1px solid token(colors.secondary)",
+    borderRadius: "0",
     transition: "colors",
     _placeholder: {
       color: "neutral.2",
@@ -25,6 +26,9 @@ export const inputRecipe = defineRecipe({
       color: "neutral.3",
       borderColor: "neutral.3",
       cursor: "not-allowed",
+    },
+    _invalid: {
+      borderColor: "danger!important",
     },
   },
   variants: {

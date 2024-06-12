@@ -1,6 +1,5 @@
 "use server";
 
-import { getLocale } from "next-intl/server";
 import { Argon2id } from "oslo/password";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
@@ -8,17 +7,18 @@ import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 const signUpHandler = async ({
+  name,
   email,
   password,
 }: SignupFormInput): Promise<FormActionState> => {
-  if (
-    await prisma.user.findUnique({
-      where: { email },
-    })
-  ) {
+  const user = await prisma.user.findFirst({
+    where: { OR: [{ email }, { company: name }] },
+  });
+
+  if (user) {
     return {
       status: "error",
-      message: "You're already registered",
+      message: "Email or company name is already registered",
     };
   }
 
@@ -28,6 +28,7 @@ const signUpHandler = async ({
     data: {
       email,
       role: "organization",
+      company: name,
       accounts: {
         create: [
           {
@@ -40,10 +41,7 @@ const signUpHandler = async ({
     },
   });
 
-  const locale = await getLocale();
-  redirect(
-    `/auth/organization/signin?callbackUrl=/${locale}/profile/organization/register`,
-  );
+  redirect(`/auth/organization/signin?callbackUrl=/profile/edit`);
 
   return null;
 };

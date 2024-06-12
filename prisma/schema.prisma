@@ -27,6 +27,7 @@ model User {
   position               String?
   company                String?
   interests              String[]
+  socialLinks            UserSocialLink[]
   vk                     String?
   facebook               String?
   instagram              String?
@@ -75,6 +76,14 @@ model UserLikedEvents {
   updatedAt DateTime @updatedAt
 
   @@id([userId, eventId])
+}
+
+model UserSocialLink {
+  id      String        @id @default(cuid())
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+  network SocialNetwork
+  url     String
 }
 
 model Account {
@@ -363,14 +372,54 @@ model Organization {
   name           String
   owner          User                   @relation(fields: [ownerId], references: [id])
   ownerId        String
-  foundationDate DateTime               @db.Date
-  requisitesUrl  String
-  aboutCompany   String
-  activitySphere String[]
+  foundationDate Int
+  country        String
+  city           String
+  businessName   String
+  NIP            String
+  businessRegion BusinessRegion?        @default(EMEA) /// @description Currently only `EMEA` region is used.
+  bankName       String
+  IBAN           String
+  address        Address[] /// @description This is a tuple. Consists of both post and billing addresses. `address[0]` - post, `address[1]` - billing.
   logotype       String?
+  socialLinks    SocialLink[]
   places         Place[]
   venues         Venue[]
   resources      OrganizationResourse[]
+}
+
+/// @description Currently only `EMEA` region is used.
+enum BusinessRegion {
+  AMER
+  APAC
+  EMEA
+}
+
+model Address {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  country        String
+  city           String
+  street         String
+  building       String
+  room           String?
+  zipCode        String
+}
+
+model SocialLink {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  network        SocialNetwork
+  url            String
+}
+
+enum SocialNetwork {
+  linkedin
+  instagram
+  facebook
+  threads
 }
 
 model OrganizationResourse {

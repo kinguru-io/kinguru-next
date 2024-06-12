@@ -5,12 +5,13 @@ import {
   PrismaClient,
   type Organization,
   type Prisma,
+  type SocialNetwork,
 } from "@prisma/client";
 import slugify, { slugifyWithCounter } from "@sindresorhus/slugify";
-import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
-import { amenitiesTags } from "@/lib/shared/config/amenities";
-import { bookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
-import { premiseTypes } from "@/lib/shared/config/premise-types";
+import { ageRestrictionList } from "../src/lib/shared/config/age-restriction";
+import { amenitiesTags } from "../src/lib/shared/config/amenities";
+import { bookingCancelTerms } from "../src/lib/shared/config/booking-cancel-terms";
+import { premiseTypes } from "../src/lib/shared/config/premise-types";
 
 const dayOfTheWeek = Object.values($Enums.DayOfTheWeek);
 const allAmenities = Object.values(amenitiesTags).flat();
@@ -33,6 +34,23 @@ const ROOM_WORD_SYNONYMS = [
   "dwelling",
 ] as const;
 
+const fakeSocialLinks: Array<{ network: SocialNetwork; url: string }> = [
+  { network: "linkedin", url: "https://linkedin.com/test" },
+  { network: "facebook", url: "https://facebook.com/test" },
+  {
+    network: "instagram",
+    url: "https://instagram.com/test",
+  },
+];
+
+function getImage() {
+  return faker.image.urlLoremFlickr({
+    width: 1280,
+    height: 720,
+    category: "random",
+  });
+}
+
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
   name: faker.person.fullName(),
@@ -49,6 +67,14 @@ const userSchema = (): Prisma.UserCreateInput => ({
   company: faker.company.name(),
   position: faker.person.jobTitle(),
   interests: faker.lorem.words().split(" "),
+  socialLinks: {
+    createMany: {
+      data: faker.helpers.arrayElements(fakeSocialLinks, {
+        min: 1,
+        max: fakeSocialLinks.length,
+      }),
+    },
+  },
 });
 
 const slugifyVenueNameWithCounter = slugifyWithCounter();
@@ -61,10 +87,7 @@ const venueSchema = (
   return {
     name,
     slug: slugifyVenueNameWithCounter(name),
-    image: faker.image.urlLoremFlickr({
-      width: 1280,
-      height: 720,
-    }),
+    image: getImage(),
     description: faker.lorem.paragraph(30),
     organizationId,
     locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
@@ -136,9 +159,7 @@ const premiseSchemaWithVenueConnection = (
     },
     resources: {
       createMany: {
-        data: Array.from({ length: 5 }, () => ({
-          url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
-        })),
+        data: Array.from({ length: 5 }, () => ({ url: getImage() })),
       },
     },
     openHours: {
@@ -241,14 +262,52 @@ async function main() {
                 organization: {
                   create: {
                     name: faker.company.name(),
-                    owner: {
-                      create: userSchema(),
-                    },
-                    foundationDate: faker.date.past(),
-                    requisitesUrl: faker.internet.url(),
-                    aboutCompany: faker.company.catchPhrase(),
-                    activitySphere: faker.company.buzzPhrase().split(" "),
+                    owner: { create: userSchema() },
                     logotype: faker.image.avatar(),
+                    foundationDate: faker.number.int({
+                      min: 1900,
+                      max: new Date().getFullYear(),
+                    }),
+                    country: faker.location.country(),
+                    city: faker.location.city(),
+                    businessName: faker.company.name(),
+                    NIP: faker.string.numeric({ length: 10 }),
+                    bankName: faker.company.name(),
+                    IBAN: faker.finance.iban(),
+                    address: {
+                      createMany: {
+                        data: [
+                          {
+                            country: faker.location.country(),
+                            city: faker.location.city(),
+                            street: faker.location.street(),
+                            building: faker.location.buildingNumber(),
+                            room: faker.string.numeric({
+                              length: { min: 0, max: 4 },
+                            }),
+                            zipCode: faker.location.zipCode(),
+                          },
+                          {
+                            country: faker.location.country(),
+                            city: faker.location.city(),
+                            street: faker.location.street(),
+                            building: faker.location.buildingNumber(),
+                            room: faker.string.numeric({
+                              length: { min: 0, max: 4 },
+                            }),
+                            zipCode: faker.location.zipCode(),
+                          },
+                        ],
+                      },
+                    },
+                    socialLinks: {
+                      createMany: {
+                        data: faker.helpers.arrayElements(fakeSocialLinks, {
+                          min: 1,
+                          max: fakeSocialLinks.length,
+                        }),
+                      },
+                    },
                     resources: {
                       createMany: {
                         data: [

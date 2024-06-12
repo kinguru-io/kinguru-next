@@ -20,7 +20,7 @@ export default async function VenuesPage() {
       ) : (
         <WarningNotice
           noticeText={t("no_organization_warn_msg")}
-          href="/profile/organization/register"
+          href="/profile/edit"
           linkLabel={t("no_organization_link_label")}
         />
       )}

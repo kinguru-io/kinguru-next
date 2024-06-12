@@ -64,7 +64,7 @@ export const buttonRecipe = defineRecipe({
       },
       ghost: {
         bg: "transparent",
-        borderColor: "transparent",
+        borderColor: "transparent!important",
         color: "neutral.1",
         fontWeight: "bold",
         _hoverEnabled: { textDecoration: "underline" },

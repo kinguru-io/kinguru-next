@@ -1,7 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { type CreateVenueInput, createVenueSchema } from "./validation";
+import {
+  mergedVenueSchema,
+  type MergedVenueFormSchemaProps,
+} from "./validation";
 import { getSession } from "@/auth";
 import { type FormActionState, createFormAction } from "@/lib/utils";
 import prisma from "@/server/prisma";
@@ -12,7 +15,7 @@ async function editVenue({
   managerId,
   name: _unused,
   ...restVenueInput
-}: CreateVenueInput): Promise<FormActionState> {
+}: MergedVenueFormSchemaProps): Promise<FormActionState> {
   const session = await getSession();
 
   if (!session || !session.user || !session.user.email) {
@@ -62,6 +65,7 @@ async function editVenue({
   };
 }
 
-export const editVenueAction = createFormAction(editVenue, createVenueSchema);
+// @ts-expect-error
+export const editVenueAction = createFormAction(editVenue, mergedVenueSchema);
 
 export type EditVenueAction = typeof editVenueAction;

@@ -8,6 +8,9 @@ COPY . .
 
 ARG SITE_URL
 ARG DATABASE_URL
+ARG ES_CLIENT_NODE
+ARG ES_CLIENT_API_KEY
+ARG ES_INDEX_PREMISE_FULFILLED
 ARG NEXT_PUBLIC_GA_ID
 ARG NEXT_PUBLIC_MAPBOX_TOKEN
 ARG NEXT_PUBLIC_ELASTICSEARCH_API_KEY
@@ -34,13 +37,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/package.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/package-lock.json ./
 COPY --from=builder --chown=nextjs:nodejs /app/global.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/instrumentation.ts ./
-COPY --from=builder --chown=nextjs:nodejs /app/src/instrumentation.node.ts ./src
+COPY --from=builder --chown=nextjs:nodejs /app/src/lib/shared ./src/lib/shared
+COPY --from=builder --chown=nextjs:nodejs /app/src/instrumentation.node.ts ./src/instrumentation.node.ts
 COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
 COPY --from=builder --chown=nextjs:nodejs /app/next-env.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/nextauth.d.ts ./
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/scheduler ./scheduler
+COPY --from=builder --chown=nextjs:nodejs /app/consumer ./consumer
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 USER nextjs

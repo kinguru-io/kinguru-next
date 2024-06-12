@@ -487,6 +487,7 @@ export function NewPlaceFeatures({
                   </FormControl>
                 )}
               </Field>
+
               <Field name="amenities">
                 {({ field, form, meta }: FieldProps) => (
                   <FormControl

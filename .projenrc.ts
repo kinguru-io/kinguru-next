@@ -41,6 +41,15 @@ const project = new web.NextJsTypeScriptProject({
       run: `echo "DATABASE_URL=\${{ secrets.DB_URL }}" >> $GITHUB_ENV`,
     },
     {
+      run: `echo "ES_CLIENT_NODE=http://172.17.0.1:9200/" >> $GITHUB_ENV`,
+    },
+    {
+      run: `echo "ES_CLIENT_API_KEY=\${{ secrets.ELASTICSEARCH_API_KEY }}" >> $GITHUB_ENV`,
+    },
+    {
+      run: `echo "ES_INDEX_PREMISE_FULFILLED=kinguru-stage.public.premise.fulfilled" >> $GITHUB_ENV`,
+    },
+    {
       run: `echo "NEXT_PUBLIC_GA_ID=\${{ secrets.GA_ID }}" >> $GITHUB_ENV`,
     },
     {
@@ -61,6 +70,13 @@ const project = new web.NextJsTypeScriptProject({
       with: {
         workload: "pod/postgres-cluster-0",
         mappings: "5432:5432",
+      },
+    },
+    {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "svc/elastic-es-default",
+        mappings: "9200:9200",
       },
     },
     {
@@ -151,6 +167,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-map-gl",
     "mapbox-gl",
     "@mapbox/search-js-react",
+    "@mapbox/search-js-core",
     "use-debounce",
     "framer-motion",
     "formik",
@@ -193,10 +210,14 @@ const project = new web.NextJsTypeScriptProject({
     "@sindresorhus/slugify",
     "date-fns",
     "date-fns-tz",
+    "react-day-picker",
     "react-hot-toast",
 
     "bullmq",
     "dotenv",
+    "kafkajs",
+    "@elastic/elasticsearch@8.13.1",
+    "@elastic/transport@8.4.1",
   ],
   devDeps: [
     "@pandacss/dev",
@@ -255,6 +276,10 @@ project.addScripts({
   "scheduler:run":
     'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node scheduler/main.ts',
 });
+project.addScripts({
+  "consumer:run":
+    'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node consumer/main.ts',
+});
 
 project.buildWorkflow?.addPostBuildJob("staging-deploy", {
   name: "staging-deploy",
@@ -300,6 +325,14 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
       },
     },
     {
+      uses: "vbem/k8s-port-forward@v1",
+      with: {
+        workload: "svc/elastic-es-default",
+        mappings: "9200:9200",
+        options: "--address=0.0.0.0",
+      },
+    },
+    {
       uses: "werf/actions/install@v1.2",
     },
     {
@@ -316,6 +349,9 @@ werf converge --atomic`,
         WERF_SET_5: "replicas.max=2",
         SITE_URL: "https://staging.eventify.today",
         DATABASE_URL: "${{ secrets.DB_URL }}",
+        ES_CLIENT_NODE: "http://172.17.0.1:9200/",
+        ES_CLIENT_API_KEY: "${{ secrets.ELASTICSEARCH_API_KEY }}",
+        ES_INDEX_PREMISE_FULFILLED: "kinguru-stage.public.premise.fulfilled",
         NEXT_PUBLIC_GA_ID: "${{ secrets.GA_ID }}",
         NEXT_PUBLIC_MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
         NEXT_PUBLIC_ELASTICSEARCH_API_KEY:

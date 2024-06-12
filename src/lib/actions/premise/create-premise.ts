@@ -3,12 +3,12 @@
 import slugify from "@sindresorhus/slugify";
 import { revalidatePath } from "next/cache";
 import { prepareAmenityList } from "./prepare-amenity-list";
-import { createPremiseSchema, type CreatePremiseSchema } from "./validation";
+import { MergedFormSchemaProps, mergedSchema } from "./validation";
 import { getSession } from "@/auth";
 import type { FormActionState } from "@/lib/utils";
 
 export async function createPremiseAction(
-  payload: CreatePremiseSchema,
+  payload: MergedFormSchemaProps,
   venueId: string,
 ): Promise<FormActionState> {
   const session = await getSession();
@@ -28,7 +28,7 @@ export async function createPremiseAction(
     };
   }
 
-  const parseResult = createPremiseSchema.safeParse(payload);
+  const parseResult = mergedSchema.safeParse(payload);
 
   if (parseResult.error) {
     return {
@@ -52,7 +52,7 @@ export async function createPremiseAction(
     };
   }
 
-  const { openHours, amenities, resources, discounts, ...restPremiseInput } =
+  const { amenities, openHours, discounts, resources, ...restPremiseInput } =
     parseResult.data;
 
   const potentialSlug = slugify(restPremiseInput.name);
@@ -68,9 +68,9 @@ export async function createPremiseAction(
   try {
     const createdPremise = await prisma.premise.create({
       data: {
+        ...restPremiseInput,
         venueId,
         slug,
-        ...restPremiseInput,
         amenities: prepareAmenityList(amenities),
         resources: {
           createMany: {

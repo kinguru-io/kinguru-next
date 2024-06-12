@@ -1,65 +1,75 @@
-import type { $Enums } from "@prisma/client";
-import { isBefore } from "date-fns";
 import { z } from "zod";
-import type { Amenity } from "@/lib/shared/config/amenities";
-import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
-import type { PremiseType } from "@/lib/shared/config/premise-types";
+import {
+  ParametersAndAmenitiesFormSchemaProps,
+  parametersAndAmenitiesSchema,
+} from "./tabs/amenities";
+import {
+  BookingCancelTermFormSchemaProps,
+  bookingCancelTermSchema,
+} from "./tabs/bookingCancelTerm";
+import {
+  MainInformationFormSchemaProps,
+  mainInformationSchema,
+} from "./tabs/mainInformation";
+import {
+  OpenHoursAndPriceFormSchemaProps,
+  openHoursAndPriceSchema,
+} from "./tabs/openHoursAndPrices";
+import { ResourcesFormSchemaProps, resourcesSchema } from "./tabs/resources";
+import { RulesFormSchemaProps, rulesSchema } from "./tabs/rules";
 
-export const openHoursSchema = z
-  .object({
-    day: z.custom<$Enums.DayOfTheWeek>(),
-    startTime: z.string().datetime(),
-    endTime: z.string().datetime(),
-    price: z.number().nonnegative(),
-  })
-  .refine(({ startTime, endTime }) => isBefore(startTime, endTime), {
-    message: "Start time should be before end time",
-    path: ["startTime"],
-  });
+export enum CreatePremiseFormTypeEnum {
+  MainInformation = "mainInformation",
+  Resources = "resources",
+  ParametersAndAmenities = "parametersAndAmenities",
+  OpenHoursAndPrice = "openHoursAndPrice",
+  Rules = "rules",
+  BookingCancelTerm = "bookingCancelTerm",
+}
 
-export const discountsSchema = z.object({
-  duration: z.number().step(1).min(1).max(23),
-  discountPercentage: z.number().step(0.1).min(0.1).max(100),
-});
-
-export const createPremiseSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  room: z.string(),
-  floor: z.string(),
-  resources: z.array(z.object({ url: z.string() })).refine((array) =>
-    array.some(({ url }) => z.string().url().safeParse(url).success, {
-      message: "Should be at least one image",
-      path: ["resources"],
+export const createPremiseFormSchema = (t: (arg: string) => string) =>
+  z.discriminatedUnion("formType", [
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.MainInformation),
+      mainInformation: mainInformationSchema(t),
     }),
-  ),
-  type: z
-    .custom<PremiseType>()
-    .refine((type) => z.string().safeParse(type).success),
-  area: z.number().nonnegative(),
-  capacity: z.number().nonnegative(),
-  amenities: z
-    .record(z.custom<Amenity>(), z.boolean())
-    .refine(
-      (amenities) => Object.values(amenities).filter(Boolean).length >= 5,
-      {
-        message: "Should be chosen at least 5 amenities",
-        path: ["amenities"],
-      },
-    ),
-  rules: z.string(),
-  openHours: z.array(openHoursSchema).min(1),
-  discounts: z
-    .array(discountsSchema)
-    .refine(
-      (fields) =>
-        new Set(fields.map(({ duration }) => duration)).size === fields.length,
-    ),
-  bookingCancelTerm: z
-    .custom<BookingCancelTerm>()
-    .refine((type) => z.string().safeParse(type).success),
-});
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.Resources),
+      resources: resourcesSchema(t),
+    }),
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.ParametersAndAmenities),
+      parametersAndAmenities: parametersAndAmenitiesSchema(t),
+    }),
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.OpenHoursAndPrice),
+      openHoursAndPrice: openHoursAndPriceSchema(t),
+    }),
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.Rules),
+      rules: rulesSchema(t),
+    }),
+    z.object({
+      formType: z.literal(CreatePremiseFormTypeEnum.BookingCancelTerm),
+      bookingCancelTerm: bookingCancelTermSchema(t),
+    }),
+  ]);
 
-export type OpenHoursSchema = z.infer<typeof openHoursSchema>;
-export type CreatePremiseSchema = z.infer<typeof createPremiseSchema>;
-export type DiscountsSchema = z.infer<typeof discountsSchema>;
+export type CreatePremiseFormSchemaProps = {
+  formType: CreatePremiseFormTypeEnum;
+  mainInformation: MainInformationFormSchemaProps;
+  resources: ResourcesFormSchemaProps;
+  parametersAndAmenities: ParametersAndAmenitiesFormSchemaProps;
+  openHoursAndPrice: OpenHoursAndPriceFormSchemaProps;
+  rules: RulesFormSchemaProps;
+  bookingCancelTerm: BookingCancelTermFormSchemaProps;
+};
+
+export const mergedSchema = mainInformationSchema()
+  .extend(resourcesSchema().shape)
+  .extend(parametersAndAmenitiesSchema().shape)
+  .extend(openHoursAndPriceSchema().shape)
+  .extend(rulesSchema().shape)
+  .extend(bookingCancelTermSchema().shape);
+
+export type MergedFormSchemaProps = z.infer<typeof mergedSchema>;

@@ -8,11 +8,13 @@ import {
   type FieldValues,
   type Control,
   type Path,
+  useFormContext,
 } from "react-hook-form";
 import { DropdownMenu, Input, useDropdown } from "@/components/uikit";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import type { Locale } from "@/navigation";
 import { InlineBox } from "~/styled-system/jsx";
+import { getError } from "@/utils/forms/errors";
 
 export function InputSearchLocation<T extends FieldValues>({
   placeholder,
@@ -23,6 +25,9 @@ export function InputSearchLocation<T extends FieldValues>({
   name: Path<T>;
   control: Control<T>;
 }) {
+  const {
+    formState: { errors },
+  } = useFormContext();
   const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
   const [textFieldValue, setTextFieldValue] = useState<string>("");
   const locale = useLocale() as Locale;
@@ -51,6 +56,7 @@ export function InputSearchLocation<T extends FieldValues>({
         placeholder={placeholder}
         value={textFieldValue}
         onChange={(e) => inputChanged(e.target.value)}
+        data-invalid={getError(errors, name)}
       />
       <DropdownMenu shouldCloseOnClick={false}>
         {places.map((place) => (

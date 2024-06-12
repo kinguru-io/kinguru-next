@@ -23,6 +23,9 @@ jobs:
       - run: echo "NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT=testing" >> $GITHUB_ENV
       - run: echo "NEXT_PUBLIC_MAPBOX_TOKEN=testing" >> $GITHUB_ENV
       - run: echo "DATABASE_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
+      - run: echo "ES_CLIENT_NODE=http://172.17.0.1:9200/" >> $GITHUB_ENV
+      - run: echo "ES_CLIENT_API_KEY=${{ secrets.ELASTICSEARCH_API_KEY }}" >> $GITHUB_ENV
+      - run: echo "ES_INDEX_PREMISE_FULFILLED=kinguru-stage.public.premise.fulfilled" >> $GITHUB_ENV
       - run: echo "NEXT_PUBLIC_GA_ID=${{ secrets.GA_ID }}" >> $GITHUB_ENV
       - run: echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}" >> $GITHUB_ENV
       - uses: vbem/kubeconfig4sa@v1
@@ -35,6 +38,10 @@ jobs:
         with:
           workload: pod/postgres-cluster-0
           mappings: 5432:5432
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: svc/elastic-es-default
+          mappings: 9200:9200
       - uses: actions/cache@v3
         with:
           path: |-
@@ -150,6 +157,11 @@ jobs:
           workload: pod/postgres-cluster-0
           mappings: 5432:5432
           options: --address=0.0.0.0
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: svc/elastic-es-default
+          mappings: 9200:9200
+          options: --address=0.0.0.0
       - uses: werf/actions/install@v1.2
       - name: Run stage deployment
         env:
@@ -161,6 +173,9 @@ jobs:
           WERF_SET_5: replicas.max=2
           SITE_URL: https://staging.eventify.today
           DATABASE_URL: ${{ secrets.DB_URL }}
+          ES_CLIENT_NODE: http://172.17.0.1:9200/
+          ES_CLIENT_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          ES_INDEX_PREMISE_FULFILLED: kinguru-stage.public.premise.fulfilled
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
           NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
           NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}

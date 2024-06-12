@@ -1,15 +1,16 @@
 "use server";
 
-import moment from "moment";
+import { prepareSocialLinks } from "./prepare-social-links";
 import { getSession } from "@/auth.ts";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
-import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
-const orgRegisterHandler = async (
-  props: OrgRegisterInput,
-): Promise<FormActionState> => {
+const orgRegisterHandler = async ({
+  socialLinks,
+  address,
+  ...restInput
+}: OrgRegisterInput): Promise<FormActionState> => {
   const session = await getSession();
   if (!session || !session.user || !session.user.email) {
     return {
@@ -19,9 +20,8 @@ const orgRegisterHandler = async (
   }
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: session.user.email,
-    },
+    where: { email: session.user.email },
+    include: { organizations: { select: { id: true } } },
   });
   if (!user) {
     return {
@@ -30,21 +30,35 @@ const orgRegisterHandler = async (
     };
   }
 
-  await prisma.organization.create({
-    data: {
-      ...props,
-      foundationDate: moment(props.foundationDate, "YYYY").toDate(),
-      activitySphere: [props.activitySphere],
+  const organization = user.organizations.at(0);
+
+  await prisma.organization.upsert({
+    where: { id: organization?.id || "" },
+    update: {
+      ...restInput,
+      socialLinks: {
+        deleteMany: {},
+        createMany: { data: prepareSocialLinks(socialLinks) },
+      },
+      // @ts-expect-error
+      address: { deleteMany: {}, createMany: { data: address } },
+    },
+    create: {
+      ...restInput,
       ownerId: user.id,
+      socialLinks: {
+        createMany: { data: prepareSocialLinks(socialLinks) },
+      },
+      // @ts-expect-error
+      address: { createMany: { data: address } },
     },
   });
 
-  redirect("/");
-  return null;
+  return { status: "success", message: "" };
 };
 
 export const orgRegister = createFormAction(
   orgRegisterHandler,
-  orgRegisterSchema,
+  orgRegisterSchema(),
 );
 export type OrgRegisterAction = typeof orgRegister;

@@ -14,11 +14,11 @@ import {
 import toast from "react-hot-toast";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Input, Select, Button } from "@/components/uikit";
-import type { CreatePremiseSchema } from "@/lib/actions/premise";
 import {
-  openHoursSchema,
   type OpenHoursSchema,
-} from "@/lib/actions/premise/validation";
+  openHoursSchema,
+} from "@/lib/actions/premise/tabs/openHoursAndPrices";
+import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { HStack, InlineBox, Stack, styled } from "~/styled-system/jsx";
 
 export function AddOpenHoursRecord({
@@ -27,8 +27,11 @@ export function AddOpenHoursRecord({
   getValues,
 }: {
   day: $Enums.DayOfTheWeek;
-  append: UseFieldArrayAppend<CreatePremiseSchema, "openHours">;
-  getValues: UseFormGetValues<CreatePremiseSchema>;
+  append: UseFieldArrayAppend<
+    CreatePremiseFormSchemaProps,
+    "openHoursAndPrice.openHours"
+  >;
+  getValues: UseFormGetValues<CreatePremiseFormSchemaProps>;
 }) {
   const t = useTranslations("profile.premises.add.fields");
   const {
@@ -47,7 +50,7 @@ export function AddOpenHoursRecord({
   const addButtonClicked = (input: OpenHoursSchema) => {
     if (!timeZone) return;
 
-    const openHours = getValues("openHours");
+    const openHours = getValues("openHoursAndPrice.openHours");
 
     // checking if a user is trying to add the range intersecting with an existing range
     const foundRecord = openHours.find(

@@ -10,7 +10,7 @@ export function ProfileNotifications({
   return notifications.map(({ id, status, createdAt }) => (
     <Tag
       key={id}
-      size="sm"
+      size="md"
       variant="secondaryLighter"
       textStyle="body.2"
       fontWeight="400"

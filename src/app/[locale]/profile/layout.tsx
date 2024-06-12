@@ -17,7 +17,7 @@ export default async function Layout({
 
   return (
     <Container maxWidth="1920px" paddingInline="0">
-      <Grid gap="0" paddingBlock="70px" gridTemplateColumns="272px 1fr">
+      <Grid gap="0" paddingBlock="45px" gridTemplateColumns="272px 1fr">
         <ProfileNavigation />
         <GridItem>
           <GoBackButton

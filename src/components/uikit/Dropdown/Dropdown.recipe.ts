@@ -13,7 +13,6 @@ export const dropdownSlot = defineSlotRecipe({
       position: "absolute",
       top: "calc(100% + 5px)",
       bg: "token(colors.neutral.5)",
-      right: "0",
       minW: "110px",
       color: "token(colors.neutral.1)",
       zIndex: "token(zIndex.dropdown)",
@@ -21,9 +20,6 @@ export const dropdownSlot = defineSlotRecipe({
       cursor: "pointer",
       overflow: "hidden",
       "&[data-hidden=true]": { display: "none" },
-      "& > *:hover": {
-        backgroundColor: "primary.disabled",
-      },
     },
     dropdown: {
       position: "relative",
@@ -35,7 +31,13 @@ export const dropdownSlot = defineSlotRecipe({
       md: { menu: { maxW: "157px" } },
       lg: { menu: { maxW: "259px" } },
       full: { menu: { width: "full" }, dropdown: { width: "full" } },
+      auto: {},
+    },
+    anchor: {
+      end: { menu: { insetInlineEnd: "0" } },
+      start: { menu: { insetInlineStart: "0" } },
     },
   },
   staticCss: [{ size: ["*"] }],
+  defaultVariants: { anchor: "end" },
 });

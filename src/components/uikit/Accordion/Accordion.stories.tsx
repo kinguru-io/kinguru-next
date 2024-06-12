@@ -43,6 +43,13 @@ export const Basic = {
 export const ControlledGroup = {
   args: { allowAll: false },
   render: ({ allowAll }: { allowAll: boolean }) => (
-    <AccordionGroup items={features} btnLabel="Next" allowAll={allowAll} />
+    <AccordionGroup
+      items={features}
+      btnLabel="Next"
+      allowAll={allowAll}
+      setActiveForm={() => {}}
+      validateFormType={() => {}}
+      isValid={true}
+    />
   ),
 };

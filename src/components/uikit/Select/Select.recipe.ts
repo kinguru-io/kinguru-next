@@ -28,6 +28,7 @@ export const selectSlot = defineSlotRecipe({
       _disabled: {
         cursor: "not-allowed",
       },
+      // take a look
       '&:has(option[value=""]:checked)': {
         color: "neutral.2",
       },

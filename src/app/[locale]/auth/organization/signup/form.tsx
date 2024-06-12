@@ -1,15 +1,18 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RichTranslationValues, useTranslations } from "next-intl";
-import { useFormState, useFormStatus } from "react-dom";
-import { UseFormRegister, useForm } from "react-hook-form";
-import { Button, Input, InputPassword } from "@/components/uikit";
-import { type SignUpAction } from "@/lib/actions";
-import { FormActionState } from "@/lib/utils";
-import { SignupFormInput, signupFormSchema } from "@/lib/validations";
+import { type RichTranslationValues, useTranslations } from "next-intl";
+import { useCallback, useEffect, useTransition } from "react";
+import { useFormState } from "react-dom";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import toast from "react-hot-toast";
+import formConfig from "./formConfig.json";
+import { BaseForm, Button } from "@/components/uikit";
+import type { SignUpAction } from "@/lib/actions";
+import { type SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { Link } from "@/navigation";
-import { VStack } from "~/styled-system/jsx";
+import { Stack } from "~/styled-system/jsx";
+import { stack } from "~/styled-system/patterns";
 
 const translationValues: RichTranslationValues = {
   partnerAgreement: (chunks) => <Link href="#">{chunks}</Link>,
@@ -18,60 +21,57 @@ const translationValues: RichTranslationValues = {
 };
 
 export function SignupForm({ signUp }: { signUp: SignUpAction }) {
-  const {
-    register,
-    formState: { isValid },
-  } = useForm<SignupFormInput>({
+  const [isPending, startTransition] = useTransition();
+
+  const methods = useForm<SignupFormInput>({
     mode: "onBlur",
     resolver: zodResolver(signupFormSchema),
   });
-  // TODO `state` might be used for notifications?
-  const [_state, formAction] = useFormState<FormActionState, FormData>(
-    signUp,
-    null,
+  const [response, formAction] = useFormState(signUp, null);
+
+  const onSubmit: SubmitHandler<SignupFormInput> = useCallback(
+    (data) => {
+      // @ts-expect-error
+      startTransition(() => formAction(data));
+    },
+    [formAction],
   );
 
+  useEffect(() => {
+    if (!response) return;
+    const { status, message } = response;
+
+    if (status === "error") {
+      toast.error(message);
+    }
+  }, [response]);
+
   return (
-    <form action={formAction}>
-      <SignupFormInner register={register} isValid={isValid} />
-    </form>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <SignupFormInner isPending={isPending} />
+      </form>
+    </FormProvider>
   );
 }
 
-function SignupFormInner({
-  register,
-  isValid,
-}: {
-  register: UseFormRegister<SignupFormInput>;
-  isValid: boolean;
-}) {
+function SignupFormInner({ isPending }: { isPending: boolean }) {
   const t = useTranslations("auth.signup_form");
-  const { pending } = useFormStatus();
 
   return (
-    <VStack gap="0">
-      <VStack gap="15px">
-        <Input
-          variant="outline"
-          placeholder={t("email_placeholder")}
-          disabled={pending}
-          {...register("email")}
+    <Stack gap="0">
+      <fieldset className={stack({ gap: "15px" })} disabled={isPending}>
+        <BaseForm<SignupFormInput>
+          config={formConfig.main}
+          schema={signupFormSchema}
+          translationsKey="auth.signup_form"
+          // variant="outline"
         />
-        <InputPassword
-          placeholder={t("password_placeholder")}
-          disabled={pending}
-          {...register("password")}
-        />
-        <InputPassword
-          placeholder={t("password_confirm_placeholder")}
-          disabled={pending}
-          {...register("confirmPassword")}
-        />
-      </VStack>
-      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
+      </fieldset>
+      <Button type="submit" size="md" isLoading={isPending} centered>
         {t("submit")}
       </Button>
       <p>{t.rich("helper", translationValues)}</p>
-    </VStack>
+    </Stack>
   );
 }
