@@ -1,6 +1,6 @@
 "use server";
 
-import type { SocialNetwork } from "@prisma/client";
+import { prepareSocialLinks } from "./prepare-social-links";
 import { getSession } from "@/auth.ts";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
@@ -56,18 +56,6 @@ const orgRegisterHandler = async ({
 
   return { status: "success", message: "" };
 };
-
-function prepareSocialLinks(links: OrgRegisterInput["socialLinks"]) {
-  return links.reduce(
-    (preparedLinks, { network, url }) => {
-      if (url) {
-        preparedLinks.push({ network, url });
-      }
-      return preparedLinks;
-    },
-    [] as Array<{ network: SocialNetwork; url: string }>,
-  );
-}
 
 export const orgRegister = createFormAction(
   orgRegisterHandler,

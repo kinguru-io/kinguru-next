@@ -1,18 +1,16 @@
-import { SocialNetwork } from "@prisma/client";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
+import { socialLinkSchema } from "./social-link";
 import { requiredFieldMessage } from "@/utils/forms/validationMessages";
 
-const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
+z.setErrorMap((issue, ctx) => {
   if (issue.code === z.ZodIssueCode.invalid_type) {
     if (issue.expected === "string" || issue.expected === "number") {
       return { message: "" };
     }
   }
   return { message: ctx.defaultError };
-};
-
-z.setErrorMap(customErrorMap);
+});
 
 const regexNIP = /^\d{10}$/m; // NIP is a 10 number string
 // https://gist.github.com/akndmr/7ba7af0c07a3ec517c651bc6f1c508d5
@@ -27,20 +25,6 @@ const addressSchema = z.object({
   room: zfd.text().optional().nullish(),
   zipCode: zfd.text().nullish(),
 });
-
-const socialLinkSchema = (t: (arg: string) => string = (value) => value) =>
-  z.object({
-    network: zfd.text(z.nativeEnum(SocialNetwork)),
-    url: zfd
-      .text(
-        z
-          .string()
-          .trim()
-          .url({ message: requiredFieldMessage(t, "socialLink") })
-          .optional(),
-      )
-      .optional(),
-  });
 
 export const orgRegisterSchema = (
   t: (arg: string) => string = (value) => value,

@@ -1,15 +1,15 @@
 "use client";
 
-import { format } from "date-fns";
+import { format, isPast, isToday } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState, useTransition, type ComponentProps } from "react";
 import { FiSearch } from "react-icons/fi";
-import { FilterDayPicker } from "./filter-day-picker";
 import {
   parseInitialDatetimeValues,
   prepareDatetimeParam,
 } from "./prepare-datetime";
+import { SingleDayPicker } from "@/components/common/cards/single-day-picker";
 import {
   Button,
   Dropdown,
@@ -105,7 +105,11 @@ export function TimeRangeLink({
           </Flex>
         </DropdownInitiator>
         <DropdownMenu likeList={false} shouldCloseOnClick={false}>
-          <FilterDayPicker date={date} callback={setDate} />
+          <SingleDayPicker
+            date={date}
+            callback={setDate}
+            disabled={(day) => isPast(day) && !isToday(day)}
+          />
         </DropdownMenu>
       </Dropdown>
       <TimeSelect

@@ -324,6 +324,38 @@
       }
     }
   },
+  "user": {
+    "basic_info_page": {
+      "heading": "Личный профиль"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Главное",
+        "social": "Социальные сети"
+      },
+      "firstname": "Имя",
+      "lastname": "Фамилия",
+      "email": "Email",
+      "phoneNumber": "Номер телефона",
+      "country": "Страна",
+      "city": "Город",
+      "birthdate": "Дата рождения",
+      "description": "Дополнительная информация",
+      "social_link_placeholder": "Cсылка на аккаунт {social}",
+      "submit": "Сохранить",
+      "social_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт.",
+      "fields": {
+        "errors": {
+          "firstname_required": "Имя должно содержать минимум 2 символа",
+          "lastname_required": "Фамилия должна содержать минимум 2 символа",
+          "email_required": "Введенный email некорректный",
+          "birthdate_required": "Некорректный ввод даты",
+          "socialLinks_required": "Необходимо указать хотя бы одну социальную сеть",
+          "socialLink_required": "Неверный формат URL"
+        }
+      }
+    }
+  },
   "venue": {
     "public_page": {
       "image_alt": "Фотография площадки \"{name}\"",

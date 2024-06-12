@@ -20,4 +20,5 @@ export const additionalGlobalCss = defineGlobalStyles({
   h4: { textStyle: "heading.4" },
   h5: { textStyle: "heading.5" },
   address: { fontStyle: "normal" },
+  ".rdp-caption_label": { textTransform: "capitalize" },
 });

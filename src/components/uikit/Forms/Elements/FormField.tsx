@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { ZodSchema } from "zod";
 import { CountrySelect } from "@/components/common/form/country-select";
-import { ErrorField, Input, InputPassword } from "@/components/uikit";
+import { ErrorField, Input, InputPassword, Textarea } from "@/components/uikit";
 import { getOptionalFields } from "@/utils/getOptionalFieldsFromSchema";
 import { Box } from "~/styled-system/jsx";
 import { InputVariant } from "~/styled-system/recipes";
@@ -14,7 +14,8 @@ type FieldType =
   | "email"
   | "password"
   | "select"
-  | "country-select";
+  | "country-select"
+  | "textarea";
 
 interface FormFieldProps {
   name: string;
@@ -94,6 +95,9 @@ export const FormField = memo(
         break;
       case "country-select":
         field = <CountrySelect {...commonProps} />;
+        break;
+      case "textarea":
+        field = <Textarea rows={9} {...commonProps} />;
         break;
       // Add more cases as needed
       default:

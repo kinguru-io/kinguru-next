@@ -290,6 +290,38 @@
       }
     }
   },
+  "user": {
+    "basic_info_page": {
+      "heading": "Profile"
+    },
+    "basic_info_form": {
+      "group": {
+        "main": "Main",
+        "social": "Social networks"
+      },
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "phoneNumber": "Phone",
+      "country": "Country",
+      "city": "City",
+      "birthdate": "Birthday",
+      "description": "Extra information",
+      "social_link_placeholder": "{social} account link",
+      "submit": "Save",
+      "social_helper": "Specify your social networks for us to be able to verify your profile.",
+      "fields": {
+        "errors": {
+          "firstname_required": "First name should contain at least 2 characters",
+          "lastname_required": "Last name should contain at least 2 characters",
+          "email_required": "To nie jest prawidłowy email",
+          "birthdate_required": "Incorrect date format",
+          "socialLinks_required": "Należy podać przynajmniej jedną sieć społecznościową",
+          "socialLink_required": "Nieprawidłowy format URL"
+        }
+      }
+    }
+  },
   "auth": {
     "reset_form": {
       "heading": "Forgot your password?",

@@ -1,10 +1,11 @@
+"use client";
+
 import type { SocialNetwork } from "@prisma/client";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorField, Input } from "@/components/uikit";
-import { OrgRegisterInput } from "@/lib/validations";
 
 import fbIcon from "~/public/img/footerIcons/FaceBook.svg";
 import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
@@ -36,12 +37,16 @@ const socialNetworkList: Array<SocialNetworkItem> = [
   },
 ];
 
-export function SocialLinks() {
-  const t = useTranslations("organization.basic_info_form");
+export function SocialLinks({
+  role,
+}: {
+  role: Extract<keyof IntlMessages, "organization" | "user">;
+}) {
+  const t = useTranslations(`${role}.basic_info_form`);
   const {
     register,
     formState: { errors },
-  } = useFormContext<OrgRegisterInput>();
+  } = useFormContext();
 
   const getErrorFromArr = (fieldName: string) => {
     const [mainKey, indexStr, secondName] = fieldName.split(".");

@@ -1,10 +1,8 @@
-import { isPast, isToday } from "date-fns";
 import { useLocale } from "next-intl";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, type CaptionLayout, type Matcher } from "react-day-picker";
 import { useDropdown } from "@/components/uikit";
 import { localeMap } from "@/lib/shared/config/date-fns-locale-map";
 import type { Locale } from "@/navigation";
-import { css } from "~/styled-system/css";
 import { token } from "~/styled-system/tokens";
 
 import "react-day-picker/dist/style.css";
@@ -15,12 +13,16 @@ const dayPickerStyles = {
   "--rdp-background-color": token.var("colors.primary.disabled"),
 } as React.CSSProperties;
 
-export function FilterDayPicker({
+export function SingleDayPicker({
   date,
   callback,
+  disabled,
+  captionLayout,
 }: {
   date: Date;
   callback: (day: Date) => unknown;
+  disabled?: Matcher | Matcher[];
+  captionLayout?: CaptionLayout;
 }) {
   const locale = useLocale() as Locale;
   const { setHidden } = useDropdown();
@@ -30,21 +32,21 @@ export function FilterDayPicker({
     setHidden(true);
   };
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <DayPicker
-      classNames={{
-        caption_label: css({
-          textTransform: "capitalize",
-          textStyle: "heading.extra.1",
-        }),
-      }}
       style={dayPickerStyles}
       weekStartsOn={1} // Monday first
       selected={date}
-      onDayClick={(day) => dayClicked(day)}
-      disabled={(day) => isPast(day) && !isToday(day)}
-      fromMonth={new Date()}
+      onDayClick={dayClicked}
       locale={localeMap[locale]}
+      disabled={disabled}
+      captionLayout={captionLayout}
+      {...(captionLayout && {
+        fromYear: currentYear - 100,
+        toYear: currentYear,
+      })}
     />
   );
 }

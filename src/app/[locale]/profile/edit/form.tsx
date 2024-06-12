@@ -11,18 +11,16 @@ import {
   FormProvider,
   useForm,
   useFormContext,
-  useWatch,
 } from "react-hook-form";
 import toast from "react-hot-toast";
-import { RxCross1 } from "react-icons/rx";
 import formFieldsConfig from "./formConfig.json";
-import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
+import { ImagePickerForm } from "@/components/common/form/image-picker-form";
 import { BaseForm, Button, Checkbox, SocialLinks } from "@/components/uikit";
 import { FormInnerLayout } from "@/layout/block";
 import { OrgRegisterAction } from "@/lib/actions/auth";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 
-import { Box, Flex } from "~/styled-system/jsx";
+import { Flex } from "~/styled-system/jsx";
 
 interface EditProfileFormProps {
   companyName: string;
@@ -116,7 +114,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
               translationsKey="organization.basic_info_form"
             />
           </FormColumn>
-          <CompanyImagePicker />
+          <ImagePickerForm groupKey="company" name="logotype" />
         </OrganizationRegisterFormGroupLayout>
       </OrganizationRegisterFormBoxLayout>
 
@@ -164,7 +162,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
         <h3>{t("group.social")}</h3>
         <span className="subheading">{t("social_helper")}</span>
         <OrganizationRegisterFormGroupLayout>
-          <SocialLinks />
+          <SocialLinks role="organization" />
         </OrganizationRegisterFormGroupLayout>
       </OrganizationRegisterFormBoxLayout>
 
@@ -191,51 +189,6 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
       customFieldName={customFieldName}
       translationsKey="organization.basic_info_form"
     />
-  );
-}
-
-function CompanyImagePicker() {
-  const {
-    control,
-    register,
-    setValue,
-    formState: { defaultValues },
-  } = useFormContext<OrgRegisterInput>();
-  const src = useWatch({
-    control,
-    name: "logotype",
-    defaultValue: defaultValues?.logotype,
-  });
-
-  return (
-    <Box
-      position="relative"
-      css={{
-        "& > .button": {
-          position: "absolute",
-          fontSize: "10px",
-          insetBlockStart: "0.3rem",
-          insetInlineEnd: "1rem",
-        },
-      }}
-    >
-      <ProfileImagePicker
-        key={src}
-        groupKey="company"
-        imageSrc={src || ""}
-        {...register("logotype")}
-      />
-      {src && (
-        <Button
-          type="button"
-          size="iconOnly"
-          variant="solid"
-          colorPalette="primary"
-          onClick={() => setValue("logotype", "")}
-          icon={<RxCross1 size="1.7em" />}
-        />
-      )}
-    </Box>
   );
 }
 

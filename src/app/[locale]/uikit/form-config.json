@@ -1,0 +1,32 @@
+{
+  "main": [
+    {
+      "name": "firstname",
+      "type": "text"
+    },
+    {
+      "name": "lastname",
+      "type": "text"
+    },
+    {
+      "name": "email",
+      "type": "email"
+    },
+    {
+      "name": "phoneNumber",
+      "type": "text"
+    },
+    {
+      "name": "country",
+      "type": "country-select"
+    },
+    {
+      "name": "city",
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "type": "textarea"
+    }
+  ]
+}
