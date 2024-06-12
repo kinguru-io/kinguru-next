@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.5.0...chart-v1.6.0) (2024-06-12)
+
+
+### Features
+
+* Add functionality to filter/find premises and frontend form validations ([#608](https://github.com/kinguru-io/kinguru-next/issues/608)) ([9379f76](https://github.com/kinguru-io/kinguru-next/commit/9379f766fe94e8d192a337e5d48b69249dd7ffa5))
+
 # [1.5.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.4.0...chart-v1.5.0) (2024-04-10)
 
 
