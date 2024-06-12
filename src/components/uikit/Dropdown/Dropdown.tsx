@@ -7,7 +7,7 @@ import {
   useContext,
   useState,
   useRef,
-  useEffect,
+  useCallback,
 } from "react";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { css, cx } from "~/styled-system/css";
@@ -33,28 +33,6 @@ export function useDropdown() {
   return useContext(DropdownContext);
 }
 
-export const useOutsideClick = (callback: () => void) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        callback();
-      }
-    };
-
-    document.addEventListener("mouseup", handleClickOutside);
-    document.addEventListener("touchend", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mouseup", handleClickOutside);
-      document.removeEventListener("touchend", handleClickOutside);
-    };
-  }, [callback]);
-
-  return ref;
-};
-
 export function Dropdown({
   children,
   size = "sm",
@@ -63,15 +41,18 @@ export function Dropdown({
 }: DropdownProps) {
   const [hidden, setHidden] = useState(hiddenState);
   const dropdownSlot = dropdown({ size, anchor });
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const ref = useOutsideClick(() => {
-    if (hidden) return;
-    setHidden(!hidden);
-  });
+  const outsideClicked = useCallback(
+    (isOutside: boolean) => isOutside && setHidden(isOutside),
+    [],
+  );
+
+  useClickOutside([dropdownRef], outsideClicked);
 
   return (
     <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
-      <div className={dropdownSlot.dropdown} ref={ref}>
+      <div className={dropdownSlot.dropdown} ref={dropdownRef}>
         {children}
       </div>
     </DropdownContext.Provider>
@@ -87,14 +68,10 @@ export function DropdownMenu({
   shouldCloseOnClick?: boolean;
   likeList?: boolean;
 }) {
-  const menuRef = useRef<HTMLDivElement | null>(null);
   const { hidden, dropdownSlot, setHidden } = useContext(DropdownContext);
-
-  useClickOutside([menuRef], (isOutside) => !hidden && setHidden(isOutside));
 
   return (
     <div
-      ref={menuRef}
       className={cx(
         dropdownSlot.menu,
         likeList && customDivider({ thickness: "1px" }),

@@ -19,9 +19,9 @@ export function useClickOutside(
   );
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("pointerdown", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("pointerdown", handleClickOutside);
     };
   }, [handleClickOutside]);
 }
