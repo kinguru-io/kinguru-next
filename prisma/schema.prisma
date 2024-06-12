@@ -27,6 +27,7 @@ model User {
   position               String?
   company                String?
   interests              String[]
+  socialLinks            UserSocialLink[]
   vk                     String?
   facebook               String?
   instagram              String?
@@ -75,6 +76,14 @@ model UserLikedEvents {
   updatedAt DateTime @updatedAt
 
   @@id([userId, eventId])
+}
+
+model UserSocialLink {
+  id      String        @id @default(cuid())
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+  network SocialNetwork
+  url     String
 }
 
 model Account {

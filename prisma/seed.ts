@@ -43,6 +43,14 @@ const fakeSocialLinks: Array<{ network: SocialNetwork; url: string }> = [
   },
 ];
 
+function getImage() {
+  return faker.image.urlLoremFlickr({
+    width: 1280,
+    height: 720,
+    category: "random",
+  });
+}
+
 const userSchema = (): Prisma.UserCreateInput => ({
   email: faker.internet.email(),
   name: faker.person.fullName(),
@@ -59,6 +67,14 @@ const userSchema = (): Prisma.UserCreateInput => ({
   company: faker.company.name(),
   position: faker.person.jobTitle(),
   interests: faker.lorem.words().split(" "),
+  socialLinks: {
+    createMany: {
+      data: faker.helpers.arrayElements(fakeSocialLinks, {
+        min: 1,
+        max: fakeSocialLinks.length,
+      }),
+    },
+  },
 });
 
 const slugifyVenueNameWithCounter = slugifyWithCounter();
@@ -71,10 +87,7 @@ const venueSchema = (
   return {
     name,
     slug: slugifyVenueNameWithCounter(name),
-    image: faker.image.urlLoremFlickr({
-      width: 1280,
-      height: 720,
-    }),
+    image: getImage(),
     description: faker.lorem.paragraph(30),
     organizationId,
     locationMapboxId: faker.helpers.arrayElement(cafeMapboxIds),
@@ -146,9 +159,7 @@ const premiseSchemaWithVenueConnection = (
     },
     resources: {
       createMany: {
-        data: Array.from({ length: 5 }, () => ({
-          url: faker.image.urlLoremFlickr({ width: 1280, height: 720 }),
-        })),
+        data: Array.from({ length: 5 }, () => ({ url: getImage() })),
       },
     },
     openHours: {
