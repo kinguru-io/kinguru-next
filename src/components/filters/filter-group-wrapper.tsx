@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useTransition } from "react";
 import { usePathname, useRouter } from "@/navigation";
-import { Stack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
 
 export function FilterGroupWrapper({
   shouldReplace = false,
@@ -15,7 +15,8 @@ export function FilterGroupWrapper({
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLFieldSetElement | null>(null);
+  const [pending, startTransition] = useTransition();
 
   useEffect(() => {
     if (!searchParams) return;
@@ -58,14 +59,27 @@ export function FilterGroupWrapper({
     router.push(`${pathname}?${params}`, { scroll: false });
   };
 
-  const innerInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, checked } = e.target;
-    updateGroupedSearchParams(name, value, checked);
+  const innerInputChanged = ({
+    target,
+  }: React.FormEvent<HTMLFieldSetElement>) => {
+    if (isInputTarget(target)) {
+      const { name, value, checked } = target;
+      startTransition(() => updateGroupedSearchParams(name, value, checked));
+    }
   };
 
   return (
-    <Stack ref={wrapperRef} gap="8px" onChangeCapture={innerInputChanged}>
+    <fieldset
+      className={css({ display: "flex", flexDirection: "column", gap: "8px" })}
+      ref={wrapperRef}
+      onChangeCapture={innerInputChanged}
+      disabled={pending}
+    >
       {children}
-    </Stack>
+    </fieldset>
   );
+}
+
+function isInputTarget(target: EventTarget): target is HTMLInputElement {
+  return "value" in target && "checked" in target;
 }
