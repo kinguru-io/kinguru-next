@@ -77,7 +77,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.596.0",
+    "@aws-sdk/client-s3": "^3.598.0",
     "@aws-sdk/s3-request-presigner": "^3.596.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.2.0",
