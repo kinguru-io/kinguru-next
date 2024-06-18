@@ -1,7 +1,33 @@
 import withNextIntl from "next-intl/plugin";
+import svg from '@neodx/svg/webpack';
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.plugins.push(
+        svg({
+          root: 'assets',
+          group: true,
+          output: 'public/sprites',
+          fileName: '{name}.{hash:8}.svg',
+          metadata: {
+            path: 'src/sprite.gen.ts',
+            runtime: {
+              size: true,
+              viewBox: true
+            }
+          },
+          resetColors: {
+            exclude: [/[a-z]*-colored\.svg$/],
+            replaceUnknown: 'currentColor'
+          }
+        })
+      );
+    }
+    return config;
+  },
   reactStrictMode: true,
   images: {
     remotePatterns: [
