@@ -6,23 +6,17 @@ export const headerSlot = defineSlotRecipe({
   slots: ["header", "headerWrapper"],
   base: {
     header: {
-      zIndex: "header",
-      width: "100%",
-      borderBottom: "1px solid token(colors.neutral.3)",
-      bg: "token(colors.neutral.5)",
-      maxH: "85px",
-      py: "22.5px",
-      position: "sticky",
-      top: "0",
+      zIndex: "1",
+      width: "full",
+      paddingBlock: { base: "2", md: "4" },
+      backgroundColor: "neutral.5",
+      boxShadow: "header",
     },
     headerWrapper: {
-      display: "grid",
+      display: "flex",
       alignItems: "center",
-      gridTemplateColumns: "auto 1fr auto",
-      gridTemplateAreas: "'logo nav user'",
-      "@media (max-width: 900px)": {
-        gridTemplateAreas: "'nav logo user'",
-      },
+      gap: "6",
+      justifyContent: "space-between",
     },
   },
 });

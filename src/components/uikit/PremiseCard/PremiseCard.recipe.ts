@@ -3,32 +3,22 @@ import { defineSlotRecipe } from "@pandacss/dev";
 
 export const premiseCardSlot = defineSlotRecipe({
   className: "premise",
-  slots: ["premise", "premiseSlider", "premiseContent"],
+  slots: ["premise", "premiseSlider"],
   base: {
     premise: {
-      padding: "23px 30px",
-      border: "1px solid token(colors.neutral.3)",
-      borderRadius: "27px",
-      bg: "token(colors.neutral.5)",
+      bgColor: "neutral.5",
       display: "flex",
-      flexWrap: "wrap-reverse",
-      gap: "2rem",
-      animation: "fadein 200ms linear",
-    },
-    premiseContent: {
-      flex: "1",
-      display: "flex",
-      minWidth: "195px",
       flexDirection: "column",
-      justifyContent: "space-between",
-      alignItems: "flex-start",
-      gap: "1.5rem",
+      gap: "2",
+      animation: "fade-in",
+      borderRadius: "lg",
     },
     premiseSlider: {
-      flexBasis: "391px",
-      alignSelf: "center",
-      position: "relative",
-      marginInline: "auto",
+      bgImage: "{gradients.darken-to-bottom}",
+      width: "full",
+      borderRadius: "lg",
+      overflow: "hidden",
+      order: "-1",
     },
   },
 });

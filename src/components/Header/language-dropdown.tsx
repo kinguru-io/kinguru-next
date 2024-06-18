@@ -1,24 +1,19 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { useTransition } from "react";
-import { BsChevronDown, BsGlobe } from "react-icons/bs";
 import { RiLoader2Fill } from "react-icons/ri";
 import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { languageFormatter } from "@/lib/utils";
+import { Icon } from "@/components/common";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { Flex } from "~/styled-system/jsx";
+import { HStack } from "~/styled-system/jsx";
 
-type LanguageDropdownProps = {
-  locale: Locale;
-};
-
-export function LanguageDropdown({ locale }: LanguageDropdownProps) {
+export function LanguageDropdown() {
+  const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
-
-  const formatLanguage = languageFormatter(locale);
 
   const onToggleLanguageClick = (newLocale: Locale) => {
     startTransition(() => {
@@ -27,35 +22,40 @@ export function LanguageDropdown({ locale }: LanguageDropdownProps) {
   };
 
   return (
-    <Dropdown size={"lg"}>
+    <Dropdown size="lg">
       <DropdownInitiator>
-        <Flex gap="8px" alignItems="center">
-          {isPending ? <RiLoader2Fill /> : <BsGlobe />}
+        <HStack gap="1" padding="2">
           <span
-            className={css({ textTransform: "capitalize" })}
-            suppressHydrationWarning
+            className={css({
+              textTransform: "uppercase",
+              fontSize: "px13",
+              fontWeight: "bold",
+              lineHeight: "1",
+            })}
           >
-            {formatLanguage.of(locale)}
+            {isPending ? <RiLoader2Fill /> : locale}
           </span>
-          <BsChevronDown />
-        </Flex>
+          <Icon
+            name="action/arrow"
+            className={css({ rotate: "-90deg", fontSize: "0.5em" })}
+          />
+        </HStack>
       </DropdownInitiator>
       <DropdownMenu>
         {locales
           .filter((code) => code !== locale)
           .map((code) => (
             <button
+              key={code}
               className={css({
-                textTransform: "capitalize",
+                textTransform: "uppercase",
                 cursor: "pointer",
                 textAlign: "left",
               })}
               type="button"
-              key={code}
               onClick={() => onToggleLanguageClick(code)}
-              suppressHydrationWarning
             >
-              {formatLanguage.of(code)}
+              {code}
             </button>
           ))}
       </DropdownMenu>

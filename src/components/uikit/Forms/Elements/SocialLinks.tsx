@@ -1,39 +1,35 @@
 "use client";
 
 import type { SocialNetwork } from "@prisma/client";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { Icon } from "@/components/common";
 import { ErrorField, Input } from "@/components/uikit";
-
-import fbIcon from "~/public/img/footerIcons/FaceBook.svg";
-import instagramIcon from "~/public/img/footerIcons/Instagram.svg";
-import linkedInIcon from "~/public/img/footerIcons/LinkedIn.svg";
-
+import type { SpritesMap } from "@/sprite.gen";
 import { Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
 
 type SocialNetworkItem = {
   network: SocialNetwork;
-  label: string;
-  iconSrc: string;
+  social: string;
+  iconName: SpritesMap["social"];
 };
 
 const socialNetworkList: Array<SocialNetworkItem> = [
   {
     network: "linkedin",
-    label: "LinkedIn",
-    iconSrc: linkedInIcon.src,
+    social: "LinkedIn",
+    iconName: "linkedin",
   },
   {
     network: "facebook",
-    label: "Facebook",
-    iconSrc: fbIcon.src,
+    social: "Facebook",
+    iconName: "facebook",
   },
   {
     network: "instagram",
-    label: "Instagram",
-    iconSrc: instagramIcon.src,
+    social: "Instagram",
+    iconName: "linkedin",
   },
 ];
 
@@ -57,7 +53,7 @@ export function SocialLinks({
 
   return (
     <Stack gap="20px" flexBasis="460px">
-      {socialNetworkList.map(({ network, label, iconSrc }, idx) => (
+      {socialNetworkList.map(({ network, social, iconName }, idx) => (
         <React.Fragment key={network}>
           <HStack gap="30px">
             <VStack
@@ -66,8 +62,8 @@ export function SocialLinks({
               flexBasis="60px"
               textStyle="body.3"
             >
-              <Image src={iconSrc} alt="" width={40} height={40} />
-              {label}
+              <Icon name={`social/${iconName}`} />
+              {social}
             </VStack>
             <Flex grow="1" direction="column">
               <input
@@ -80,7 +76,7 @@ export function SocialLinks({
               <Input
                 type="text"
                 variant="outline"
-                placeholder={t("social_link_placeholder", { social: label })}
+                placeholder={t("social_link_placeholder", { social })}
                 data-invalid={getErrorFromArr(`socialLinks.${idx}.url`)}
                 {...register(`socialLinks.${idx}.url`)}
               />

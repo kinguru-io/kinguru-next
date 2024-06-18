@@ -6,12 +6,12 @@ import * as nextintl from "next-intl/server";
 import { createMock } from "storybook-addon-module-mock";
 import { Header } from "./Header";
 import * as auth from "@/auth.ts";
-import russianLocale from "~/public/locales/ru/common.json";
+import en from "~/public/locales/en/common.json";
 
 const meta = {
   title: "Header",
   component: () => (
-    <NextIntlClientProvider locale="ru" messages={russianLocale}>
+    <NextIntlClientProvider locale="en" messages={en}>
       <Header />
     </NextIntlClientProvider>
   ),
@@ -42,8 +42,8 @@ export const notAuthHeader: Story = {
         const mockTranslations = createMock(nextintl, "getTranslations");
         mockTranslations.mockReturnValue(
           Promise.resolve(
-            ((langCode: keyof typeof russianLocale.navbar) =>
-              russianLocale.navbar[langCode]) as unknown as ReturnType<
+            ((key: keyof typeof en.navbar) =>
+              en.navbar[key]) as unknown as ReturnType<
               typeof nextintl.getTranslations
             >,
           ),
@@ -77,8 +77,8 @@ export const authHeader: Story = {
         const mockTranslations = createMock(nextintl, "getTranslations");
         mockTranslations.mockReturnValue(
           Promise.resolve(
-            ((langCode: keyof typeof russianLocale.navbar) =>
-              russianLocale.navbar[langCode]) as unknown as ReturnType<
+            ((key: keyof typeof en.navbar) =>
+              en.navbar[key]) as unknown as ReturnType<
               typeof nextintl.getTranslations
             >,
           ),

@@ -4,15 +4,17 @@ import {
   TimeRangeLink,
 } from "@/components/common/cards/time-range";
 import { PremiseStack } from "@/components/premise";
-import { css } from "~/styled-system/css";
+import { Link } from "@/navigation";
+import { css, cx } from "~/styled-system/css";
 import { container } from "~/styled-system/patterns";
+import { button } from "~/styled-system/recipes";
 
 export default async function RootPage() {
   const t = await getTranslations("main");
   const premiseIdList = await prisma.premise.findMany({
     select: { id: true },
     orderBy: { updatedAt: "desc" },
-    take: 5,
+    take: 4,
   });
 
   return (
@@ -24,19 +26,33 @@ export default async function RootPage() {
           name="search_datetime"
         />
       </TimeRangeHero>
-      <section
-        className={container({
-          display: "flex",
-          gap: "45px",
-          flexDirection: "column",
-          alignItems: "center",
-          paddingBlock: "50px 100px",
-        })}
-      >
-        <h2 className={css({ textStyle: "heading.3", fontWeight: "bold" })}>
+      <section className={container({ marginBlock: "8" })}>
+        <h2
+          className={css({
+            textStyle: "heading.section",
+            marginBlockEnd: { base: "6", md: "8" },
+          })}
+        >
           {t("heading_popular")}
         </h2>
         <PremiseStack premiseIdList={premiseIdList} />
+        <Link
+          className={cx(
+            css({
+              colorPalette: "secondary",
+              marginBlock: { base: "10", md: "13" },
+              width: "max-content",
+            }),
+            button({
+              size: "lg",
+              variant: "solid",
+              centered: true,
+            }),
+          )}
+          href="/premises"
+        >
+          {t("show_more")}
+        </Link>
       </section>
     </>
   );

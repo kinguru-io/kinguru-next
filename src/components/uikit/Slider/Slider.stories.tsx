@@ -3,52 +3,52 @@ import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
 import { Slider, SliderItem } from "./Slider";
-import { AspectRatio, Box } from "~/styled-system/jsx";
+import { AspectRatio } from "~/styled-system/jsx";
+import { slider } from "~/styled-system/recipes";
 
 const items = Array.from({ length: 5 }).map((_, i) => ({
   id: i,
   src: faker.image.urlLoremFlickr({ height: 220, width: 391 }),
 }));
 
-const meta = {
+const meta: Meta<typeof Slider> = {
   title: "UIKit/Slider",
-  component: () => (
-    <Box w="391px" h="220px">
-      <Slider slidesCount={items.length}>
-        {items.map((item) => (
-          <SliderItem key={item.id}>
-            <AspectRatio ratio={16 / 9}>
-              <Image src={item.src} fill alt="" />
-            </AspectRatio>
-          </SliderItem>
-        ))}
-      </Slider>
-    </Box>
-  ),
-  parameters: {
-    layout: "centered",
+  argTypes: {
+    buttonPosition: {
+      options: slider.variantMap.buttonPosition,
+      control: "radio",
+    },
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Slider>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultSlider: Story = {};
-
-export const SliderWithOuterButtons: Story = {
-  args: { children: null },
-  render: () => (
-    <Box w="640px" h="180px">
-      <Slider buttonPosition="outer" slidesCount={items.length}>
-        {items.map((item) => (
-          <SliderItem key={item.id} buttonPosition="outer">
-            <AspectRatio ratio={16 / 9} w="320px" h="180px">
-              <Image src={item.src} fill alt="" />
-            </AspectRatio>
-          </SliderItem>
-        ))}
-      </Slider>
-    </Box>
+export const DefaultSlider: Story = {
+  render: ({ buttonPosition }) => (
+    <Slider slidesCount={items.length} buttonPosition={buttonPosition}>
+      {items.map((item) => (
+        <SliderItem key={item.id} buttonPosition={buttonPosition}>
+          <AspectRatio ratio={16 / 9}>
+            <Image src={item.src} fill alt="" />
+          </AspectRatio>
+        </SliderItem>
+      ))}
+    </Slider>
   ),
 };
+
+// TODO in progress
+// export const XSlidesPerView: Story = {
+//   render: ({ buttonPosition }) => (
+//     <Slider slidesCount={items.length} buttonPosition={buttonPosition}>
+//       {items.map((item) => (
+//         <SliderItem key={item.id} buttonPosition={buttonPosition}>
+//           <AspectRatio ratio={16 / 9}>
+//             <Image src={item.src} fill alt="" />
+//           </AspectRatio>
+//         </SliderItem>
+//       ))}
+//     </Slider>
+//   ),
+// };

@@ -221,6 +221,7 @@ const project = new web.NextJsTypeScriptProject({
   ],
   devDeps: [
     "@pandacss/dev",
+    "@neodx/svg",
 
     "tsconfig-paths-webpack-plugin",
     "@storybook/addon-essentials",

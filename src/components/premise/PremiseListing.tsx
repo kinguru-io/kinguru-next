@@ -1,6 +1,6 @@
 import { PremiseCollapse } from "./PremiseCollapse";
 import { PremiseView } from "./PremiseView";
-import { Stack } from "~/styled-system/jsx";
+import { Grid, Stack } from "~/styled-system/jsx";
 
 type PremiseListingProps = {
   premiseIdList: { id: string | undefined }[];
@@ -28,8 +28,8 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
 
 export function PremiseStack({ premiseIdList }: PremiseListingProps) {
   return (
-    <Stack gap="20px">
+    <Grid gap="6" gridTemplateColumns={{ base: "1", sm: "2" }}>
       {premiseIdList.map(({ id }) => id && <PremiseView key={id} id={id} />)}
-    </Stack>
+    </Grid>
   );
 }

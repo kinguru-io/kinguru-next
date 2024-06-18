@@ -2,71 +2,83 @@
 import { faker } from "@faker-js/faker";
 import { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
+import Link from "next/link";
+import { NextIntlClientProvider } from "next-intl";
+import { PremiseTags } from "./PremiseCard";
 import {
   Slider,
   SliderItem,
   PremiseCard,
-  Button,
-  PremiseContent,
   PremiseDescription,
-  PremisePrice,
   PremiseSlider,
-  PremiseTextContent,
   PremiseTitle,
-  PremiseTitleSize,
-  PremiseTitleWrapper,
+  Tag,
+  PremiseContent,
 } from "@/components/uikit";
-import { AspectRatio, Container } from "~/styled-system/jsx";
+import { priceFormatter } from "@/lib/utils";
+import { css } from "~/styled-system/css";
+import { AspectRatio, Container, Grid } from "~/styled-system/jsx";
+import { linkOverlay } from "~/styled-system/patterns";
 
-const items = Array.from({ length: 5 }).map((_, i) => ({
+const items = Array.from({ length: 3 }).map((_, i) => ({
   id: i,
-  src: faker.image.urlLoremFlickr(),
+  src: faker.image.urlLoremFlickr({
+    width: 720,
+    height: 405,
+    category: "random",
+  }),
 }));
 
-const meta = {
+const meta: Meta = {
   title: "UIKit/Cards/PremiseCard",
-  component: PremiseCard,
-  parameters: {
-    layout: "centered",
-  },
-} satisfies Meta<typeof PremiseCard>;
+  decorators: [
+    (Story) => (
+      <NextIntlClientProvider locale="en">
+        <Container>
+          <Grid gap="6" gridTemplateColumns={{ base: "1", sm: "2" }}>
+            <Story />
+          </Grid>
+        </Container>
+      </NextIntlClientProvider>
+    ),
+  ],
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const DefaultPremiseCard: Story = {
-  args: { children: null },
+export const PremiseCardTemplate: StoryObj = {
   render: () => {
     return (
-      <Container>
-        <PremiseCard>
-          <PremiseContent>
-            <PremiseTextContent>
-              <PremiseTitleWrapper>
-                <PremiseTitle>Hall 1</PremiseTitle>
-                <PremiseTitleSize>
-                  ({faker.number.float({ min: 10, max: 20, fractionDigits: 2 })}
-                  m<sup>2</sup>)
-                </PremiseTitleSize>
-              </PremiseTitleWrapper>
-              <PremiseDescription>{faker.lorem.lines(4)}</PremiseDescription>
-            </PremiseTextContent>
-            <Button size="md">More</Button>
-          </PremiseContent>
-          <PremiseSlider>
-            <Slider slidesCount={items.length}>
-              {items.map((item) => (
-                <SliderItem key={item.id}>
-                  <AspectRatio ratio={16 / 9}>
-                    <Image src={item.src} fill alt="" />
-                  </AspectRatio>
-                </SliderItem>
-              ))}
-            </Slider>
-            <PremisePrice>{faker.finance.amount()}$</PremisePrice>
-          </PremiseSlider>
-        </PremiseCard>
-      </Container>
+      <PremiseCard>
+        <PremiseTags>
+          <Tag variant="solid" colorPalette="success">
+            {faker.number.int({ min: 1, max: 100 })} m²
+          </Tag>
+          <Tag variant="solid" colorPalette="primary">
+            from {priceFormatter.format(+faker.finance.amount())}
+          </Tag>
+        </PremiseTags>
+        <PremiseContent href="/#" label="Go to premise page">
+          <PremiseTitle>Hall 1</PremiseTitle>
+          <PremiseDescription>{faker.lorem.lines(6)}</PremiseDescription>
+        </PremiseContent>
+        <PremiseSlider>
+          <Slider slidesCount={items.length}>
+            {items.map((item) => (
+              <SliderItem key={item.id}>
+                <AspectRatio ratio={16 / 9}>
+                  <Image src={item.src} fill alt="" />
+                  <Link href="#" className={linkOverlay()}>
+                    <span className={css({ srOnly: true })}>
+                      Go to premise page
+                    </span>
+                  </Link>
+                </AspectRatio>
+              </SliderItem>
+            ))}
+          </Slider>
+        </PremiseSlider>
+      </PremiseCard>
     );
   },
 };

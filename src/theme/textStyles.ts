@@ -2,16 +2,30 @@
 import { defineTextStyles } from "@pandacss/dev";
 
 export const additionalTextStyles = defineTextStyles({
-  body: {
-    1: { value: { fontSize: "18px" } },
-    2: { value: { fontSize: "16px" } },
-    3: { value: { fontSize: "12px" } },
-    4: { value: { fontSize: "8px" } },
-    extra: {
-      3: { value: { fontSize: "10px" } },
-    },
-  },
   heading: {
+    hero: {
+      value: {
+        fontSize: { base: "2xl", md: "5xl" },
+        fontWeight: "bold",
+        lineHeight: "1",
+      },
+    },
+    section: {
+      value: {
+        fontSize: { base: "2xl", md: "4xl" },
+        fontWeight: "bold",
+        lineHeight: "1.15",
+      },
+    },
+    body: {
+      1: { value: { fontSize: "18px" } },
+      2: { value: { fontSize: "16px" } },
+      3: { value: { fontSize: "12px" } },
+      4: { value: { fontSize: "8px" } },
+      extra: {
+        3: { value: { fontSize: "10px" } },
+      },
+    },
     1: {
       value: {
         fontSize: "36px",
