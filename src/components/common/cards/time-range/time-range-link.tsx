@@ -78,7 +78,6 @@ export function TimeRangeLink({
     <HStack
       gap="18px"
       justifyContent="space-between"
-      maxWidth="668px"
       layerStyle="outlinePrimaryWrapper"
       borderRadius="full"
       paddingBlock="18px"
