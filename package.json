@@ -104,7 +104,7 @@
     "@opentelemetry/sdk-trace-node": "^1.25.0",
     "@opentelemetry/semantic-conventions": "^1.25.0",
     "@prisma/client": "^5.15.0",
-    "@prisma/instrumentation": "^5.15.0",
+    "@prisma/instrumentation": "^5.15.1",
     "@sindresorhus/slugify": "^2.2.1",
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.5.0",
