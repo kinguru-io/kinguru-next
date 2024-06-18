@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1080 1080" style="enable-background:new 0 0 1080 1080;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFD800;}
-	.st1{fill:none;stroke:#000000;stroke-width:45;stroke-linecap:round;stroke-linejoin:round;}
-</style>
 <g>
-	<circle class="st0" cx="540" cy="540" r="540"/>
+	<circle class="st0" cx="540" cy="540" r="540" fill="#FFD800"/>
 </g>
 <g>
 	<path class="st1" d="M195.5,534.5h419 M614.68,534.5c110.84,0,283.82,0,283.82,0C871.72,348.23,624.08,379.51,614.68,534.5z
-		 M614.68,534.74c-8.73,144.07,173.64,221.93,277.27,61.85 M614.68,534.5C615.36,534.5,614,534.5,614.68,534.5z"/>
+		 M614.68,534.74c-8.73,144.07,173.64,221.93,277.27,61.85 M614.68,534.5C615.36,534.5,614,534.5,614.68,534.5z" stroke="#000000" stroke-width="45" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </g>
 </svg>

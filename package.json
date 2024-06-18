@@ -35,6 +35,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@google/semantic-release-replace-plugin": "1.2.0",
+    "@neodx/svg": "^0.7.1",
     "@next/eslint-plugin-next": "^14.2.4",
     "@pandacss/dev": "^0.41.0",
     "@semantic-release/changelog": "^6.0.3",

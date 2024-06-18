@@ -6,17 +6,16 @@ import {
   TimeRangeLink,
 } from "@/components/common/cards/time-range";
 import {
-  Button,
-  DefaultImage,
   PremiseCard,
   PremiseContent,
   PremiseDescription,
   PremiseSlider,
-  PremiseTextContent,
-  PremiseTitleWrapper,
+  PremiseTitle,
+  Tag,
 } from "@/components/uikit";
+import { PremiseTags } from "@/components/uikit/PremiseCard/PremiseCard";
 import { defaultSizings } from "@/lib/actions/premise-filter";
-import { AspectRatio, Container, Grid, Stack } from "~/styled-system/jsx";
+import { AspectRatio, Container, Grid, InlineBox } from "~/styled-system/jsx";
 
 export default function PremiseListingPage({
   searchParams,
@@ -36,7 +35,7 @@ export default function PremiseListingPage({
           name="search_datetime"
         />
       </TimeRangeHero>
-      <Container maxWidth="1920px">
+      <Container>
         <Grid
           gap="50px"
           paddingBlock="70px"
@@ -57,25 +56,25 @@ export default function PremiseListingPage({
 
 function ListingSkeletons({ size }: { size: number }) {
   return (
-    <Stack gap="20px">
-      {Array.from({ length: size }, (_) => (
-        <PremiseCard>
-          <PremiseContent>
-            <PremiseTextContent>
-              <PremiseTitleWrapper>{""}</PremiseTitleWrapper>
-              <PremiseDescription>{""}</PremiseDescription>
-            </PremiseTextContent>
-            <Button size="md" colorPalette="secondary" isLoading>
-              Loading...
-            </Button>
+    <Grid gap="6" gridTemplateColumns={{ base: "1", sm: "2" }} aria-busy>
+      {Array.from({ length: size }, (_, i) => (
+        <PremiseCard key={i}>
+          <PremiseTags>
+            <Tag variant="solid" colorPalette="transparent" color="transparent">
+              ...
+            </Tag>
+          </PremiseTags>
+          <PremiseContent href="#" label="">
+            <PremiseTitle>...</PremiseTitle>
+            <PremiseDescription>
+              <InlineBox display="inline-block" height="2lh" lineHeight="1.5" />
+            </PremiseDescription>
           </PremiseContent>
           <PremiseSlider>
-            <AspectRatio ratio={16 / 9}>
-              <DefaultImage />
-            </AspectRatio>
+            <AspectRatio ratio={16 / 9} />
           </PremiseSlider>
         </PremiseCard>
       ))}
-    </Stack>
+    </Grid>
   );
 }

@@ -18,23 +18,19 @@ export function HeaderLinks({ links }: LinksProps) {
   const selectedSegment = useSelectedLayoutSegment();
 
   return (
-    <Flex justify="space-evenly" alignItems="center" flexWrap="wrap">
+    <Flex flexWrap="wrap" gap="3" flexGrow="1">
       {links.map(({ href, name }) => (
         <Link
           key={name}
           href={href}
           className={css({
+            fontWeight: "bold",
             textAlign: "center",
-            textStyle:
-              selectedSegment === href.slice(1) ? "heading.4" : "body.2",
-            padding: "5px",
-            _hover: {
-              transformOrigin: "center center",
-              transform: "scale(1.05)",
-              transition: "0.1s ease",
-              textShadow: "-.25px -.25px 0 black, .25px .25px black",
-            },
+            padding: "2",
+            _hover: { color: "primary" },
+            _selected: { color: "primary" },
           })}
+          aria-selected={selectedSegment === href.slice(1)}
         >
           {name}
         </Link>

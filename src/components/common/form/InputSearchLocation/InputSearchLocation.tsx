@@ -13,8 +13,8 @@ import {
 import { DropdownMenu, Input, useDropdown } from "@/components/uikit";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import type { Locale } from "@/navigation";
-import { InlineBox } from "~/styled-system/jsx";
 import { getError } from "@/utils/forms/errors";
+import { InlineBox } from "~/styled-system/jsx";
 
 export function InputSearchLocation<T extends FieldValues>({
   placeholder,
