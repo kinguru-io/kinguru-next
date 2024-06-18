@@ -53,7 +53,8 @@
     "add_organization": "Add an organization account",
     "sign_in_and_sign_up": "Sign in and sign up",
     "eventify_logotype": "Eventify logotype",
-    "toggle_nav": "Open/close navigation menu"
+    "toggle_nav": "Open/close navigation menu",
+    "home_link": "Go to home page"
   },
   "hero": {
     "slug_keywords": "choose,organize,earn",
@@ -66,7 +67,8 @@
   },
   "main": {
     "heading": "Znajdź idealną lokalizację",
-    "heading_popular": "Popularne oferty"
+    "heading_popular": "Popularne oferty",
+    "show_more": "Show more"
   },
   "events": {
     "upcoming_events": "Upcoming events",
@@ -236,11 +238,13 @@
     "reviews": "Reviews",
     "photo_reports": "Photo reports",
     "contacts": "Contacts",
+    "user_links": "For users",
+    "extra": "Extra",
     "privacy_policy": "Privacy policy",
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ",
-    "all_rights_reserved": "{year} Eventify. All rights reserved",
+    "all_rights_reserved": "© {year} Eventify. All rights reserved",
     "events": "Events",
     "speakers": "Speakers",
     "places": "Places",
@@ -406,12 +410,14 @@
   "premise": {
     "more": "More",
     "from": "from {price}",
+    "free": "free",
     "see_all": "See all",
     "hide": "Hide",
     "map": "Map",
     "amenities_and_facilities": "Amenities and facilities",
     "area_and_capacity": "Area and capacity",
     "area": "Area: {area} m²",
+    "area_literal": "m²",
     "capacity": "Capacity: {capacity}",
     "booking_cancellation_terms": "Booking cancellation terms",
     "premise_rules": "Premise rules",

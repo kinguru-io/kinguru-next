@@ -17,12 +17,21 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = t("description");
 
   return {
+    metadataBase: new URL("https://eventify.today"),
+    alternates: {
+      canonical: "/",
+      languages: {
+        en: "/en",
+        pl: "/pl",
+        ru: "/ru",
+      },
+    },
     title,
     description,
     openGraph: {
       title,
       description,
-      images: "./img/logotypes/footer-logotype-512x512.png",
+      images: "/img/logotypes/footer-logotype-512x512.png",
     },
   };
 }
@@ -42,12 +51,12 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
-          <Grid gridTemplateRows="auto 1fr auto" gap="0" minHeight="100vh">
+          <Grid gridTemplateRows="auto 1fr" gap="0" minHeight="100vh">
             <Header />
             <main>{children}</main>
-            <Toaster />
             <Footer />
           </Grid>
+          <Toaster />
         </body>
       </NextIntlClientProvider>
     </html>

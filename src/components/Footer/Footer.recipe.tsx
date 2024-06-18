@@ -6,31 +6,24 @@ export const footerSlot = defineSlotRecipe({
   slots: ["footer", "footerWrapper", "additionalText", "contentWrapper"],
   base: {
     footer: {
-      bg: "token(colors.neutral.1)",
-      py: "70px 20px",
-      width: "100%",
-      color: "token(colors.neutral.5)",
-      textStyle: "body.2",
-    },
-    footerWrapper: {
-      height: "100%",
-      display: "flex",
-      gap: "30px",
-      flexDirection: "column",
-      alignItems: "center",
+      bgColor: "neutral.1",
+      color: "neutral.5",
+      width: "full",
+      paddingBlock: "8",
+      md: { paddingBlockStart: "12" },
     },
     additionalText: {
-      color: "token(colors.neutral.2)",
+      color: "#a3a3a3",
+      fontSize: "px13",
+      lineHeight: "1",
     },
     contentWrapper: {
       display: "flex",
-      flexDirection: {
-        base: "column",
-        md: "row",
-      },
-      gap: "20px",
+      flexDirection: { base: "column", sm: "row" },
       justifyContent: "space-between",
-      width: "100%",
+      gap: "8",
+      width: "full",
+      marginBlockEnd: "8",
     },
   },
 });

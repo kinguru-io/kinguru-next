@@ -53,7 +53,8 @@
     "add_organization": "Добавить кабинет организации",
     "sign_in_and_sign_up": "Вход и регистрация",
     "eventify_logotype": "Логотип Eventify",
-    "toggle_nav": "Открыть/закрыть меню навигацию"
+    "toggle_nav": "Открыть/закрыть меню навигацию",
+    "home_link": "Вернуться на главную"
   },
   "hero": {
     "slug_keywords": "выбирайте,огранизуйте,зарабатывайте",
@@ -66,7 +67,8 @@
   },
   "main": {
     "heading": "Найди свою идеальную площадку",
-    "heading_popular": "Популярные предложения"
+    "heading_popular": "Популярные предложения",
+    "show_more": "Показать еще"
   },
   "events": {
     "upcoming_events": "Ближайшие мероприятия",
@@ -235,11 +237,13 @@
     "reviews": "Ревью",
     "photo_reports": "Фото-репортажи",
     "contacts": "Контакты",
+    "user_links": "Пользовательское",
+    "extra": "Дополнительно",
     "privacy_policy": "Политика конфиденциальности",
     "terms_and_conditions": "Terms & Conditions",
     "cookie_policy": "Cookie Policy",
     "faq": "FAQ",
-    "all_rights_reserved": "{year} Eventify. Все права защищены",
+    "all_rights_reserved": "© {year} Eventify. Все права защищены",
     "events": "Мероприятия",
     "speakers": "Спикеры",
     "places": "Площадки",
@@ -368,12 +372,14 @@
   "premise": {
     "more": "Подробнее",
     "from": "от {price}",
+    "free": "Бесплатно",
     "see_all": "Смотреть все",
     "hide": "Скрыть",
     "map": "Карта",
     "amenities_and_facilities": "Оснащения и удобства",
     "area_and_capacity": "Площадь и вместительность",
     "area": "Площадь: {area} м²",
+    "area_literal": "м²",
     "capacity": "Вместительность: {capacity}",
     "booking_cancellation_terms": "Условия отмены бронирования",
     "premise_rules": "Правила зала",

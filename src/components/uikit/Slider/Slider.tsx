@@ -1,8 +1,8 @@
 "use client";
 
 import { useSnapCarousel } from "react-snap-carousel";
-import { ArrowIcon } from "@/components/uikit";
-import { cx } from "~/styled-system/css";
+import { Icon } from "@/components/common";
+import { css, cx } from "~/styled-system/css";
 import { SliderVariantProps, slider } from "~/styled-system/recipes";
 
 type SliderProps = {
@@ -14,11 +14,7 @@ type SliderItemProps = {
   children: React.ReactNode;
 } & SliderVariantProps;
 
-export function Slider({
-  slidesCount,
-  children,
-  buttonPosition = "inner",
-}: SliderProps) {
+export function Slider({ slidesCount, children, buttonPosition }: SliderProps) {
   const { scrollRef, prev, next, activePageIndex, goTo } = useSnapCarousel();
 
   const nextSlide = () => {
@@ -45,31 +41,28 @@ export function Slider({
         {children}
       </ul>
       {slidesCount > 1 && (
-        <>
+        <div className={classes.buttonGroup}>
           <button
             type="button"
             className={cx(classes.sliderButton, classes.prevButton)}
             onClick={prevSlide}
           >
-            <ArrowIcon direction="left" />
+            <Icon name="action/arrow" />
           </button>
           <button
             type="button"
             className={cx(classes.sliderButton, classes.nextButton)}
             onClick={nextSlide}
           >
-            <ArrowIcon direction="right" />
+            <Icon name="action/arrow" className={css({ rotate: "180deg" })} />
           </button>
-        </>
+        </div>
       )}
     </div>
   );
 }
 
-export function SliderItem({
-  children,
-  buttonPosition = "inner",
-}: SliderItemProps) {
+export function SliderItem({ children, buttonPosition }: SliderItemProps) {
   const classes = slider({ buttonPosition });
 
   return <li className={classes.item}>{children}</li>;

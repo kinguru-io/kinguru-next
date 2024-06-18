@@ -1,36 +1,26 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
+import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
   PremiseCard,
   PremiseContent,
   PremiseDescription,
-  PremisePrice,
   PremiseSlider,
-  PremiseTextContent,
   PremiseTitle,
-  PremiseTitleSize,
-  PremiseTitleWrapper,
   Slider,
   SliderItem,
+  Tag,
 } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
 import { Link } from "@/navigation";
 import prisma from "@/server/prisma";
+import { css } from "~/styled-system/css";
 import { AspectRatio } from "~/styled-system/jsx";
-import { button } from "~/styled-system/recipes";
+import { linkOverlay } from "~/styled-system/patterns";
 
-export async function PremiseView({
-  id,
-  href,
-  linkLabel,
-}: {
-  id: string;
-  href?: string;
-  linkLabel?: string;
-}) {
+export async function PremiseView({ id, href }: { id: string; href?: string }) {
   const t = await getTranslations("premise");
-  const locale = await getLocale();
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
@@ -54,59 +44,54 @@ export async function PremiseView({
   const { slug, name, description, area, resources, openHours } = premise;
   const minPrice = openHours.at(0)?.price;
 
+  const priceLabel =
+    minPrice && minPrice !== 0
+      ? t("from", { price: priceFormatter.format(minPrice) })
+      : t("free");
+
   return (
     <PremiseCard>
-      <PremiseContent>
-        <PremiseTextContent>
-          <PremiseTitleWrapper>
-            <PremiseTitle>
-              <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
-                {name}
-              </Link>
-            </PremiseTitle>
-            {area && (
-              <PremiseTitleSize>
-                (
-                {area.toLocaleString(locale, {
-                  style: "unit",
-                  unit: "meter",
-                })}
-                <sup>2</sup>)
-              </PremiseTitleSize>
-            )}
-          </PremiseTitleWrapper>
-          <PremiseDescription>{description}</PremiseDescription>
-        </PremiseTextContent>
-        <Link
-          className={button({
-            // TODO add button variants to props in case anything other is needed
-            variant: linkLabel ? "solid" : "outline",
-            size: "md",
-          })}
-          href={href || `/premises/${slug}`}
-        >
-          {linkLabel || t("more")}
-        </Link>
+      <PremiseTags>
+        <Tag variant="solid" colorPalette="success">
+          {area} {t("area_literal")}
+        </Tag>
+        {minPrice && (
+          <Tag variant="solid" colorPalette="primary">
+            {priceLabel}
+          </Tag>
+        )}
+      </PremiseTags>
+      <PremiseContent
+        href={href || `/premises/${slug}`}
+        label={t("go_to_premise_page")}
+      >
+        <PremiseTitle>{name}</PremiseTitle>
+        <PremiseDescription>{description}</PremiseDescription>
       </PremiseContent>
       <PremiseSlider>
-        <Link href={`/premises/${slug}`} title={t("go_to_premise_page")}>
-          <Slider slidesCount={resources.length}>
-            {resources.map((item) => {
-              return (
-                <SliderItem key={item.id}>
-                  <AspectRatio ratio={16 / 9}>
-                    <Image src={item.url} width={391} height={220} alt="" />
-                  </AspectRatio>
-                </SliderItem>
-              );
-            })}
-          </Slider>
-        </Link>
-        {minPrice && (
-          <PremisePrice>
-            {t("from", { price: priceFormatter.format(minPrice) })}
-          </PremisePrice>
-        )}
+        <Slider slidesCount={resources.length}>
+          {resources.map((item) => (
+            <SliderItem key={item.id}>
+              <AspectRatio ratio={16 / 9}>
+                <Image
+                  src={item.url}
+                  alt=""
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  fill
+                />
+                <Link
+                  href={href || `/premises/${slug}`}
+                  className={linkOverlay()}
+                  tabIndex={-1}
+                >
+                  <span className={css({ srOnly: true })}>
+                    {t("go_to_premise_page")}
+                  </span>
+                </Link>
+              </AspectRatio>
+            </SliderItem>
+          ))}
+        </Slider>
       </PremiseSlider>
     </PremiseCard>
   );

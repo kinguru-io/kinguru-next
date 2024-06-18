@@ -2,15 +2,27 @@ import { cva } from "~/styled-system/css";
 import { styled } from "~/styled-system/jsx";
 import type { StyledVariantProps } from "~/styled-system/types";
 
-export const tagStyles = cva({
+const tagStyles = cva({
   base: {
     display: "inline-block",
     flexShrink: "0",
-    borderRadius: "6px",
-    fontWeight: "bold",
+    whiteSpace: "nowrap",
+    borderRadius: "sm",
+    fontSize: "px15",
+    lineHeight: "0.75",
+    padding: "2",
+    colorPalette: "secondary",
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "colorPalette",
   },
   variants: {
     variant: {
+      solid: {
+        color: "colorPalette.text",
+        backgroundColor: "colorPalette",
+      },
+      outline: {},
       primary: {
         bg: "primary",
         color: "neutral.1",
@@ -70,10 +82,6 @@ export const tagStyles = cva({
         py: "8.5px",
       },
     },
-  },
-  defaultVariants: {
-    variant: "primary",
-    size: "xs",
   },
 });
 

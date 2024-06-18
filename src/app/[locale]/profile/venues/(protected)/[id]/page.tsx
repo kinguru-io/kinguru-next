@@ -45,7 +45,6 @@ export default async function ProfileVenuePage({
             <PremiseView
               key={premiseId}
               id={premiseId}
-              linkLabel={t("edit_premise_link_label")}
               href={`/profile/venues/${id}/edit-premise?venueId=${id}&premiseId=${premiseId}`}
             />
           ))}

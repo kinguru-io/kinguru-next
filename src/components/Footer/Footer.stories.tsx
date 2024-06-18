@@ -1,58 +1,41 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
+import * as nextIntl from "next-intl/server";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { createMock } from "storybook-addon-module-mock";
 import { Footer } from "./Footer";
 import englishLocale from "../../../public/locales/en/common.json";
-import polishLocale from "../../../public/locales/pl/common.json";
-import russianLocale from "../../../public/locales/ru/common.json";
 
-const meta = {
+const meta: Meta<typeof Footer> = {
   title: "Footer",
-  component: () => (
-    <NextIntlClientProvider locale="ru" messages={russianLocale}>
-      <Footer />
-    </NextIntlClientProvider>
-  ),
+  component: Footer,
+  decorators: [
+    (Story) => (
+      <NextIntlClientProvider locale="en">
+        <Story />
+      </NextIntlClientProvider>
+    ),
+  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const russianFooter: Story = {
+export const FooterStory: Story = {
   parameters: {
+    moduleMock: {
+      mock: () => {
+        const mock = createMock(nextIntl, "getTranslations");
+        // @ts-ignore
+        mock.mockReturnValue((key) => englishLocale.footer[key]);
+        return [mock];
+      },
+    },
     nextjs: {
       appDirectory: true,
+      navigation: {
+        pathname: "/en",
+      },
     },
   },
-  render: () => (
-    <NextIntlClientProvider locale="ru" messages={russianLocale}>
-      <Footer />
-    </NextIntlClientProvider>
-  ),
-};
-
-export const englishFooter: Story = {
-  parameters: {
-    nextjs: {
-      appDirectory: true,
-    },
-  },
-  render: () => (
-    <NextIntlClientProvider locale="en" messages={englishLocale}>
-      <Footer />
-    </NextIntlClientProvider>
-  ),
-};
-
-export const polishFooter: Story = {
-  parameters: {
-    nextjs: {
-      appDirectory: true,
-    },
-  },
-  render: () => (
-    <NextIntlClientProvider locale="pl" messages={polishLocale}>
-      <Footer />
-    </NextIntlClientProvider>
-  ),
 };
