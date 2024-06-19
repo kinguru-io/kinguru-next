@@ -131,7 +131,7 @@
     "next-intl": "^3.15.0",
     "next-s3-upload": "^0.3.4",
     "next-sitemap": "^4.2.3",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "^6.9.14",
     "oslo": "^1.2.0",
     "rc-pagination": "^4.1.0",
     "react": "^18.3.1",
