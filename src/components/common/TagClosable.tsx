@@ -35,13 +35,10 @@ export function TagClosable({
       <span data-helper>{helper}</span>
       <Divider orientation="vertical" color="neutral.2" borderStyle="dashed" />
       <Button
-        variant="ghost"
-        size="iconOnly"
         onClick={onClick}
         icon={<RxCross1 size="10px" />}
-      >
-        {buttonLabel}
-      </Button>
+        aria-label={buttonLabel}
+      />
     </Card>
   );
 }

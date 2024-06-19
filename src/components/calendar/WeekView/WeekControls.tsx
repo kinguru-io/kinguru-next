@@ -1,13 +1,10 @@
 import { useTranslations } from "next-intl";
 import { memo } from "react";
 import { useOriginDate } from "./use-origin-date";
-import { ArrowIcon, Button } from "@/components/uikit";
-import { GridItem, type GridItemProps } from "~/styled-system/jsx";
-
-const gridButtonsStyles: GridItemProps = {
-  paddingBlockStart: "3px", // appends transparent space for buttons area to be in the visual center
-  css: { "& .arrowIcon": { fontSize: "40px", lineHeight: "0" } },
-};
+import { Icon } from "@/components/common";
+import { Button, type ButtonProps } from "@/components/uikit";
+import { css } from "~/styled-system/css";
+import { GridItem } from "~/styled-system/jsx";
 
 export const WeekControls = memo(function WeekControls({
   canGoNext,
@@ -20,31 +17,34 @@ export const WeekControls = memo(function WeekControls({
 >) {
   const t = useTranslations("calendar");
 
+  const commonProps: ButtonProps = {
+    type: "button",
+    rounded: false,
+    colorPalette: "secondary",
+  };
+
   return (
     <>
-      <GridItem gridArea="prev-week" {...gridButtonsStyles}>
+      <GridItem gridArea="prev-week">
         <Button
-          type="button"
-          variant="ghost"
-          size="iconOnly"
-          icon={<ArrowIcon direction="left" />}
+          icon={<Icon name="action/arrow" />}
           onClick={prevWeek}
           disabled={canGoPrev}
-        >
-          {t("prev_week_btn_label")}
-        </Button>
+          aria-label={t("prev_week_btn_label")}
+          {...commonProps}
+        />
       </GridItem>
-      <GridItem gridArea="next-week" {...gridButtonsStyles}>
+      <GridItem gridArea="next-week">
         <Button
           type="button"
-          variant="ghost"
-          size="iconOnly"
-          icon={<ArrowIcon direction="right" />}
+          icon={
+            <Icon name="action/arrow" className={css({ rotate: "180deg" })} />
+          }
           onClick={nextWeek}
           disabled={canGoNext}
-        >
-          {t("next_week_btn_label")}
-        </Button>
+          aria-label={t("next_week_btn_label")}
+          {...commonProps}
+        />
       </GridItem>
     </>
   );

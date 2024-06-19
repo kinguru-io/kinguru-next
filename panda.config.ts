@@ -141,7 +141,7 @@ export default defineConfig({
           disabled: { value: "{colors.yellow.4}" },
         },
         secondary: {
-          DEFAULT: { value: "{colors.neutral.2}" },
+          DEFAULT: { value: "{colors.neutral.4}" },
           darker: { value: "{colors.neutral.1}" },
           hover: { value: "{colors.neutral.3}" },
           active: { value: "{colors.neutral.4}" },
@@ -177,6 +177,7 @@ export default defineConfig({
   outdir: "styled-system",
 
   staticCss: {
+    recipes: "*",
     css: [
       {
         properties: {

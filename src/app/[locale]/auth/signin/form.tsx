@@ -30,7 +30,7 @@ export function SigninForm({
               />
             )}
             <Button
-              size={provider.name === "Email" ? "md" : "sm"}
+              size={provider.name === "Email" ? "lg" : "sm"}
               onClick={() =>
                 signIn(provider.id, {
                   email: provider.id === "email" ? email : undefined,

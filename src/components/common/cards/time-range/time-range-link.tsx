@@ -123,12 +123,8 @@ export function TimeRangeLink({
         value={to}
         callback={setTo}
       />
-      <Button {...buttonCommonProps} size="iconOnly">
-        {t("search_btn_label")}
-      </Button>
-      <Button {...buttonCommonProps} size="md">
-        {t("search_btn_label")}
-      </Button>
+      <Button {...buttonCommonProps}>{t("search_btn_label")}</Button>
+      <Button {...buttonCommonProps}>{t("search_btn_label")}</Button>
     </HStack>
   );
 }

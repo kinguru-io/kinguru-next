@@ -56,9 +56,6 @@ export function PremiseImageSelector() {
               />
               {url && (
                 <Button
-                  size="iconOnly"
-                  variant="solid"
-                  colorPalette="primary"
                   onClick={() => update(i, { url: "" })}
                   icon={<RxCross1 />}
                 />

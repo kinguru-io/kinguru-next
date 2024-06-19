@@ -59,24 +59,12 @@ export function EventModal({
     <Modal>
       {!isJoined ? (
         <ModalInitiator>
-          <Button
-            size="lg"
-            variant="solid"
-            colorPalette="primary"
-            isLoading={isPending}
-            onClick={getClientSecret}
-          >
+          <Button size="lg" isLoading={isPending} onClick={getClientSecret}>
             {t("join")}
           </Button>
         </ModalInitiator>
       ) : (
-        <Button
-          size="lg"
-          variant="solid"
-          colorPalette="primary"
-          disabled={isPending}
-          onClick={leaveFromEvent}
-        >
+        <Button size="lg" disabled={isPending} onClick={leaveFromEvent}>
           {t("leave")}
         </Button>
       )}

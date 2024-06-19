@@ -4,118 +4,65 @@ import { defineRecipe } from "@pandacss/dev";
 export const buttonRecipe = defineRecipe({
   className: "button",
   base: {
-    colorPalette: "primary",
     display: "flex",
     alignItems: "center",
-    gap: "2",
+    gap: "2.5",
     borderRadius: "full",
-    borderStyle: "solid",
-    cursor: "pointer",
+    lineHeight: "0.75",
     position: "relative",
     overflow: "hidden",
     transition: "colors",
-    outline: "none",
-    "&[data-icon-position=right]": { flexDirection: "row-reverse" },
-    _disabled: {
-      cursor: "not-allowed",
+    outline: "1px solid transparent",
+    _hoverEnabled: {
+      bgColor: "neutral.1",
+      color: "neutral.5",
     },
+    _focusVisible: {
+      boxShadow: "0 0 0 2px token(colors.focus)",
+    },
+    _disabled: {
+      opacity: "0.4",
+    },
+    "&[data-icon-position=right]": { flexDirection: "row-reverse" },
   },
   variants: {
-    variant: {
-      solid: {
-        bg: "token(colors.colorPalette)",
-        borderColor: "token(colors.colorPalette)",
-        color: "token(colors.colorPalette.text, colors.neutral.1)",
-        fontWeight: "bold",
+    colorPalette: {
+      primary: {
+        bgColor: "primary",
         _hoverEnabled: {
-          bg: "token(colors.colorPalette.hover)",
-          borderColor: "token(colors.colorPalette.hover)",
-        },
-        _activeEnabled: {
-          bg: "token(colors.colorPalette.active)",
-          borderColor: "token(colors.colorPalette.active)",
-        },
-        _disabled: {
-          bg: "token(colors.colorPalette.disabled)",
-          borderColor: "token(colors.colorPalette.disabled)",
-          color: "token(colors.colorPalette.text, colors.neutral.2)",
-        },
-        _focusVisible: {
-          borderColor: "token(colors.focus)",
+          bgColor: "neutral.1",
         },
       },
-      outline: {
-        bg: "neutral.5",
-        borderColor: "token(colors.colorPalette.darker, colors.colorPalette)",
-        fontWeight: "normal",
+      secondary: {
+        bgColor: "secondary",
         _hoverEnabled: {
-          textDecoration: "underline",
-        },
-        _activeEnabled: {
-          borderColor: "token(colors.colorPalette.active)",
-        },
-        _disabled: {
-          color: "neutral.2",
-          borderColor: "token(colors.colorPalette.disabled)",
-        },
-        _focusVisible: {
-          borderColor: "token(colors.focus)",
+          bgColor: "neutral.1",
         },
       },
-      ghost: {
-        bg: "transparent",
-        borderColor: "transparent!important",
-        color: "neutral.1",
-        fontWeight: "bold",
-        _hoverEnabled: { textDecoration: "underline" },
-        _activeEnabled: { bg: "neutral.4" },
-        _disabled: { color: "neutral.2" },
-        _focusVisible: {
-          borderColor: "token(colors.focus)",
+      dark: {
+        bgColor: "neutral.1",
+        color: "neutral.5",
+        _hoverEnabled: {
+          bgColor: "danger",
         },
       },
     },
     size: {
       sm: {
-        textStyle: "button.sm",
-        px: "20px",
-        py: "6.8px",
-        borderWidth: "1px",
-      },
-      md: {
-        textStyle: "button.md",
-        px: "25px",
-        py: "10.6px",
-        borderWidth: "1px",
+        fontSize: "sm",
+        padding: "4",
       },
       lg: {
-        textStyle: "button.lg",
-        px: "40px",
-        py: "13.5px",
-        borderWidth: "2px",
-      },
-      xl: {
-        textStyle: "button.xl",
-        px: "44px",
-        py: "17.6px",
-        borderWidth: "3px",
-      },
-      iconOnly: {
-        h: "2.5em",
-        w: "2.5em",
-        borderWidth: "1px",
-        alignItems: "center",
-        justifyContent: "center",
-        "& [data-label]": {
-          srOnly: true,
-        },
+        fontSize: "px15",
+        paddingBlock: "6",
+        paddingInline: "8",
       },
     },
     centered: { true: { marginInline: "auto" } },
+    rounded: { false: { borderRadius: "sm" } },
   },
   defaultVariants: {
-    variant: "solid",
+    colorPalette: "primary",
     size: "sm",
   },
-  staticCss: [{ size: ["*"], responsive: true }, { variant: ["*"] }],
 });

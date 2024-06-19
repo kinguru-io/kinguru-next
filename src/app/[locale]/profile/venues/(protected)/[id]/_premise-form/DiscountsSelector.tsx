@@ -180,7 +180,6 @@ function AddOpenHoursDiscountRecord({
       </HStack>
       <Button
         type="button"
-        variant="outline"
         onClick={handleSubmit(addButtonClicked)}
         disabled={!isValid}
       >

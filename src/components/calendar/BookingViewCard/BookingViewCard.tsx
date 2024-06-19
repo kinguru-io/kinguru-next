@@ -184,7 +184,6 @@ export function BookingViewCard({
               </>
             )}
             <Button
-              size="md"
               isLoading={isPending}
               disabled={
                 isOutsideModal || !isUserAwareOfRules || areThereNoSlots

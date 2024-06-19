@@ -45,8 +45,6 @@ export function ImagePickerForm({
       {src && (
         <Button
           type="button"
-          size="iconOnly"
-          variant="solid"
           colorPalette="primary"
           onClick={() => setValue(name, "")}
           icon={<RxCross1 size="1.7em" />}

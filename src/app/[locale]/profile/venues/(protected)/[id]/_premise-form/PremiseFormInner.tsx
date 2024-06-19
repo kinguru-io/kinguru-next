@@ -110,7 +110,7 @@ function SaveChangesButton() {
   const t = useTranslations("profile.premises.add");
 
   return (
-    <Button type="submit" size="md" isLoading={isSubmitting} centered>
+    <Button type="submit" isLoading={isSubmitting} centered>
       {t("edit_btn_label")}
     </Button>
   );

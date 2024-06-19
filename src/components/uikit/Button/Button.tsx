@@ -1,45 +1,38 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { ImSpinner8 } from "react-icons/im";
 import { cx, css } from "~/styled-system/css";
 import { button, type ButtonVariantProps } from "~/styled-system/recipes";
-
-export const buttonColorPalette = [
-  "primary",
-  "secondary",
-  "danger",
-  "success",
-] as const;
 
 export type ButtonProps = ButtonVariantProps &
   ComponentProps<"button"> & {
     icon?: React.ReactNode;
     isLoading?: boolean;
     iconPosition?: "left" | "right";
-    colorPalette?: (typeof buttonColorPalette)[number];
   };
 
 export function Button({
-  icon = null,
-  variant,
-  iconPosition = "left",
+  icon,
+  iconPosition,
   centered,
   colorPalette,
   size,
   children,
   isLoading = false,
   disabled = false,
+  className,
+  rounded,
   ...restProps
 }: ButtonProps) {
-  const className = cx(
-    css({ colorPalette }),
-    button({ variant, size, centered }),
+  const buttonClassName = cx(
+    className,
+    button({ colorPalette, size, centered, rounded }),
   );
 
   return (
     <button
-      data-icon-position={iconPosition}
-      className={className}
+      className={buttonClassName}
       disabled={isLoading || disabled}
+      data-icon-position={iconPosition}
       {...restProps}
     >
       {icon && (
@@ -51,13 +44,15 @@ export function Button({
           {icon}
         </span>
       )}
-      <span
-        className={css({ _loading: { opacity: 0 } })}
-        aria-busy={isLoading}
-        data-label
-      >
-        {children}
-      </span>
+      {children && (
+        <span
+          className={css({ _loading: { opacity: 0 } })}
+          aria-busy={isLoading}
+          data-label
+        >
+          {children}
+        </span>
+      )}
       {isLoading && <LoaderIcon />}
     </button>
   );

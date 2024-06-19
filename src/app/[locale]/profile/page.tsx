@@ -36,10 +36,7 @@ export default async function ProfilePage() {
           <h1>{t("user_greeting")}</h1>
           {t("page_tip")}
         </InlineBox>
-        <Link
-          className={button({ size: "md", variant: "solid" })}
-          href="/profile/venues/add"
-        >
+        <Link className={button()} href="/profile/venues/add">
           {t("add_venue_btn_label")}
         </Link>
       </VStack>

@@ -12,5 +12,11 @@ export const additionalGlobalCss = defineGlobalStyles({
     color: "neutral.1",
   },
   address: { fontStyle: "normal" },
+  button: {
+    cursor: {
+      base: "pointer",
+      _disabled: "not-allowed",
+    },
+  },
   ".rdp-caption_label": { textTransform: "capitalize" },
 });

@@ -15,11 +15,7 @@ export default async function VenueListingPage() {
   return (
     <Center flexDirection="column">
       {venues.map(({ id, name, slug }) => (
-        <Link
-          className={button({ variant: "ghost" })}
-          key={id}
-          href={`/venues/${slug}`}
-        >
+        <Link className={button()} key={id} href={`/venues/${slug}`}>
           {name}
         </Link>
       ))}

@@ -136,13 +136,9 @@ export function WeekView({
                     milliseconds: 0,
                   });
                   const slotISOString = slotTime.toISOString();
-
-                  if (
+                  const isDisabled =
                     isBeforeZoned(slotTime, nowDate, timeZone) ||
-                    bookedSlots.has(slotISOString)
-                  ) {
-                    return null;
-                  }
+                    bookedSlots.has(slotISOString);
 
                   const isSlotSelected = selectedSlots.some(
                     ({ time: selectedTime }) => isEqual(selectedTime, slotTime),
@@ -157,6 +153,7 @@ export function WeekView({
                       onClick={() => toggleSlot({ day, time: slotTime, price })}
                       condition={getTimeSlotCondition(price, aggregatedPrices)}
                       selected={isSlotSelected}
+                      disabled={isDisabled}
                     />
                   );
                 });
