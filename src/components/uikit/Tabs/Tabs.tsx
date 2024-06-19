@@ -85,9 +85,6 @@ export const TabList = styled("div", {
 });
 
 const TabButton = styled("button", {
-  base: {
-    cursor: "pointer",
-  },
   variants: {
     variant: {
       "line-below": {
