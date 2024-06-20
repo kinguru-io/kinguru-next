@@ -4,10 +4,10 @@ import { useLocale } from "next-intl";
 import { useTransition } from "react";
 import { RiLoader2Fill } from "react-icons/ri";
 import {
-  Icon,
   Dropdown,
   DropdownInitiator,
   DropdownMenu,
+  ArrowIcon,
 } from "@/components/uikit";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -39,10 +39,7 @@ export function LanguageDropdown() {
           >
             {isPending ? <RiLoader2Fill /> : locale}
           </span>
-          <Icon
-            name="action/arrow"
-            className={css({ rotate: "-90deg", fontSize: "0.5em" })}
-          />
+          <ArrowIcon direction="down" className={css({ fontSize: "0.5em" })} />
         </HStack>
       </DropdownInitiator>
       <DropdownMenu>

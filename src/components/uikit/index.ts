@@ -12,7 +12,6 @@ export * from "./PremiseCard";
 export * from "./Slider";
 export * from "./Checkbox";
 export * from "./Accordion";
-export * from "./ArrowIcon";
 export * from "./Modal";
 export * from "./DefaultImage";
 export * from "./TimeSlot";
