@@ -166,7 +166,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
         </OrganizationRegisterFormGroupLayout>
       </OrganizationRegisterFormBoxLayout>
 
-      <Button type="submit" size="md" isLoading={isPending}>
+      <Button type="submit" isLoading={isPending}>
         {t("submit")}
       </Button>
     </FormInnerLayout>

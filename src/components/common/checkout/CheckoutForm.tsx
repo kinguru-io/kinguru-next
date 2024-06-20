@@ -73,8 +73,6 @@ export function CheckoutForm({
       <Button
         id="submit"
         type="submit"
-        size="md"
-        variant="ghost"
         isLoading={isProcessing || !stripe || !elements}
       >
         {t("pay_now")}

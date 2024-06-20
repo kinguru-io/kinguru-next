@@ -35,10 +35,7 @@ export default async function CreatedNoticePage({
       <h1 className="heading">{t("heading")}</h1>
       <section>
         <Flex justifyContent="center" marginBottom="30px">
-          <Link
-            className={button({ size: "md", variant: "solid" })}
-            href={`/venues/${venue?.slug}`}
-          >
+          <Link className={button()} href={`/venues/${venue?.slug}`}>
             {t("check_venue", { venueName: venue?.name })}
           </Link>
         </Flex>

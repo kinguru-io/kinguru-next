@@ -34,7 +34,6 @@ export const InputPassword = forwardRef(function InputPassword(
           // right + padding = 13px (ui-kit design, inline-end padding)
           right: "4px",
           padding: "9px",
-          cursor: "pointer",
           fontSize: "12px",
         })}
         onClick={onIconClick}

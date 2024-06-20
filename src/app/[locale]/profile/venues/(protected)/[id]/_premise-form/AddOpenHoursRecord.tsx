@@ -114,7 +114,6 @@ export function AddOpenHoursRecord({
       </styled.label>
       <Button
         type="button"
-        variant="outline"
         onClick={handleSubmit(addButtonClicked)}
         disabled={!isValid || !timeZone}
       >

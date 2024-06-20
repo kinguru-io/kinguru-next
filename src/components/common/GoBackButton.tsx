@@ -19,8 +19,6 @@ export function GoBackButton({
       <Button
         type="button"
         colorPalette="secondary"
-        size={label ? "md" : "iconOnly"}
-        variant="ghost"
         icon={<ArrowIcon direction="left" />}
         onClick={router.back}
       >

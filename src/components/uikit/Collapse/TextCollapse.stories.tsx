@@ -41,7 +41,7 @@ export const WithTrigger: Story = {
     return (
       <Flex maxWidth="5xl" gap="2" direction="column" alignItems="center">
         <TextCollapse isShown={isShown} {...restProps} />
-        <Button variant="outline" onClick={() => setIsShown((prev) => !prev)}>
+        <Button onClick={() => setIsShown((prev) => !prev)}>
           Show {isShown ? "less" : "more"}
         </Button>
       </Flex>

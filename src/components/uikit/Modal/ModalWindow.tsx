@@ -61,13 +61,7 @@ export function _ModalWindow({ children }: ModalProps) {
           fontSize="10px"
           translate="none"
         >
-          <Button
-            size="iconOnly"
-            variant="solid"
-            colorPalette="danger"
-            onClick={closeButtonClicked}
-            icon={<RxCross2 />}
-          />
+          <Button onClick={closeButtonClicked} icon={<RxCross2 />} />
         </Float>
       )}
     </dialog>,

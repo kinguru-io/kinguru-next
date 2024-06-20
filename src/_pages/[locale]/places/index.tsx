@@ -27,11 +27,7 @@ export default function Places({
   return (
     <Center flexDirection="column">
       {venues.map(({ id, name }) => (
-        <Link
-          className={button({ variant: "ghost" })}
-          key={id}
-          href={`/venue/${id}`}
-        >
+        <Link className={button()} key={id} href={`/venue/${id}`}>
           {name}
         </Link>
       ))}

@@ -1,8 +1,6 @@
 import { formatInTimeZone } from "date-fns-tz";
 import { priceFormatter } from "@/lib/utils";
-import { css, cx } from "~/styled-system/css";
-import { divider } from "~/styled-system/patterns";
-import { button } from "~/styled-system/recipes";
+import { css } from "~/styled-system/css";
 
 export const timeSlotCondition = {
   regular: "secondary",
@@ -20,9 +18,32 @@ export type TimeSlotInfo = {
 type TimeSlotProps = TimeSlotInfo & {
   timeZone?: string;
   onClick: () => void;
+  disabled?: boolean;
   condition?: Condition;
   selected?: boolean;
 };
+
+const timeSlotClassName = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "1",
+  fontSize: "px15",
+  fontWeight: "bold",
+  lineHeight: "1",
+  padding: "2",
+  borderRadius: "sm",
+  borderWidth: "1px",
+  borderColor: "neutral.3",
+  bgColor: "neutral.5",
+  _disabled: {
+    bgColor: "neutral.3",
+    opacity: "0.4",
+  },
+  _selected: {
+    borderColor: "primary.hover",
+    bgColor: "primary.hover",
+  },
+});
 
 export function TimeSlot({
   price,
@@ -31,60 +52,31 @@ export function TimeSlot({
   onClick,
   condition = "regular",
   selected = false,
+  disabled,
 }: TimeSlotProps) {
   const colorPalette = timeSlotCondition[condition];
-  const className = cx(
-    button({ variant: "solid" }),
-    // variant reset styles
-    css({
-      colorPalette,
-      flexDirection: "column",
-      gap: "3px",
-      borderRadius: "6px",
-      padding: "4px",
-      color: "neutral.0",
-      bgColor: "neutral.5",
-      fontWeight: "normal",
-      _hoverEnabled: {
-        bgColor: "primary.disabled",
-      },
-      _activeEnabled: {
-        bgColor: "primary.active",
-      },
-      _selected: {
-        bgColor: "primary.active",
-      },
-    }),
-  );
 
   return (
     <button
       type="button"
-      className={className}
+      className={timeSlotClassName}
       onClick={onClick}
       aria-selected={selected}
+      disabled={disabled}
     >
-      <time
-        className={css({ textStyle: "body.1" })}
-        dateTime={time.toISOString()}
-      >
-        {formatInTimeZone(time, timeZone, "H:mm")}
+      <time dateTime={time.toISOString()}>
+        {formatInTimeZone(time, timeZone, "HH:mm")}
       </time>
       <span
-        className={divider({ orientation: "horizontal", minWidth: "40px" })}
-      />
-      <span
         className={css({
-          textStyle: "body.3",
-          borderRadius: "3px",
-          paddingInline: "2px",
+          fontWeight: "normal",
+          fontSize: "sm",
+          colorPalette,
           "&[data-colored=true]": {
-            colorPalette,
-            bgColor: "colorPalette",
-            color: "neutral.5",
+            color: "colorPalette",
           },
         })}
-        data-colored={colorPalette !== "secondary"}
+        data-colored={!disabled && colorPalette !== "secondary"}
       >
         {priceFormatter.format(price)}
       </span>

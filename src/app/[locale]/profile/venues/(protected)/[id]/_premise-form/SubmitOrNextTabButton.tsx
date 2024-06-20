@@ -44,7 +44,6 @@ export function SubmitOrNextTabButton({
 
   return (
     <Button
-      size="md"
       type="submit"
       onClick={buttonClicked}
       isLoading={isSubmitting}

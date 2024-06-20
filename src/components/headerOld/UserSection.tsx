@@ -20,9 +20,7 @@ export function UserSection() {
         {session ? (
           <Avatar name={session.user?.name} image={session.user?.image} />
         ) : (
-          <Button variant="outline" size="md">
-            {t("sign_in_and_sign_up")}
-          </Button>
+          <Button>{t("sign_in_and_sign_up")}</Button>
         )}
       </DropdownInitiator>
       <DropdownMenu>

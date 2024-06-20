@@ -174,7 +174,7 @@ export function AddVenueFormInner({
         setActiveForm={setActiveForm}
         validateFormType={validateFormType}
       />
-      <Button type="submit" size="md" isLoading={isSubmitting}>
+      <Button type="submit" isLoading={isSubmitting}>
         {t(isEditing ? "edit_btn_label" : "submit_btn_label")}
       </Button>
     </Box>

@@ -55,7 +55,6 @@ export function EventLikeButton({
   return (
     <Box fontSize="16px">
       <Button
-        size="iconOnly"
         onClick={toggleLike}
         disabled={isPending}
         icon={

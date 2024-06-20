@@ -113,7 +113,7 @@ function EditUserProfileFormInner() {
         <ImagePickerForm groupKey="user-profile" name="image" />
       </Flex>
       <SocialLinks role="user" />
-      <Button type="submit" size="md" isLoading={isSubmitting} centered>
+      <Button type="submit" isLoading={isSubmitting} centered>
         {t("submit")}
       </Button>
     </Flex>
