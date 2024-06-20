@@ -168,6 +168,7 @@ export default defineConfig({
       hoverEnabled: "&:not([disabled]):hover",
       activeEnabled: "&:not([disabled]):active",
       peerCheckedAndDisabled: ".peer:is(:checked:disabled) ~ &",
+      placeholderHidden: "&:is(:not(:placeholder-shown))",
     },
   },
 
