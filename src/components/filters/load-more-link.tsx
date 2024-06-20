@@ -19,7 +19,7 @@ export function LoadMoreLink({
   label: string;
 }) {
   const className = cx(
-    button({ size: "md", centered: true }),
+    button({ colorPalette: "secondary", centered: true }),
     css({ marginBlockStart: "30px", alignItems: "baseline" }),
   );
 

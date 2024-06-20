@@ -49,7 +49,6 @@ export function LanguageDropdown() {
               key={code}
               className={css({
                 textTransform: "uppercase",
-                cursor: "pointer",
                 textAlign: "left",
               })}
               type="button"

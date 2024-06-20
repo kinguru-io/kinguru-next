@@ -68,7 +68,7 @@ function SignupFormInner({ isPending }: { isPending: boolean }) {
           // variant="outline"
         />
       </fieldset>
-      <Button type="submit" size="md" isLoading={isPending} centered>
+      <Button type="submit" isLoading={isPending} centered>
         {t("submit")}
       </Button>
       <p>{t.rich("helper", translationValues)}</p>

@@ -6,7 +6,6 @@ import {
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
 import { Link } from "@/navigation";
-import { css, cx } from "~/styled-system/css";
 import { VStack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
@@ -72,10 +71,7 @@ export async function PremiseFilter() {
         })}
       </Filter>
       <Link
-        className={cx(
-          css({ colorPalette: "primary" }),
-          button({ size: "md", variant: "outline" }),
-        )}
+        className={button({ colorPalette: "dark" })}
         href="/premises"
         replace
       >

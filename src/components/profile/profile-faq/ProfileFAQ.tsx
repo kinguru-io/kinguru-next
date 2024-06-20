@@ -35,11 +35,7 @@ export async function ProfileFAQ() {
     <>
       <Flex colorPalette="primary" flexWrap="wrap" gap="10px">
         {faqLinks.map(({ href, labelIntlCode }) => (
-          <Link
-            key={labelIntlCode}
-            className={button({ variant: "outline" })}
-            href={href}
-          >
+          <Link key={labelIntlCode} className={button()} href={href}>
             {t(labelIntlCode)}
           </Link>
         ))}

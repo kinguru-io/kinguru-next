@@ -153,7 +153,6 @@ export function EventCardView({
                   const link = `${globalThis.location.origin}/${locale}/events/${slug}`;
                   await navigator.clipboard.writeText(link);
                 }}
-                variant="ghost"
               >
                 {t("event_card.copy_link")}
               </Button>

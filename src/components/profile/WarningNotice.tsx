@@ -26,7 +26,7 @@ export function WarningNotice({
         </Circle>
         <InlineBox>{noticeText}</InlineBox>
       </VStack>
-      <Link className={button({ size: "md", variant: "solid" })} href={href}>
+      <Link className={button()} href={href}>
         {linkLabel}
       </Link>
     </VStack>

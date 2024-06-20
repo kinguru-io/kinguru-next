@@ -45,7 +45,6 @@ export default async function RootPage() {
             }),
             button({
               size: "lg",
-              variant: "solid",
               centered: true,
             }),
           )}

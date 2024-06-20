@@ -33,7 +33,6 @@ export function Description({
       {description.length > 500 && (
         <Box color="neutral.1">
           <Button
-            variant="outline"
             icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
             iconPosition="right"
             onClick={handleExpandClick}

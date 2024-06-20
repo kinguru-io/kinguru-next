@@ -59,7 +59,7 @@ function ResetFormInner({
         {...register("email")}
       />
       <p>{t("helper")}</p>
-      <Button type="submit" size="md" isLoading={pending} disabled={!isValid}>
+      <Button type="submit" isLoading={pending} disabled={!isValid}>
         {t("submit")}
       </Button>
     </VStack>

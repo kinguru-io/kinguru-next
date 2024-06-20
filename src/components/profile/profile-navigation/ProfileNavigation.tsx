@@ -70,7 +70,7 @@ export function ProfileNavigation() {
             key={navItem.href}
             href={navItem.href}
             className={cx(
-              button({ variant: isActive ? "solid" : "ghost" }),
+              button({ colorPalette: isActive ? "primary" : "secondary" }),
               css({
                 colorPalette: "primary",
                 textStyle: "body.2",

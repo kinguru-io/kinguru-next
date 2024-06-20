@@ -67,13 +67,10 @@ function SigninFormInner() {
           translationsKey="auth.signin_form"
         />
       </fieldset>
-      <Button type="submit" size="md" isLoading={isSubmitting}>
+      <Button type="submit" isLoading={isSubmitting}>
         {t("submit")}
       </Button>
-      <Link
-        className={button({ size: "sm", variant: "ghost" })}
-        href="/auth/reset"
-      >
+      <Link className={button()} href="/auth/reset">
         {t("forgot_password")}
       </Link>
     </VStack>

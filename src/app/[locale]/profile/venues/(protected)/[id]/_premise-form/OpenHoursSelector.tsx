@@ -140,7 +140,6 @@ export function OpenHoursSelector() {
               {t("open_hours_spread_mode")}
               <Button
                 type="button"
-                variant="solid"
                 onClick={spreadButtonClicked}
                 disabled={fields.every(
                   (field) => field.day !== DAYS_OF_WEEK_ORDERED[0],

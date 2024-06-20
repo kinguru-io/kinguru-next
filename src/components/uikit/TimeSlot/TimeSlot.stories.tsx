@@ -1,7 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { faker } from "@faker-js/faker";
-import { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import type { Meta, StoryObj } from "@storybook/react";
 import { lightFormat } from "date-fns";
 import { useState } from "react";
 import { getTimeSlotCondition, timeSlotCondition } from "./TimeSlot";
@@ -14,16 +13,17 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  args: {
-    onClick: fn(),
-    condition: "regular",
-    selected: false,
-  },
   argTypes: {
     condition: {
       options: Object.keys(timeSlotCondition),
       control: "radio",
     },
+  },
+  args: {
+    condition: "regular",
+    selected: false,
+    disabled: false,
+    onClick: () => {},
   },
 } satisfies Meta<typeof TimeSlot>;
 
@@ -82,7 +82,7 @@ export const Controlled = {
               <p>
                 {lightFormat(
                   mockSlots.find(({ id }) => id === selectedId)!.time,
-                  "H:mm",
+                  "HH:mm",
                 )}
               </p>
             ))}
