@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Icon } from "@/components/common";
+import { Icon } from "@/components/uikit";
 import { Link } from "@/navigation";
 import type { SpritesMap } from "@/sprite.gen";
 import footerLogo from "~/public/img/logotypes/footer-logotype.svg";

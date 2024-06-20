@@ -1,5 +1,5 @@
 export interface SpritesMap {
-  action: "arrow";
+  action: "arrow" | "view-off" | "view";
   common: "phone";
   social: "facebook" | "instagram" | "linkedin";
 }
@@ -17,12 +17,22 @@ export const SPRITES_META: {
   };
 } = {
   action: {
-    filePath: "action.a3b8bf98.svg",
+    filePath: "action.8c58981f.svg",
     items: {
       arrow: {
         viewBox: "0 0 20 20",
         width: 20,
         height: 20,
+      },
+      "view-off": {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
+      },
+      view: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
       },
     },
   },

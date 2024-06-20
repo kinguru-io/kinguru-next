@@ -3,8 +3,12 @@
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
 import { RiLoader2Fill } from "react-icons/ri";
-import { Dropdown, DropdownInitiator, DropdownMenu } from "../uikit/Dropdown";
-import { Icon } from "@/components/common";
+import {
+  Icon,
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+} from "@/components/uikit";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { HStack } from "~/styled-system/jsx";

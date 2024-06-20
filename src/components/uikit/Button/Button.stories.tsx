@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "@/components/common";
-import { Button } from "@/components/uikit";
+import { Button, Icon } from "@/components/uikit";
 import { button as buttonRecipe } from "~/styled-system/recipes";
 
 const variantMap = buttonRecipe.variantMap;

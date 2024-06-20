@@ -1,8 +1,7 @@
 import { useTranslations } from "next-intl";
 import { memo } from "react";
 import { useOriginDate } from "./use-origin-date";
-import { Icon } from "@/components/common";
-import { Button, type ButtonProps } from "@/components/uikit";
+import { Button, Icon, type ButtonProps } from "@/components/uikit";
 import { css } from "~/styled-system/css";
 import { GridItem } from "~/styled-system/jsx";
 

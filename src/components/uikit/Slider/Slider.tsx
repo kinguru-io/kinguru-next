@@ -1,7 +1,7 @@
 "use client";
 
 import { useSnapCarousel } from "react-snap-carousel";
-import { Icon } from "@/components/common";
+import { Icon } from "@/components/uikit";
 import { css, cx } from "~/styled-system/css";
 import { SliderVariantProps, slider } from "~/styled-system/recipes";
 
