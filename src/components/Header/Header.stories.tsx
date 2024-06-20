@@ -1,17 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
-import * as nextintl from "next-intl/server";
+import * as nextIntl from "next-intl/server";
 import { createMock } from "storybook-addon-module-mock";
 import { Header } from "./Header";
-import * as auth from "@/auth.ts";
+import * as auth from "@/auth";
 import en from "~/public/locales/en/common.json";
 
 const meta = {
   title: "Header",
   component: () => (
-    <NextIntlClientProvider locale="en" messages={en}>
+    <NextIntlClientProvider locale="en" messages={en.navbar}>
       <Header />
     </NextIntlClientProvider>
   ),
@@ -39,12 +39,12 @@ export const notAuthHeader: Story = {
         const mockSession = createMock(auth, "getSession");
         mockSession.mockReturnValue(Promise.resolve(null));
 
-        const mockTranslations = createMock(nextintl, "getTranslations");
+        const mockTranslations = createMock(nextIntl, "getTranslations");
         mockTranslations.mockReturnValue(
           Promise.resolve(
             ((key: keyof typeof en.navbar) =>
               en.navbar[key]) as unknown as ReturnType<
-              typeof nextintl.getTranslations
+              typeof nextIntl.getTranslations
             >,
           ),
         );
@@ -74,12 +74,12 @@ export const authHeader: Story = {
           }),
         );
 
-        const mockTranslations = createMock(nextintl, "getTranslations");
+        const mockTranslations = createMock(nextIntl, "getTranslations");
         mockTranslations.mockReturnValue(
           Promise.resolve(
             ((key: keyof typeof en.navbar) =>
               en.navbar[key]) as unknown as ReturnType<
-              typeof nextintl.getTranslations
+              typeof nextIntl.getTranslations
             >,
           ),
         );
