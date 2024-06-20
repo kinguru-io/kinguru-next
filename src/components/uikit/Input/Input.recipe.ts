@@ -22,7 +22,7 @@ export const inputSlot = defineSlotRecipe({
       _invalid: { borderColor: "danger!" },
       _focusWithin: {
         bgColor: "#FBFBFB",
-        borderColor: "#FBFBFB",
+        borderColor: "focus!",
       },
       _hover: {
         bgColor: "#FBFBFB",
@@ -50,8 +50,5 @@ export const inputSlot = defineSlotRecipe({
     variant: { default: {}, outline: {} },
     rounded: { true: { label: { borderRadius: "full" } } },
     textCentered: { true: { input: { textAlign: "center" } } },
-  },
-  defaultVariants: {
-    variant: "default",
   },
 });

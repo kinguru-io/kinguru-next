@@ -24,7 +24,7 @@ const textAreaClassName = css({
   },
   _focusVisible: {
     bgColor: "#FBFBFB",
-    borderColor: "#FBFBFB",
+    borderColor: "focus!",
   },
   _hoverEnabled: {
     bgColor: "#FBFBFB",
