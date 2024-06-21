@@ -1,6 +1,6 @@
 export interface SpritesMap {
   action: "arrow" | "view-off" | "view";
-  common: "phone";
+  common: "calendar" | "phone" | "search" | "time";
   social: "facebook" | "instagram" | "linkedin";
 }
 export const SPRITES_META: {
@@ -37,12 +37,27 @@ export const SPRITES_META: {
     },
   },
   common: {
-    filePath: "common.6c74e148.svg",
+    filePath: "common.7d58ec7d.svg",
     items: {
+      calendar: {
+        viewBox: "0 0 20 20",
+        width: 20,
+        height: 20,
+      },
       phone: {
         viewBox: "0 0 24 25",
         width: 24,
         height: 25,
+      },
+      search: {
+        viewBox: "0 0 21 20",
+        width: 21,
+        height: 20,
+      },
+      time: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
       },
     },
   },

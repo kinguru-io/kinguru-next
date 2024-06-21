@@ -3,8 +3,8 @@
 import { format, isPast, isToday } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState, useTransition, type ComponentProps } from "react";
-import { FiSearch } from "react-icons/fi";
+import { useState, useTransition } from "react";
+import type { Matcher } from "react-day-picker";
 import {
   parseInitialDatetimeValues,
   prepareDatetimeParam,
@@ -15,18 +15,15 @@ import {
   Dropdown,
   DropdownInitiator,
   DropdownMenu,
+  Icon,
+  Input,
   Select,
 } from "@/components/uikit";
 import { useRouter } from "@/navigation";
-import { Flex, HStack } from "~/styled-system/jsx";
-import { input } from "~/styled-system/recipes";
-import type { SystemStyleObject } from "~/styled-system/types";
+import { css } from "~/styled-system/css";
+import { Flex } from "~/styled-system/jsx";
 
-const selectorStyles: SystemStyleObject = {
-  gap: "5px",
-  flexDirection: "column",
-  sm: { gap: "15px", flexDirection: "row", alignItems: "center" },
-};
+const timeSearchDayMatcher: Matcher = (day) => isPast(day) && !isToday(day);
 
 export function TimeRangeLink({
   pathname,
@@ -42,9 +39,8 @@ export function TimeRangeLink({
   const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
 
-  const nowDate = new Date();
   const initialParams = parseInitialDatetimeValues({ searchParams, name });
-  const [date, setDate] = useState(nowDate);
+  const [date, setDate] = useState<Date | null>(null);
   const [from, setFrom] = useState(initialParams[0]);
   const [to, setTo] = useState(initialParams[1]);
 
@@ -52,10 +48,10 @@ export function TimeRangeLink({
     const params = new URLSearchParams(searchParams || undefined);
     flushBefore.forEach((param) => params.delete(param));
 
-    // absence of any of these params makes no sense for searching for items including such predicates
+    // absence any of these params makes no sense looking for items including such predicates
     if (from !== "" && to !== "") {
       const datetimeParam = prepareDatetimeParam(
-        date,
+        date || new Date(),
         Number(from),
         Number(to),
       );
@@ -65,95 +61,90 @@ export function TimeRangeLink({
     startTransition(() => router.push(`${pathname}?${params}`));
   };
 
-  const dateFormatted = format(date, "dd.MM.yyyy");
-  const buttonCommonProps: ComponentProps<typeof Button> = {
-    role: "link",
-    type: "button",
-    onClick: searchBtnClicked,
-    icon: <FiSearch size="1.125em" />,
-    isLoading: pending,
-  };
-
   return (
-    <HStack
-      gap="18px"
+    <Flex
+      flexDirection="column"
+      gap="2"
       justifyContent="space-between"
-      layerStyle="outlinePrimaryWrapper"
-      borderRadius="full"
-      paddingBlock="18px"
-      paddingInline="30px"
-      sm={{
-        gap: "25px",
-        "& > .button": { marginInlineStart: "auto" },
-      }}
-      css={{
-        "& > .button": {
-          flexShrink: "0",
-          _firstOfType: { display: { base: "inline-flex", sm: "none" } },
-          _lastOfType: { display: { base: "none", sm: "inline-flex" } },
-        },
+      md={{
+        flexDirection: "row",
+        padding: "4",
+        bgColor: "neutral.5",
+        borderRadius: "full",
+        "& > :first-child": { flexBasis: "full" }, // stretch dropdown fully
       }}
     >
       <Dropdown size="auto" anchor="start">
         <DropdownInitiator>
-          <Flex css={selectorStyles}>
-            {t("date_label")}
-            <time className={input()} dateTime={dateFormatted}>
-              {dateFormatted}
-            </time>
-          </Flex>
+          <Input
+            type="text"
+            value={date ? format(date, "dd.MM.yyyy") : ""}
+            placeholder={t("date_label")}
+            className={css({ pointerEvents: "none" })}
+            prefix={
+              <Icon
+                name="common/calendar"
+                className={css({ fontSize: "2xl" })}
+              />
+            }
+            readOnly
+            rounded
+          />
         </DropdownInitiator>
         <DropdownMenu likeList={false} shouldCloseOnClick={false}>
           <SingleDayPicker
-            date={date}
+            date={date || new Date()}
             callback={setDate}
-            disabled={(day) => isPast(day) && !isToday(day)}
+            disabled={timeSearchDayMatcher}
           />
         </DropdownMenu>
       </Dropdown>
       <TimeSelect
-        label={t("from_label")}
-        placeholder="09:00"
+        placeholder={t("from_label")}
         value={from}
         callback={setFrom}
       />
-      <TimeSelect
-        label={t("to_label")}
-        placeholder="20:00"
-        value={to}
-        callback={setTo}
-      />
-      <Button {...buttonCommonProps}>{t("search_btn_label")}</Button>
-      <Button {...buttonCommonProps}>{t("search_btn_label")}</Button>
-    </HStack>
+      <TimeSelect placeholder={t("to_label")} value={to} callback={setTo} />
+      <Button
+        role="link"
+        type="button"
+        onClick={searchBtnClicked}
+        icon={<Icon name="common/search" className={css({ fontSize: "xl" })} />}
+        isLoading={pending}
+        className={css({
+          justifyContent: "center",
+          flexShrink: "0",
+          marginBlockStart: { base: "2", md: "0" },
+        })}
+      >
+        {t("search_btn_label")}
+      </Button>
+    </Flex>
   );
 }
 
 function TimeSelect({
-  label,
   placeholder,
   value,
   callback,
 }: {
-  label: string;
   placeholder: string;
   value: string;
   callback: (value: string) => unknown;
 }) {
   return (
-    <Flex css={selectorStyles}>
-      {label}
-      <Select
-        placeholder={placeholder}
-        value={value}
-        onChange={({ target }) => callback(target.value)}
-      >
-        {Array.from({ length: 24 }, (_, i) => (
-          <option key={i} value={i}>
-            {String(i).padStart(2, "0")}:00
-          </option>
-        ))}
-      </Select>
-    </Flex>
+    <Select
+      placeholder={placeholder}
+      value={value}
+      onChange={({ target }) => callback(target.value)}
+      icon={<Icon name="common/time" />}
+      rounded
+    >
+      {Array.from({ length: 24 }, (_, i) => (
+        <option key={i} value={i}>
+          {String(i).padStart(2, "0")}:00
+        </option>
+      ))}
+    </Select>
   );
 }

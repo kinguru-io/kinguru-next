@@ -11,6 +11,7 @@ export const inputSlot = defineSlotRecipe({
       width: "full",
       fontSize: "px15",
       fontWeight: "500",
+      color: "neutral.2",
       lineHeight: "0.75",
       borderWidth: "1px",
       borderStyle: "solid",
@@ -31,12 +32,14 @@ export const inputSlot = defineSlotRecipe({
       "&:has(input:not(:placeholder-shown))": {
         bgColor: "neutral.5",
         borderColor: "neutral.1",
+        color: "neutral.1",
       },
       "&[data-disabled=true]": { opacity: "0.4", cursor: "not-allowed" },
       "& > svg": { fontSize: "2xl" },
       "& > svg:last-of-type": { marginInlineStart: "auto" },
     },
     input: {
+      display: "inline-block",
       minWidth: "0",
       width: "full",
       outline: "1px solid transparent",

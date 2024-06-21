@@ -908,10 +908,10 @@
       "desc": "Price decreasing"
     },
     "time_range": {
-      "search_btn_label": "Search",
+      "search_btn_label": "Search halls",
       "date_label": "Date",
-      "from_label": "From",
-      "to_label": "To"
+      "from_label": "from 18:00",
+      "to_label": "to 21:00"
     }
   }
 }
