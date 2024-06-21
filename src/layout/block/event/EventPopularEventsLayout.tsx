@@ -6,8 +6,8 @@ export function EventPopularEventsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box position="relative" paddingBlock="70px 110px" bg="neutral.4">
-      <Container color="neutral.1">
+    <Box position="relative" paddingBlock="70px 110px" bg="secondary.lighter">
+      <Container color="dark">
         <section>{children}</section>
       </Container>
     </Box>

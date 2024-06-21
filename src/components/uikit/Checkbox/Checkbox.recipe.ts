@@ -24,10 +24,10 @@ export const checkboxSlot = defineSlotRecipe({
       position: "relative",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: "neutral.1",
+      borderColor: "dark",
       borderRadius: "3px",
       transition: "colors",
-      backgroundColor: "neutral.5",
+      backgroundColor: "light",
       _peerFocusVisible: {
         borderColor: "focus",
       },
@@ -41,10 +41,10 @@ export const checkboxSlot = defineSlotRecipe({
         },
       },
       _peerCheckedAndDisabled: {
-        backgroundColor: "primary.disabled",
+        backgroundColor: "primary.lightest",
       },
       _peerDisabled: {
-        borderColor: "neutral.3",
+        borderColor: "tertiary",
       },
       // checkmark icon [✓]
       _after: {
@@ -54,19 +54,19 @@ export const checkboxSlot = defineSlotRecipe({
         width: "0.3em",
         height: "0.6em",
         borderWidth: "1px",
-        borderColor: "neutral.1",
+        borderColor: "dark",
         borderInlineStart: "none",
         borderBlockStart: "none",
         rotate: "45deg",
         transformOrigin: "0.25em 0.25em",
         _peerDisabled: {
-          borderColor: "neutral.3",
+          borderColor: "tertiary",
         },
       },
     },
     label: {
       _peerDisabled: {
-        color: "neutral.3",
+        color: "tertiary",
       },
     },
   },

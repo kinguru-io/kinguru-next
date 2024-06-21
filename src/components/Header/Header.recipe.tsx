@@ -9,7 +9,7 @@ export const headerSlot = defineSlotRecipe({
       zIndex: "1",
       width: "full",
       paddingBlock: { base: "2", md: "4" },
-      backgroundColor: "neutral.5",
+      backgroundColor: "light",
       boxShadow: "header",
     },
     headerWrapper: {

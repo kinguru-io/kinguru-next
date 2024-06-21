@@ -95,7 +95,7 @@ const TabButton = styled("button", {
         marginBlockEnd: "2px",
         position: "relative",
         textStyle: "heading.4",
-        color: "neutral.2",
+        color: "secondary",
         _after: {
           content: '""',
           display: "inline-block",
@@ -105,9 +105,9 @@ const TabButton = styled("button", {
           width: "calc(100% - 8px)",
           height: "4px",
           transition: "colors",
-          bgColor: "primary.disabled",
+          bgColor: "primary.lightest",
         },
-        _selected: { color: "neutral.1", _after: { bgColor: "primary" } },
+        _selected: { color: "dark", _after: { bgColor: "primary" } },
         _focusVisible: { outline: "none", _after: { bgColor: "focus" } },
         _disabled: {
           cursor: "not-allowed",

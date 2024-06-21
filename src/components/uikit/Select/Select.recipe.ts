@@ -9,10 +9,10 @@ export const selectSlot = defineSlotRecipe({
       position: "relative",
       display: "inline-block",
       width: "full",
-      color: "neutral.1",
+      color: "dark",
       fontWeight: "500",
       '&:has(option[value=""]:checked)': {
-        color: "neutral.2",
+        color: "secondary",
         fontWeight: "normal",
       },
     },
@@ -24,8 +24,8 @@ export const selectSlot = defineSlotRecipe({
       fontSize: "px15",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: "neutral.4",
-      bgColor: "neutral.4",
+      borderColor: "secondary.lighter",
+      bgColor: "secondary.lighter",
       borderRadius: "sm",
       outline: "1px solid transparent",
       transition: "colors",
@@ -33,20 +33,20 @@ export const selectSlot = defineSlotRecipe({
       paddingInlineEnd: "12", // 16px padding + 16 icon + 16 safe space = 48 (48 / 4 = spacings.12)
       _invalid: { borderColor: "danger!" },
       _focusWithin: {
-        bgColor: "#FBFBFB",
+        bgColor: "secondary.lightest",
         borderColor: "focus!",
       },
       _hover: {
-        bgColor: "#FBFBFB",
-        borderColor: "#FBFBFB",
+        bgColor: "secondary.lightest",
+        borderColor: "secondary.lightest",
       },
       _disabled: {
         opacity: "0.4",
         cursor: "not-allowed",
       },
       '&:has(option[value=""]:not(:checked))': {
-        borderColor: "neutral.1",
-        bgColor: "neutral.5",
+        borderColor: "dark",
+        bgColor: "light",
       },
     },
     icon: {
@@ -65,7 +65,7 @@ export const selectSlot = defineSlotRecipe({
       insetInlineEnd: "4",
       transform: "translateY(-50%) rotate(-90deg)",
       pointerEvents: "none",
-      color: "neutral.2",
+      color: "secondary",
     },
   },
   variants: {

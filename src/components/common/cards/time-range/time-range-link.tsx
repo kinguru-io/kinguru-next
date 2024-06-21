@@ -69,7 +69,7 @@ export function TimeRangeLink({
       md={{
         flexDirection: "row",
         padding: "4",
-        bgColor: "neutral.5",
+        bgColor: "light",
         borderRadius: "full",
         "& > :first-child": { flexBasis: "full" }, // stretch dropdown fully
       }}

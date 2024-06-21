@@ -10,7 +10,7 @@ export const customDividerPattern: PatternConfig = {
   },
   transform(props) {
     const {
-      color = "token(colors.neutral.4)",
+      color = "token(colors.secondary.lighter)",
       thickness = "1px",
       ...rest
     } = props;
@@ -19,7 +19,7 @@ export const customDividerPattern: PatternConfig = {
         paddingInline: "10px",
         paddingBlock: "5px",
         _hover: {
-          backgroundColor: "primary.disabled",
+          backgroundColor: "primary.lightest",
         },
       },
       "& > *:first-child": { paddingBlockStart: "10px" },

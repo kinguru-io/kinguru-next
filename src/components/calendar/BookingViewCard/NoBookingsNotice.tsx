@@ -7,7 +7,7 @@ export function NoBookingsNotice({ label }: { label: string }) {
       maxWidth="156px"
       textStyle="body.2"
       textAlign="center"
-      color="neutral.2"
+      color="secondary"
     >
       <span>{label}</span>
     </Center>

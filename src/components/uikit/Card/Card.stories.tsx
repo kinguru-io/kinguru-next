@@ -103,7 +103,7 @@ function PseudoButtonGroup() {
         height: "fit-content!",
         inset: "auto 15px 15px auto!",
         fontSize: "14px",
-        color: "neutral.5",
+        color: "light",
       })}
     >
       <Icon name="action/view" />

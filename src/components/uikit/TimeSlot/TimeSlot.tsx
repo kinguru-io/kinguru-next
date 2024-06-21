@@ -33,15 +33,15 @@ const timeSlotClassName = css({
   padding: "2",
   borderRadius: "sm",
   borderWidth: "1px",
-  borderColor: "neutral.3",
-  bgColor: "neutral.5",
+  borderColor: "tertiary",
+  bgColor: "light",
   _disabled: {
-    bgColor: "neutral.3",
+    bgColor: "secondary.lighter",
     opacity: "0.4",
   },
   _selected: {
-    borderColor: "primary.hover",
-    bgColor: "primary.hover",
+    borderColor: "primary.lighter",
+    bgColor: "primary.lighter",
   },
 });
 

@@ -18,10 +18,10 @@ export function WarningNotice({
         layerStyle="outlinePrimaryWrapper"
         padding="30px 25px"
         textAlign="center"
-        color="neutral.0"
+        color="dark"
         textStyle="heading.6"
       >
-        <Circle size="2em" color="neutral.5" bgColor="primary" aria-hidden>
+        <Circle size="2em" color="light" bgColor="primary" aria-hidden>
           !
         </Circle>
         <InlineBox>{noticeText}</InlineBox>

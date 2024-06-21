@@ -6,7 +6,7 @@ export function DefaultImage() {
     <span
       className={css({
         position: "absolute",
-        bgColor: "neutral.4",
+        bgColor: "secondary.lighter",
         bgPosition: "center",
         bgRepeat: "no-repeat",
         bgSize: "50%",

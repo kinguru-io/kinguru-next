@@ -32,7 +32,7 @@ export default async function ProfilePage() {
     <Grid gap="75px" paddingInline="10%">
       <VStack gap="0">
         <Avatar size="md" name={user.name} image={user.image} />
-        <InlineBox textAlign="center" marginBlock="25px" color="neutral.0">
+        <InlineBox textAlign="center" marginBlock="25px" color="dark">
           <h1>{t("user_greeting")}</h1>
           {t("page_tip")}
         </InlineBox>
@@ -46,8 +46,8 @@ export default async function ProfilePage() {
           layerStyle="outlineSecondaryWrapper"
           gridColumn="1 / 3"
           gridRow="1 / -1"
-          backgroundColor="neutral.4"
-          borderColor="neutral.2"
+          backgroundColor="secondary.lighter"
+          borderColor="secondary"
           position="relative"
         >
           <WorkInProgress label={t("calendar_label")} />
@@ -68,8 +68,8 @@ export default async function ProfilePage() {
           // * in progress (2nd part)
           layerStyle="outlineSecondaryWrapper"
           gridColumn="3 / -1"
-          backgroundColor="neutral.4"
-          borderColor="neutral.2"
+          backgroundColor="secondary.lighter"
+          borderColor="secondary"
           position="relative"
         >
           <WorkInProgress label={t("profile_completeness_label")} />

@@ -26,15 +26,15 @@ export const sliderSlot = defineSlotRecipe({
     sliderButton: {
       display: "grid",
       placeItems: "center",
-      color: "#8B8B8B",
+      color: "secondary",
       transition: "colors",
       height: "clamp(3rem, 2.4rem + 2vw, 4rem)", //since container queries feature is almost brand new feature for potential user agents
       width: "clamp(3rem, 2.4rem + 2vw, 4rem)",
       borderRadius: "50%",
       bgColor: {
         base: "rgba(255, 255, 255, 0.8)",
-        _hover: "neutral.5",
-        _focusVisible: "neutral.5",
+        _hover: "light",
+        _focusVisible: "light",
       },
       _focusVisible: {
         outline: "none",

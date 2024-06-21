@@ -36,7 +36,7 @@ export function TimeRangeHero({
           <h1
             className={css({
               textStyle: "heading.hero",
-              color: "neutral.5",
+              color: "light",
               marginBlockEnd: { base: "6", md: "8" },
             })}
           >

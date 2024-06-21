@@ -36,7 +36,7 @@ export const Basic = {
         <TabContent
           tabList={tabsContent}
           padding="10px"
-          border="1px solid token(colors.neutral.3)"
+          border="1px solid token(colors.tertiary)"
           borderRadius="10px"
         />
       </TabsWrapper>
@@ -78,7 +78,7 @@ export const BasicWithNextButton = {
         <TabContent
           tabList={tabsContent}
           padding="10px"
-          border="1px solid token(colors.neutral.3)"
+          border="1px solid token(colors.tertiary)"
           borderRadius="10px"
         >
           <NextButton lastIdx={tabsContent.length - 1} />

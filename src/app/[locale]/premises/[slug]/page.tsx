@@ -135,7 +135,7 @@ export default async function PremisePage({
     {
       title: t("booking_cancellation_terms"),
       description: bookingCancelTerm && (
-        <Stack gap="20px" color="neutral.0">
+        <Stack gap="20px" color="dark">
           <InlineBox textStyle="body.1">
             {translationsBCT(bookingCancelTerm as BookingCancelTerm)}
           </InlineBox>

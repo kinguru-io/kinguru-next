@@ -39,12 +39,12 @@ export default async function RootPage() {
         <Link
           className={cx(
             css({
-              colorPalette: "secondary",
               marginBlock: { base: "10", md: "13" },
               width: "max-content",
             }),
             button({
               size: "lg",
+              colorPalette: "secondary",
               centered: true,
             }),
           )}

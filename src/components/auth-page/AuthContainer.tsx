@@ -34,9 +34,9 @@ export function AuthContainer({ children }: { children: React.ReactNode }) {
           "& p": {
             mt: "20px",
             textStyle: "body.3",
-            color: "neutral.2",
+            color: "secondary",
             "& a": {
-              color: "neutral.1",
+              color: "dark",
               _hover: {
                 textDecoration: "underline",
               },

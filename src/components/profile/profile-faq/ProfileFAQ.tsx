@@ -44,7 +44,7 @@ export async function ProfileFAQ() {
         justifyContent="space-between"
         fontSize="10px"
         lineHeight="1.5"
-        color="neutral.2"
+        color="secondary"
       >
         <Link href="/faq">{t("see_more")}</Link>
         <Link href="/faq">{t("ask")}</Link>

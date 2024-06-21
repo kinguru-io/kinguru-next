@@ -25,10 +25,10 @@ export const radioSlot = defineSlotRecipe({
       position: "relative",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: "neutral.1",
+      borderColor: "dark",
       borderRadius: "full",
       transition: "colors",
-      backgroundColor: "neutral.5",
+      backgroundColor: "light",
       _peerFocusVisible: {
         borderColor: "focus",
       },
@@ -42,10 +42,10 @@ export const radioSlot = defineSlotRecipe({
         },
       },
       _peerCheckedAndDisabled: {
-        backgroundColor: "primary.disabled",
+        backgroundColor: "primary.lightest",
       },
       _peerDisabled: {
-        borderColor: "neutral.3",
+        borderColor: "tertiary",
       },
       _after: {
         content: "''",
@@ -54,16 +54,16 @@ export const radioSlot = defineSlotRecipe({
         width: "0.5em",
         height: "0.5em",
         borderWidth: "1px",
-        borderColor: "neutral.1",
+        borderColor: "dark",
         borderRadius: "full",
         _peerDisabled: {
-          borderColor: "neutral.3",
+          borderColor: "tertiary",
         },
       },
     },
     label: {
       _peerDisabled: {
-        color: "neutral.3",
+        color: "tertiary",
       },
     },
   },

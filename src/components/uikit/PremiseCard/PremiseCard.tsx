@@ -38,7 +38,7 @@ export function PremiseDescription({ children }: PropsWithChildren) {
     <p
       className={css({
         lineClamp: "2",
-        color: "#474747",
+        color: "secondary",
         fontSize: "sm",
         lineHeight: "1.5",
       })}

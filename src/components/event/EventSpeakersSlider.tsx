@@ -46,7 +46,7 @@ export async function EventSpeakersSlider({
           ) => {
             return (
               <SliderItem key={name} buttonPosition="outer">
-                <Box w="270px" color="neutral.1" key={name}>
+                <Box w="270px" color="dark" key={name}>
                   <Card variant="speaker">
                     <CardBody>
                       <Float

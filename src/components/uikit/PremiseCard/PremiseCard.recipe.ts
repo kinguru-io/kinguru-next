@@ -6,7 +6,7 @@ export const premiseCardSlot = defineSlotRecipe({
   slots: ["premise", "premiseSlider"],
   base: {
     premise: {
-      bgColor: "neutral.5",
+      bgColor: "light",
       display: "flex",
       flexDirection: "column",
       gap: "2",

@@ -18,14 +18,14 @@ export function DiscountViewCard({
   if (discounts.length === 0) return null;
 
   return (
-    <Card border="1px solid" borderColor="primary" color="neutral.0">
+    <Card border="1px solid" borderColor="primary" color="dark">
       <CardInner padding="15px 33px" gap="15px">
         <CardHeading
           alignSelf="center"
           backgroundColor="primary"
           borderRadius="4px"
           padding="2px 5px"
-          color="neutral.1"
+          color="dark"
         >
           <h4>{t("card_heading")}</h4>
         </CardHeading>

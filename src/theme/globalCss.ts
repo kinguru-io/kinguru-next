@@ -9,7 +9,7 @@ export const additionalGlobalCss = defineGlobalStyles({
     },
   },
   body: {
-    color: "neutral.1",
+    color: "dark",
   },
   address: { fontStyle: "normal" },
   button: {

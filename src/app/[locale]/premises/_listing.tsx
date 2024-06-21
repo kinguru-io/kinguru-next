@@ -28,7 +28,7 @@ export async function Listing({
   return (
     <Stack gap="15px">
       <HStack justifyContent="space-between">
-        <InlineBox color="neutral.0" textStyle="heading.6">
+        <InlineBox color="dark" textStyle="heading.6">
           {t("variants_found", { total })}
         </InlineBox>
         <SortToggler

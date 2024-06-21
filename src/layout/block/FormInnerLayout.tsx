@@ -7,7 +7,7 @@ export function FormInnerLayout({ children }: { children: React.ReactNode }) {
         "& h3": { textStyle: "heading.extra.1" },
         "& .helper": {
           textStyle: "body.3",
-          color: "neutral.1",
+          color: "dark",
         },
         "& .button": { mx: "auto" },
       }}

@@ -8,7 +8,7 @@ export const avatarRecipe = defineRecipe({
     alignItems: "center",
     justifyContent: "center",
     bg: "primary",
-    color: "neutral.1",
+    color: "dark",
     fontSize: "12px",
     lineHeight: "1.2",
     borderWidth: "1px",
