@@ -1,16 +1,6 @@
-import {
-  type ComponentPropsWithoutRef,
-  ForwardedRef,
-  forwardRef,
-  useId,
-} from "react";
-import { ArrowIcon, Icon } from "../icon";
-import { cx } from "styled-system/css";
-import {
-  input,
-  select,
-  type SelectVariantProps,
-} from "~/styled-system/recipes";
+import { type ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
+import { Icon } from "@/components/uikit";
+import { select, type SelectVariantProps } from "~/styled-system/recipes";
 
 export type SelectProps = SelectVariantProps &
   ComponentPropsWithoutRef<"select"> & {
