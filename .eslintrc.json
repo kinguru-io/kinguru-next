@@ -17,8 +17,8 @@
   },
   "extends": [
     "plugin:import/typescript",
-    "plugin:prettier/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "import/parsers": {
