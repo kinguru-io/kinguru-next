@@ -4,27 +4,24 @@ import { defineRecipe } from "@pandacss/dev";
 export const avatarRecipe = defineRecipe({
   className: "avatar",
   base: {
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    bg: "primary",
-    color: "dark",
-    fontSize: "12px",
-    lineHeight: "1.2",
-    borderWidth: "1px",
-    borderColor: "primary",
+    color: "secondary",
+    bgColor: "secondary.lighter",
+    fontSize: "sm",
     borderRadius: "full",
     position: "relative", // since fill={true} for inner Image(next/image) component
     overflow: "hidden",
+    "& > img[data-failed=true]": { opacity: "0" },
   },
   variants: {
     size: {
-      xs: { w: "40px", h: "40px" },
-      sm: { w: "50px", h: "50px" },
-      md: { w: "100px", h: "100px" },
-      lg: { w: "185px", h: "185px", borderWidth: "2px" },
+      xs: { width: "7", height: "7" },
+      sm: { width: "8", height: "8" },
+      md: { width: "10", height: "10", fontSize: "md" },
+      lg: {},
     },
   },
   defaultVariants: { size: "xs" },
-  staticCss: [{ size: ["*"] }],
 });

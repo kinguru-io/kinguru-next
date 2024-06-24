@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
-import { AvatarGroup } from "@/components/uikit/AvatarGroup";
+import { AvatarGroup } from "@/components/uikit";
+import { avatar } from "~/styled-system/recipes";
 
 const meta = {
   title: "UIKit/Avatar/AvatarGroup",
@@ -13,6 +14,11 @@ const meta = {
   argTypes: {
     avatars: {
       control: false,
+    },
+
+    size: {
+      options: avatar.variantMap.size,
+      control: "radio",
     },
   },
 } satisfies Meta<typeof AvatarGroup>;

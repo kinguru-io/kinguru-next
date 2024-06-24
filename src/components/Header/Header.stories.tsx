@@ -61,16 +61,21 @@ export const authHeader: Story = {
       mock: () => {
         const mockSession = createMock(auth, "getSession");
         mockSession.mockReturnValue(
-          Promise.resolve({
-            user: {
-              id: "213123",
-              image: faker.image.avatar(),
-              name: "Name Surname",
-              speaker: null,
-              stripeCustomerId: "123123",
-              organizations: [],
-            },
-            expires: "date",
+          new Promise((resolve) => {
+            const id = setTimeout(() => {
+              resolve({
+                user: {
+                  id: "213123",
+                  image: faker.image.avatar(),
+                  name: "Name Surname",
+                  speaker: null,
+                  stripeCustomerId: "123123",
+                  organizations: [],
+                },
+                expires: "date",
+              });
+              clearTimeout(id);
+            }, 1000);
           }),
         );
 
