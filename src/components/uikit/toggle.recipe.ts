@@ -1,33 +1,32 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineSlotRecipe } from "@pandacss/dev";
 
-export const checkboxSlot = defineSlotRecipe({
-  className: "input_checkbox",
-  slots: ["root", "checkbox", "label"],
+export const toggleSlot = defineSlotRecipe({
+  className: "input_toggle",
+  slots: ["root", "toggle", "label"],
   base: {
     root: {
       cursor: "pointer",
       display: "inline-flex",
-      gap: "10px",
-      "& input[type=checkbox]": {
-        srOnly: true,
-      },
-      "& input[type=checkbox]:disabled ~ *": {
-        cursor: "not-allowed",
-      },
+      alignItems: "center",
+      gap: "2",
+      fontSize: "sm",
+      "& .peer": { srOnly: true },
+      "& .peer:disabled ~ *": { cursor: "not-allowed" },
     },
-    checkbox: {
+    toggle: {
       flexShrink: "0",
+      width: "4",
+      height: "4",
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
       position: "relative",
       borderWidth: "1px",
       borderStyle: "solid",
-      borderColor: "dark",
-      borderRadius: "3px",
+      borderColor: "secondary",
       transition: "colors",
-      backgroundColor: "light",
+      bgColor: "light",
       _peerFocusVisible: {
         borderColor: "focus",
       },
@@ -35,30 +34,26 @@ export const checkboxSlot = defineSlotRecipe({
         borderColor: "danger",
       },
       _peerChecked: {
-        backgroundColor: "primary",
+        borderColor: "primary",
         _after: {
-          display: "block",
+          bgColor: "primary",
         },
       },
       _peerCheckedAndDisabled: {
-        backgroundColor: "primary.lightest",
+        _after: {
+          bgColor: "primary.lighter",
+        },
       },
       _peerDisabled: {
         borderColor: "tertiary",
       },
-      // checkmark icon [✓]
       _after: {
         content: "''",
-        position: "absolute",
-        display: "none",
-        width: "0.3em",
-        height: "0.6em",
-        borderWidth: "1px",
-        borderColor: "dark",
-        borderInlineStart: "none",
-        borderBlockStart: "none",
-        rotate: "45deg",
-        transformOrigin: "0.25em 0.25em",
+        display: "inline-block",
+        width: "2",
+        height: "2",
+        bgColor: "light",
+        transition: "colors",
         _peerDisabled: {
           borderColor: "tertiary",
         },
@@ -71,14 +66,13 @@ export const checkboxSlot = defineSlotRecipe({
     },
   },
   variants: {
-    size: {
-      default: {
-        checkbox: {
-          width: "1.125em",
-          height: "1.125em",
+    rounded: {
+      true: {
+        toggle: {
+          borderRadius: "full",
+          _after: { borderRadius: "full" },
         },
       },
     },
   },
-  defaultVariants: { size: "default" },
 });

@@ -21,7 +21,7 @@ export function Avatar({ image, name, size }: AvatarProps) {
       <span className={css({ textTransform: "uppercase" })}>
         {name ? prepareAbbreviation(name) : "?"}
       </span>
-      {image && <AvatarImage src={"/123" + image} />}
+      {image && <AvatarImage src={image} />}
     </AvatarWrapper>
   );
 }

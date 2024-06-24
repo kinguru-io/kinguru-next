@@ -11,7 +11,7 @@ export const avatarRecipe = defineRecipe({
     bgColor: "secondary.lighter",
     fontSize: "sm",
     borderRadius: "full",
-    position: "relative", // since fill={true} for inner Image(next/image) component
+    position: "relative",
     overflow: "hidden",
     "& > img[data-failed=true]": { opacity: "0" },
   },

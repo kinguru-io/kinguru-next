@@ -4,13 +4,12 @@ import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { headerSlot } from "./src/components/Header/Header.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
-import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputSlot } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
-import { radioSlot } from "./src/components/uikit/Radio/Radio.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
+import { toggleSlot } from "./src/components/uikit/toggle.recipe";
 import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
@@ -63,8 +62,7 @@ export default defineConfig({
         header: headerSlot,
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
-        checkbox: checkboxSlot,
-        radio: radioSlot,
+        toggle: toggleSlot,
       },
       tokens: {
         animations: {
