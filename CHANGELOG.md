@@ -1,3 +1,10 @@
+# [0.45.0](https://github.com/kinguru-io/kinguru-next/compare/v0.44.0...v0.45.0) (2024-06-24)
+
+
+### Features
+
+* **KINGU-144:** restyled base components ([#643](https://github.com/kinguru-io/kinguru-next/issues/643)) ([b297dc8](https://github.com/kinguru-io/kinguru-next/commit/b297dc8e4d1f0e36e6a5a2110bba72ed703136c2))
+
 # [0.44.0](https://github.com/kinguru-io/kinguru-next/compare/v0.43.0...v0.44.0) (2024-06-12)
 
 
