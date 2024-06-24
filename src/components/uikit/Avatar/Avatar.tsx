@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { User } from "next-auth";
+import { AvatarImage } from "./avatar-image";
 import { css } from "~/styled-system/css";
 import { avatar, type AvatarVariantProps } from "~/styled-system/recipes";
 
@@ -21,15 +21,7 @@ export function Avatar({ image, name, size }: AvatarProps) {
       <span className={css({ textTransform: "uppercase" })}>
         {name ? prepareAbbreviation(name) : "?"}
       </span>
-      {image && (
-        <Image
-          src={image}
-          onError={addFailedAttribute}
-          alt=""
-          sizes="40px"
-          fill
-        />
-      )}
+      {image && <AvatarImage src={"/123" + image} />}
     </AvatarWrapper>
   );
 }
@@ -42,11 +34,4 @@ function prepareAbbreviation(name: string) {
   if (!matches) return name[0];
 
   return matches[0] + matches[1] || "";
-}
-
-function addFailedAttribute({
-  currentTarget,
-}: React.SyntheticEvent<HTMLImageElement>) {
-  // due to black/gray border on broken image
-  currentTarget.setAttribute("data-failed", "true");
 }
