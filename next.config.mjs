@@ -13,7 +13,7 @@ const nextConfig = {
           output: 'public/sprites',
           fileName: '{name}.{hash:8}.svg',
           metadata: {
-            path: 'src/sprite.gen.ts',
+            path: 'src/components/uikit/icon/sprite.gen.ts',
             runtime: {
               size: true,
               viewBox: true

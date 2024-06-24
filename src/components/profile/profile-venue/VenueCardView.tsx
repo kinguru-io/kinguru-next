@@ -46,7 +46,7 @@ export function VenueCardView({
       <AspectRatio ratio={16 / 9}>
         <Image src={venue.image} width={310} height={174} alt="" />
       </AspectRatio>
-      <CardInner bgColor="neutral.4">
+      <CardInner bgColor="secondary.lighter">
         <CardHeading lineClamp="3">
           <h4>{venue.name}</h4>
         </CardHeading>
@@ -58,12 +58,7 @@ export function VenueCardView({
         <CardFooter>
           {venue.premises.length === 0 && (
             <HStack gap="5px" color="danger" textStyle="body.extra.3">
-              <Circle
-                size="1.8em"
-                color="neutral.5"
-                bgColor="danger"
-                aria-hidden
-              >
+              <Circle size="1.8em" color="light" bgColor="danger" aria-hidden>
                 !
               </Circle>
               {noPremiseLabel}

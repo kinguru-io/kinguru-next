@@ -4,9 +4,8 @@ import type { SocialNetwork } from "@prisma/client";
 import { useTranslations } from "next-intl";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { Icon } from "@/components/common";
-import { ErrorField, Input } from "@/components/uikit";
-import type { SpritesMap } from "@/sprite.gen";
+import { ErrorField, Icon, Input } from "@/components/uikit";
+import type { SpritesMap } from "@/components/uikit";
 import { Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
 
 type SocialNetworkItem = {

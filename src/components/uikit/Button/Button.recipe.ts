@@ -14,8 +14,8 @@ export const buttonRecipe = defineRecipe({
     transition: "colors",
     outline: "1px solid transparent",
     _hoverEnabled: {
-      bgColor: "neutral.1",
-      color: "neutral.5",
+      bgColor: "dark",
+      color: "light",
     },
     _focusVisible: {
       boxShadow: "0 0 0 2px token(colors.focus)",
@@ -30,18 +30,18 @@ export const buttonRecipe = defineRecipe({
       primary: {
         bgColor: "primary",
         _hoverEnabled: {
-          bgColor: "neutral.1",
+          bgColor: "dark",
         },
       },
       secondary: {
-        bgColor: "secondary",
+        bgColor: "secondary.lighter",
         _hoverEnabled: {
-          bgColor: "neutral.1",
+          bgColor: "dark",
         },
       },
       dark: {
-        bgColor: "neutral.1",
-        color: "neutral.5",
+        bgColor: "dark",
+        color: "light",
         _hoverEnabled: {
           bgColor: "danger",
         },

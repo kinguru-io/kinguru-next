@@ -15,11 +15,11 @@ export function EventMainInfoLayout({
       bgSize="cover"
       paddingBlock="82px 70px"
       style={{ backgroundImage: `url(${bgImageSrc})` }}
-      color="neutral.5"
+      color="light"
       _before={{
         content: '""',
         position: "absolute",
-        backgroundColor: bgImageSrc ? "neutral.1" : "neutral.2",
+        backgroundColor: bgImageSrc ? "dark" : "secondary",
         inset: "0",
         opacity: bgImageSrc ? "0.9" : "1",
       }}

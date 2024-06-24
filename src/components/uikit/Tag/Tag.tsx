@@ -25,27 +25,27 @@ const tagStyles = cva({
       outline: {},
       primary: {
         bg: "primary",
-        color: "neutral.1",
+        color: "dark",
       },
       primaryLighter: {
-        bg: "primary.active",
-        color: "neutral.1",
+        bg: "primary.lighter",
+        color: "dark",
       },
       secondary: {
         bg: "secondary",
-        color: "neutral.5",
+        color: "light",
       },
       secondaryLighter: {
-        bg: "neutral.4",
-        color: "neutral.1",
+        bg: "secondary.lighter",
+        color: "dark",
       },
       tertiary: {
-        bg: "neutral.5",
-        color: "neutral.1",
+        bg: "light",
+        color: "dark",
       },
       ellipse: {
-        bg: "neutral.3",
-        color: "neutral.1",
+        bg: "secondary.lighter",
+        color: "dark",
         borderRadius: "full",
       },
     },

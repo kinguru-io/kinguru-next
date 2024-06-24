@@ -1,9 +1,7 @@
 import { useTranslations } from "next-intl";
 import { memo } from "react";
 import { useOriginDate } from "./use-origin-date";
-import { Icon } from "@/components/common";
-import { Button, type ButtonProps } from "@/components/uikit";
-import { css } from "~/styled-system/css";
+import { ArrowIcon, Button, type ButtonProps } from "@/components/uikit";
 import { GridItem } from "~/styled-system/jsx";
 
 export const WeekControls = memo(function WeekControls({
@@ -27,7 +25,7 @@ export const WeekControls = memo(function WeekControls({
     <>
       <GridItem gridArea="prev-week">
         <Button
-          icon={<Icon name="action/arrow" />}
+          icon={<ArrowIcon />}
           onClick={prevWeek}
           disabled={canGoPrev}
           aria-label={t("prev_week_btn_label")}
@@ -37,9 +35,7 @@ export const WeekControls = memo(function WeekControls({
       <GridItem gridArea="next-week">
         <Button
           type="button"
-          icon={
-            <Icon name="action/arrow" className={css({ rotate: "180deg" })} />
-          }
+          icon={<ArrowIcon direction="right" />}
           onClick={nextWeek}
           disabled={canGoNext}
           aria-label={t("next_week_btn_label")}

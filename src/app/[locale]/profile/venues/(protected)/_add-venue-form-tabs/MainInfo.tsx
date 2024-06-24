@@ -24,7 +24,7 @@ export function MainInfoGroup({ isEditing }: MainInfoGroupProps) {
       css={{
         "& span": {
           textStyle: "heading.6",
-          color: "neutral.0",
+          color: "dark",
           marginBlockStart: "10px",
         },
       }}

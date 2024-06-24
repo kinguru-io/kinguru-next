@@ -14,7 +14,7 @@ export function SortToggler<T extends { value: string; label: string }>({
   items: T[];
   defaultLabel: string;
 }) {
-  const btnClassName = cx(input(), css({ whiteSpace: "nowrap" }));
+  const btnClassName = cx(input().label, css({ whiteSpace: "nowrap" }));
 
   return (
     <Dropdown size="lg">

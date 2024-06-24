@@ -60,8 +60,8 @@ export function AccordionGroup<T extends EssentialItemParts>({
             key={title}
             css={{
               "&[data-disabled=true]": {
-                color: "neutral.2",
-                backgroundColor: "neutral.4",
+                color: "secondary",
+                backgroundColor: "secondary.lighter",
               },
             }}
             data-disabled={isDisabledYet}

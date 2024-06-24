@@ -736,10 +736,10 @@
       "desc": "Cena malejąco"
     },
     "time_range": {
-      "search_btn_label": "Search",
-      "date_label": "Date",
-      "from_label": "From",
-      "to_label": "To"
+      "search_btn_label": "Szukaj obiektów",
+      "date_label": "Data",
+      "from_label": "od 18:00",
+      "to_label": "do 21:00"
     }
   }
 }

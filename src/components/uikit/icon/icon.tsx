@@ -1,9 +1,8 @@
 import type { SVGProps } from "react";
-import { SPRITES_META, type SpritesMap } from "@/sprite.gen";
+import { SPRITES_META, type SpritesMap } from "./sprite.gen";
 import { cx } from "~/styled-system/css";
 import { icon } from "~/styled-system/recipes";
 
-// Our icon will extend an SVG element and accept all its props
 export interface IconProps extends SVGProps<SVGSVGElement> {
   name: AnyIconName;
 }

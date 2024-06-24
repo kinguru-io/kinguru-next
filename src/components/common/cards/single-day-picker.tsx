@@ -9,8 +9,8 @@ import "react-day-picker/dist/style.css";
 
 const dayPickerStyles = {
   "--rdp-accent-color": token.var("colors.primary"),
-  "--rdp-selected-color": token.var("colors.neutral.0"),
-  "--rdp-background-color": token.var("colors.primary.disabled"),
+  "--rdp-selected-color": token.var("colors.dark"),
+  "--rdp-background-color": token.var("colors.primary.lightest"),
 } as React.CSSProperties;
 
 export function SingleDayPicker({

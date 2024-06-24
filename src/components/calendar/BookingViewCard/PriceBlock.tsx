@@ -13,7 +13,7 @@ export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
       alignSelf="stretch"
       marginBlockStart="auto"
       borderBlockStart="1px solid"
-      borderColor="neutral.2"
+      borderColor="secondary"
       textStyle="body.3"
     >
       <Flex flexDirection="column" gap="3px">

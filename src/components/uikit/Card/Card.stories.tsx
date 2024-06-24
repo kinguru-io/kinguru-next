@@ -2,8 +2,7 @@
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
 import Image from "next/image";
-import { BsGeoAlt } from "react-icons/bs";
-import { Avatar, Tag } from "@/components/uikit";
+import { Avatar, Icon, Tag } from "@/components/uikit";
 import { Button } from "@/components/uikit/Button";
 import {
   Card,
@@ -84,7 +83,7 @@ export const CardTemplate: Story = {
             <CardFooter>
               <Flex alignItems="center" justifyContent="space-between">
                 <span>Footer is at the end</span>
-                <Button icon={<BsGeoAlt />}></Button>
+                <Button icon={<Icon name="action/view" />}></Button>
               </Flex>
             </CardFooter>
           </CardInner>
@@ -104,12 +103,12 @@ function PseudoButtonGroup() {
         height: "fit-content!",
         inset: "auto 15px 15px auto!",
         fontSize: "14px",
-        color: "neutral.5",
+        color: "light",
       })}
     >
-      <BsGeoAlt />
-      <BsGeoAlt />
-      <BsGeoAlt />
+      <Icon name="action/view" />
+      <Icon name="action/view" />
+      <Icon name="action/view" />
     </span>
   );
 }
@@ -128,15 +127,15 @@ function PseudoSection() {
       })}
     >
       <li>
-        <BsGeoAlt />
+        <Icon name="action/view" />
         Lorem.
       </li>
       <li>
-        <BsGeoAlt />
+        <Icon name="action/view" />
         Lorem.
       </li>
       <li>
-        <BsGeoAlt />
+        <Icon name="action/view" />
         Lorem.
       </li>
     </ul>

@@ -197,9 +197,9 @@ function PickerPlaceholder({
             bgColor: ["rectangle", "rectangle-smaller"].includes(
               placeholderVariant,
             )
-              ? "neutral.5"
-              : "neutral.4",
-            color: isPending ? "transparent" : "neutral.2",
+              ? "light"
+              : "secondary.lighter",
+            color: isPending ? "transparent" : "secondary",
             textStyle: "body.2",
           })}
         >
@@ -213,7 +213,7 @@ function PickerPlaceholder({
             animation: "spin",
             width: "25%",
             height: "25%",
-            color: "neutral.2",
+            color: "secondary",
           })}
         />
       )}

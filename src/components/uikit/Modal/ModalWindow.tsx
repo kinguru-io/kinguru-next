@@ -41,7 +41,7 @@ export function _ModalWindow({ children }: ModalProps) {
       ref={dialogRef}
       onCancel={modalCancelled}
       className={css({
-        bg: "neutral.3",
+        bg: "secondary.lighter",
         borderRadius: "10px",
         position: "fixed",
         top: "50%",

@@ -6,14 +6,14 @@ export const footerSlot = defineSlotRecipe({
   slots: ["footer", "footerWrapper", "additionalText", "contentWrapper"],
   base: {
     footer: {
-      bgColor: "neutral.1",
-      color: "neutral.5",
+      bgColor: "dark",
+      color: "light",
       width: "full",
       paddingBlock: "8",
       md: { paddingBlockStart: "12" },
     },
     additionalText: {
-      color: "#a3a3a3",
+      color: "secondary",
       fontSize: "px13",
       lineHeight: "1",
     },

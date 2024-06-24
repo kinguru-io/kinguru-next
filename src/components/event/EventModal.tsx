@@ -72,7 +72,7 @@ export function EventModal({
         <ModalWindow>
           <VStack gap="12px">
             <h4>{t("buy_a_ticket")}</h4>
-            <Box bg="neutral.5" borderRadius="10px">
+            <Box bg="light" borderRadius="10px">
               <Elements stripe={stripePromise} options={{ clientSecret }}>
                 <CheckoutForm succeedRefetch={paymentSucceed} />
               </Elements>

@@ -20,7 +20,7 @@ export function TagClosable({
     <Card
       flexShrink="0"
       border="1px solid"
-      borderColor="neutral.2"
+      borderColor="secondary"
       padding="6px 5px"
       alignItems="center"
       textStyle="body.2"
@@ -33,7 +33,7 @@ export function TagClosable({
         {content}
       </Tag>
       <span data-helper>{helper}</span>
-      <Divider orientation="vertical" color="neutral.2" borderStyle="dashed" />
+      <Divider orientation="vertical" color="secondary" borderStyle="dashed" />
       <Button
         onClick={onClick}
         icon={<RxCross1 size="10px" />}

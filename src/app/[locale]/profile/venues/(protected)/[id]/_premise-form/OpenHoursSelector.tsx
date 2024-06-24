@@ -88,7 +88,7 @@ export function OpenHoursSelector() {
           </GridItem>
           <GridItem
             gridColumn="9 / -1"
-            bgColor="neutral.4"
+            bgColor="secondary.lighter"
             paddingBlock="30px"
             paddingInline="10px"
           >
@@ -119,7 +119,7 @@ export function OpenHoursSelector() {
               ) : (
                 <InlineBox
                   textStyle="body.3"
-                  color="neutral.2"
+                  color="secondary"
                   paddingBlockStart="17px"
                 >
                   {t("open_hours_empty_notice")}
@@ -134,7 +134,7 @@ export function OpenHoursSelector() {
               justifyContent="space-between"
               paddingBlock="20px"
               paddingInline="7.143%" // 100% / 14 columns
-              borderBlockStart="2px dashed token(colors.neutral.3)"
+              borderBlockStart="2px dashed token(colors.tertiary)"
               css={{ "& > .button": { flexShrink: "0" } }}
             >
               {t("open_hours_spread_mode")}

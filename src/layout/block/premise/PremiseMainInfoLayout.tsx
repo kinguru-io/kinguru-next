@@ -6,7 +6,7 @@ export function PremiseMainInfoLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box bg="neutral.4" width="100%">
+    <Box bg="secondary.lighter" width="100%">
       <Container paddingBlock="60px 50px">
         <section>
           <VStack gap="30px">{children}</VStack>

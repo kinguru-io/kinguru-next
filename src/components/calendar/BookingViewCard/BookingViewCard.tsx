@@ -136,7 +136,7 @@ export function BookingViewCard({
       <VStack gap="12px" minHeight="350px">
         <h4>{t("booking_modal_heading")}</h4>
         <Timer minutes={10} callback={paymentCancelled} />
-        <Box bg="neutral.5" borderRadius="10px">
+        <Box bg="light" borderRadius="10px">
           <Elements
             stripe={stripePromise}
             options={{ clientSecret: intentResponse?.clientSecret }}
@@ -152,7 +152,7 @@ export function BookingViewCard({
     <>
       <Card
         border="1px solid"
-        borderColor="neutral.2"
+        borderColor="secondary"
         alignSelf="flex-start"
         minHeight="352px"
       >

@@ -2,12 +2,11 @@
 import { defineConfig, defineRecipe } from "@pandacss/dev";
 import { footerSlot } from "./src/components/Footer/Footer.recipe";
 import { headerSlot } from "./src/components/Header/Header.recipe";
-import { arrowIconRecipe } from "./src/components/uikit/ArrowIcon/ArrowIcon.recipe";
 import { avatarRecipe } from "./src/components/uikit/Avatar/Avatar.recipe";
 import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { checkboxSlot } from "./src/components/uikit/Checkbox/Checkbox.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
-import { inputRecipe } from "./src/components/uikit/Input/Input.recipe";
+import { inputSlot } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
 import { radioSlot } from "./src/components/uikit/Radio/Radio.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
@@ -42,9 +41,7 @@ export default defineConfig({
       textStyles: additionalTextStyles,
       recipes: {
         button: buttonRecipe,
-        input: inputRecipe,
         avatar: avatarRecipe,
-        arrowIcon: arrowIconRecipe,
         icon: defineRecipe({
           className: "icon",
           base: {
@@ -59,6 +56,7 @@ export default defineConfig({
         }),
       },
       slotRecipes: {
+        input: inputSlot,
         dropdown: dropdownSlot,
         select: selectSlot,
         footer: footerSlot,
@@ -89,6 +87,7 @@ export default defineConfig({
         shadows: {
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
           header: { value: "0px 4px 48px 0px rgba(0, 0, 0, 0.06)" },
+          dropdown: { value: "0px 14px 45px rgba(0, 0, 0, 0.2)" },
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
@@ -107,59 +106,32 @@ export default defineConfig({
           13: { value: "3.25rem" },
           15: { value: "3.75rem" },
         },
-        colors: {
-          "yellow.1": { value: "#FFD800" },
-          "yellow.2": { value: "#FFE44D" },
-          "yellow.3": { value: "#FFEC82" },
-          "yellow.4": { value: "#FEF7D2" },
-          "red.1": { value: "#DC1414" },
-          "red.2": { value: "#E75B5B" },
-          "red.3": { value: "#EE8C8C" },
-          "red.4": { value: "#F5BDBD" },
-          "green.1": { value: "#1C9109" },
-          "green.2": { value: "#60B253" },
-          "green.3": { value: "#90C987" },
-          "green.4": { value: "#C0E0BB" },
-          "neutral.0": { value: "#000000" },
-          "neutral.1": { value: "#212529" },
-          "neutral.2": { value: "#AFAFAF" },
-          "neutral.3": { value: "#D9D9D9" },
-          "neutral.4": { value: "#F2F2F2" },
-          "neutral.5": { value: "#FFFFFF" },
-          blue: { value: "#0B99FF" },
-        },
       },
     },
-    // Semantic tokens declaration
     semanticTokens: {
       colors: {
-        focus: { value: "{colors.blue}" },
+        focus: { value: "#0B99FF" },
         primary: {
-          DEFAULT: { value: "{colors.yellow.1}" },
-          hover: { value: "{colors.yellow.2}" },
-          active: { value: "{colors.yellow.3}" },
-          disabled: { value: "{colors.yellow.4}" },
+          DEFAULT: { value: "#FFD800" },
+          lighter: { value: "#FFEC82" },
+          lightest: { value: "#FEF7D2" },
         },
         secondary: {
-          DEFAULT: { value: "{colors.neutral.4}" },
-          darker: { value: "{colors.neutral.1}" },
-          hover: { value: "{colors.neutral.3}" },
-          active: { value: "{colors.neutral.4}" },
-          disabled: { value: "{colors.neutral.4}" },
+          DEFAULT: { value: "#7A7A7A" },
+          lighter: { value: "#F5F5F5" },
+          lightest: { value: "#FBFBFB" },
         },
+        tertiary: { DEFAULT: { value: "#D9D9D9" } },
+        dark: { DEFAULT: { value: "#212529" } },
+        light: { DEFAULT: { value: "#FFFFFF" } },
+        neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
-          DEFAULT: { value: "{colors.red.1}" },
-          hover: { value: "{colors.red.2}" },
-          active: { value: "{colors.red.3}" },
-          disabled: { value: "{colors.red.4}" },
-          text: { value: "{colors.neutral.5}" },
+          DEFAULT: { value: "#DC1414" },
+          text: { value: "{colors.light}" },
         },
         success: {
-          DEFAULT: { value: "{colors.green.1}" },
-          hover: { value: "{colors.green.2}" },
-          active: { value: "{colors.green.3}" },
-          disabled: { value: "{colors.green.4}" },
-          text: { value: "{colors.neutral.5}" },
+          DEFAULT: { value: "#1C9109" },
+          text: { value: "{colors.light}" },
         },
       },
     },
@@ -170,6 +142,7 @@ export default defineConfig({
       hoverEnabled: "&:not([disabled]):hover",
       activeEnabled: "&:not([disabled]):active",
       peerCheckedAndDisabled: ".peer:is(:checked:disabled) ~ &",
+      placeholderHidden: "&:is(:not(:placeholder-shown))",
     },
   },
 
@@ -202,6 +175,12 @@ export default defineConfig({
       },
       // JSX <span /> component. As simple as the `Box` component
       inlineBox: { jsxElement: "span", transform: (props) => props },
+    },
+  },
+  hooks: {
+    "config:resolved": ({ config, utils }) => {
+      // removing base color palette
+      return utils.omit(config, ["theme.tokens.colors"]);
     },
   },
 });

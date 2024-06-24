@@ -743,10 +743,10 @@
       "desc": "Цена по убыванию"
     },
     "time_range": {
-      "search_btn_label": "Поиск",
+      "search_btn_label": "Поиск объектов",
       "date_label": "Дата",
-      "from_label": "С",
-      "to_label": "До"
+      "from_label": "c 18:00",
+      "to_label": "до 21:00"
     }
   }
 }

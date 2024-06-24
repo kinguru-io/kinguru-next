@@ -9,7 +9,6 @@ import {
   IsLikedAction,
 } from "@/lib/actions";
 import { Box } from "~/styled-system/jsx";
-import { token } from "~/styled-system/tokens";
 
 type EventImageProps = {
   id: string;
@@ -57,13 +56,7 @@ export function EventLikeButton({
       <Button
         onClick={toggleLike}
         disabled={isPending}
-        icon={
-          optimisticLike ? (
-            <FaHeart fill={token("colors.red.1")} />
-          ) : (
-            <FaRegHeart />
-          )
-        }
+        icon={optimisticLike ? <FaHeart /> : <FaRegHeart />}
       >
         {optimisticLike ? dislikeTranslate : likeTranslate}
       </Button>

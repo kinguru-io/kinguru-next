@@ -14,8 +14,8 @@ export const Accordion = styled("div", {
 
 export const AccordionItem = styled("div", {
   base: {
-    bgColor: "neutral.5",
-    borderColor: "neutral.2",
+    bgColor: "light",
+    borderColor: "secondary",
     borderWidth: "1px",
     borderRadius: "10px",
     paddingInline: "30px 15px",
@@ -55,7 +55,7 @@ export function AccordionItemToggle(
         height: "0.61em",
         borderWidth: "1px",
         borderStyle: "none solid solid none",
-        borderColor: "neutral.1",
+        borderColor: "dark",
         top: "50%",
         right: "1.25rem",
         transform: "translateY(-75%) rotate(45deg)",

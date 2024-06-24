@@ -16,7 +16,7 @@ export const Card = styled(
       borderRadius: "10px",
       overflow: "hidden",
       textStyle: "body.3",
-      bgColor: "token(colors.neutral.5)",
+      bgColor: "light",
       "&[data-interactive]": {
         boxShadow: {
           base: "cardShadow",
@@ -35,10 +35,10 @@ export const Card = styled(
     variants: {
       variant: {
         speaker: {
-          bgColor: "token(colors.neutral.4)",
+          bgColor: "token(colors.secondary.lighter)",
         },
         marker: {
-          bgColor: "token(colors.neutral.4)",
+          bgColor: "token(colors.secondary.lighter)",
           borderRadius: "20px 20px 0 20px",
         },
         event: {

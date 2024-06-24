@@ -1,15 +1,10 @@
 "use client";
 
-import { ForwardedRef, forwardRef, useState } from "react";
-import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
-import { Input, InputProps } from "@/components/uikit";
-import { css } from "~/styled-system/css";
-import { Box } from "~/styled-system/jsx";
-
-type InputPasswordProps = Omit<InputProps, "type" | "variant">;
+import { type ForwardedRef, forwardRef, useState } from "react";
+import { Icon, Input, type InputProps } from "@/components/uikit";
 
 export const InputPassword = forwardRef(function InputPassword(
-  props: InputPasswordProps,
+  props: Omit<InputProps, "type" | "suffix">,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const [passwordShown, setPasswordShownState] = useState(false);
@@ -19,27 +14,16 @@ export const InputPassword = forwardRef(function InputPassword(
   }
 
   return (
-    <Box
-      position="relative"
-      css={{ "& input[type=password]": { color: "neutral.2" } }}
-    >
-      <Input type={passwordShown ? "text" : "password"} ref={ref} {...props} />
-      <button
-        type="button"
-        tabIndex={-1}
-        className={css({
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          // right + padding = 13px (ui-kit design, inline-end padding)
-          right: "4px",
-          padding: "9px",
-          fontSize: "12px",
-        })}
-        onClick={onIconClick}
-      >
-        {passwordShown ? <RiEyeLine /> : <RiEyeOffLine />}
-      </button>
-    </Box>
+    <Input
+      type={passwordShown ? "text" : "password"}
+      ref={ref}
+      suffix={
+        <Icon
+          name={passwordShown ? "action/view" : "action/view-off"}
+          onClick={onIconClick}
+        />
+      }
+      {...props}
+    />
   );
 });

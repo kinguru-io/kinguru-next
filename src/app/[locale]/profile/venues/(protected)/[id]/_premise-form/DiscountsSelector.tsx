@@ -55,7 +55,7 @@ export function DiscountsSelector() {
         </GridItem>
         <GridItem
           gridColumn="9 / -1"
-          bgColor="neutral.4"
+          bgColor="secondary.lighter"
           paddingBlock="30px"
           paddingInline="10px"
         >
@@ -83,7 +83,7 @@ export function DiscountsSelector() {
             ) : (
               <InlineBox
                 textStyle="body.3"
-                color="neutral.2"
+                color="secondary"
                 paddingBlockStart="17px"
               >
                 {t("open_hours_discounts_empty_notice")}

@@ -7,15 +7,15 @@ export function PremiseCalendarLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Box bg="neutral.3" width="full">
+    <Box bg="secondary.lighter" width="full">
       <Container paddingBlock="70px">
         <section
           className={css({
             paddingBlock: "48px 36px",
             paddingInline: "40px",
-            backgroundColor: "neutral.5",
+            backgroundColor: "light",
             border: "1px solid",
-            borderColor: "neutral.2",
+            borderColor: "secondary",
             borderRadius: "10px",
             "& h2": {
               textAlign: "center",

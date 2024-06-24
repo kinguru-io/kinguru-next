@@ -95,7 +95,7 @@ function HeaderNav({ children }: { children: React.ReactNode }) {
             _peerChecked: {
               inset: "0",
               top: "85px",
-              bgColor: "neutral.5",
+              bgColor: "light",
             },
           },
         })}

@@ -31,7 +31,7 @@ export function Description({
         visibleCharsCount={500}
       />
       {description.length > 500 && (
-        <Box color="neutral.1">
+        <Box color="dark">
           <Button
             icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
             iconPosition="right"

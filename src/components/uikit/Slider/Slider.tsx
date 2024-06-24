@@ -1,8 +1,8 @@
 "use client";
 
 import { useSnapCarousel } from "react-snap-carousel";
-import { Icon } from "@/components/common";
-import { css, cx } from "~/styled-system/css";
+import { ArrowIcon } from "@/components/uikit";
+import { cx } from "~/styled-system/css";
 import { SliderVariantProps, slider } from "~/styled-system/recipes";
 
 type SliderProps = {
@@ -47,14 +47,14 @@ export function Slider({ slidesCount, children, buttonPosition }: SliderProps) {
             className={cx(classes.sliderButton, classes.prevButton)}
             onClick={prevSlide}
           >
-            <Icon name="action/arrow" />
+            <ArrowIcon />
           </button>
           <button
             type="button"
             className={cx(classes.sliderButton, classes.nextButton)}
             onClick={nextSlide}
           >
-            <Icon name="action/arrow" className={css({ rotate: "180deg" })} />
+            <ArrowIcon direction="right" />
           </button>
         </div>
       )}

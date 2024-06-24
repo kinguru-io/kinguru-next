@@ -36,7 +36,7 @@ export function FilterGroup({
       paddingBlock="15px"
       paddingInline="25px"
       borderBlockEnd={{
-        base: "1px solid token(colors.neutral.2)",
+        base: "1px solid token(colors.tertiary)",
         _last: "none",
       }}
     >

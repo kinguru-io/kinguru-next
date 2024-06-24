@@ -2,30 +2,24 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Textarea } from "@/components/uikit/Textarea";
 
 const meta = {
-  title: "UIKit/Textarea",
+  title: "UIKit/Forms/Textarea",
   component: Textarea,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
+  argTypes: {
+    rows: { control: "number" },
+  },
   args: {
-    placeholder: "Placeholder...",
+    placeholder: "Lorem ipsum dolor",
     disabled: false,
-    rows: 4,
-    cols: 31,
   },
 } satisfies Meta<typeof Textarea>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TextAreaEmpty: Story = {
-  args: {
-    placeholder: "Placeholder...",
-  },
-};
+export const Empty: Story = {};
 
-export const TextAreaFilled: Story = {
+export const WithContent: Story = {
   args: {
     defaultValue: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
   },

@@ -20,7 +20,7 @@ export const Default: Story = {
             <b>Weights:</b> 400 (normal), <b>700 (bold)</b>
           </li>
         </ul>
-        <div className={divider({ color: "neutral.3", my: "4" })} />
+        <div className={divider({ color: "secondary.lighter", my: "4" })} />
         <Flex flexWrap="wrap" gap="50px">
           <div>
             <h1>Heading [heading.1]</h1>
@@ -36,7 +36,7 @@ export const Default: Story = {
             </span>
           </div>
         </Flex>
-        <div className={divider({ color: "neutral.3", my: "4" })} />
+        <div className={divider({ color: "secondary.lighter", my: "4" })} />
         <Flex flexWrap="wrap" gap="50px">
           <div>
             <p className={css({ textStyle: "body.1" })}>Basic text [body.1]</p>
@@ -50,7 +50,7 @@ export const Default: Story = {
             </p>
           </div>
         </Flex>
-        <div className={divider({ color: "neutral.3", my: "4" })} />
+        <div className={divider({ color: "secondary.lighter", my: "4" })} />
         <div>
           <p className={css({ textStyle: "button.sm" })}>Button [button.sm]</p>
           <p className={css({ textStyle: "button.md" })}>Button [button.md]</p>
