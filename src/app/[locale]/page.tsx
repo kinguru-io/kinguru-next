@@ -14,7 +14,7 @@ export default async function RootPage() {
   const premiseIdList = await prisma.premise.findMany({
     select: { id: true },
     orderBy: { updatedAt: "desc" },
-    take: 4,
+    take: 6, // for flexible layout. 6 is divisible by both 2 and 3
   });
 
   return (

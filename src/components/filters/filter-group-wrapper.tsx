@@ -28,7 +28,7 @@ export function FilterGroupWrapper({
     inputs.forEach((input) => {
       input.checked = searchParams.has(input.name, input.value);
     });
-  }, [wrapperRef]);
+  }, [wrapperRef, searchParams]);
 
   const updateGroupedSearchParams = (
     name: string,

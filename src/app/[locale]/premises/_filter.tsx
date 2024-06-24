@@ -6,7 +6,7 @@ import {
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
 import { Link } from "@/navigation";
-import { VStack } from "~/styled-system/jsx";
+import { Stack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
 const filters: Array<FilterConfig<PremiseAggregations>> = [
@@ -22,7 +22,7 @@ const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
     aggKey: "price",
     behavior: "range",
-    meta: { literal: "price" },
+    meta: { helper: "price" },
   },
   {
     aggKey: "type",
@@ -32,12 +32,12 @@ const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
     aggKey: "capacity",
     behavior: "range",
-    meta: { literal: "capacity" },
+    meta: { helper: "capacity" },
   },
   {
     aggKey: "area",
     behavior: "range",
-    meta: { literal: "area" },
+    meta: { helper: "area" },
   },
   {
     aggKey: "amenities",
@@ -51,7 +51,7 @@ export async function PremiseFilter() {
   const t = await getTranslations("filters");
 
   return (
-    <VStack gap="30px">
+    <Stack gap="4">
       <Filter heading={t("all")}>
         {filters.map(({ aggKey, behavior, meta }) => {
           const aggregation = aggregations[aggKey];
@@ -71,12 +71,13 @@ export async function PremiseFilter() {
         })}
       </Filter>
       <Link
-        className={button({ colorPalette: "dark" })}
+        className={button({ colorPalette: "dark", centered: true })}
         href="/premises"
+        prefetch={false}
         replace
       >
         {t("reset_btn_label")}
       </Link>
-    </VStack>
+    </Stack>
   );
 }

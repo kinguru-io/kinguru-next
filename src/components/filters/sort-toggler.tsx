@@ -1,4 +1,9 @@
-import { Dropdown, DropdownInitiator, DropdownMenu } from "@/components/uikit";
+import {
+  ArrowIcon,
+  Dropdown,
+  DropdownInitiator,
+  DropdownMenu,
+} from "@/components/uikit";
 import { Link } from "@/navigation";
 import { css, cx } from "~/styled-system/css";
 import { input } from "~/styled-system/recipes";
@@ -14,13 +19,17 @@ export function SortToggler<T extends { value: string; label: string }>({
   items: T[];
   defaultLabel: string;
 }) {
-  const btnClassName = cx(input().label, css({ whiteSpace: "nowrap" }));
+  const btnClassName = cx(
+    input().label,
+    css({ whiteSpace: "nowrap", justifyContent: "space-between" }),
+  );
 
   return (
-    <Dropdown size="lg">
+    <Dropdown size="auto" className={css({ flexGrow: "1" })}>
       <DropdownInitiator>
         <button className={btnClassName} type="button">
           {defaultLabel}
+          <ArrowIcon direction="down" className={css({ fontSize: "xs" })} />
         </button>
       </DropdownInitiator>
       <DropdownMenu>

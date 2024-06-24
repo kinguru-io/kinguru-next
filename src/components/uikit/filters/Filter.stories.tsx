@@ -8,7 +8,7 @@ export default {
 export const FilterExample = {
   render: () => {
     return (
-      <Box maxWidth="284px">
+      <Box maxWidth="80">
         <Filter heading="All filters">
           <FilterGroup heading="Country">0</FilterGroup>
           <FilterGroup heading="City">1</FilterGroup>

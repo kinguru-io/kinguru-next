@@ -11,11 +11,7 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
   const hiddenPremiseIdList = premiseIdList.slice(3);
 
   return (
-    <Stack
-      gap="20px"
-      marginBlockStart="50px"
-      css={{ "& > .button": { alignSelf: "center" } }}
-    >
+    <Stack gap="6">
       <PremiseStack premiseIdList={visiblePremiseIdList} />
       {hiddenPremiseIdList.length > 0 && (
         <PremiseCollapse>
@@ -28,7 +24,10 @@ export function PremiseListing({ premiseIdList }: PremiseListingProps) {
 
 export function PremiseStack({ premiseIdList }: PremiseListingProps) {
   return (
-    <Grid gap="6" gridTemplateColumns={{ base: "1", sm: "2" }}>
+    <Grid
+      gap="6"
+      gridTemplateColumns="repeat(auto-fill, minmax({spacing.80}, 1fr))"
+    >
       {premiseIdList.map(({ id }) => id && <PremiseView key={id} id={id} />)}
     </Grid>
   );

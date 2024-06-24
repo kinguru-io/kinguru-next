@@ -15,7 +15,7 @@ export function PremiseCollapse({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Collapse isShown={isShown}>{children}</Collapse>
-      <Button onClick={changeShownState}>
+      <Button onClick={changeShownState} centered>
         {isShown ? t("hide") : t("see_all")}
       </Button>
     </>

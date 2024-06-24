@@ -37,9 +37,16 @@ export default function PremiseListingPage({
       </TimeRangeHero>
       <Container>
         <Grid
-          gap="50px"
-          paddingBlock="70px"
-          gridTemplateColumns={{ base: "1fr", md: "284px 1fr" }}
+          gap="4"
+          paddingBlockStart="4"
+          paddingBlockEnd="8"
+          gridTemplateColumns="1fr"
+          md={{
+            gap: "16",
+            paddingBlockStart: "8",
+            paddingBlockEnd: "13",
+            gridTemplateColumns: "{spacing.72} 1fr",
+          }}
         >
           <PremiseFilter />
           <Suspense

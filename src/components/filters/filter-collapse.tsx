@@ -34,7 +34,7 @@ export function FilterCollapse({
     <>
       <fieldset
         ref={collapsedRef}
-        className={css({ minWidth: "unset", srOnly: !isShown })}
+        className={css({ minWidth: "unset", _disabled: { srOnly: true } })}
         disabled={!isShown}
       >
         {children}
@@ -43,16 +43,20 @@ export function FilterCollapse({
         className={css({
           alignSelf: "start",
           display: "inline-flex",
-          gap: "15px",
-          alignItems: "baseline",
-          fontSize: "20px",
+          alignItems: "center",
+          gap: "1",
+          fontSize: "px13",
+          color: "success",
+          "& > svg": { color: "secondary" },
+          _hoverOrFocusVisible: {
+            color: "success.darker",
+            "& > svg": { color: "dark" },
+          },
         })}
         type="button"
         onClick={collapseClicked}
       >
-        <span className={css({ textStyle: "body.2", whiteSpace: "nowrap" })}>
-          {isShown ? hideLabel : `${showLabel} (${count})`}
-        </span>
+        {isShown ? hideLabel : showLabel} ({count})
         <ArrowIcon direction={isShown ? "up" : "down"} />
       </button>
     </>

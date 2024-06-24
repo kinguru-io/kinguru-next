@@ -129,6 +129,7 @@ export default defineConfig({
         },
         success: {
           DEFAULT: { value: "#1C9109" },
+          darker: { value: "#1a6e0d" },
           text: { value: "{colors.light}" },
         },
       },
@@ -141,6 +142,7 @@ export default defineConfig({
       activeEnabled: "&:not([disabled]):active",
       peerCheckedAndDisabled: ".peer:is(:checked:disabled) ~ &",
       placeholderHidden: "&:is(:not(:placeholder-shown))",
+      hoverOrFocusVisible: "&:is(:hover,:focus-visible)",
     },
   },
 

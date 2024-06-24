@@ -4,12 +4,12 @@ import { FilterCollapse } from "./filter-collapse";
 import { FilterGroupWrapper } from "./filter-group-wrapper";
 import type { GlobalAgg, TermsAgg } from "@/lib/actions/premise-filter";
 import { filterDefaults } from "@/lib/shared/config/filters";
-import { Stack } from "~/styled-system/jsx";
+import { InlineBox, Stack } from "~/styled-system/jsx";
 
 type RangedType = "range";
 type GroupedType = "checkbox" | "radio";
 
-type RangedMeta = { literal: keyof IntlMessages["filters"]["literal"] };
+type RangedMeta = { helper: keyof IntlMessages["filters"]["helpers"] };
 type GroupedMeta = {
   intl: "native" | "custom";
   intlKey?: Extract<keyof IntlMessages, "amenities" | "premise_types">;
@@ -37,7 +37,7 @@ function isRanged(
 }
 
 function isMetaRanged(meta: FilterMeta["meta"]): meta is RangedMeta {
-  return meta !== undefined && "literal" in meta;
+  return meta !== undefined && "helper" in meta;
 }
 
 function isMetaGrouped(meta: FilterMeta["meta"]): meta is GroupedMeta {
@@ -74,17 +74,21 @@ export async function FilterElement({
 
   if (isMetaRanged(meta) && isRanged(behavior, data)) {
     const { min, max } = data;
-    const { literal } = meta;
+    const { helper } = meta;
 
     return (
-      <RangeItem
-        min={min.value}
-        max={max.value}
-        fieldName={aggName}
-        literalLabel={t(`literal.${literal}`)}
-        fromLabel={t("range_from_label")}
-        toLabel={t("range_to_label")}
-      />
+      <>
+        <InlineBox color="secondary" fontSize="px13" marginBlockStart="-3">
+          {t(`helpers.${helper}`)}
+        </InlineBox>
+        <RangeItem
+          min={min.value}
+          max={max.value}
+          fieldName={aggName}
+          fromLabel={t("range_from_label")}
+          toLabel={t("range_to_label")}
+        />
+      </>
     );
   }
 
@@ -108,14 +112,14 @@ export async function FilterElement({
 
   return (
     <FilterGroupWrapper shouldReplace={isRadio}>
-      <Stack gap="8px">{allTerms.slice(0, sliceTo)}</Stack>
+      <Stack gap="2">{allTerms.slice(0, sliceTo)}</Stack>
       {allTerms.length >= handleFrom && (
         <FilterCollapse
           count={allTerms.length}
           showLabel={t("show_all_btn_label")}
           hideLabel={t("hide_btn_label")}
         >
-          <Stack gap="8px" alignItems="flex-start">
+          <Stack gap="2" alignItems="flex-start">
             {allTerms.slice(take)}
           </Stack>
         </FilterCollapse>

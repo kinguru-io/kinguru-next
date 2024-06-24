@@ -884,23 +884,23 @@
     "show_more": "Show more",
     "reset_btn_label": "Reset all filters",
     "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
-    "range_from_label": "From",
+    "range_from_label": "from",
     "range_to_label": "to",
     "show_all_btn_label": "Show all filters",
     "hide_btn_label": "Show less",
     "group": {
       "countryCode": "Country",
       "city": "City",
-      "price": "Price",
+      "price": "Price, zł",
       "type": "Premise type",
-      "capacity": "Capacity",
-      "area": "Area",
+      "capacity": "Capacity, ppl.",
+      "area": "Area, m²",
       "amenities": "Amenities and facilities"
     },
-    "literal": {
-      "price": "zł",
-      "area": "m²",
-      "capacity": "ppl."
+    "helpers": {
+      "price": "Specify price range",
+      "area": "Specify required area",
+      "capacity": "Specify number of people"
     },
     "sorting": {
       "label": "Sorting",

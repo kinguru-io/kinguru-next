@@ -15,6 +15,7 @@ import { customDivider } from "~/styled-system/patterns";
 import { dropdown, type DropdownVariantProps } from "~/styled-system/recipes";
 
 type DropdownProps = DropdownVariantProps & {
+  className?: string;
   children: React.ReactNode;
   hiddenState?: boolean;
 };
@@ -34,6 +35,7 @@ export function useDropdown() {
 }
 
 export function Dropdown({
+  className,
   children,
   size = "sm",
   anchor,
@@ -52,7 +54,7 @@ export function Dropdown({
 
   return (
     <DropdownContext.Provider value={{ hidden, setHidden, dropdownSlot }}>
-      <div className={dropdownSlot.dropdown} ref={dropdownRef}>
+      <div className={cx(dropdownSlot.dropdown, className)} ref={dropdownRef}>
         {children}
       </div>
     </DropdownContext.Provider>
