@@ -8,7 +8,7 @@ import prisma from "@/server/prisma.ts";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;
 const stripe = new Stripe(webhookSecret, {
-  apiVersion: "2024-04-10",
+  apiVersion: "2024-06-20",
   typescript: true,
 });
 
