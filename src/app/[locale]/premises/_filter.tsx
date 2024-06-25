@@ -1,12 +1,14 @@
 import { getTranslations } from "next-intl/server";
+import { FilterControlWrapper } from "./_filter-client-entry";
 import { FilterElement, type FilterConfig } from "@/components/filters";
-import { Filter, FilterGroup } from "@/components/uikit";
+import { Button, Filter, FilterGroup } from "@/components/uikit";
 import {
   getPremiseAggregations,
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
 import { Link } from "@/navigation";
-import { VStack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { Stack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
 const filters: Array<FilterConfig<PremiseAggregations>> = [
@@ -22,7 +24,7 @@ const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
     aggKey: "price",
     behavior: "range",
-    meta: { literal: "price" },
+    meta: { helper: "price" },
   },
   {
     aggKey: "type",
@@ -32,12 +34,12 @@ const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
     aggKey: "capacity",
     behavior: "range",
-    meta: { literal: "capacity" },
+    meta: { helper: "capacity" },
   },
   {
     aggKey: "area",
     behavior: "range",
-    meta: { literal: "area" },
+    meta: { helper: "area" },
   },
   {
     aggKey: "amenities",
@@ -51,7 +53,7 @@ export async function PremiseFilter() {
   const t = await getTranslations("filters");
 
   return (
-    <VStack gap="30px">
+    <Stack gap="0">
       <Filter heading={t("all")}>
         {filters.map(({ aggKey, behavior, meta }) => {
           const aggregation = aggregations[aggKey];
@@ -70,13 +72,19 @@ export async function PremiseFilter() {
           );
         })}
       </Filter>
-      <Link
-        className={button({ colorPalette: "dark" })}
-        href="/premises"
-        replace
-      >
-        {t("reset_btn_label")}
-      </Link>
-    </VStack>
+      <FilterControlWrapper>
+        <Link
+          className={button({ colorPalette: "dark" })}
+          href="/premises"
+          prefetch={false}
+          replace
+        >
+          {t("reset_btn_label")}
+        </Link>
+        <Button className={css({ md: { display: "none" } })}>
+          {t("show_result_btn_label")}
+        </Button>
+      </FilterControlWrapper>
+    </Stack>
   );
 }

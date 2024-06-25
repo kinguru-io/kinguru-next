@@ -10,6 +10,9 @@ export const additionalGlobalCss = defineGlobalStyles({
   },
   body: {
     color: "dark",
+    "&:has(dialog[open])": {
+      overflow: "hidden",
+    },
   },
   address: { fontStyle: "normal" },
   button: {

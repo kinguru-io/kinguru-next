@@ -6,10 +6,13 @@ import { Radio } from "./Radio";
 import { VStack } from "~/styled-system/jsx";
 
 const meta = {
-  title: "UIKit/Radio",
+  title: "UIKit/Forms/Radio",
   component: Radio,
   parameters: {
     layout: "centered",
+  },
+  args: {
+    disabled: false,
   },
 } satisfies Meta<typeof Radio>;
 

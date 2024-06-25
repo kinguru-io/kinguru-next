@@ -716,26 +716,27 @@
   },
   "filters": {
     "all": "Все фильтры",
-    "show_more": "Показать еще",
-    "reset_btn_label": "Сбросить все фильтры",
+    "show_more": "Показать больше",
+    "reset_btn_label": "Очистить фильтр",
+    "show_result_btn_label": "Показать результаты",
     "variants_found": "По вашему запросу {total, plural, =0 {ничего не найдено} one {найден # вариант} few {найдено # варианта} other {найдено # вариантов}}",
-    "range_from_label": "От",
+    "range_from_label": "от",
     "range_to_label": "до",
-    "show_all_btn_label": "Показать все фильтры",
-    "hide_btn_label": "Показать меньше",
+    "show_all_btn_label": "Показать еще",
+    "hide_btn_label": "Скрыть",
     "group": {
       "countryCode": "Страна",
       "city": "Город",
-      "price": "Цена",
+      "price": "Стоимость, zł",
       "type": "Тип помещения",
-      "capacity": "Вместительность",
-      "area": "Площадь",
+      "capacity": "Вместительность, чел.",
+      "area": "Площадь, м²",
       "amenities": "Оснащения и удобства"
     },
-    "literal": {
-      "price": "zł",
-      "area": "м²",
-      "capacity": "чел."
+    "helpers": {
+      "price": "Укажите диапазон стоимости",
+      "area": "Укажите необходимую площадь",
+      "capacity": "Укажите количество человек"
     },
     "sorting": {
       "label": "Сортировка",

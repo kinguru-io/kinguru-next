@@ -1,12 +1,16 @@
-import { Avatar, AvatarWrapper, type AvatarDataType } from "../Avatar";
+import { Avatar, AvatarWrapper, type AvatarDataType } from "@/components/uikit";
 import { css } from "~/styled-system/css";
+import type { AvatarVariantProps } from "~/styled-system/recipes";
 
-type AvatarProps = {
+export function AvatarGroup({
+  avatars,
+  showCount = 3,
+  size,
+}: {
   avatars: AvatarDataType[];
   showCount?: 3 | 5;
-};
-
-export function AvatarGroup({ avatars, showCount = 3 }: AvatarProps) {
+  size?: AvatarVariantProps["size"];
+}) {
   const avatarsCountLeft = avatars.length - showCount;
   const trimLastCount = avatarsCountLeft === 0 ? 0 : 1;
   const visibleAvatars = avatars.slice(0, showCount - trimLastCount).reverse();
@@ -16,16 +20,21 @@ export function AvatarGroup({ avatars, showCount = 3 }: AvatarProps) {
       className={css({
         display: "flex",
         flexDirection: "row-reverse",
-        "& .avatar:not(:last-child)": {
-          marginInlineStart: "-5px",
+        "& > :not(:last-child)": {
+          marginInlineStart: "-1.5",
         },
       })}
     >
       {avatarsCountLeft > 0 && (
-        <AvatarWrapper>+{avatarsCountLeft + 1}</AvatarWrapper>
+        <AvatarWrapper size={size}>+{avatarsCountLeft + 1}</AvatarWrapper>
       )}
       {visibleAvatars.map(({ image, name }) => (
-        <Avatar key={name} image={image} name={name} />
+        <Avatar
+          key={name + "_" + image}
+          image={image}
+          name={name}
+          size={size}
+        />
       ))}
     </div>
   );

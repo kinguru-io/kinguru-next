@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { LoadMoreLink, SortToggler } from "@/components/filters";
 import { PremiseStack } from "@/components/premise";
 import { getPremises, defaultSizings } from "@/lib/actions/premise-filter";
-import { HStack, InlineBox, Stack } from "~/styled-system/jsx";
+import { Flex, InlineBox, Stack } from "~/styled-system/jsx";
 
 export async function Listing({
   searchParams,
@@ -26,9 +26,14 @@ export async function Listing({
   ];
 
   return (
-    <Stack gap="15px">
-      <HStack justifyContent="space-between">
-        <InlineBox color="dark" textStyle="heading.6">
+    <Stack gap="3">
+      <Flex
+        gap="2"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        alignItems="center"
+      >
+        <InlineBox fontSize="sm" fontWeight="bold" flexGrow="5">
           {t("variants_found", { total })}
         </InlineBox>
         <SortToggler
@@ -37,7 +42,7 @@ export async function Listing({
           items={sortItems}
           defaultLabel={t(`sorting.${sort}`)}
         />
-      </HStack>
+      </Flex>
       <PremiseStack premiseIdList={hits} />
       <LoadMoreLink
         take={defaultSizings.size}

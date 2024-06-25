@@ -13,6 +13,7 @@ export const buttonRecipe = defineRecipe({
     overflow: "hidden",
     transition: "colors",
     outline: "1px solid transparent",
+    whiteSpace: "nowrap",
     _hoverEnabled: {
       bgColor: "dark",
       color: "light",

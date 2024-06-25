@@ -1,11 +1,16 @@
 import { Suspense } from "react";
 import { PremiseFilter } from "./_filter";
+import { FilterModal } from "./_filter-client-entry";
 import { Listing } from "./_listing";
 import {
   TimeRangeHero,
   TimeRangeLink,
 } from "@/components/common/cards/time-range";
 import {
+  Button,
+  Filter,
+  FilterGroup,
+  Icon,
   PremiseCard,
   PremiseContent,
   PremiseDescription,
@@ -15,6 +20,7 @@ import {
 } from "@/components/uikit";
 import { PremiseTags } from "@/components/uikit/PremiseCard/PremiseCard";
 import { defaultSizings } from "@/lib/actions/premise-filter";
+import { css } from "~/styled-system/css";
 import { AspectRatio, Container, Grid, InlineBox } from "~/styled-system/jsx";
 
 export default function PremiseListingPage({
@@ -37,11 +43,20 @@ export default function PremiseListingPage({
       </TimeRangeHero>
       <Container>
         <Grid
-          gap="50px"
-          paddingBlock="70px"
-          gridTemplateColumns={{ base: "1fr", md: "284px 1fr" }}
+          gap="4"
+          paddingBlockStart="4"
+          paddingBlockEnd="8"
+          gridTemplateColumns="1fr"
+          md={{
+            gap: "16",
+            paddingBlockStart: "8",
+            paddingBlockEnd: "13",
+            gridTemplateColumns: "{spacing.72} 1fr",
+          }}
         >
-          <PremiseFilter />
+          <FilterModal fallback={<FilterSkeleton />}>
+            <PremiseFilter />
+          </FilterModal>
           <Suspense
             key={Object.values(searchParams).join()}
             fallback={<ListingSkeletons size={size} />}
@@ -76,5 +91,31 @@ function ListingSkeletons({ size }: { size: number }) {
         </PremiseCard>
       ))}
     </Grid>
+  );
+}
+
+function FilterSkeleton() {
+  return (
+    <div
+      className={css({
+        "& > :first-child": { width: "full", md: { display: "none" } },
+        "& > :last-child": { mdDown: { display: "none" } },
+      })}
+      aria-busy
+    >
+      <Button
+        colorPalette="secondary"
+        icon={
+          <Icon name="common/settings" className={css({ fontSize: "xl" })} />
+        }
+        isLoading
+      >
+        ...
+      </Button>
+      <Filter heading="...">
+        <FilterGroup heading="...">...</FilterGroup>
+        <FilterGroup heading="...">...</FilterGroup>
+      </Filter>
+    </div>
   );
 }

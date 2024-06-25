@@ -8,14 +8,8 @@ export function Filter({
   children: React.ReactNode;
 }) {
   return (
-    <Stack
-      layerStyle="outlineSecondaryWrapper"
-      borderRadius="27px"
-      paddingBlock="15px 10px"
-      gap="0"
-      height="min-content"
-    >
-      <InlineBox textStyle="heading.6" paddingInline="25px">
+    <Stack gap="4" height="min-content">
+      <InlineBox fontSize="3xl" fontWeight="bold">
         {heading}
       </InlineBox>
       {children}
@@ -32,15 +26,16 @@ export function FilterGroup({
 }) {
   return (
     <Stack
-      gap="15px"
-      paddingBlock="15px"
-      paddingInline="25px"
+      gap="3"
+      paddingBlockEnd="4"
       borderBlockEnd={{
         base: "1px solid token(colors.tertiary)",
         _last: "none",
       }}
     >
-      <InlineBox textStyle="heading.4">{heading}</InlineBox>
+      <InlineBox fontSize="md" fontWeight="bold">
+        {heading}
+      </InlineBox>
       {children}
     </Stack>
   );

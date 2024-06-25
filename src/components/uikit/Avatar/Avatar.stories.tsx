@@ -22,20 +22,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const DefaultAvatar: Story = {
+export const Basic: Story = {
   args: {
     image: faker.image.avatar(),
     name: faker.person.fullName(),
   },
 };
 
-export const SizedAvatar: Story = {
-  args: DefaultAvatar.args,
-  render: ({ image, name }) => {
-    const data = avatarRecipe.variantMap.size.map((size) => {
-      return <Avatar key={size} size={size} image={image} name={name} />;
-    });
-
-    return <>{data}</>;
+export const WithBrokenSrc: Story = {
+  args: {
+    image: "???",
+    name: faker.person.fullName(),
   },
 };

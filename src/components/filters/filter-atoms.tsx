@@ -13,14 +13,12 @@ export function RangeItem({
   min,
   max,
   fieldName,
-  literalLabel,
   fromLabel,
   toLabel,
 }: {
   min: number;
   max: number;
   fieldName: string;
-  literalLabel: string;
   fromLabel: string;
   toLabel: string;
 }) {
@@ -31,6 +29,7 @@ export function RangeItem({
   const commonProps: ComponentProps<typeof Input> = {
     type: "text",
     inputMode: "numeric",
+    textCentered: true,
     onInput: ({ currentTarget }) => {
       const newValue = currentTarget.value;
       if (numericRegex.test(newValue)) return;
@@ -64,30 +63,21 @@ export function RangeItem({
   const [from, to] = currentState ? currentState.split("-") : [];
 
   return (
-    <HStack gap="15px">
-      <HStack gap="7px">
-        <span>{fromLabel}</span>
-        <Input
-          name={`from_${fieldName}`}
-          placeholder={String(min)}
-          defaultValue={from}
-          onChange={(e) => updateRangeSearchParams(e.target.value, "from")}
-          {...commonProps}
-        />
-        <span>{literalLabel}</span>
-      </HStack>
-
-      <HStack gap="7px">
-        <span>{toLabel}</span>
-        <Input
-          name={`to_${fieldName}`}
-          placeholder={String(max)}
-          defaultValue={to}
-          onChange={(e) => updateRangeSearchParams(e.target.value, "to")}
-          {...commonProps}
-        />
-        <span>{literalLabel}</span>
-      </HStack>
+    <HStack gap="2">
+      <Input
+        name={`from_${fieldName}`}
+        placeholder={`${fromLabel} ${String(min)}`}
+        defaultValue={from}
+        onChange={(e) => updateRangeSearchParams(e.target.value, "from")}
+        {...commonProps}
+      />
+      <Input
+        name={`to_${fieldName}`}
+        placeholder={`${toLabel} ${String(max)}`}
+        defaultValue={to}
+        onChange={(e) => updateRangeSearchParams(e.target.value, "to")}
+        {...commonProps}
+      />
     </HStack>
   );
 }

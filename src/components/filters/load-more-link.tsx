@@ -19,8 +19,12 @@ export function LoadMoreLink({
   label: string;
 }) {
   const className = cx(
-    button({ colorPalette: "secondary", centered: true }),
-    css({ marginBlockStart: "30px", alignItems: "baseline" }),
+    button({
+      colorPalette: "secondary",
+      centered: true,
+      size: { base: "sm", md: "lg" },
+    }),
+    css({ marginBlockStart: { base: "5", md: "10" } }),
   );
 
   const currentSize = searchParams?.size

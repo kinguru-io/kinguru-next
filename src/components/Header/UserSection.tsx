@@ -9,16 +9,32 @@ import {
   DropdownMenu,
 } from "@/components/uikit";
 import { Link } from "@/navigation";
+import { HStack, InlineBox } from "~/styled-system/jsx";
 
 export async function UserSection() {
   const session = await getSession();
   const t = await getTranslations("navbar");
 
+  const name = session?.user?.name;
+  const image = session?.user?.image;
+
   return (
     <Dropdown size="lg">
       <DropdownInitiator>
         {session ? (
-          <Avatar name={session.user?.name} image={session.user?.image} />
+          <HStack gap="2">
+            <Avatar name={name} image={image} size={{ base: "xs", md: "md" }} />
+            {name && (
+              <InlineBox
+                fontSize="xs"
+                maxWidth="75px"
+                display={{ base: "none", sm: "initial" }}
+                truncate
+              >
+                {name}
+              </InlineBox>
+            )}
+          </HStack>
         ) : (
           <Button>{t("sign_in_and_sign_up")}</Button>
         )}

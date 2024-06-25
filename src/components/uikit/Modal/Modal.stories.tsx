@@ -1,32 +1,40 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Meta, StoryObj } from "@storybook/react";
-import { Modal, ModalInitiator, Button } from "@/components/uikit";
+import type { Meta, StoryObj } from "@storybook/react";
+import {
+  Modal,
+  ModalInitiator,
+  Button,
+  Filter,
+  FilterGroup,
+  Checkbox,
+  Input,
+} from "@/components/uikit";
 // using renaming to obtain the original since ModalWindow is being exported as next.js dynamic()
 import { _ModalWindow as ModalWindow } from "@/components/uikit/Modal/ModalWindow";
 
-const meta = {
+const meta: Meta<typeof Modal> = {
   title: "UIKit/Modal",
-  component: Modal,
-  parameters: {
-    layout: "centered",
-  },
-} satisfies Meta<typeof Modal>;
+  parameters: { layout: "centered" },
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DefaultModal: Story = {
-  args: {
-    children: null,
-  },
   render: () => {
     return (
       <Modal>
         <ModalInitiator>
-          <Button> Open Modal</Button>
+          <Button>All filters</Button>
         </ModalInitiator>
         <ModalWindow>
-          <h1>Header</h1>
+          <Filter heading="All filters">
+            <FilterGroup heading="Country">
+              <Checkbox label="Poland" />
+            </FilterGroup>
+            <FilterGroup heading="Price">
+              <Input placeholder="42 zl" />
+            </FilterGroup>
+          </Filter>
         </ModalWindow>
       </Modal>
     );
