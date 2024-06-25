@@ -717,7 +717,8 @@
   "filters": {
     "all": "Все фильтры",
     "show_more": "Показать больше",
-    "reset_btn_label": "Сбросить все фильтры",
+    "reset_btn_label": "Очистить фильтр",
+    "show_result_btn_label": "Показать результаты",
     "variants_found": "По вашему запросу {total, plural, =0 {ничего не найдено} one {найден # вариант} few {найдено # варианта} other {найдено # вариантов}}",
     "range_from_label": "от",
     "range_to_label": "до",

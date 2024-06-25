@@ -1,24 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Modal, ModalInitiator, Button } from "@/components/uikit";
 // using renaming to obtain the original since ModalWindow is being exported as next.js dynamic()
 import { _ModalWindow as ModalWindow } from "@/components/uikit/Modal/ModalWindow";
 
-const meta = {
+const meta: Meta<typeof Modal> = {
   title: "UIKit/Modal",
-  component: Modal,
-  parameters: {
-    layout: "centered",
-  },
-} satisfies Meta<typeof Modal>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DefaultModal: Story = {
-  args: {
-    children: null,
-  },
   render: () => {
     return (
       <Modal>

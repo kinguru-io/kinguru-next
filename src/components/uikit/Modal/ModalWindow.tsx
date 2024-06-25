@@ -1,14 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { RxCross2 } from "react-icons/rx";
-import { ModalProps, useModal } from "./Modal";
-import { Button } from "@/components/uikit";
+import { useModal } from "./Modal";
+import { Button, Icon } from "@/components/uikit";
+import headerLogotype from "~/public/img/logotypes/header-logotype.svg";
 import { css } from "~/styled-system/css";
-import { Box, Float } from "~/styled-system/jsx";
+import { Box, HStack } from "~/styled-system/jsx";
 
-export function _ModalWindow({ children }: ModalProps) {
+export function _ModalWindow({
+  children,
+  headerSlot,
+}: {
+  children: React.ReactNode;
+  headerSlot?: React.ReactNode;
+}) {
   const { open, setOpen, closable } = useModal();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -36,35 +43,81 @@ export function _ModalWindow({ children }: ModalProps) {
     }
   };
 
+  // click outside handler in terms of <dialog />
+  const dialogBackdropClicked = ({
+    target,
+  }: React.PointerEvent<HTMLDialogElement>) => {
+    if (closable && target === dialogRef.current) {
+      setOpen(false);
+    }
+  };
+
+  if (!open) return null;
+
   return createPortal(
     <dialog
       ref={dialogRef}
+      onClick={dialogBackdropClicked}
       onCancel={modalCancelled}
       className={css({
-        bg: "secondary.lighter",
-        borderRadius: "10px",
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translateX(-50%) translateY(-50%)",
-        p: "18px",
-        overflow: "initial",
+        bgColor: "light",
+        maxWidth: "100vw",
+        maxHeight: "full",
+        width: "full",
+        height: "full",
+        md: {
+          maxWidth: "breakpoint-md",
+          maxHeight: "90vh",
+          borderRadius: "sm",
+          margin: "auto",
+          height: "min-content",
+          width: "max-content",
+        },
       })}
     >
-      <Box overflowY="auto" maxHeight="90vh">
-        {children}
-      </Box>
-      {closable && (
-        <Float
-          placement="top-end"
-          offset="-10px"
-          fontSize="10px"
-          translate="none"
-        >
-          <Button onClick={closeButtonClicked} icon={<RxCross2 />} />
-        </Float>
-      )}
+      <ModalHeader>
+        {headerSlot}
+        {closable && (
+          <Button
+            className={css({ padding: "2" })}
+            colorPalette="dark"
+            onClick={closeButtonClicked}
+            aria-label="Close"
+          >
+            <Icon name="action/cross" />
+          </Button>
+        )}
+      </ModalHeader>
+      <Box padding="4">{children}</Box>
     </dialog>,
     document.body,
+  );
+}
+
+function ModalHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <HStack
+      gap="2"
+      padding="4"
+      position="sticky"
+      top="0"
+      bgColor="light"
+      boxShadow="header"
+      zIndex="1"
+      md={{
+        "& > img": { display: "none" },
+      }}
+    >
+      <Image
+        src={headerLogotype.src}
+        alt="Eventify"
+        width="87"
+        height="32"
+        unoptimized
+      />
+      <HStack gap="6" marginInlineStart="auto">
+        {children}
+      </HStack>
+    </HStack>
   );
 }

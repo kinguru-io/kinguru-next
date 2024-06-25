@@ -882,7 +882,8 @@
   "filters": {
     "all": "All filters",
     "show_more": "Show more",
-    "reset_btn_label": "Reset all filters",
+    "reset_btn_label": "Reset filter",
+    "show_result_btn_label": "Show results",
     "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
     "range_from_label": "from",
     "range_to_label": "to",

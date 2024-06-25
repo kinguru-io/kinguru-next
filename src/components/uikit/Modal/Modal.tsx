@@ -17,15 +17,23 @@ const ModalContext = createContext<{
   setOpen: Dispatch<SetStateAction<boolean>>;
   closable: boolean;
   setClosable: Dispatch<SetStateAction<boolean>>;
-}>({
-  open: false,
-  setOpen: () => {},
-  closable: true,
-  setClosable: () => {},
-});
+} | null>(null);
 
 export function useModal() {
   const context = useContext(ModalContext);
+
+  if (context === null) {
+    // TODO need to be refactored to fit SSR
+    console.warn("useModal() must be used within a <Modal />");
+
+    return {
+      open: false,
+      setOpen: () => {},
+      closable: true,
+      setClosable: () => {},
+    };
+  }
+
   return context;
 }
 

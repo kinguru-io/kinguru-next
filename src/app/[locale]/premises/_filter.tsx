@@ -1,11 +1,13 @@
 import { getTranslations } from "next-intl/server";
+import { FilterControlWrapper } from "./_filter-client-entry";
 import { FilterElement, type FilterConfig } from "@/components/filters";
-import { Filter, FilterGroup } from "@/components/uikit";
+import { Button, Filter, FilterGroup } from "@/components/uikit";
 import {
   getPremiseAggregations,
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
 import { Link } from "@/navigation";
+import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
@@ -51,7 +53,7 @@ export async function PremiseFilter() {
   const t = await getTranslations("filters");
 
   return (
-    <Stack gap="4">
+    <Stack gap="0">
       <Filter heading={t("all")}>
         {filters.map(({ aggKey, behavior, meta }) => {
           const aggregation = aggregations[aggKey];
@@ -70,14 +72,19 @@ export async function PremiseFilter() {
           );
         })}
       </Filter>
-      <Link
-        className={button({ colorPalette: "dark", centered: true })}
-        href="/premises"
-        prefetch={false}
-        replace
-      >
-        {t("reset_btn_label")}
-      </Link>
+      <FilterControlWrapper>
+        <Link
+          className={button({ colorPalette: "dark" })}
+          href="/premises"
+          prefetch={false}
+          replace
+        >
+          {t("reset_btn_label")}
+        </Link>
+        <Button className={css({ md: { display: "none" } })}>
+          {t("show_result_btn_label")}
+        </Button>
+      </FilterControlWrapper>
     </Stack>
   );
 }
