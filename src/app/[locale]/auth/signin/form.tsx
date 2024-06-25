@@ -1,6 +1,5 @@
 "use client";
 
-import { StackDivider } from "@chakra-ui/react";
 import { type ClientSafeProvider, signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -42,7 +41,6 @@ export function SigninForm({
               {provider.id === "email" ? t("submit") : provider.name}
             </Button>
           </VStack>
-          <StackDivider borderColor="gray.200" />
         </>
       ))}
     </VStack>

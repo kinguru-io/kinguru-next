@@ -1,6 +1,5 @@
 "use client";
 
-import { IconButton } from "@chakra-ui/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
@@ -172,19 +171,7 @@ export function Tab({
     >
       {label}
       {showSuccessIcon && (
-        <IconButton
-          isRound={true}
-          variant="solid"
-          colorScheme="teal"
-          aria-label="Done"
-          fontSize="20px"
-          position="absolute"
-          bottom="10px"
-          right="9px"
-          icon={
-            <Image src={IconFormFieldSuccess} alt="" width={10} height={10} />
-          }
-        />
+        <Image src={IconFormFieldSuccess} alt="" width={10} height={10} />
       )}
     </TabButton>
   );
