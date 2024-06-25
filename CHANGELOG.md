@@ -1,3 +1,10 @@
+# [0.46.0](https://github.com/kinguru-io/kinguru-next/compare/v0.45.1...v0.46.0) (2024-06-25)
+
+
+### Features
+
+* **KINGU-144:** `Avatar`, `Filter` restyling [and derived] ([#649](https://github.com/kinguru-io/kinguru-next/issues/649)) ([8eec557](https://github.com/kinguru-io/kinguru-next/commit/8eec557504dfd50f5c9c2f62df2d4c4f5d079aad))
+
 ## [0.45.1](https://github.com/kinguru-io/kinguru-next/compare/v0.45.0...v0.45.1) (2024-06-25)
 
 
