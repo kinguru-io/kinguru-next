@@ -60,6 +60,7 @@ export function _ModalWindow({
       onClick={dialogBackdropClicked}
       onCancel={modalCancelled}
       className={css({
+        position: "relative",
         bgColor: "light",
         maxWidth: "100vw",
         maxHeight: "full",
@@ -82,7 +83,7 @@ export function _ModalWindow({
           <Button
             className={css({
               padding: "2",
-              md: { fontSize: "xs", padding: "1.5" },
+              md: { fontSize: "2xs", padding: "1.5", borderRadius: "sm" },
             })}
             colorPalette="dark"
             onClick={closeButtonClicked}
@@ -109,8 +110,11 @@ function ModalHeader({ children }: { children: React.ReactNode }) {
       boxShadow="header"
       zIndex="1"
       md={{
-        "& > img": { display: "none" },
+        position: "absolute",
+        right: "0",
+        bgColor: "unset",
         padding: "1",
+        "& > img": { display: "none" },
       }}
     >
       <Image
