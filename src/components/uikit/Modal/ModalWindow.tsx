@@ -66,6 +66,7 @@ export function _ModalWindow({
         width: "full",
         height: "full",
         md: {
+          minWidth: "80",
           maxWidth: "breakpoint-md",
           maxHeight: "90vh",
           borderRadius: "sm",
@@ -79,7 +80,10 @@ export function _ModalWindow({
         {headerSlot}
         {closable && (
           <Button
-            className={css({ padding: "2" })}
+            className={css({
+              padding: "2",
+              md: { fontSize: "xs", padding: "1.5" },
+            })}
             colorPalette="dark"
             onClick={closeButtonClicked}
             aria-label="Close"
@@ -106,6 +110,7 @@ function ModalHeader({ children }: { children: React.ReactNode }) {
       zIndex="1"
       md={{
         "& > img": { display: "none" },
+        padding: "1",
       }}
     >
       <Image
