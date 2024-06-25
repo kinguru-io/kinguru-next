@@ -4,7 +4,7 @@ import { getTimezoneOffset } from "date-fns-tz";
 import { groupBy } from "../../../src/lib/shared/utils/array";
 import { DAYS_OF_WEEK_ORDERED } from "../../../src/lib/shared/utils/datetime";
 
-const fullDayHoursList = Array.from({ length: 25 }, (_, i) => i);
+export const fullDayHoursList = Array.from({ length: 25 }, (_, i) => i);
 
 /**
  * @description Creates a group of hours when a hall is closed in the form `{ "1": [1,2,3,4,5,12,24] }`
@@ -13,7 +13,7 @@ export function prepareClosedHours({
   openHours,
   timeZone,
 }: {
-  openHours: PremiseOpenHours[];
+  openHours: Array<Pick<PremiseOpenHours, "day" | "openTime" | "closeTime">>;
   timeZone: string;
 }) {
   const _hoursOffset = getTimezoneOffset(timeZone) / millisecondsInHour;

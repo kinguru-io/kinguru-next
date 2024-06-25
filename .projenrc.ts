@@ -218,11 +218,33 @@ const project = new web.NextJsTypeScriptProject({
     "@semantic-release/git",
     "@semantic-release/release-notes-generator",
     "semantic-release-plus",
+
+    "vitest",
+    "@vitejs/plugin-react",
+    "jsdom",
+    "@testing-library/react",
   ],
 });
 
 project.package.addField("type", "module");
 project.eslint?.addExtends("plugin:@next/next/recommended");
+project.eslint?.addRules({
+  "import/no-extraneous-dependencies": [
+    "error",
+    {
+      devDependencies: [
+        "**/test/**",
+        "**/build-tools/**",
+        ".projenrc.ts",
+        "projenrc/**/*.ts",
+        "**/*.{test,spec}.ts",
+        "src/**/*.stories.tsx",
+      ],
+      optionalDependencies: false,
+      peerDependencies: true,
+    },
+  ],
+});
 
 project.defaultTask?.reset(
   'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node .projenrc.ts',
@@ -248,6 +270,9 @@ project.addScripts({
   "consumer:run":
     'node --import \'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));\'  --experimental-specifier-resolution=node consumer/main.ts',
 });
+project.addScripts({ vitest: "vitest" });
+
+project.testTask.exec("vitest run");
 
 project.buildWorkflow?.addPostBuildJob("staging-deploy", {
   name: "staging-deploy",
