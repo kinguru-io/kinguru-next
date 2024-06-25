@@ -1,3 +1,10 @@
+## [0.45.1](https://github.com/kinguru-io/kinguru-next/compare/v0.45.0...v0.45.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* remove unused next pages router ([#652](https://github.com/kinguru-io/kinguru-next/issues/652)) ([8493d32](https://github.com/kinguru-io/kinguru-next/commit/8493d32b7786caf48ee70271e4fe179181a4cebb))
+
 # [0.45.0](https://github.com/kinguru-io/kinguru-next/compare/v0.44.0...v0.45.0) (2024-06-24)
 
 
