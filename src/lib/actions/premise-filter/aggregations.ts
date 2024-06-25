@@ -7,8 +7,8 @@ const premiseAggregationsQuery = {
   price: {
     global: {},
     aggs: {
-      min: { min: { field: "minPrice" } },
-      max: { max: { field: "maxPrice" } },
+      min: { min: { field: "minPrice", script: "(int) _value" } },
+      max: { max: { field: "maxPrice", script: "Math.ceil(_value)" } },
     },
   },
   capacity: {
@@ -21,8 +21,8 @@ const premiseAggregationsQuery = {
   area: {
     global: {},
     aggs: {
-      min: { min: { field: "area" } },
-      max: { max: { field: "area" } },
+      min: { min: { field: "area", script: "(int) _value" } },
+      max: { max: { field: "area", script: "Math.ceil(_value)" } },
     },
   },
   countryCode: {
