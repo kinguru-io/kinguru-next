@@ -188,44 +188,8 @@
       "type": "runtime"
     },
     {
-      "name": "@chakra-ui/icons",
-      "type": "runtime"
-    },
-    {
-      "name": "@chakra-ui/next-js",
-      "type": "runtime"
-    },
-    {
-      "name": "@chakra-ui/react",
-      "type": "runtime"
-    },
-    {
-      "name": "@chakra-ui/theme-tools",
-      "type": "runtime"
-    },
-    {
-      "name": "@egjs/react-flicking",
-      "type": "runtime"
-    },
-    {
       "name": "@elastic/elasticsearch",
       "version": "8.13.1",
-      "type": "runtime"
-    },
-    {
-      "name": "@elastic/react-search-ui",
-      "type": "runtime"
-    },
-    {
-      "name": "@elastic/react-search-ui-views",
-      "type": "runtime"
-    },
-    {
-      "name": "@elastic/search-ui",
-      "type": "runtime"
-    },
-    {
-      "name": "@elastic/search-ui-elasticsearch-connector",
       "type": "runtime"
     },
     {
@@ -234,23 +198,11 @@
       "type": "runtime"
     },
     {
-      "name": "@emotion/react",
-      "type": "runtime"
-    },
-    {
-      "name": "@emotion/styled",
-      "type": "runtime"
-    },
-    {
       "name": "@hookform/resolvers",
       "type": "runtime"
     },
     {
       "name": "@mapbox/search-js-core",
-      "type": "runtime"
-    },
-    {
-      "name": "@mapbox/search-js-react",
       "type": "runtime"
     },
     {
@@ -302,41 +254,7 @@
       "type": "runtime"
     },
     {
-      "name": "@tanstack/react-query-devtools",
-      "version": "^4.18.0",
-      "type": "runtime"
-    },
-    {
-      "name": "@tanstack/react-query",
-      "version": "^4.18.0",
-      "type": "runtime"
-    },
-    {
-      "name": "@tanstack/react-table",
-      "type": "runtime"
-    },
-    {
-      "name": "@trpc/client",
-      "type": "runtime"
-    },
-    {
-      "name": "@trpc/next",
-      "type": "runtime"
-    },
-    {
-      "name": "@trpc/react-query",
-      "type": "runtime"
-    },
-    {
-      "name": "@trpc/server",
-      "type": "runtime"
-    },
-    {
       "name": "bullmq",
-      "type": "runtime"
-    },
-    {
-      "name": "chakra-react-select",
       "type": "runtime"
     },
     {
@@ -352,27 +270,11 @@
       "type": "runtime"
     },
     {
-      "name": "formik",
-      "type": "runtime"
-    },
-    {
-      "name": "framer-motion",
-      "type": "runtime"
-    },
-    {
       "name": "kafkajs",
       "type": "runtime"
     },
     {
       "name": "mapbox-gl",
-      "type": "runtime"
-    },
-    {
-      "name": "micro",
-      "type": "runtime"
-    },
-    {
-      "name": "moment",
       "type": "runtime"
     },
     {
@@ -388,10 +290,6 @@
       "type": "runtime"
     },
     {
-      "name": "next-s3-upload",
-      "type": "runtime"
-    },
-    {
       "name": "next-sitemap",
       "type": "runtime"
     },
@@ -404,15 +302,7 @@
       "type": "runtime"
     },
     {
-      "name": "rc-pagination",
-      "type": "runtime"
-    },
-    {
       "name": "react",
-      "type": "runtime"
-    },
-    {
-      "name": "react-cookie-consent",
       "type": "runtime"
     },
     {
@@ -436,19 +326,7 @@
       "type": "runtime"
     },
     {
-      "name": "react-infinite-scroll-component",
-      "type": "runtime"
-    },
-    {
-      "name": "react-intersection-observer",
-      "type": "runtime"
-    },
-    {
       "name": "react-map-gl",
-      "type": "runtime"
-    },
-    {
-      "name": "react-simple-star-rating",
       "type": "runtime"
     },
     {
@@ -461,14 +339,6 @@
     },
     {
       "name": "stripe",
-      "type": "runtime"
-    },
-    {
-      "name": "superjson",
-      "type": "runtime"
-    },
-    {
-      "name": "trpc-shield",
       "type": "runtime"
     },
     {
@@ -485,10 +355,6 @@
     },
     {
       "name": "zod-form-data",
-      "type": "runtime"
-    },
-    {
-      "name": "zod-formik-adapter",
       "type": "runtime"
     }
   ],
