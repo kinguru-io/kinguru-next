@@ -70,6 +70,10 @@
       "type": "build"
     },
     {
+      "name": "@testing-library/react",
+      "type": "build"
+    },
+    {
       "name": "@types/gtag.js",
       "type": "build"
     },
@@ -94,6 +98,10 @@
     {
       "name": "@typescript-eslint/parser",
       "version": "^7",
+      "type": "build"
+    },
+    {
+      "name": "@vitejs/plugin-react",
       "type": "build"
     },
     {
@@ -128,6 +136,10 @@
     {
       "name": "eslint",
       "version": "^8",
+      "type": "build"
+    },
+    {
+      "name": "jsdom",
       "type": "build"
     },
     {
@@ -177,6 +189,10 @@
     },
     {
       "name": "typescript",
+      "type": "build"
+    },
+    {
+      "name": "vitest",
       "type": "build"
     },
     {
