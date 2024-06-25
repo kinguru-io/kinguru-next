@@ -55,9 +55,7 @@
           "**/test/**",
           "**/build-tools/**",
           ".projenrc.ts",
-          "projenrc/**/*.ts",
-          "src/**/*.stories.tsx",
-          "**/*.{test,spec}.ts"
+          "projenrc/**/*.ts"
         ],
         "optionalDependencies": false,
         "peerDependencies": true
