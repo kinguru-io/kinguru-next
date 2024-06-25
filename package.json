@@ -147,7 +147,7 @@
     "react-simple-star-rating": "^5.1.7",
     "react-snap-carousel": "^0.4.0",
     "sharp": "^0.33.4",
-    "stripe": "^15.12.0",
+    "stripe": "^16.0.0",
     "superjson": "^2.2.1",
     "trpc-shield": "^0.4.4",
     "use-debounce": "^10.0.1",
