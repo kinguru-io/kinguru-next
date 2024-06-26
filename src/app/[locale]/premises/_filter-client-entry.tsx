@@ -17,22 +17,22 @@ export function FilterModal({
   children: React.ReactNode;
   fallback: React.ReactNode;
 }) {
-  const isBelowMd = useMediaQuery(mdMediaQuery);
+  const isAboveMd = useMediaQuery(mdMediaQuery);
 
-  if (isBelowMd === null) {
+  if (isAboveMd === null) {
     return <>{fallback}</>;
   }
 
-  if (!isBelowMd) {
-    return (
-      <Modal>
-        <FilterToggle />
-        <ModalWindow>{children}</ModalWindow>
-      </Modal>
-    );
+  if (isAboveMd) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  return (
+    <Modal>
+      <FilterToggle />
+      <ModalWindow>{children}</ModalWindow>
+    </Modal>
+  );
 }
 
 function FilterToggle() {

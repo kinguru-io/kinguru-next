@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
@@ -37,7 +36,14 @@ export const notAuthHeader: Story = {
     moduleMock: {
       mock: () => {
         const mockSession = createMock(auth, "getSession");
-        mockSession.mockReturnValue(Promise.resolve(null));
+        mockSession.mockReturnValue(
+          new Promise((resolve) => {
+            const id = setTimeout(() => {
+              resolve(null);
+              clearTimeout(id);
+            }, 800);
+          }),
+        );
 
         const mockTranslations = createMock(nextIntl, "getTranslations");
         mockTranslations.mockReturnValue(
@@ -75,7 +81,7 @@ export const authHeader: Story = {
                 expires: "date",
               });
               clearTimeout(id);
-            }, 1000);
+            }, 800);
           }),
         );
 

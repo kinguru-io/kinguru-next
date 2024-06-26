@@ -2,12 +2,12 @@
 
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
-import { RiLoader2Fill } from "react-icons/ri";
 import {
   Dropdown,
   DropdownInitiator,
   DropdownMenu,
   ArrowIcon,
+  Icon,
 } from "@/components/uikit";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -37,7 +37,14 @@ export function LanguageDropdown() {
               lineHeight: "1",
             })}
           >
-            {isPending ? <RiLoader2Fill /> : locale}
+            {isPending ? (
+              <Icon
+                name="common/spinner"
+                className={css({ animation: "spin" })}
+              />
+            ) : (
+              locale
+            )}
           </span>
           <ArrowIcon direction="down" className={css({ fontSize: "0.5em" })} />
         </HStack>
