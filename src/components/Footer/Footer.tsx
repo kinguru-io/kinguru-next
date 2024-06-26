@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Icon } from "@/components/uikit";
-import type { SpritesMap } from "@/components/uikit";
+import { SocialMediaLinks, Contacts } from "@/components/brand";
 import { Link } from "@/navigation";
 import footerLogo from "~/public/img/logotypes/footer-logotype.svg";
 import { css } from "~/styled-system/css";
-import { Container, Flex, HStack } from "~/styled-system/jsx";
+import { Container, Flex } from "~/styled-system/jsx";
 import { footer } from "~/styled-system/recipes";
 
 export async function Footer() {
@@ -92,20 +91,8 @@ export async function Footer() {
             })}
           </Flex>
           <Flex gap="6" flexDirection="column">
-            <SocialMedia />
-            <HStack gap="2">
-              <Icon name="common/phone" className={css({ fontSize: "2xl" })} />
-              <a
-                href="tel:+48792665092"
-                className={css({
-                  fontSize: "lg",
-                  fontWeight: "bold",
-                  _hover: { color: "primary" },
-                })}
-              >
-                +48792665092
-              </a>
-            </HStack>
+            <SocialMediaLinks />
+            <Contacts />
           </Flex>
         </div>
         <span className={classes.additionalText}>
@@ -113,53 +100,5 @@ export async function Footer() {
         </span>
       </Container>
     </footer>
-  );
-}
-
-const socialMedia: Array<{
-  iconName: SpritesMap["social"];
-  link: string;
-  social: string;
-}> = [
-  {
-    iconName: "instagram",
-    link: "https://www.instagram.com/eventify.today/",
-    social: "Instagram",
-  },
-  {
-    iconName: "facebook",
-    link: "https://www.facebook.com/eventify.today",
-    social: "Facebook",
-  },
-  {
-    iconName: "linkedin",
-    link: "https://www.linkedin.com/company/eventifytoday/",
-    social: "LinkedIn",
-  },
-];
-
-async function SocialMedia() {
-  const t = await getTranslations("footer");
-
-  return (
-    <Flex gap="2">
-      {socialMedia.map(({ iconName, link, social }) => (
-        <a
-          key={iconName}
-          href={link}
-          title={t("follow_us", { social })}
-          target="_blank"
-        >
-          <Icon
-            className={css({
-              width: "10",
-              height: "10",
-              _hover: { color: "primary" },
-            })}
-            name={`social/${iconName}`}
-          />
-        </a>
-      ))}
-    </Flex>
   );
 }
