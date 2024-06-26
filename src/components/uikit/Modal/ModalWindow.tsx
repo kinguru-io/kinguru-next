@@ -93,7 +93,13 @@ export function _ModalWindow({
           </Button>
         )}
       </ModalHeader>
-      <Box padding="4">{children}</Box>
+      <Box
+        padding="4"
+        height="full"
+        maxHeight={{ base: "calc(100% - {spacing.16})", md: "unset" }}
+      >
+        {children}
+      </Box>
     </dialog>,
     document.body,
   );
