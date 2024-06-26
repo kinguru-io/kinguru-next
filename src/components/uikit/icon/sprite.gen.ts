@@ -1,6 +1,13 @@
 export interface SpritesMap {
-  action: "arrow" | "cross" | "view-off" | "view";
-  common: "calendar" | "phone" | "search" | "settings" | "time";
+  action: "arrow" | "cross" | "menu" | "view-off" | "view";
+  common:
+    | "calendar"
+    | "phone"
+    | "search"
+    | "settings"
+    | "spinner"
+    | "time"
+    | "user-circle";
   social: "facebook" | "instagram" | "linkedin";
 }
 export const SPRITES_META: {
@@ -17,7 +24,7 @@ export const SPRITES_META: {
   };
 } = {
   action: {
-    filePath: "action.b0bb6950.svg",
+    filePath: "action.945d6b12.svg",
     items: {
       arrow: {
         viewBox: "0 0 20 20",
@@ -28,6 +35,11 @@ export const SPRITES_META: {
         viewBox: "0 0 14 14",
         width: 14,
         height: 14,
+      },
+      menu: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
       },
       "view-off": {
         viewBox: "0 0 24 24",
@@ -42,7 +54,7 @@ export const SPRITES_META: {
     },
   },
   common: {
-    filePath: "common.6fd97590.svg",
+    filePath: "common.27765c02.svg",
     items: {
       calendar: {
         viewBox: "0 0 20 20",
@@ -64,7 +76,17 @@ export const SPRITES_META: {
         width: 24,
         height: 24,
       },
+      spinner: {
+        viewBox: "0 0 16 16",
+        width: 200,
+        height: 200,
+      },
       time: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
+      },
+      "user-circle": {
         viewBox: "0 0 24 24",
         width: 24,
         height: 24,
