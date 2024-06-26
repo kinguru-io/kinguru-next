@@ -22,7 +22,6 @@ export function LanguageSelector({ label }: { label?: string }) {
 
     if (isLocale(nextLocale)) {
       startTransition(async () => {
-        await new Promise((res) => setTimeout(res, 500));
         router.replace(pathname, { locale: nextLocale });
       });
     }
