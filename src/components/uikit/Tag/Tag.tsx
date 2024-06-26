@@ -2,7 +2,7 @@ import { cva } from "~/styled-system/css";
 import { styled } from "~/styled-system/jsx";
 import type { StyledVariantProps } from "~/styled-system/types";
 
-const tagStyles = cva({
+export const tagStyles = cva({
   base: {
     display: "inline-block",
     flexShrink: "0",
