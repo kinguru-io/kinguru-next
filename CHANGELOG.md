@@ -1,3 +1,10 @@
+# [0.47.0](https://github.com/kinguru-io/kinguru-next/compare/v0.46.0...v0.47.0) (2024-06-26)
+
+
+### Features
+
+* **KINGU-144:** header modal on mobile ([#656](https://github.com/kinguru-io/kinguru-next/issues/656)) ([7df7f71](https://github.com/kinguru-io/kinguru-next/commit/7df7f7115e10ff4468c9c81d09167ff47f67ecc5))
+
 # [0.46.0](https://github.com/kinguru-io/kinguru-next/compare/v0.45.1...v0.46.0) (2024-06-25)
 
 
