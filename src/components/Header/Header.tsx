@@ -1,15 +1,20 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { LanguageDropdown } from "./language-dropdown";
-import { UserSection } from "./UserSection";
-import { Button } from "@/components/uikit";
+
+import { HeaderModal } from "./header-modal";
+import { LanguageSelector } from "./language-selector";
+import { SignOutButton } from "./sign-out-button";
+import { UserSection, UserSectionSkeleton } from "./user-section";
+
+import { getSession } from "@/auth";
+import { Contacts, SocialMediaLinks } from "@/components/brand";
 import { Link } from "@/navigation";
 import headerLogotype from "~/public/img/logotypes/header-logotype.svg";
-import { css } from "~/styled-system/css";
-import { Container, HStack, InlineBox } from "~/styled-system/jsx";
+import { css, cx } from "~/styled-system/css";
+import { Container, HStack, InlineBox, Stack } from "~/styled-system/jsx";
 import { linkOverlay } from "~/styled-system/patterns";
-import { header } from "~/styled-system/recipes";
+import { button, header } from "~/styled-system/recipes";
 
 export async function Header() {
   const t = await getTranslations("navbar");
@@ -38,18 +43,54 @@ export async function Header() {
           </Link>
         </InlineBox>
         <HStack gap="3">
-          <Suspense
-            fallback={
-              <Button colorPalette="secondary" isLoading>
-                {t("sign_in_and_sign_up")}
-              </Button>
+          <HeaderModal
+            content={
+              <ModalContent
+                signOutLabel={t("sign_out")}
+                localeLabel={t("lang_menu")}
+              />
             }
           >
-            <UserSection />
-          </Suspense>
-          <LanguageDropdown />
+            <Suspense
+              fallback={
+                <UserSectionSkeleton label={t("sign_in_and_sign_up")} />
+              }
+            >
+              <UserSection />
+            </Suspense>
+          </HeaderModal>
         </HStack>
       </Container>
     </header>
+  );
+}
+
+async function ModalContent({
+  signOutLabel,
+  localeLabel,
+}: {
+  signOutLabel: string;
+  localeLabel: string;
+}) {
+  const session = await getSession();
+
+  return (
+    <Stack flexDirection="column" gap="10" height="full">
+      <LanguageSelector label={localeLabel} />
+      <Stack marginBlockStart="auto" gap="6">
+        <SocialMediaLinks />
+        <Contacts />
+      </Stack>
+      {session && (
+        <SignOutButton
+          className={cx(
+            button({ colorPalette: "dark", rounded: false }),
+            css({ justifyContent: "center" }),
+          )}
+        >
+          {signOutLabel}
+        </SignOutButton>
+      )}
+    </Stack>
   );
 }
