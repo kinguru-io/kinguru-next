@@ -100,7 +100,7 @@
     "@prisma/instrumentation": "^5.16.0",
     "@sindresorhus/slugify": "^2.2.1",
     "@stripe/react-stripe-js": "^2.7.1",
-    "@stripe/stripe-js": "^3.5.0",
+    "@stripe/stripe-js": "^4.0.0",
     "bullmq": "^5.8.2",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^v3.1.3",
