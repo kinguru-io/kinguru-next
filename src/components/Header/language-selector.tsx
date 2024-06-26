@@ -57,7 +57,7 @@ export function LanguageSelector({ label }: { label?: string }) {
             transition: "opacity",
             _selected: { colorPalette: "primary" },
             _groupDisabled: { opacity: "0.4", cursor: "not-allowed" },
-            "& > input": { appearance: "none" },
+            "& > input": { srOnly: true },
           })}
           aria-selected={code === locale}
         >
