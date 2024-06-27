@@ -1,3 +1,5 @@
+"use server";
+
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { ResetFormInput, resetFormSchema } from "@/lib/validations";
 

@@ -250,28 +250,33 @@
     "eventify_logotype": "Логотип Eventify"
   },
   "auth": {
+    "profile_type": "Кем Вы являетесь?",
+    "type_user": "Физическое лицо",
+    "type_company": "Юридическое лицо",
+    "sign_in_heading": "Вход в личный кабинет",
+    "signup_helper": "Нажимая на кнопку \"Зарегистрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>",
+    "sign_in_label": "Войти",
+    "sign_up_label": "Зарегистрироваться",
+    "reset_password_label": "Забыли пароль?",
     "reset_form": {
       "heading": "Забыли пароль?",
-      "email_placeholder": "Введите email",
+      "email_placeholder": "Email",
       "submit": "Отправить",
-      "helper": "Введите адрес электронной почты используемый для входа и мы вышлем вам письмо со ссылкой для создания нового пароля"
+      "helper": "Введите адрес электронной почты используемый для входа. Мы вышлем Вам письмо со ссылкой для создания нового пароля"
     },
     "signin_form": {
-      "heading": "Вход в кабинет пользователя",
-      "heading_org": "Вход в кабинет организации",
       "email": "Email",
       "password": "Пароль",
       "submit": "Войти",
       "forgot_password": "Забыли пароль?"
     },
     "signup_form": {
-      "heading": "Зарегистрируйте свою организацию",
+      "heading": "Зарегистрируйте свою компанию",
       "name": "Название компании",
       "email": "Email",
       "password": "Пароль",
       "confirmPassword": "Повтор пароля",
-      "submit": "Зарегистрироваться",
-      "helper": "Нажимая на кнопку \"Зарегистрироваться\", Вы принимаете условия <partnerAgreement>Партнёрского соглашения</partnerAgreement>, подтверждаете, что ознакомились с <personalDataPolicy>Политикой обработки персональный данных</personalDataPolicy>, и даете <personalDataProcess>Согласие на обработку персональных данных</personalDataProcess>"
+      "submit": "Зарегистрироваться"
     }
   },
   "form": {

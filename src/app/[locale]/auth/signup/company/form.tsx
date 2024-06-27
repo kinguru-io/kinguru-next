@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type RichTranslationValues, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useTransition } from "react";
 import { useFormState } from "react-dom";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
@@ -10,15 +10,9 @@ import formConfig from "./formConfig.json";
 import { BaseForm, Button } from "@/components/uikit";
 import type { SignUpAction } from "@/lib/actions";
 import { type SignupFormInput, signupFormSchema } from "@/lib/validations";
-import { Link } from "@/navigation";
+import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 import { stack } from "~/styled-system/patterns";
-
-const translationValues: RichTranslationValues = {
-  partnerAgreement: (chunks) => <Link href="#">{chunks}</Link>,
-  personalDataPolicy: (chunks) => <Link href="#">{chunks}</Link>,
-  personalDataProcess: (chunks) => <Link href="#">{chunks}</Link>,
-};
 
 export function SignupForm({ signUp }: { signUp: SignUpAction }) {
   const [isPending, startTransition] = useTransition();
@@ -59,19 +53,21 @@ function SignupFormInner({ isPending }: { isPending: boolean }) {
   const t = useTranslations("auth.signup_form");
 
   return (
-    <Stack gap="0">
-      <fieldset className={stack({ gap: "15px" })} disabled={isPending}>
+    <Stack gap="4">
+      <fieldset className={stack({ gap: "1" })} disabled={isPending}>
         <BaseForm<SignupFormInput>
           config={formConfig.main}
           schema={signupFormSchema}
           translationsKey="auth.signup_form"
-          // variant="outline"
         />
       </fieldset>
-      <Button type="submit" isLoading={isPending} centered>
+      <Button
+        type="submit"
+        isLoading={isPending}
+        className={css({ justifyContent: "center" })}
+      >
         {t("submit")}
       </Button>
-      <p>{t.rich("helper", translationValues)}</p>
     </Stack>
   );
 }

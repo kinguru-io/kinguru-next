@@ -41,7 +41,7 @@ const signUpHandler = async ({
     },
   });
 
-  redirect(`/auth/organization/signin?callbackUrl=/profile/edit`);
+  redirect(`/auth/signin/company?callbackUrl=/profile/edit`);
 
   return null;
 };

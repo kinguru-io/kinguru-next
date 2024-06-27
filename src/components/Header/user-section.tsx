@@ -22,13 +22,13 @@ export async function UserSection() {
     return (
       <>
         <Link
-          href="/auth/signin"
+          href="/auth/signin/user"
           className={cx(button(), css({ mdDown: { display: "none" } }))}
         >
           {t("sign_in_and_sign_up")}
         </Link>
         <Link
-          href="/auth/signin"
+          href="/auth/signin/user"
           className={css({
             display: "flex",
             gap: "1.5",
