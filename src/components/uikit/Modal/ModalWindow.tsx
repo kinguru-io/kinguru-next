@@ -60,7 +60,8 @@ export function _ModalWindow({
       onClick={dialogBackdropClicked}
       onCancel={modalCancelled}
       className={css({
-        position: "relative",
+        position: "fixed",
+        inset: "0",
         bgColor: "light",
         maxWidth: "100vw",
         maxHeight: "full",
