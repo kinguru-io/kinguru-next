@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import { Icon } from "@/components/uikit";
+import { SpinnerIcon } from "@/components/uikit";
 import { cx, css } from "~/styled-system/css";
 import { button, type ButtonVariantProps } from "~/styled-system/recipes";
 
@@ -69,7 +69,7 @@ function LoaderIcon() {
       })}
       aria-hidden
     >
-      <Icon name="common/spinner" className={css({ animation: "spin" })} />
+      <SpinnerIcon />
     </span>
   );
 }
