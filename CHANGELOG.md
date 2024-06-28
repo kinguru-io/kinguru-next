@@ -1,3 +1,10 @@
+# [0.48.0](https://github.com/kinguru-io/kinguru-next/compare/v0.47.0...v0.48.0) (2024-06-28)
+
+
+### Features
+
+* **KINGU-144:** restyled auth pages ([#659](https://github.com/kinguru-io/kinguru-next/issues/659)) ([df69c1d](https://github.com/kinguru-io/kinguru-next/commit/df69c1d116e11ca44370602963540e2fe46ae470))
+
 # [0.47.0](https://github.com/kinguru-io/kinguru-next/compare/v0.46.0...v0.47.0) (2024-06-26)
 
 
