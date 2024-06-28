@@ -413,15 +413,21 @@
     "eventify_logotype": "Eventify logotype"
   },
   "auth": {
+    "profile_type": "Who are you?",
+    "type_user": "Individual",
+    "type_company": "Legal entity",
+    "sign_in_heading": "Sign in to your account",
+    "signup_helper": "By clicking the \"Register\" button, you accept the <partnerAgreement>Partner Agreement</partnerAgreement>, confirm that you have read the <personalDataPolicy>Personal Data Processing Policy</personalDataPolicy>, and give <personalDataProcess>Consent to the processing of personal data</personalDataProcess>",
+    "sign_in_label": "Sign in",
+    "sign_up_label": "Register",
+    "reset_password_label": "Forgot password?",
     "reset_form": {
       "heading": "Forgot your password?",
       "email_placeholder": "Enter email",
       "submit": "Submit",
-      "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
+      "helper": "Enter the email address used for login. We will send you an email with a link to create a new password"
     },
     "signin_form": {
-      "heading": "User Log In",
-      "heading_org": "Organization Log In",
       "email": "Email",
       "password": "Password",
       "submit": "Log In",
@@ -433,8 +439,7 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
-      "submit": "Register",
-      "helper": "By clicking the \"Register\" button, you accept the <partnerAgreement>Partner Agreement</partnerAgreement>, confirm that you have read the <personalDataPolicy>Personal Data Processing Policy</personalDataPolicy>, and give <personalDataProcess>Consent to the processing of personal data</personalDataProcess>"
+      "submit": "Register"
     }
   },
   "form": {

@@ -51,7 +51,14 @@ export default function RootLayout({
     <html lang={locale} className={`${NotoSans.variable}`}>
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
-          <Grid gridTemplateRows="auto 1fr" gap="0" minHeight="100vh">
+          <Grid
+            css={{
+              gridTemplateRows: "auto 1fr 0",
+              gap: "0",
+              minHeight: "100vh",
+              sm: { gridTemplateRows: "auto 1fr" },
+            }}
+          >
             <Header />
             <main>{children}</main>
             <Footer />

@@ -325,15 +325,21 @@
     }
   },
   "auth": {
+    "profile_type": "Kim jesteś?",
+    "type_user": "Osoba fizyczna",
+    "type_company": "Osoba prawna",
+    "sign_in_heading": "Logowanie do konta",
+    "signup_helper": "Klikając przycisk \"Zarejestruj się\", akceptujesz <partnerAgreement>Umowę partnerską</partnerAgreement>, potwierdzasz, że zapoznałeś się z <personalDataPolicy>Polityką przetwarzania danych osobowych</personalDataPolicy> i wyrażasz <personalDataProcess>Zgodę na przetwarzanie danych osobowych</personalDataProcess>",
+    "sign_in_label": "Zaloguj się",
+    "sign_up_label": "Zarejestruj się",
+    "reset_password_label": "Zapomniałeś hasła?",
     "reset_form": {
       "heading": "Forgot your password?",
       "email_placeholder": "Enter email",
       "submit": "Submit",
-      "helper": "Enter the email address used for login and we will send you an email with a link to create a new password"
+      "helper": "Enter the email address used for login. We will send you an email with a link to create a new password"
     },
     "signin_form": {
-      "heading": "Logowanie użytkownika",
-      "heading_org": "Logowanie organizacji",
       "email": "Email",
       "password": "Hasło",
       "submit": "Zaloguj się",
@@ -345,8 +351,7 @@
       "email": "Email",
       "password": "Hasło",
       "confirmPassword": "Potwierdź hasło",
-      "submit": "Zarejestruj się",
-      "helper": "Klikając przycisk \"Zarejestruj się\", akceptujesz <partnerAgreement>Umowę partnerską</partnerAgreement>, potwierdzasz, że zapoznałeś się z <personalDataPolicy>Polityką przetwarzania danych osobowych</personalDataPolicy> i wyrażasz <personalDataProcess>Zgodę na przetwarzanie danych osobowych</personalDataProcess>"
+      "submit": "Zarejestruj się"
     }
   },
   "form": {

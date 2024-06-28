@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
@@ -10,18 +11,17 @@ import { BaseForm, Button } from "@/components/uikit";
 import type { RevalidateAll } from "@/lib/actions/auth";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link, useRouter } from "@/navigation";
-import { VStack } from "~/styled-system/jsx";
-import { vstack } from "~/styled-system/patterns";
+import { HStack, Stack } from "~/styled-system/jsx";
+import { stack } from "~/styled-system/patterns";
 import { button } from "~/styled-system/recipes";
 
 export function SigninForm({
-  callbackUrl,
   revalidateAll,
 }: {
-  callbackUrl?: string;
   revalidateAll: RevalidateAll;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const methods = useForm<SigninFormInput>({
     mode: "onBlur",
     resolver: zodResolver(signinFormSchema),
@@ -36,7 +36,7 @@ export function SigninForm({
 
     if (response && response.ok) {
       await revalidateAll();
-      router.replace(callbackUrl || "/");
+      router.replace(searchParams.get("callbackUrl") || "/");
       return;
     }
 
@@ -53,26 +53,41 @@ export function SigninForm({
 }
 
 function SigninFormInner() {
-  const t = useTranslations("auth.signin_form");
+  const t = useTranslations("auth");
   const {
     formState: { isSubmitting },
   } = useFormContext();
 
   return (
-    <VStack gap="0">
-      <fieldset className={vstack({ gap: "15px" })} disabled={isSubmitting}>
+    <Stack gap="4">
+      <fieldset className={stack({ gap: "1" })} disabled={isSubmitting}>
         <BaseForm<SigninFormInput>
           config={formConfig.main}
           schema={signinFormSchema}
           translationsKey="auth.signin_form"
         />
       </fieldset>
-      <Button type="submit" isLoading={isSubmitting}>
-        {t("submit")}
-      </Button>
-      <Link className={button()} href="/auth/reset">
-        {t("forgot_password")}
-      </Link>
-    </VStack>
+      <HStack
+        css={{
+          gap: "2",
+          flexWrap: "wrap-reverse",
+          "& > a, & > button": {
+            justifyContent: "center",
+            flexBasis: "44",
+            flexGrow: "1",
+          },
+        }}
+      >
+        <Link
+          href="/auth/signup/company"
+          className={button({ colorPalette: "secondary" })}
+        >
+          {t("sign_up_label")}
+        </Link>
+        <Button type="submit" isLoading={isSubmitting}>
+          {t("sign_in_label")}
+        </Button>
+      </HStack>
+    </Stack>
   );
 }

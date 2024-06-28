@@ -9,7 +9,6 @@ import { Button, Input } from "@/components/uikit";
 import { type ResetPasswordAction } from "@/lib/actions";
 import { FormActionState } from "@/lib/utils";
 import { resetFormSchema, type ResetFormInput } from "@/lib/validations";
-import { VStack } from "~/styled-system/jsx";
 
 export function ResetForm({
   resetPassword,
@@ -23,7 +22,6 @@ export function ResetForm({
     mode: "onBlur",
     resolver: zodResolver(resetFormSchema),
   });
-  // TODO `state` might be used for notifications?
   const [state, formAction] = useFormState<FormActionState, FormData>(
     resetPassword,
     null,
@@ -51,17 +49,15 @@ function ResetFormInner({
   const { pending } = useFormStatus();
 
   return (
-    <VStack gap="0">
+    <>
       <Input
-        // variant="outline"
         placeholder={t("email_placeholder")}
         disabled={pending}
         {...register("email")}
       />
-      <p>{t("helper")}</p>
       <Button type="submit" isLoading={pending} disabled={!isValid}>
         {t("submit")}
       </Button>
-    </VStack>
+    </>
   );
 }
