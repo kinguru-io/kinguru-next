@@ -77,9 +77,17 @@ export default defineConfig({
             value:
               "linear-gradient(0deg, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.64))",
           },
+          "dark-overlay-lighter": {
+            value:
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+          },
           "darken-to-bottom": {
             value:
               "linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.58) 100%)",
+          },
+          "darken-to-bottom-lighter": {
+            value:
+              "linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.38) 100%)",
           },
         },
         shadows: {
@@ -113,6 +121,7 @@ export default defineConfig({
           DEFAULT: { value: "#FFD800" },
           lighter: { value: "#FFEC82" },
           lightest: { value: "#FEF7D2" },
+          text: { value: "{colors.dark}" },
         },
         secondary: {
           DEFAULT: { value: "#7A7A7A" },
@@ -120,7 +129,10 @@ export default defineConfig({
           lightest: { value: "#FBFBFB" },
         },
         tertiary: { DEFAULT: { value: "#D9D9D9" } },
-        dark: { DEFAULT: { value: "#212529" } },
+        dark: {
+          DEFAULT: { value: "#212529" },
+          text: { value: "{colors.light}" },
+        },
         light: { DEFAULT: { value: "#FFFFFF" } },
         neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
