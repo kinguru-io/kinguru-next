@@ -11,4 +11,8 @@ describe("prepare abbreviation", () => {
   it("not trimmed", () => {
     expect(prepareAbbreviation(" john  Doe ")).toBe("jD");
   });
+
+  it("empty string", () => {
+    expect(prepareAbbreviation("")).toBe("");
+  });
 });
