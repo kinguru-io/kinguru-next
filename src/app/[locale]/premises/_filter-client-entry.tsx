@@ -2,7 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { useCallback } from "react";
-import { Button, Icon, Modal, ModalWindow, useModal } from "@/components/uikit";
+import {
+  ArrowIcon,
+  Button,
+  Icon,
+  Modal,
+  ModalWindow,
+  useModal,
+} from "@/components/uikit";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { css } from "~/styled-system/css";
 import { HStack } from "~/styled-system/jsx";
@@ -41,11 +48,22 @@ function FilterToggle() {
 
   return (
     <Button
-      className={css({ alignSelf: "flex-start" })}
+      className={css({
+        alignSelf: "flex-start",
+        position: "sticky",
+        top: "1",
+        zIndex: "1",
+        boxShadow: "light-backdrop",
+        "& > [data-label=true]": {
+          display: "inline-flex",
+          flexBasis: "full",
+          justifyContent: "space-between",
+        },
+      })}
       onClick={() => setOpen((prev) => !prev)}
       icon={<Icon name="common/settings" className={css({ fontSize: "xl" })} />}
     >
-      {t("all")}
+      {t("all")} <ArrowIcon direction="right" />
     </Button>
   );
 }

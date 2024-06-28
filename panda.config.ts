@@ -94,6 +94,9 @@ export default defineConfig({
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
           header: { value: "0px 4px 48px 0px rgba(0, 0, 0, 0.06)" },
           dropdown: { value: "0px 14px 45px rgba(0, 0, 0, 0.2)" },
+          "light-backdrop": {
+            value: "0px 14px 45px rgba(255, 255, 255, 0.45)",
+          },
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
