@@ -76,7 +76,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
                 <Image
                   src={item.url}
                   alt=""
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 712px) 100vw, (max-width: 1056px) 50vw, 33vw"
                   fill
                 />
                 <Link
