@@ -528,11 +528,11 @@
   },
   "venue": {
     "public_page": {
-      "image_alt": "Photo of the \"{name}\" venue",
       "show_more": "More",
       "show_less": "Less",
       "premises_heading": "Venue's premises",
-      "map": "Map"
+      "map": "Map",
+      "cannot_load_location": "Unable to load venue location"
     }
   },
   "premise": {

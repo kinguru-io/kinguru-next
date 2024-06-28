@@ -410,6 +410,15 @@
     "max": "high price",
     "regular": "regular price"
   },
+  "venue": {
+    "public_page": {
+      "show_more": "Więcej",
+      "show_less": "Mniej",
+      "premises_heading": "Pokoje na tej hali",
+      "map": "Mapa",
+      "cannot_load_location": "Nie można załadować lokalizacji hali"
+    }
+  },
   "premise": {
     "more": "More",
     "from": "from {price}",

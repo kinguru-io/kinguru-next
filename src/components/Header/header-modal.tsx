@@ -3,7 +3,13 @@
 import { useTranslations } from "next-intl";
 import type React from "react";
 import { LanguageDropdown } from "./language-dropdown";
-import { Icon, Modal, ModalWindow, useModal } from "@/components/uikit";
+import {
+  Icon,
+  Modal,
+  ModalWindow,
+  SpinnerIcon,
+  useModal,
+} from "@/components/uikit";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { css } from "~/styled-system/css";
 import { token } from "~/styled-system/tokens";
@@ -23,7 +29,7 @@ export function HeaderModal({
     return (
       <>
         {children}
-        <Icon name="common/spinner" className={css({ animation: "spin" })} />
+        <SpinnerIcon />
       </>
     );
   }

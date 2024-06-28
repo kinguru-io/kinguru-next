@@ -14,7 +14,7 @@ export const premiseCardSlot = defineSlotRecipe({
       borderRadius: "lg",
     },
     premiseSlider: {
-      bgImage: "{gradients.darken-to-bottom}",
+      bgImage: "{gradients.darken-to-bottom-lighter}",
       width: "full",
       borderRadius: "lg",
       overflow: "hidden",

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button, TextCollapse, ArrowIcon } from "@/components/uikit";
-import { Box, Stack } from "~/styled-system/jsx";
+import { TextCollapse, ArrowIcon } from "@/components/uikit";
+import { css } from "~/styled-system/css";
+import { Stack } from "~/styled-system/jsx";
 
 type DescriptionProps = {
   description: string;
@@ -13,33 +14,39 @@ type DescriptionProps = {
 
 export function Description({
   description,
-  maxW,
   showLessLabel,
   showMoreLabel,
 }: DescriptionProps) {
   const [isShown, setIsShown] = useState(false);
 
-  const handleExpandClick = () => {
-    setIsShown((prevState) => !prevState);
-  };
-
   return (
-    <Stack gap="30px" maxW={maxW} alignSelf="stretch">
+    <Stack gap="3" fontSize="px15" color="secondary">
       <TextCollapse
         isShown={isShown}
         textContent={description}
         visibleCharsCount={500}
       />
       {description.length > 500 && (
-        <Box color="dark">
-          <Button
-            icon={<ArrowIcon direction={isShown ? "up" : "down"} />}
-            iconPosition="right"
-            onClick={handleExpandClick}
-          >
-            {isShown ? showLessLabel : showMoreLabel}
-          </Button>
-        </Box>
+        <button
+          className={css({
+            alignSelf: "start",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "1",
+            fontSize: "px13",
+            color: "success",
+            "& > svg": { color: "secondary" },
+            _hoverOrFocusVisible: {
+              color: "success.darker",
+              "& > svg": { color: "dark" },
+            },
+          })}
+          type="button"
+          onClick={() => setIsShown((prev) => !prev)}
+        >
+          {isShown ? showLessLabel : showMoreLabel}
+          <ArrowIcon direction={isShown ? "up" : "down"} />
+        </button>
       )}
     </Stack>
   );

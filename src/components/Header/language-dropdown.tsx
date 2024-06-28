@@ -7,7 +7,7 @@ import {
   DropdownInitiator,
   DropdownMenu,
   ArrowIcon,
-  Icon,
+  SpinnerIcon,
 } from "@/components/uikit";
 import { locales, useRouter, usePathname, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -37,14 +37,7 @@ export function LanguageDropdown() {
               lineHeight: "1",
             })}
           >
-            {isPending ? (
-              <Icon
-                name="common/spinner"
-                className={css({ animation: "spin" })}
-              />
-            ) : (
-              locale
-            )}
+            {isPending ? <SpinnerIcon /> : locale}
           </span>
           <ArrowIcon direction="down" className={css({ fontSize: "0.5em" })} />
         </HStack>

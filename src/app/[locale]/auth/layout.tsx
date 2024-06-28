@@ -6,8 +6,8 @@ import { token } from "~/styled-system/tokens";
 
 const overlayAuthImage: React.CSSProperties = {
   backgroundImage: `
-    ${token.var("gradients.dark-overlay")},
-    ${token.var("gradients.darken-to-bottom")},
+    ${token.var("gradients.dark-overlay-lighter")},
+    ${token.var("gradients.darken-to-bottom-lighter")},
     url(${bg.src})
   `,
 };
