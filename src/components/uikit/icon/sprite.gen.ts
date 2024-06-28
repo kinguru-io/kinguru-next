@@ -2,6 +2,7 @@ export interface SpritesMap {
   action: "arrow" | "cross" | "menu" | "view-off" | "view";
   common:
     | "calendar"
+    | "location-star"
     | "phone"
     | "search"
     | "settings"
@@ -54,12 +55,17 @@ export const SPRITES_META: {
     },
   },
   common: {
-    filePath: "common.27765c02.svg",
+    filePath: "common.ae42a057.svg",
     items: {
       calendar: {
         viewBox: "0 0 20 20",
         width: 20,
         height: 20,
+      },
+      "location-star": {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
       },
       phone: {
         viewBox: "0 0 24 25",
