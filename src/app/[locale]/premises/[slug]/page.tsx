@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import {
   BookingViewCard,
   BookingViewProvider,
@@ -9,8 +10,8 @@ import {
   PriceDescription,
 } from "@/components/calendar";
 import { Description } from "@/components/common/description";
+import { MapSection } from "@/components/common/maps";
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
-import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
 import {
   AccordionItemToggle,
@@ -22,12 +23,12 @@ import {
   SliderItem,
   Tag,
   type AggregatedPrices,
+  Loader,
 } from "@/components/uikit";
 import {
   PremiseAccordionLayout,
   PremiseCalendarLayout,
   PremiseMainInfoLayout,
-  PremiseMapLayout,
 } from "@/layout/block/premise";
 import {
   cancelPremiseSlotsIntent,
@@ -236,19 +237,22 @@ export default async function PremisePage({
         </BookingViewProvider>
       </PremiseCalendarLayout>
 
-      <PremiseMapLayout>
-        <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
-        <AspectRatio
-          ratio={{ base: 4 / 3, md: 16 / 9 }}
-          marginBlockStart="50px"
-        >
-          <SingleMarkerMap
-            mapboxId={venue.locationMapboxId}
+      <section
+        id="map" // TODO connect with link
+        className={css({
+          height: { base: "50vh", md: "breakpoint-sm" },
+          maxHeight: "75vh",
+        })}
+      >
+        <h3 className={css({ srOnly: true })}>{t("map")}</h3>
+        <Suspense fallback={<Loader />}>
+          <MapSection
+            locationId={venue.locationMapboxId}
+            locationName={name}
             image={venue.image}
-            name={name}
           />
-        </AspectRatio>
-      </PremiseMapLayout>
+        </Suspense>
+      </section>
     </MapboxSearchBoxResponseProvider>
   );
 }

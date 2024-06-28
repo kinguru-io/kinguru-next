@@ -365,11 +365,11 @@
   },
   "venue": {
     "public_page": {
-      "image_alt": "Фотография площадки \"{name}\"",
       "show_more": "Подробнее",
       "show_less": "Свернуть",
       "premises_heading": "Помещения этой площадки",
-      "map": "Карта"
+      "map": "Карта",
+      "cannot_load_location": "Не удалось загрузить местоположение площадки"
     }
   },
   "premise": {

@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Description } from "@/components/common/description";
-import { SingleMarkerMap } from "@/components/common/maps/SingleMarkerMap";
 import {
   EventCardView,
   EventLikeButton,
@@ -180,11 +179,11 @@ export default async function EventPage({
       <EventMapLayout>
         <h2 className={css({ textAlign: "center" })}>{t("map")}</h2>
         <AspectRatio ratio={16 / 9} marginBlockStart="50px">
-          <SingleMarkerMap
+          {/* <SingleMarkerMap
             mapboxId={place.locationMapboxId}
             image={poster}
             name={topic}
-          />
+          /> */}
         </AspectRatio>
       </EventMapLayout>
       <EventPopularEventsLayout>

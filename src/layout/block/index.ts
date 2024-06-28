@@ -1,3 +1,2 @@
 export { FormInnerLayout } from "./FormInnerLayout";
-export { VenueMainInfoLayout } from "./VenueMainInfoLayout";
-export { VenueMapLayout } from "./VenueMapLayout";
+export { VenueMainInfoLayout } from "./venue-main-info-layout";
