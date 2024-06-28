@@ -1,3 +1,10 @@
+# [0.49.0](https://github.com/kinguru-io/kinguru-next/compare/v0.48.0...v0.49.0) (2024-06-28)
+
+
+### Features
+
+* **KINGU-144:** new design venue page and derived changes ([#663](https://github.com/kinguru-io/kinguru-next/issues/663)) ([1b74257](https://github.com/kinguru-io/kinguru-next/commit/1b7425775cb87ed5a6209e57c2d135319f2e1a6c))
+
 # [0.48.0](https://github.com/kinguru-io/kinguru-next/compare/v0.47.0...v0.48.0) (2024-06-28)
 
 
