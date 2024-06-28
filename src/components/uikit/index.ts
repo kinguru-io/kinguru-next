@@ -20,3 +20,4 @@ export * from "./Tabs";
 export * from "./filters";
 export * from "./Forms";
 export * from "./icon";
+export { Loader } from "./loader";
