@@ -9,6 +9,7 @@ export const additionalGlobalCss = defineGlobalStyles({
     },
   },
   body: {
+    lineHeight: "1.25",
     color: "dark",
     "&:has(dialog[open])": {
       overflow: "hidden",
