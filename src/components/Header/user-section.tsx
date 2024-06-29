@@ -45,7 +45,7 @@ export async function UserSection() {
     );
   }
 
-  const name = session.user?.name;
+  const name = session.user?.organizations.at(0)?.name || session.user?.name;
   const image = session.user?.image;
 
   return (

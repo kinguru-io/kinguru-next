@@ -41,6 +41,7 @@ export function PremiseDescription({ children }: PropsWithChildren) {
         color: "secondary",
         fontSize: "sm",
         lineHeight: "1.5",
+        whiteSpace: "pre-line",
       })}
     >
       {children}

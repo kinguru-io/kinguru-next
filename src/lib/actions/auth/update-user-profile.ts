@@ -22,10 +22,14 @@ export async function updateUserProfile({
     };
   }
 
+  const { firstname, lastname } = restInput;
+  const name = lastname ? `${firstname} ${lastname}` : firstname;
+
   await prisma.user.update({
     where: { id: session.user.id },
     data: {
       ...restInput,
+      name: name.trim(),
       birthdate: toDate(birthdate),
       image: image || "",
       socialLinks: {
