@@ -81,14 +81,20 @@ export function FilterControlWrapper({
 
   return (
     <HStack
-      gap="2"
+      gap="1"
       position="sticky"
       bottom="4"
       justifyContent="center"
+      boxShadow="0 0 46px 10px {colors.light}"
+      bgColor="rgba(255, 255, 255, 0.67)"
       mdDown={{
-        boxShadow: "0 0 46px 10px {colors.light}",
-        bgColor: "rgba(255, 255, 255, 0.67)",
+        flexWrap: "wrap",
         paddingBlockStart: "4",
+        "& > *": {
+          flexGrow: "1",
+          flexBasis: "40",
+          justifyContent: "center",
+        },
       }}
       onClick={anyButtonInsideClicked}
     >
