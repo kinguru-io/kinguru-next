@@ -19,6 +19,7 @@ export const selectSlot = defineSlotRecipe({
     selectRoot: {
       display: "inline-block",
       width: "full",
+      height: "full",
       appearance: "none",
       cursor: "pointer",
       fontSize: "px15",
