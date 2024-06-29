@@ -20,12 +20,7 @@ export function Description({
   const [isShown, setIsShown] = useState(false);
 
   return (
-    <Stack
-      gap="3"
-      fontSize="px15"
-      color="secondary"
-      whiteSpace="preserve-breaks"
-    >
+    <Stack gap="3" fontSize="px15" color="secondary" whiteSpace="pre">
       <TextCollapse
         isShown={isShown}
         textContent={description}
