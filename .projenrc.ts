@@ -346,6 +346,7 @@ werf converge --atomic`,
         ES_CLIENT_API_KEY: "${{ secrets.ELASTICSEARCH_API_KEY }}",
         ES_INDEX_PREMISE_FULFILLED: "kinguru-stage.public.premise.fulfilled",
         NEXT_PUBLIC_GA_ID: "${{ secrets.GA_ID }}",
+        MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
         NEXT_PUBLIC_MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
         NEXT_PUBLIC_ELASTICSEARCH_API_KEY:
           "${{ secrets.ELASTICSEARCH_API_KEY }}",
