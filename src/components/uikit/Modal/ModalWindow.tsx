@@ -66,14 +66,13 @@ export function _ModalWindow({
         maxWidth: "100vw",
         maxHeight: "full",
         width: "full",
-        height: "full",
+        mdDown: { height: "full" },
         md: {
           minWidth: "80",
           maxWidth: "breakpoint-md",
           maxHeight: "90vh",
           borderRadius: "sm",
           margin: "auto",
-          height: "min-content",
           width: "max-content",
         },
       })}
@@ -96,7 +95,7 @@ export function _ModalWindow({
       </ModalHeader>
       <Box
         padding="4"
-        height="full"
+        mdDown={{ height: "full" }}
         maxHeight={{ base: "calc(100% - {spacing.16})", md: "unset" }}
       >
         {children}
