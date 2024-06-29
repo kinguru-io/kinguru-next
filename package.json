@@ -86,7 +86,7 @@
     "@aws-sdk/client-s3": "^3.606.0",
     "@aws-sdk/s3-request-presigner": "^3.606.0",
     "@elastic/elasticsearch": "8.13.1",
-    "@elastic/transport": "8.4.1",
+    "@elastic/transport": "8.6.1",
     "@hookform/resolvers": "^3.6.0",
     "@mapbox/search-js-core": "^1.0.0-beta.21",
     "@opentelemetry/exporter-trace-otlp-http": "^0.52.1",
