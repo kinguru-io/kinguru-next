@@ -449,6 +449,10 @@
     "unexpected_error_msg": "An unexpected error occurred."
   },
   "profile": {
+    "menu": {
+      "menu_label": "Menu nawigacji",
+      "find_premise_label": "Znajdź salę"
+    },
     "go_back_btn_label": "Back",
     "link_labels": {
       "main": "Home",

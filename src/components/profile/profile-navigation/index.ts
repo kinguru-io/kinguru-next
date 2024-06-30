@@ -1,1 +1,1 @@
-export { ProfileNavigation } from "./ProfileNavigation";
+export { ProfileNavigation } from "./profile-navigation";
