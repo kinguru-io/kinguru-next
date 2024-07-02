@@ -4,7 +4,7 @@ import {
 } from "@mapbox/search-js-core";
 
 export const searchBox = new SearchBoxCore({
-  accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+  accessToken: process.env.MAPBOX_TOKEN,
 });
 
 const emptySuggestionObject: SearchBoxSuggestion = {
