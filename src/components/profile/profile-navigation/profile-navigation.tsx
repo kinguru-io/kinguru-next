@@ -1,5 +1,7 @@
 "use client";
 
+import type { UrlObject } from "url";
+import type { $Enums } from "@prisma/client";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { type NestedKeyOf, useTranslations } from "next-intl";
 import { useModal } from "@/components/uikit";
@@ -8,44 +10,53 @@ import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 
 type NavLink = {
-  href: string;
+  href: string | UrlObject;
   labelIntlCode: NestedKeyOf<IntlMessages["profile"]["link_labels"]>;
   segment: string;
 };
 
-// TODO add an access by a role
-const profileNavLinks: readonly NavLink[] = [
-  {
-    href: "/profile",
-    labelIntlCode: "main",
-    segment: "",
-  },
-  {
-    href: "/profile/edit",
-    labelIntlCode: "edit",
-    segment: "edit",
-  },
-  {
-    href: "/profile/events",
-    labelIntlCode: "events",
-    segment: "events",
-  },
-  {
-    href: "/profile/venues",
-    labelIntlCode: "venues",
-    segment: "venues",
-  },
-  {
-    href: "/profile/notifications",
-    labelIntlCode: "notifications",
-    segment: "notifications",
-  },
-  {
-    href: "/profile/settings",
-    labelIntlCode: "settings",
-    segment: "settings",
-  },
-] as NavLink[];
+const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
+  user: [
+    {
+      href: "/profile/edit",
+      labelIntlCode: "edit",
+      segment: "edit",
+    },
+    {
+      href: "/profile/notifications",
+      labelIntlCode: "notifications",
+      segment: "notifications",
+    },
+    {
+      href: "/profile/settings",
+      labelIntlCode: "settings",
+      segment: "settings",
+    },
+  ],
+  organization: [
+    {
+      href: "/profile/edit",
+      labelIntlCode: "edit",
+      segment: "edit",
+    },
+    {
+      href: "/profile/venues",
+      labelIntlCode: "venues",
+      segment: "venues",
+    },
+    {
+      href: "/profile/notifications",
+      labelIntlCode: "notifications",
+      segment: "notifications",
+    },
+    {
+      href: "/profile/settings",
+      labelIntlCode: "settings",
+      segment: "settings",
+    },
+  ],
+  admin: [],
+};
 
 const navigationClassName = css({
   display: "flex",
@@ -71,11 +82,16 @@ const navigationClassName = css({
   },
 });
 
-export function ProfileNavigation({ menuLabel }: { menuLabel: string }) {
+export function ProfileNavigation({
+  menuLabel,
+  role,
+}: {
+  menuLabel: string;
+  role: $Enums.UserRole;
+}) {
   const { setOpen } = useModal();
   const t = useTranslations("profile.link_labels");
-  // no segment = null = main profile mage
-  const segment = useSelectedLayoutSegment() || "";
+  const segment = useSelectedLayoutSegment() || "edit";
 
   return (
     <Stack
@@ -102,12 +118,12 @@ export function ProfileNavigation({ menuLabel }: { menuLabel: string }) {
         {menuLabel}
       </span>
       <nav onClick={() => setOpen(false)} className={navigationClassName}>
-        {profileNavLinks.map((navItem) => {
+        {profileLinksMap[role].map((navItem) => {
           const isActive = navItem.segment === segment;
 
           return (
             <Link
-              key={navItem.href}
+              key={navItem.segment}
               href={navItem.href}
               aria-current={isActive ? "page" : "false"}
             >

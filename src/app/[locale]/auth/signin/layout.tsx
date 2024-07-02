@@ -38,7 +38,7 @@ export default function SignInLayout({
           <Link
             href="/auth/signin/user"
             className={linkClassName}
-            aria-current={segment === "user" && "page"}
+            aria-current={segment !== "company" && "page"}
           >
             {t("type_user")}
           </Link>

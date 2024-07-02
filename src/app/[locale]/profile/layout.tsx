@@ -15,9 +15,14 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
-  const t = await getTranslations("profile");
 
-  if (!session) return redirect("/auth/signin");
+  // 3 checks is used to get correct type for role
+  if (!session || !session.user || !session.user.role) {
+    return redirect("/auth/signin");
+  }
+
+  const t = await getTranslations("profile");
+  const role = session.user.role;
 
   return (
     <Box bgColor="neutral.1" height="full">
@@ -25,7 +30,7 @@ export default async function Layout({
         css={{
           display: "grid",
           gridTemplateColumns: "1fr",
-          paddingBlock: "6",
+          paddingBlock: "3", // or 6 if you don't use layerStyle: 'sub-section'
           md: {
             gap: "7",
             gridTemplateColumns: "19rem 1fr",
@@ -47,8 +52,8 @@ export default async function Layout({
               },
             }}
           >
-            <ProfileNavigation menuLabel={t("menu.menu_label")} />
-            {session.user?.role === "user" && (
+            <ProfileNavigation menuLabel={t("menu.menu_label")} role={role} />
+            {role === "user" && (
               <FindPremiseLink label={t("menu.find_premise_label")} />
             )}
           </Stack>

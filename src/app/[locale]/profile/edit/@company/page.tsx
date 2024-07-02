@@ -5,7 +5,7 @@ import { ProfileSectionLayout } from "@/layout/page";
 import { orgRegister } from "@/lib/actions";
 import { redirect } from "@/navigation.ts";
 
-export default async function EditProfilePage() {
+export default async function EditCompanyPage() {
   const t = await getTranslations("organization.basic_info_page");
   const session = await getSession();
   if (session?.user?.role !== "organization") {

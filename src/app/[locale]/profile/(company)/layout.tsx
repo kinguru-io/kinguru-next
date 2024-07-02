@@ -11,7 +11,7 @@ export default async function ProtectedProfileVenuesLayout({
 
   // redirect if user haven't completed company profile registration
   if (!organization) {
-    redirect("/profile/venues");
+    return redirect("/profile/venues");
   }
 
   return <>{children}</>;

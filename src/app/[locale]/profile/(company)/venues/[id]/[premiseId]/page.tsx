@@ -6,11 +6,11 @@ import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 export default async function EditPremisePage({
-  searchParams: { venueId, premiseId },
+  params: { id: venueId, premiseId },
 }: {
-  searchParams: { venueId?: string; premiseId?: string };
+  params: { id?: string; premiseId?: string };
 }) {
-  if (!venueId) {
+  if (!venueId || !premiseId) {
     return redirect("/profile/venues");
   }
 
