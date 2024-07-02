@@ -8,7 +8,7 @@ export const buttonRecipe = defineRecipe({
     alignItems: "center",
     gap: "2.5",
     borderRadius: "full",
-    lineHeight: "0.75",
+    lineHeight: "1",
     position: "relative",
     overflow: "hidden",
     transition: "colors",

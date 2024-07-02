@@ -448,6 +448,10 @@
     "unexpected_error_msg": "Произошла непредвиденная ошибка."
   },
   "profile": {
+    "menu": {
+      "menu_label": "Меню навигации",
+      "find_premise_label": "Найти зал"
+    },
     "go_back_btn_label": "Назад",
     "link_labels": {
       "main": "Главная",
