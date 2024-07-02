@@ -143,8 +143,8 @@ export default defineConfig({
           text: { value: "{colors.light}" },
         },
         success: {
-          DEFAULT: { value: "#1C9109" },
-          darker: { value: "#1a6e0d" },
+          DEFAULT: { value: "#1c8809" },
+          darker: { value: "#1a670d" },
           text: { value: "{colors.light}" },
         },
       },
