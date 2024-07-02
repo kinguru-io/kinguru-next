@@ -1,3 +1,10 @@
+# [0.50.0](https://github.com/kinguru-io/kinguru-next/compare/v0.49.0...v0.50.0) (2024-07-02)
+
+
+### Features
+
+* **KINGU-145:** new design profile layout ([#670](https://github.com/kinguru-io/kinguru-next/issues/670)) ([88663d8](https://github.com/kinguru-io/kinguru-next/commit/88663d860aa0e0146361b14364218499e70b3d0d))
+
 # [0.49.0](https://github.com/kinguru-io/kinguru-next/compare/v0.48.0...v0.49.0) (2024-06-28)
 
 
