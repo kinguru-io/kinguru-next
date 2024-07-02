@@ -3,7 +3,7 @@
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { compareAsc } from "date-fns";
+import { addHours, compareAsc, getDate } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { useCallback, useState, useTransition } from "react";
@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
-import { useBookingView } from "../BookingViewContext";
+import { TimeSlotInfoExtended, useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Timer } from "@/components/common/timer";
@@ -25,13 +25,15 @@ import {
   ModalWindow,
   useModal,
 } from "@/components/uikit";
-import type {
+import {
+  blockPremiseSlotsIntent,
   CancelPremiseSlotsIntent,
   CreatePremiseSlotsIntent,
   RevalidatePremisePage,
 } from "@/lib/actions/booking";
 import { groupBy } from "@/lib/utils/array";
-import { processDiscounts } from "@/lib/utils/price";
+import { groupAndMergeTimeslots } from "@/lib/utils/premise-booking";
+import { getSlotDiscount, processOrderTotalDiscounts } from "@/lib/utils/price";
 import { Box, VStack } from "~/styled-system/jsx";
 
 const stripePromise = loadStripe(
@@ -44,6 +46,7 @@ export function BookingViewCard({
   cancelIntent,
   revalidateFn,
   discountsMap,
+  isOwner,
   inModal = false,
 }: {
   premiseId: Premise["id"];
@@ -51,6 +54,7 @@ export function BookingViewCard({
   cancelIntent: CancelPremiseSlotsIntent;
   revalidateFn: RevalidatePremisePage;
   discountsMap: Record<number, number | undefined>;
+  isOwner: boolean;
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
@@ -67,16 +71,67 @@ export function BookingViewCard({
   const areThereNoSlots = selectedSlots.length === 0;
   const isOutsideModal = open && !inModal;
 
+  const newSlots = selectedSlots.map(({ time, price }) => ({
+    premiseId,
+    price,
+    date: time,
+    startTime: time,
+    endTime: addHours(time, 1),
+    discountAmount: getSlotDiscount(selectedSlots, time, discountsMap),
+  }));
+
+  console.log("newSlots", newSlots);
+  const newGroupedSlots = groupAndMergeTimeslots(newSlots);
+
+  console.log("newGroupedSlots", newGroupedSlots);
+
   const groupedSlots = groupBy(
+    Array.from(newGroupedSlots).sort((slotA, slotB) =>
+      compareAsc(slotA.startTime, slotB.startTime),
+    ),
+    ({ startTime }) => formatInTimeZone(startTime, timeZone, "dd.MM.yyyy"),
+  );
+
+  console.log("groupedSlots", groupedSlots);
+
+  const priceGroupedSlots = groupBy(
     Array.from(selectedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
     ),
     ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
   );
-  const priceInfo = processDiscounts(groupedSlots, discountsMap);
+
+  const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);
 
   const checkboxChanged = () => {
     setAwarenessState((prevState) => !prevState);
+  };
+
+  const blockSlotsBtnClicked = () => {
+    if (!open) {
+      setOpen(true);
+      return;
+    }
+
+    startTransition(async () => {
+      const { status, messageIntlKey, response } =
+        await blockPremiseSlotsIntent({
+          premiseId,
+          slots: selectedSlots,
+        });
+
+      if (response) {
+        setOpen(false);
+        resetSlots();
+
+        void revalidateFn();
+        toast.success(t("action_successfully_blocked_slots"));
+      }
+
+      if (status === "error" && messageIntlKey) {
+        toast.error(t(messageIntlKey));
+      }
+    });
   };
 
   const payBtnClicked = () => {
@@ -90,6 +145,7 @@ export function BookingViewCard({
         premiseId,
         slots: selectedSlots,
         timeZone,
+        discountsMap,
       });
 
       if (response) {
@@ -148,6 +204,25 @@ export function BookingViewCard({
     );
   }
 
+  const SubmitBtn = () =>
+    isOwner ? (
+      <Button
+        isLoading={isPending}
+        disabled={isOutsideModal || !isUserAwareOfRules || areThereNoSlots}
+        onClick={blockSlotsBtnClicked}
+      >
+        {t("block_slot_btn")}
+      </Button>
+    ) : (
+      <Button
+        isLoading={isPending}
+        disabled={isOutsideModal || !isUserAwareOfRules || areThereNoSlots}
+        onClick={payBtnClicked}
+      >
+        {t("pay_btn")}
+      </Button>
+    );
+
   return (
     <>
       <Card
@@ -169,11 +244,10 @@ export function BookingViewCard({
             gap="20px"
             flexDirection="column"
             alignItems="center"
-            css={{ "& .button": { width: "min-content" } }}
           >
             {!areThereNoSlots && (
               <>
-                <PriceBlock priceInfo={priceInfo} />
+                {!isOwner && <PriceBlock priceInfo={priceInfo} />}
                 <Checkbox
                   checked={isUserAwareOfRules}
                   disabled={isOutsideModal}
@@ -183,15 +257,7 @@ export function BookingViewCard({
                 />
               </>
             )}
-            <Button
-              isLoading={isPending}
-              disabled={
-                isOutsideModal || !isUserAwareOfRules || areThereNoSlots
-              }
-              onClick={payBtnClicked}
-            >
-              {t("pay_btn")}
-            </Button>
+            <SubmitBtn />
           </CardFooter>
         </CardInner>
       </Card>
@@ -204,6 +270,7 @@ export function BookingViewCard({
             revalidateFn={revalidateFn}
             discountsMap={discountsMap}
             inModal={true}
+            isOwner={isOwner}
           />
         </ModalWindow>
       )}

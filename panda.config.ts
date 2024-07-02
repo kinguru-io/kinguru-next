@@ -7,6 +7,7 @@ import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputSlot } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
+import { premiseMyBookingCardSlot } from "./src/components/uikit/PremiseMyBookingCard/PremiseMyBookingCard.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
 import { toggleSlot } from "./src/components/uikit/toggle.recipe";
@@ -14,7 +15,6 @@ import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
-
 export default defineConfig({
   globalCss: additionalGlobalCss,
   jsxFramework: "react",
@@ -62,6 +62,7 @@ export default defineConfig({
         header: headerSlot,
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
+        premiseMyBookingCard: premiseMyBookingCardSlot,
         toggle: toggleSlot,
       },
       tokens: {

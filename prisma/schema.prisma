@@ -494,6 +494,8 @@ model PremiseSlot {
   user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String
   paymentIntentId String
+  amount          Float              @default(0)
+  discountAmount  Float              @default(0)
   date            DateTime
   startTime       DateTime
   endTime         DateTime

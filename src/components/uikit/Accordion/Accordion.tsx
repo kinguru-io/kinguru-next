@@ -8,18 +8,21 @@ export const Accordion = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "15px",
+    gap: "3.5",
+    marginBottom: "6",
+    // bgColor: "secondary.lighter",
+    // padding="3"
+    // alignItems="center"
+    // borderRadius="lg"
   },
 });
 
 export const AccordionItem = styled("div", {
   base: {
-    bgColor: "light",
-    borderColor: "secondary",
-    borderWidth: "1px",
-    borderRadius: "10px",
-    paddingInline: "30px 15px",
-    paddingBlock: "9px",
+    // bgColor: "secondary.lighter",
+    // borderRadius: "lg",
+    // paddingInline: "4",
+    // paddingBlock: "3",
     transition: "colors",
     _focusWithin: {
       borderColor: "focus",
@@ -43,8 +46,13 @@ export function AccordionItemToggle(
   const labelClassName = css(
     {
       position: "relative",
+      bgColor: "secondary.lighter",
+      borderRadius: "lg",
+      paddingInline: "4",
+      paddingBlock: "3",
       cursor: "pointer",
       display: "block",
+      fontSize: "md",
       _peerDisabled: {
         cursor: "not-allowed",
       },
@@ -86,13 +94,15 @@ export function AccordionItemToggle(
 }
 
 export function AccordionItemContent({
+  padding = "30px",
   children,
 }: {
+  padding?: string;
   children: React.ReactNode;
 }) {
   return (
     <Collapse>
-      <Box padding="30px">{children}</Box>
+      <Box padding={padding}>{children}</Box>
     </Collapse>
   );
 }

@@ -37,6 +37,7 @@ import {
 } from "@/lib/actions/booking";
 import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 import { groupBy } from "@/lib/utils/array";
+import { isUserOwnerOfPremise } from "@/lib/utils/premise-booking";
 import {
   prepareBookedSlots,
   generateTimeSlots,
@@ -150,6 +151,8 @@ export default async function PremisePage({
     { title: t("how_to_get_there"), description: venue.locationTutorial },
   ];
 
+  const isOwner = await isUserOwnerOfPremise(premise?.venue?.organizationId);
+
   return (
     <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
       <PremiseMainInfoLayout>
@@ -228,6 +231,7 @@ export default async function PremisePage({
                   cancelIntent={cancelPremiseSlotsIntent}
                   revalidateFn={revalidatePremisePage}
                   discountsMap={discountMap}
+                  isOwner={isOwner}
                 />
               </Modal>
               <DiscountViewCard discounts={discounts} locale={locale} />

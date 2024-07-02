@@ -29,6 +29,7 @@ export function BookingViewProvider({
 }) {
   const [selectedSlots, setSlots] = useState<TimeSlotInfoExtended[]>([]);
 
+  console.log("selectedSlots", selectedSlots);
   const toggleSlot = useCallback((timeSlotInfo: TimeSlotInfoExtended) => {
     setSlots((prevSlotsState) => {
       const filteredPrevSlotsState = prevSlotsState.filter(

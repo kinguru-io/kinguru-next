@@ -531,6 +531,23 @@
           "socialLink_required": "Invalid URL format"
         }
       }
+    },
+    "my_bookings": {
+      "heading": "My bookings",
+      "no_bookings": "You have no bookings yet",
+      "booking_canceled_successfully": "Booking canceled successfully",
+      "modal_cancel_confirmation_desc": "Are you sure you want to cancel the booking?",
+      "cancel_booking_btn": "Cancel booking",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "booking": {
+        "date": "Date",
+        "time": "Time",
+        "place": "Place",
+        "price": "Price",
+        "status": "Status",
+        "cancel": "Cancel"
+      }
     }
   },
   "venue": {
@@ -593,11 +610,13 @@
   "booking_view": {
     "card_heading": "Your booking",
     "no_selected_slots": "Your booking will be shown here",
+    "block_slot_btn": "Block time",
     "pay_btn": "Pay",
     "rules_agreement": "I have read and agree with the rules of the premise",
     "remove_timeslot_btn": "Delete booking time",
     "booking_modal_heading": "Time slots booking",
     "action_successful_booking": "Successfully booked!",
+    "action_successfully_blocked_slots": "Slots are successfully blocked!",
     "action_invalid_data": "Invalid data",
     "action_payment_cancelled": "Payment was cancelled"
   },
@@ -630,7 +649,8 @@
       "events": "My events",
       "venues": "My venues",
       "notifications": "My notifications",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mybookings": "My bookings"
     },
     "faq_link_labels": {
       "add_venue": "How to add a venue to the platform",
@@ -888,6 +908,7 @@
     "commercial_kitchens": "Commercial kitchens"
   },
   "booking_cancel_terms": {
+    "cancel_terms": "Cancellation terms",
     "very_flexible": "Very flexible",
     "very_flexible_desc": "Guests have the ability to cancel their booking no later than 24 hours before the event and receive a full refund, including all fees paid for the reservation.",
     "flexible": "Flexible",

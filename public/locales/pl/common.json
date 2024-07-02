@@ -467,7 +467,8 @@
       "events": "My events",
       "venues": "My venues",
       "notifications": "My notifications",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mybookings": "Moje rezerwacje"
     },
     "faq_link_labels": {
       "add_venue": "How to add a venue to the platform",

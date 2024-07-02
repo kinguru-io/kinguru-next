@@ -126,9 +126,8 @@ export function WeekView({
                   {formatInTimeZone(weekdayInfo.day, timeZone, "d")}
                 </time>
               </Box>
-
               {weekDayTimeSlots.map(({ day, timeSlots }) => {
-                return timeSlots.flatMap(({ price, time }) => {
+                return timeSlots.flatMap(({ price, time, discountAmount }) => {
                   const slotTime = set(weekdayInfo.day, {
                     hours: time.getHours(),
                     minutes: time.getMinutes(),
@@ -150,7 +149,14 @@ export function WeekView({
                       price={price}
                       time={slotTime}
                       timeZone={timeZone}
-                      onClick={() => toggleSlot({ day, time: slotTime, price })}
+                      onClick={() =>
+                        toggleSlot({
+                          day,
+                          time: slotTime,
+                          price,
+                          discountAmount: 0,
+                        })
+                      }
                       condition={getTimeSlotCondition(price, aggregatedPrices)}
                       selected={isSlotSelected}
                       disabled={isDisabled}

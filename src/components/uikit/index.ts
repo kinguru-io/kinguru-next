@@ -21,3 +21,5 @@ export * from "./filters";
 export * from "./Forms";
 export * from "./icon";
 export { Loader } from "./loader";
+export * from "./ModalNew/Modal";
+export * from "./PremiseMyBookingCard";

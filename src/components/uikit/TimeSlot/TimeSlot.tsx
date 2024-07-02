@@ -13,6 +13,7 @@ type Condition = keyof typeof timeSlotCondition;
 export type TimeSlotInfo = {
   price: number;
   time: Date;
+  discountAmount: number;
 };
 
 type TimeSlotProps = TimeSlotInfo & {
@@ -49,6 +50,7 @@ export function TimeSlot({
   price,
   time,
   timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
+  discountAmount,
   onClick,
   condition = "regular",
   selected = false,
@@ -65,7 +67,8 @@ export function TimeSlot({
       disabled={disabled}
     >
       <time dateTime={time.toISOString()}>
-        {formatInTimeZone(time, timeZone, "HH:mm")}
+        {formatInTimeZone(time, timeZone, "HH:mm")}{" "}
+        {discountAmount && "with discount"}
       </time>
       <span
         className={css({

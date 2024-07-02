@@ -32,7 +32,9 @@ export function _ModalWindow({
   }, [open]);
 
   const closeButtonClicked = () => {
+    console.log("closeButtonClicked called");
     setOpen(false);
+    console.log("Modal should be closed now");
   };
 
   const modalCancelled = (e: React.SyntheticEvent<HTMLDialogElement>) => {

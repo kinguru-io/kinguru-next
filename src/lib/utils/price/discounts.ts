@@ -1,4 +1,5 @@
 import type { PremiseDiscount } from "@prisma/client";
+import { TimeSlotInfoExtended } from "@/components/calendar";
 import type { TimeSlotInfo } from "@/components/uikit";
 import type { Group } from "@/lib/utils/array";
 
@@ -35,7 +36,27 @@ export function prepareDiscountRangeMap(discounts: PremiseDiscount[]) {
   );
 }
 
-export function processDiscounts<T extends TimeSlotInfo>(
+export function getSlotDiscount(
+  slots: TimeSlotInfoExtended[],
+  slotTime: TimeSlotInfoExtended["time"],
+  discountsMap: Record<number, number | undefined>,
+) {
+  const slotsAmount = slots.filter(
+    (slot) => slot.time.getDate() === slotTime.getDate(),
+  ).length;
+
+  const maxDiscountDuration = Math.max(
+    ...Object.keys(discountsMap).map((duration) => Number(duration)),
+    0,
+  );
+
+  const groupDuration = Math.min(slotsAmount, maxDiscountDuration);
+  const discountPercentage = discountsMap[groupDuration] || 0;
+
+  return discountPercentage;
+}
+
+export function processOrderTotalDiscounts<T extends TimeSlotInfo>(
   groupedSlots: Group<PropertyKey, T>,
   discountsMap: Record<number, number | undefined>,
 ) {
@@ -88,4 +109,4 @@ export function processDiscounts<T extends TimeSlotInfo>(
   );
 }
 
-export type PriceInfo = ReturnType<typeof processDiscounts>;
+export type PriceInfo = ReturnType<typeof processOrderTotalDiscounts>;
