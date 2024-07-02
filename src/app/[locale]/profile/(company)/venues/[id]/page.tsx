@@ -45,12 +45,12 @@ export default async function ProfileVenuePage({
             <PremiseView
               key={premiseId}
               id={premiseId}
-              href={`/profile/venues/${id}/edit-premise?venueId=${id}&premiseId=${premiseId}`}
+              href={`/profile/venues/${id}/${premiseId}`}
             />
           ))}
           <AddItemLink
             fontSize="8px" // for the plus icon to be smaller
-            href={`/profile/venues/${id}/add-premise?venueId=${id}`}
+            href={`/profile/venues/${id}/add-premise`}
             borderRadius="27px"
             minHeight="225px"
           />

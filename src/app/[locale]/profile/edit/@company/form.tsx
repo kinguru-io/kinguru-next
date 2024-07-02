@@ -13,7 +13,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import toast from "react-hot-toast";
-import formFieldsConfig from "./formConfig.json";
+import formFieldsConfig from "./form-config.json";
 import { ImagePickerForm } from "@/components/common/form/image-picker-form";
 import { BaseForm, Button, Checkbox, SocialLinks } from "@/components/uikit";
 import { FormInnerLayout } from "@/layout/block";

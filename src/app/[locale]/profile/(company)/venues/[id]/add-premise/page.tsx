@@ -7,9 +7,9 @@ import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
 
 export default async function AddPremisePage({
-  searchParams: { venueId },
+  params: { id: venueId },
 }: {
-  searchParams: { venueId?: string };
+  params: { id?: string };
 }) {
   if (!venueId) {
     return redirect("/profile/venues");
