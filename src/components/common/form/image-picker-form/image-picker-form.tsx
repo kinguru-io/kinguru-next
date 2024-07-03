@@ -1,7 +1,7 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { RxCross1 } from "react-icons/rx";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { Button } from "@/components/uikit";
+import { Button, Icon } from "@/components/uikit";
+import { css } from "~/styled-system/css";
 import { Box } from "~/styled-system/jsx";
 
 export function ImagePickerForm({
@@ -24,18 +24,7 @@ export function ImagePickerForm({
   });
 
   return (
-    <Box
-      position="relative"
-      alignSelf="flex-start"
-      css={{
-        "& > .button": {
-          position: "absolute",
-          fontSize: "10px",
-          insetBlockStart: "0.3rem",
-          insetInlineEnd: "1rem",
-        },
-      }}
-    >
+    <Box css={{ position: "relative", maxWidth: { base: "full", md: "50%" } }}>
       <ProfileImagePicker
         key={src}
         groupKey={groupKey}
@@ -44,10 +33,27 @@ export function ImagePickerForm({
       />
       {src && (
         <Button
+          className={css({
+            position: "absolute",
+            padding: "3",
+            insetBlockEnd: "2.5",
+            insetInlineEnd: "2.5",
+            md: {
+              padding: "0.5",
+              insetBlockEnd: "2",
+              insetInlineEnd: "2",
+            },
+          })}
           type="button"
-          colorPalette="primary"
+          colorPalette="danger"
           onClick={() => setValue(name, "")}
-          icon={<RxCross1 size="1.7em" />}
+          icon={
+            <Icon
+              name="action/trash-can"
+              className={css({ fontSize: { base: "md", md: "xl" } })}
+            />
+          }
+          rounded={false}
         />
       )}
     </Box>

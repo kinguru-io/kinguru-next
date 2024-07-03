@@ -445,8 +445,12 @@
   "form": {
     "common": {
       "upload_photo": "Upload a photo",
+      "uploading_photo": "Uploading...",
       "uploaded_photo": "Uploaded photo",
-      "updated": "Updated"
+      "updated": "Updated",
+      "incorrect_file_type": "Incorrect file type",
+      "incorrect_file_size": "File size exceeded",
+      "upload_failed": "File upload error"
     },
     "multi_step": {
       "complete_current_step": "Please complete the current step to unlock access to the next steps."

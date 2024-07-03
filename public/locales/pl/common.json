@@ -357,8 +357,12 @@
   "form": {
     "common": {
       "upload_photo": "Prześlij zdjęcie",
+      "uploading_photo": "Przesyłanie zdjęcia...",
       "uploaded_photo": "Zdjęcie przesłane",
-      "updated": "Zaktualizowano"
+      "updated": "Zaktualizowano",
+      "incorrect_file_type": "Nieprawidłowy typ pliku",
+      "incorrect_file_size": "Przekroczony rozmiar pliku",
+      "upload_failed": "Błąd przesyłania pliku"
     },
     "multi_step": {
       "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."

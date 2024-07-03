@@ -282,8 +282,12 @@
   "form": {
     "common": {
       "upload_photo": "Загрузите фото",
+      "uploading_photo": "Загрузка...",
       "uploaded_photo": "Загруженное фото",
-      "updated": "Данные обновлены"
+      "updated": "Данные обновлены",
+      "incorrect_file_type": "Неправильный тип файла",
+      "incorrect_file_size": "Превышен размер файла",
+      "upload_failed": "Ошибка загрузки файла"
     },
     "multi_step": {
       "complete_current_step": "Пожалуйста, завершите текущий шаг, чтобы разблокировать доступ к следующим шагам."
