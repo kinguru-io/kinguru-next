@@ -11,6 +11,10 @@ export const premiseMyBookingCardSlot = defineSlotRecipe({
       animation: "fade-in",
       borderRadius: "lg",
       marginBlockEnd: "2",
+      flexDirection: "column",
+      md: {
+        flexDirection: "row",
+      },
     },
   },
 });

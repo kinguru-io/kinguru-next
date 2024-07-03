@@ -18,6 +18,11 @@ type NavLink = {
 const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
   user: [
     {
+      href: "/profile/mybookings",
+      labelIntlCode: "mybookings",
+      segment: "mybookings",
+    },
+    {
       href: "/profile/edit",
       labelIntlCode: "edit",
       segment: "edit",
@@ -34,6 +39,11 @@ const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
     },
   ],
   organization: [
+    {
+      href: "/profile/mybookings",
+      labelIntlCode: "mybookings",
+      segment: "mybookings",
+    },
     {
       href: "/profile/edit",
       labelIntlCode: "edit",

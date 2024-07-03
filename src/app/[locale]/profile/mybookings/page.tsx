@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
+
+import { SubSection } from "@/components/common/cards/sub-section";
 import { PremiseMyBookings } from "@/components/premise/PremiseMyBookings";
-import { ProfileSectionLayout } from "@/layout/page";
 import { redirect } from "@/navigation.ts";
-import { Stack } from "~/styled-system/jsx";
 
 export default async function MyBookingsPage() {
   const t = await getTranslations("user.my_bookings");
@@ -25,15 +25,12 @@ export default async function MyBookingsPage() {
   });
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">
+    <SubSection>
+      <h2 className="title">
         {t("heading")} ({userBookings.length})
-      </h1>
-      <section>
-        <Stack gap="20px">
-          <PremiseMyBookings userBookings={userBookings} />
-        </Stack>
-      </section>
-    </ProfileSectionLayout>
+      </h2>
+      {/*// @ts-ignore*/}
+      <PremiseMyBookings userBookings={userBookings} />
+    </SubSection>
   );
 }

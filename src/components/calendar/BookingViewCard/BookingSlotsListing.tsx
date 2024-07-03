@@ -3,20 +3,18 @@
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { LiaCalendar } from "react-icons/lia";
-import {
-  type TimeSlotInfoExtended,
-  useBookingView,
-} from "../BookingViewContext";
+import { useBookingView } from "../BookingViewContext";
 import { TagClosable } from "@/components/common";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
+import { MergedTimeSlots } from "@/lib/utils/premise-booking";
 import { Grid, HStack } from "~/styled-system/jsx";
 
 export function BookingSlotsListing({
   groupedSlots,
 }: {
-  groupedSlots: Group<string, TimeSlotInfoExtended>;
+  groupedSlots: Group<string, MergedTimeSlots>;
 }) {
   const t = useTranslations("booking_view");
   const { toggleSlot } = useBookingView();

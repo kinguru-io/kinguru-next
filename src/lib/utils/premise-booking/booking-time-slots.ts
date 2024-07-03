@@ -1,5 +1,5 @@
 import { getSession } from "@/auth";
-import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
+import { BookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
 
 export async function isUserOwnerOfPremise(
   premiseOrgId: string,
@@ -32,21 +32,21 @@ export interface Booking {
     venueId: string;
     name: string;
     description: string;
-    room: string;
-    floor: string;
-    type: string;
-    area: number;
-    capacity: number;
-    rules: string;
+    room: string | null;
+    floor: string | null;
+    type: string | null;
+    area: number | null;
+    capacity: number | null;
+    rules: string | null;
     amenities: any[];
-    direction: string;
-    bookingCancelTerm: BookingCancelTerm;
+    direction: string | null;
+    bookingCancelTerm: BookingCancelTerms;
     createdAt: Date;
     updatedAt: Date;
   };
 }
 
-type MergedTimeSlots = {
+export type MergedTimeSlots = {
   premiseId: string;
   date: Date;
   startTime: Date;

@@ -1,4 +1,4 @@
-import { useState, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
@@ -25,7 +25,9 @@ export function PremiseMyBookingCardTitle({ children }: PropsWithChildren) {
   );
 }
 
-export function PremiseMyBookingCardDescription({ children }: PropsWithChildren) {
+export function PremiseMyBookingCardDescription({
+  children,
+}: PropsWithChildren) {
   return (
     <p
       className={css({
@@ -46,12 +48,17 @@ export function PremiseMyBookingCardContent({
   children,
 }: PropsWithChildren<{ href: string; label: string }>) {
   return (
-    <span
+    <div
       className={css({
         position: "relative",
         display: "flex",
+        flexGrow: "1",
+        gap: "4",
         flexDirection: "column",
-        gap: "2",
+        lg: {
+          flexDirection: "row",
+          alignItems: "center",
+        },
         _focusWithin: {
           "& > [data-label=heading]": { textDecoration: "underline" },
         },
@@ -61,6 +68,6 @@ export function PremiseMyBookingCardContent({
       <Link href={href} className={linkOverlay()}>
         <span className={css({ srOnly: true })}>{label}</span>
       </Link>
-    </span>
+    </div>
   );
 }

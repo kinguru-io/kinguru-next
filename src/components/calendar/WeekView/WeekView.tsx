@@ -127,7 +127,7 @@ export function WeekView({
                 </time>
               </Box>
               {weekDayTimeSlots.map(({ day, timeSlots }) => {
-                return timeSlots.flatMap(({ price, time, discountAmount }) => {
+                return timeSlots.flatMap(({ price, time }) => {
                   const slotTime = set(weekdayInfo.day, {
                     hours: time.getHours(),
                     minutes: time.getMinutes(),
@@ -154,7 +154,6 @@ export function WeekView({
                           day,
                           time: slotTime,
                           price,
-                          discountAmount: 0,
                         })
                       }
                       condition={getTimeSlotCondition(price, aggregatedPrices)}

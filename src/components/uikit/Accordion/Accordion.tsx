@@ -9,20 +9,12 @@ export const Accordion = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "3.5",
-    marginBottom: "6",
-    // bgColor: "secondary.lighter",
-    // padding="3"
-    // alignItems="center"
-    // borderRadius="lg"
+    marginBlockEnd: "6",
   },
 });
 
 export const AccordionItem = styled("div", {
   base: {
-    // bgColor: "secondary.lighter",
-    // borderRadius: "lg",
-    // paddingInline: "4",
-    // paddingBlock: "3",
     transition: "colors",
     _focusWithin: {
       borderColor: "focus",

@@ -9,3 +9,17 @@ export const bookingCancelTerms: Array<BookingCancelTerm> = [
   "default_30",
   "default_90",
 ];
+
+export type BookingCancelTerms =
+  | "very_flexible"
+  | "flexible"
+  | "default_30"
+  | "default_90";
+
+export const REFUND_TYPES = {
+  FULL_REFUND: "FULL_REFUND",
+  PARTIAL_REFUND: "PARTIAL_REFUND",
+  NO_REFUND: "NO_REFUND",
+} as const;
+
+export type RefundType = (typeof REFUND_TYPES)[keyof typeof REFUND_TYPES];

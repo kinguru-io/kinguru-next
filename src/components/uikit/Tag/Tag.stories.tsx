@@ -28,3 +28,25 @@ export const TagPrimary: Story = {
     children: "example",
   },
 };
+
+// export const CancelBookingBtn = {
+//   render: (isActual: boolean) => {
+//     return (
+//       <button
+//         type="button"
+//         className={cx(
+//           tagStyles({ variant: isActual ? "solid" : "outline" }),
+//           css({
+//             padding: "4",
+//             _selected: { colorPalette: "dark" },
+//             _hover: { colorPalette: "secondary" },
+//           }),
+//         )}
+//         aria-selected={isActual}
+//         disabled={!isActual}
+//       >
+//         Cancel booking
+//       </button>
+//     );
+//   },
+// };

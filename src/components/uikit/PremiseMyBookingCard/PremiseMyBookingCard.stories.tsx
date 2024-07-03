@@ -9,7 +9,7 @@ import {
   PremiseMyBookingCardTitle,
   PremiseMyBookingCardContent,
 } from "@/components/uikit";
-import { AspectRatio, Container } from "~/styled-system/jsx";
+import { Container } from "~/styled-system/jsx";
 
 const items = Array.from({ length: 3 }).map((_, i) => ({
   id: i,

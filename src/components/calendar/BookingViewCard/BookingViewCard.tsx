@@ -3,7 +3,7 @@
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { addHours, compareAsc, getDate } from "date-fns";
+import { addHours, compareAsc } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { useCallback, useState, useTransition } from "react";
@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
-import { TimeSlotInfoExtended, useBookingView } from "../BookingViewContext";
+import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Timer } from "@/components/common/timer";
@@ -80,10 +80,7 @@ export function BookingViewCard({
     discountAmount: getSlotDiscount(selectedSlots, time, discountsMap),
   }));
 
-  console.log("newSlots", newSlots);
   const newGroupedSlots = groupAndMergeTimeslots(newSlots);
-
-  console.log("newGroupedSlots", newGroupedSlots);
 
   const groupedSlots = groupBy(
     Array.from(newGroupedSlots).sort((slotA, slotB) =>
@@ -91,8 +88,6 @@ export function BookingViewCard({
     ),
     ({ startTime }) => formatInTimeZone(startTime, timeZone, "dd.MM.yyyy"),
   );
-
-  console.log("groupedSlots", groupedSlots);
 
   const priceGroupedSlots = groupBy(
     Array.from(selectedSlots).sort((slotA, slotB) =>
@@ -118,6 +113,7 @@ export function BookingViewCard({
         await blockPremiseSlotsIntent({
           premiseId,
           slots: selectedSlots,
+          discountsMap,
         });
 
       if (response) {
@@ -231,7 +227,7 @@ export function BookingViewCard({
         alignSelf="flex-start"
         minHeight="352px"
       >
-        <CardInner padding="25px 18px" alignItems="center" gap="0px">
+        <CardInner padding="25px 18px" alignItems="center" gap="0">
           <h4>{t("card_heading")}</h4>
           {areThereNoSlots ? (
             <NoBookingsNotice label={t("no_selected_slots")} />

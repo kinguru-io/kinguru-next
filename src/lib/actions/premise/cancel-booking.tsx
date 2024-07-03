@@ -1,7 +1,6 @@
 "use server";
 
 import { differenceInHours, differenceInDays } from "date-fns";
-import { p } from "msw/lib/core/GraphQLHandler-COiPfZ8k";
 import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
 import { getSession } from "@/auth";
@@ -17,18 +16,16 @@ export interface CancelBookingActionProps {
   isActive: boolean;
 }
 
-type ProcessRefundProps = Omit<CancelBookingActionProps, "premiseSlotIds"> & {
+type ProcessRefundProps = Omit<
+  CancelBookingActionProps,
+  "premiseSlotIds" | "isActive"
+> & {
   cancellationDate: Date;
 };
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-04-10",
+  apiVersion: "2024-06-20",
 });
-
-function subtractPercentage(amount: number, percentage: number): number {
-  const deduction = (amount * percentage) / 100;
-  return amount - deduction;
-}
 
 async function processRefund({
   bookingStartTime,
@@ -38,8 +35,8 @@ async function processRefund({
   cancellationDate,
   discountAmount,
 }: ProcessRefundProps) {
-  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-  const amountPaid = premiseAmount / 100; // Convert from cents to dollars
+  const discount = discountAmount ? discountAmount / 100 : 1;
+  const amountPaid = Math.round((premiseAmount / 100) * discount); // Convert from cents to dollars
 
   const hoursUntilEvent = differenceInHours(bookingStartTime, cancellationDate);
   const daysUntilEvent = differenceInDays(bookingStartTime, cancellationDate);

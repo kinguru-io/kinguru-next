@@ -139,10 +139,12 @@ export default async function PremisePage({
       description: bookingCancelTerm && (
         <Stack gap="20px" color="dark">
           <InlineBox textStyle="body.1">
-            {translationsBCT(bookingCancelTerm as BookingCancelTerm)}
+            {translationsBCT(bookingCancelTerm as keyof typeof translationsBCT)}
           </InlineBox>
           <p>
-            {translationsBCT(`${bookingCancelTerm as BookingCancelTerm}_desc`)}
+            {translationsBCT(
+              `${bookingCancelTerm as keyof typeof translationsBCT}_desc`,
+            )}
           </p>
         </Stack>
       ),

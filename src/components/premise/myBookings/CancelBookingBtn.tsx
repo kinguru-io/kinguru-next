@@ -8,14 +8,15 @@ import {
   Button,
   Card,
   CardInner,
-  ModalInitiator,
   ModalWindow,
   useModal,
 } from "@/components/uikit";
+import { tagStyles } from "@/components/uikit/Tag/Tag";
 import {
   CancelBookingActionProps,
   cancelBookingAction,
 } from "@/lib/actions/premise/cancel-booking";
+import { css, cx } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
 export default function CancelBookingBtn({
@@ -59,36 +60,48 @@ export default function CancelBookingBtn({
     setOpen(false);
   };
 
+  const CancelBookingButton = () => {
+    return (
+      <button
+        type="button"
+        className={cx(
+          tagStyles({ variant: isActive ? "solid" : "outline" }),
+          css({
+            padding: "4",
+            _selected: {
+              colorPalette: "dark",
+              _hover: { colorPalette: "danger" },
+            },
+            _disabled: {
+              opacity: 0.5,
+            },
+          }),
+        )}
+        onClick={() => setOpen(isActive)}
+        aria-selected={isActive}
+        disabled={!isActive}
+      >
+        {t("cancel_booking_btn")}
+      </button>
+    );
+  };
+
   return (
     <>
-      {isActive ? (
-        <ModalInitiator>
-          <Button type="button" rounded={false}>
-            {t("cancel_booking_btn")}
-          </Button>
-        </ModalInitiator>
-      ) : (
-        <Button type="button" rounded={false} disabled={!isActive}>
-          {t("cancel_booking_btn")}
-        </Button>
-      )}
+      <CancelBookingButton />
       <ModalWindow>
         <Flex gap="1rem" minWidth="100px">
           {isLoading ? (
             <LoaderIcon />
           ) : (
             <>
-              <Card
-                border="1px solid"
-                borderColor="neutral.2"
-                alignSelf="flex-start"
-              >
-                <CardInner padding="25px 18px" alignItems="center" gap="0px">
+              <Card alignSelf="flex-start">
+                <CardInner padding="25px 18px" alignItems="center" gap="0">
                   <h4>{t("modal_cancel_confirmation_desc")}</h4>
                   <Flex gap="1rem" padding="1rem 0 0">
-                    <Button onClick={closeModal}>{t("cancel")}</Button>
+                    <Button onClick={closeModal}>{t("modal_cancel")}</Button>
                     <Button colorPalette="dark" onClick={onCancelBooking}>
-                      {t("confirm")}
+                      {t("modal_confirm")}
                     </Button>
                   </Flex>
                 </CardInner>

@@ -2,6 +2,7 @@ import { TicketIntentStatus } from "@prisma/client";
 import { format } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import { LiaCalendar } from "react-icons/lia";
+
 import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
 import { Tag } from "@/components/uikit";
 import { fetchImageSrc } from "@/lib/utils/fetch-image-src";
@@ -15,7 +16,6 @@ export async function PremiseMyBookings({
   userBookings: Booking[];
 }) {
   const t = await getTranslations("user.my_bookings");
-  const tBookCancelTerms = await getTranslations("booking_cancel_terms");
 
   const statusColorPallets: Record<TicketIntentStatus, string> = {
     failed: "danger",
@@ -65,7 +65,6 @@ export async function PremiseMyBookings({
           premises={premises}
           imageSrcs={imageSrcs}
           labels={labels}
-          t={tBookCancelTerms}
         />
       ))}
     </>
