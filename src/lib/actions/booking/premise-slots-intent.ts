@@ -59,7 +59,6 @@ export async function blockPremiseSlotsIntent({
     slots,
   });
 
-  console.log("isValid, editedSlots", isValid, editedSlots);
   if (!isValid || editedSlots.length === 0) {
     return {
       status: "error",
