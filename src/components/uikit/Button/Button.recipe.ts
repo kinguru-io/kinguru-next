@@ -47,6 +47,13 @@ export const buttonRecipe = defineRecipe({
           bgColor: "danger",
         },
       },
+      danger: {
+        backgroundColor: "danger",
+        color: "light",
+        _hoverEnabled: {
+          bgColor: "danger.darker",
+        },
+      },
     },
     size: {
       sm: {

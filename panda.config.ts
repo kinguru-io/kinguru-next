@@ -140,6 +140,7 @@ export default defineConfig({
         neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
           DEFAULT: { value: "#DC1414" },
+          darker: { value: "#c51010" },
           text: { value: "{colors.light}" },
         },
         success: {
