@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Icon } from "../icon";
-import { Select } from "@/components/uikit/Select";
+import { Select, Icon } from "@/components/uikit";
 
 const meta = {
   title: "UIKit/Forms/Select",
@@ -14,6 +13,7 @@ const meta = {
     placeholder: "Select value",
     disabled: false,
     rounded: false,
+    hideLabel: false,
   },
 } satisfies Meta<typeof Select>;
 

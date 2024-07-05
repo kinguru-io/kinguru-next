@@ -1,8 +1,8 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { RxCross1 } from "react-icons/rx";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { Button, ErrorField } from "@/components/uikit";
+import { Button, ErrorField, Icon } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
+import { css } from "~/styled-system/css";
 import { Box, Flex } from "~/styled-system/jsx";
 
 export function PremiseImageSelector() {
@@ -21,28 +21,12 @@ export function PremiseImageSelector() {
 
   return (
     <>
-      <Flex
-        gap="1.25rem"
-        flexWrap="wrap"
-        justifyContent="space-around"
-        paddingInline="25px"
-      >
+      <Flex gap="2" flexWrap="wrap">
         {fields.map(({ id, url }, i) => {
           const fieldName = `${formFieldPath}.${i}.url` as const;
 
           return (
-            <Box
-              key={id}
-              position="relative"
-              css={{
-                "& > .button": {
-                  position: "absolute",
-                  insetBlockStart: "-1em",
-                  insetInlineEnd: "-1em",
-                  fontSize: "8px",
-                },
-              }}
-            >
+            <Box key={id} position="relative" css={{ flexGrow: "1" }}>
               <ProfileImagePicker
                 {...register(fieldName, {
                   onChange: (e) => {
@@ -51,22 +35,29 @@ export function PremiseImageSelector() {
                   },
                 })}
                 imageSrc={url}
-                placeholderWrapper="rectangle-smaller"
                 groupKey="premises"
               />
               {url && (
                 <Button
+                  type="button"
+                  className={css({
+                    position: "absolute",
+                    insetBlockEnd: "1",
+                    insetInlineEnd: "1",
+                    padding: "2",
+                    fontSize: "xs",
+                  })}
+                  colorPalette="danger"
                   onClick={() => update(i, { url: "" })}
-                  icon={<RxCross1 />}
+                  icon={<Icon name="action/cross" />}
+                  rounded={false}
                 />
               )}
             </Box>
           );
         })}
       </Flex>
-      <Flex paddingInline="25px">
-        <ErrorField error={errors?.resources?.resources} />
-      </Flex>
+      <ErrorField error={errors?.resources?.resources} />
     </>
   );
 }

@@ -279,10 +279,11 @@
       "IBAN": "IBAN",
       "bankName": "Bank name",
       "same_addresses_label": "Billing address matches post address",
-      "social_link_placeholder": "{social} account link",
+      "social_links_title": "Media społecznościowe",
+      "social_links_helper": "Wprowadź swoje konta w mediach społecznościowych, abyśmy mogli zweryfikować Twoje konto.",
+      "social_link_placeholder": "Określ łącze",
       "submit": "Save",
       "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
-      "social_helper": "Specify your social networks for us to be able to verify your profile.",
       "fields": {
         "errors": {
           "NIP_required": "NIP musi mieć dokładnie 10 cyfr",
@@ -299,6 +300,7 @@
     "basic_info_form": {
       "group": {
         "main": "Main",
+        "about_me": "O mnie",
         "social": "Social networks"
       },
       "firstname": "First name",
@@ -308,10 +310,11 @@
       "country": "Country",
       "city": "City",
       "birthdate": "Birthday",
-      "description": "Extra information",
-      "social_link_placeholder": "{social} account link",
+      "description": "Więcej informacji",
+      "social_links_title": "Media społecznościowe",
+      "social_links_helper": "Wprowadź swoje konta w mediach społecznościowych, abyśmy mogli zweryfikować Twoje konto.",
+      "social_link_placeholder": "Określ łącze",
       "submit": "Save",
-      "social_helper": "Specify your social networks for us to be able to verify your profile.",
       "fields": {
         "errors": {
           "firstname_required": "First name should contain at least 2 characters",
@@ -357,8 +360,12 @@
   "form": {
     "common": {
       "upload_photo": "Prześlij zdjęcie",
+      "uploading_photo": "Przesyłanie zdjęcia...",
       "uploaded_photo": "Zdjęcie przesłane",
-      "updated": "Zaktualizowano"
+      "updated": "Zaktualizowano",
+      "incorrect_file_type": "Nieprawidłowy typ pliku",
+      "incorrect_file_size": "Przekroczony rozmiar pliku",
+      "upload_failed": "Błąd przesyłania pliku"
     },
     "multi_step": {
       "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."
@@ -485,6 +492,11 @@
       "heading": "Moje miejsca",
       "premises_heading": "Pomieszczenia",
       "no_premises": "Miejsce jest nieaktywne. Należy dodać salę.",
+      "no_premises_short": "Strona jest nieaktywna",
+      "add_venue_btn_label": "Add an Avenue",
+      "edit_venue_btn_label": "Edit pad",
+      "add_premise_btn_label": "Dodaj halę",
+      "cannot_load_location": "Nie można załadować lokalizacji obiektu",
       "no_organization_warn_msg": "Aby móc dodawać miejsca i sale, proszę wypełnić swoje dane osobowe w sekcji \"Profil\".",
       "no_organization_link_label": "Przejdź do sekcji \"Profil\"",
       "edit_premise_link_label": "Edytuj",
@@ -506,6 +518,7 @@
           "description": "Opis",
           "description_placeholder": "Dodaj opis swojego miejsca",
           "photo_tip": "Dodaj jedno zdjęcie, które będzie wyświetlane na stronie miejsca.",
+          "photo_tip_extra": "Rozmiar zdjęcia nie może przekraczać {size} mb",
           "locationMapboxId_placeholder": "Wprowadź adres",
           "locationTutorial_tip": "Napisz przewodnik, jak do Ciebie dotrzeć. Będzie widoczny dla wszystkich użytkowników i ułatwi im znalezienie Ciebie.",
           "locationTutorial_placeholder": "Na przykład: Można dojechać tramwajem #2 i #5. Od przystanku \"Ozernaya\" idź do dużego ceglastego budynku. Wejście od tyłu. Na trzecim piętrze skręć w prawo i podążaj za znakami.",
@@ -528,10 +541,11 @@
         }
       },
       "created": {
-        "heading": "Congratulations!\nYou have successfully registered the venue.",
-        "no_premise_warn_msg": "Next, you need to register at least one premise on this venue that will be rented out.",
-        "no_premise_link_label": "Go to premise registration",
-        "check_venue": "Zobacz stronę {venueName}"
+        "congrats_label": "Gratulacje!",
+        "complete_label": "Pomyślnie zarejestrowano obiekt.",
+        "no_premise_warn_msg": "Następnie musisz zarejestrować co najmniej jeden pokój do wynajęcia na tej stronie.",
+        "no_premise_link_label": "Przejdź do rejestracji sali.",
+        "check_venue": "Zobacz stronę {name}"
       }
     },
     "premises": {
@@ -560,29 +574,26 @@
           "photo": "Zdjęcie",
           "photo_tip": "Dodaj zdjęcia swojej sali",
           "premise_parameters": "Parametry sali",
-          "type_placeholder": "Wybierz rodzaj pomieszczenia",
-          "area_prefix": "Powierzchnia",
-          "area_literal": "m",
-          "capacity_prefix": "Pojemność do",
-          "capacity_literal": "osób",
+          "type_placeholder": "Rodzaj pomieszczenia",
+          "area_prefix": "Powierzchnia, m²",
+          "capacity_prefix": "Pojemność do, osób",
           "amenities": "Wyposażenie i udogodnienia",
           "amenities_tip": "Zaznacz co najmniej 5 udogodnień dostępnych w twojej sali. Im więcej udogodnień zaznaczysz, tym więcej użytkowników znajdzie twoją salę.",
           "open_hours": "Godziny otwarcia i ceny",
           "open_hours_example": "Ta forma pozwala na określenie kosztu wynajmu sali za 1 godzinę. Oznacza to, że możesz podać różne ceny dla różnych przedziałów czasowych.\n\nNa przykład:\n<bold>10:00-14:00 - 50 zł</bold>,\n<bold>14:00-23:00 - 70 zł</bold>.\n\nJeśli koszt wynajmu sali jest stały przez cały dzień, zaleca się wypełnić formularz w następujący sposób:\n<bold>10:00-23:00 - 50 zł</bold>",
-          "open_hours_price_label": "Koszt za 1 godzinę:",
+          "open_hours_from_label": "od",
+          "open_hours_to_label": "do",
+          "open_hours_price_label": "Koszt za godzinę, zł",
           "open_hours_add_record_btn_label": "Dodaj",
           "open_hours_existing_range_error_msg": "Nie można dodać. Nakładanie się z istniejącym przedziałem: {start} - {end}",
-          "open_hours_operating_mode": "Godziny otwarcia:",
-          "open_hours_empty_notice": "Aby wyświetlić godziny otwarcia w wybrany dzień, wypełnij odpowiednie pola po lewej stronie ekranu",
           "open_hours_spread_mode": "Możesz ustawić te godziny otwarcia na pozostałe dni tygodnia",
+          "open_hours_spread_mode_success": "Skopiowany tryb działania",
           "open_hours_spread_mode_btn_label": "Ustaw",
           "open_hours_discounts_heading": "Czy planujesz rabaty w ramach jednego dnia?",
+          "open_hours_discounts_label_time": "Czas",
+          "open_hours_discounts_label": "Rabat, %",
           "open_hours_discounts_tip": "Jeśli planujesz rabat, wypełnij warunki jego zastosowania. Rabat dotyczy tylko kilku godzin i jest ważny tylko w ramach jednego dnia.",
-          "open_hours_discounts_form": "Kalkulacja rabatu",
-          "open_hours_discounts_input": "Rabat za <noWrap><hoursSelector>X godzin</hoursSelector> - <percentageSelector>X</percentageSelector>%</noWrap>",
-          "open_hours_discounts": "Rabat:",
-          "open_hours_discounts_helper": "Przy rezerwacji na \n{duration, plural, =1 {# godzinę} =21 {# godzinę} other {# godzin}} lub więcej",
-          "open_hours_discounts_empty_notice": "Aby wyświetlić rabat w wybranym przedziale czasowym, wypełnij odpowiednie pola po lewej stronie ekranu",
+          "open_hours_discounts_helper": "Przy rezerwacji na {duration, plural, =1 {# godzinę} =21 {# godzinę} other {# godzin}} lub więcej",
           "rules": "Zasady sali",
           "rules_tip": "Opisz wszystkie zasady obowiązujące w twojej sali",
           "rules_placeholder": "Na przykład: spożywanie alkoholu jest zabronione.",

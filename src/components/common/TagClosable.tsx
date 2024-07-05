@@ -1,10 +1,9 @@
-import { RxCross1 } from "react-icons/rx";
-import { Button, Card, Tag } from "@/components/uikit";
+import { Button, Icon } from "@/components/uikit";
 import type { TagVariantProps } from "@/components/uikit/Tag";
-import { Divider } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { HStack } from "~/styled-system/jsx";
 
 export function TagClosable({
-  variant = "secondaryLighter",
   content,
   helper,
   onClick,
@@ -17,28 +16,34 @@ export function TagClosable({
   helper?: React.ReactNode;
 }) {
   return (
-    <Card
-      flexShrink="0"
-      border="1px solid"
-      borderColor="secondary"
-      padding="6px 5px"
-      alignItems="center"
-      textStyle="body.2"
+    <HStack
       css={{
-        "& > .button": { fontSize: "9px" },
-        "& > [data-helper]": { marginInline: "auto" },
+        color: "dark",
+        gap: "4",
+        fontSize: "sm",
+        paddingBlockEnd: "2",
+        borderColor: "secondary.lighter",
+        borderBlockEnd: "1px solid",
       }}
     >
-      <Tag size="sm" variant={variant} css={{ flexShrink: "0" }}>
-        {content}
-      </Tag>
-      <span data-helper>{helper}</span>
-      <Divider orientation="vertical" color="secondary" borderStyle="dashed" />
-      <Button
-        onClick={onClick}
-        icon={<RxCross1 size="10px" />}
-        aria-label={buttonLabel}
-      />
-    </Card>
+      {content}
+      <HStack gap="3" marginInlineStart="auto">
+        {helper}
+        <Button
+          className={css({ padding: "1" })}
+          type="button"
+          colorPalette="secondary"
+          onClick={onClick}
+          icon={
+            <Icon
+              name="action/trash-can"
+              className={css({ fontSize: "md", color: "danger" })}
+            />
+          }
+          aria-label={buttonLabel}
+          rounded={false}
+        />
+      </HStack>
+    </HStack>
   );
 }

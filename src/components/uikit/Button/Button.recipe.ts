@@ -19,7 +19,7 @@ export const buttonRecipe = defineRecipe({
       color: "light",
     },
     _focusVisible: {
-      boxShadow: "0 0 0 2px token(colors.focus)",
+      boxShadow: "focus",
     },
     _disabled: {
       opacity: "0.4",
@@ -45,6 +45,20 @@ export const buttonRecipe = defineRecipe({
         color: "light",
         _hoverEnabled: {
           bgColor: "danger",
+        },
+      },
+      danger: {
+        backgroundColor: "danger",
+        color: "light",
+        _hoverEnabled: {
+          bgColor: "danger.darker",
+        },
+      },
+      success: {
+        backgroundColor: "success",
+        color: "light",
+        _hoverEnabled: {
+          bgColor: "success.darker",
         },
       },
     },

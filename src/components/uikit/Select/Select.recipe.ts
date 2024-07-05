@@ -3,7 +3,7 @@ import { defineSlotRecipe } from "@pandacss/dev";
 
 export const selectSlot = defineSlotRecipe({
   className: "select",
-  slots: ["outerWrapper", "selectRoot", "icon", "arrow"],
+  slots: ["outerWrapper", "selectRoot", "placeholder", "icon", "arrow"],
   base: {
     outerWrapper: {
       position: "relative",
@@ -48,6 +48,24 @@ export const selectSlot = defineSlotRecipe({
       '&:has(option[value=""]:not(:checked))': {
         borderColor: "dark",
         bgColor: "light",
+      },
+    },
+    placeholder: {
+      display: "none",
+      position: "absolute",
+      insetBlockStart: "-1.5",
+      insetInlineStart: "3",
+      fontWeight: "normal",
+      fontSize: "sm",
+      color: "secondary",
+      bgColor: "light",
+      borderRadius: "xs",
+      paddingInline: "1",
+      '.select__selectRoot:has(option[value=""]:not(:checked)) + &': {
+        display: "inline-block",
+      },
+      _peerInvalid: {
+        color: "danger",
       },
     },
     icon: {

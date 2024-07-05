@@ -11,7 +11,6 @@ export const tagStyles = cva({
     fontSize: "px15",
     lineHeight: "0.75",
     padding: "2",
-    colorPalette: "secondary",
     borderWidth: "1px",
     borderStyle: "solid",
     borderColor: "colorPalette",

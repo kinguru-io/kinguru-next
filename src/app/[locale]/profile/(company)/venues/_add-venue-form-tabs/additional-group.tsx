@@ -2,20 +2,17 @@ import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 import { ErrorField, Radio, Select } from "@/components/uikit";
 import { CreateVenueFormSchemaProps } from "@/lib/actions/venue";
-import { Flex, VStack } from "~/styled-system/jsx";
+import { ageRestrictionList } from "@/lib/shared/config/age-restriction";
+import { Flex, Stack } from "~/styled-system/jsx";
 
 interface AdditionalGroupProps {
   defaultValues?: {
     featureCCTV?: boolean;
     featureParking?: boolean;
   };
-  ageRestrictionList: number[];
 }
 
-export function AdditionalGroup({
-  defaultValues,
-  ageRestrictionList,
-}: AdditionalGroupProps) {
+export function AdditionalGroup({ defaultValues }: AdditionalGroupProps) {
   const {
     register,
     formState: { errors },
@@ -25,8 +22,8 @@ export function AdditionalGroup({
   const formFieldPath = "features";
 
   return (
-    <Flex justifyContent="space-between" flexWrap="wrap" gap="20px">
-      <VStack alignItems="flex-start" gap="10px">
+    <Flex gap="6" justifyContent="space-between" flexWrap="wrap">
+      <Stack gap="2" flexGrow="1">
         <span>{t("fields.featureCCTV_tip")}</span>
         <Radio
           value="1"
@@ -43,9 +40,9 @@ export function AdditionalGroup({
           {...register(`${formFieldPath}.featureCCTV`)}
         />
         <ErrorField error={errors?.features?.featureCCTV} />
-      </VStack>
+      </Stack>
 
-      <VStack alignItems="flex-start" gap="10px">
+      <Stack gap="2" flexGrow="1">
         <span>{t("fields.featureParking_tip")}</span>
         <Radio
           value="1"
@@ -62,14 +59,15 @@ export function AdditionalGroup({
           {...register(`${formFieldPath}.featureParking`)}
         />
         <ErrorField error={errors?.features?.featureParking} />
-      </VStack>
+      </Stack>
 
-      <VStack alignItems="stretch" gap="10px">
+      <Stack flexGrow="1" flexBasis="fit-content" gap="2">
         <span>{t("fields.featureAge_tip")}</span>
         <Select
           placeholder={t("fields.featureAge_placeholder")}
           data-invalid={errors?.features?.featureAge}
           {...register(`${formFieldPath}.featureAge`)}
+          hideLabel
         >
           {ageRestrictionList.map((age) => (
             <option key={age} value={age}>
@@ -78,7 +76,7 @@ export function AdditionalGroup({
           ))}
         </Select>
         <ErrorField error={errors?.features?.featureAge} />
-      </VStack>
+      </Stack>
     </Flex>
   );
 }

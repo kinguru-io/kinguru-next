@@ -7,11 +7,9 @@ export default async function ProtectedProfileVenuesLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
-  const organization = session?.user?.organizations.at(0);
 
-  // redirect if user haven't completed company profile registration
-  if (!organization) {
-    return redirect("/profile/venues");
+  if (session?.user?.role !== "organization") {
+    return redirect("/profile/edit");
   }
 
   return <>{children}</>;

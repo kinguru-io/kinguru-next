@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 import { ErrorField, Input } from "@/components/uikit";
 import { CreateVenueFormSchemaProps } from "@/lib/actions/venue";
-import { Box, Flex, InlineBox, VStack } from "~/styled-system/jsx";
+import { Flex } from "~/styled-system/jsx";
 
 export function ContactsGroup() {
   const {
@@ -14,28 +14,36 @@ export function ContactsGroup() {
   const formFieldPath = "manager.manager";
 
   return (
-    <Flex justifyContent="space-around" flexWrap="wrap" gap="20px">
-      <InlineBox flexBasis="full">{t("fields.contacts_tip")}</InlineBox>
-      <VStack alignItems="flex-start" gap="10px" width="35%">
-        <Box width="100%">
+    <>
+      <span className="helper">{t("fields.contacts_tip")}</span>
+      <Flex
+        css={{
+          gap: "2",
+          flexWrap: "wrap",
+          "& > div": {
+            flexBasis: "calc(50% - {spacing.1})",
+            flexGrow: "1",
+            minWidth: "60",
+          },
+        }}
+      >
+        <div>
           <Input
             placeholder={t("fields.firstname_placeholder")}
             data-invalid={errors?.manager?.manager?.firstname}
             {...register(`${formFieldPath}.firstname`)}
           />
           <ErrorField error={errors?.manager?.manager?.firstname} />
-        </Box>
-        <Box width="100%">
+        </div>
+        <div>
           <Input
             placeholder={t("fields.lastname_placeholder")}
             data-invalid={errors?.manager?.manager?.lastname}
             {...register(`${formFieldPath}.lastname`)}
           />
           <ErrorField error={errors?.manager?.manager?.lastname} />
-        </Box>
-      </VStack>
-      <VStack alignItems="flex-start" gap="10px" width="35%">
-        <Box width="100%">
+        </div>
+        <div>
           <Input
             type="email"
             inputMode="email"
@@ -44,8 +52,8 @@ export function ContactsGroup() {
             {...register(`${formFieldPath}.email`)}
           />
           <ErrorField error={errors?.manager?.manager?.email} />
-        </Box>
-        <Box width="100%">
+        </div>
+        <div>
           <Input
             type="text"
             inputMode="tel"
@@ -54,8 +62,8 @@ export function ContactsGroup() {
             {...register(`${formFieldPath}.phoneNumber`)}
           />
           <ErrorField error={errors?.manager?.manager?.phoneNumber} />
-        </Box>
-      </VStack>
-    </Flex>
+        </div>
+      </Flex>
+    </>
   );
 }

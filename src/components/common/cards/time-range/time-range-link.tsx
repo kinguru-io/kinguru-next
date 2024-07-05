@@ -89,6 +89,7 @@ export function TimeRangeLink({
             }
             readOnly
             rounded
+            hideLabel
           />
         </DropdownInitiator>
         <DropdownMenu likeList={false} shouldCloseOnClick={false}>
@@ -139,6 +140,7 @@ function TimeSelect({
       onChange={({ target }) => callback(target.value)}
       icon={<Icon name="common/time" />}
       rounded
+      hideLabel
     >
       {Array.from({ length: 24 }, (_, i) => (
         <option key={i} value={i}>

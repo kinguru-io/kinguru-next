@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { getDefaultFormAmenities } from "../_premise-form/default-form-amenities";
-import { PremiseFormInner } from "../_premise-form/PremiseFormInner";
+import { PremiseFormInner } from "../_premise-form/premise-form-inner";
 import { type CreatePremiseAction } from "@/lib/actions/premise";
 import {
   type CreatePremiseFormSchemaProps,

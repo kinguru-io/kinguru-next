@@ -1,16 +1,12 @@
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
-import { TabInnerSection } from "@/components/profile/profile-premise";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { Textarea, Input, ErrorField } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { getError } from "@/utils/forms/errors";
-import { HStack } from "~/styled-system/jsx";
+import { Flex, Stack } from "~/styled-system/jsx";
 
-export default function MainInformation({
-  isEditing = false,
-}: {
-  isEditing?: boolean;
-}) {
+export function MainInformation({ editMode = false }: { editMode?: boolean }) {
   const {
     register,
     formState: { errors },
@@ -19,40 +15,40 @@ export default function MainInformation({
 
   const formFieldPath = "mainInformation";
 
-  const legendLabel = isEditing
+  const legendLabel = editMode
     ? "fields.name_and_description_editing"
     : "fields.name_and_description";
 
   return (
     <>
-      <TabInnerSection>
-        <h3>{t(legendLabel)}</h3>
-        <div>
+      <SubSection>
+        <h2 className="title">{t(legendLabel)}</h2>
+        <Stack gap="2">
           <Input
             placeholder={t("fields.name_placeholder")}
-            readOnly={isEditing}
-            hidden={isEditing}
+            readOnly={editMode}
+            hidden={editMode}
             data-invalid={getError(errors, `${formFieldPath}.name`)}
             {...register(`${formFieldPath}.name`)}
           />
           <ErrorField error={errors.mainInformation?.name} />
-        </div>
-        <div>
           <Textarea
             placeholder={t("fields.description_placeholder")}
-            rows={9}
             data-invalid={getError(errors, `${formFieldPath}.description`)}
             {...register(`${formFieldPath}.description`)}
           />
           <ErrorField error={errors.mainInformation?.description} />
-        </div>
-      </TabInnerSection>
-      <TabInnerSection>
-        <h3>{t("fields.address")}</h3>
-        <p>{t("fields.address_tip")}</p>
-        <HStack
-          justifyContent="space-between"
-          css={{ "& > div": { flexBasis: "38%" } }}
+        </Stack>
+      </SubSection>
+      <SubSection>
+        <h2 className="title">{t("fields.address")}</h2>
+        <p className="helper">{t("fields.address_tip")}</p>
+        <Flex
+          css={{
+            gap: "2",
+            flexWrap: "wrap",
+            "& > div": { flexGrow: "1", flexBasis: "60" },
+          }}
         >
           <div>
             <Input
@@ -70,8 +66,8 @@ export default function MainInformation({
             />
             <ErrorField error={errors.mainInformation?.floor} />
           </div>
-        </HStack>
-      </TabInnerSection>
+        </Flex>
+      </SubSection>
     </>
   );
 }

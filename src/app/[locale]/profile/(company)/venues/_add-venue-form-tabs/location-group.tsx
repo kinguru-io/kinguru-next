@@ -1,18 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, type Control } from "react-hook-form";
 import { InputSearchLocation } from "@/components/common/form/InputSearchLocation";
 import { Dropdown, ErrorField, Textarea } from "@/components/uikit";
-import { CreateVenueFormSchemaProps } from "@/lib/actions/venue";
+import type { CreateVenueFormSchemaProps } from "@/lib/actions/venue";
 import { getError } from "@/utils/forms/errors";
-import { Box, VStack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { Stack } from "~/styled-system/jsx";
 
-interface LocationGroupProps {
-  control: any;
-}
-
-export function LocationGroup({ control }: LocationGroupProps) {
+export function LocationGroup({
+  control,
+}: {
+  control: Control<CreateVenueFormSchemaProps>;
+}) {
   const {
     register,
     formState: { errors },
@@ -20,7 +21,7 @@ export function LocationGroup({ control }: LocationGroupProps) {
   const t = useTranslations("profile.venues.add");
 
   return (
-    <VStack gap="20px">
+    <>
       <Dropdown size="full">
         <InputSearchLocation
           name="location.locationMapboxId"
@@ -29,8 +30,11 @@ export function LocationGroup({ control }: LocationGroupProps) {
         />
         <ErrorField error={errors?.location?.locationMapboxId} />
       </Dropdown>
-      <p>{t("fields.locationTutorial_tip")}</p>
-      <Box width="100%">
+
+      <Stack gap="3">
+        <p className={css({ fontSize: "sm" })}>
+          {t("fields.locationTutorial_tip")}
+        </p>
         <Textarea
           placeholder={t("fields.locationTutorial_placeholder")}
           rows={9}
@@ -38,7 +42,7 @@ export function LocationGroup({ control }: LocationGroupProps) {
           {...register("location.locationTutorial")}
         />
         <ErrorField error={errors?.location?.locationTutorial} />
-      </Box>
-    </VStack>
+      </Stack>
+    </>
   );
 }

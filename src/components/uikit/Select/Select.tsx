@@ -1,11 +1,13 @@
 import { type ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
 import { Icon } from "@/components/uikit";
+import { cx } from "~/styled-system/css";
 import { select, type SelectVariantProps } from "~/styled-system/recipes";
 
 export type SelectProps = SelectVariantProps &
   ComponentPropsWithoutRef<"select"> & {
     icon?: React.ReactNode;
     placeholder?: string;
+    hideLabel?: boolean;
   };
 
 export const Select = forwardRef(function Select(
@@ -17,6 +19,7 @@ export const Select = forwardRef(function Select(
     defaultValue,
     className,
     rounded,
+    hideLabel = false,
     ...props
   }: SelectProps,
   ref: ForwardedRef<HTMLSelectElement>,
@@ -32,15 +35,20 @@ export const Select = forwardRef(function Select(
       {icon && <span className={classes.icon}>{icon}</span>}
       <select
         ref={ref}
-        className={classes.selectRoot}
+        className={cx("peer", classes.selectRoot)}
         {...valueProp}
         {...props}
       >
-        <option value="" disabled>
-          {placeholder}
-        </option>
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
         {children}
       </select>
+      {!hideLabel && placeholder && (
+        <span className={classes.placeholder}>{placeholder}</span>
+      )}
       <Icon name="action/arrow" className={classes.arrow} />
     </span>
   );
