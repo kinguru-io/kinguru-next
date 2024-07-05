@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
   createContext,
@@ -9,15 +8,12 @@ import {
   useContext,
   useState,
   useEffect,
+  type ComponentPropsWithoutRef,
+  type ComponentProps,
 } from "react";
-import IconFormFieldSuccess from "~/public/img/icon_form_field_succes.svg";
-import {
-  Box,
-  BoxProps,
-  type HTMLStyledProps,
-  styled,
-} from "~/styled-system/jsx";
-import type { StyledVariantProps } from "~/styled-system/types";
+import { tagStyles } from "@/components/uikit/Tag/Tag";
+import { css, cx } from "~/styled-system/css";
+import { Box, BoxProps, styled } from "~/styled-system/jsx";
 
 type TabsContextType = {
   activeTabIdx: number;
@@ -79,52 +75,46 @@ export function TabsWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const TabList = styled("div", {
-  base: { display: "flex", gap: "4px", overflowX: "auto" },
-});
-
-const TabButton = styled("button", {
-  variants: {
-    variant: {
-      "line-below": {
-        flexGrow: "1",
-        flexBasis: "0",
-        minWidth: "116px",
-        paddingBlockEnd: "14px", // 10px + 4px (line)
-        marginBlockEnd: "2px",
-        position: "relative",
-        textStyle: "heading.4",
-        color: "secondary",
-        _after: {
-          content: '""',
-          display: "inline-block",
-          position: "absolute",
-          insetInlineStart: "4px",
-          insetBlockEnd: "0",
-          width: "calc(100% - 8px)",
-          height: "4px",
-          transition: "colors",
-          bgColor: "primary.lightest",
-        },
-        _selected: { color: "dark", _after: { bgColor: "primary" } },
-        _focusVisible: { outline: "none", _after: { bgColor: "focus" } },
-        _disabled: {
-          cursor: "not-allowed",
-          "pointer-events": "all !important",
-        },
-      },
-    },
+export const TabList = styled("nav", {
+  base: {
+    display: "flex",
+    gap: "2",
+    overflowX: "auto",
+    padding: "0.5", // do not cut button box shadows
   },
-  defaultVariants: { variant: "line-below" },
 });
 
-type TabProps = StyledVariantProps<typeof TabButton> &
-  Omit<HTMLStyledProps<"button">, "type" | "onClick" | "aria-selected"> & {
-    tabIdx: number;
-    label: string;
-    setActiveForm: (tabIdx: number) => void;
-    isDisabled?: boolean;
-  };
+const tabButtonClassName = cx(
+  tagStyles({ variant: "solid" }),
+  css({
+    paddingBlock: "2.5",
+    colorPalette: "tertiary",
+    _selected: { colorPalette: "primary" },
+    _checked: { bgColor: "success.darker", color: "light" },
+  }),
+);
+
+function TabButton({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<"button">) {
+  return (
+    <button className={cx(tabButtonClassName, className)} {...props}>
+      {children}
+    </button>
+  );
+}
+
+type TabProps = Omit<
+  ComponentProps<typeof TabButton>,
+  "type" | "onClick" | "aria-selected" | "aria-checked"
+> & {
+  tabIdx: number;
+  label: string;
+  setActiveForm: (tabIdx: number) => void;
+  isDisabled?: boolean;
+};
 
 export function Tab({
   tabIdx,
@@ -148,12 +138,12 @@ export function Tab({
 
       // Update tabsVisited state
       if (!tabsVisited.includes(tabIdx)) {
-        setTabsVisited((prev) => [...prev, tabIdx]);
+        setTabsVisited((prev) => prev.concat(tabIdx));
       }
     }
   };
 
-  const showSuccessIcon =
+  const isSucceed =
     !isDisabled &&
     tabsVisited.includes(activeTabIdx) &&
     activeTabIdx !== tabIdx;
@@ -163,6 +153,7 @@ export function Tab({
       type="button"
       onClick={handleActiveTab}
       aria-selected={tabIdx === activeTabIdx}
+      aria-checked={isSucceed}
       disabled={isDisabled}
       {...(isDisabled && {
         title: t("complete_current_step"),
@@ -170,9 +161,6 @@ export function Tab({
       {...buttonProps}
     >
       {label}
-      {showSuccessIcon && (
-        <Image src={IconFormFieldSuccess} alt="" width={10} height={10} />
-      )}
     </TabButton>
   );
 }

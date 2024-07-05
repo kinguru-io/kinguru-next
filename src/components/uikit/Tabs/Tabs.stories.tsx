@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { faker } from "@faker-js/faker";
+import type { Meta } from "@storybook/react";
+import { NextIntlClientProvider } from "next-intl";
 import {
   Tab,
   TabContent,
@@ -9,7 +10,18 @@ import {
   useTabs,
 } from "@/components/uikit";
 
-export default { title: "UIKit/Tabs" };
+import en from "~/public/locales/en/common.json";
+
+export default {
+  title: "UIKit/Tabs",
+  decorators: [
+    (Story) => (
+      <NextIntlClientProvider locale="en" messages={en}>
+        <Story />
+      </NextIntlClientProvider>
+    ),
+  ],
+} satisfies Meta;
 
 const tabsContent = Array.from({ length: 7 }, () => {
   return {
@@ -28,7 +40,6 @@ export const Basic = {
               key={label}
               tabIdx={i}
               label={label}
-              variant="line-below"
               setActiveForm={() => {}}
             />
           ))}
@@ -70,7 +81,6 @@ export const BasicWithNextButton = {
               key={label}
               tabIdx={i}
               label={label}
-              variant="line-below"
               setActiveForm={() => {}}
             />
           ))}
