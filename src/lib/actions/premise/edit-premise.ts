@@ -82,6 +82,15 @@ export async function editPremiseAction(
       where: { id: premise.id },
       data: { ...restPremiseInput, amenities: prepareAmenityList(amenities) },
     }),
+    prisma.premise.update({
+      where: { id: premise.id },
+      data: {
+        discounts: {
+          deleteMany: {},
+          create: discounts,
+        },
+      },
+    }),
   ];
 
   if (changedFields.openHours) {
@@ -97,20 +106,6 @@ export async function editPremiseAction(
               closeTime: endTime,
               price,
             })),
-          },
-        },
-      }),
-    );
-  }
-
-  if (changedFields.discounts && changedFields.discounts.length > 0) {
-    requests.push(
-      prisma.premise.update({
-        where: { id: premise.id },
-        data: {
-          discounts: {
-            deleteMany: {},
-            create: discounts,
           },
         },
       }),
