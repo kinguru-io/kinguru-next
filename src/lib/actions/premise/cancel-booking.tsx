@@ -147,7 +147,7 @@ export async function cancelBookingAction({
   discountAmount,
 }: CancelBookingActionProps) {
   const session = await getSession();
-  const t = await getTranslations("user.my_bookings");
+  const t = await getTranslations("profile.my_bookings");
 
   if (!session?.user?.email) {
     return {

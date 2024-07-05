@@ -17,7 +17,7 @@ interface BookingCardProps {
 }
 
 const BookingCard = ({ booking, imageSrc, labels }: BookingCardProps) => {
-  const t = useTranslations("user.my_bookings");
+  const t = useTranslations("profile.my_bookings");
 
   return (
     <PremiseMyBookingCard>

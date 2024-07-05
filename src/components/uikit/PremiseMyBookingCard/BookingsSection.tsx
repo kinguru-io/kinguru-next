@@ -35,7 +35,7 @@ const BookingsSection = ({
   imageSrcs,
   labels,
 }: BookingsSectionProps) => {
-  const t = useTranslations("booking_cancel_terms");
+  const t = useTranslations("profile.my_bookings");
   const now = new Date();
 
   return (

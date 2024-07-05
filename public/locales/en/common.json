@@ -531,23 +531,6 @@
           "socialLink_required": "Invalid URL format"
         }
       }
-    },
-    "my_bookings": {
-      "heading": "My Bookings",
-      "with_discount": "With Discount",
-      "no_bookings": "You have no bookings yet",
-      "booking_canceled_successfully": "Booking canceled successfully",
-      "cancel_booking_btn": "Cancel Booking",
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "booking": {
-        "date": "Date",
-        "time": "Time",
-        "place": "Place",
-        "price": "Price",
-        "status": "Status",
-        "cancel": "Cancel"
-      }
     }
   },
   "venue": {
@@ -802,6 +785,29 @@
           }
         }
       }
+    },
+    "my_bookings": {
+      "heading": "My Bookings",
+      "no_bookings": "You have no bookings yet",
+      "with_discount": "With Discount",
+      "before": "before",
+      "after": "after",
+      "tab_clients": "Clients",
+      "tab_company": "Company",
+      "cancel_btn_accordion_label": "Booking Cancellation",
+      "cancel_booking_btn": "Cancel Booking",
+      "modal_cancel_confirmation_desc": "Are you sure you want to cancel the booking?",
+      "modal_cancel": "Cancel",
+      "modal_confirm": "Confirm",
+      "booking_canceled_successfully": "Booking canceled successfully",
+      "conditions": {
+        "FULL_REFUND": "Full Refund",
+        "FULL_REFUND_desc": "Full refund, including all applicable fees, based on the cost of their booking",
+        "NO_REFUND": "No Refund",
+        "NO_REFUND_desc": "Payment is non-refundable",
+        "PARTIAL_REFUND": "Partial Refund",
+        "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees"
+      }
     }
   },
   "amenities": {
@@ -908,11 +914,6 @@
     "commercial_kitchens": "Commercial kitchens"
   },
   "booking_cancel_terms": {
-    "modal_cancel_confirmation_desc": "Are you sure you want to cancel the booking?",
-    "modal_cancel": "Cancel",
-    "modal_confirm": "Confirm",
-    "before": "before",
-    "after": "after",
     "very_flexible": "Very Flexible",
     "very_flexible_desc": "Guests can cancel their reservation up to 24 hours before the start of the event and receive a full refund, including all fees paid for the reservation. Bookings canceled less than 24 hours before the start of the event are non-refundable.",
     "flexible": "Flexible",
@@ -920,17 +921,7 @@
     "default_30": "Standard (30 days)",
     "default_30_desc": "Guests can cancel their booking up to 30 days before the start of the event and receive a full refund, including all applicable fees. If the booking is canceled between 30 days and 7 days before the start of the event, guests are entitled to a 50% refund of the booking cost (excluding fees). Cancellation requests made less than 7 days before the start of the event are non-refundable.",
     "default_90": "Standard (90 days)",
-    "default_90_desc": "Guests can cancel their booking up to 90 days before the start of the event and receive a full refund, including all applicable fees. If the booking is canceled between 90 days and 14 days before the start of the event, guests are entitled to a 50% refund of the booking cost (excluding fees). Cancellation requests made less than 14 days before the start of the event are non-refundable.",
-    "cancel_btn_accordion_label": "Booking Cancellation",
-    "cancel_booking_btn": "Cancel Booking",
-    "conditions": {
-      "FULL_REFUND": "Full Refund",
-      "FULL_REFUND_desc": "Full refund, including all applicable fees, based on the cost of their booking",
-      "NO_REFUND": "No Refund",
-      "NO_REFUND_desc": "Payment is non-refundable",
-      "PARTIAL_REFUND": "Partial Refund",
-      "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees"
-    }
+    "default_90_desc": "Guests can cancel their booking up to 90 days before the start of the event and receive a full refund, including all applicable fees. If the booking is canceled between 90 days and 14 days before the start of the event, guests are entitled to a 50% refund of the booking cost (excluding fees). Cancellation requests made less than 14 days before the start of the event are non-refundable."
   },
   "filters": {
     "all": "All filters",

@@ -5,7 +5,7 @@ import { SubSection } from "@/components/common/cards/sub-section";
 import { PremiseMyBookings } from "@/components/premise/PremiseMyBookings";
 
 export default async function MyBookingsPage() {
-  const t = await getTranslations("user.my_bookings");
+  const t = await getTranslations("profile.my_bookings");
   const session = await getSession();
 
   const allBookings = await prisma.premiseSlot.findMany({

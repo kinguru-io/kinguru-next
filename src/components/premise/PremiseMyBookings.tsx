@@ -20,7 +20,7 @@ export async function PremiseMyBookings({
   allBookings: Booking[];
 }) {
   const session = await getSession();
-  const t = await getTranslations("user.my_bookings");
+  const t = await getTranslations("profile.my_bookings");
 
   const statusColorPallets: Record<TicketIntentStatus, string> = {
     failed: "danger",
@@ -109,18 +109,22 @@ export async function PremiseMyBookings({
     ));
 
   const tabs = [
-    { label: "My Bookings", content: <MyBookings /> },
+    { label: "Clients", content: <MyBookings /> },
     { label: "Company", content: <CompanyBookings /> },
   ];
 
+  const renderNoBookings = () => {
+    return <section>{t("no_bookings")}</section>;
+  };
+
+  const renderBookings = () => {
+    if (session?.user?.role === "organization") {
+      return <Tabs tabs={tabs} />;
+    }
+    return <MyBookings />;
+  };
+
   return (
-    <>
-      {!allBookings.length && <section>{t("no_bookings")}</section>}
-      {session?.user?.role === "organization" ? (
-        <Tabs tabs={tabs} />
-      ) : (
-        <MyBookings />
-      )}
-    </>
+    <>{allBookings.length === 0 ? renderNoBookings() : renderBookings()}</>
   );
 }

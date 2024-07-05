@@ -325,23 +325,6 @@
           "socialLink_required": "Nieprawidłowy format URL"
         }
       }
-    },
-    "my_bookings": {
-      "heading": "Moje Rezerwacje",
-      "with_discount": "Ze Zniżką",
-      "no_bookings": "Nie masz jeszcze rezerwacji",
-      "booking_canceled_successfully": "Rezerwacja została pomyślnie anulowana",
-      "cancel_booking_btn": "Anuluj Rezerwację",
-      "cancel": "Anuluj",
-      "confirm": "Potwierdź",
-      "booking": {
-        "date": "Data",
-        "time": "Czas",
-        "place": "Miejsce",
-        "price": "Cena",
-        "status": "Status",
-        "cancel": "Anuluj"
-      }
     }
   },
   "auth": {
@@ -638,6 +621,29 @@
           }
         }
       }
+    },
+    "my_bookings": {
+      "heading": "Moje Rezerwacje",
+      "with_discount": "Ze Zniżką",
+      "no_bookings": "Nie masz jeszcze rezerwacji",
+      "before": "przed",
+      "after": "po",
+      "tab_clients": "Klienci",
+      "tab_company": "Firma",
+      "cancel_btn_accordion_label": "Anulowanie rezerwacji",
+      "cancel_booking_btn": "Anuluj rezerwację",
+      "modal_cancel_confirmation_desc": "Czy na pewno chcesz anulować rezerwację?",
+      "modal_cancel": "Anuluj",
+      "modal_confirm": "Potwierdź",
+      "booking_canceled_successfully": "Rezerwacja została pomyślnie anulowana",
+      "conditions": {
+        "FULL_REFUND": "Pełny zwrot",
+        "FULL_REFUND_desc": "Pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty, na podstawie kosztów ich rezerwacji",
+        "NO_REFUND": "Bez zwrotu",
+        "NO_REFUND_desc": "Płatność nie podlega zwrotowi",
+        "PARTIAL_REFUND": "Częściowy zwrot",
+        "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat"
+      }
     }
   },
   "amenities": {
@@ -744,11 +750,6 @@
     "commercial_kitchens": "Commercial kitchens"
   },
   "booking_cancel_terms": {
-    "modal_cancel_confirmation_desc": "Czy na pewno chcesz anulować rezerwację?",
-    "modal_cancel": "Anuluj",
-    "modal_confirm": "Potwierdź",
-    "before": "przed",
-    "after": "po",
     "very_flexible": "Bardzo elastyczne",
     "very_flexible_desc": "Goście mogą anulować swoją rezerwację do 24 godzin przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie opłaty zapłacone za rezerwację. Rezerwacje anulowane mniej niż 24 godziny przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
     "flexible": "Elastyczne",
@@ -756,17 +757,7 @@
     "default_30": "Standardowa (30 dni)",
     "default_30_desc": "Goście mogą anulować swoją rezerwację do 30 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 30 dni do 7 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 7 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
     "default_90": "Standardowa (90 dni)",
-    "default_90_desc": "Goście mogą anulować swoją rezerwację do 90 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 90 dni do 14 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 14 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
-    "cancel_btn_accordion_label": "Anulowanie rezerwacji",
-    "cancel_booking_btn": "Anuluj rezerwację",
-    "conditions": {
-      "FULL_REFUND": "Pełny zwrot",
-      "FULL_REFUND_desc": "Pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty, na podstawie kosztów ich rezerwacji",
-      "NO_REFUND": "Bez zwrotu",
-      "NO_REFUND_desc": "Płatność nie podlega zwrotowi",
-      "PARTIAL_REFUND": "Częściowy zwrot",
-      "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat"
-    }
+    "default_90_desc": "Goście mogą anulować swoją rezerwację do 90 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 90 dni do 14 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 14 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów."
   },
   "filters": {
     "all": "All filters",

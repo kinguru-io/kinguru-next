@@ -29,7 +29,7 @@ export default function CancelBookingBtn({
   isActive,
 }: CancelBookingActionProps) {
   const router = useRouter();
-  const t = useTranslations("booking_cancel_terms");
+  const t = useTranslations("profile.my_bookings");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { setOpen } = useModal();
