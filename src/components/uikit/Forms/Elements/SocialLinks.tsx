@@ -3,10 +3,12 @@
 import type { SocialNetwork } from "@prisma/client";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, type FieldErrors } from "react-hook-form";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { ErrorField, Icon, Input } from "@/components/uikit";
 import type { SpritesMap } from "@/components/uikit";
-import { Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { Flex, HStack, InlineBox, Stack } from "~/styled-system/jsx";
 
 type SocialNetworkItem = {
   network: SocialNetwork;
@@ -32,6 +34,13 @@ const socialNetworkList: Array<SocialNetworkItem> = [
   },
 ];
 
+const getErrorFromArr = (fieldName: string, errors: FieldErrors) => {
+  const [mainKey, indexStr, secondName] = fieldName.split(".");
+  const index = parseInt(indexStr);
+  // @ts-expect-error
+  return errors?.[mainKey]?.[index]?.[secondName];
+};
+
 export function SocialLinks({
   role,
 }: {
@@ -43,48 +52,47 @@ export function SocialLinks({
     formState: { errors },
   } = useFormContext();
 
-  const getErrorFromArr = (fieldName: string) => {
-    const [mainKey, indexStr, secondName] = fieldName.split(".");
-    const index = parseInt(indexStr);
-    // @ts-expect-error
-    return errors?.[mainKey]?.[index]?.[secondName];
-  };
-
   return (
-    <Stack gap="20px" flexBasis="460px">
-      {socialNetworkList.map(({ network, social, iconName }, idx) => (
-        <React.Fragment key={network}>
-          <HStack gap="30px">
-            <VStack
-              gap="8px"
-              flexShrink="0"
-              flexBasis="60px"
-              textStyle="body.3"
-            >
-              <Icon name={`social/${iconName}`} />
-              {social}
-            </VStack>
-            <Flex grow="1" direction="column">
-              <input
-                type="text"
-                defaultValue={network}
-                readOnly
-                hidden
-                {...register(`socialLinks.${idx}.network`)}
+    <SubSection>
+      <h2 className="title">{t("social_links_title")}</h2>
+      <span className="helper">{t("social_links_helper")}</span>
+      <Stack gap="4">
+        {socialNetworkList.map(({ network, social, iconName }, idx) => (
+          <React.Fragment key={network}>
+            <HStack gap="3">
+              <InlineBox srOnly>{social}</InlineBox>
+              <Icon
+                name={`social/${iconName}`}
+                className={css({ fontSize: { base: "2xl", md: "2.5rem" } })}
               />
-              <Input
-                type="text"
-                variant="outline"
-                placeholder={t("social_link_placeholder", { social })}
-                data-invalid={getErrorFromArr(`socialLinks.${idx}.url`)}
-                {...register(`socialLinks.${idx}.url`)}
-              />
-              <ErrorField error={getErrorFromArr(`socialLinks.${idx}.url`)} />
-            </Flex>
-          </HStack>
-        </React.Fragment>
-      ))}
+              <Flex grow="1" direction="column">
+                <input
+                  type="text"
+                  defaultValue={network}
+                  readOnly
+                  hidden
+                  {...register(`socialLinks.${idx}.network`)}
+                />
+                <Input
+                  type="text"
+                  inputMode="url"
+                  variant="outline"
+                  placeholder={t("social_link_placeholder")}
+                  data-invalid={getErrorFromArr(
+                    `socialLinks.${idx}.url`,
+                    errors,
+                  )}
+                  {...register(`socialLinks.${idx}.url`)}
+                />
+                <ErrorField
+                  error={getErrorFromArr(`socialLinks.${idx}.url`, errors)}
+                />
+              </Flex>
+            </HStack>
+          </React.Fragment>
+        ))}
+      </Stack>
       <ErrorField error={errors?.socialLinks} />
-    </Stack>
+    </SubSection>
   );
 }

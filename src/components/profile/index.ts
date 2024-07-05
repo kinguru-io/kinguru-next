@@ -1,2 +1,2 @@
 export { NoticeScreen } from "./notice-screen";
-export { AddItemLink } from "./AddItemLink";
+export { AddItemLink } from "./add-item-link";

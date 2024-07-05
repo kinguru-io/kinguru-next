@@ -21,7 +21,8 @@ export function SubmitOrNextTabButton({
 
   useEffect(() => {
     // using an effect to scroll to the top when the next tab is shown
-    window.scrollTo({ top: 0 });
+    // due to undefined content height (temporary)
+    window.scroll({ top: 0, behavior: "instant" });
   }, [activeTabIdx]);
 
   function setActiveForm() {

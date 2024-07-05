@@ -1,9 +1,8 @@
 import { EditPremiseForm } from "./form";
-import { getSession } from "@/auth.ts";
-import { ProfileSectionLayout } from "@/layout/page";
+import { getSession } from "@/auth";
 import { editPremiseAction } from "@/lib/actions/premise";
-import { redirect } from "@/navigation.ts";
-import prisma from "@/server/prisma.ts";
+import { redirect } from "@/navigation";
+import prisma from "@/server/prisma";
 
 export default async function EditPremisePage({
   params: { id: venueId, premiseId },
@@ -44,8 +43,8 @@ export default async function EditPremisePage({
   }
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">{premise.name}</h1>
+    <>
+      <h1 className="main-heading">{premise.name}</h1>
       <section>
         <EditPremiseForm
           editPremise={editPremiseAction}
@@ -53,6 +52,6 @@ export default async function EditPremisePage({
           premise={premise}
         />
       </section>
-    </ProfileSectionLayout>
+    </>
   );
 }

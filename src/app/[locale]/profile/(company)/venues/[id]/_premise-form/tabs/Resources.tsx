@@ -1,15 +1,15 @@
 import { useTranslations } from "next-intl";
-import { PremiseImageSelector } from "../PremiseImageSelector";
-import { TabInnerSection } from "@/components/profile/profile-premise";
+import { PremiseImageSelector } from "../premise-image-selector";
+import { SubSection } from "@/components/common/cards/sub-section";
 
-export default function Resources() {
+export function Resources() {
   const t = useTranslations("profile.premises.add");
 
   return (
-    <TabInnerSection fullWidthContent>
-      <h3>{t("fields.photo")}</h3>
-      <p className="subheading">{t("fields.photo_tip")}</p>
+    <SubSection>
+      <h2 className="title">{t("fields.photo")}</h2>
+      <p className="helper">{t("fields.photo_tip")}</p>
       <PremiseImageSelector />
-    </TabInnerSection>
+    </SubSection>
   );
 }

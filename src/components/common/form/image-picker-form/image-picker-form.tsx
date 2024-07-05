@@ -24,7 +24,13 @@ export function ImagePickerForm({
   });
 
   return (
-    <Box css={{ position: "relative", maxWidth: { base: "full", md: "50%" } }}>
+    <Box
+      css={{
+        position: "relative",
+        maxWidth: { base: "full", md: "50%" },
+        minWidth: "80",
+      }}
+    >
       <ProfileImagePicker
         key={src}
         groupKey={groupKey}

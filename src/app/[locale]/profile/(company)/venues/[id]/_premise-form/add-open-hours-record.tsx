@@ -19,7 +19,8 @@ import {
   openHoursSchema,
 } from "@/lib/actions/premise/tabs/openHoursAndPrices";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
-import { HStack, InlineBox, Stack, styled } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { Flex } from "~/styled-system/jsx";
 
 export function AddOpenHoursRecord({
   day,
@@ -76,50 +77,47 @@ export function AddOpenHoursRecord({
   };
 
   return (
-    <Stack gap="10px" marginBlockStart="24px" alignItems="flex-start">
-      <HStack gap="7px">
-        <Select placeholder="XX:00" {...register("startTime")}>
+    <Flex css={{ gap: "2", flexWrap: "wrap" }}>
+      <Flex
+        css={{
+          flexGrow: "3",
+          gap: "2",
+          flexWrap: "wrap",
+          "& > *": { flexBasis: "48", flexGrow: "1" },
+        }}
+      >
+        <Select
+          placeholder={t("open_hours_from_label")}
+          {...register("startTime")}
+        >
           <TimeSelectOptions watchedName="endTime" control={control} />
         </Select>
-        <span>-</span>
-        <Select placeholder="XX:00" {...register("endTime")}>
+        <Select placeholder={t("open_hours_to_label")} {...register("endTime")}>
           <TimeSelectOptions watchedName="startTime" control={control} />
         </Select>
-      </HStack>
-      <styled.label
-        display="flex"
-        alignItems="center"
-        gap="7px"
-        flexWrap="wrap"
-        whiteSpace="nowrap"
-      >
-        {t("open_hours_price_label")}
-        <InlineBox
-          display="flex"
-          alignItems="center"
-          flexBasis="min-content"
-          gap="7px"
-          css={{ "& > .input": { minWidth: "65px" } }}
-        >
-          <Input
-            type="number"
-            inputMode="decimal"
-            step="0.01"
-            min="0"
-            placeholder="000,00"
-            {...register("price", { valueAsNumber: true })}
-          />
-          zł
-        </InlineBox>
-      </styled.label>
+        <Input
+          type="number"
+          inputMode="decimal"
+          step="0.1"
+          min="0"
+          placeholder={t("open_hours_price_label")}
+          {...register("price", { valueAsNumber: true })}
+        />
+      </Flex>
       <Button
+        className={css({
+          justifyContent: "center",
+          flexBasis: "fit-content",
+          flexGrow: "1",
+        })}
         type="button"
         onClick={handleSubmit(addButtonClicked)}
         disabled={!isValid || !timeZone}
+        rounded={false}
       >
         {t("open_hours_add_record_btn_label")}
       </Button>
-    </Stack>
+    </Flex>
   );
 }
 

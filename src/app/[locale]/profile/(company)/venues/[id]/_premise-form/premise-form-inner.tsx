@@ -1,16 +1,15 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { SubmitOrNextTabButton } from "./SubmitOrNextTabButton";
-import BookingCancelTerm from "./tabs/BookingCancelTerm";
-import MainInformation from "./tabs/MainInformation";
-import OpenHoursAndPrices from "./tabs/OpenHoursAndPrices";
-import ParametersAndAmenities from "./tabs/ParametersAndAmenities";
-import Resources from "./tabs/Resources";
-import Rules from "./tabs/Rules";
+import { SubmitOrNextTabButton } from "./submit-next-tab-button";
+import { BookingCancelTerm } from "./tabs/booking-cancel-term";
+import { MainInformation } from "./tabs/main-information";
+import { OpenHoursAndPrices } from "./tabs/open-hours-and-prices";
+import { ParametersAndAmenities } from "./tabs/parameters-and-amenities";
+import { Resources } from "./tabs/resources";
+import { Rules } from "./tabs/rules";
 import {
   Tab,
   TabContent,
@@ -22,11 +21,15 @@ import { PassVisitedTabsProvider } from "@/components/uikit/Tabs/Tabs";
 import type { CreatePremiseFormSchemaProps } from "@/lib/actions/premise";
 import { CreatePremiseFormTypeEnum } from "@/lib/actions/premise/validation";
 
-export function PremiseFormInner({ mapboxId }: { mapboxId: string }) {
+export function PremiseFormInner({
+  mapboxId,
+  editMode = false,
+}: {
+  mapboxId: string;
+  editMode?: boolean;
+}) {
   const { setValue } = useFormContext<CreatePremiseFormSchemaProps>();
   const t = useTranslations("profile.premises.add");
-  const pathname = usePathname();
-  const isEditing = pathname?.includes("edit-premise");
 
   function setActiveForm(tabIdx: number) {
     setValue("formType", tabs[tabIdx].formType);
@@ -35,7 +38,7 @@ export function PremiseFormInner({ mapboxId }: { mapboxId: string }) {
   const tabs = [
     {
       label: t("groups.main_info"),
-      content: <MainInformation isEditing={isEditing} />,
+      content: <MainInformation editMode={editMode} />,
       formType: CreatePremiseFormTypeEnum.MainInformation,
     },
     {
@@ -73,28 +76,29 @@ export function PremiseFormInner({ mapboxId }: { mapboxId: string }) {
 
   return (
     <TabsWrapper>
-      <TabList overflowX="auto" marginBlockEnd="50px">
+      <TabList css={{ md: { marginInline: "8", marginBlockEnd: "5" } }}>
         {tabs.map(({ label }, i) => (
           <Tab
-            key={`${label}_${isEditing}`}
+            key={label}
             setActiveForm={setActiveForm}
             tabIdx={i}
             label={label}
-            variant="line-below"
             isDisabled={
-              !isEditing && !PassVisitedTabsProvider.tabsVisited.includes(i)
+              !editMode && !PassVisitedTabsProvider.tabsVisited.includes(i)
             }
           />
         ))}
       </TabList>
       <TabContent
         tabList={tabs}
-        display="flex"
-        flexDirection="column"
-        gap="40px"
-        marginBlockEnd="40px"
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "6",
+          marginBlockEnd: "6",
+        }}
       />
-      {isEditing ? (
+      {editMode ? (
         <SaveChangesButton />
       ) : (
         <SubmitOrNextTabButton lastTabIdx={tabs.length - 1} tabs={tabs} />

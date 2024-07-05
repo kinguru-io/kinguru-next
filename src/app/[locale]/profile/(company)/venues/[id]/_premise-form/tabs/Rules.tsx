@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
-import { TabInnerSection } from "@/components/profile/profile-premise";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { ErrorField, Textarea } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { getError } from "@/utils/forms/errors";
 
-export default function Rules() {
+export function Rules() {
   const {
     register,
     formState: { errors },
@@ -13,9 +13,9 @@ export default function Rules() {
   const t = useTranslations("profile.premises.add");
 
   return (
-    <TabInnerSection>
-      <h3>{t("fields.rules")}</h3>
-      <p className="subheading">{t("fields.rules_tip")}</p>
+    <SubSection>
+      <h2 className="title">{t("fields.rules")}</h2>
+      <p className="helper">{t("fields.rules_tip")}</p>
       <div>
         <Textarea
           placeholder={t("fields.rules_placeholder")}
@@ -25,6 +25,6 @@ export default function Rules() {
         />
         <ErrorField error={errors?.rules?.rules} />
       </div>
-    </TabInnerSection>
+    </SubSection>
   );
 }
