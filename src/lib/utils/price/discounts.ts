@@ -41,8 +41,12 @@ export function getSlotDiscount(
   slotTime: TimeSlotInfoExtended["time"],
   discountsMap: Record<number, number | undefined>,
 ) {
+  if (!slotTime) {
+    return 0;
+  }
+
   const slotsAmount = slots.filter(
-    (slot) => slot.time.getDate() === slotTime.getDate(),
+    (slot) => slot.time && slot.time.getDate() === slotTime.getDate(),
   ).length;
 
   const maxDiscountDuration = Math.max(

@@ -12,6 +12,7 @@ type Condition = keyof typeof timeSlotCondition;
 
 export type TimeSlotInfo = {
   price: number;
+  // @ts-check
   time: Date;
 };
 

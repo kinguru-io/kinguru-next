@@ -1,5 +1,3 @@
-"use client";
-
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { LiaCalendar } from "react-icons/lia";
@@ -8,7 +6,7 @@ import { TagClosable } from "@/components/common";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
-import { MergedTimeSlots } from "@/lib/utils/premise-booking";
+import type { MergedTimeSlots } from "@/lib/utils/premise-booking";
 import { Grid, HStack } from "~/styled-system/jsx";
 
 export function BookingSlotsListing({
@@ -54,6 +52,7 @@ export function BookingSlotsListing({
                     content={`${start} - ${end}`}
                     helper={priceFormatter.format(timeSlotInfo.price)}
                     onClick={() => {
+                      // @ts-ignore
                       toggleSlot(timeSlotInfo);
                     }}
                     buttonLabel={t("remove_timeslot_btn")}

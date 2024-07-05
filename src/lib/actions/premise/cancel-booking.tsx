@@ -168,6 +168,7 @@ export async function cancelBookingAction({
   if (!paymentIntentId) {
     // ONLY for premise owners, No paymentIntentId means no payment was made
     await deleteCompaniesPremiseSlots(premiseSlotIds);
+    console.log("premiseSlotIds", premiseSlotIds);
 
     return {
       status: "success",

@@ -42,7 +42,9 @@ export const PremiseMyBookingCardTemplate: StoryObj = {
         <Image src={items[0].src} width={159} height={90} alt="" />
         <PremiseMyBookingCardContent href="/#" label="Go to premise page">
           <PremiseMyBookingCardTitle>Hall 1</PremiseMyBookingCardTitle>
-          <PremiseMyBookingCardDescription>{faker.lorem.lines(6)}</PremiseMyBookingCardDescription>
+          <PremiseMyBookingCardDescription>
+            {faker.lorem.lines(6)}
+          </PremiseMyBookingCardDescription>
         </PremiseMyBookingCardContent>
       </PremiseMyBookingCard>
     );

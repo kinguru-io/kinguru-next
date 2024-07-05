@@ -3,18 +3,23 @@ import { format } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import { LiaCalendar } from "react-icons/lia";
 
+import CancelBookingBtn from "./myBookings/CancelBookingBtn";
+import Tabs from "./Tabs";
+import BookingCard from "../uikit/PremiseMyBookingCard/BookingCard";
 import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
-import { Tag } from "@/components/uikit";
+import { getSession } from "@/auth";
+import { Modal, Tag } from "@/components/uikit";
 import { fetchImageSrc } from "@/lib/utils/fetch-image-src";
 import { bookingsGroupedByDateAndPremiseAndPayment } from "@/lib/utils/groupBy-bookings";
 import { Booking } from "@/lib/utils/premise-booking";
 import { HStack } from "~/styled-system/jsx";
 
 export async function PremiseMyBookings({
-  userBookings,
+  allBookings,
 }: {
-  userBookings: Booking[];
+  allBookings: Booking[];
 }) {
+  const session = await getSession();
   const t = await getTranslations("user.my_bookings");
 
   const statusColorPallets: Record<TicketIntentStatus, string> = {
@@ -47,26 +52,75 @@ export async function PremiseMyBookings({
     },
   };
 
-  const groupedBookings =
-    bookingsGroupedByDateAndPremiseAndPayment(userBookings);
+  function partition(array: any[], isValid: (elem: any) => boolean) {
+    return array.reduce(
+      ([pass, fail]: [any[], any[]], elem) => {
+        return isValid(elem)
+          ? [[...pass, elem], fail]
+          : [pass, [...fail, elem]];
+      },
+      [[], []],
+    );
+  }
+
+  const [myBookings, companyBookings] = partition(
+    allBookings,
+    (e) => !!e.paymentIntentId,
+  );
+
+  const groupedBookings = bookingsGroupedByDateAndPremiseAndPayment(myBookings);
 
   const imageSrcs: Record<string, string> = {};
-  for (const booking of userBookings) {
+  for (const booking of allBookings) {
     imageSrcs[booking.premiseId] = await fetchImageSrc(booking.premiseId);
   }
 
-  return (
-    <>
-      {!userBookings.length && <section>{t("no_bookings")}</section>}
-      {Object.entries(groupedBookings).map(([date, premises]) => (
-        <BookingsSection
-          key={date}
-          date={date}
-          premises={premises}
-          imageSrcs={imageSrcs}
+  const MyBookings = () =>
+    Object.entries(groupedBookings).map(([date, premises]) => (
+      <BookingsSection
+        key={date}
+        date={date}
+        premises={premises}
+        imageSrcs={imageSrcs}
+        labels={labels}
+      />
+    ));
+
+  const CompanyBookings = () =>
+    companyBookings.map((booking: Booking) => (
+      <>
+        <BookingCard
+          booking={booking}
+          imageSrc={imageSrcs[booking.premiseId]}
           labels={labels}
         />
-      ))}
+        <Modal>
+          <CancelBookingBtn
+            bookingStartTime={booking.startTime}
+            bookingCancelTerm={booking.premise.bookingCancelTerm}
+            premiseSlotIds={[booking.id]}
+            paymentIntentId={booking.paymentIntentId}
+            premiseAmount={0}
+            discountAmount={booking.discountAmount}
+            isActive={true}
+          />
+        </Modal>
+      </>
+    ));
+
+  const tabs = [
+    { label: "My Bookings", content: <MyBookings /> },
+    { label: "Company", content: <CompanyBookings /> },
+  ];
+
+  return (
+    <>
+      {!allBookings.length && <section>{t("no_bookings")}</section>}
+      {session?.user?.role === "organization" ? (
+        <Tabs tabs={tabs} />
+      ) : (
+        <MyBookings />
+      )}
     </>
   );
 }

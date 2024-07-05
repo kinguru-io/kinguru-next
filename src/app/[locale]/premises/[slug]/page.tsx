@@ -35,7 +35,6 @@ import {
   createPremiseSlotsIntent,
   revalidatePremisePage,
 } from "@/lib/actions/booking";
-import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 import { groupBy } from "@/lib/utils/array";
 import { isUserOwnerOfPremise } from "@/lib/utils/premise-booking";
 import {
@@ -139,10 +138,14 @@ export default async function PremisePage({
       description: bookingCancelTerm && (
         <Stack gap="20px" color="dark">
           <InlineBox textStyle="body.1">
-            {translationsBCT(bookingCancelTerm as keyof typeof translationsBCT)}
+            {translationsBCT(
+              // @ts-ignore
+              bookingCancelTerm as keyof typeof translationsBCT,
+            )}
           </InlineBox>
           <p>
             {translationsBCT(
+              // @ts-ignore
               `${bookingCancelTerm as keyof typeof translationsBCT}_desc`,
             )}
           </p>

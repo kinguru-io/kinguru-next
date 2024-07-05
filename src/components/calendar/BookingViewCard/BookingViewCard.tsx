@@ -3,11 +3,10 @@
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { addHours, compareAsc } from "date-fns";
+import { addHours, compareAsc, isValid } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { useCallback, useState, useTransition } from "react";
-
 import { toast } from "react-hot-toast";
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
@@ -32,7 +31,10 @@ import {
   RevalidatePremisePage,
 } from "@/lib/actions/booking";
 import { groupBy } from "@/lib/utils/array";
-import { groupAndMergeTimeslots } from "@/lib/utils/premise-booking";
+import {
+  MergedTimeSlots,
+  groupAndMergeTimeslots,
+} from "@/lib/utils/premise-booking";
 import { getSlotDiscount, processOrderTotalDiscounts } from "@/lib/utils/price";
 import { Box, VStack } from "~/styled-system/jsx";
 
@@ -71,14 +73,23 @@ export function BookingViewCard({
   const areThereNoSlots = selectedSlots.length === 0;
   const isOutsideModal = open && !inModal;
 
-  const newSlots = selectedSlots.map(({ time, price }) => ({
-    premiseId,
-    price,
-    date: time,
-    startTime: time,
-    endTime: addHours(time, 1),
-    discountAmount: getSlotDiscount(selectedSlots, time, discountsMap),
-  }));
+  const newSlots = selectedSlots
+    .map(({ time, price }) => {
+      if (!isValid(time)) {
+        console.error("Invalid date detected:", time);
+        return null; // Skip invalid dates
+      }
+
+      return {
+        premiseId,
+        price,
+        date: time,
+        startTime: time,
+        endTime: addHours(time, 1),
+        discountAmount: getSlotDiscount(selectedSlots, time, discountsMap),
+      };
+    })
+    .filter(Boolean) as MergedTimeSlots[]; // Remove null values
 
   const newGroupedSlots = groupAndMergeTimeslots(newSlots);
 
@@ -93,7 +104,13 @@ export function BookingViewCard({
     Array.from(selectedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
     ),
-    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
+    ({ time }) => {
+      if (!isValid(time)) {
+        console.error("Invalid date detected during grouping:", time);
+        return "Invalid Date"; // Group invalid dates separately
+      }
+      return formatInTimeZone(time, timeZone, "dd.MM.yyyy");
+    },
   );
 
   const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);

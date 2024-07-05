@@ -416,15 +416,16 @@
     "select_choose_month": "Choose month"
   },
   "booking_view": {
-    "card_heading": "Your booking",
-    "no_selected_slots": "Your booking will be shown here",
-    "pay_btn": "Pay",
-    "rules_agreement": "I have read and agree with the rules of the premise",
-    "remove_timeslot_btn": "Delete booking time",
-    "booking_modal_heading": "Time slots booking",
-    "action_successful_booking": "Successfully booked!",
-    "action_invalid_data": "Invalid data",
-    "action_payment_cancelled": "Payment was cancelled"
+    "card_heading": "Twoja rezerwacja",
+    "no_selected_slots": "Twoja rezerwacja pojawi się tutaj",
+    "block_slot_btn": "Zablokuj slot",
+    "pay_btn": "Zapłać",
+    "rules_agreement": "Przeczytałem i zgadzam się z zasadami obowiązującymi na terenie",
+    "remove_timeslot_btn": "Usuń czas rezerwacji",
+    "booking_modal_heading": "Rezerwacja terminów",
+    "action_successful_booking": "Pomyślnie zarezerwowane!",
+    "action_invalid_data": "Nieprawidłowe dane",
+    "action_payment_cancelled": "Płatność została anulowana"
   },
   "price": {
     "total": "Total",
