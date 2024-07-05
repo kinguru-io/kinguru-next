@@ -2,7 +2,7 @@
 
 import type { UrlObject } from "url";
 import type { $Enums } from "@prisma/client";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 import { type NestedKeyOf, useTranslations } from "next-intl";
 import { useModal } from "@/components/uikit";
 import { Link } from "@/navigation";
@@ -82,6 +82,11 @@ const navigationClassName = css({
   },
 });
 
+/**
+ * @description regex for a segment from a list of segments that doesn't start with `(` or `_`
+ */
+const actualSegmentRegex = /^[^\(_]/m;
+
 export function ProfileNavigation({
   menuLabel,
   role,
@@ -91,7 +96,8 @@ export function ProfileNavigation({
 }) {
   const { setOpen } = useModal();
   const t = useTranslations("profile.link_labels");
-  const segment = useSelectedLayoutSegment() || "edit";
+  const segments = useSelectedLayoutSegments();
+  const segment = segments.find((part) => actualSegmentRegex.test(part));
 
   return (
     <Stack

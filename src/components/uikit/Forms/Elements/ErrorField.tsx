@@ -1,13 +1,20 @@
-import { Flex } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
 
 export function ErrorField({ error }: { error: any }) {
   const errorFromKey = error?.root || error;
 
   return (
     errorFromKey && (
-      <Flex grow="1" fontSize="0.875rem" color="danger" animation="fade-in">
+      <span
+        className={css({
+          flexGrow: "1",
+          fontSize: "sm",
+          color: "danger",
+          animation: "fade-in",
+        })}
+      >
         {errorFromKey?.message}
-      </Flex>
+      </span>
     )
   );
 }
