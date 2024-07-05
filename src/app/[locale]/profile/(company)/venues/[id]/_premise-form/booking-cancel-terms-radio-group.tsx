@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
-import { Fragment } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorField, Radio } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { bookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
-import { InlineBox, Stack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { Stack } from "~/styled-system/jsx";
 
 export function BookingCancelTermsRadioGroup() {
   const t = useTranslations("booking_cancel_terms");
@@ -15,27 +15,26 @@ export function BookingCancelTermsRadioGroup() {
 
   return (
     <>
-      <Stack
-        gap="20px"
-        textStyle="body.1"
-        css={{
-          "& > p": {
-            paddingInlineStart: "calc(12px + 1.125em)", // 10px (gap) + 1px * 2 (icon borders) + 1.125em (icon width)
-          },
-        }}
-      >
+      <Stack gap="6">
         {bookingCancelTerms.map((term) => {
           return (
-            <Fragment key={term}>
+            <Stack key={term} css={{ gap: "3", fontWeight: "bold" }}>
               <Radio
                 value={term}
-                {...register("bookingCancelTerm.bookingCancelTerm")}
                 label={t(term)}
+                {...register("bookingCancelTerm.bookingCancelTerm")}
               />
-              <p>
-                <InlineBox textStyle="body.2">{t(`${term}_desc`)}</InlineBox>
+              <p
+                className={css({
+                  fontWeight: "normal",
+                  fontSize: "sm",
+                  color: "secondary",
+                  lineHeight: "1.6",
+                })}
+              >
+                {t(`${term}_desc`)}
               </p>
-            </Fragment>
+            </Stack>
           );
         })}
       </Stack>

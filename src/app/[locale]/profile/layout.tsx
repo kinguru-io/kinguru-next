@@ -58,7 +58,19 @@ export default async function Layout({
             )}
           </Stack>
         </ProfileMenuModal>
-        <GridItem minHeight="30vh">
+        <GridItem
+          css={{
+            minHeight: "30vh",
+            overflow: "hidden",
+            padding: "0.5", // do not cut interactive elements box shadows
+            "& .main-heading": {
+              marginBlockEnd: "2",
+              fontWeight: "bold",
+              fontSize: "2xl",
+              md: { marginInlineStart: "8", fontSize: "3xl" },
+            },
+          }}
+        >
           <GoBackButton label={t("go_back_btn_label")} display="block" />
           {children}
         </GridItem>

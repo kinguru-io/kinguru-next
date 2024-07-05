@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { getSession } from "@/auth.ts";
-import { WarningNotice } from "@/components/profile";
-import { ProfileSectionLayout } from "@/layout/page";
-import { redirect } from "@/navigation.ts";
-import prisma from "@/server/prisma.ts";
-import { Flex } from "~/styled-system/jsx";
+import { getSession } from "@/auth";
+import { SubSection } from "@/components/common/cards/sub-section";
+import { Icon } from "@/components/uikit";
+import { redirect } from "@/navigation";
+import prisma from "@/server/prisma";
+import { css } from "~/styled-system/css";
+import { Center } from "~/styled-system/jsx";
 import { button } from "~/styled-system/recipes";
 
 export default async function CreatedNoticePage({
@@ -31,20 +32,43 @@ export default async function CreatedNoticePage({
   }
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">{t("heading")}</h1>
-      <section>
-        <Flex justifyContent="center" marginBottom="30px">
-          <Link className={button()} href={`/venues/${venue?.slug}`}>
-            {t("check_venue", { venueName: venue?.name })}
-          </Link>
-        </Flex>
-        <WarningNotice
-          noticeText={t("no_premise_warn_msg")}
-          linkLabel={t("no_premise_link_label")}
-          href={`/profile/venues/${venueId}/add-premise?venueId=${venueId}`}
+    <SubSection>
+      <Center flexDirection="column" gap="5" textAlign="center">
+        <Icon
+          name="action/tick-double"
+          className={css({
+            fontSize: "3xl",
+            padding: "5",
+            borderRadius: "full",
+            bgColor: "success",
+            color: "light",
+          })}
         />
-      </section>
-    </ProfileSectionLayout>
+        <span className={css({ fontSize: "4xl", fontWeight: "bold" })}>
+          {t("congrats_label")}
+        </span>
+        <span className={css({ fontSize: "px17" })}>{t("complete_label")}</span>
+        <span className={css({ fontSize: "sm", maxWidth: "md" })}>
+          {t("no_premise_warn_msg")}
+        </span>
+        <Link
+          className={button({ size: "lg" })}
+          href={`/profile/venues/${venueId}/add-premise`}
+        >
+          {t("no_premise_link_label")}
+        </Link>
+        <Link
+          className={css({
+            fontSize: "sm",
+            padding: "1",
+            color: "secondary",
+            _hoverOrFocusVisible: { textDecoration: "underline" },
+          })}
+          href={`/venues/${venue?.slug}`}
+        >
+          {t("check_venue", { name: venue?.name })}
+        </Link>
+      </Center>
+    </SubSection>
   );
 }

@@ -19,7 +19,8 @@ import {
   MainInfoGroup,
   PhotoGroup,
 } from "../_add-venue-form-tabs";
-import { AccordionGroup, Button } from "@/components/uikit";
+import { SubSection } from "@/components/common/cards/sub-section";
+import { Button } from "@/components/uikit";
 import {
   createVenueFormSchema,
   type CreateVenueFormSchemaProps,
@@ -29,10 +30,9 @@ import {
   CreateVenueFormTypeEnum,
   MergedVenueFormSchemaProps,
 } from "@/lib/actions/venue/validation";
-import { ageRestrictionList } from "@/lib/shared/config/age-restriction.ts";
 import { FormActionState } from "@/lib/utils";
 import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
-import { Box } from "~/styled-system/jsx";
+import { Stack } from "~/styled-system/jsx";
 
 export function AddVenueForm({
   createVenue,
@@ -99,16 +99,13 @@ export function AddVenueForm({
 }
 
 export function AddVenueFormInner({
-  isEditing = false,
+  isEditing: editMode = false,
 }: {
   isEditing?: boolean;
 }) {
   const {
     control,
-    setValue,
-    trigger,
-    watch,
-    formState: { isValid, defaultValues, isSubmitting },
+    formState: { defaultValues, isSubmitting },
   } = useFormContext<CreateVenueFormSchemaProps>();
 
   const t = useTranslations("profile.venues.add");
@@ -116,7 +113,7 @@ export function AddVenueFormInner({
   const formGroupItems = [
     {
       title: t("groups.main_info"),
-      content: <MainInfoGroup isEditing={isEditing} />,
+      content: <MainInfoGroup isEditing={editMode} />,
       formType: CreateVenueFormTypeEnum.MainInfo,
     },
     {
@@ -131,12 +128,7 @@ export function AddVenueFormInner({
     },
     {
       title: t("groups.additional"),
-      content: (
-        <AdditionalGroup
-          defaultValues={defaultValues?.features}
-          ageRestrictionList={Array.from(ageRestrictionList)}
-        />
-      ),
+      content: <AdditionalGroup defaultValues={defaultValues?.features} />,
       formType: CreateVenueFormTypeEnum.Features,
     },
     {
@@ -146,37 +138,17 @@ export function AddVenueFormInner({
     },
   ];
 
-  function setActiveForm(tabIdx: number) {
-    setValue(
-      "formType",
-      formGroupItems?.[tabIdx]?.formType || formGroupItems?.[0]?.formType,
-    );
-  }
-
-  const validateFormType = async (callbackNextStep?: () => void) => {
-    const formType = watch("formType");
-    const isValidForm = await trigger(formType);
-
-    if (callbackNextStep && isValidForm) {
-      callbackNextStep();
-    }
-  };
-
   return (
-    <Box
-      css={{ "& .button": { marginInline: "auto", marginBlockStart: "20px" } }}
-    >
-      <AccordionGroup
-        items={formGroupItems}
-        btnLabel={t("next_group_btn_label")}
-        allowAll={isEditing}
-        isValid={isValid}
-        setActiveForm={setActiveForm}
-        validateFormType={validateFormType}
-      />
-      <Button type="submit" isLoading={isSubmitting}>
-        {t(isEditing ? "edit_btn_label" : "submit_btn_label")}
+    <Stack css={{ md: { gap: "6" } }}>
+      {formGroupItems.map(({ title, content }) => (
+        <SubSection key={title}>
+          <h2 className="title">{title}</h2>
+          {content}
+        </SubSection>
+      ))}
+      <Button type="submit" isLoading={isSubmitting} centered>
+        {t(editMode ? "edit_btn_label" : "submit_btn_label")}
       </Button>
-    </Box>
+    </Stack>
   );
 }

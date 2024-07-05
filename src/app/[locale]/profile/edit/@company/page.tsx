@@ -1,12 +1,9 @@
-import { getTranslations } from "next-intl/server";
 import { EditProfileForm } from "./form";
-import { getSession } from "@/auth.ts";
-import { ProfileSectionLayout } from "@/layout/page";
+import { getSession } from "@/auth";
 import { orgRegister } from "@/lib/actions";
-import { redirect } from "@/navigation.ts";
+import { redirect } from "@/navigation";
 
 export default async function EditCompanyPage() {
-  const t = await getTranslations("organization.basic_info_page");
   const session = await getSession();
   if (session?.user?.role !== "organization") {
     redirect("/");
@@ -26,15 +23,10 @@ export default async function EditCompanyPage() {
   const companyName = organizationData?.name || user.company || "";
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">{t("heading")}</h1>
-      <section>
-        <EditProfileForm
-          companyName={companyName}
-          companyData={organizationData}
-          orgRegister={orgRegister}
-        />
-      </section>
-    </ProfileSectionLayout>
+    <EditProfileForm
+      companyName={companyName}
+      companyData={organizationData}
+      orgRegister={orgRegister}
+    />
   );
 }

@@ -13,6 +13,7 @@ import {
 import { toast } from "react-hot-toast";
 import formConfig from "./form-config.json";
 import { SingleDayPicker } from "@/components/common/cards/single-day-picker";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { ImagePickerForm } from "@/components/common/form/image-picker-form";
 import {
   BaseForm,
@@ -21,6 +22,7 @@ import {
   DropdownInitiator,
   DropdownMenu,
   ErrorField,
+  Icon,
   Input,
   SocialLinks,
 } from "@/components/uikit";
@@ -29,7 +31,7 @@ import {
   userProfileSchema,
   type UserProfileInput,
 } from "@/lib/validations/auth/user-profile";
-import { Flex } from "~/styled-system/jsx";
+import { Stack } from "~/styled-system/jsx";
 
 export function EditUserProfileForm({
   userData: {
@@ -96,27 +98,39 @@ function EditUserProfileFormInner() {
   const t = useTranslations("user.basic_info_form");
 
   return (
-    <Flex direction="column" gap="20px">
-      <Flex
-        direction="column"
-        gap="20px"
-        flexBasis="256px"
-        justifyContent="flex-start"
-      >
+    <Stack css={{ md: { gap: "6" } }}>
+      <SubSection>
+        <h2 className="title">{t("group.main")}</h2>
+        <Stack gap="4">
+          <ImagePickerForm groupKey="user-profile" name="image" />
+          <Stack gap="2">
+            <BaseForm<UserProfileInput>
+              config={formConfig.main}
+              // @ts-expect-error
+              schema={userProfileSchema(t)}
+              translationsKey="user.basic_info_form"
+            />
+            <DateDropdown name="birthdate" placeholder={t("birthdate")} />
+          </Stack>
+        </Stack>
+      </SubSection>
+
+      <SubSection>
+        <h2 className="title">{t("group.about_me")}</h2>
         <BaseForm<UserProfileInput>
-          config={formConfig.main}
+          config={formConfig.extra}
           // @ts-expect-error
           schema={userProfileSchema(t)}
           translationsKey="user.basic_info_form"
         />
-        <DateDropdown name="birthdate" placeholder={t("birthdate")} />
-        <ImagePickerForm groupKey="user-profile" name="image" />
-      </Flex>
+      </SubSection>
+
       <SocialLinks role="user" />
-      <Button type="submit" isLoading={isSubmitting} centered>
+
+      <Button type="submit" size="lg" isLoading={isSubmitting} centered>
         {t("submit")}
       </Button>
-    </Flex>
+    </Stack>
   );
 }
 
@@ -141,6 +155,7 @@ function DateDropdown({
     <Dropdown size="auto" anchor="start">
       <DropdownInitiator>
         <Input
+          prefix={<Icon name="common/calendar" />}
           placeholder={placeholder}
           value={field.value ? format(field.value, "dd.MM.yyyy") : ""}
           readOnly
@@ -150,7 +165,7 @@ function DateDropdown({
       </DropdownInitiator>
       <DropdownMenu likeList={false} shouldCloseOnClick={false}>
         <SingleDayPicker
-          date={toDate(field.value)}
+          date={toDate(field.value || new Date())}
           callback={dayChanged}
           disabled={isFuture}
           captionLayout="dropdown-buttons"

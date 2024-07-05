@@ -2,41 +2,47 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { ForwardedRef, forwardRef, useState, useTransition } from "react";
-import { ImSpinner8 } from "react-icons/im";
-import { RxCross1 } from "react-icons/rx";
+import { type ForwardedRef, forwardRef, useState, useTransition } from "react";
+import toast from "react-hot-toast";
 import {
   InputFile,
   type InputFileProps,
 } from "@/components/common/form/InputFile";
+import { Icon } from "@/components/uikit";
 import {
-  imageSchema,
+  ACCEPTED_IMAGE_MIME_TYPES,
   uploadProfileImage,
   type ProfileImageActionData,
 } from "@/lib/actions/file-upload";
 import { css } from "~/styled-system/css";
-import { avatar } from "~/styled-system/recipes";
-
-type PlaceholderVariant = "circle" | "rectangle" | "rectangle-smaller";
+import { aspectRatio } from "~/styled-system/patterns";
+import type { ConditionalValue } from "~/styled-system/types";
 
 type ProfileImagePickerProps = InputFileProps & {
   imageSrc?: string;
   name?: string;
   groupKey?: string;
-  placeholderWrapper?: PlaceholderVariant;
+  ratio?: ConditionalValue<number>;
+  sizes?: string;
 };
 
+/**
+ * - default `ratio` is `16 / 9`
+ * - default image `sizes` is `50vw`
+ */
 export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   {
     imageSrc: propsImageSrc = "",
     name: propsName,
     groupKey = "undefined_key",
-    placeholderWrapper = "circle",
+    ratio,
+    sizes,
     onChange,
     ...restProps
   }: ProfileImagePickerProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
+  const t = useTranslations("form.common");
   const [imageSrc, setImageSrc] = useState(propsImageSrc);
   const [isPending, startTransition] = useTransition();
 
@@ -50,30 +56,42 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     const image = target.files[0];
     const { name, size, type } = image;
     const uploadImageData: ProfileImageActionData = { name, size, type };
-    const parseResult = imageSchema.safeParse(uploadImageData);
-
-    if (!parseResult.success) {
-      return;
-    }
 
     startTransition(async () => {
-      const presignedUrl = await uploadProfileImage(uploadImageData, groupKey);
-      const response = await fetch(presignedUrl, {
-        method: "PUT",
-        body: image,
-      });
+      const actionResponse = await uploadProfileImage(
+        uploadImageData,
+        groupKey,
+      );
 
-      if (!response.ok) {
+      if (Array.isArray(actionResponse)) {
+        actionResponse.forEach((code) => {
+          toast.error(t(code));
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch(actionResponse, {
+          method: "PUT",
+          body: image,
+        });
+
+        if (!response.ok) {
+          toast.error(t("upload_failed"));
+          return;
+        }
+      } catch (_) {
+        toast.error(t("upload_failed"));
         return;
       }
 
       onChange?.({
         target: {
-          value: cutSearchParams(presignedUrl),
+          value: cutSearchParams(actionResponse),
           name: propsName,
         },
       } as React.ChangeEvent<HTMLInputElement>);
-      setImageSrc(cutSearchParams(presignedUrl));
+      setImageSrc(cutSearchParams(actionResponse));
     });
   };
 
@@ -81,13 +99,14 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     <>
       <InputFile
         onChange={handleFileChange}
-        accept="image/*"
+        accept={ACCEPTED_IMAGE_MIME_TYPES.join(",")}
         disabled={isPending}
       >
         <PickerPlaceholder
           imageSrc={imageSrc}
           isPending={isPending}
-          placeholderVariant={placeholderWrapper}
+          ratio={ratio}
+          sizes={sizes}
         />
       </InputFile>
       <input
@@ -104,119 +123,66 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   );
 });
 
-const placeholderVariantMap: Record<
-  PlaceholderVariant,
-  {
-    wrapperClassName: string;
-    imageParams: { width: number; height: number };
-    noImageContent?: React.ReactNode;
-  }
-> = {
-  circle: {
-    wrapperClassName: avatar({ size: "lg" }),
-    imageParams: { width: 185, height: 185 },
-  },
-  rectangle: {
-    wrapperClassName: css({
-      display: "grid",
-      placeItems: "center",
-      layerStyle: "dashedWrapper",
-      overflow: "hidden",
-      position: "relative",
-      width: "400px",
-      height: "225px",
-    }),
-    imageParams: { width: 400, height: 225 },
-    noImageContent: (
-      <RxCross1
-        className={css({
-          color: "primary",
-          rotate: "45deg",
-          fontSize: "5.625em",
-        })}
-      />
-    ),
-  },
-  "rectangle-smaller": {
-    wrapperClassName: css({
-      display: "grid",
-      placeItems: "center",
-      layerStyle: "dashedWrapper",
-      overflow: "hidden",
-      position: "relative",
-      width: "240px",
-      height: "135px",
-    }),
-    imageParams: { width: 240, height: 135 },
-    noImageContent: (
-      <RxCross1
-        className={css({
-          color: "primary",
-          rotate: "45deg",
-          fontSize: "4.25em",
-        })}
-      />
-    ),
-  },
-};
-
 function PickerPlaceholder({
   imageSrc,
   isPending,
-  placeholderVariant,
+  ratio = 16 / 9,
+  sizes = "50vw",
 }: {
   imageSrc: string;
   isPending: boolean;
-  placeholderVariant: PlaceholderVariant;
+  ratio?: ConditionalValue<number>;
+  sizes?: string;
 }) {
   const t = useTranslations("form.common");
 
-  const {
-    wrapperClassName,
-    imageParams,
-    noImageContent = t("upload_photo"),
-  } = placeholderVariantMap[placeholderVariant];
-
   return (
-    <span className={wrapperClassName}>
-      {imageSrc ? (
-        <Image
-          src={imageSrc}
-          alt={t("uploaded_photo")}
-          style={{ width: "100%", height: "auto", objectFit: "cover" }}
-          {...imageParams}
+    <span
+      className={css({
+        display: "inline-block",
+        minWidth: "32",
+        width: "full",
+        bgColor: "secondary.lighter",
+        borderRadius: "sm",
+        bgPosition: "center",
+        bgSize: "cover",
+        bgRepeat: "no-repeat",
+        position: "relative",
+        overflow: "hidden",
+      })}
+      style={{
+        backgroundImage: `url(${imageSrc})`,
+      }}
+    >
+      <span
+        className={css({
+          position: "absolute",
+          inset: "0",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2",
+          placeItems: "center",
+          color: "secondary",
+          fontSize: "xs",
+          textAlign: "center",
+          "&[data-loaded=true]": { backdropFilter: "blur(10px)" },
+        })}
+        data-loaded={Boolean(imageSrc)}
+      >
+        <Icon
+          name={isPending ? "common/spinner" : "action/image-add"}
+          className={css({ fontSize: "2rem", _loading: { animation: "spin" } })}
+          aria-busy={isPending}
         />
-      ) : (
-        <span
-          className={css({
-            display: "grid",
-            placeItems: "center",
-            width: "full",
-            height: "full",
-            // TODO Needs refactor
-            bgColor: ["rectangle", "rectangle-smaller"].includes(
-              placeholderVariant,
-            )
-              ? "light"
-              : "secondary.lighter",
-            color: isPending ? "transparent" : "secondary",
-            textStyle: "body.2",
-          })}
-        >
-          {!isPending && noImageContent}
-        </span>
-      )}
-      {isPending && (
-        <ImSpinner8
-          className={css({
-            position: "absolute",
-            animation: "spin",
-            width: "25%",
-            height: "25%",
-            color: "secondary",
-          })}
-        />
-      )}
+        {t(isPending ? "uploading_photo" : "upload_photo")}
+      </span>
+      <span className={aspectRatio({ display: "block", ratio })}>
+        {imageSrc && !isPending && (
+          <Image src={imageSrc} alt="" sizes={sizes} fill />
+        )}
+      </span>
     </span>
   );
 }

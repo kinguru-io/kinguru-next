@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   SearchBoxCore,
-  SearchBoxOptions,
-  SearchBoxRetrieveResponse,
-  SearchBoxSuggestion,
+  type SearchBoxOptions,
+  type SearchBoxRetrieveResponse,
+  type SearchBoxSuggestion,
 } from "@mapbox/search-js-core";
 import { useEffect, useMemo } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -52,21 +51,17 @@ export const useSearchBoxCore = (
   }, [options]);
 
   const fetchSuggestions = useDebouncedCallback(
-    (value: string, cb: (options: SearchBoxSuggestion[]) => void): void => {
-      if (value.length < 5) return cb([]);
+    (
+      value: string,
+      callback: (options: SearchBoxSuggestion[]) => void,
+    ): void => {
+      if (value.length < 5) return callback([]);
 
       void search
         .suggest(value, {
           sessionToken: "test-123",
         })
-        .then(({ suggestions }) =>
-          cb(
-            suggestions.map((suggestion) => ({
-              ...suggestion,
-              label: suggestion.name + " " + suggestion.place_formatted,
-            })),
-          ),
-        );
+        .then(({ suggestions }) => callback(suggestions));
     },
     300,
   );

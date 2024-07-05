@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { FormProvider, UseFormReturn, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { getDefaultFormAmenities } from "../_premise-form/default-form-amenities";
-import { PremiseFormInner } from "../_premise-form/PremiseFormInner";
+import { PremiseFormInner } from "../_premise-form/premise-form-inner";
 import {
   createPremiseFormSchema,
   type CreatePremiseFormSchemaProps,
@@ -132,7 +132,7 @@ export function EditPremiseForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(formSubmitted)}>
-        <PremiseFormInner mapboxId={mapboxId} />
+        <PremiseFormInner mapboxId={mapboxId} editMode />
       </form>
     </FormProvider>
   );

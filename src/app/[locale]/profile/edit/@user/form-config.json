@@ -23,7 +23,9 @@
     {
       "name": "city",
       "type": "text"
-    },
+    }
+  ],
+  "extra": [
     {
       "name": "description",
       "type": "textarea"

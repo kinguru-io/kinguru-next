@@ -14,13 +14,13 @@ import {
 } from "react-hook-form";
 import toast from "react-hot-toast";
 import formFieldsConfig from "./form-config.json";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { ImagePickerForm } from "@/components/common/form/image-picker-form";
 import { BaseForm, Button, Checkbox, SocialLinks } from "@/components/uikit";
-import { FormInnerLayout } from "@/layout/block";
 import { OrgRegisterAction } from "@/lib/actions/auth";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 
-import { Flex } from "~/styled-system/jsx";
+import { Flex, Grid, Stack } from "~/styled-system/jsx";
 
 interface EditProfileFormProps {
   companyName: string;
@@ -102,25 +102,31 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
   };
 
   return (
-    <FormInnerLayout>
-      <OrganizationRegisterFormBoxLayout>
-        <h3>{t("group.main")}</h3>
-        <OrganizationRegisterFormGroupLayout>
-          <FormColumn>
+    <Stack css={{ md: { gap: "6" } }}>
+      <SubSection>
+        <h2 className="title">{t("group.main")}</h2>
+        <Stack gap="4">
+          <ImagePickerForm groupKey="company" name="logotype" />
+          <Stack gap="2">
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.main}
               // @ts-expect-error
               schema={orgRegisterSchema(t)}
               translationsKey="organization.basic_info_form"
             />
-          </FormColumn>
-          <ImagePickerForm groupKey="company" name="logotype" />
-        </OrganizationRegisterFormGroupLayout>
-      </OrganizationRegisterFormBoxLayout>
+          </Stack>
+        </Stack>
+      </SubSection>
 
-      <OrganizationRegisterFormBoxLayout>
-        <h3>{t("group.credentials")}</h3>
-        <OrganizationRegisterFormGroupLayout>
+      <SubSection>
+        <h2 className="title">{t("group.credentials")}</h2>
+        <Grid
+          css={{
+            gridTemplateColumns: "repeat(auto-fill, minmax({spacing.72}, 1fr))",
+            gap: "4",
+            md: { gap: "8" },
+          }}
+        >
           <FormColumn>
             {t("column.business")}
             <BaseForm<OrgRegisterInput>
@@ -147,29 +153,23 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             {t("column.billingAddress")}
             <AddressGroup type="billing" />
           </FormColumn>
-          <FormRow>
-            <Checkbox
-              label={t("same_addresses_label")}
-              defaultChecked={false}
-              onChange={({ target }) => sameAddressStateChanged(target.checked)}
-            />
-            <span className="helper">{t("credentials_asterisk_helper")}</span>
-          </FormRow>
-        </OrganizationRegisterFormGroupLayout>
-      </OrganizationRegisterFormBoxLayout>
+        </Grid>
+        <FormFooter>
+          <Checkbox
+            label={t("same_addresses_label")}
+            defaultChecked={false}
+            onChange={({ target }) => sameAddressStateChanged(target.checked)}
+          />
+          <span className="notice">{t("credentials_asterisk_helper")}</span>
+        </FormFooter>
+      </SubSection>
 
-      <OrganizationRegisterFormBoxLayout>
-        <h3>{t("group.social")}</h3>
-        <span className="subheading">{t("social_helper")}</span>
-        <OrganizationRegisterFormGroupLayout>
-          <SocialLinks role="organization" />
-        </OrganizationRegisterFormGroupLayout>
-      </OrganizationRegisterFormBoxLayout>
+      <SocialLinks role="organization" />
 
-      <Button type="submit" isLoading={isPending}>
+      <Button type="submit" size="lg" isLoading={isPending} centered>
         {t("submit")}
       </Button>
-    </FormInnerLayout>
+    </Stack>
   );
 }
 
@@ -192,68 +192,17 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
   );
 }
 
-function OrganizationRegisterFormBoxLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <Flex
-      layerStyle="outlineSecondaryWrapper"
-      paddingInline="30px"
-      marginBlockEnd="60px"
-      direction="column"
-      gap="30px"
-      alignItems="center"
-      css={{
-        "& > .subheading": { marginBlockStart: "-1.5rem", textAlign: "center" },
-      }}
-    >
-      {children}
-    </Flex>
-  );
-}
-
-function OrganizationRegisterFormGroupLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <Flex
-      justifyContent="space-around"
-      alignItems="center"
-      flexWrap="wrap"
-      width="full"
-      maxWidth="600px"
-      gap="50px"
-    >
-      {children}
-    </Flex>
-  );
-}
-
 function FormColumn({ children }: { children: React.ReactNode }) {
   return (
-    <Flex
-      direction="column"
-      gap="20px"
-      flexGrow="1"
-      justifyContent="flex-start"
-    >
+    <Flex direction="column" gap="3" fontSize="px15">
       {children}
     </Flex>
   );
 }
 
-function FormRow({ children }: { children: React.ReactNode }) {
+function FormFooter({ children }: { children: React.ReactNode }) {
   return (
-    <Flex
-      direction="column"
-      flexGrow="1"
-      justifyContent="flex-start"
-      gap="25px"
-    >
+    <Flex direction="column" gap="2">
       {children}
     </Flex>
   );

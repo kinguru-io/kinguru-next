@@ -1,11 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
-import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
-import { WarningNotice } from "@/components/profile";
-import { AddItemLink } from "@/components/profile/AddItemLink";
+import { SubSection } from "@/components/common/cards/sub-section";
+import { LocationAddressFallback } from "@/components/common/maps";
+import { NoticeScreen } from "@/components/profile";
+import { AddItemLink } from "@/components/profile/add-item-link";
 import { VenueCardView } from "@/components/profile/profile-venue";
-import { ProfileSectionLayout } from "@/layout/page";
-import { GridItem } from "~/styled-system/jsx";
+import { retrieveLocationPropertiesById } from "@/searchBox";
+import { Grid } from "~/styled-system/jsx";
 
 export default async function VenuesPage() {
   const t = await getTranslations("profile.venues");
@@ -13,18 +14,18 @@ export default async function VenuesPage() {
   const organization = session?.user?.organizations.at(0);
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">{t("heading")}</h1>
+    <SubSection>
+      <h1 className="title">{t("heading")}</h1>
       {organization ? (
         <VenueCardListing organizationId={organization.id} />
       ) : (
-        <WarningNotice
+        <NoticeScreen
           noticeText={t("no_organization_warn_msg")}
           href="/profile/edit"
           linkLabel={t("no_organization_link_label")}
         />
       )}
-    </ProfileSectionLayout>
+    </SubSection>
   );
 }
 
@@ -40,26 +41,46 @@ async function VenueCardListing({
     include: { premises: true },
   });
 
+  const addresses = await Promise.allSettled(
+    venues.map(({ locationMapboxId }) =>
+      retrieveLocationPropertiesById(locationMapboxId),
+    ),
+  );
+
   return (
-    <GridItem
-      gridColumn="1 / -1"
-      display="grid"
-      gap="30px"
-      gridTemplateColumns="repeat(auto-fill, minmax(310px, 1fr))"
+    <Grid
+      css={{
+        gap: "4",
+        gridTemplateColumns: "repeat(auto-fill, minmax({spacing.72}, 1fr))",
+        md: { gap: "8" },
+      }}
     >
-      {venues.map((venue) => (
-        <MapboxSearchBoxResponseProvider
-          key={venue.id}
-          mapboxId={venue.locationMapboxId}
-        >
-          <VenueCardView venue={venue} noPremiseLabel={t("no_premises")} />
-        </MapboxSearchBoxResponseProvider>
-      ))}
+      {venues.map((venue, idx) => {
+        const locationProperties = addresses.at(idx);
+        const address =
+          locationProperties?.status === "fulfilled"
+            ? locationProperties.value
+            : null;
+        const addressSlot = address?.full_address ||
+          address?.place_formatted || (
+            <LocationAddressFallback label={t("cannot_load_location")} />
+          );
+
+        return (
+          <VenueCardView
+            key={venue.id}
+            venue={venue}
+            noPremiseLabel={t("no_premises")}
+            noPremiseLabelShort={t("no_premises_short")}
+            addressSlot={addressSlot}
+          />
+        );
+      })}
       <AddItemLink
-        maxWidth="310px"
-        minHeight="330px"
+        minHeight="60"
         href="/profile/venues/add"
+        label={t("add_venue_btn_label")}
       />
-    </GridItem>
+    </Grid>
   );
 }

@@ -1,2 +1,2 @@
-export { WarningNotice } from "./WarningNotice";
-export { AddItemLink } from "./AddItemLink";
+export { NoticeScreen } from "./notice-screen";
+export { AddItemLink } from "./add-item-link";

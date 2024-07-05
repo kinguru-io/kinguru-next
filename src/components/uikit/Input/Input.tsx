@@ -11,6 +11,7 @@ export type InputProps = InputVariantProps &
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
     "data-invalid"?: unknown;
+    hideLabel?: boolean;
   };
 
 export const Input = forwardRef(function Input(
@@ -21,6 +22,7 @@ export const Input = forwardRef(function Input(
     className,
     prefix,
     suffix,
+    hideLabel = false,
     ...restProps
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -30,6 +32,7 @@ export const Input = forwardRef(function Input(
   const {
     hidden,
     disabled,
+    placeholder,
     "aria-invalid": ariaInvalid,
     "data-invalid": dataInvalid,
   } = restProps;
@@ -45,7 +48,10 @@ export const Input = forwardRef(function Input(
       {...invalidTag}
     >
       {prefix}
-      <input ref={ref} className={classes.input} {...restProps} />
+      <input ref={ref} className={cx("peer", classes.input)} {...restProps} />
+      {!hideLabel && placeholder && (
+        <span className={classes.placeholder}>{placeholder}</span>
+      )}
       {suffix}
     </label>
   );

@@ -92,6 +92,7 @@ export default defineConfig({
         },
         shadows: {
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
+          focus: { value: "0 0 0 2px {colors.focus}" },
           header: { value: "0px 4px 48px 0px rgba(0, 0, 0, 0.06)" },
           dropdown: { value: "0px 14px 45px rgba(0, 0, 0, 0.2)" },
           "light-backdrop": {
@@ -130,8 +131,12 @@ export default defineConfig({
           DEFAULT: { value: "#7A7A7A" },
           lighter: { value: "#F5F5F5" },
           lightest: { value: "#FBFBFB" },
+          text: { value: "{colors.light}" },
         },
-        tertiary: { DEFAULT: { value: "#D9D9D9" } },
+        tertiary: {
+          DEFAULT: { value: "#D9D9D9" },
+          text: { value: "{colors.secondary}" },
+        },
         dark: {
           DEFAULT: { value: "#212529" },
           text: { value: "{colors.light}" },
@@ -140,6 +145,7 @@ export default defineConfig({
         neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
           DEFAULT: { value: "#DC1414" },
+          darker: { value: "#c51010" },
           text: { value: "{colors.light}" },
         },
         success: {

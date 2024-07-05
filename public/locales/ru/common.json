@@ -282,8 +282,12 @@
   "form": {
     "common": {
       "upload_photo": "Загрузите фото",
+      "uploading_photo": "Загрузка...",
       "uploaded_photo": "Загруженное фото",
-      "updated": "Данные обновлены"
+      "updated": "Данные обновлены",
+      "incorrect_file_type": "Неправильный тип файла",
+      "incorrect_file_size": "Превышен размер файла",
+      "upload_failed": "Ошибка загрузки файла"
     },
     "multi_step": {
       "complete_current_step": "Пожалуйста, завершите текущий шаг, чтобы разблокировать доступ к следующим шагам."
@@ -318,10 +322,11 @@
       "IBAN": "IBAN",
       "bankName": "Название банка",
       "same_addresses_label": "юридический адрес совпадает с почтовым адресом",
-      "social_link_placeholder": "Cсылка на аккаунт {social}",
+      "social_links_title": "Социальные сети",
+      "social_links_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт.",
+      "social_link_placeholder": "Укажите ссылку",
       "submit": "Сохранить",
       "credentials_asterisk_helper": "* вся указанная информация будет использоваться исключительно в рамках внутренних рабочих процессов",
-      "social_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт.",
       "fields": {
         "errors": {
           "NIP_required": "NIP должен содержать ровно 10 цифр",
@@ -338,6 +343,7 @@
     "basic_info_form": {
       "group": {
         "main": "Главное",
+        "about_me": "О себе",
         "social": "Социальные сети"
       },
       "firstname": "Имя",
@@ -348,9 +354,10 @@
       "city": "Город",
       "birthdate": "Дата рождения",
       "description": "Дополнительная информация",
-      "social_link_placeholder": "Cсылка на аккаунт {social}",
+      "social_links_title": "Социальные сети",
+      "social_links_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт.",
+      "social_link_placeholder": "Укажите ссылку",
       "submit": "Сохранить",
-      "social_helper": "Укажите свои социальные сети, чтобы мы могли верифицировать ваш аккаунт.",
       "fields": {
         "errors": {
           "firstname_required": "Имя должно содержать минимум 2 символа",
@@ -483,6 +490,11 @@
       "heading": "Мои площадки",
       "premises_heading": "Залы",
       "no_premises": "Площадка неактивна. Необходимо добавить зал.",
+      "no_premises_short": "Площадка неактивна",
+      "add_venue_btn_label": "Добавить площадку",
+      "edit_venue_btn_label": "Редактировать площадку",
+      "add_premise_btn_label": "Добавить зал",
+      "cannot_load_location": "Не удалось загрузить местоположение площадки",
       "no_organization_warn_msg": "Чтобы получить возможность регистрировать площадки и залы, заполните свои реквизиты в разделе \"Личный профиль\".",
       "no_organization_link_label": "Перейти в раздел \"Личный профиль\"",
       "edit_premise_link_label": "Изменить",
@@ -504,6 +516,7 @@
           "description": "Описание",
           "description_placeholder": "Добавьте описание для своей площадки",
           "photo_tip": "Добавьте одну фотографию, которая будет отображаться на странице площадки.",
+          "photo_tip_extra": "Размер фотографии не должен превышать {size} мб",
           "locationMapboxId_placeholder": "Введите адрес",
           "locationTutorial_tip": "Напишите инструкцию как к Вам добраться. Она будет видна всем пользователям и им будет проще Вас найти.",
           "locationTutorial_placeholder": "Например: Добраться можно трамваем №2 и №5. От остановки \"Озерная\" идите к большому кирпичному зданию. Вход с торца. На третьем этаже поверните направо и идите по указателям.",
@@ -526,10 +539,11 @@
         }
       },
       "created": {
-        "heading": "Поздравляем!\nВы успешно зарегистрировали площадку.",
-        "no_premise_warn_msg": "Далее вам необходимо зарегистрировать на этой площадке как минимум один зал, который будет сдаваться в аренду.",
+        "congrats_label": "Поздравляем!",
+        "complete_label": "Вы успешно зарегистрировали площадку.",
+        "no_premise_warn_msg": "Далее Вам необходимо зарегистрировать на этой площадке как минимум один зал, который будет сдаваться в аренду.",
         "no_premise_link_label": "Перейти к регистрации зала",
-        "check_venue": "Посмотреть страницу {venueName}"
+        "check_venue": "Посмотреть страницу {name}"
       }
     },
     "premises": {
@@ -558,29 +572,26 @@
           "photo": "Фото",
           "photo_tip": "Добавьте фотографии вашего зала",
           "premise_parameters": "Параметры зала",
-          "type_placeholder": "Выберите тип помещения",
-          "area_prefix": "Площадь",
-          "area_literal": "м",
-          "capacity_prefix": "Вместительность до",
-          "capacity_literal": "человек",
+          "type_placeholder": "Тип помещения",
+          "area_prefix": "Площадь, м²",
+          "capacity_prefix": "Вместительность до, чел.",
           "amenities": "Оснащения и удобства",
           "amenities_tip": "Отметьте как минимум 5 удобств, которые есть в вашем зале. Чем больше удобств Вы отметите, тем больше пользователей смогут найти ваш зал.",
           "open_hours": "Режим работы и стоимость",
           "open_hours_example": "Данная форма позволяет указывать стоимость вашего зала за 1 час. Это значит, что Вы можете указать разную стоимость для разных временных промежутков.\n\nНапример:\n<bold>10:00-14:00 - 50 zl</bold>,\n<bold>14:00-23:00 - 70 zl</bold>.\n\nЕсли стоимость вашего зала не меняется в течение дня, то заполнить рекомендуется так:\n<bold>10:00-23:00 - 50 zl</bold>",
-          "open_hours_price_label": "Стоимость за 1 час:",
+          "open_hours_from_label": "c",
+          "open_hours_to_label": "до",
+          "open_hours_price_label": "Стоимость часа, zł",
           "open_hours_add_record_btn_label": "Добавить",
           "open_hours_existing_range_error_msg": "Невозможно добавить. Пересечение с существующим промежутком: {start} - {end}",
-          "open_hours_operating_mode": "Режим работы:",
-          "open_hours_empty_notice": "Для отображения режима работы в указанный день заполните необходимые поля в левой части экрана",
           "open_hours_spread_mode": "Вы можете установить этот режим работы на остальные дни недели",
+          "open_hours_spread_mode_success": "Режим работы скопирован",
           "open_hours_spread_mode_btn_label": "Установить",
           "open_hours_discounts_heading": "Планируете ли Вы скидки в рамках одного дня?",
+          "open_hours_discounts_label_time": "Время",
+          "open_hours_discounts_label": "Скидка, %",
           "open_hours_discounts_tip": "Если Вы планируете скидку, то заполните условия ее выполнения. Скидка дается только от нескольких часов и действует только в рамках одного дня.",
-          "open_hours_discounts_form": "Расчет скидки",
-          "open_hours_discounts_input": "Скидка за <noWrap><hoursSelector>X часов</hoursSelector> - <percentageSelector>X</percentageSelector>%</noWrap>",
-          "open_hours_discounts": "Скидка:",
-          "open_hours_discounts_helper": "При бронировании \n{duration, plural, =1 {# часа} =21 {# часа} other {# часов}} и более",
-          "open_hours_discounts_empty_notice": "Для отображения скидки в указанный временной промежуток заполните необходимые поля в левой части экрана",
+          "open_hours_discounts_helper": "при бронировании {duration, plural, =1 {# часа} =21 {# часа} other {# часов}} и более",
           "rules": "Правила зала",
           "rules_tip": "Опишите все правила вашего зала",
           "rules_placeholder": "Например: запрещено употребление алкогольных напитков.",

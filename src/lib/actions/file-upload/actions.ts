@@ -8,6 +8,7 @@ import { s3client } from "@/s3client";
 
 export type ProfileImageActionData = Pick<File, "name" | "size" | "type">;
 type GroupKey = string;
+type ImageUploadError = keyof IntlMessages["form"]["common"];
 
 export async function uploadProfileImage(
   data: ProfileImageActionData,
@@ -20,12 +21,15 @@ export async function uploadProfileImage(
     ContentType: data.type,
   });
 
-  try {
-    imageSchema.parse(data);
+  const parseResult = imageSchema.safeParse(data);
 
+  if (!parseResult.success) {
+    return parseResult.error.flatten().formErrors as ImageUploadError[];
+  }
+
+  try {
     return await getSignedUrl(s3client, command); // default URL lifetime = 900s (15mins)
-  } catch (e) {
-    // TODO handle an error?
-    return JSON.stringify(e);
+  } catch (_) {
+    return ["upload_failed"] as ImageUploadError[];
   }
 }

@@ -21,6 +21,7 @@ const meta = {
     rounded: false,
     textCentered: false,
     "aria-invalid": false,
+    hideLabel: false,
   },
 } satisfies Meta<typeof Input>;
 
@@ -66,8 +67,8 @@ export const ManyTextFields: Story = {
           <Input type="text" placeholder="Last name" />
         </fieldset>
         <fieldset className={vstack({ gap: "2" })}>
-          <Input type="text" defaultValue="John" />
-          <Input type="text" defaultValue="Doe" />
+          <Input type="text" placeholder="First name" defaultValue="John" />
+          <Input type="text" placeholder="Last name" defaultValue="Doe" />
         </fieldset>
       </div>
     );

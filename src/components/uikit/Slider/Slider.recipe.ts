@@ -37,8 +37,8 @@ export const sliderSlot = defineSlotRecipe({
         _focusVisible: "light",
       },
       _focusVisible: {
-        outline: "none",
-        border: "1px solid token(colors.focus)",
+        outline: "1px solid transparent",
+        boxShadow: "focus",
       },
     },
     sliderOptions: {

@@ -11,17 +11,17 @@ export function InputFile({ children, disabled, ...props }: InputFileProps) {
     <label
       data-disabled={disabled}
       className={css({
-        display: "block",
-        width: "min-content",
+        display: "grid",
+        width: "full",
         position: "relative",
         cursor: "pointer",
         "&[data-disabled=true]": {
           cursor: "not-allowed",
         },
-        borderRadius: "10px",
+        borderRadius: "sm",
         transition: "shadow",
         _focusWithin: {
-          boxShadow: "0 0 0 2px token(colors.focus)",
+          boxShadow: "focus",
         },
       })}
     >
