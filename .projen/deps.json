@@ -291,6 +291,7 @@
     },
     {
       "name": "mapbox-gl",
+      "version": "3.4.0",
       "type": "runtime"
     },
     {

@@ -148,7 +148,7 @@ const project = new web.NextJsTypeScriptProject({
     "next-intl",
     "nodemailer",
     "react-map-gl",
-    "mapbox-gl",
+    "mapbox-gl@3.4.0",
     "@mapbox/search-js-core",
     "use-debounce",
     "react-icons",
