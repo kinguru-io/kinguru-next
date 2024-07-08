@@ -100,7 +100,7 @@ const BookingsSection = ({
                     <AccordionItemToggle textStyle="heading.3">
                       {t("cancel_btn_accordion_label")}
                     </AccordionItemToggle>
-                    <AccordionItemContent padding="0">
+                    <AccordionItemContent>
                       {refundConditions}
                     </AccordionItemContent>
                   </AccordionItem>

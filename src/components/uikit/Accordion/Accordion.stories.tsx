@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { faker } from "@faker-js/faker";
 import { Meta } from "@storybook/react";
 import { AccordionGroup } from "./AccordionGroup";
@@ -8,6 +7,7 @@ import {
   AccordionItemToggle,
   AccordionItemContent,
 } from "@/components/uikit";
+import { css } from "~/styled-system/css";
 
 const meta = {
   title: "UIKit/Accordion",
@@ -31,7 +31,9 @@ export const Basic = {
               <AccordionItemToggle textStyle="heading.3">
                 {title}
               </AccordionItemToggle>
-              <AccordionItemContent>{content}</AccordionItemContent>
+              <AccordionItemContent className={css({ padding: "4" })}>
+                {content}
+              </AccordionItemContent>
             </AccordionItem>
           );
         })}

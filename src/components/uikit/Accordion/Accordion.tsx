@@ -66,8 +66,7 @@ export function AccordionItemToggle(
       },
     },
     styleProps,
-    // TODO leave just `cssProp` once `@pandacss/dev` is updated from 0.38.0
-    ...(Array.isArray(cssProp) ? cssProp : [cssProp]),
+    cssProp,
   );
 
   return (
@@ -86,15 +85,15 @@ export function AccordionItemToggle(
 }
 
 export function AccordionItemContent({
-  padding = "30px",
+  className,
   children,
 }: {
-  padding?: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
     <Collapse>
-      <Box padding={padding}>{children}</Box>
+      <Box className={className}>{children}</Box>
     </Collapse>
   );
 }
