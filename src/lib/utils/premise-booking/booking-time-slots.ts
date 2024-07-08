@@ -13,6 +13,17 @@ export async function isUserOwnerOfPremise(
   return isOwner;
 }
 
+const ORGANIZATION_ROLE = "organization";
+
+export async function getUserRole() {
+  const session = await getSession();
+  return session?.user?.role;
+}
+
+export async function isUserOrganization() {
+  return (await getUserRole()) === ORGANIZATION_ROLE;
+}
+
 export interface Booking {
   id: string;
   ids?: string[];

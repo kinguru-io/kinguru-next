@@ -386,6 +386,7 @@ model Organization {
   places         Place[]
   venues         Venue[]
   resources      OrganizationResourse[]
+  slots          PremiseSlot[] // Add this relation to Organization
 }
 
 /// @description Currently only `EMEA` region is used.
@@ -487,8 +488,14 @@ model PremiseOpenHours {
   price     Float /// @description currently is used for 1 hour intervals
 }
 
+enum BookingType {
+  blocked_by_admin
+  via_website
+}
+
 model PremiseSlot {
   id              String             @id @default(cuid())
+  type            BookingType        @default(via_website)
   premise         Premise            @relation(fields: [premiseId], references: [id])
   premiseId       String
   user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -501,6 +508,9 @@ model PremiseSlot {
   endTime         DateTime
   status          TicketIntentStatus
   createdAt       DateTime           @default(now())
+  organizationId  String
+  organization    Organization       @relation(fields: [organizationId], references: [id])
+  @@index([organizationId])
 }
 
 /// @deprecated pricing is set directly to the `PremiseOpenHours` model

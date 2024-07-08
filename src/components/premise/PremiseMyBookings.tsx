@@ -1,10 +1,10 @@
 import { TicketIntentStatus } from "@prisma/client";
 import { format } from "date-fns";
-import { getTranslations } from "next-intl/server";
-import { LiaCalendar } from "react-icons/lia";
 
+import { LiaCalendar } from "react-icons/lia";
 import CancelBookingBtn from "./myBookings/CancelBookingBtn";
 import Tabs from "./Tabs";
+import { withError } from "./withError";
 import BookingCard from "../uikit/PremiseMyBookingCard/BookingCard";
 import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
 import { getSession } from "@/auth";
@@ -13,14 +13,17 @@ import { fetchImageSrc } from "@/lib/utils/fetch-image-src";
 import { bookingsGroupedByDateAndPremiseAndPayment } from "@/lib/utils/groupBy-bookings";
 import { Booking } from "@/lib/utils/premise-booking";
 import { HStack } from "~/styled-system/jsx";
+import { useTranslations } from "next-intl";
 
 export async function PremiseMyBookings({
-  allBookings,
+  bookingsViaWebsite,
+  bookingsBlockedByAdmin,
 }: {
-  allBookings: Booking[];
+  bookingsViaWebsite: Booking[];
+  bookingsBlockedByAdmin: Booking[];
 }) {
+  const t = useTranslations("profile.my_bookings");
   const session = await getSession();
-  const t = await getTranslations("profile.my_bookings");
 
   const statusColorPallets: Record<TicketIntentStatus, string> = {
     failed: "danger",
@@ -32,7 +35,7 @@ export async function PremiseMyBookings({
     date: {
       format: ({ date }: { date: Date }) => (
         <HStack gap="3px">
-          <LiaCalendar size="1.125em" />{" "}
+          <LiaCalendar size="1.125em" />
           <time dateTime={format(date, "dd.MM.yyyy")}>
             {format(date, "dd.MM.yyyy")}
           </time>
@@ -52,31 +55,17 @@ export async function PremiseMyBookings({
     },
   };
 
-  function partition(array: any[], isValid: (elem: any) => boolean) {
-    return array.reduce(
-      ([pass, fail]: [any[], any[]], elem) => {
-        return isValid(elem)
-          ? [[...pass, elem], fail]
-          : [pass, [...fail, elem]];
-      },
-      [[], []],
-    );
-  }
-
-  const [myBookings, companyBookings] = partition(
-    allBookings,
-    (e) => !!e.paymentIntentId,
+  const groupedBookings = Object.entries(
+    bookingsGroupedByDateAndPremiseAndPayment(bookingsViaWebsite),
   );
 
-  const groupedBookings = bookingsGroupedByDateAndPremiseAndPayment(myBookings);
-
   const imageSrcs: Record<string, string> = {};
-  for (const booking of allBookings) {
+  for (const booking of [...bookingsViaWebsite, ...bookingsBlockedByAdmin]) {
     imageSrcs[booking.premiseId] = await fetchImageSrc(booking.premiseId);
   }
 
   const MyBookings = () =>
-    Object.entries(groupedBookings).map(([date, premises]) => (
+    groupedBookings.map(([date, premises]) => (
       <BookingsSection
         key={date}
         date={date}
@@ -86,9 +75,9 @@ export async function PremiseMyBookings({
       />
     ));
 
-  const CompanyBookings = () =>
-    companyBookings.map((booking: Booking) => (
-      <>
+  const OrganizationBookings = () =>
+    bookingsBlockedByAdmin.map((booking: Booking) => (
+      <div key={booking.id}>
         <BookingCard
           booking={booking}
           imageSrc={imageSrcs[booking.premiseId]}
@@ -105,26 +94,33 @@ export async function PremiseMyBookings({
             isActive={true}
           />
         </Modal>
-      </>
+      </div>
     ));
 
-  const tabs = [
-    { label: "Clients", content: <MyBookings /> },
-    { label: "Company", content: <CompanyBookings /> },
-  ];
+  const WithErrorMyBookings = withError(MyBookings);
+  const WithErrorOrganizationBookings = withError(OrganizationBookings);
 
-  const renderNoBookings = () => {
-    return <section>{t("no_bookings")}</section>;
-  };
+  const tabs = [
+    {
+      label: t("tab_booked_via_website"),
+      content: <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>,
+    },
+    {
+      label: t("tab_blocked_by_admin"),
+      content: (
+        <WithErrorOrganizationBookings>
+          {bookingsBlockedByAdmin}
+        </WithErrorOrganizationBookings>
+      ),
+    },
+  ];
 
   const renderBookings = () => {
     if (session?.user?.role === "organization") {
       return <Tabs tabs={tabs} />;
     }
-    return <MyBookings />;
+    return <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>;
   };
 
-  return (
-    <>{allBookings.length === 0 ? renderNoBookings() : renderBookings()}</>
-  );
+  return renderBookings();
 }

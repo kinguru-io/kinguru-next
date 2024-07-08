@@ -227,6 +227,7 @@ export default async function PremisePage({
               <Modal>
                 <BookingViewCard
                   premiseId={premise.id}
+                  premiseOrgId={premise.venue.organizationId}
                   createIntent={createPremiseSlotsIntent}
                   cancelIntent={cancelPremiseSlotsIntent}
                   revalidateFn={revalidatePremisePage}

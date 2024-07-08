@@ -407,6 +407,7 @@
     "remove_timeslot_btn": "Usuń czas rezerwacji",
     "booking_modal_heading": "Rezerwacja terminów",
     "action_successful_booking": "Pomyślnie zarezerwowane!",
+    "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",
     "action_invalid_data": "Nieprawidłowe dane",
     "action_payment_cancelled": "Płatność została anulowana"
   },
@@ -628,8 +629,8 @@
       "no_bookings": "Nie masz jeszcze rezerwacji",
       "before": "przed",
       "after": "po",
-      "tab_clients": "Klienci",
-      "tab_company": "Firma",
+      "tab_booked_via_website": "Zarezerwowane przez stronę internetową",
+      "tab_blocked_by_admin": "Zablokowane przez administratora",
       "cancel_btn_accordion_label": "Anulowanie rezerwacji",
       "cancel_booking_btn": "Anuluj rezerwację",
       "modal_cancel_confirmation_desc": "Czy na pewno chcesz anulować rezerwację?",

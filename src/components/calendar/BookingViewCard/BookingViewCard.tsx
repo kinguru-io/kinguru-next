@@ -44,6 +44,7 @@ const stripePromise = loadStripe(
 
 export function BookingViewCard({
   premiseId,
+  premiseOrgId,
   createIntent,
   cancelIntent,
   revalidateFn,
@@ -52,6 +53,7 @@ export function BookingViewCard({
   inModal = false,
 }: {
   premiseId: Premise["id"];
+  premiseOrgId: string;
   createIntent: CreatePremiseSlotsIntent;
   cancelIntent: CancelPremiseSlotsIntent;
   revalidateFn: RevalidatePremisePage;
@@ -129,6 +131,7 @@ export function BookingViewCard({
       const { status, messageIntlKey, response } =
         await blockPremiseSlotsIntent({
           premiseId,
+          premiseOrgId,
           slots: selectedSlots,
           discountsMap,
         });
@@ -156,6 +159,7 @@ export function BookingViewCard({
     startTransition(async () => {
       const { status, messageIntlKey, response } = await createIntent({
         premiseId,
+        premiseOrgId,
         slots: selectedSlots,
         timeZone,
         discountsMap,
@@ -238,12 +242,7 @@ export function BookingViewCard({
 
   return (
     <>
-      <Card
-        border="1px solid"
-        borderColor="secondary"
-        alignSelf="flex-start"
-        minHeight="352px"
-      >
+      <Card alignSelf="flex-start" minHeight="352px">
         <CardInner padding="25px 18px" alignItems="center" gap="0">
           <h4>{t("card_heading")}</h4>
           {areThereNoSlots ? (
@@ -278,6 +277,7 @@ export function BookingViewCard({
         <ModalWindow>
           <BookingViewCard
             premiseId={premiseId}
+            premiseOrgId={premiseOrgId}
             createIntent={createIntent}
             cancelIntent={cancelIntent}
             revalidateFn={revalidateFn}

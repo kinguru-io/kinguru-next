@@ -3,8 +3,8 @@
 import { differenceInHours, differenceInDays } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
-import { getSession } from "@/auth";
 import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
+import { isUserOrganization } from "@/lib/utils/premise-booking";
 
 export interface CancelBookingActionProps {
   bookingStartTime: Date;
@@ -27,6 +27,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
 
+function calculateAmountPaid(
+  premiseAmount: number,
+  discountAmount: number,
+): number {
+  const discount = discountAmount / 100;
+  const amountPaid = (premiseAmount / 100) * (1 - discount);
+  return Math.round(amountPaid);
+}
+
 async function processRefund({
   bookingStartTime,
   bookingCancelTerm,
@@ -35,8 +44,7 @@ async function processRefund({
   cancellationDate,
   discountAmount,
 }: ProcessRefundProps) {
-  const discount = discountAmount ? discountAmount / 100 : 1;
-  const amountPaid = Math.round((premiseAmount / 100) * discount); // Convert from cents to dollars
+  const amountPaid = calculateAmountPaid(premiseAmount, discountAmount);
 
   const hoursUntilEvent = differenceInHours(bookingStartTime, cancellationDate);
   const daysUntilEvent = differenceInDays(bookingStartTime, cancellationDate);
@@ -146,34 +154,26 @@ export async function cancelBookingAction({
   paymentIntentId,
   discountAmount,
 }: CancelBookingActionProps) {
-  const session = await getSession();
   const t = await getTranslations("profile.my_bookings");
 
-  if (!session?.user?.email) {
-    return {
-      status: "error",
-      message: "Not authorized",
-    };
-  }
+  const isUserOrg = await isUserOrganization();
 
-  const organization = session.user.organizations?.[0];
+  if (isUserOrg && !paymentIntentId) {
+    try {
+      // ONLY for premise owners, No paymentIntentId means no payment was made
+      await deleteCompaniesPremiseSlots(premiseSlotIds);
 
-  if (session.user.role !== "organization" || !organization) {
-    return {
-      status: "error",
-      message: "Not an organization",
-    };
-  }
-
-  if (!paymentIntentId) {
-    // ONLY for premise owners, No paymentIntentId means no payment was made
-    await deleteCompaniesPremiseSlots(premiseSlotIds);
-    console.log("premiseSlotIds", premiseSlotIds);
-
-    return {
-      status: "success",
-      message: t("booking_canceled_successfully"),
-    };
+      return {
+        status: "success",
+        message: t("booking_canceled_successfully"),
+      };
+    } catch (error) {
+      console.error("Error in cancelBookingAction:", error);
+      return {
+        status: "error",
+        message: "Something went wrong",
+      };
+    }
   }
 
   const cancellationDate = new Date();

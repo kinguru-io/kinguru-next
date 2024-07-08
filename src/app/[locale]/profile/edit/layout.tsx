@@ -1,4 +1,4 @@
-import { getSession } from "@/auth";
+import { isUserOrganization as checkUserOrganization } from "@/lib/utils/premise-booking";
 
 export default async function EditProfileLayout({
   user,
@@ -7,7 +7,7 @@ export default async function EditProfileLayout({
   user: React.ReactNode;
   company: React.ReactNode;
 }) {
-  const session = await getSession();
+  const isUserOrg = await checkUserOrganization();
 
-  return <>{session?.user?.role === "organization" ? company : user}</>;
+  return <>{isUserOrg ? company : user}</>;
 }

@@ -27,6 +27,7 @@ import { redirect } from "@/navigation";
 
 type BookTimeSlotsActionData = {
   premiseId: string;
+  premiseOrgId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
   timeZone: string;
@@ -45,6 +46,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function blockPremiseSlotsIntent({
   premiseId,
   slots,
+  premiseOrgId,
 }: BlockTimeSlotsActionData): ActionResponse<
   { message: string },
   "booking_view"
@@ -71,12 +73,14 @@ export async function blockPremiseSlotsIntent({
     data: slots.map(({ time }) => ({
       userId,
       premiseId,
+      organizationId: premiseOrgId,
       paymentIntentId: "",
       amount: 0,
       date: time,
       startTime: time,
       endTime: addHours(time, 1),
       status: TicketIntentStatus.progress,
+      type: "blocked_by_admin",
     })),
   });
 
@@ -90,6 +94,7 @@ export async function blockPremiseSlotsIntent({
 
 export async function createPremiseSlotsIntent({
   premiseId,
+  premiseOrgId,
   slots,
   timeZone,
   discountsMap,
@@ -135,7 +140,11 @@ export async function createPremiseSlotsIntent({
       currency: "PLN",
       customer: session?.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
-      metadata: { source: "premise-slots-booking" } as StripeMetadataExtended,
+      metadata: {
+        source: "premise-slots-booking",
+        user_name: session?.user?.name,
+        user_email: session?.user?.email,
+      } as StripeMetadataExtended,
     });
 
   if (!clientSecret) {
@@ -162,6 +171,7 @@ export async function createPremiseSlotsIntent({
         premiseId,
         paymentIntentId,
         discountAmount,
+        organizationId: premiseOrgId,
         date: startTime,
         amount: Math.round(price * 100),
         startTime: startTime,

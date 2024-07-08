@@ -435,6 +435,7 @@
     "remove_timeslot_btn": "Удалить время бронирования",
     "booking_modal_heading": "Бронирование",
     "action_successful_booking": "Забронировано успешно!",
+    "action_successfully_blocked_slots": "Слот успешно заблокирован",
     "action_invalid_data": "Некорректные данные",
     "action_payment_cancelled": "Оплата была отменена"
   },
@@ -626,8 +627,8 @@
       "with_discount": "Со скидкой",
       "before": "до",
       "after": "после",
-      "tab_clients": "Клиенты",
-      "tab_company": "Компания",
+      "tab_booked_via_website": "Забронировано через сайт",
+      "tab_blocked_by_admin": "Заблокировано администратором",
       "cancel_btn_accordion_label": "Отмена бронирования",
       "cancel_booking_btn": "Отменить бронь",
       "modal_cancel_confirmation_desc": "Вы уверены, что хотите отменить бронирование?",

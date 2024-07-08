@@ -10,7 +10,7 @@ import {
   AccordionItemToggle,
 } from "../Accordion";
 import { REFUND_TYPES } from "@/lib/shared/config/booking-cancel-terms";
-import { Booking } from "@/lib/utils/premise-booking";
+import { Booking, isUserOrganization } from "@/lib/utils/premise-booking";
 import { getActiveCancelTerm } from "@/lib/utils/premise-booking/cancel-booking";
 
 import { css } from "~/styled-system/css";
@@ -29,7 +29,7 @@ interface BookingsSectionProps {
   labels: any;
 }
 
-const BookingsSection = ({
+const BookingsSection = async ({
   date,
   premises,
   imageSrcs,
@@ -37,6 +37,8 @@ const BookingsSection = ({
 }: BookingsSectionProps) => {
   const t = useTranslations("profile.my_bookings");
   const now = new Date();
+
+  const isUserOrg = await isUserOrganization();
 
   return (
     <span key={date}>
@@ -50,9 +52,10 @@ const BookingsSection = ({
             daysUntilEvent,
             hoursUntilEvent,
           );
-          const premiseSlotIds = Object.entries(bookings).map(
-            ([_, value]) => value.id,
-          );
+          const premiseSlotIds = booking.discountAmount
+            ? Object.entries(bookings).map(([_, value]) => value.id)
+            : [booking.id];
+
           const premiseSlotsPrice = Object.entries(bookings).reduce(
             (acc, [_, value]) => acc + value.amount,
             0,
@@ -94,7 +97,7 @@ const BookingsSection = ({
                 imageSrc={imageSrc}
                 labels={labels}
               />
-              {showCancelBtn && (
+              {!isUserOrg && showCancelBtn && (
                 <Accordion>
                   <AccordionItem>
                     <AccordionItemToggle textStyle="heading.3">
