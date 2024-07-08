@@ -41,7 +41,8 @@
     "sign_in": "Sign in",
     "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
-    "your_profile": "Your profile",
+    "your_profile": "Profile",
+    "mybookings": "My bookings",
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
@@ -409,7 +410,8 @@
     "action_successful_booking": "Pomyślnie zarezerwowane!",
     "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",
     "action_invalid_data": "Nieprawidłowe dane",
-    "action_payment_cancelled": "Płatność została anulowana"
+    "action_payment_cancelled": "Płatność została anulowana",
+    "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy."
   },
   "price": {
     "total": "Total",

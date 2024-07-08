@@ -1,5 +1,5 @@
 import { getSession } from "@/auth";
-import { BookingCancelTerms } from "@/lib/shared/config/booking-cancel-terms";
+import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 
 export async function isUserOwnerOfPremise(
   premiseOrgId: string,
@@ -13,7 +13,10 @@ export async function isUserOwnerOfPremise(
   return isOwner;
 }
 
-const ORGANIZATION_ROLE = "organization";
+type UserType = "user" | "organization";
+
+export const USER_ROLE: UserType = "user";
+export const ORGANIZATION_ROLE: UserType = "organization";
 
 export async function getUserRole() {
   const session = await getSession();
@@ -51,7 +54,7 @@ export interface Booking {
     rules: string | null;
     amenities: any[];
     direction: string | null;
-    bookingCancelTerm: BookingCancelTerms;
+    bookingCancelTerm: BookingCancelTerm;
     createdAt: Date;
     updatedAt: Date;
   };

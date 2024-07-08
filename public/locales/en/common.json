@@ -49,7 +49,8 @@
     "sign_in": "Sign in",
     "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
-    "your_profile": "Your profile",
+    "your_profile": "Profile",
+    "mybookings": "My bookings",
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
@@ -601,7 +602,8 @@
     "action_successful_booking": "Successfully booked!",
     "action_successfully_blocked_slots": "Slots are successfully blocked!",
     "action_invalid_data": "Invalid data",
-    "action_payment_cancelled": "Payment was cancelled"
+    "action_payment_cancelled": "Payment was cancelled",
+    "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings."
   },
   "price": {
     "total": "Total",

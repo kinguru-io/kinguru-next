@@ -1,4 +1,4 @@
-import { isUserOrganization as checkUserOrganization } from "@/lib/utils/premise-booking";
+import { isUserOrganization } from "@/lib/utils/premise-booking";
 
 export default async function EditProfileLayout({
   user,
@@ -7,7 +7,7 @@ export default async function EditProfileLayout({
   user: React.ReactNode;
   company: React.ReactNode;
 }) {
-  const isUserOrg = await checkUserOrganization();
+  const isUserOrg = await isUserOrganization();
 
   return <>{isUserOrg ? company : user}</>;
 }

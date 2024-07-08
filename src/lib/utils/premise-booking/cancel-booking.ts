@@ -41,7 +41,6 @@ export const getCancellationDate = (
 ): { cancellationDate: Date; dateLabel: string } => {
   const t = useTranslations("profile.my_bookings");
 
-  //@ts-ignore
   const cancellationOffsets: Record<
     BookingCancelTerm,
     Record<RefundType, number>

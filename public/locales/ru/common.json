@@ -41,7 +41,8 @@
     "sign_in": "Вход",
     "sign_in_org": "Вход для организаций",
     "view_notifications": "Просмотр уведомлений",
-    "your_profile": "Ваш профиль",
+    "your_profile": "Профиль",
+    "mybookings": "Мои бронирования",
     "sign_out": "Выход",
     "settings": "Настройки",
     "open_user_manu": "Открыть меню пользователя",
@@ -437,7 +438,8 @@
     "action_successful_booking": "Забронировано успешно!",
     "action_successfully_blocked_slots": "Слот успешно заблокирован",
     "action_invalid_data": "Некорректные данные",
-    "action_payment_cancelled": "Оплата была отменена"
+    "action_payment_cancelled": "Оплата была отменена",
+    "organization_cannot_pay": "Организациям не доступно бронирование залов. Бронировать могут только обычные пользователи."
   },
   "price": {
     "total": "Итого",

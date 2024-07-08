@@ -1,6 +1,7 @@
 import { TicketIntentStatus } from "@prisma/client";
 import { format } from "date-fns";
 
+import { useTranslations } from "next-intl";
 import { LiaCalendar } from "react-icons/lia";
 import CancelBookingBtn from "./myBookings/CancelBookingBtn";
 import Tabs from "./Tabs";
@@ -11,9 +12,8 @@ import { getSession } from "@/auth";
 import { Modal, Tag } from "@/components/uikit";
 import { fetchImageSrc } from "@/lib/utils/fetch-image-src";
 import { bookingsGroupedByDateAndPremiseAndPayment } from "@/lib/utils/groupBy-bookings";
-import { Booking } from "@/lib/utils/premise-booking";
+import { Booking, ORGANIZATION_ROLE } from "@/lib/utils/premise-booking";
 import { HStack } from "~/styled-system/jsx";
-import { useTranslations } from "next-intl";
 
 export async function PremiseMyBookings({
   bookingsViaWebsite,
@@ -116,7 +116,7 @@ export async function PremiseMyBookings({
   ];
 
   const renderBookings = () => {
-    if (session?.user?.role === "organization") {
+    if (session?.user?.role === ORGANIZATION_ROLE) {
       return <Tabs tabs={tabs} />;
     }
     return <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>;

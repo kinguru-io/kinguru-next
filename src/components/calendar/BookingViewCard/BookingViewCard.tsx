@@ -50,6 +50,7 @@ export function BookingViewCard({
   revalidateFn,
   discountsMap,
   isOwner,
+  isUserOrg,
   inModal = false,
 }: {
   premiseId: Premise["id"];
@@ -59,6 +60,7 @@ export function BookingViewCard({
   revalidateFn: RevalidatePremisePage;
   discountsMap: Record<number, number | undefined>;
   isOwner: boolean;
+  isUserOrg: boolean;
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
@@ -150,7 +152,11 @@ export function BookingViewCard({
     });
   };
 
-  const payBtnClicked = () => {
+  const payBtnClicked = async () => {
+    if (isUserOrg && !isOwner) {
+      toast.error(t("organization_cannot_pay"));
+      return;
+    }
     if (!open) {
       setOpen(true);
       return;
@@ -284,6 +290,7 @@ export function BookingViewCard({
             discountsMap={discountsMap}
             inModal={true}
             isOwner={isOwner}
+            isUserOrg={isUserOrg}
           />
         </ModalWindow>
       )}

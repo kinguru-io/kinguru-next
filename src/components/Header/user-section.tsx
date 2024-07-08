@@ -66,6 +66,7 @@ export async function UserSection() {
       </DropdownInitiator>
       <DropdownMenu>
         <Link href="/profile">{t("your_profile")}</Link>
+        <Link href="/profile/mybookings">{t("mybookings")}</Link>
         <SignOutButton className={css({ textAlign: "start" })}>
           {t("sign_out")}
         </SignOutButton>
