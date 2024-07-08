@@ -27,6 +27,7 @@ export default function CancelBookingBtn({
   paymentIntentId,
   discountAmount,
   isActive,
+  type,
 }: CancelBookingActionProps) {
   const router = useRouter();
   const t = useTranslations("profile.my_bookings");
@@ -67,7 +68,9 @@ export default function CancelBookingBtn({
         className={cx(
           tagStyles({ variant: isActive ? "solid" : "outline" }),
           css({
-            padding: "4",
+            position: "relative",
+            zIndex: 1,
+            padding: type === "tag" ? "2" : "4",
             _selected: {
               colorPalette: "dark",
               _hover: { colorPalette: "danger" },
@@ -77,7 +80,9 @@ export default function CancelBookingBtn({
             },
           }),
         )}
-        onClick={() => setOpen(isActive)}
+        onClick={() => {
+          setOpen(isActive);
+        }}
         aria-selected={isActive}
         disabled={!isActive}
       >

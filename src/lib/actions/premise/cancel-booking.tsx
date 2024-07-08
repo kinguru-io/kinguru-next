@@ -14,6 +14,7 @@ export interface CancelBookingActionProps {
   paymentIntentId: string;
   discountAmount: number;
   isActive: boolean;
+  type?: "tag";
 }
 
 type ProcessRefundProps = Omit<

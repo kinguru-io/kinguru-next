@@ -1,3 +1,4 @@
+import { BookingType } from "@prisma/client";
 import { getSession } from "@/auth";
 import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 
@@ -29,6 +30,7 @@ export async function isUserOrganization() {
 
 export interface Booking {
   id: string;
+  type: BookingType;
   ids?: string[];
   premiseId: string;
   userId: string;

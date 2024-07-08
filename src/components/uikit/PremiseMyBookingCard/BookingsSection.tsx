@@ -26,14 +26,12 @@ interface BookingsSectionProps {
   date: string;
   premises: { [key: string]: Booking[] };
   imageSrcs: Record<string, string>;
-  labels: any;
 }
 
 const BookingsSection = async ({
   date,
   premises,
   imageSrcs,
-  labels,
 }: BookingsSectionProps) => {
   const t = useTranslations("profile.my_bookings");
   const now = new Date();
@@ -92,11 +90,7 @@ const BookingsSection = async ({
                 },
               }}
             >
-              <BookingCard
-                booking={booking}
-                imageSrc={imageSrc}
-                labels={labels}
-              />
+              <BookingCard booking={booking} imageSrc={imageSrc} />
               {!isUserOrg && showCancelBtn && (
                 <Accordion>
                   <AccordionItem>

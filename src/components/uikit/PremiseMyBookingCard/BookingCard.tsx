@@ -13,10 +13,9 @@ import { AspectRatio } from "~/styled-system/jsx";
 interface BookingCardProps {
   booking: Booking;
   imageSrc: string;
-  labels: any;
 }
 
-const BookingCard = ({ booking, imageSrc, labels }: BookingCardProps) => {
+const BookingCard = ({ booking, imageSrc }: BookingCardProps) => {
   const t = useTranslations("profile.my_bookings");
 
   return (
@@ -42,7 +41,7 @@ const BookingCard = ({ booking, imageSrc, labels }: BookingCardProps) => {
               (`${t("with_discount")} ${booking.discountAmount}%` as string)}
           </PremiseMyBookingCardDescription>
         </div>
-        <BookingLabels labels={labels} booking={booking} />
+        <BookingLabels booking={booking} />
       </PremiseMyBookingCardContent>
     </PremiseMyBookingCard>
   );

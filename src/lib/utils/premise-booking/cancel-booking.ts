@@ -47,8 +47,8 @@ export const getCancellationDate = (
   > = {
     very_flexible: {
       [REFUND_TYPES.FULL_REFUND]: 1,
+      [REFUND_TYPES.PARTIAL_REFUND]: 0,
       [REFUND_TYPES.NO_REFUND]: 1,
-      PARTIAL_REFUND: 0,
     },
     flexible: {
       [REFUND_TYPES.FULL_REFUND]: 7,
