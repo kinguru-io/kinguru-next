@@ -94,6 +94,7 @@ export default defineConfig({
         shadows: {
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
           focus: { value: "0 0 0 2px {colors.focus}" },
+          "ring-primary": { value: "0 0 0 2px {colors.primary}" },
           header: { value: "0px 4px 48px 0px rgba(0, 0, 0, 0.06)" },
           dropdown: { value: "0px 14px 45px rgba(0, 0, 0, 0.2)" },
           "light-backdrop": {

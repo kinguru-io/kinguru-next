@@ -288,7 +288,10 @@
       "updated": "Данные обновлены",
       "incorrect_file_type": "Неправильный тип файла",
       "incorrect_file_size": "Превышен размер файла",
-      "upload_failed": "Ошибка загрузки файла"
+      "upload_failed": "Ошибка загрузки файла",
+      "upload_chunks_failed": "Ошибка загрузки некоторых файлов",
+      "drop_zone_upload_photo": "Нажмите для выбора или перетащите фото",
+      "max_file_count_label": "Вы можете загрузить еще {count}"
     },
     "multi_step": {
       "complete_current_step": "Пожалуйста, завершите текущий шаг, чтобы разблокировать доступ к следующим шагам."
@@ -576,6 +579,9 @@
           "floor_placeholder": "Этаж",
           "photo": "Фото",
           "photo_tip": "Добавьте фотографии вашего зала",
+          "photo_gallery_tip_1": "Первая из загруженных Вами фотографий будет являться основной фотографией в профиле",
+          "photo_gallery_tip_2": "Размер фотографии не должен превышать {size} мб",
+          "photo_gallery_tip_3": "Допустимые расширения: {extensions}",
           "premise_parameters": "Параметры зала",
           "type_placeholder": "Тип помещения",
           "area_prefix": "Площадь, м²",

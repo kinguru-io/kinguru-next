@@ -1,3 +1,10 @@
+# [0.52.0](https://github.com/kinguru-io/kinguru-next/compare/v0.51.0...v0.52.0) (2024-07-09)
+
+
+### Features
+
+* **KINGU-145:** DND premise gallery ([#695](https://github.com/kinguru-io/kinguru-next/issues/695)) ([71a65a8](https://github.com/kinguru-io/kinguru-next/commit/71a65a8baee07b6a6bef4f4f90dd11949bcbc71b))
+
 # [0.51.0](https://github.com/kinguru-io/kinguru-next/compare/v0.50.0...v0.51.0) (2024-07-05)
 
 

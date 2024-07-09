@@ -91,6 +91,15 @@ export async function editPremiseAction(
         },
       },
     }),
+    prisma.premise.update({
+      where: { id: premise.id },
+      data: {
+        resources: {
+          deleteMany: {},
+          create: resources,
+        },
+      },
+    }),
   ];
 
   if (changedFields.openHours) {
@@ -106,20 +115,6 @@ export async function editPremiseAction(
               closeTime: endTime,
               price,
             })),
-          },
-        },
-      }),
-    );
-  }
-
-  if (changedFields.resources) {
-    requests.push(
-      prisma.premise.update({
-        where: { id: premise.id },
-        data: {
-          resources: {
-            deleteMany: {},
-            create: resources.filter((resource) => resource.url),
           },
         },
       }),

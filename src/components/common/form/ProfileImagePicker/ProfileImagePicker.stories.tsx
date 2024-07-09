@@ -1,16 +1,15 @@
-import * as s3RequestPresignerModule from "@aws-sdk/s3-request-presigner";
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
-import { HttpResponse, delay, http } from "msw";
 import { NextIntlClientProvider } from "next-intl";
 import { createMock } from "storybook-addon-module-mock";
 import { ProfileImagePicker } from "./ProfileImagePicker";
+import * as awsUtilModule from "@/lib/shared/utils/aws";
 
 import en from "~/public/locales/en/common.json";
 import { Box } from "~/styled-system/jsx";
 
 const meta: Meta<typeof ProfileImagePicker> = {
-  title: "UiKit/Forms/ProfileImagePicker",
+  title: "UiKit/Forms/Files/ProfileImagePicker",
   component: ProfileImagePicker,
   decorators: [
     (Story) => (
@@ -37,8 +36,6 @@ const meta: Meta<typeof ProfileImagePicker> = {
   },
 };
 
-const responseSRC = faker.image.avatarGitHub();
-
 export default meta;
 type Story = StoryObj<typeof meta>;
 
@@ -49,22 +46,15 @@ export const ImageUpload: Story = {
   parameters: {
     moduleMock: {
       mock: () => {
-        const mockImageUpload = createMock(
-          s3RequestPresignerModule,
-          "getSignedUrl",
+        const mockSafeUpload = createMock(awsUtilModule, "safeUploadToBucket");
+        mockSafeUpload.mockImplementation(({ urls }) =>
+          Promise.resolve(
+            Array.from({ length: urls.length }, faker.image.avatar),
+          ),
         );
-        mockImageUpload.mockReturnValue(Promise.resolve(responseSRC));
 
-        return [mockImageUpload];
+        return [mockSafeUpload];
       },
-    },
-    msw: {
-      handlers: [
-        http.put(responseSRC, async () => {
-          await delay(900);
-          return new HttpResponse();
-        }),
-      ],
     },
   },
 };
