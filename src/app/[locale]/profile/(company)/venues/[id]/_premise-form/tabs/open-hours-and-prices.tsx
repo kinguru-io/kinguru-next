@@ -25,11 +25,9 @@ export function OpenHoursAndPrices({ mapboxId }: { mapboxId: string }) {
           {t.rich("fields.open_hours_example", richTagMap)}
         </p>
       </SubSection>
-      <div>
-        <MapboxSearchBoxResponseProvider mapboxId={mapboxId}>
-          <OpenHoursSelector />
-        </MapboxSearchBoxResponseProvider>
-      </div>
+      <MapboxSearchBoxResponseProvider mapboxId={mapboxId}>
+        <OpenHoursSelector />
+      </MapboxSearchBoxResponseProvider>
       <DiscountsSelector />
     </>
   );

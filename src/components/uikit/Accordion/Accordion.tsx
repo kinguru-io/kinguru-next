@@ -1,5 +1,5 @@
 import { type ComponentProps, useId } from "react";
-import { Collapse } from "@/components/uikit";
+import { Collapse, Icon } from "@/components/uikit";
 import { css, cx } from "~/styled-system/css";
 import { Box, splitCssProps, styled } from "~/styled-system/jsx";
 import type { HTMLStyledProps } from "~/styled-system/types";
@@ -9,7 +9,6 @@ export const Accordion = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "3.5",
-    marginBlockEnd: "6",
   },
 });
 
@@ -30,7 +29,7 @@ export function AccordionItemToggle(
     >;
   },
 ) {
-  const checkboxId = useId() + "accordion-item";
+  const checkboxId = useId();
 
   const [cssProps, { children, checkboxProps, ...labelProps }] =
     splitCssProps(props);
@@ -43,26 +42,14 @@ export function AccordionItemToggle(
       paddingInline: "4",
       paddingBlock: "3",
       cursor: "pointer",
-      display: "block",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
       fontSize: "md",
+      "& > svg": { rotate: "-90deg", color: "secondary" },
+      _peerChecked: { "& > svg": { rotate: "90deg" } },
       _peerDisabled: {
         cursor: "not-allowed",
-      },
-      _after: {
-        position: "absolute",
-        content: "''",
-        width: "0.61em",
-        height: "0.61em",
-        borderWidth: "1px",
-        borderStyle: "none solid solid none",
-        borderColor: "dark",
-        top: "50%",
-        right: "1.25rem",
-        transform: "translateY(-75%) rotate(45deg)",
-        transition: "transform",
-        _peerChecked: {
-          transform: "translateY(-25%) rotate(-135deg)",
-        },
       },
     },
     styleProps,
@@ -79,6 +66,7 @@ export function AccordionItemToggle(
       />
       <label className={labelClassName} htmlFor={checkboxId} {...labelProps}>
         {children}
+        <Icon name="action/arrow" />
       </label>
     </>
   );
