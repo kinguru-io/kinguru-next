@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
