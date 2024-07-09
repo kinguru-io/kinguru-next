@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Tabs from "./Tabs";
 import { withError } from "./withError";
 import BookingCard from "../uikit/PremiseMyBookingCard/BookingCard";
@@ -15,7 +15,7 @@ export async function PremiseMyBookings({
   bookingsViaWebsite: Booking[];
   bookingsBlockedByAdmin: Booking[];
 }) {
-  const t = useTranslations("profile.my_bookings");
+  const t = await getTranslations("profile.my_bookings");
   const session = await getSession();
 
   const groupedBookings = Object.entries(
