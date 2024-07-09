@@ -204,6 +204,14 @@
       "type": "runtime"
     },
     {
+      "name": "@dnd-kit/core",
+      "type": "runtime"
+    },
+    {
+      "name": "@dnd-kit/sortable",
+      "type": "runtime"
+    },
+    {
       "name": "@elastic/elasticsearch",
       "version": "8.13.1",
       "type": "runtime"
