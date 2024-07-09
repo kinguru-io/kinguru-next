@@ -56,6 +56,11 @@ export default async function ProfileVenuePage({
             md: { gap: "8" },
           }}
         >
+          <AddItemLink
+            minHeight="60"
+            href={`/profile/venues/${id}/add-premise`}
+            label={t("add_premise_btn_label")}
+          />
           {premises.map(({ id: premiseId }) => (
             <PremiseView
               key={premiseId}
@@ -63,11 +68,6 @@ export default async function ProfileVenuePage({
               href={`/profile/venues/${id}/${premiseId}`}
             />
           ))}
-          <AddItemLink
-            minHeight="60"
-            href={`/profile/venues/${id}/add-premise`}
-            label={t("add_premise_btn_label")}
-          />
         </Grid>
       </SubSection>
     </Stack>

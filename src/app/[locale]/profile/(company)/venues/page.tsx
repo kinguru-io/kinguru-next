@@ -55,6 +55,11 @@ async function VenueCardListing({
         md: { gap: "8" },
       }}
     >
+      <AddItemLink
+        minHeight="60"
+        href="/profile/venues/add"
+        label={t("add_venue_btn_label")}
+      />
       {venues.map((venue, idx) => {
         const locationProperties = addresses.at(idx);
         const address =
@@ -76,11 +81,6 @@ async function VenueCardListing({
           />
         );
       })}
-      <AddItemLink
-        minHeight="60"
-        href="/profile/venues/add"
-        label={t("add_venue_btn_label")}
-      />
     </Grid>
   );
 }
