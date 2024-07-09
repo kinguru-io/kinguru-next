@@ -12,7 +12,7 @@ import {
   type AmenityGroup,
 } from "@/lib/shared/config/amenities";
 import { getError } from "@/utils/forms/errors";
-import { Grid } from "~/styled-system/jsx";
+import { Grid, Stack } from "~/styled-system/jsx";
 
 export function AmenitySelector() {
   const t = useTranslations("amenities");
@@ -31,40 +31,51 @@ export function AmenitySelector() {
     return Object.values(amenities).filter(Boolean).length;
   };
 
-  return (Object.keys(amenitiesTags) as AmenityGroup[]).map(
-    (amenityGroup, idx) => (
-      <Accordion key={amenityGroup}>
-        <AccordionItemToggle
-          fontWeight="bold"
-          checkboxProps={{ defaultChecked: idx <= 1 }} // the first two sections are opened
-        >
-          {t(`group.${amenityGroup}`)}
-        </AccordionItemToggle>
-        <AccordionItemContent>
-          <Grid
-            gridTemplateColumns="repeat(auto-fit, minmax({spacing.52}, 1fr))"
-            gap="4"
-          >
-            {amenitiesTags[amenityGroup].map((amenity) => (
-              <Checkbox
-                key={amenity}
-                label={t(amenity)}
-                data-invalid={getError(
-                  errors,
-                  `${formFieldPath}.amenities.${amenity}`,
-                )}
-                {...register(`${formFieldPath}.amenities.${amenity}`, {
-                  onChange: () => {
-                    if (checkedAmenitiesCount() >= 5) {
-                      clearErrors(formFieldPath);
-                    }
-                  },
-                })}
-              />
-            ))}
-          </Grid>
-        </AccordionItemContent>
-      </Accordion>
-    ),
+  return (
+    <Stack gap="2">
+      {(Object.keys(amenitiesTags) as AmenityGroup[]).map(
+        (amenityGroup, idx) => (
+          <Accordion key={amenityGroup}>
+            <AccordionItemToggle
+              css={{
+                fontWeight: "bold",
+                paddingInline: "0",
+                bgColor: "unset",
+                borderBlockEnd: "1px solid {colors.primary}",
+                borderRadius: "0",
+                _peerChecked: { borderBlockEndColor: "transparent" },
+              }}
+              checkboxProps={{ defaultChecked: idx <= 1 }} // the first two sections are opened
+            >
+              {t(`group.${amenityGroup}`)}
+            </AccordionItemToggle>
+            <AccordionItemContent>
+              <Grid
+                gridTemplateColumns="repeat(auto-fit, minmax({spacing.60}, 1fr))"
+                gap="4"
+              >
+                {amenitiesTags[amenityGroup].map((amenity) => (
+                  <Checkbox
+                    key={amenity}
+                    label={t(amenity)}
+                    data-invalid={getError(
+                      errors,
+                      `${formFieldPath}.amenities.${amenity}`,
+                    )}
+                    {...register(`${formFieldPath}.amenities.${amenity}`, {
+                      onChange: () => {
+                        if (checkedAmenitiesCount() >= 5) {
+                          clearErrors(formFieldPath);
+                        }
+                      },
+                    })}
+                  />
+                ))}
+              </Grid>
+            </AccordionItemContent>
+          </Accordion>
+        ),
+      )}
+    </Stack>
   );
 }

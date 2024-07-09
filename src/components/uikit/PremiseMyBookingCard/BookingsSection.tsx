@@ -92,7 +92,7 @@ const BookingsSection = async ({
             >
               <BookingCard booking={booking} imageSrc={imageSrc} />
               {!isUserOrg && showCancelBtn && (
-                <Accordion>
+                <Accordion marginBlockEnd="3.5">
                   <AccordionItem>
                     <AccordionItemToggle textStyle="heading.3">
                       {t("cancel_btn_accordion_label")}
