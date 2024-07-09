@@ -36,9 +36,6 @@ export function AddPremiseForm({
     resolver: zodResolver(createPremiseFormSchema(t)),
     defaultValues: {
       formType: CreatePremiseFormTypeEnum.MainInformation,
-      resources: {
-        resources: Array.from({ length: 12 }, () => ({ url: "" })),
-      },
       parametersAndAmenities: {
         amenities: getDefaultFormAmenities(),
       },

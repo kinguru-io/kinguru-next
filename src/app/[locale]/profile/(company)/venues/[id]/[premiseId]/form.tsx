@@ -65,13 +65,7 @@ export function EditPremiseForm({
       room: room || undefined,
       floor: floor || undefined,
     },
-    resources: {
-      resources: resources
-        .map(({ url }) => ({ url }))
-        .concat(
-          Array.from({ length: 12 - resources.length }, () => ({ url: "" })),
-        ),
-    },
+    resources: { resources },
     parametersAndAmenities: {
       type: (type as PremiseType) || undefined,
       area: area || undefined,

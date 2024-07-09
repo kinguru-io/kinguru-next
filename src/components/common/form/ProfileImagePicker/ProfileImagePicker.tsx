@@ -11,9 +11,11 @@ import {
 import { Icon } from "@/components/uikit";
 import {
   ACCEPTED_IMAGE_MIME_TYPES,
-  uploadProfileImage,
-  type ProfileImageActionData,
+  uploadImageAction,
+  type ImageActionData,
 } from "@/lib/actions/file-upload";
+import { imageSchema } from "@/lib/actions/file-upload/validation";
+import { safeUploadToBucket } from "@/lib/shared/utils/aws";
 import { css } from "~/styled-system/css";
 import { aspectRatio } from "~/styled-system/patterns";
 import type { ConditionalValue } from "~/styled-system/types";
@@ -34,7 +36,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
   {
     imageSrc: propsImageSrc = "",
     name: propsName,
-    groupKey = "undefined_key",
+    groupKey = "public",
     ratio,
     sizes,
     onChange,
@@ -55,43 +57,45 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
 
     const image = target.files[0];
     const { name, size, type } = image;
-    const uploadImageData: ProfileImageActionData = { name, size, type };
+    const uploadImageData: ImageActionData = { name, size, type };
+
+    const parseResult = imageSchema.safeParse(uploadImageData);
+
+    if (!parseResult.success) {
+      parseResult.error.errors.forEach(({ message }) =>
+        // @ts-expect-error
+        toast.error(t(message)),
+      );
+      return;
+    }
 
     startTransition(async () => {
-      const actionResponse = await uploadProfileImage(
-        uploadImageData,
-        groupKey,
-      );
+      const actionResponse = await uploadImageAction(uploadImageData, groupKey);
 
-      if (Array.isArray(actionResponse)) {
-        actionResponse.forEach((code) => {
+      if (!actionResponse.ok) {
+        actionResponse.messages.forEach((code) => {
           toast.error(t(code));
         });
         return;
       }
 
-      try {
-        const response = await fetch(actionResponse, {
-          method: "PUT",
-          body: image,
-        });
+      const [url] = await safeUploadToBucket({
+        urls: actionResponse.urls,
+        files: [image],
+      });
 
-        if (!response.ok) {
-          toast.error(t("upload_failed"));
-          return;
-        }
-      } catch (_) {
+      if (url === null) {
         toast.error(t("upload_failed"));
         return;
       }
 
+      setImageSrc(url);
       onChange?.({
         target: {
-          value: cutSearchParams(actionResponse),
+          value: url,
           name: propsName,
         },
       } as React.ChangeEvent<HTMLInputElement>);
-      setImageSrc(cutSearchParams(actionResponse));
     });
   };
 
@@ -135,12 +139,13 @@ function PickerPlaceholder({
   sizes?: string;
 }) {
   const t = useTranslations("form.common");
+  const helper = t(isPending ? "uploading_photo" : "upload_photo");
 
   return (
     <span
       className={css({
         display: "inline-block",
-        minWidth: "32",
+        minWidth: "20",
         width: "full",
         bgColor: "secondary.lighter",
         borderRadius: "sm",
@@ -150,9 +155,7 @@ function PickerPlaceholder({
         position: "relative",
         overflow: "hidden",
       })}
-      style={{
-        backgroundImage: `url(${imageSrc})`,
-      }}
+      style={{ backgroundImage: `url(${imageSrc})` }}
     >
       <span
         className={css({
@@ -176,7 +179,7 @@ function PickerPlaceholder({
           className={css({ fontSize: "2rem", _loading: { animation: "spin" } })}
           aria-busy={isPending}
         />
-        {t(isPending ? "uploading_photo" : "upload_photo")}
+        {!imageSrc && helper}
       </span>
       <span className={aspectRatio({ display: "block", ratio })}>
         {imageSrc && !isPending && (
@@ -185,8 +188,4 @@ function PickerPlaceholder({
       </span>
     </span>
   );
-}
-
-function cutSearchParams(url: string) {
-  return url.slice(0, url.indexOf("?"));
 }

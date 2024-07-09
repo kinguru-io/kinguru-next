@@ -185,6 +185,8 @@ const project = new web.NextJsTypeScriptProject({
     "kafkajs",
     "@elastic/elasticsearch@8.13.1",
     "@elastic/transport@8.4.1",
+    "@dnd-kit/core",
+    "@dnd-kit/sortable",
   ],
   devDeps: [
     "@pandacss/dev",
