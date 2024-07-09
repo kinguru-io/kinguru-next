@@ -38,7 +38,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
   });
 
   if (!premise) {
-    notFound();
+    return null;
   }
 
   const { slug, name, description, area, resources, openHours } = premise;
