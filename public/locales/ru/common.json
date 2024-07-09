@@ -41,7 +41,8 @@
     "sign_in": "Вход",
     "sign_in_org": "Вход для организаций",
     "view_notifications": "Просмотр уведомлений",
-    "your_profile": "Ваш профиль",
+    "your_profile": "Профиль",
+    "mybookings": "Мои бронирования",
     "sign_out": "Выход",
     "settings": "Настройки",
     "open_user_manu": "Открыть меню пользователя",
@@ -432,13 +433,16 @@
   "booking_view": {
     "card_heading": "Ваше бронирование",
     "no_selected_slots": "Здесь будет отображаться ваше бронирование",
+    "block_slot_btn": "Заблокировать слот",
     "pay_btn": "Оплатить",
     "rules_agreement": "Я ознакомился и согласен с правилами зала",
     "remove_timeslot_btn": "Удалить время бронирования",
     "booking_modal_heading": "Бронирование",
     "action_successful_booking": "Забронировано успешно!",
+    "action_successfully_blocked_slots": "Слот успешно заблокирован",
     "action_invalid_data": "Некорректные данные",
-    "action_payment_cancelled": "Оплата была отменена"
+    "action_payment_cancelled": "Оплата была отменена",
+    "organization_cannot_pay": "Организациям не доступно бронирование залов. Бронировать могут только обычные пользователи."
   },
   "price": {
     "total": "Итого",
@@ -469,7 +473,8 @@
       "events": "Моя активность",
       "venues": "Мои площадки",
       "notifications": "Мои уведомления",
-      "settings": "Настройки"
+      "settings": "Настройки",
+      "mybookings": "Мои бронирования"
     },
     "faq_link_labels": {
       "add_venue": "Как добавить площадку на платформу",
@@ -622,6 +627,29 @@
             "bookingCancelTerm_required": "Обязательно указать условия отмены бронирования"
           }
         }
+      }
+    },
+    "my_bookings": {
+      "heading": "Мои бронирования",
+      "no_bookings": "У вас еще нет бронирований",
+      "with_discount": "Со скидкой",
+      "before": "до",
+      "after": "после",
+      "tab_booked_via_website": "Забронировано через сайт",
+      "tab_blocked_by_admin": "Заблокировано администратором",
+      "cancel_btn_accordion_label": "Отмена бронирования",
+      "cancel_booking_btn": "Отменить бронь",
+      "modal_cancel_confirmation_desc": "Вы уверены, что хотите отменить бронирование?",
+      "modal_cancel": "Отменить",
+      "modal_confirm": "Подтвердить",
+      "booking_canceled_successfully": "Бронирование успешно отменено",
+      "conditions": {
+        "FULL_REFUND": "Полный возврат",
+        "FULL_REFUND_desc": "Полный возврат средств, включая все применимые сборы, с учетом стоимости их бронирования",
+        "NO_REFUND": "Без возврата",
+        "NO_REFUND_desc": "Оплата не возращается",
+        "PARTIAL_REFUND": "Частичный возврат",
+        "PARTIAL_REFUND_desc": "Возмещение в размере 50% от стоимости своего бронирования, за вычетом применимых сборов"
       }
     }
   },

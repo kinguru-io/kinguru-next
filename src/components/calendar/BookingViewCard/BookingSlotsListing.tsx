@@ -1,23 +1,18 @@
-"use client";
-
-import { addHours } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import { LiaCalendar } from "react-icons/lia";
-import {
-  type TimeSlotInfoExtended,
-  useBookingView,
-} from "../BookingViewContext";
+import { useBookingView } from "../BookingViewContext";
 import { TagClosable } from "@/components/common";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
+import type { MergedTimeSlots } from "@/lib/utils/premise-booking";
 import { Grid, HStack } from "~/styled-system/jsx";
 
 export function BookingSlotsListing({
   groupedSlots,
 }: {
-  groupedSlots: Group<string, TimeSlotInfoExtended>;
+  groupedSlots: Group<string, MergedTimeSlots>;
 }) {
   const t = useTranslations("booking_view");
   const { toggleSlot } = useBookingView();
@@ -41,22 +36,25 @@ export function BookingSlotsListing({
             {slots &&
               slots.map((timeSlotInfo) => {
                 const start = formatInTimeZone(
-                  timeSlotInfo.time,
+                  timeSlotInfo.startTime,
                   timeZone,
                   "H:mm",
                 );
                 const end = formatInTimeZone(
-                  addHours(timeSlotInfo.time, 1),
+                  timeSlotInfo.endTime,
                   timeZone,
                   "H:mm",
                 );
 
                 return (
                   <TagClosable
-                    key={"booking-view" + timeSlotInfo.time.toISOString()}
+                    key={"booking-view" + timeSlotInfo.startTime.toISOString()}
                     content={`${start} - ${end}`}
                     helper={priceFormatter.format(timeSlotInfo.price)}
-                    onClick={() => toggleSlot(timeSlotInfo)}
+                    onClick={() => {
+                      // @ts-ignore
+                      toggleSlot(timeSlotInfo);
+                    }}
                     buttonLabel={t("remove_timeslot_btn")}
                   />
                 );

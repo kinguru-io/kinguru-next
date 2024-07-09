@@ -41,7 +41,8 @@
     "sign_in": "Sign in",
     "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
-    "your_profile": "Your profile",
+    "your_profile": "Profile",
+    "mybookings": "My bookings",
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
@@ -402,15 +403,18 @@
     "select_choose_month": "Choose month"
   },
   "booking_view": {
-    "card_heading": "Your booking",
-    "no_selected_slots": "Your booking will be shown here",
-    "pay_btn": "Pay",
-    "rules_agreement": "I have read and agree with the rules of the premise",
-    "remove_timeslot_btn": "Delete booking time",
-    "booking_modal_heading": "Time slots booking",
-    "action_successful_booking": "Successfully booked!",
-    "action_invalid_data": "Invalid data",
-    "action_payment_cancelled": "Payment was cancelled"
+    "card_heading": "Twoja rezerwacja",
+    "no_selected_slots": "Twoja rezerwacja pojawi się tutaj",
+    "block_slot_btn": "Zablokuj slot",
+    "pay_btn": "Zapłać",
+    "rules_agreement": "Przeczytałem i zgadzam się z zasadami obowiązującymi na terenie",
+    "remove_timeslot_btn": "Usuń czas rezerwacji",
+    "booking_modal_heading": "Rezerwacja terminów",
+    "action_successful_booking": "Pomyślnie zarezerwowane!",
+    "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",
+    "action_invalid_data": "Nieprawidłowe dane",
+    "action_payment_cancelled": "Płatność została anulowana",
+    "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy."
   },
   "price": {
     "total": "Total",
@@ -470,7 +474,8 @@
       "events": "My events",
       "venues": "My venues",
       "notifications": "My notifications",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mybookings": "Moje rezerwacje"
     },
     "faq_link_labels": {
       "add_venue": "How to add a venue to the platform",
@@ -625,6 +630,29 @@
           }
         }
       }
+    },
+    "my_bookings": {
+      "heading": "Moje Rezerwacje",
+      "with_discount": "Ze Zniżką",
+      "no_bookings": "Nie masz jeszcze rezerwacji",
+      "before": "przed",
+      "after": "po",
+      "tab_booked_via_website": "Zarezerwowane przez stronę internetową",
+      "tab_blocked_by_admin": "Zablokowane przez administratora",
+      "cancel_btn_accordion_label": "Anulowanie rezerwacji",
+      "cancel_booking_btn": "Anuluj rezerwację",
+      "modal_cancel_confirmation_desc": "Czy na pewno chcesz anulować rezerwację?",
+      "modal_cancel": "Anuluj",
+      "modal_confirm": "Potwierdź",
+      "booking_canceled_successfully": "Rezerwacja została pomyślnie anulowana",
+      "conditions": {
+        "FULL_REFUND": "Pełny zwrot",
+        "FULL_REFUND_desc": "Pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty, na podstawie kosztów ich rezerwacji",
+        "NO_REFUND": "Bez zwrotu",
+        "NO_REFUND_desc": "Płatność nie podlega zwrotowi",
+        "PARTIAL_REFUND": "Częściowy zwrot",
+        "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat"
+      }
     }
   },
   "amenities": {
@@ -731,14 +759,14 @@
     "commercial_kitchens": "Commercial kitchens"
   },
   "booking_cancel_terms": {
-    "very_flexible": "Very flexible",
-    "very_flexible_desc": "Guests have the ability to cancel their booking no later than 24 hours before the event and receive a full refund, including all fees paid for the reservation.",
-    "flexible": "Flexible",
-    "flexible_desc": "Guests have the ability to cancel their booking no later than 7 days before the event and receive a full refund of the booking, including any applicable fees, minus any fees paid for the booking. However, bookings cancelled less than 24 hours before the event are not eligible for a refund.",
-    "default_30": "Standard (30 days)",
-    "default_30_desc": "Bookings can be cancelled by guests up to 30 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 30-7 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 7 days of the event are not eligible for a refund.",
-    "default_90": "Standard (90 days)",
-    "default_90_desc": "Bookings can be cancelled by guests up to 90 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 90-14 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 14 days of the event are not eligible for a refund."
+    "very_flexible": "Bardzo elastyczne",
+    "very_flexible_desc": "Goście mogą anulować swoją rezerwację do 24 godzin przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie opłaty zapłacone za rezerwację. Rezerwacje anulowane mniej niż 24 godziny przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
+    "flexible": "Elastyczne",
+    "flexible_desc": "Goście mogą anulować swoją rezerwację do 7 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty, na podstawie kosztów ich rezerwacji. W przypadku anulowania rezerwacji w okresie od 7 dni do 24 godzin przed rozpoczęciem wydarzenia, goście otrzymają zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat. Jednak rezerwacje anulowane mniej niż 24 godziny przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
+    "default_30": "Standardowa (30 dni)",
+    "default_30_desc": "Goście mogą anulować swoją rezerwację do 30 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 30 dni do 7 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 7 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów.",
+    "default_90": "Standardowa (90 dni)",
+    "default_90_desc": "Goście mogą anulować swoją rezerwację do 90 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 90 dni do 14 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 14 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów."
   },
   "filters": {
     "all": "All filters",

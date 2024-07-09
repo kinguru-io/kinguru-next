@@ -49,7 +49,8 @@
     "sign_in": "Sign in",
     "sign_in_org": "Sign in for organizations",
     "view_notifications": "View notifications",
-    "your_profile": "Your profile",
+    "your_profile": "Profile",
+    "mybookings": "My bookings",
     "sign_out": "Sign out",
     "settings": "Settings",
     "open_user_manu": "Open user menu",
@@ -596,13 +597,16 @@
   "booking_view": {
     "card_heading": "Your booking",
     "no_selected_slots": "Your booking will be shown here",
+    "block_slot_btn": "Block time",
     "pay_btn": "Pay",
     "rules_agreement": "I have read and agree with the rules of the premise",
     "remove_timeslot_btn": "Delete booking time",
     "booking_modal_heading": "Time slots booking",
     "action_successful_booking": "Successfully booked!",
+    "action_successfully_blocked_slots": "Slots are successfully blocked!",
     "action_invalid_data": "Invalid data",
-    "action_payment_cancelled": "Payment was cancelled"
+    "action_payment_cancelled": "Payment was cancelled",
+    "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings."
   },
   "price": {
     "total": "Total",
@@ -633,7 +637,8 @@
       "events": "My events",
       "venues": "My venues",
       "notifications": "My notifications",
-      "settings": "Settings"
+      "settings": "Settings",
+      "mybookings": "My bookings"
     },
     "faq_link_labels": {
       "add_venue": "How to add a venue to the platform",
@@ -788,6 +793,29 @@
           }
         }
       }
+    },
+    "my_bookings": {
+      "heading": "My Bookings",
+      "no_bookings": "You have no bookings yet",
+      "with_discount": "With Discount",
+      "before": "before",
+      "after": "after",
+      "tab_booked_via_website": "Made Through Website",
+      "tab_blocked_by_admin": "Blocked by Administrator",
+      "cancel_btn_accordion_label": "Booking Cancellation",
+      "cancel_booking_btn": "Cancel Booking",
+      "modal_cancel_confirmation_desc": "Are you sure you want to cancel the booking?",
+      "modal_cancel": "Cancel",
+      "modal_confirm": "Confirm",
+      "booking_canceled_successfully": "Booking canceled successfully",
+      "conditions": {
+        "FULL_REFUND": "Full Refund",
+        "FULL_REFUND_desc": "Full refund, including all applicable fees, based on the cost of their booking",
+        "NO_REFUND": "No Refund",
+        "NO_REFUND_desc": "Payment is non-refundable",
+        "PARTIAL_REFUND": "Partial Refund",
+        "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees"
+      }
     }
   },
   "amenities": {
@@ -894,14 +922,14 @@
     "commercial_kitchens": "Commercial kitchens"
   },
   "booking_cancel_terms": {
-    "very_flexible": "Very flexible",
-    "very_flexible_desc": "Guests have the ability to cancel their booking no later than 24 hours before the event and receive a full refund, including all fees paid for the reservation.",
+    "very_flexible": "Very Flexible",
+    "very_flexible_desc": "Guests can cancel their reservation up to 24 hours before the start of the event and receive a full refund, including all fees paid for the reservation. Bookings canceled less than 24 hours before the start of the event are non-refundable.",
     "flexible": "Flexible",
-    "flexible_desc": "Guests have the ability to cancel their booking no later than 7 days before the event and receive a full refund of the booking, including any applicable fees, minus any fees paid for the booking. However, bookings cancelled less than 24 hours before the event are not eligible for a refund.",
+    "flexible_desc": "Guests can cancel their booking up to 7 days before the start of the event and receive a full refund, including all applicable fees, based on the cost of their booking. If the booking is canceled between 7 days and 24 hours before the start of the event, guests will receive a 50% refund of the booking cost, excluding applicable fees. However, bookings canceled less than 24 hours before the start of the event are non-refundable.",
     "default_30": "Standard (30 days)",
-    "default_30_desc": "Bookings can be cancelled by guests up to 30 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 30-7 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 7 days of the event are not eligible for a refund.",
+    "default_30_desc": "Guests can cancel their booking up to 30 days before the start of the event and receive a full refund, including all applicable fees. If the booking is canceled between 30 days and 7 days before the start of the event, guests are entitled to a 50% refund of the booking cost (excluding fees). Cancellation requests made less than 7 days before the start of the event are non-refundable.",
     "default_90": "Standard (90 days)",
-    "default_90_desc": "Bookings can be cancelled by guests up to 90 days before the event, at which point the full amount paid for the booking, including all applicable fees, will be refunded. If a cancellation is made within the 90-14 day period before the event, guests will receive a 50% refund of the booking amount (less any applicable fees). Bookings cancelled within 14 days of the event are not eligible for a refund."
+    "default_90_desc": "Guests can cancel their booking up to 90 days before the start of the event and receive a full refund, including all applicable fees. If the booking is canceled between 90 days and 14 days before the start of the event, guests are entitled to a 50% refund of the booking cost (excluding fees). Cancellation requests made less than 14 days before the start of the event are non-refundable."
   },
   "filters": {
     "all": "All filters",

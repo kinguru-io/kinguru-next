@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "PremiseSlot" ADD COLUMN     "amount" DOUBLE PRECISION NOT NULL DEFAULT 0;

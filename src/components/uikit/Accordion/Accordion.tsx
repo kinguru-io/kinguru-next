@@ -8,18 +8,13 @@ export const Accordion = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "15px",
+    gap: "3.5",
+    marginBlockEnd: "6",
   },
 });
 
 export const AccordionItem = styled("div", {
   base: {
-    bgColor: "light",
-    borderColor: "secondary",
-    borderWidth: "1px",
-    borderRadius: "10px",
-    paddingInline: "30px 15px",
-    paddingBlock: "9px",
     transition: "colors",
     _focusWithin: {
       borderColor: "focus",
@@ -43,8 +38,13 @@ export function AccordionItemToggle(
   const labelClassName = css(
     {
       position: "relative",
+      bgColor: "secondary.lighter",
+      borderRadius: "lg",
+      paddingInline: "4",
+      paddingBlock: "3",
       cursor: "pointer",
       display: "block",
+      fontSize: "md",
       _peerDisabled: {
         cursor: "not-allowed",
       },
@@ -66,8 +66,7 @@ export function AccordionItemToggle(
       },
     },
     styleProps,
-    // TODO leave just `cssProp` once `@pandacss/dev` is updated from 0.38.0
-    ...(Array.isArray(cssProp) ? cssProp : [cssProp]),
+    cssProp,
   );
 
   return (
@@ -86,13 +85,15 @@ export function AccordionItemToggle(
 }
 
 export function AccordionItemContent({
+  className,
   children,
 }: {
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
     <Collapse>
-      <Box padding="30px">{children}</Box>
+      <Box className={className}>{children}</Box>
     </Collapse>
   );
 }

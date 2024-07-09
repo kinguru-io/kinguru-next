@@ -13,28 +13,91 @@ import type { TimeSlotInfoExtended } from "@/components/calendar";
 import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import type { ActionResponse } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
+import { groupAndMergeTimeslots } from "@/lib/utils/premise-booking";
 import {
   prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
-import { prepareDiscountRangeMap, processDiscounts } from "@/lib/utils/price";
+import {
+  getSlotDiscount,
+  prepareDiscountRangeMap,
+  processOrderTotalDiscounts,
+} from "@/lib/utils/price";
 import { redirect } from "@/navigation";
 
 type BookTimeSlotsActionData = {
   premiseId: string;
+  premiseOrgId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
   timeZone: string;
+  discountsMap: Record<number, number | undefined>;
 };
+
+type BlockTimeSlotsActionData = Omit<
+  BookTimeSlotsActionData,
+  "timeZone" | "discountMap"
+>;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
 
-export async function createPremiseSlotsIntent({
+export async function blockPremiseSlotsIntent({
   premiseId,
   slots,
+  premiseOrgId,
+}: BlockTimeSlotsActionData): ActionResponse<
+  { message: string },
+  "booking_view"
+> {
+  const session = await getSession();
+  const userId = session?.user?.id;
+
+  if (!userId) return redirect("/auth/signin");
+
+  const { isValid, editedSlots } = await validatePaymentIntentData({
+    premiseId,
+    slots,
+  });
+
+  if (!isValid || editedSlots.length === 0) {
+    return {
+      status: "error",
+      messageIntlKey: "action_invalid_data",
+      response: null,
+    };
+  }
+
+  await prisma.premiseSlot.createMany({
+    data: slots.map(({ time }) => ({
+      userId,
+      premiseId,
+      organizationId: premiseOrgId,
+      paymentIntentId: "",
+      amount: 0,
+      date: time,
+      startTime: time,
+      endTime: addHours(time, 1),
+      status: TicketIntentStatus.progress,
+      type: "blocked_by_admin",
+    })),
+  });
+
+  return {
+    status: "success",
+    response: {
+      message: "action_slots_blocked",
+    },
+  };
+}
+
+export async function createPremiseSlotsIntent({
+  premiseId,
+  premiseOrgId,
+  slots,
   timeZone,
+  discountsMap,
 }: BookTimeSlotsActionData): ActionResponse<
   {
     clientSecret: string;
@@ -66,7 +129,7 @@ export async function createPremiseSlotsIntent({
     ),
     ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
   );
-  const { totalPrice } = processDiscounts(
+  const { totalPrice } = processOrderTotalDiscounts(
     groupedSlots,
     prepareDiscountRangeMap(discounts),
   );
@@ -77,7 +140,11 @@ export async function createPremiseSlotsIntent({
       currency: "PLN",
       customer: session?.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
-      metadata: { source: "premise-slots-booking" } as StripeMetadataExtended,
+      metadata: {
+        source: "premise-slots-booking",
+        user_name: session?.user?.name,
+        user_email: session?.user?.email,
+      } as StripeMetadataExtended,
     });
 
   if (!clientSecret) {
@@ -88,16 +155,30 @@ export async function createPremiseSlotsIntent({
     };
   }
 
+  const newSlots = slots.map(({ time, price }) => ({
+    premiseId,
+    price,
+    date: time,
+    startTime: time,
+    endTime: addHours(time, 1),
+    discountAmount: getSlotDiscount(slots, time, discountsMap),
+  }));
+
   await prisma.premiseSlot.createMany({
-    data: slots.map(({ time }) => ({
-      userId,
-      premiseId,
-      paymentIntentId,
-      date: time,
-      startTime: time,
-      endTime: addHours(time, 1),
-      status: TicketIntentStatus.progress,
-    })),
+    data: groupAndMergeTimeslots(newSlots).map(
+      ({ startTime, endTime, price, discountAmount }) => ({
+        userId,
+        premiseId,
+        paymentIntentId,
+        discountAmount,
+        organizationId: premiseOrgId,
+        date: startTime,
+        amount: Math.round(price * 100),
+        startTime: startTime,
+        endTime: endTime,
+        status: TicketIntentStatus.progress,
+      }),
+    ),
   });
 
   return {
@@ -214,5 +295,6 @@ async function validatePaymentIntentData({
   return { ...result, discounts: premise.discounts };
 }
 
+export type BlockPremiseSlotsIntent = typeof blockPremiseSlotsIntent;
 export type CreatePremiseSlotsIntent = typeof createPremiseSlotsIntent;
 export type CancelPremiseSlotsIntent = typeof cancelPremiseSlotsIntent;

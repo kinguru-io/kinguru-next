@@ -18,7 +18,7 @@ export function DiscountViewCard({
   if (discounts.length === 0) return null;
 
   return (
-    <Card border="1px solid" borderColor="primary" color="dark">
+    <Card color="dark">
       <CardInner padding="15px 33px" gap="15px">
         <CardHeading
           alignSelf="center"

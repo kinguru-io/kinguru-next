@@ -51,7 +51,7 @@ export function Modal({ children }: ModalProps) {
 }
 
 export function ModalInitiator({ children }: ModalProps) {
-  const { setOpen, open } = useModal();
+  const { setOpen } = useModal();
 
-  return <div onClick={() => setOpen(!open)}>{children}</div>;
+  return <div onClick={() => setOpen(true)}>{children}</div>;
 }
