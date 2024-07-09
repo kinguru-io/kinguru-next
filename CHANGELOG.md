@@ -1,3 +1,10 @@
+## [0.52.1](https://github.com/kinguru-io/kinguru-next/compare/v0.52.0...v0.52.1) (2024-07-09)
+
+
+### Bug Fixes
+
+* fixed deps? ([c9cf4cc](https://github.com/kinguru-io/kinguru-next/commit/c9cf4cc0c8e415068aa7f6e82441bf301fc88f5a))
+
 # [0.52.0](https://github.com/kinguru-io/kinguru-next/compare/v0.51.0...v0.52.0) (2024-07-09)
 
 
