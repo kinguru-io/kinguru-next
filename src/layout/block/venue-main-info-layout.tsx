@@ -31,11 +31,7 @@ export function VenueMainInfoLayout({
       <section
         className={container({
           color: "light",
-          "& h1": {
-            fontSize: "3xl",
-            fontWeight: "bold",
-            md: { fontSize: "5xl" },
-          },
+          "& h1": { textStyle: "heading.page" },
         })}
       >
         {children}
