@@ -1,0 +1,72 @@
+name: release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: prod
+    permissions:
+      contents: write
+      packages: write
+    env:
+      CI: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set git identity
+        run: |-
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: npm
+      - name: Install dependencies
+        run: npm i
+      - name: release
+        run: >-
+          for dir in ".helm" "." ; do
+            pushd $dir; npx semantic-release-plus; popd
+          done
+      - uses: vbem/kubeconfig4sa@v1
+        with:
+          server: https://b6ca91f2-516c-4882-90fe-b232d3b2b33b.api.k8s.pl-waw.scw.cloud:6443
+          ca-base64: ${{ secrets.K8S_CA_BASE64 }}
+          token: ${{ secrets.K8S_SA_TOKEN }}
+          namespace: persistence
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: svc/postgres-cluster
+          mappings: 5432:5432
+          options: --address=0.0.0.0
+      - uses: vbem/k8s-port-forward@v1
+        with:
+          workload: svc/elastic-es-default
+          mappings: 9200:9200
+          options: --address=0.0.0.0
+      - name: Install werf
+        uses: werf/actions/install@v1.2
+      - name: Run deployment
+        run: |
+          . $(werf ci-env github --as-file)
+          werf cr login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ghcr.io
+          werf converge --atomic
+        env:
+          WERF_ENV: prod
+          WERF_SET_1: image.pullSecret=github-cr-secret
+          WERF_SET_2: ingress.hostname=eventify.today
+          SITE_URL: https://eventify.today
+          DATABASE_URL: ${{ secrets.DB_URL }}
+          ES_CLIENT_NODE: http://172.17.0.1:9200/
+          ES_CLIENT_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          ES_INDEX_PREMISE_FULFILLED: kinguru-stage.public.premise.fulfilled
+          NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          NEXT_PUBLIC_ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          NEXT_PUBLIC_ELASTICSEARCH_ENDPOINT: ${{ secrets.ELASTICSEARCH_ENDPOINT }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
