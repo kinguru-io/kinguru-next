@@ -38,6 +38,11 @@ export async function retrieveLocationPropertiesById(mapbox_id: string) {
       { sessionToken: "test-123" },
     );
 
+    console.log(
+      "SearchBox access token:",
+      searchBox.accessToken.substring(0, 10),
+    );
+
     return properties;
   } catch (_) {
     return null;
