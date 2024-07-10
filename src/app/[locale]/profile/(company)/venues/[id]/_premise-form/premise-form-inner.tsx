@@ -20,6 +20,7 @@ import {
 import { PassVisitedTabsProvider } from "@/components/uikit/Tabs/Tabs";
 import type { CreatePremiseFormSchemaProps } from "@/lib/actions/premise";
 import { CreatePremiseFormTypeEnum } from "@/lib/actions/premise/validation";
+import { css } from "~/styled-system/css";
 
 export function PremiseFormInner({
   mapboxId,
@@ -76,7 +77,28 @@ export function PremiseFormInner({
 
   return (
     <TabsWrapper>
-      <TabList css={{ md: { marginInline: "8", marginBlockEnd: "5" } }}>
+      <TabList
+        className={css({ caretColor: "red.400" })}
+        css={{
+          "&::-webkit-scrollbar-track": {
+            marginInline: "0.5",
+            boxShadow: "inset 0 0 2px rgba(0,0,0,0.2)",
+            borderRadius: "lg",
+            bgColor: "gray.300",
+          },
+          "&::-webkit-scrollbar": {
+            width: "15",
+            height: "2",
+            bgColor: "gray.300",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundClip: "padding-box",
+            bgColor: "tertiary",
+            borderRadius: "lg",
+          },
+          md: { marginInline: "8", marginBlockEnd: "5" },
+        }}
+      >
         {tabs.map(({ label }, i) => (
           <Tab
             key={label}

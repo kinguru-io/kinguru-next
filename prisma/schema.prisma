@@ -262,6 +262,7 @@ enum TicketIntentStatus {
   failed
   progress
   succeed
+  canceled
 }
 
 model UsersOnEvent {
