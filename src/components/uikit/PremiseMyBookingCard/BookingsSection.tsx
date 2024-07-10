@@ -81,17 +81,22 @@ const BookingsSection = async ({
             />
           ));
 
+          const showCancelBooking = booking.status !== "canceled" && !isUserOrg;
+
           return (
             <Box
               key={booking.id}
               css={{
+                _disabled: {
+                  opacity: 0.5,
+                },
                 "&:last-child > div:last-child": {
                   marginBlockEnd: "0",
                 },
               }}
             >
               <BookingCard booking={booking} imageSrc={imageSrc} />
-              {!isUserOrg && showCancelBtn && (
+              {showCancelBooking && showCancelBtn && (
                 <Accordion marginBlockEnd="3.5">
                   <AccordionItem>
                     <AccordionItemToggle textStyle="heading.3">

@@ -1,4 +1,4 @@
-import { BookingType, User } from "@prisma/client";
+import { BookingType, TicketIntent, User } from "@prisma/client";
 
 export async function getBookingsByRole(
   userId: User["id"],
@@ -9,6 +9,9 @@ export async function getBookingsByRole(
       where: {
         userId: userId,
         type: bookingType,
+        status: {
+          not: "canceled",
+        },
       },
       include: {
         premise: true,
@@ -24,7 +27,35 @@ export async function getBookingsByRole(
   }
 }
 
-export async function getBookingsViaWebsite(userId: User["id"]) {
+export async function getCanceledBookingsByRole(
+  userId: User["id"],
+  bookingType: BookingType = "via_website",
+) {
+  try {
+    const bookings = await prisma.premiseSlot.findMany({
+      where: {
+        userId: userId,
+        type: bookingType,
+        status: "canceled",
+      },
+      include: {
+        premise: true,
+      },
+      orderBy: {
+        startTime: "asc",
+      },
+    });
+    return bookings;
+  } catch (error) {
+    console.error("Error retrieving user bookings:", error);
+    return [];
+  }
+}
+
+export async function getBookingsViaWebsite(
+  userId: User["id"],
+  withCanceled = "false",
+) {
   try {
     const userWithOrganizations = await prisma.user.findUnique({
       where: {
@@ -44,12 +75,18 @@ export async function getBookingsViaWebsite(userId: User["id"]) {
       (org) => org.id,
     );
 
+    const withCanceledStatus =
+      withCanceled === "true"
+        ? { status: "canceled" }
+        : { status: { not: "canceled" } };
+
     const premiseSlots = await prisma.premiseSlot.findMany({
       where: {
         organizationId: {
           in: organizationIds,
         },
         type: "via_website",
+        ...withCanceledStatus,
       },
       include: {
         premise: true,
@@ -72,3 +109,4 @@ export async function getBookingsViaWebsite(userId: User["id"]) {
 
 export type GetBookingsByRole = typeof getBookingsByRole;
 export type GetBookingsViaWebsite = typeof getBookingsViaWebsite;
+export type GetCanceledBookingsByRole = typeof getCanceledBookingsByRole;

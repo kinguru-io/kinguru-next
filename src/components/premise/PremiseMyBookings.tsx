@@ -1,6 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import Tabs from "./Tabs";
 import { withError } from "./withError";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemToggle,
+} from "../uikit";
 import BookingCard from "../uikit/PremiseMyBookingCard/BookingCard";
 import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
 import { getSession } from "@/auth";
@@ -11,9 +17,11 @@ import { Booking, ORGANIZATION_ROLE } from "@/lib/utils/premise-booking";
 export async function PremiseMyBookings({
   bookingsViaWebsite,
   bookingsBlockedByAdmin,
+  bookingsCanceled,
 }: {
   bookingsViaWebsite: Booking[];
   bookingsBlockedByAdmin: Booking[];
+  bookingsCanceled: Booking[];
 }) {
   const t = await getTranslations("profile.my_bookings");
   const session = await getSession();
@@ -37,6 +45,18 @@ export async function PremiseMyBookings({
       />
     ));
 
+  const MyCanceledBookings = () =>
+    Object.entries(
+      bookingsGroupedByDateAndPremiseAndPayment(bookingsCanceled),
+    ).map(([date, premises]) => (
+      <BookingsSection
+        key={date}
+        date={date}
+        premises={premises}
+        imageSrcs={imageSrcs}
+      />
+    ));
+
   const OrganizationBookings = () =>
     bookingsBlockedByAdmin.map((booking: Booking) => (
       <div key={booking.id}>
@@ -49,8 +69,24 @@ export async function PremiseMyBookings({
 
   const WithErrorMyBookings = withError(MyBookings);
   const WithErrorOrganizationBookings = withError(OrganizationBookings);
+  const WithErrorMyCanceledBookings = withError(MyCanceledBookings);
 
-  const tabs = [
+  const tabsUserBooking = [
+    {
+      label: t("tab_booked_active"),
+      content: <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>,
+    },
+    {
+      label: t("tab_booked_canceled"),
+      content: (
+        <WithErrorMyCanceledBookings>
+          {bookingsCanceled}
+        </WithErrorMyCanceledBookings>
+      ),
+    },
+  ];
+
+  const tabsOrgBooking = [
     {
       label: t("tab_booked_via_website"),
       content: <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>,
@@ -63,13 +99,21 @@ export async function PremiseMyBookings({
         </WithErrorOrganizationBookings>
       ),
     },
+    {
+      label: t("tab_booked_canceled"),
+      content: (
+        <WithErrorMyCanceledBookings>
+          {bookingsCanceled}
+        </WithErrorMyCanceledBookings>
+      ),
+    },
   ];
 
   const renderBookings = () => {
     if (session?.user?.role === ORGANIZATION_ROLE) {
-      return <Tabs tabs={tabs} />;
+      return <Tabs tabs={tabsOrgBooking} />;
     }
-    return <WithErrorMyBookings>{bookingsViaWebsite}</WithErrorMyBookings>;
+    return <Tabs tabs={tabsUserBooking} />;
   };
 
   return renderBookings();

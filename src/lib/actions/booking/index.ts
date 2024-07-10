@@ -15,6 +15,8 @@ export {
 export {
   getBookingsByRole,
   getBookingsViaWebsite,
+  getCanceledBookingsByRole,
   type GetBookingsByRole,
   type GetBookingsViaWebsite,
+  type GetCanceledBookingsByRole,
 } from "./get-data";

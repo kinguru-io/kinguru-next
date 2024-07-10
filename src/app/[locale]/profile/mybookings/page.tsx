@@ -5,6 +5,7 @@ import { PremiseMyBookings } from "@/components/premise/PremiseMyBookings";
 import {
   getBookingsViaWebsite,
   getBookingsByRole,
+  getCanceledBookingsByRole,
 } from "@/lib/actions/booking";
 import { Booking, isUserOrganization } from "@/lib/utils/premise-booking";
 
@@ -16,6 +17,7 @@ export default async function MyBookingsPage() {
 
   let bookingsViaWebsite: Booking[] = [];
   let bookingsBlockedByAdmin: any[] = [];
+  let bookingsCanceled: any[] = [];
 
   if (isUserOrg) {
     // @ts-ignore
@@ -24,9 +26,11 @@ export default async function MyBookingsPage() {
       userId,
       "blocked_by_admin",
     );
+    bookingsCanceled = await getBookingsViaWebsite(userId, "true");
   } else {
     // @ts-ignore
     bookingsViaWebsite = await getBookingsByRole(userId);
+    bookingsCanceled = await getCanceledBookingsByRole(userId);
   }
 
   return (
@@ -35,6 +39,7 @@ export default async function MyBookingsPage() {
       <PremiseMyBookings
         bookingsViaWebsite={bookingsViaWebsite}
         bookingsBlockedByAdmin={bookingsBlockedByAdmin}
+        bookingsCanceled={bookingsCanceled}
       />
     </SubSection>
   );
