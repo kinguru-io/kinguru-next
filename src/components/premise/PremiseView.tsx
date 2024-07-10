@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
@@ -38,7 +37,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
   });
 
   if (!premise) {
-    notFound();
+    return null;
   }
 
   const { slug, name, description, area, resources, openHours } = premise;
