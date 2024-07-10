@@ -36,7 +36,7 @@ jobs:
           namespace: persistence
       - uses: vbem/k8s-port-forward@v1
         with:
-          workload: pod/postgres-cluster-0
+          workload: svc/postgres-cluster
           mappings: 5432:5432
       - uses: vbem/k8s-port-forward@v1
         with:
@@ -154,7 +154,7 @@ jobs:
           namespace: persistence
       - uses: vbem/k8s-port-forward@v1
         with:
-          workload: pod/postgres-cluster-0
+          workload: svc/postgres-cluster
           mappings: 5432:5432
           options: --address=0.0.0.0
       - uses: vbem/k8s-port-forward@v1

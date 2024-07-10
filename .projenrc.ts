@@ -68,7 +68,7 @@ const project = new web.NextJsTypeScriptProject({
     {
       uses: "vbem/k8s-port-forward@v1",
       with: {
-        workload: "pod/postgres-cluster-0",
+        workload: "svc/postgres-cluster",
         mappings: "5432:5432",
       },
     },
@@ -314,7 +314,7 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
     {
       uses: "vbem/k8s-port-forward@v1",
       with: {
-        workload: "pod/postgres-cluster-0",
+        workload: "svc/postgres-cluster",
         mappings: "5432:5432",
         options: "--address=0.0.0.0",
       },
