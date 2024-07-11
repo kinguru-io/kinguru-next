@@ -52,7 +52,7 @@ export const sliderSlot = defineSlotRecipe({
       inner: {},
       outer: {},
       "bottom-end": {
-        sliderButton: { insetBlockEnd: "2", insetInlineEnd: "2" },
+        sliderButton: { insetBlockEnd: "2" },
         nextButton: {
           insetInlineEnd: "2",
         },
