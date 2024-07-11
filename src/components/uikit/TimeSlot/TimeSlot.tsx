@@ -28,6 +28,7 @@ type TimeSlotProps = TimeSlotInfo & {
 const timeSlotClassName = css({
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
   gap: "1",
   fontSize: "px15",
   fontWeight: "bold",

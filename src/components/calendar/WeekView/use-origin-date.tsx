@@ -47,7 +47,7 @@ export function useOriginDate({
     prevWeek,
     nextWeek,
     changeMonth,
-    canGoPrev: isBeforeZoned(originDate, initialDate, timeZone),
+    canGoPrev: isBeforeZoned(addDays(originDate, -7), initialDate, timeZone),
     canGoNext:
       differenceInCalendarMonths(addDays(originDate, 7), initialDate) >
       maxMonthCount,

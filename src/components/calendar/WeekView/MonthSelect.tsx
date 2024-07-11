@@ -2,7 +2,7 @@ import { differenceInCalendarMonths, eachMonthOfInterval } from "date-fns";
 import { memo } from "react";
 import { Select } from "@/components/uikit";
 import type { Locale } from "@/navigation";
-import { Box, GridItem } from "~/styled-system/jsx";
+import { Box } from "~/styled-system/jsx";
 
 export const MonthSelect = memo(function MonthSelect({
   locale,
@@ -25,30 +25,26 @@ export const MonthSelect = memo(function MonthSelect({
   };
 
   return (
-    <GridItem gridArea="month-select">
-      <Box
-        maxWidth="200px"
-        marginBlockEnd="44px"
-        css={{
-          "& select": {
-            textTransform: "capitalize",
-          },
-        }}
-      >
-        <Select value={monthNumber} onChange={optionChanged}>
-          {eachMonthOfInterval({
-            start: initialDate,
-            end: endDate,
-          }).map((interimDate) => (
-            <option
-              key={interimDate.toISOString()}
-              value={differenceInCalendarMonths(interimDate, initialDate)}
-            >
-              {`${monthFormatter.format(interimDate)} ${interimDate.getFullYear()}`}
-            </option>
-          ))}
-        </Select>
-      </Box>
-    </GridItem>
+    <Box
+      css={{
+        mdDown: { flexGrow: "1" },
+        "& select": { textTransform: "capitalize", bgColor: "primary" },
+        "& svg": { color: "inherit" },
+      }}
+    >
+      <Select value={monthNumber} onChange={optionChanged}>
+        {eachMonthOfInterval({
+          start: initialDate,
+          end: endDate,
+        }).map((interimDate) => (
+          <option
+            key={interimDate.toISOString()}
+            value={differenceInCalendarMonths(interimDate, initialDate)}
+          >
+            {`${monthFormatter.format(interimDate)} ${interimDate.getFullYear()}`}
+          </option>
+        ))}
+      </Select>
+    </Box>
   );
 });

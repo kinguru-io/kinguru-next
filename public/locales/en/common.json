@@ -228,7 +228,8 @@
     "show_more": "More",
     "show_less": "Less",
     "go_to_premise_page": "Go to the premise page",
-    "cannot_load_location": "Unable to load location"
+    "cannot_load_location": "Unable to load location",
+    "bookings_link": "Book the hall"
   },
   "event": {
     "future_event_page": {

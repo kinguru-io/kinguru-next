@@ -228,7 +228,8 @@
     "show_more": "Подробнее",
     "show_less": "Свернуть",
     "go_to_premise_page": "Перейти на страницу помещения",
-    "cannot_load_location": "Не удалось загрузить местоположение"
+    "cannot_load_location": "Не удалось загрузить местоположение",
+    "bookings_link": "Оформить бронирование"
   },
   "event": {
     "future_event_page": {

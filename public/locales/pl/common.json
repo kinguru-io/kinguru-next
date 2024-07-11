@@ -278,7 +278,8 @@
     "show_more": "More",
     "show_less": "Less",
     "go_to_premise_page": "Przejdź do strony lokalu",
-    "cannot_load_location": "Nie można załadować lokalizacji"
+    "cannot_load_location": "Nie można załadować lokalizacji",
+    "bookings_link": "Zarezerwuj salę"
   },
   "discount_info": {
     "card_heading": "Istnieją zniżki*",
