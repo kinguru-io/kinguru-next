@@ -267,7 +267,7 @@ export default async function PremisePage({
           <BookingViewProvider>
             <Grid
               gap="10"
-              gridTemplateColumns={{ base: "1fr", md: "1fr {sizes.72}" }}
+              gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}
             >
               <WeekView
                 locale={locale}
@@ -276,12 +276,14 @@ export default async function PremisePage({
                 bookedSlots={bookedSlots}
                 aggregatedPrices={aggregatedPrices}
               />
-              <Grid
-                gap="8"
-                gridAutoFlow="row"
-                position="sticky"
-                top="2"
-                height="min-content"
+              <Stack
+                css={{
+                  gap: "4",
+                  position: "sticky",
+                  top: "2",
+                  height: "min-content",
+                  md: { gap: "8" },
+                }}
               >
                 <Modal>
                   <BookingViewCard
@@ -297,7 +299,7 @@ export default async function PremisePage({
                 </Modal>
                 <DiscountViewCard discounts={discounts} locale={locale} />
                 <PriceDescription />
-              </Grid>
+              </Stack>
             </Grid>
           </BookingViewProvider>
         </MapboxSearchBoxResponseProvider>

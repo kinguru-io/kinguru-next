@@ -10,6 +10,7 @@ import { ErrorIcon } from "react-hot-toast";
 import { Button } from "@/components/uikit";
 import { css } from "~/styled-system/css";
 import { HStack } from "~/styled-system/jsx";
+import { stack } from "~/styled-system/patterns";
 
 export function CheckoutForm({
   succeedRefetch,
@@ -55,16 +56,10 @@ export function CheckoutForm({
     <form
       id="payment-form"
       onSubmit={formSubmitted}
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "10px",
-        padding: "10px",
-      })}
+      className={stack({ gap: "4" })}
     >
       {message && (
-        <HStack maxWidth="310px">
+        <HStack maxWidth="80" fontSize="sm">
           <ErrorIcon className={css({ flexShrink: "0" })} />
           {message}
         </HStack>
@@ -74,6 +69,7 @@ export function CheckoutForm({
         id="submit"
         type="submit"
         isLoading={isProcessing || !stripe || !elements}
+        rounded={false}
       >
         {t("pay_now")}
       </Button>

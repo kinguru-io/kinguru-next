@@ -1,15 +1,20 @@
-import { Center } from "~/styled-system/jsx";
+import { Icon } from "@/components/uikit";
+import { css } from "~/styled-system/css";
+import { Box } from "~/styled-system/jsx";
 
 export function NoBookingsNotice({ label }: { label: string }) {
   return (
-    <Center
-      flexBasis="full"
-      maxWidth="156px"
-      textStyle="body.2"
-      textAlign="center"
-      color="secondary"
-    >
+    <Box css={{ color: "secondary" }}>
       <span>{label}</span>
-    </Center>
+      <Icon
+        name="common/cards"
+        className={css({
+          display: "block",
+          paddingBlock: "9",
+          marginInline: "auto",
+          fontSize: "4rem",
+        })}
+      />
+    </Box>
   );
 }

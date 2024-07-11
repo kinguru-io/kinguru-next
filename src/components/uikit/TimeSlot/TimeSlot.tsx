@@ -74,11 +74,8 @@ export function TimeSlot({
           fontWeight: "normal",
           fontSize: "sm",
           colorPalette,
-          "&[data-colored=true]": {
-            color: "colorPalette",
-          },
+          color: "colorPalette",
         })}
-        data-colored={!disabled && colorPalette !== "secondary"}
       >
         {priceFormatter.format(price)}
       </span>

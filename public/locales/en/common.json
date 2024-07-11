@@ -263,7 +263,7 @@
     "no_selected_slots": "Your booking will be shown here",
     "block_slot_btn": "Block time",
     "pay_btn": "Pay",
-    "rules_agreement": "I have read and agree with the rules of the premise",
+    "rules_agreement": "By clicking on the \"Pay\" button, you accept the rules of the hall.",
     "remove_timeslot_btn": "Delete booking time",
     "booking_modal_heading": "Time slots booking",
     "action_successful_booking": "Successfully booked!",
@@ -276,9 +276,9 @@
     "total": "Total",
     "full_price": "Full price",
     "discount": "Discount {percentage}%",
-    "min": "low price",
-    "max": "high price",
-    "regular": "regular price"
+    "min": "Low price",
+    "max": "High price",
+    "regular": "Regular price"
   },
   "discount_info": {
     "card_heading": "There are discounts*",

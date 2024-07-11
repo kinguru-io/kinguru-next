@@ -6,8 +6,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { addHours, compareAsc, isValid } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
-import { useCallback, useState, useTransition } from "react";
+import {
+  useCallback,
+  useState,
+  useTransition,
+  type ComponentProps,
+} from "react";
 import { toast } from "react-hot-toast";
+
 import { BookingSlotsListing } from "./BookingSlotsListing";
 import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
@@ -15,15 +21,7 @@ import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Timer } from "@/components/common/timer";
-import {
-  Button,
-  Card,
-  CardFooter,
-  CardInner,
-  Checkbox,
-  ModalWindow,
-  useModal,
-} from "@/components/uikit";
+import { Button, ModalWindow, useModal } from "@/components/uikit";
 import {
   blockPremiseSlotsIntent,
   CancelPremiseSlotsIntent,
@@ -36,7 +34,9 @@ import {
   groupAndMergeTimeslots,
 } from "@/lib/utils/premise-booking";
 import { getSlotDiscount, processOrderTotalDiscounts } from "@/lib/utils/price";
-import { Box, VStack } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { HStack, Stack } from "~/styled-system/jsx";
+import { stack } from "~/styled-system/patterns";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
@@ -68,7 +68,6 @@ export function BookingViewCard({
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
-  const [isUserAwareOfRules, setAwarenessState] = useState(inModal);
   const [intentResponse, setIntentResponse] = useState<{
     clientSecret: string;
     paymentIntentId: string;
@@ -118,10 +117,6 @@ export function BookingViewCard({
   );
 
   const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);
-
-  const checkboxChanged = () => {
-    setAwarenessState((prevState) => !prevState);
-  };
 
   const blockSlotsBtnClicked = () => {
     if (!open) {
@@ -212,73 +207,75 @@ export function BookingViewCard({
 
   if (inModal && intentResponse?.clientSecret) {
     return (
-      <VStack gap="12px" minHeight="350px">
-        <h4>{t("booking_modal_heading")}</h4>
-        <Timer minutes={10} callback={paymentCancelled} />
-        <Box bg="light" borderRadius="10px">
-          <Elements
-            stripe={stripePromise}
-            options={{ clientSecret: intentResponse?.clientSecret }}
-          >
-            <CheckoutForm succeedRefetch={paymentSucceed} />
-          </Elements>
-        </Box>
-      </VStack>
+      <section className={stack({ gap: "4", minHeight: "80" })}>
+        <HStack gap="4" justifyContent="space-between">
+          <h3 className={css({ fontWeight: "bold" })}>
+            {t("booking_modal_heading")}
+          </h3>
+          <Timer minutes={10} callback={paymentCancelled} />
+        </HStack>
+        <Elements
+          stripe={stripePromise}
+          options={{ clientSecret: intentResponse?.clientSecret }}
+        >
+          <CheckoutForm succeedRefetch={paymentSucceed} />
+        </Elements>
+      </section>
     );
   }
 
-  const SubmitBtn = () =>
-    isOwner ? (
-      <Button
-        isLoading={isPending}
-        disabled={isOutsideModal || !isUserAwareOfRules || areThereNoSlots}
-        onClick={blockSlotsBtnClicked}
-      >
-        {t("block_slot_btn")}
-      </Button>
-    ) : (
-      <Button
-        isLoading={isPending}
-        disabled={isOutsideModal || !isUserAwareOfRules || areThereNoSlots}
-        onClick={payBtnClicked}
-      >
-        {t("pay_btn")}
-      </Button>
-    );
+  const submitButtonProps: ComponentProps<typeof Button> = {
+    type: "button",
+    isLoading: isPending,
+    disabled: isOutsideModal || areThereNoSlots,
+    onClick: isOwner ? blockSlotsBtnClicked : payBtnClicked,
+    centered: true,
+    size: "lg",
+  };
+
+  const isPriceInfoShown = !(isOwner || areThereNoSlots);
 
   return (
     <>
-      <Card alignSelf="flex-start" minHeight="352px">
-        <CardInner padding="25px 18px" alignItems="center" gap="0">
-          <h4>{t("card_heading")}</h4>
-          {areThereNoSlots ? (
-            <NoBookingsNotice label={t("no_selected_slots")} />
-          ) : (
-            <BookingSlotsListing groupedSlots={groupedSlots} />
+      <section
+        className={stack({
+          gap: "1",
+          padding: "6",
+          fontSize: "sm",
+          borderRadius: "lg",
+          borderWidth: "1px",
+          borderColor: "tertiary",
+          "&[data-in-modal]": { border: "none", padding: "0" },
+        })}
+        data-in-modal={inModal || undefined}
+      >
+        <h3 className={css({ fontSize: "px17", fontWeight: "bold" })}>
+          {t("card_heading")}
+        </h3>
+        {areThereNoSlots ? (
+          <NoBookingsNotice label={t("no_selected_slots")} />
+        ) : (
+          <BookingSlotsListing groupedSlots={groupedSlots} />
+        )}
+
+        <Stack gap="6">
+          {isPriceInfoShown && <PriceBlock priceInfo={priceInfo} />}
+          <Button {...submitButtonProps}>
+            {t(isOwner ? "block_slot_btn" : "pay_btn")}
+          </Button>
+          {!areThereNoSlots && (
+            <span
+              className={css({
+                color: "secondary",
+                fontSize: "xs",
+                textAlign: "center",
+              })}
+            >
+              {t("rules_agreement")}
+            </span>
           )}
-          <CardFooter
-            width="full"
-            display="flex"
-            gap="20px"
-            flexDirection="column"
-            alignItems="center"
-          >
-            {!areThereNoSlots && (
-              <>
-                {!isOwner && <PriceBlock priceInfo={priceInfo} />}
-                <Checkbox
-                  checked={isUserAwareOfRules}
-                  disabled={isOutsideModal}
-                  onChange={checkboxChanged}
-                  label={t("rules_agreement")}
-                  required
-                />
-              </>
-            )}
-            <SubmitBtn />
-          </CardFooter>
-        </CardInner>
-      </Card>
+        </Stack>
+      </section>
       {!inModal && (
         <ModalWindow>
           <BookingViewCard
