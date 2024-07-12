@@ -1,0 +1,16 @@
+{
+  "main": [
+    {
+      "name": "email",
+      "type": "email"
+    },
+    {
+      "name": "password",
+      "type": "password"
+    },
+    {
+      "name": "confirmPassword",
+      "type": "password"
+    }
+  ]
+}

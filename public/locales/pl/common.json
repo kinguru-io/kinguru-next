@@ -177,12 +177,20 @@
     },
     "signup_form": {
       "heading": "Zarejestruj swoją firmę",
+      "heading_user": "Zarejestruj konto osobiste",
       "name": "Nazwa firmy",
       "email": "Email",
       "password": "Hasło",
       "confirmPassword": "Potwierdź hasło",
       "submit": "Zarejestruj się"
-    }
+    },
+    "error": {
+      "email_exists": "Email jest już zarejestrowany",
+      "email_or_name_exist": "Adres e-mail lub nazwa firmy jest już zarejestrowana",
+      "invalid_credentials": "Adres e-mail lub hasło są nieprawidłowe",
+      "unknown_error": "Coś poszło nie tak"
+    },
+    "alternative_sign_in_label": "Lub zaloguj się za pomocą"
   },
   "form": {
     "common": {
