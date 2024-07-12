@@ -1,6 +1,6 @@
 import { LocationMap } from "./location-map";
 import { LocationCard, LocationMarker } from "./location-marker";
-import { retrieveLocationPropertiesById } from "@/searchBox";
+import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
 
 export async function MapSection({
   locationId,
