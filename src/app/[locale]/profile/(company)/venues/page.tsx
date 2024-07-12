@@ -5,7 +5,7 @@ import { LocationAddressFallback } from "@/components/common/maps";
 import { NoticeScreen } from "@/components/profile";
 import { AddItemLink } from "@/components/profile/add-item-link";
 import { VenueCardView } from "@/components/profile/profile-venue";
-import { retrieveLocationPropertiesById } from "@/searchBox";
+import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
 import { Grid } from "~/styled-system/jsx";
 
 export default async function VenuesPage() {
