@@ -1,5 +1,5 @@
 import { Icon } from "@/components/uikit";
-import { retrieveLocationPropertiesById } from "@/searchBox";
+import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
 import { css } from "~/styled-system/css";
 
 export async function LocationAddressField({
