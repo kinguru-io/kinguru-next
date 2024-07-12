@@ -18,7 +18,7 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
 
   const retrieveResponse: SearchBoxRetrieveResponse = await response.json();
 
-  logger.error(retrieveResponse);
+  logger.error({ ...retrieveResponse, mapbox_token: process.env.MAPBOX_TOKEN });
 
   return retrieveResponse.features.at(0)?.properties;
 }
