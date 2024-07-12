@@ -234,7 +234,7 @@
     "no_selected_slots": "Twoja rezerwacja pojawi się tutaj",
     "block_slot_btn": "Zablokuj slot",
     "pay_btn": "Zapłać",
-    "rules_agreement": "Przeczytałem i zgadzam się z zasadami obowiązującymi na terenie",
+    "rules_agreement": "Klikając przycisk \"Zapłać\", akceptujesz regulamin hali.",
     "remove_timeslot_btn": "Usuń czas rezerwacji",
     "booking_modal_heading": "Rezerwacja terminów",
     "action_successful_booking": "Pomyślnie zarezerwowane!",
@@ -244,12 +244,12 @@
     "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy."
   },
   "price": {
-    "total": "Total",
-    "full_price": "Full price",
-    "discount": "Discount {percentage}%",
-    "min": "low price",
-    "max": "high price",
-    "regular": "regular price"
+    "total": "Całkowity",
+    "full_price": "Pełna cena",
+    "discount": "Rabat {percentage}%",
+    "min": "Niska cena",
+    "max": "Wysoka cena",
+    "regular": "Normalna cena"
   },
   "venue": {
     "public_page": {
@@ -278,12 +278,13 @@
     "show_more": "More",
     "show_less": "Less",
     "go_to_premise_page": "Przejdź do strony lokalu",
-    "cannot_load_location": "Nie można załadować lokalizacji"
+    "cannot_load_location": "Nie można załadować lokalizacji",
+    "bookings_link": "Zarezerwuj salę"
   },
   "discount_info": {
-    "card_heading": "There are discounts*",
-    "per_day_notice": "* - per day",
-    "duration": "{hours} and more"
+    "card_heading": "Istnieją zniżki*",
+    "per_day_notice": "* - na dzień",
+    "duration": "{hours} i więcej"
   },
   "stripe_checkout_form": {
     "pay_now": "Zapłać teraz",

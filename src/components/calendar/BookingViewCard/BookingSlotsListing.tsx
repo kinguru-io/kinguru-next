@@ -1,13 +1,13 @@
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
-import { LiaCalendar } from "react-icons/lia";
 import { useBookingView } from "../BookingViewContext";
 import { TagClosable } from "@/components/common";
 import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
+import { Icon } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
 import type { MergedTimeSlots } from "@/lib/utils/premise-booking";
-import { Grid, HStack } from "~/styled-system/jsx";
+import { HStack, Stack } from "~/styled-system/jsx";
 
 export function BookingSlotsListing({
   groupedSlots,
@@ -21,47 +21,55 @@ export function BookingSlotsListing({
   if (!timeZone) return null;
 
   return (
-    <Grid
-      alignSelf="stretch"
-      gridAutoFlow="row"
-      marginBlock="30px 40px"
-      gap="30px"
+    <Stack
+      css={{ gap: "4", marginBlock: "4", maxHeight: "md", overflow: "auto" }}
     >
       {Object.entries(groupedSlots).map(([date, slots]) => {
         return (
-          <Grid key={date} gap="10px" gridAutoFlow="row">
-            <HStack gap="3px">
-              <LiaCalendar size="1.125em" /> <time dateTime={date}>{date}</time>
+          <Stack key={date} gap="3">
+            <HStack
+              css={{
+                gap: "1",
+                fontSize: "px13",
+                "& > svg": { fontSize: "xl" },
+              }}
+            >
+              <Icon name="common/calendar" />{" "}
+              <time dateTime={date}>{date}</time>
             </HStack>
-            {slots &&
-              slots.map((timeSlotInfo) => {
-                const start = formatInTimeZone(
-                  timeSlotInfo.startTime,
-                  timeZone,
-                  "H:mm",
-                );
-                const end = formatInTimeZone(
-                  timeSlotInfo.endTime,
-                  timeZone,
-                  "H:mm",
-                );
+            <Stack gap="2">
+              {slots &&
+                slots.map((timeSlotInfo) => {
+                  const start = formatInTimeZone(
+                    timeSlotInfo.startTime,
+                    timeZone,
+                    "H:mm",
+                  );
+                  const end = formatInTimeZone(
+                    timeSlotInfo.endTime,
+                    timeZone,
+                    "H:mm",
+                  );
 
-                return (
-                  <TagClosable
-                    key={"booking-view" + timeSlotInfo.startTime.toISOString()}
-                    content={`${start} - ${end}`}
-                    helper={priceFormatter.format(timeSlotInfo.price)}
-                    onClick={() => {
-                      // @ts-ignore
-                      toggleSlot(timeSlotInfo);
-                    }}
-                    buttonLabel={t("remove_timeslot_btn")}
-                  />
-                );
-              })}
-          </Grid>
+                  return (
+                    <TagClosable
+                      key={
+                        "booking-view" + timeSlotInfo.startTime.toISOString()
+                      }
+                      content={`${start} - ${end}`}
+                      helper={priceFormatter.format(timeSlotInfo.price)}
+                      onClick={() => {
+                        // @ts-ignore
+                        toggleSlot(timeSlotInfo);
+                      }}
+                      buttonLabel={t("remove_timeslot_btn")}
+                    />
+                  );
+                })}
+            </Stack>
+          </Stack>
         );
       })}
-    </Grid>
+    </Stack>
   );
 }

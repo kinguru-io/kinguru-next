@@ -47,7 +47,7 @@ import {
 } from "@/lib/utils/premise-time-slots";
 import { prepareDiscountRangeMap } from "@/lib/utils/price";
 import { Link, type Locale } from "@/navigation";
-import { css } from "~/styled-system/css";
+import { css, cx } from "~/styled-system/css";
 import {
   Box,
   Container,
@@ -57,6 +57,7 @@ import {
   Stack,
 } from "~/styled-system/jsx";
 import { container } from "~/styled-system/patterns";
+import { button } from "~/styled-system/recipes";
 
 export default async function PremisePage({
   params: { slug, locale },
@@ -64,6 +65,7 @@ export default async function PremisePage({
   params: { slug: string; locale: Locale };
 }) {
   const mapId = useId();
+  const calendarId = useId();
   const nowDate = new Date();
   const premise = await prisma.premise.findUnique({
     where: { slug },
@@ -228,6 +230,19 @@ export default async function PremisePage({
               showMoreLabel={t("show_more")}
               showLessLabel={t("show_less")}
             />
+            <Link
+              className={cx(
+                button({ size: "lg" }),
+                css({
+                  marginBlockStart: "4",
+                  justifyContent: "center",
+                  sm: { width: "fit-content" },
+                }),
+              )}
+              href={`#${calendarId}`}
+            >
+              {t("bookings_link")}
+            </Link>
           </Stack>
         </Container>
       </section>
@@ -257,17 +272,15 @@ export default async function PremisePage({
         </Container>
       </Box>
 
-      <section className={container({ paddingBlock: { base: "6", md: "8" } })}>
-        <h2
-          className={css({ textStyle: "heading.section", marginBlockEnd: "6" })}
-        >
-          {t("calendar_heading")}
-        </h2>
+      <section
+        id={calendarId}
+        className={container({ paddingBlock: { base: "6", md: "8" } })}
+      >
         <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
           <BookingViewProvider>
             <Grid
               gap="10"
-              gridTemplateColumns={{ base: "1fr", md: "1fr {sizes.72}" }}
+              gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}
             >
               <WeekView
                 locale={locale}
@@ -275,13 +288,20 @@ export default async function PremisePage({
                 timeSlotsGroup={timeSlotsGroup}
                 bookedSlots={bookedSlots}
                 aggregatedPrices={aggregatedPrices}
+                headingSlot={
+                  <h2 className={css({ textStyle: "heading.section" })}>
+                    {t("calendar_heading")}
+                  </h2>
+                }
               />
-              <Grid
-                gap="8"
-                gridAutoFlow="row"
-                position="sticky"
-                top="2"
-                height="min-content"
+              <Stack
+                css={{
+                  gap: "4",
+                  position: "sticky",
+                  top: "2",
+                  height: "min-content",
+                  md: { gap: "8" },
+                }}
               >
                 <Modal>
                   <BookingViewCard
@@ -297,7 +317,7 @@ export default async function PremisePage({
                 </Modal>
                 <DiscountViewCard discounts={discounts} locale={locale} />
                 <PriceDescription />
-              </Grid>
+              </Stack>
             </Grid>
           </BookingViewProvider>
         </MapboxSearchBoxResponseProvider>

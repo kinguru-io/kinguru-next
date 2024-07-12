@@ -28,6 +28,7 @@ type TimeSlotProps = TimeSlotInfo & {
 const timeSlotClassName = css({
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
   gap: "1",
   fontSize: "px15",
   fontWeight: "bold",
@@ -74,11 +75,8 @@ export function TimeSlot({
           fontWeight: "normal",
           fontSize: "sm",
           colorPalette,
-          "&[data-colored=true]": {
-            color: "colorPalette",
-          },
+          color: "colorPalette",
         })}
-        data-colored={!disabled && colorPalette !== "secondary"}
       >
         {priceFormatter.format(price)}
       </span>
