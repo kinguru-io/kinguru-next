@@ -1,20 +1,28 @@
 {
   "main": [
     {
-      "name": "firstname",
-      "type": "text"
+      "row": [
+        {
+          "name": "firstname",
+          "type": "text"
+        },
+        {
+          "name": "lastname",
+          "type": "text"
+        }
+      ]
     },
     {
-      "name": "lastname",
-      "type": "text"
-    },
-    {
-      "name": "email",
-      "type": "email"
-    },
-    {
-      "name": "phoneNumber",
-      "type": "text"
+      "row": [
+        {
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "phoneNumber",
+          "type": "text"
+        }
+      ]
     },
     {
       "name": "country",

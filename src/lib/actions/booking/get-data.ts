@@ -1,4 +1,4 @@
-import { BookingType, TicketIntent, User } from "@prisma/client";
+import { BookingType, User } from "@prisma/client";
 
 export async function getBookingsByRole(
   userId: User["id"],

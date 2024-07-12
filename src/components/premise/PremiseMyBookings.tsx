@@ -1,12 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import Tabs from "./Tabs";
 import { withError } from "./withError";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemContent,
-  AccordionItemToggle,
-} from "../uikit";
 import BookingCard from "../uikit/PremiseMyBookingCard/BookingCard";
 import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
 import { getSession } from "@/auth";

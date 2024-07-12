@@ -1,11 +1,11 @@
 "use server";
 
+import { TicketIntentStatus } from "@prisma/client";
 import { differenceInHours, differenceInDays } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
 import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 import { isUserOrganization } from "@/lib/utils/premise-booking";
-import { TicketIntentStatus } from "@prisma/client";
 
 export interface CancelBookingActionProps {
   bookingStartTime: Date;
@@ -239,7 +239,6 @@ export async function cancelBookingAction({
         premiseSlotIds,
       );
     } else {
-      console.log("HER");
       await cancelPremiseSlots(
         paymentIntentId,
         discountAmount,
