@@ -100,12 +100,20 @@
     },
     "signup_form": {
       "heading": "Register your company",
+      "heading_user": "Register a personal account",
       "name": "Company name",
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
       "submit": "Register"
-    }
+    },
+    "error": {
+      "email_exists": "Email is already registered",
+      "email_or_name_exist": "Email or company name is already registered",
+      "invalid_credentials": "Email or password is invalid",
+      "unknown_error": "Something went wrong"
+    },
+    "alternative_sign_in_label": "Or sign in with"
   },
   "form": {
     "common": {
@@ -465,7 +473,10 @@
       "after": "after",
       "tab_booked_via_website": "Made Through Website",
       "tab_blocked_by_admin": "Blocked by Administrator",
+      "tab_booked_canceled": "Canceled",
+      "tab_booked_active": "Active",
       "cancel_btn_accordion_label": "Booking Cancellation",
+      "canceled_booking_heading": "Canceled Bookings",
       "cancel_booking_btn": "Cancel Booking",
       "modal_cancel_confirmation_desc": "Are you sure you want to cancel the booking?",
       "modal_cancel": "Cancel",

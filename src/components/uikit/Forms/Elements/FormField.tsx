@@ -3,7 +3,13 @@ import React, { memo } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { ZodSchema } from "zod";
 import { CountrySelect } from "@/components/common/form/country-select";
-import { ErrorField, Input, InputPassword, Textarea } from "@/components/uikit";
+import {
+  ErrorField,
+  Input,
+  InputPassword,
+  Textarea,
+  Select,
+} from "@/components/uikit";
 import { getOptionalFields } from "@/utils/getOptionalFieldsFromSchema";
 import { Box } from "~/styled-system/jsx";
 import { InputVariant } from "~/styled-system/recipes";
@@ -23,7 +29,7 @@ interface FormFieldProps {
   type: FieldType;
   options?: { text: string }[];
   schema: ZodSchema<any>;
-  variant: InputVariant;
+  variant?: InputVariant["variant"];
   translationsKey?: string;
 }
 
@@ -35,23 +41,27 @@ export const FormField = memo(
     schema,
     translationsKey,
     variant,
+    options,
   }: FormFieldProps): JSX.Element => {
     const {
       register,
       formState: { errors },
     } = useFormContext<T>();
 
-    // @ts-expect-error
-    const t = useTranslations(translationsKey);
+    // @ts-ignore
+    const t = useTranslations(translationsKey) as (key: string) => string;
 
     const fieldName = customName || name;
 
     const getError = () => {
       if (customName) {
         const [mainKey, indexStr, secondName] = fieldName.split(".");
-        const index = parseInt(indexStr);
-        // @ts-expect-error
-        return errors?.[mainKey]?.[index]?.[secondName];
+        const index = parseInt(indexStr, 10);
+        if (!isNaN(index)) {
+          // @ts-ignore
+          return errors?.[mainKey]?.[index]?.[secondName];
+        }
+        return errors?.[fieldName];
       }
       return errors?.[fieldName];
     };
@@ -60,35 +70,27 @@ export const FormField = memo(
 
     const optionalFields = getOptionalFields(schema);
     const markRequiredField = optionalFields.includes(fieldName) ? "" : "*";
-    // @ts-expect-error
+    // @ts-ignore
     const placeholder = `${t(name)}${markRequiredField}`;
 
     const commonProps = {
       placeholder,
-      // @ts-expect-error
+      // @ts-ignore
       ...register(fieldName),
-      "data-invalid": error,
+      "data-invalid": error ? true : undefined,
     };
 
     if (variant) {
-      // @ts-expect-error
-      commonProps.variant = "outline";
+      // @ts-ignore
+      commonProps.variant = variant;
     }
 
     let field = null;
     switch (type) {
       case "text":
-        field = <Input type={type} {...commonProps} />;
-        break;
       case "number":
       case "email":
-        field = (
-          <Input
-            type={type}
-            inputMode={type === "email" ? "email" : "numeric"}
-            {...commonProps}
-          />
-        );
+        field = <Input type={type} {...commonProps} />;
         break;
       case "password":
         field = <InputPassword {...commonProps} />;
@@ -99,8 +101,19 @@ export const FormField = memo(
       case "textarea":
         field = <Textarea rows={9} {...commonProps} />;
         break;
-      // Add more cases as needed
+      case "select":
+        field = (
+          <Select {...commonProps}>
+            {options?.map((option, idx) => (
+              <option key={idx} value={option.text}>
+                {t(option.text)}
+              </option>
+            ))}
+          </Select>
+        );
+        break;
       default:
+        field = <Input type="text" {...commonProps} />; // Default to text if type is unknown
     }
 
     return (

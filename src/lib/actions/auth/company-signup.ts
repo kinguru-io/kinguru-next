@@ -1,12 +1,13 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
-import { redirect } from "@/navigation.ts";
-import prisma from "@/server/prisma.ts";
+import { redirect } from "@/navigation";
+import prisma from "@/server/prisma";
 
-const signUpHandler = async ({
+const companySignUpHandler = async ({
   name,
   email,
   password,
@@ -14,11 +15,12 @@ const signUpHandler = async ({
   const user = await prisma.user.findFirst({
     where: { OR: [{ email }, { company: name }] },
   });
+  const t = await getTranslations("auth.error");
 
   if (user) {
     return {
       status: "error",
-      message: "Email or company name is already registered",
+      message: t("email_or_name_exist"),
     };
   }
 
@@ -46,5 +48,8 @@ const signUpHandler = async ({
   return null;
 };
 
-export const signUp = createFormAction(signUpHandler, signupFormSchema);
-export type SignUpAction = typeof signUp;
+export const companySignUp = createFormAction(
+  companySignUpHandler,
+  signupFormSchema,
+);
+export type CompanySignUpAction = typeof companySignUp;

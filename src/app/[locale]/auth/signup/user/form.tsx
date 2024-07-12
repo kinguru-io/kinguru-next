@@ -8,22 +8,25 @@ import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import toast from "react-hot-toast";
 import formConfig from "./form-config.json";
 import { BaseForm, Button } from "@/components/uikit";
-import type { CompanySignUpAction } from "@/lib/actions";
-import { type SignupFormInput, signupFormSchema } from "@/lib/validations";
+import type { UserSignUpAction } from "@/lib/actions";
+import {
+  type UserSignupFormInput,
+  userSignupFormSchema,
+} from "@/lib/validations";
 import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 import { stack } from "~/styled-system/patterns";
 
-export function CompanySignUpForm({ signUp }: { signUp: CompanySignUpAction }) {
+export function UserSignUpForm({ signUp }: { signUp: UserSignUpAction }) {
   const [isPending, startTransition] = useTransition();
 
-  const methods = useForm<SignupFormInput>({
+  const methods = useForm<UserSignupFormInput>({
     mode: "onBlur",
-    resolver: zodResolver(signupFormSchema),
+    resolver: zodResolver(userSignupFormSchema),
   });
   const [response, formAction] = useFormState(signUp, null);
 
-  const onSubmit: SubmitHandler<SignupFormInput> = useCallback(
+  const onSubmit: SubmitHandler<UserSignupFormInput> = useCallback(
     (data) => {
       // @ts-expect-error
       startTransition(() => formAction(data));
@@ -55,9 +58,9 @@ function SignupFormInner({ isPending }: { isPending: boolean }) {
   return (
     <Stack gap="4">
       <fieldset className={stack({ gap: "2" })} disabled={isPending}>
-        <BaseForm<SignupFormInput>
+        <BaseForm<UserSignupFormInput>
           config={formConfig.main}
-          schema={signupFormSchema}
+          schema={userSignupFormSchema}
           translationsKey="auth.signup_form"
         />
       </fieldset>

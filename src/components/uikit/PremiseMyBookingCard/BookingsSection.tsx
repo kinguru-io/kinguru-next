@@ -1,3 +1,4 @@
+import { TicketIntentStatus } from "@prisma/client";
 import { differenceInDays, differenceInHours } from "date-fns";
 import { useTranslations } from "next-intl";
 
@@ -81,17 +82,26 @@ const BookingsSection = async ({
             />
           ));
 
+          const showCancelBooking =
+            booking.status !== TicketIntentStatus.canceled && !isUserOrg;
+          const isDisabled =
+            booking.status === TicketIntentStatus.canceled || undefined;
+
           return (
             <Box
-              key={booking.id}
+              key={`${booking.id}-${booking.premiseId}`}
+              data-disabled={isDisabled}
               css={{
                 "&:last-child > div:last-child": {
                   marginBlockEnd: "0",
                 },
+                _disabled: {
+                  opacity: 0.6,
+                },
               }}
             >
               <BookingCard booking={booking} imageSrc={imageSrc} />
-              {!isUserOrg && showCancelBtn && (
+              {showCancelBooking && showCancelBtn && (
                 <Accordion marginBlockEnd="3.5">
                   <AccordionItem>
                     <AccordionItemToggle textStyle="heading.3">

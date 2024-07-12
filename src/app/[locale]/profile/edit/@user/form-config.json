@@ -1,28 +1,40 @@
 {
   "main": [
     {
-      "name": "firstname",
-      "type": "text"
+      "row": [
+        {
+          "name": "firstname",
+          "type": "text"
+        },
+        {
+          "name": "lastname",
+          "type": "text"
+        }
+      ]
     },
     {
-      "name": "lastname",
-      "type": "text"
+      "row": [
+        {
+          "name": "email",
+          "type": "email"
+        },
+        {
+          "name": "phoneNumber",
+          "type": "text"
+        }
+      ]
     },
     {
-      "name": "email",
-      "type": "email"
-    },
-    {
-      "name": "phoneNumber",
-      "type": "text"
-    },
-    {
-      "name": "country",
-      "type": "country-select"
-    },
-    {
-      "name": "city",
-      "type": "text"
+      "row": [
+        {
+          "name": "country",
+          "type": "country-select"
+        },
+        {
+          "name": "city",
+          "type": "text"
+        }
+      ]
     }
   ],
   "extra": [

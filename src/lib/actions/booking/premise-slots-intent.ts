@@ -235,6 +235,7 @@ async function validatePaymentIntentData({
       slots: {
         where: {
           date: { gte: startOfDay(new Date()).toISOString() },
+          status: { not: "canceled" },
         },
       },
       discounts: {
