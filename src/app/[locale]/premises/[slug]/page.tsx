@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
+import { PremiseGallery } from "./_gallery";
 import {
   BookingViewCard,
   BookingViewProvider,
@@ -24,8 +24,6 @@ import {
   AccordionItem,
   AccordionItemContent,
   Modal,
-  Slider,
-  SliderItem,
   Tag,
   type AggregatedPrices,
   Loader,
@@ -51,7 +49,6 @@ import { prepareDiscountRangeMap } from "@/lib/utils/price";
 import { Link, type Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import {
-  AspectRatio,
   Box,
   Container,
   Flex,
@@ -184,18 +181,7 @@ export default async function PremisePage({
           },
         })}
       >
-        <Slider slidesCount={resources.length} buttonPosition="center">
-          {resources.map((resource) => (
-            <SliderItem key={resource.id}>
-              <AspectRatio
-                ratio={1.5}
-                md={{ borderRadius: "md", overflow: "hidden" }}
-              >
-                <Image src={resource.url} fill alt="" />
-              </AspectRatio>
-            </SliderItem>
-          ))}
-        </Slider>
+        <PremiseGallery resources={resources} />
         <Container
           css={{
             mdDown: { paddingBlockStart: "4", paddingBlockEnd: "8" },
