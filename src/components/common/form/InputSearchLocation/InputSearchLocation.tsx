@@ -14,7 +14,7 @@ import { DropdownMenu, Input, useDropdown } from "@/components/uikit";
 import { useSearchBoxCore } from "@/hooks/mapbox/useSearchBoxCore";
 import type { Locale } from "@/navigation";
 import { getError } from "@/utils/forms/errors";
-import { InlineBox } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
 
 export function InputSearchLocation<T extends FieldValues>({
   placeholder,
@@ -29,7 +29,7 @@ export function InputSearchLocation<T extends FieldValues>({
     formState: { errors },
   } = useFormContext();
   const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
-  const [textFieldValue, setTextFieldValue] = useState<string>("");
+  const [textFieldValue, setTextFieldValue] = useState("");
   const locale = useLocale() as Locale;
   const { fetchSuggestions } = useSearchBoxCore({ language: locale });
   const { setHidden } = useDropdown();
@@ -41,7 +41,7 @@ export function InputSearchLocation<T extends FieldValues>({
     fetchSuggestions(searchValue, setPlaces);
   };
 
-  const suggestionClicked = (suggestion: SearchBoxSuggestion) => {
+  const suggestionChosen = (suggestion: SearchBoxSuggestion) => {
     setHidden(true);
     setTextFieldValue(suggestion.full_address || suggestion.place_formatted);
 
@@ -60,13 +60,15 @@ export function InputSearchLocation<T extends FieldValues>({
       />
       <DropdownMenu shouldCloseOnClick={false}>
         {places.map((place) => (
-          <InlineBox
+          <button
             key={place.mapbox_id}
-            onClick={() => suggestionClicked(place)}
+            type="button"
+            className={css({ textAlign: "start" })}
+            onClick={() => suggestionChosen(place)}
           >
             <b>{place.name}</b>
             <address>{place.full_address || place.place_formatted}</address>
-          </InlineBox>
+          </button>
         ))}
       </DropdownMenu>
     </>

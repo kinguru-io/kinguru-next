@@ -1,5 +1,6 @@
 import { Icon } from "@/components/uikit";
 import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
+import { css } from "~/styled-system/css";
 
 export async function LocationAddressField({
   locationId,
@@ -27,5 +28,43 @@ export function LocationAddressFallback({ label }: { label: string }) {
     <>
       <Icon name="action/cross" /> {label}
     </>
+  );
+}
+
+export function LinkToMap({
+  mapId,
+  children,
+  colored,
+}: {
+  mapId?: string;
+  children?: React.ReactNode;
+  colored?: boolean;
+}) {
+  const NodeTag = mapId ? "a" : "span";
+
+  return (
+    <NodeTag
+      {...(mapId && { href: "#" + mapId })}
+      className={css({
+        display: "flex",
+        alignItems: "center",
+        gap: "1",
+        fontSize: "px13",
+        "& > svg": {
+          fontSize: "1.5em",
+          color: "colorPalette",
+          flexShrink: "0",
+        },
+        md: { fontSize: "md" },
+        _hoverOrFocusVisible: {
+          color: "colorPalette",
+          textDecoration: "underline",
+        },
+        "&[data-colored]": { colorPalette: "primary" },
+      })}
+      data-colored={colored}
+    >
+      {children}
+    </NodeTag>
   );
 }

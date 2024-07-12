@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
 import { Description } from "@/components/common/description";
 import {
+  LinkToMap,
   LocationAddressFallback,
   LocationAddressField,
   MapSection,
@@ -45,22 +46,7 @@ export default async function VenuePage({
       <VenueMainInfoLayout bgImageSrc={image}>
         <Stack gap="2">
           <h1>{name}</h1>
-          <a
-            href={`#${mapId}`}
-            className={css({
-              display: "flex",
-              alignItems: "center",
-              gap: "1",
-              fontSize: "px13",
-              "& > svg": {
-                fontSize: "1.5em",
-                color: "primary",
-                flexShrink: "0",
-              },
-              md: { fontSize: "md" },
-              _hoverOrFocusVisible: { color: "primary" },
-            })}
-          >
+          <LinkToMap mapId={mapId} colored>
             <Suspense fallback={<SpinnerIcon />}>
               <LocationAddressField
                 locationId={venue.locationMapboxId}
@@ -69,7 +55,7 @@ export default async function VenuePage({
                 }
               />
             </Suspense>
-          </a>
+          </LinkToMap>
         </Stack>
       </VenueMainInfoLayout>
 

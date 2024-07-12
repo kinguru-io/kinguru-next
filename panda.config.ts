@@ -7,6 +7,7 @@ import { buttonRecipe } from "./src/components/uikit/Button/Button.recipe";
 import { dropdownSlot } from "./src/components/uikit/Dropdown/Dropdown.recipe";
 import { inputSlot } from "./src/components/uikit/Input/Input.recipe";
 import { premiseCardSlot } from "./src/components/uikit/PremiseCard/PremiseCard.recipe";
+import { premiseMyBookingCardSlot } from "./src/components/uikit/PremiseMyBookingCard/PremiseMyBookingCard.recipe";
 import { selectSlot } from "./src/components/uikit/Select/Select.recipe";
 import { sliderSlot } from "./src/components/uikit/Slider/Slider.recipe";
 import { toggleSlot } from "./src/components/uikit/toggle.recipe";
@@ -14,7 +15,6 @@ import { additionalGlobalCss } from "./src/theme/globalCss";
 import { layerStyles } from "./src/theme/layerStyles";
 import { customDividerPattern } from "./src/theme/patterns/customDivider";
 import { additionalTextStyles } from "./src/theme/textStyles";
-
 export default defineConfig({
   globalCss: additionalGlobalCss,
   jsxFramework: "react",
@@ -62,6 +62,7 @@ export default defineConfig({
         header: headerSlot,
         slider: sliderSlot,
         premiseCard: premiseCardSlot,
+        premiseMyBookingCard: premiseMyBookingCardSlot,
         toggle: toggleSlot,
       },
       tokens: {
@@ -92,8 +93,13 @@ export default defineConfig({
         },
         shadows: {
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },
+          focus: { value: "0 0 0 2px {colors.focus}" },
+          "ring-primary": { value: "0 0 0 2px {colors.primary}" },
           header: { value: "0px 4px 48px 0px rgba(0, 0, 0, 0.06)" },
           dropdown: { value: "0px 14px 45px rgba(0, 0, 0, 0.2)" },
+          "light-backdrop": {
+            value: "0px 14px 45px rgba(255, 255, 255, 0.45)",
+          },
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },
@@ -127,8 +133,12 @@ export default defineConfig({
           DEFAULT: { value: "#7A7A7A" },
           lighter: { value: "#F5F5F5" },
           lightest: { value: "#FBFBFB" },
+          text: { value: "{colors.light}" },
         },
-        tertiary: { DEFAULT: { value: "#D9D9D9" } },
+        tertiary: {
+          DEFAULT: { value: "#D9D9D9" },
+          text: { value: "{colors.secondary}" },
+        },
         dark: {
           DEFAULT: { value: "#212529" },
           text: { value: "{colors.light}" },
@@ -137,11 +147,12 @@ export default defineConfig({
         neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
           DEFAULT: { value: "#DC1414" },
+          darker: { value: "#c51010" },
           text: { value: "{colors.light}" },
         },
         success: {
-          DEFAULT: { value: "#1C9109" },
-          darker: { value: "#1a6e0d" },
+          DEFAULT: { value: "#1c8809" },
+          darker: { value: "#1a670d" },
           text: { value: "{colors.light}" },
         },
       },

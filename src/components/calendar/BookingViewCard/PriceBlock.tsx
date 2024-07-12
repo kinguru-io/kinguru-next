@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { priceFormatter } from "@/lib/utils";
 import type { PriceInfo } from "@/lib/utils/price";
-import { Box, Flex } from "~/styled-system/jsx";
+import { Box, Flex, Stack } from "~/styled-system/jsx";
 
 export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
   const t = useTranslations("price");
@@ -9,14 +9,8 @@ export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
   const { fullPrice, totalPrice, discountsMeta } = priceInfo;
 
   return (
-    <Box
-      alignSelf="stretch"
-      marginBlockStart="auto"
-      borderBlockStart="1px solid"
-      borderColor="secondary"
-      textStyle="body.3"
-    >
-      <Flex flexDirection="column" gap="3px">
+    <Box fontSize="sm">
+      <Stack gap="1">
         {fullPrice !== totalPrice && (
           <PricingRow label={t("full_price")} amount={fullPrice} />
         )}
@@ -31,8 +25,9 @@ export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
             />
           );
         })}
-      </Flex>
-      <PricingRow label={t("total")} amount={totalPrice} isTotal />
+
+        <PricingRow label={t("total")} amount={totalPrice} isTotal />
+      </Stack>
     </Box>
   );
 }
@@ -40,7 +35,7 @@ export function PriceBlock({ priceInfo }: { priceInfo: PriceInfo }) {
 function PricingRow({
   label,
   amount,
-  isTotal = false,
+  isTotal,
 }: {
   label: string;
   amount: number;
@@ -48,17 +43,11 @@ function PricingRow({
 }) {
   return (
     <Flex
-      justifyContent="space-between"
       css={{
-        "&[data-total=true]": {
-          textStyle: "heading.4",
-          marginBlockStart: "10px",
-        },
-        _first: {
-          marginBlockStart: "10px",
-        },
+        justifyContent: "space-between",
+        "&[data-total]": { fontWeight: "bold", fontSize: "px17" },
       }}
-      data-total={isTotal}
+      data-total={isTotal || undefined}
     >
       <span>{label}</span>
       <span>{priceFormatter.format(amount)}</span>

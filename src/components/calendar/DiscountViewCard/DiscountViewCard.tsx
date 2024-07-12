@@ -1,9 +1,9 @@
 import type { PremiseDiscount } from "@prisma/client";
 import { useTranslations } from "next-intl";
-import { Card, CardHeading, CardInner } from "@/components/uikit";
 import { hoursFormatter } from "@/lib/utils";
 import type { Locale } from "@/navigation";
-import { Flex } from "~/styled-system/jsx";
+import { css } from "~/styled-system/css";
+import { stack } from "~/styled-system/patterns";
 
 export function DiscountViewCard({
   discounts,
@@ -18,32 +18,31 @@ export function DiscountViewCard({
   if (discounts.length === 0) return null;
 
   return (
-    <Card border="1px solid" borderColor="primary" color="dark">
-      <CardInner padding="15px 33px" gap="15px">
-        <CardHeading
-          alignSelf="center"
-          backgroundColor="primary"
-          borderRadius="4px"
-          padding="2px 5px"
-          color="dark"
-        >
-          <h4>{t("card_heading")}</h4>
-        </CardHeading>
-        <Flex gap="0" flexDirection="column">
-          {discounts.map(({ id, duration, discountPercentage }) => {
-            const relativeHours = t("duration", {
-              hours: formatter.format(duration),
-            });
+    <section
+      className={stack({
+        gap: "4",
+        padding: "6",
+        fontSize: "sm",
+        borderRadius: "lg",
+        borderWidth: "1px",
+        borderColor: "primary.lighter",
+      })}
+    >
+      <h3 className={css({ fontWeight: "bold" })}>{t("card_heading")}</h3>
+      <ul className={stack({ gap: "1" })}>
+        {discounts.map(({ id, duration, discountPercentage }) => {
+          const relativeHours = t("duration", {
+            hours: formatter.format(duration),
+          });
 
-            return (
-              <span key={id}>
-                {relativeHours} - {discountPercentage}%
-              </span>
-            );
-          })}
-        </Flex>
-        <span>{t("per_day_notice")}</span>
-      </CardInner>
-    </Card>
+          return (
+            <li key={id}>
+              {relativeHours} - {discountPercentage}%
+            </li>
+          );
+        })}
+      </ul>
+      <span className={css({ color: "secondary" })}>{t("per_day_notice")}</span>
+    </section>
   );
 }

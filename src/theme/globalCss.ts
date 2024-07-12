@@ -7,13 +7,12 @@ export const additionalGlobalCss = defineGlobalStyles({
       base: "smooth",
       _motionReduce: "auto",
     },
+    scrollbarGutter: "stable",
   },
   body: {
     lineHeight: "1.25",
     color: "dark",
-    "&:has(dialog[open])": {
-      overflow: "hidden",
-    },
+    "&:has(dialog[open])": { overflow: "hidden" },
   },
   address: { fontStyle: "normal" },
   button: {

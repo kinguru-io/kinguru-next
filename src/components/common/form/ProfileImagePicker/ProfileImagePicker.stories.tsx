@@ -1,57 +1,60 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import * as s3RequestPresignerModule from "@aws-sdk/s3-request-presigner";
 import { faker } from "@faker-js/faker";
 import type { Meta, StoryObj } from "@storybook/react";
-import { HttpResponse, delay, http } from "msw";
 import { NextIntlClientProvider } from "next-intl";
 import { createMock } from "storybook-addon-module-mock";
 import { ProfileImagePicker } from "./ProfileImagePicker";
+import * as awsUtilModule from "@/lib/shared/utils/aws";
 
-import enLocaleMessages from "~/public/locales/en/common.json";
+import en from "~/public/locales/en/common.json";
+import { Box } from "~/styled-system/jsx";
 
-const meta = {
-  title: "Common/Forms/ProfileImagePicker",
+const meta: Meta<typeof ProfileImagePicker> = {
+  title: "UiKit/Forms/Files/ProfileImagePicker",
   component: ProfileImagePicker,
   decorators: [
     (Story) => (
-      <NextIntlClientProvider locale="en" messages={enLocaleMessages}>
-        <Story />
+      <NextIntlClientProvider locale="en" messages={en}>
+        <Box maxWidth="breakpoint-md">
+          <Story />
+        </Box>
       </NextIntlClientProvider>
     ),
   ],
-  parameters: {
-    layout: "centered",
+  argTypes: {
+    ratio: {
+      options: [21 / 9, 16 / 9, 4 / 3, 1 / 1],
+      control: {
+        type: "radio",
+        labels: {
+          [21 / 9]: "21:9",
+          [16 / 9]: "16:9",
+          [4 / 3]: "4:3",
+          [1 / 1]: "1:1",
+        },
+      },
+    },
   },
-} satisfies Meta<typeof ProfileImagePicker>;
-
-const responseSRC = faker.image.avatarGitHub();
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const MockedImageResponse: Story = {
+export const ImageUpload: Story = {
   args: {
     name: "profile_image",
   },
   parameters: {
     moduleMock: {
       mock: () => {
-        const mockImageUpload = createMock(
-          s3RequestPresignerModule,
-          "getSignedUrl",
+        const mockSafeUpload = createMock(awsUtilModule, "safeUploadToBucket");
+        mockSafeUpload.mockImplementation(({ urls }) =>
+          Promise.resolve(
+            Array.from({ length: urls.length }, faker.image.avatar),
+          ),
         );
-        mockImageUpload.mockReturnValue(Promise.resolve(responseSRC));
 
-        return [mockImageUpload];
+        return [mockSafeUpload];
       },
-    },
-    msw: {
-      handlers: [
-        http.put(responseSRC, async () => {
-          await delay(900);
-          return new HttpResponse();
-        }),
-      ],
     },
   },
 };

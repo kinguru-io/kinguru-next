@@ -45,7 +45,7 @@ export async function UserSection() {
     );
   }
 
-  const name = session.user?.name;
+  const name = session.user?.organizations.at(0)?.name || session.user?.name;
   const image = session.user?.image;
 
   return (
@@ -66,6 +66,7 @@ export async function UserSection() {
       </DropdownInitiator>
       <DropdownMenu>
         <Link href="/profile">{t("your_profile")}</Link>
+        <Link href="/profile/mybookings">{t("mybookings")}</Link>
         <SignOutButton className={css({ textAlign: "start" })}>
           {t("sign_out")}
         </SignOutButton>

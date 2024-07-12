@@ -1,7 +1,9 @@
+import { SubSection } from "@/components/common/cards/sub-section";
+
 export default function SettingsPage() {
   return (
-    <div>
-      <h1>SettingsPage</h1>
-    </div>
+    <SubSection>
+      <h1 className="title">Settings Page</h1>
+    </SubSection>
   );
 }

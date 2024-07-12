@@ -17,13 +17,11 @@ export const additionalTextStyles = defineTextStyles({
         lineHeight: "1.15",
       },
     },
-    body: {
-      1: { value: { fontSize: "18px" } },
-      2: { value: { fontSize: "16px" } },
-      3: { value: { fontSize: "12px" } },
-      4: { value: { fontSize: "8px" } },
-      extra: {
-        3: { value: { fontSize: "10px" } },
+    page: {
+      value: {
+        fontSize: "3xl",
+        fontWeight: "bold",
+        md: { fontSize: "5xl" },
       },
     },
     1: {

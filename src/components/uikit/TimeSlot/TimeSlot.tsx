@@ -12,6 +12,7 @@ type Condition = keyof typeof timeSlotCondition;
 
 export type TimeSlotInfo = {
   price: number;
+  // @ts-check
   time: Date;
 };
 
@@ -21,11 +22,13 @@ type TimeSlotProps = TimeSlotInfo & {
   disabled?: boolean;
   condition?: Condition;
   selected?: boolean;
+  startTime?: Date;
 };
 
 const timeSlotClassName = css({
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
   gap: "1",
   fontSize: "px15",
   fontWeight: "bold",
@@ -65,18 +68,15 @@ export function TimeSlot({
       disabled={disabled}
     >
       <time dateTime={time.toISOString()}>
-        {formatInTimeZone(time, timeZone, "HH:mm")}
+        {formatInTimeZone(time, timeZone, "HH:mm")}{" "}
       </time>
       <span
         className={css({
           fontWeight: "normal",
           fontSize: "sm",
           colorPalette,
-          "&[data-colored=true]": {
-            color: "colorPalette",
-          },
+          color: "colorPalette",
         })}
-        data-colored={!disabled && colorPalette !== "secondary"}
       >
         {priceFormatter.format(price)}
       </span>

@@ -65,7 +65,12 @@ export function LocationCard({
       animation={{ base: "fade-in", _motionReduce: "none" }}
       sm={{ maxWidth: "breakpoint-sm" }}
     >
-      <InlineBox width="16" height="16" flexShrink="0">
+      <InlineBox
+        width="16"
+        height="16"
+        flexShrink="0"
+        bgImage="{gradients.darken-to-bottom-lighter}"
+      >
         <Image
           src={image}
           alt={name}

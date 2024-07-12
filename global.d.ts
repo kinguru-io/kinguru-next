@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-type Messages =
-& typeof import("./public/locales/en/common.json")
-& typeof import("./public/locales/ru/common.json")
-& typeof import("./public/locales/pl/common.json");
+type Messages = typeof import("./public/locales/en/common.json")
 
 declare global {
   namespace globalThis {

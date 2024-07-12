@@ -5,7 +5,6 @@ export const sliderSlot = defineSlotRecipe({
   className: "slider",
   slots: [
     "slider",
-    "buttonGroup",
     "sliderOptions",
     "prevButton",
     "nextButton",
@@ -17,28 +16,20 @@ export const sliderSlot = defineSlotRecipe({
       position: "relative",
       height: "full",
     },
-    buttonGroup: {
-      position: "absolute",
-      display: "flex",
-      gap: "2",
-      padding: "clamp(0.75rem, 0.3rem + 1.5vw, 1.5rem)",
-    },
     sliderButton: {
+      position: "absolute",
       display: "grid",
       placeItems: "center",
       color: "secondary",
       transition: "colors",
       height: "clamp(3rem, 2.4rem + 2vw, 4rem)", //since container queries feature is almost brand new feature for potential user agents
       width: "clamp(3rem, 2.4rem + 2vw, 4rem)",
-      borderRadius: "50%",
-      bgColor: {
-        base: "rgba(255, 255, 255, 0.8)",
-        _hover: "light",
-        _focusVisible: "light",
-      },
+      borderRadius: "full",
+      bgColor: "rgba(255, 255, 255, 0.8)",
+      _hoverOrFocusVisible: { color: "dark", bgColor: "light" },
       _focusVisible: {
-        outline: "none",
-        border: "1px solid token(colors.focus)",
+        outline: "1px solid transparent",
+        boxShadow: "focus",
       },
     },
     sliderOptions: {
@@ -46,7 +37,7 @@ export const sliderSlot = defineSlotRecipe({
       display: "flex",
       overflow: "auto",
       scrollSnapType: "x mandatory",
-      h: "100%",
+      height: "full",
       scrollbarWidth: "none",
       _scrollbar: { display: "none" },
     },
@@ -60,23 +51,24 @@ export const sliderSlot = defineSlotRecipe({
     buttonPosition: {
       inner: {},
       outer: {},
-      "bottom-right": {
-        buttonGroup: {
-          insetInlineEnd: "0",
-          insetBlockEnd: "0",
+      "bottom-end": {
+        sliderButton: { insetBlockEnd: "2" },
+        nextButton: {
+          insetInlineEnd: "2",
+        },
+        prevButton: {
+          insetInlineEnd: "calc(clamp(3rem, 2.4rem + 2vw, 4rem) + {spacing.4})", // spacing.2 + button width + spacing.2
         },
       },
       center: {
-        buttonGroup: {
-          width: "full",
-          justifyContent: "space-between",
-          insetBlockStart: "50%",
-          transform: "translateY(-50%)",
-        },
+        sliderButton: { insetBlockStart: "50%", transform: "translateY(-50%)" },
+        prevButton: { insetInlineStart: "2" },
+        nextButton: { insetInlineEnd: "2" },
       },
+      hidden: { sliderButton: { display: "none" } },
     },
   },
   defaultVariants: {
-    buttonPosition: "bottom-right",
+    buttonPosition: "bottom-end",
   },
 });

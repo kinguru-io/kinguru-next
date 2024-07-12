@@ -57,7 +57,7 @@ async function createVenue({
       },
     });
 
-    revalidatePath("[locale]/profile/venues/(protected)", "layout");
+    revalidatePath("[locale]/profile/(company)", "layout");
     return {
       status: "success",
       message: "Venue created successfully",

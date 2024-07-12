@@ -1,40 +1,39 @@
-"use client";
-
 import type { Premise, Venue } from "@prisma/client";
 import Image from "next/image";
-import { useSearchBoxResponse } from "@/components/common/maps/MapboxResponseProvider";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeading,
-  CardInner,
-} from "@/components/uikit";
+import { Tag } from "@/components/uikit";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
-import { AspectRatio, Circle, HStack } from "~/styled-system/jsx";
+import { AspectRatio, Float, InlineBox, Stack } from "~/styled-system/jsx";
 
 export function VenueCardView({
   venue,
   noPremiseLabel,
+  noPremiseLabelShort,
+  addressSlot,
 }: {
   venue: Venue & { premises: Premise[] };
   noPremiseLabel: string;
+  noPremiseLabelShort: string;
+  addressSlot: React.ReactNode;
 }) {
-  const locationInfo = useSearchBoxResponse();
-  const address = locationInfo && locationInfo.properties;
+  const isInactive = venue.premises.length === 0;
 
   return (
-    <Card variant="profile-venue" data-interactive>
+    <Stack
+      css={{
+        gap: "4",
+        position: "relative",
+        overflow: "hidden",
+        borderRadius: "md",
+        _focusWithin: { boxShadow: "focus" },
+      }}
+    >
       <Link
         className={css({
-          // hiding by pushing out of the wrapper
-          fontSize: "1px",
-          lineHeight: "1px",
-          marginBlockStart: "-1px",
+          marginBlockStart: "calc(-1lh - {spacing.4})", // hiding by pushing out of the wrapper. 1lh + gap 16px (spacing.4)
           _before: {
-            zIndex: "1", // to be clickable over the image
             content: "''",
+            zIndex: "1", // to be clickable over the image
             position: "absolute",
             inset: 0,
           },
@@ -43,29 +42,37 @@ export function VenueCardView({
       >
         {venue.name}
       </Link>
-      <AspectRatio ratio={16 / 9}>
-        <Image src={venue.image} width={310} height={174} alt="" />
+      <AspectRatio
+        ratio={16 / 9}
+        css={{
+          borderRadius: "md",
+          overflow: "hidden",
+          _disabled: { opacity: "0.5" },
+        }}
+        data-disabled={isInactive || undefined}
+      >
+        <Image src={venue.image} width={425} height={240} alt="" />
       </AspectRatio>
-      <CardInner bgColor="secondary.lighter">
-        <CardHeading lineClamp="3">
-          <h4>{venue.name}</h4>
-        </CardHeading>
-        <CardBody>
-          <address>
-            {address ? address.full_address || address.place_formatted : "..."}
-          </address>
-        </CardBody>
-        <CardFooter>
-          {venue.premises.length === 0 && (
-            <HStack gap="5px" color="danger" textStyle="body.extra.3">
-              <Circle size="1.8em" color="light" bgColor="danger" aria-hidden>
-                !
-              </Circle>
-              {noPremiseLabel}
-            </HStack>
-          )}
-        </CardFooter>
-      </CardInner>
-    </Card>
+      <Stack gap="1">
+        <InlineBox css={{ fontSize: "xl", fontWeight: "bold" }}>
+          {venue.name}
+        </InlineBox>
+        <address className={css({ fontSize: "xs", color: "secondary" })}>
+          {addressSlot}
+        </address>
+      </Stack>
+      {isInactive && (
+        <>
+          <InlineBox color="danger" fontSize="sm">
+            {noPremiseLabel}
+          </InlineBox>
+          <Float placement="top-start" translate="none" offset="3">
+            <Tag colorPalette="danger" variant="solid" fontSize="xs">
+              {noPremiseLabelShort}
+            </Tag>
+          </Float>
+        </>
+      )}
+    </Stack>
   );
 }

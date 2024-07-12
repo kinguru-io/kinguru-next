@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
+import { Suspense, useId } from "react";
+import { PremiseGallery } from "./_gallery";
 import {
   BookingViewCard,
   BookingViewProvider,
@@ -10,54 +10,62 @@ import {
   PriceDescription,
 } from "@/components/calendar";
 import { Description } from "@/components/common/description";
-import { MapSection } from "@/components/common/maps";
+import {
+  LinkToMap,
+  LocationAddressFallback,
+  LocationAddressField,
+  MapSection,
+} from "@/components/common/maps";
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
-import { PremiseAttributes, PremiseAmenities } from "@/components/premise";
+import { PremiseAmenities } from "@/components/premise";
 import {
   AccordionItemToggle,
   Accordion,
   AccordionItem,
   AccordionItemContent,
   Modal,
-  Slider,
-  SliderItem,
   Tag,
   type AggregatedPrices,
   Loader,
+  SpinnerIcon,
 } from "@/components/uikit";
-import {
-  PremiseAccordionLayout,
-  PremiseCalendarLayout,
-  PremiseMainInfoLayout,
-} from "@/layout/block/premise";
 import {
   cancelPremiseSlotsIntent,
   createPremiseSlotsIntent,
   revalidatePremisePage,
 } from "@/lib/actions/booking";
 import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
+import { priceFormatter } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
+import {
+  isUserOrganization,
+  isUserOwnerOfPremise,
+} from "@/lib/utils/premise-booking";
 import {
   prepareBookedSlots,
   generateTimeSlots,
 } from "@/lib/utils/premise-time-slots";
 import { prepareDiscountRangeMap } from "@/lib/utils/price";
 import { Link, type Locale } from "@/navigation";
-import { css } from "~/styled-system/css";
+import { css, cx } from "~/styled-system/css";
 import {
-  AspectRatio,
   Box,
+  Container,
+  Flex,
   Grid,
   InlineBox,
   Stack,
-  VStack,
 } from "~/styled-system/jsx";
+import { container } from "~/styled-system/patterns";
+import { button } from "~/styled-system/recipes";
 
 export default async function PremisePage({
   params: { slug, locale },
 }: {
   params: { slug: string; locale: Locale };
 }) {
+  const mapId = useId();
+  const calendarId = useId();
   const nowDate = new Date();
   const premise = await prisma.premise.findUnique({
     where: { slug },
@@ -75,7 +83,7 @@ export default async function PremisePage({
   });
 
   if (!premise) {
-    notFound();
+    return notFound();
   }
 
   const t = await getTranslations("premise");
@@ -115,29 +123,32 @@ export default async function PremisePage({
   const bookedSlots = prepareBookedSlots(slots);
   const discountMap = prepareDiscountRangeMap(discounts);
 
-  const accordionItems = [
+  const parametersLine = [
     {
       title: t("amenities_and_facilities"),
-      description: <PremiseAmenities amenities={amenities} />,
+      tagsList: <PremiseAmenities amenities={amenities} />,
     },
     {
       title: t("area_and_capacity"),
-      description: (
-        <Stack alignItems="flex-start" gap="15px">
-          <Tag variant="secondaryLighter" size="md" fontWeight="500">
-            {t("area", { area })}
+      tagsList: (
+        <>
+          <Tag colorPalette="tertiary" fontSize="sm">
+            {area} {t("area_literal")}
           </Tag>
-          <Tag variant="secondaryLighter" size="md" fontWeight="500">
+          <Tag colorPalette="tertiary" fontSize="sm">
             {t("capacity", { capacity })}
           </Tag>
-        </Stack>
+        </>
       ),
     },
+  ];
+
+  const accordionItems = [
     {
       title: t("booking_cancellation_terms"),
       description: bookingCancelTerm && (
-        <Stack gap="20px" color="dark">
-          <InlineBox textStyle="body.1">
+        <Stack gap="2">
+          <InlineBox fontWeight="bold">
             {translationsBCT(bookingCancelTerm as BookingCancelTerm)}
           </InlineBox>
           <p>
@@ -150,101 +161,216 @@ export default async function PremisePage({
     { title: t("how_to_get_there"), description: venue.locationTutorial },
   ];
 
-  return (
-    <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
-      <PremiseMainInfoLayout>
-        <VStack gap="0">
-          <h1>{name}</h1>
-          <Link
-            className={css({
-              textStyle: "body.1",
-              textDecoration: {
-                _hover: "underline",
-                _focus: "underline",
-              },
-            })}
-            href={`/venues/${venue.slug}`}
-          >
-            {venue.name}
-          </Link>
-        </VStack>
-        <PremiseAttributes price={aggregatedPrices.minPrice} />
-        <Box width="full" marginBlockEnd="30px">
-          <Slider slidesCount={resources.length}>
-            {resources.map((resource) => (
-              <SliderItem key={resource.id}>
-                <AspectRatio ratio={16 / 9}>
-                  <Image src={resource.url} fill alt="" />
-                </AspectRatio>
-              </SliderItem>
-            ))}
-          </Slider>
-        </Box>
-        <Description
-          description={premise.description}
-          showMoreLabel={t("show_more")}
-          showLessLabel={t("show_less")}
-        />
-      </PremiseMainInfoLayout>
+  const isOwner = await isUserOwnerOfPremise(premise?.venue?.organizationId);
+  const isUserOrg = await isUserOrganization();
 
-      <PremiseAccordionLayout>
-        <Accordion>
+  const priceLabel = aggregatedPrices.minPrice
+    ? t("from", {
+        price: priceFormatter.format(aggregatedPrices.minPrice),
+      })
+    : t("free");
+
+  return (
+    <>
+      <section
+        className={container({
+          mdDown: { maxWidth: "unset", paddingInline: "unset" },
+          md: {
+            display: "grid",
+            gap: "4%",
+            gridTemplateColumns: "50% auto",
+            paddingBlock: "8",
+          },
+        })}
+      >
+        <PremiseGallery resources={resources} />
+        <Container
+          css={{
+            mdDown: { paddingBlockStart: "4", paddingBlockEnd: "8" },
+            md: { paddingInline: "unset" },
+          }}
+        >
+          <Stack gap="4">
+            <div>
+              <h1 className={css({ textStyle: "heading.page" })}>{name}</h1>
+              <Link
+                className={css({
+                  color: "secondary",
+                  _hoverOrFocusVisible: { textDecoration: "underline" },
+                })}
+                href={`/venues/${venue.slug}`}
+              >
+                {venue.name}
+              </Link>
+              <Flex
+                css={{ gap: "1", fontWeight: "bold", marginBlockStart: "3" }}
+              >
+                <Tag variant="solid" colorPalette="success">
+                  {area} {t("area_literal")}
+                </Tag>
+                <Tag variant="solid" colorPalette="primary">
+                  {priceLabel}
+                </Tag>
+              </Flex>
+            </div>
+            <LinkToMap mapId={mapId}>
+              <Suspense fallback={<SpinnerIcon />}>
+                <LocationAddressField
+                  locationId={venue.locationMapboxId}
+                  fallback={
+                    <LocationAddressFallback
+                      label={t("cannot_load_location")}
+                    />
+                  }
+                />
+              </Suspense>
+            </LinkToMap>
+            <Description
+              description={premise.description}
+              showMoreLabel={t("show_more")}
+              showLessLabel={t("show_less")}
+            />
+            <Link
+              className={cx(
+                button({ size: "lg" }),
+                css({
+                  marginBlockStart: "4",
+                  justifyContent: "center",
+                  sm: { width: "fit-content" },
+                }),
+              )}
+              href={`#${calendarId}`}
+            >
+              {t("bookings_link")}
+            </Link>
+          </Stack>
+        </Container>
+      </section>
+
+      <Box
+        css={{
+          bgColor: "secondary.lightest",
+          paddingBlock: { base: "6", md: "8" },
+        }}
+      >
+        <Container>
+          <Flex gap="6" flexWrap="wrap">
+            {parametersLine.map(({ title, tagsList }) => (
+              <Stack
+                key={title}
+                css={{ gap: "4", flexBasis: "{sizes.md}", flexGrow: "1" }}
+              >
+                <InlineBox css={{ fontWeight: "bold", md: { fontSize: "lg" } }}>
+                  {title}
+                </InlineBox>
+                <Flex gap="1" flexWrap="wrap">
+                  {tagsList}
+                </Flex>
+              </Stack>
+            ))}
+          </Flex>
+        </Container>
+      </Box>
+
+      <section
+        id={calendarId}
+        className={container({ paddingBlock: { base: "6", md: "8" } })}
+      >
+        <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
+          <BookingViewProvider>
+            <Grid
+              gap="10"
+              gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}
+            >
+              <WeekView
+                locale={locale}
+                nowDate={nowDate}
+                timeSlotsGroup={timeSlotsGroup}
+                bookedSlots={bookedSlots}
+                aggregatedPrices={aggregatedPrices}
+                headingSlot={
+                  <h2 className={css({ textStyle: "heading.section" })}>
+                    {t("calendar_heading")}
+                  </h2>
+                }
+              />
+              <Stack
+                css={{
+                  gap: "4",
+                  position: "sticky",
+                  top: "2",
+                  height: "min-content",
+                  md: { gap: "8" },
+                }}
+              >
+                <Modal>
+                  <BookingViewCard
+                    premiseId={premise.id}
+                    premiseOrgId={premise.venue.organizationId}
+                    createIntent={createPremiseSlotsIntent}
+                    cancelIntent={cancelPremiseSlotsIntent}
+                    revalidateFn={revalidatePremisePage}
+                    discountsMap={discountMap}
+                    isOwner={isOwner}
+                    isUserOrg={isUserOrg}
+                  />
+                </Modal>
+                <DiscountViewCard discounts={discounts} locale={locale} />
+                <PriceDescription />
+              </Stack>
+            </Grid>
+          </BookingViewProvider>
+        </MapboxSearchBoxResponseProvider>
+      </section>
+
+      <Container>
+        <Accordion
+          css={{
+            gap: "2",
+            paddingBlock: "6",
+            md: { gap: "4", paddingBlock: "8" },
+          }}
+        >
           {accordionItems.map(({ title, description }) => (
             <AccordionItem key={title}>
-              <AccordionItemToggle textStyle="heading.6" fontWeight="bold">
+              <AccordionItemToggle
+                css={{
+                  fontSize: "px15",
+                  fontWeight: "bold",
+                  borderRadius: "sm",
+                  _peerChecked: { bgColor: "primary" },
+                  md: { padding: "6", fontSize: "md" },
+                }}
+              >
                 {title}
               </AccordionItemToggle>
-              <AccordionItemContent>{description}</AccordionItemContent>
+              <AccordionItemContent
+                className={css({
+                  padding: "4",
+                  fontSize: "sm",
+                  md: { paddingInline: "6", fontSize: "px15" },
+                })}
+              >
+                {description}
+              </AccordionItemContent>
             </AccordionItem>
           ))}
         </Accordion>
-      </PremiseAccordionLayout>
-
-      <PremiseCalendarLayout>
-        <h2>{t("calendar_heading")}</h2>
-        <BookingViewProvider>
-          <Grid
-            gap="20px"
-            gridTemplateColumns={{ base: "1fr", md: "1fr 260px" }}
-          >
-            <WeekView
-              locale={locale}
-              nowDate={nowDate}
-              timeSlotsGroup={timeSlotsGroup}
-              bookedSlots={bookedSlots}
-              aggregatedPrices={aggregatedPrices}
-            />
-            <Grid
-              gap="30px"
-              gridAutoFlow="row"
-              position="sticky"
-              top="100px" // header height + 15px
-              height="min-content"
-            >
-              <Modal>
-                <BookingViewCard
-                  premiseId={premise.id}
-                  createIntent={createPremiseSlotsIntent}
-                  cancelIntent={cancelPremiseSlotsIntent}
-                  revalidateFn={revalidatePremisePage}
-                  discountsMap={discountMap}
-                />
-              </Modal>
-              <DiscountViewCard discounts={discounts} locale={locale} />
-              <PriceDescription />
-            </Grid>
-          </Grid>
-        </BookingViewProvider>
-      </PremiseCalendarLayout>
+      </Container>
 
       <section
-        id="map" // TODO connect with link
+        id={mapId}
         className={css({
-          height: { base: "50vh", md: "breakpoint-sm" },
+          marginBlockStart: "6",
+          height: "50vh",
           maxHeight: "75vh",
+          md: {
+            height: "breakpoint-sm",
+            marginBlockStart: "8",
+          },
         })}
       >
-        <h3 className={css({ srOnly: true })}>{t("map")}</h3>
+        <h2 className={css({ srOnly: true })}>{t("map")}</h2>
         <Suspense fallback={<Loader />}>
           <MapSection
             locationId={venue.locationMapboxId}
@@ -253,6 +379,6 @@ export default async function PremisePage({
           />
         </Suspense>
       </section>
-    </MapboxSearchBoxResponseProvider>
+    </>
   );
 }

@@ -148,7 +148,7 @@ const project = new web.NextJsTypeScriptProject({
     "next-intl",
     "nodemailer",
     "react-map-gl",
-    "mapbox-gl",
+    "mapbox-gl@3.4.0",
     "@mapbox/search-js-core",
     "use-debounce",
     "react-icons",
@@ -185,6 +185,8 @@ const project = new web.NextJsTypeScriptProject({
     "kafkajs",
     "@elastic/elasticsearch@8.13.1",
     "@elastic/transport@8.4.1",
+    "@dnd-kit/core",
+    "@dnd-kit/sortable",
   ],
   devDeps: [
     "@pandacss/dev",

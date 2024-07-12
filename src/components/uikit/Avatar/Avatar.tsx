@@ -1,5 +1,6 @@
 import type { User } from "next-auth";
 import { AvatarImage } from "./avatar-image";
+import { prepareAbbreviation } from "./prepare-abbr";
 import { css } from "~/styled-system/css";
 import { avatar, type AvatarVariantProps } from "~/styled-system/recipes";
 
@@ -24,14 +25,4 @@ export function Avatar({ image, name, size }: AvatarProps) {
       {image && <AvatarImage src={image} />}
     </AvatarWrapper>
   );
-}
-
-const firstLetterRegex = /(?<=\s+|^)[\w\d]/gm;
-
-function prepareAbbreviation(name: string) {
-  const matches = name.match(firstLetterRegex);
-
-  if (!matches) return name[0];
-
-  return matches[0] + matches[1] || "";
 }

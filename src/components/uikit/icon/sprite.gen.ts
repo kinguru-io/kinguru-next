@@ -1,7 +1,16 @@
 export interface SpritesMap {
-  action: "arrow" | "cross" | "menu" | "view-off" | "view";
+  action:
+    | "arrow"
+    | "cross"
+    | "image-add"
+    | "menu"
+    | "tick-double"
+    | "trash-can"
+    | "view-off"
+    | "view";
   common:
     | "calendar"
+    | "cards"
     | "location-star"
     | "phone"
     | "search"
@@ -25,7 +34,7 @@ export const SPRITES_META: {
   };
 } = {
   action: {
-    filePath: "action.945d6b12.svg",
+    filePath: "action.becb9c07.svg",
     items: {
       arrow: {
         viewBox: "0 0 20 20",
@@ -37,7 +46,22 @@ export const SPRITES_META: {
         width: 14,
         height: 14,
       },
+      "image-add": {
+        viewBox: "0 0 32 32",
+        width: 32,
+        height: 32,
+      },
       menu: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
+      },
+      "tick-double": {
+        viewBox: "0 0 41 40",
+        width: 41,
+        height: 40,
+      },
+      "trash-can": {
         viewBox: "0 0 24 24",
         width: 24,
         height: 24,
@@ -55,12 +79,17 @@ export const SPRITES_META: {
     },
   },
   common: {
-    filePath: "common.ae42a057.svg",
+    filePath: "common.969eaced.svg",
     items: {
       calendar: {
         viewBox: "0 0 20 20",
         width: 20,
         height: 20,
+      },
+      cards: {
+        viewBox: "0 0 64 64",
+        width: 64,
+        height: 64,
       },
       "location-star": {
         viewBox: "0 0 24 24",

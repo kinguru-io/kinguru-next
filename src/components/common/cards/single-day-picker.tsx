@@ -44,6 +44,7 @@ export function SingleDayPicker({
       disabled={disabled}
       captionLayout={captionLayout}
       {...(captionLayout && {
+        defaultMonth: date,
         fromYear: currentYear - 100,
         toYear: currentYear,
       })}

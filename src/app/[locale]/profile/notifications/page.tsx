@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
+import { SubSection } from "@/components/common/cards/sub-section";
 import { ProfileNotifications } from "@/components/notifications/profile-notifications";
-import { ProfileSectionLayout } from "@/layout/page";
 import { Stack } from "~/styled-system/jsx";
 
 export default async function NotificationsPage() {
@@ -13,13 +13,11 @@ export default async function NotificationsPage() {
   });
 
   return (
-    <ProfileSectionLayout>
-      <h1 className="heading">{t("heading")}</h1>
-      <section>
-        <Stack gap="10px">
-          <ProfileNotifications notifications={notifications} />
-        </Stack>
-      </section>
-    </ProfileSectionLayout>
+    <SubSection>
+      <h1 className="title">{t("heading")}</h1>
+      <Stack gap="2">
+        <ProfileNotifications notifications={notifications} />
+      </Stack>
+    </SubSection>
   );
 }

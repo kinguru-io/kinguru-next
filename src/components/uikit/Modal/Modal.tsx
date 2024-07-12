@@ -24,7 +24,9 @@ export function useModal() {
 
   if (context === null) {
     // TODO need to be refactored to fit SSR
-    console.warn("useModal() must be used within a <Modal />");
+    if (process.env.NODE_ENV === "development") {
+      console.warn("useModal() must be used within a <Modal />");
+    }
 
     return {
       open: false,
@@ -49,7 +51,7 @@ export function Modal({ children }: ModalProps) {
 }
 
 export function ModalInitiator({ children }: ModalProps) {
-  const { setOpen, open } = useModal();
+  const { setOpen } = useModal();
 
-  return <div onClick={() => setOpen(!open)}>{children}</div>;
+  return <div onClick={() => setOpen(true)}>{children}</div>;
 }

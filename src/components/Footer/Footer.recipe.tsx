@@ -12,6 +12,9 @@ export const footerSlot = defineSlotRecipe({
       width: "full",
       paddingBlock: "8",
       md: { paddingBlockStart: "12" },
+      // `expanded` stands for keeping copyright visible due to fixed button position somewhere (e.g. mobile profile)
+      // TODO may be adjusted but I didn't manage to find correct way to load a button at the bottom of the footer
+      _expanded: { paddingBlockEnd: "14" },
     },
     additionalText: {
       color: "secondary",

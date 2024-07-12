@@ -1,3 +1,45 @@
+# [0.54.0](https://github.com/kinguru-io/kinguru-next/compare/v0.53.0...v0.54.0) (2024-07-12)
+
+
+### Features
+
+* **KINGU-146:** new design calendar ([#708](https://github.com/kinguru-io/kinguru-next/issues/708)) ([c23b6a1](https://github.com/kinguru-io/kinguru-next/commit/c23b6a1497d1fd54237b76b98ddd4e20c94dfe5b))
+
+# [0.53.0](https://github.com/kinguru-io/kinguru-next/compare/v0.52.1...v0.53.0) (2024-07-12)
+
+
+### Features
+
+* **KINGU-147:** new design premise page ([#700](https://github.com/kinguru-io/kinguru-next/issues/700)) ([6484446](https://github.com/kinguru-io/kinguru-next/commit/64844464ab5ed5d220e7f799fdf92e30dc2ec8ef))
+
+## [0.52.1](https://github.com/kinguru-io/kinguru-next/compare/v0.52.0...v0.52.1) (2024-07-09)
+
+
+### Bug Fixes
+
+* fixed deps? ([c9cf4cc](https://github.com/kinguru-io/kinguru-next/commit/c9cf4cc0c8e415068aa7f6e82441bf301fc88f5a))
+
+# [0.52.0](https://github.com/kinguru-io/kinguru-next/compare/v0.51.0...v0.52.0) (2024-07-09)
+
+
+### Features
+
+* **KINGU-145:** DND premise gallery ([#695](https://github.com/kinguru-io/kinguru-next/issues/695)) ([71a65a8](https://github.com/kinguru-io/kinguru-next/commit/71a65a8baee07b6a6bef4f4f90dd11949bcbc71b))
+
+# [0.51.0](https://github.com/kinguru-io/kinguru-next/compare/v0.50.0...v0.51.0) (2024-07-05)
+
+
+### Features
+
+* **KINGU-145:** new design profile layouts ([#687](https://github.com/kinguru-io/kinguru-next/issues/687)) ([d5cb184](https://github.com/kinguru-io/kinguru-next/commit/d5cb1840abaa00488d6f81cfe806215e0b29fec9))
+
+# [0.50.0](https://github.com/kinguru-io/kinguru-next/compare/v0.49.0...v0.50.0) (2024-07-02)
+
+
+### Features
+
+* **KINGU-145:** new design profile layout ([#670](https://github.com/kinguru-io/kinguru-next/issues/670)) ([88663d8](https://github.com/kinguru-io/kinguru-next/commit/88663d860aa0e0146361b14364218499e70b3d0d))
+
 # [0.49.0](https://github.com/kinguru-io/kinguru-next/compare/v0.48.0...v0.49.0) (2024-06-28)
 
 
