@@ -1,3 +1,10 @@
+# [0.55.0](https://github.com/kinguru-io/kinguru-next/compare/v0.54.0...v0.55.0) (2024-07-12)
+
+
+### Features
+
+* user sign in and creds registration ([#709](https://github.com/kinguru-io/kinguru-next/issues/709)) ([accbeee](https://github.com/kinguru-io/kinguru-next/commit/accbeee347a4a3ce73a0bfae565c95bedf309931))
+
 # [0.54.0](https://github.com/kinguru-io/kinguru-next/compare/v0.53.0...v0.54.0) (2024-07-12)
 
 
