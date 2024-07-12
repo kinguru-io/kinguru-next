@@ -33,7 +33,7 @@ export function PremiseGallery({
                 src={resource.url}
                 fill
                 alt=""
-                priority={idx === 1}
+                priority={idx === 0}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </AspectRatio>

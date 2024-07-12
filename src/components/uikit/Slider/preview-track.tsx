@@ -24,7 +24,6 @@ export function PreviewTrack({
           key={item.id}
           buttonPosition="hidden"
           className={css({
-            flexGrow: "1",
             flexBasis: "28",
             width: "unset",
             borderRadius: "md",
