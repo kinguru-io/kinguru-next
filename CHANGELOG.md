@@ -1,3 +1,10 @@
+## [0.55.1](https://github.com/kinguru-io/kinguru-next/compare/v0.55.0...v0.55.1) (2024-07-12)
+
+
+### Bug Fixes
+
+* fixed mapbox token usage ([#664](https://github.com/kinguru-io/kinguru-next/issues/664)) ([ce2464f](https://github.com/kinguru-io/kinguru-next/commit/ce2464f495d3e76b2e750467faaec154156d36bf))
+
 # [0.55.0](https://github.com/kinguru-io/kinguru-next/compare/v0.54.0...v0.55.0) (2024-07-12)
 
 
