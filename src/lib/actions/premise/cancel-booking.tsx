@@ -1,5 +1,6 @@
 "use server";
 
+import { TicketIntentStatus } from "@prisma/client";
 import { differenceInHours, differenceInDays } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
@@ -15,6 +16,7 @@ export interface CancelBookingActionProps {
   discountAmount: number;
   isActive: boolean;
   type?: "tag";
+  bookingStatus?: TicketIntentStatus;
 }
 
 type ProcessRefundProps = Omit<
@@ -147,6 +149,46 @@ const deleteCompaniesPremiseSlots = async (premiseSlotIds: string[]) => {
   });
 };
 
+const cancelPremiseSlots = async (
+  paymentIntentId: string,
+  discountAmount: number,
+  bookingDate: Date,
+  premiseSlotIds: string[],
+) => {
+  const { start, end } = getDayRange(bookingDate);
+
+  if (discountAmount > 0) {
+    await prisma.premiseSlot.updateMany({
+      where: {
+        paymentIntentId,
+        discountAmount,
+        date: {
+          gte: start,
+          lte: end,
+        },
+      },
+      data: {
+        status: TicketIntentStatus.canceled,
+      },
+    });
+  } else {
+    await cancelCompaniesPremiseSlots(premiseSlotIds);
+  }
+};
+
+const cancelCompaniesPremiseSlots = async (premiseSlotIds: string[]) => {
+  await prisma.premiseSlot.updateMany({
+    where: {
+      id: {
+        in: premiseSlotIds,
+      },
+    },
+    data: {
+      status: TicketIntentStatus.canceled,
+    },
+  });
+};
+
 export async function cancelBookingAction({
   bookingStartTime,
   bookingCancelTerm,
@@ -189,12 +231,21 @@ export async function cancelBookingAction({
       discountAmount,
     });
 
-    await deletePremiseSlots(
-      paymentIntentId,
-      discountAmount,
-      bookingStartTime,
-      premiseSlotIds,
-    );
+    if (isUserOrg) {
+      await deletePremiseSlots(
+        paymentIntentId,
+        discountAmount,
+        bookingStartTime,
+        premiseSlotIds,
+      );
+    } else {
+      await cancelPremiseSlots(
+        paymentIntentId,
+        discountAmount,
+        bookingStartTime,
+        premiseSlotIds,
+      );
+    }
 
     return {
       status: "success",

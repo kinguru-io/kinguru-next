@@ -15,6 +15,9 @@ export const premiseMyBookingCardSlot = defineSlotRecipe({
       md: {
         flexDirection: "row",
       },
+      _disabled: {
+        opacity: 0.5,
+      },
     },
   },
 });

@@ -2,12 +2,15 @@
 
 import { ZodSchema } from "zod";
 import { FormField } from "./Elements/FormField";
+import { Flex } from "~/styled-system/jsx";
 import { InputVariant } from "~/styled-system/recipes";
 
 // Types for the config prop
 interface FieldConfig {
-  name: string;
-  type: string;
+  name?: string;
+  type?: string;
+  options?: { text: string }[];
+  row?: FieldConfig[];
 }
 
 // Props for the BaseForm component
@@ -24,20 +27,57 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
 
   return (
     <>
-      {config.map((_field) => (
-        // @ts-ignore
-        <FormField<T>
-          key={`${_field.name}_${_field.type}`}
-          name={_field.name}
-          type={_field.type}
-          customName={
-            props?.customFieldName ? props.customFieldName(_field) : undefined
-          }
-          schema={props.schema} // explicitly pass schema
-          translationsKey={props.translationsKey} // explicitly pass translationsKey
-          variant={props.variant} // explicitly pass variant
-        />
-      ))}
+      {config.map((field, index) => {
+        if (field.row) {
+          return (
+            <Flex
+              key={`${field.name}_${index}`}
+              css={{
+                gap: "4",
+                flexDirection: "column",
+                lg: { gap: "8", flexDirection: "row" },
+              }}
+            >
+              {field.row.map(
+                // @ts-ignore
+                (rowField) => (
+                  // @ts-ignore
+                  <FormField<T>
+                    key={`${rowField.name}_${rowField.type}`}
+                    name={rowField.name}
+                    type={rowField.type}
+                    options={rowField.options}
+                    customName={
+                      props.customFieldName
+                        ? props.customFieldName(rowField)
+                        : undefined
+                    }
+                    schema={props.schema}
+                    translationsKey={props.translationsKey}
+                    variant={props.variant}
+                  />
+                ),
+              )}
+            </Flex>
+          );
+        }
+
+        return (
+          // @ts-ignore
+          <FormField<T>
+            key={`${field.name}_${field.type}`}
+            name={field.name}
+            type={field.type}
+            options={field.options}
+            customName={
+              props.customFieldName ? props.customFieldName(field) : undefined
+            }
+            schema={props.schema}
+            translationsKey={props.translationsKey}
+            variant={props.variant}
+          />
+        );
+      })}
     </>
   );
 }

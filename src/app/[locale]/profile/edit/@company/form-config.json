@@ -5,16 +5,20 @@
       "type": "text"
     },
     {
-      "name": "foundationDate",
-      "type": "number"
-    },
-    {
-      "name": "country",
-      "type": "country-select"
-    },
-    {
-      "name": "city",
-      "type": "text"
+      "row": [
+        {
+          "name": "foundationDate",
+          "type": "number"
+        },
+        {
+          "name": "country",
+          "type": "country-select"
+        },
+        {
+          "name": "city",
+          "type": "text"
+        }
+      ]
     }
   ],
   "credentials": {
@@ -52,16 +56,20 @@
         "type": "text"
       },
       {
-        "name": "building",
-        "type": "text"
-      },
-      {
-        "name": "room",
-        "type": "text"
-      },
-      {
-        "name": "zipCode",
-        "type": "text"
+        "row": [
+        {
+          "name": "building",
+          "type": "text"
+        },
+        {
+          "name": "room",
+          "type": "text"
+        },
+        {
+          "name": "zipCode",
+          "type": "text"
+        }
+        ]
       }
     ],
     "billingAddress": [
@@ -78,16 +86,20 @@
         "type": "text"
       },
       {
-        "name": "building",
-        "type": "text"
-      },
-      {
-        "name": "room",
-        "type": "text"
-      },
-      {
-        "name": "zipCode",
-        "type": "text"
+        "row": [
+        {
+          "name": "building",
+          "type": "text"
+        },
+        {
+          "name": "room",
+          "type": "text"
+        },
+        {
+          "name": "zipCode",
+          "type": "text"
+        }
+        ]
       }
     ]
   },

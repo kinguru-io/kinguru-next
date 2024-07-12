@@ -27,6 +27,7 @@ const statusColorPallets: Record<TicketIntentStatus, string> = {
   failed: "danger",
   succeed: "success",
   progress: "primary",
+  canceled: "dark",
 };
 
 const labels: LabelsType = {

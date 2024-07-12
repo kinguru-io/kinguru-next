@@ -26,10 +26,7 @@ import {
   type CreateVenueFormSchemaProps,
   type CreateVenueAction,
 } from "@/lib/actions/venue";
-import {
-  CreateVenueFormTypeEnum,
-  MergedVenueFormSchemaProps,
-} from "@/lib/actions/venue/validation";
+import { MergedVenueFormSchemaProps } from "@/lib/actions/venue/validation";
 import { FormActionState } from "@/lib/utils";
 import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
 import { Stack } from "~/styled-system/jsx";
@@ -47,9 +44,6 @@ export function AddVenueForm({
     mode: "all",
     // @ts-expect-error
     resolver: zodResolver(createVenueFormSchema(t)),
-    defaultValues: {
-      formType: CreateVenueFormTypeEnum.MainInfo,
-    },
   });
 
   const [response, formAction] = useFormState<FormActionState, FormData>(
@@ -73,10 +67,9 @@ export function AddVenueForm({
 
   const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> = useCallback(
     (data) => {
-      if (!methods.formState.isValid) return;
       const formData = {
-        ...methods.getValues(),
         ...data,
+        ...methods.getValues(),
       };
 
       const multiFormPayload = transformMultiFormPayload<
@@ -114,27 +107,22 @@ export function AddVenueFormInner({
     {
       title: t("groups.main_info"),
       content: <MainInfoGroup isEditing={editMode} />,
-      formType: CreateVenueFormTypeEnum.MainInfo,
     },
     {
       title: t("groups.photo"),
       content: <PhotoGroup defaultValues={defaultValues?.image} />,
-      formType: CreateVenueFormTypeEnum.Image,
     },
     {
       title: t("groups.location"),
       content: <LocationGroup control={control} />,
-      formType: CreateVenueFormTypeEnum.Location,
     },
     {
       title: t("groups.additional"),
       content: <AdditionalGroup defaultValues={defaultValues?.features} />,
-      formType: CreateVenueFormTypeEnum.Features,
     },
     {
       title: t("groups.contacts"),
       content: <ContactsGroup />,
-      formType: CreateVenueFormTypeEnum.Manager,
     },
   ];
 

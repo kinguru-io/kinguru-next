@@ -31,7 +31,7 @@ import {
   userProfileSchema,
   type UserProfileInput,
 } from "@/lib/validations/auth/user-profile";
-import { Stack } from "~/styled-system/jsx";
+import { Flex, Stack } from "~/styled-system/jsx";
 
 export function EditUserProfileForm({
   userData: {
@@ -101,9 +101,19 @@ function EditUserProfileFormInner() {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Stack gap="4">
-          <ImagePickerForm groupKey="user-profile" name="image" />
-          <Stack gap="2">
+        <Flex
+          css={{
+            flexDirection: "column",
+            gap: "4",
+            lg: { gap: "8", flexDirection: "row" },
+          }}
+        >
+          <ImagePickerForm
+            groupKey="user-profile"
+            name="image"
+            type="profile"
+          />
+          <Stack gap="2" flexGrow="1">
             <BaseForm<UserProfileInput>
               config={formConfig.main}
               // @ts-expect-error
@@ -112,7 +122,7 @@ function EditUserProfileFormInner() {
             />
             <DateDropdown name="birthdate" placeholder={t("birthdate")} />
           </Stack>
-        </Stack>
+        </Flex>
       </SubSection>
 
       <SubSection>

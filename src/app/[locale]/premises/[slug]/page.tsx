@@ -75,6 +75,9 @@ export default async function PremisePage({
       slots: {
         where: {
           date: { gte: nowDate.toISOString() },
+          status: {
+            not: "canceled",
+          },
         },
       },
       discounts: { orderBy: { duration: "asc" } },
