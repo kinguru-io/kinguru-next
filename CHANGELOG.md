@@ -1,3 +1,10 @@
+# [0.54.0](https://github.com/kinguru-io/kinguru-next/compare/v0.53.0...v0.54.0) (2024-07-12)
+
+
+### Features
+
+* **KINGU-146:** new design calendar ([#708](https://github.com/kinguru-io/kinguru-next/issues/708)) ([c23b6a1](https://github.com/kinguru-io/kinguru-next/commit/c23b6a1497d1fd54237b76b98ddd4e20c94dfe5b))
+
 # [0.53.0](https://github.com/kinguru-io/kinguru-next/compare/v0.52.1...v0.53.0) (2024-07-12)
 
 
