@@ -269,16 +269,16 @@
     "map": "Map",
     "amenities_and_facilities": "Amenities and facilities",
     "area_and_capacity": "Area and capacity",
-    "area": "Area: {area} m²",
     "area_literal": "m²",
-    "capacity": "Capacity: {capacity}",
+    "capacity": "Do {capacity} osób",
     "booking_cancellation_terms": "Booking cancellation terms",
     "premise_rules": "Premise rules",
     "how_to_get_there": "How to get there",
     "calendar_heading": "Premise calendar",
     "show_more": "More",
     "show_less": "Less",
-    "go_to_premise_page": "Przejdź do strony lokalu"
+    "go_to_premise_page": "Przejdź do strony lokalu",
+    "cannot_load_location": "Nie można załadować lokalizacji"
   },
   "discount_info": {
     "card_heading": "There are discounts*",

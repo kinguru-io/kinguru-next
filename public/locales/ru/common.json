@@ -219,16 +219,16 @@
     "map": "Карта",
     "amenities_and_facilities": "Оснащения и удобства",
     "area_and_capacity": "Площадь и вместительность",
-    "area": "Площадь: {area} м²",
     "area_literal": "м²",
-    "capacity": "Вместительность: {capacity}",
+    "capacity": "до {capacity} человек",
     "booking_cancellation_terms": "Условия отмены бронирования",
     "premise_rules": "Правила зала",
     "how_to_get_there": "Как добраться",
     "calendar_heading": "Календарь площадки",
     "show_more": "Подробнее",
     "show_less": "Свернуть",
-    "go_to_premise_page": "Перейти на страницу помещения"
+    "go_to_premise_page": "Перейти на страницу помещения",
+    "cannot_load_location": "Не удалось загрузить местоположение"
   },
   "event": {
     "future_event_page": {
