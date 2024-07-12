@@ -1,3 +1,10 @@
+# [0.53.0](https://github.com/kinguru-io/kinguru-next/compare/v0.52.1...v0.53.0) (2024-07-12)
+
+
+### Features
+
+* **KINGU-147:** new design premise page ([#700](https://github.com/kinguru-io/kinguru-next/issues/700)) ([6484446](https://github.com/kinguru-io/kinguru-next/commit/64844464ab5ed5d220e7f799fdf92e30dc2ec8ef))
+
 ## [0.52.1](https://github.com/kinguru-io/kinguru-next/compare/v0.52.0...v0.52.1) (2024-07-09)
 
 
