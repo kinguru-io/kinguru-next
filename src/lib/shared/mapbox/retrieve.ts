@@ -10,16 +10,13 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
     "retrieveLocationPropertiesById",
   );
 
-  try {
-    const response = await fetch(retrieveUrl.toString(), {
-      next: { revalidate: 3600 },
-    });
-    const {
-      features: [{ properties }],
-    }: SearchBoxRetrieveResponse = await response.json();
+  const response = await fetch(retrieveUrl.toString(), {
+    next: { revalidate: 3600 },
+  });
 
-    return properties;
-  } catch (_) {
-    return null;
-  }
+  const {
+    features: [{ properties }],
+  }: SearchBoxRetrieveResponse = await response.json();
+
+  return properties;
 }
