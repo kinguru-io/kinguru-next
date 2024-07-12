@@ -181,6 +181,7 @@ const project = new web.NextJsTypeScriptProject({
     "react-hot-toast",
 
     "bullmq",
+    "pino",
     "dotenv",
     "kafkajs",
     "@elastic/elasticsearch@8.13.1",
