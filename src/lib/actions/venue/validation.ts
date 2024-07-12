@@ -56,44 +56,19 @@ const idsSchema = z.object({
   managerId: zfd.text(z.string()).optional(),
 });
 
-// Enum for form types
-export enum CreateVenueFormTypeEnum {
-  MainInfo = "mainInfo",
-  Image = "image",
-  Location = "location",
-  Features = "features",
-  Manager = "manager",
-}
-
 // Discriminated union schema
 export const createVenueFormSchema = (
   t: (arg: string) => string = (value) => value,
 ) =>
-  z.discriminatedUnion("formType", [
-    z.object({
-      formType: z.literal(CreateVenueFormTypeEnum.MainInfo),
-      mainInfo: mainInfoSchema,
-    }),
-    z.object({
-      formType: z.literal(CreateVenueFormTypeEnum.Image),
-      image: imageSchema(t),
-    }),
-    z.object({
-      formType: z.literal(CreateVenueFormTypeEnum.Location),
-      location: locationSchema,
-    }),
-    z.object({
-      formType: z.literal(CreateVenueFormTypeEnum.Features),
-      features: featuresSchema,
-    }),
-    z.object({
-      formType: z.literal(CreateVenueFormTypeEnum.Manager),
-      manager: managerSchema(t),
-    }),
-  ]);
+  z.object({
+    mainInfo: mainInfoSchema,
+    image: imageSchema(t),
+    location: locationSchema,
+    features: featuresSchema,
+    manager: managerSchema(t),
+  });
 
 export type CreateVenueFormSchemaProps = {
-  formType: CreateVenueFormTypeEnum;
   mainInfo: z.infer<typeof mainInfoSchema>;
   image: z.infer<ReturnType<typeof imageSchema>>;
   location: z.infer<typeof locationSchema>;

@@ -1,3 +1,4 @@
+import { TicketIntentStatus } from "@prisma/client";
 import { differenceInDays, differenceInHours } from "date-fns";
 import { useTranslations } from "next-intl";
 
@@ -81,17 +82,21 @@ const BookingsSection = async ({
             />
           ));
 
-          const showCancelBooking = booking.status !== "canceled" && !isUserOrg;
+          const showCancelBooking =
+            booking.status !== TicketIntentStatus.canceled && !isUserOrg;
+          const isDisabled =
+            booking.status === TicketIntentStatus.canceled || undefined;
 
           return (
             <Box
-              key={booking.id}
+              key={`${booking.id}-${booking.premiseId}`}
+              data-disabled={isDisabled}
               css={{
-                _disabled: {
-                  opacity: 0.5,
-                },
                 "&:last-child > div:last-child": {
                   marginBlockEnd: "0",
+                },
+                _disabled: {
+                  opacity: 0.6,
                 },
               }}
             >

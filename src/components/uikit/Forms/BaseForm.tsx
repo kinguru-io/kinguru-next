@@ -30,24 +30,34 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
       {config.map((field, index) => {
         if (field.row) {
           return (
-            <Flex key={index} gap={4}>
-              {field.row.map((rowField) => (
+            <Flex
+              key={`${field.name}_${index}`}
+              css={{
+                gap: "4",
+                flexDirection: "column",
+                lg: { gap: "8", flexDirection: "row" },
+              }}
+            >
+              {field.row.map(
                 // @ts-ignore
-                <FormField<T>
-                  key={`${rowField.name}_${rowField.type}`}
-                  name={rowField.name}
-                  type={rowField.type}
-                  options={rowField.options}
-                  customName={
-                    props.customFieldName
-                      ? props.customFieldName(rowField)
-                      : undefined
-                  }
-                  schema={props.schema}
-                  translationsKey={props.translationsKey}
-                  variant={props.variant}
-                />
-              ))}
+                (rowField) => (
+                  // @ts-ignore
+                  <FormField<T>
+                    key={`${rowField.name}_${rowField.type}`}
+                    name={rowField.name}
+                    type={rowField.type}
+                    options={rowField.options}
+                    customName={
+                      props.customFieldName
+                        ? props.customFieldName(rowField)
+                        : undefined
+                    }
+                    schema={props.schema}
+                    translationsKey={props.translationsKey}
+                    variant={props.variant}
+                  />
+                ),
+              )}
             </Flex>
           );
         }

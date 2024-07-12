@@ -49,7 +49,7 @@ export const FormField = memo(
     } = useFormContext<T>();
 
     // @ts-ignore
-    const t = useTranslations(translationsKey);
+    const t = useTranslations(translationsKey) as (key: string) => string;
 
     const fieldName = customName || name;
 

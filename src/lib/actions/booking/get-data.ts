@@ -1,4 +1,4 @@
-import { BookingType, User } from "@prisma/client";
+import { BookingType, TicketIntentStatus, User } from "@prisma/client";
 
 export async function getBookingsByRole(
   userId: User["id"],
@@ -10,7 +10,7 @@ export async function getBookingsByRole(
         userId: userId,
         type: bookingType,
         status: {
-          not: "canceled",
+          not: TicketIntentStatus.canceled,
         },
       },
       include: {
@@ -36,7 +36,7 @@ export async function getCanceledBookingsByRole(
       where: {
         userId: userId,
         type: bookingType,
-        status: "canceled",
+        status: TicketIntentStatus.canceled,
       },
       include: {
         premise: true,
@@ -77,15 +77,15 @@ export async function getBookingsViaWebsite(
 
     const withCanceledStatus =
       withCanceled === "true"
-        ? { status: "canceled" }
-        : { status: { not: "canceled" } };
+        ? { status: TicketIntentStatus.canceled }
+        : { status: { not: TicketIntentStatus.canceled } };
 
     const premiseSlots = await prisma.premiseSlot.findMany({
       where: {
         organizationId: {
           in: organizationIds,
         },
-        type: "via_website",
+        type: BookingType.via_website,
         ...withCanceledStatus,
       },
       include: {

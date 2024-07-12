@@ -106,15 +106,27 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
         <Stack gap="4">
-          <ImagePickerForm groupKey="company" name="logotype" />
-          <Stack gap="2">
-            <BaseForm<OrgRegisterInput>
-              config={formFieldsConfig.main}
-              // @ts-expect-error
-              schema={orgRegisterSchema(t)}
-              translationsKey="organization.basic_info_form"
+          <Flex
+            css={{
+              flexDirection: "column",
+              gap: "4",
+              lg: { gap: "8", flexDirection: "row" },
+            }}
+          >
+            <ImagePickerForm
+              groupKey="company"
+              name="logotype"
+              type="profile"
             />
-          </Stack>
+            <Stack gap="2" flexGrow="1">
+              <BaseForm<OrgRegisterInput>
+                config={formFieldsConfig.main}
+                // @ts-expect-error
+                schema={orgRegisterSchema(t)}
+                translationsKey="organization.basic_info_form"
+              />
+            </Stack>
+          </Flex>
         </Stack>
       </SubSection>
 
@@ -186,6 +198,7 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
       config={formFieldsConfig.credentials.postAddress}
       // @ts-expect-error
       schema={orgRegisterSchema(t)}
+      // @ts-expect-error
       customFieldName={customFieldName}
       translationsKey="organization.basic_info_form"
     />

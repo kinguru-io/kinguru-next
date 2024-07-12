@@ -40,6 +40,7 @@ export function ImagePickerForm({
     <Box
       css={{
         position: "relative",
+        height: "118px",
         "& > label": {
           height: "118px",
 
