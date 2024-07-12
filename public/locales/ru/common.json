@@ -100,12 +100,20 @@
     },
     "signup_form": {
       "heading": "Зарегистрируйте свою компанию",
+      "heading_user": "Зарегистрируйте личный аккаунт",
       "name": "Название компании",
       "email": "Email",
       "password": "Пароль",
       "confirmPassword": "Повтор пароля",
       "submit": "Зарегистрироваться"
-    }
+    },
+    "error": {
+      "email_exists": "Email уже используется",
+      "email_or_name_exist": "Email или название компании уже используются",
+      "invalid_credentials": "Неправильные email или пароль",
+      "unknown_error": "Что-то пошло не так"
+    },
+    "alternative_sign_in_label": "Или войдите через"
   },
   "form": {
     "common": {

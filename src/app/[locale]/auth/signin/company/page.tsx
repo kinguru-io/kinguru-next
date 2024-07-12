@@ -1,6 +1,6 @@
-import { SigninForm } from "./form";
+import { SignInForm } from "../_sign-in-form/form";
 import { revalidateAll } from "@/lib/actions";
 
 export default async function CompanySignInPage() {
-  return <SigninForm revalidateAll={revalidateAll} />;
+  return <SignInForm revalidateAll={revalidateAll} isCompany />;
 }
