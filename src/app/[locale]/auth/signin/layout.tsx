@@ -53,7 +53,7 @@ export default function SignInLayout({
       </div>
       <h1>{t("sign_in_heading")}</h1>
       {children}
-      <Link
+      {/* <Link
         href="/auth/reset"
         className={css({
           padding: "1",
@@ -63,7 +63,7 @@ export default function SignInLayout({
         })}
       >
         {t("reset_password_label")}
-      </Link>
+      </Link> */}
     </>
   );
 }

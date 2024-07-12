@@ -100,12 +100,20 @@
     },
     "signup_form": {
       "heading": "Register your company",
+      "heading_user": "Register a personal account",
       "name": "Company name",
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
       "submit": "Register"
-    }
+    },
+    "error": {
+      "email_exists": "Email is already registered",
+      "email_or_name_exist": "Email or company name is already registered",
+      "invalid_credentials": "Email or password is invalid",
+      "unknown_error": "Something went wrong"
+    },
+    "alternative_sign_in_label": "Or sign in with"
   },
   "form": {
     "common": {

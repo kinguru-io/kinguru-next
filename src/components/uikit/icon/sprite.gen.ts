@@ -8,6 +8,7 @@ export interface SpritesMap {
     | "trash-can"
     | "view-off"
     | "view";
+  auth: "github" | "google";
   common:
     | "calendar"
     | "cards"
@@ -72,6 +73,21 @@ export const SPRITES_META: {
         height: 24,
       },
       view: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
+      },
+    },
+  },
+  auth: {
+    filePath: "auth.9f2ed548.svg",
+    items: {
+      github: {
+        viewBox: "0 0 98 96",
+        width: 98,
+        height: 96,
+      },
+      google: {
         viewBox: "0 0 24 24",
         width: 24,
         height: 24,
