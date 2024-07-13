@@ -7,11 +7,9 @@ import { Box } from "~/styled-system/jsx";
 export function ImagePickerForm({
   name,
   groupKey,
-  type = "cover",
 }: {
   name: string;
   groupKey: string;
-  type?: "profile" | "cover";
 }) {
   const {
     control,
@@ -25,36 +23,21 @@ export function ImagePickerForm({
     defaultValue: defaultValues && defaultValues[name],
   });
 
-  const styles = {
-    profile: {
-      maxWidth: { base: "full", md: "50%" },
-      minWidth: "40",
-    },
-    cover: {
-      maxWidth: { base: "full", md: "50%" },
-      minWidth: "80",
-    },
-  }[type];
-
   return (
     <Box
       css={{
         position: "relative",
-        height: "118px",
-        "& > label": {
-          height: "118px",
-
-          "& > span span": {
-            height: "118px",
-          },
-        },
-        ...styles,
+        flexBasis: "full",
+        height: "fit-content",
+        md: { flexBasis: "32", maxWidth: "32" },
+        "& img": { objectFit: "contain" },
       }}
     >
       <ProfileImagePicker
         key={src}
         groupKey={groupKey}
         imageSrc={src || ""}
+        ratio={{ base: 21 / 9, md: 1 }}
         {...register(name)}
       />
       {src && (

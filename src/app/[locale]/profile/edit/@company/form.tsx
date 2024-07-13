@@ -106,19 +106,9 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
         <Stack gap="4">
-          <Flex
-            css={{
-              flexDirection: "column",
-              gap: "4",
-              lg: { gap: "8", flexDirection: "row" },
-            }}
-          >
-            <ImagePickerForm
-              groupKey="company"
-              name="logotype"
-              type="profile"
-            />
-            <Stack gap="2" flexGrow="1">
+          <Flex css={{ flexWrap: "wrap", gap: "4" }}>
+            <ImagePickerForm groupKey="company" name="logotype" />
+            <Stack gap="2" flexGrow="1" alignSelf="center">
               <BaseForm<OrgRegisterInput>
                 config={formFieldsConfig.main}
                 // @ts-expect-error
@@ -140,7 +130,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
           }}
         >
           <FormColumn>
-            {t("column.business")}
+            <span className="subtitle">{t("column.business")}</span>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.business}
               // @ts-expect-error
@@ -149,7 +139,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             />
           </FormColumn>
           <FormColumn>
-            {t("column.bank")}
+            <span className="subtitle">{t("column.bank")}</span>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.bank}
               // @ts-expect-error
@@ -158,11 +148,11 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             />
           </FormColumn>
           <FormColumn>
-            {t("column.postAddress")}
+            <span className="subtitle">{t("column.postAddress")}</span>
             <AddressGroup type="post" />
           </FormColumn>
           <FormColumn>
-            {t("column.billingAddress")}
+            <span className="subtitle">{t("column.billingAddress")}</span>
             <AddressGroup type="billing" />
           </FormColumn>
         </Grid>
@@ -207,7 +197,14 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
 
 function FormColumn({ children }: { children: React.ReactNode }) {
   return (
-    <Flex direction="column" gap="3" fontSize="px15">
+    <Flex
+      css={{
+        flexDirection: "column",
+        gap: "2",
+        fontSize: "px15",
+        "& > .subtitle": { marginBlockEnd: "2" },
+      }}
+    >
       {children}
     </Flex>
   );

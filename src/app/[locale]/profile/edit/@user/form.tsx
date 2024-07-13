@@ -101,18 +101,8 @@ function EditUserProfileFormInner() {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Flex
-          css={{
-            flexDirection: "column",
-            gap: "4",
-            lg: { gap: "8", flexDirection: "row" },
-          }}
-        >
-          <ImagePickerForm
-            groupKey="user-profile"
-            name="image"
-            type="profile"
-          />
+        <Flex css={{ flexWrap: "wrap", gap: "2" }}>
+          <ImagePickerForm groupKey="user-profile" name="image" />
           <Stack gap="2" flexGrow="1">
             <BaseForm<UserProfileInput>
               config={formConfig.main}
