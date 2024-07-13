@@ -4,6 +4,7 @@ export interface SpritesMap {
     | "cross"
     | "image-add"
     | "menu"
+    | "move"
     | "tick-double"
     | "trash-can"
     | "view-off"
@@ -35,7 +36,7 @@ export const SPRITES_META: {
   };
 } = {
   action: {
-    filePath: "action.becb9c07.svg",
+    filePath: "action.df2d0198.svg",
     items: {
       arrow: {
         viewBox: "0 0 20 20",
@@ -53,6 +54,11 @@ export const SPRITES_META: {
         height: 32,
       },
       menu: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
+      },
+      move: {
         viewBox: "0 0 24 24",
         width: 24,
         height: 24,

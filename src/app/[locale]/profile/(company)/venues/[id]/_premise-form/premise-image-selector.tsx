@@ -153,19 +153,25 @@ function Sortable({ id, children }: PropsWithChildren<{ id: number }>) {
           ref={setActivatorNodeRef}
           {...listeners}
           className={cx(
-            button({ colorPalette: "secondary", rounded: false }),
             css({
               touchAction: "none",
+              cursor: "grab",
               position: "absolute",
               insetInlineEnd: "0",
               insetBlockStart: "0",
               padding: "1",
-              "& > svg": { fontSize: "xl" },
-              md: { padding: "1.5" },
+              "&[data-dragging]": { cursor: "grabbing" },
+              "& > svg": {
+                fontSize: "2xl",
+                padding: "2",
+                bgColor: "primary.lighter",
+                borderRadius: "sm",
+              },
             }),
           )}
+          data-dragging={isDragging || undefined}
         >
-          <ArrowIcon direction="up" />
+          <Icon name="action/move" />
         </button>
       )}
     </Box>
