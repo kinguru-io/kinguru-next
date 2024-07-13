@@ -10,13 +10,30 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
     "retrieveLocationPropertiesById",
   );
 
-  const response = await fetch(retrieveUrl.toString(), {
-    next: { revalidate: 3600 },
-  });
+  try {
+    const response = await fetch(retrieveUrl.toString(), {
+      next: { revalidate: 3600 },
+    });
 
-  const {
-    features: [{ properties }],
-  }: SearchBoxRetrieveResponse = await response.json();
+    if (!response.ok) {
+      console.error({
+        response: await response.json(),
+        url: response.url,
+      });
+      return null;
+    }
 
-  return properties;
+    const { features }: SearchBoxRetrieveResponse = await response.json();
+
+    // since it retrieves by mapbox_id, there is only one feature to take
+    const feature = features.at(0);
+
+    if (!feature) return null;
+
+    return feature.properties;
+  } catch (e) {
+    console.error(JSON.stringify(e));
+
+    return null;
+  }
 }
