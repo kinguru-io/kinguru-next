@@ -72,6 +72,7 @@ export function TimeRangeLink({
         bgColor: "light",
         borderRadius: "full",
         "& > :first-child": { flexBasis: "full" }, // stretch dropdown fully
+        "& > label": { height: "unset" },
       }}
     >
       <Dropdown size="auto" anchor="start">

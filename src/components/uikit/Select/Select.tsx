@@ -31,7 +31,7 @@ export const Select = forwardRef(function Select(
     : { defaultValue: defaultValue || "" };
 
   return (
-    <span className={classes.outerWrapper}>
+    <label className={classes.outerWrapper}>
       {icon && <span className={classes.icon}>{icon}</span>}
       <select
         ref={ref}
@@ -50,6 +50,6 @@ export const Select = forwardRef(function Select(
         <span className={classes.placeholder}>{placeholder}</span>
       )}
       <Icon name="action/arrow" className={classes.arrow} />
-    </span>
+    </label>
   );
 });

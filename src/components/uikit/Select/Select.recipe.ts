@@ -9,6 +9,7 @@ export const selectSlot = defineSlotRecipe({
       position: "relative",
       display: "inline-block",
       width: "full",
+      height: "full",
       color: "dark",
       fontWeight: "500",
       '&:has(option[value=""]:checked)': {
