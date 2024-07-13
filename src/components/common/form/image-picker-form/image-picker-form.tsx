@@ -3,6 +3,10 @@ import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker"
 import { Button, Icon } from "@/components/uikit";
 import { css } from "~/styled-system/css";
 import { Box } from "~/styled-system/jsx";
+import { aspectRatio } from "~/styled-system/patterns";
+
+// pregenerate ratio
+aspectRatio.raw({ ratio: { base: 21 / 9, md: 1 } });
 
 export function ImagePickerForm({
   name,
