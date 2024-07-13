@@ -8,12 +8,11 @@ import { useCallback, type PropsWithChildren } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { ImageDropZone } from "@/components/common/form/image-drop-zone";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { ArrowIcon, Button, ErrorField, Icon } from "@/components/uikit";
+import { Button, ErrorField, Icon } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { css, cx } from "~/styled-system/css";
 import { Box, Grid } from "~/styled-system/jsx";
 import { aspectRatio } from "~/styled-system/patterns";
-import { button } from "~/styled-system/recipes";
 
 // pregenerate ratio
 aspectRatio.raw({ ratio: { base: 1, md: 16 / 9 } });
