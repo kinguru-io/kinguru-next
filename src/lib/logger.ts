@@ -1,12 +1,5 @@
-import pinoLogger, { Logger } from "pino";
+import pinoLogger from "pino";
 
-let logger: Logger;
-export const getLogger = () => {
-  if (!logger) {
-    const deploymentEnv = process.env.NODE_ENV || "development";
-    logger = pinoLogger({
-      level: deploymentEnv === "production" ? "info" : "debug",
-    });
-  }
-  return logger;
-};
+export const logger = pinoLogger({
+  level: process.env.NODE_ENV === "production" ? "info" : "debug",
+});

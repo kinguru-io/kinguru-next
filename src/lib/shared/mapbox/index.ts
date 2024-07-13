@@ -1,1 +1,1 @@
-export * from "./retrieve";
+export { retrieveLocationPropertiesById } from "./retrieve";

@@ -1,4 +1,5 @@
 import { type SearchBoxRetrieveResponse } from "@mapbox/search-js-core";
+import { logger } from "@/lib/logger";
 
 export async function retrieveLocationPropertiesById(mapboxId: string) {
   const retrieveUrl = new URL(
@@ -16,10 +17,7 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
     });
 
     if (!response.ok) {
-      console.error({
-        response: await response.json(),
-        url: response.url,
-      });
+      logger.error(await response.json());
       return null;
     }
 
@@ -32,8 +30,7 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
 
     return feature.properties;
   } catch (e) {
-    console.error(JSON.stringify(e));
-
+    logger.error(e);
     return null;
   }
 }
