@@ -11,7 +11,7 @@ export const selectSlot = defineSlotRecipe({
       width: "full",
       height: "full",
       color: "dark",
-      fontWeight: "500",
+      fontWeight: "medium",
       '&:has(option[value=""]:checked)': {
         color: "secondary",
         fontWeight: "normal",
