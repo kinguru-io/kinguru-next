@@ -15,13 +15,23 @@ export function parseInitialDatetimeValues({
   searchParams: ReadonlyURLSearchParams | null;
   name: string;
 }) {
-  const defaultValues = ["", ""];
+  const defaultConfig = {
+    from: "",
+    to: "",
+    date: null,
+  };
 
-  if (!searchParams) return defaultValues;
+  if (!searchParams) return defaultConfig;
 
   const datetimeParam = searchParams.get(name);
 
-  if (!datetimeParam) return defaultValues;
+  if (!datetimeParam) return defaultConfig;
 
-  return datetimeParam.split(",").map((datetime) => String(getHours(datetime)));
+  const [from, to] = datetimeParam.split(",");
+
+  return {
+    from: getHours(from).toString(),
+    to: getHours(to).toString(),
+    date: new Date(from),
+  };
 }

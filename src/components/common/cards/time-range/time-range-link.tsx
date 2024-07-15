@@ -40,9 +40,9 @@ export function TimeRangeLink({
   const [pending, startTransition] = useTransition();
 
   const initialParams = parseInitialDatetimeValues({ searchParams, name });
-  const [date, setDate] = useState<Date | null>(null);
-  const [from, setFrom] = useState(initialParams[0]);
-  const [to, setTo] = useState(initialParams[1]);
+  const [date, setDate] = useState<Date | null>(initialParams.date);
+  const [from, setFrom] = useState(initialParams.from);
+  const [to, setTo] = useState(initialParams.to);
 
   const searchBtnClicked = () => {
     const params = new URLSearchParams(searchParams || undefined);
@@ -72,7 +72,7 @@ export function TimeRangeLink({
         bgColor: "light",
         borderRadius: "full",
         "& > :first-child": { flexBasis: "full" }, // stretch dropdown fully
-        "& > label": { height: "unset" },
+        "& select": { height: "full" },
       }}
     >
       <Dropdown size="auto" anchor="start">
