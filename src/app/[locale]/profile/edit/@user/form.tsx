@@ -152,13 +152,11 @@ function DateDropdown({
     control,
     formState: { errors },
   } = useFormContext();
-  const { field } = useController({ name, control, shouldUnregister: false });
+  const { field } = useController({ name, control });
 
   const dayChanged = (day: Date) => {
     field.onChange(formatISO(day, { representation: "date" }));
   };
-
-  console.log(field.value);
 
   return (
     <Dropdown size="auto" anchor="start">
