@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import BookingLabels from "./BookingLabels";
+import { BookingLabels } from "./BookingLabels";
 import {
   PremiseMyBookingCard,
   PremiseMyBookingCardContent,

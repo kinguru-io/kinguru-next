@@ -1,9 +1,8 @@
-import { BookingType, TicketIntentStatus } from "@prisma/client";
-import { format } from "date-fns";
-import { Icon } from "../icon";
-import { Modal } from "../Modal";
-import { Tag } from "../Tag";
+import type { BookingType, TicketIntentStatus } from "@prisma/client";
+import { formatInTimeZone } from "date-fns-tz";
 import CancelBookingBtn from "@/components/premise/myBookings/CancelBookingBtn";
+import { Icon, Modal, Tag } from "@/components/uikit";
+import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
 import { Booking } from "@/lib/utils/premise-booking";
 import { css } from "~/styled-system/css";
 import { Flex, HStack } from "~/styled-system/jsx";
@@ -19,7 +18,7 @@ type LabelKey = keyof LabelProps;
 
 type LabelsType = {
   [K in LabelKey]: {
-    format: (props: LabelProps[K]) => JSX.Element | string;
+    format: (props: LabelProps[K], timeZone?: string) => React.ReactNode;
   };
 };
 
@@ -32,18 +31,20 @@ const statusColorPallets: Record<TicketIntentStatus, string> = {
 
 const labels: LabelsType = {
   date: {
-    format: ({ date }) => (
-      <HStack gap="1">
-        <Icon name="common/calendar" className={css({ fontSize: "xl" })} />
-        <time dateTime={format(date, "dd.MM.yyyy")}>
-          {format(date, "dd.MM.yyyy")}
-        </time>
-      </HStack>
-    ),
+    format: ({ date }, timeZone = "UTC") => {
+      const dateTime = formatInTimeZone(date, timeZone, "dd.MM.yyyy");
+
+      return (
+        <HStack gap="1">
+          <Icon name="common/calendar" className={css({ fontSize: "xl" })} />
+          <time dateTime={dateTime}>{dateTime}</time>
+        </HStack>
+      );
+    },
   },
   time: {
-    format: ({ startTime, endTime }) =>
-      `${format(startTime, "HH:mm")} - ${format(endTime, "HH:mm")}`,
+    format: ({ startTime, endTime }, timeZone = "UTC") =>
+      `${formatInTimeZone(startTime, timeZone, "HH:mm")} - ${formatInTimeZone(endTime, timeZone, "HH:mm")}`,
   },
   status: {
     format: ({ status }) => (
@@ -78,8 +79,22 @@ const labelGroups: Record<BookingType, LabelKey[]> = {
   via_website: labelsForBookedViaWebsite,
 };
 
-const BookingLabels = ({ booking }: { booking: Booking }) => {
+export async function BookingLabels({ booking }: { booking: Booking }) {
   const labelsForBooking = labelGroups[booking.type as BookingType] || [];
+
+  // TODO temporary solution.
+  //  Should be removed once `PremiseOpenHours` model doesn't not depend on time zone
+  const venue = await prisma.venue.findUnique({
+    where: { id: booking.premise.venueId },
+    select: { locationMapboxId: true },
+  });
+
+  const locationProps = await retrieveLocationPropertiesById(
+    venue ? venue.locationMapboxId : "",
+    true,
+  );
+
+  if (!locationProps || !("TZID" in locationProps)) return null;
 
   return (
     <Flex
@@ -91,12 +106,15 @@ const BookingLabels = ({ booking }: { booking: Booking }) => {
       }}
     >
       {labelsForBooking.map((label) => (
-        <Flex key={label} flexDirection="column" justifyContent="space-between">
-          {labels[label].format(booking as any)}
+        <Flex
+          key={label}
+          flexDirection="column"
+          justifyContent="space-between"
+          fontSize="sm"
+        >
+          {labels[label].format(booking as any, locationProps.TZID || "UTC")}
         </Flex>
       ))}
     </Flex>
   );
-};
-
-export default BookingLabels;
+}
