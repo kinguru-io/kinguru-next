@@ -189,6 +189,7 @@ export default async function PremisePage({
         <PremiseGallery resources={resources} />
         <Container
           css={{
+            width: "full",
             mdDown: { paddingBlockStart: "4", paddingBlockEnd: "8" },
             md: { paddingInline: "unset" },
           }}
@@ -199,7 +200,10 @@ export default async function PremisePage({
               <Link
                 className={css({
                   color: "secondary",
-                  _hoverOrFocusVisible: { textDecoration: "underline" },
+                  textDecoration: {
+                    base: "underline",
+                    _hoverOrFocusVisible: "none",
+                  },
                 })}
                 href={`/venues/${venue.slug}`}
               >
