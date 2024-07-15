@@ -105,19 +105,22 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Stack gap="4">
-          <Flex css={{ flexWrap: "wrap", gap: "4" }}>
-            <ImagePickerForm groupKey="company" name="logotype" />
-            <Stack gap="2" flexGrow="1" alignSelf="center">
-              <BaseForm<OrgRegisterInput>
-                config={formFieldsConfig.main}
-                // @ts-expect-error
-                schema={orgRegisterSchema(t)}
-                translationsKey="organization.basic_info_form"
-              />
-            </Stack>
-          </Flex>
-        </Stack>
+        <Grid
+          css={{
+            gap: "4",
+            gridTemplateColumns: { base: "1fr", md: "{sizes.32} 1fr" },
+          }}
+        >
+          <ImagePickerForm groupKey="company" name="logotype" />
+          <Stack gap="2" justifyContent="center">
+            <BaseForm<OrgRegisterInput>
+              config={formFieldsConfig.main}
+              // @ts-expect-error
+              schema={orgRegisterSchema(t)}
+              translationsKey="organization.basic_info_form"
+            />
+          </Stack>
+        </Grid>
       </SubSection>
 
       <SubSection>

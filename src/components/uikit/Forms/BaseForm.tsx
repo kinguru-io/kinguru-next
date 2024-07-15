@@ -35,8 +35,9 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
               css={{
                 gap: "2",
                 flexWrap: "wrap",
+                alignItems: "flex-start",
                 "& > *": {
-                  flexBasis: field.row.length > 2 ? "36" : "44",
+                  flexBasis: field.row.length > 2 ? "34" : "44",
                   flexGrow: "1",
                 },
               }}

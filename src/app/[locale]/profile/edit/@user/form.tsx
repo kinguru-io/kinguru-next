@@ -31,7 +31,7 @@ import {
   userProfileSchema,
   type UserProfileInput,
 } from "@/lib/validations/auth/user-profile";
-import { Flex, Stack } from "~/styled-system/jsx";
+import { Grid, Stack } from "~/styled-system/jsx";
 
 export function EditUserProfileForm({
   userData: {
@@ -65,7 +65,9 @@ export function EditUserProfileForm({
       phoneNumber: phoneNumber || "",
       country: country || "",
       city,
-      birthdate: birthdate ? birthdate.toISOString() : "",
+      birthdate: birthdate
+        ? formatISO(birthdate, { representation: "date" })
+        : "",
       description,
       socialLinks,
     },
@@ -101,7 +103,12 @@ function EditUserProfileFormInner() {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Flex css={{ flexWrap: "wrap", gap: "2" }}>
+        <Grid
+          css={{
+            gap: "4",
+            gridTemplateColumns: { base: "1fr", md: "{sizes.32} 1fr" },
+          }}
+        >
           <ImagePickerForm groupKey="user-profile" name="image" />
           <Stack gap="2" flexGrow="1">
             <BaseForm<UserProfileInput>
@@ -112,7 +119,7 @@ function EditUserProfileFormInner() {
             />
             <DateDropdown name="birthdate" placeholder={t("birthdate")} />
           </Stack>
-        </Flex>
+        </Grid>
       </SubSection>
 
       <SubSection>
@@ -145,11 +152,13 @@ function DateDropdown({
     control,
     formState: { errors },
   } = useFormContext();
-  const { field } = useController({ name, control });
+  const { field } = useController({ name, control, shouldUnregister: false });
 
   const dayChanged = (day: Date) => {
     field.onChange(formatISO(day, { representation: "date" }));
   };
+
+  console.log(field.value);
 
   return (
     <Dropdown size="auto" anchor="start">

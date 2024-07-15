@@ -117,6 +117,10 @@ export default defineConfig({
         spacing: {
           13: { value: "3.25rem" },
           15: { value: "3.75rem" },
+          34: { value: "8.5rem" },
+        },
+        sizes: {
+          34: { value: "8.5rem" },
         },
       },
     },
