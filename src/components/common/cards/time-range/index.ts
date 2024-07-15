@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic";
+import { lazy } from "react";
 
 export { TimeRangeHero } from "./hero-wrapper";
-export const TimeRangeLink = dynamic(() =>
-  import("./time-range-link").then((m) => m.TimeRangeLink),
-);
+export const TimeRangeLink = lazy(async () => ({
+  default: (await import("./time-range-link")).TimeRangeLink,
+}));
