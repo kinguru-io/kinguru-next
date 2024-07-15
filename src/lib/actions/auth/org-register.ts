@@ -1,14 +1,17 @@
 "use server";
 
+import { z } from "zod";
 import { prepareSocialLinks } from "./prepare-social-links";
-import { getSession } from "@/auth.ts";
+import { getSession } from "@/auth";
+import { revalidateAll } from "@/lib/actions";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
-import prisma from "@/server/prisma.ts";
+import prisma from "@/server/prisma";
 
 const orgRegisterHandler = async ({
   socialLinks,
   address,
+  logotype,
   ...restInput
 }: OrgRegisterInput): Promise<FormActionState> => {
   const session = await getSession();
@@ -31,11 +34,13 @@ const orgRegisterHandler = async ({
   }
 
   const organization = user.organizations.at(0);
+  const image = z.string().url().safeParse(logotype).success ? logotype : "";
 
   await prisma.organization.upsert({
     where: { id: organization?.id || "" },
     update: {
       ...restInput,
+      logotype: image,
       socialLinks: {
         deleteMany: {},
         createMany: { data: prepareSocialLinks(socialLinks) },
@@ -45,6 +50,7 @@ const orgRegisterHandler = async ({
     },
     create: {
       ...restInput,
+      logotype: image,
       ownerId: user.id,
       socialLinks: {
         createMany: { data: prepareSocialLinks(socialLinks) },
@@ -53,6 +59,8 @@ const orgRegisterHandler = async ({
       address: { createMany: { data: address } },
     },
   });
+
+  await revalidateAll();
 
   return { status: "success", message: "" };
 };

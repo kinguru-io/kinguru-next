@@ -1,4 +1,5 @@
 import { type SearchBoxRetrieveResponse } from "@mapbox/search-js-core";
+import { logger } from "@/lib/logger";
 
 export async function retrieveLocationPropertiesById(mapboxId: string) {
   const retrieveUrl = new URL(
@@ -10,13 +11,26 @@ export async function retrieveLocationPropertiesById(mapboxId: string) {
     "retrieveLocationPropertiesById",
   );
 
-  const response = await fetch(retrieveUrl.toString(), {
-    next: { revalidate: 3600 },
-  });
+  try {
+    const response = await fetch(retrieveUrl.toString(), {
+      next: { revalidate: 3600 },
+    });
 
-  const {
-    features: [{ properties }],
-  }: SearchBoxRetrieveResponse = await response.json();
+    if (!response.ok) {
+      logger.error(await response.json());
+      return null;
+    }
 
-  return properties;
+    const { features }: SearchBoxRetrieveResponse = await response.json();
+
+    // since it retrieves by mapbox_id, there is only one feature to take
+    const feature = features.at(0);
+
+    if (!feature) return null;
+
+    return feature.properties;
+  } catch (e) {
+    logger.error(e);
+    return null;
+  }
 }

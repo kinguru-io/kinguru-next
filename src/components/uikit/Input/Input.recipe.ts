@@ -11,7 +11,7 @@ export const inputSlot = defineSlotRecipe({
       gap: "2",
       width: "full",
       fontSize: "px15",
-      fontWeight: "500",
+      fontWeight: "medium",
       lineHeight: "0.75",
       borderWidth: "1px",
       borderStyle: "solid",

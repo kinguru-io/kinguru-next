@@ -30,7 +30,7 @@ export async function safeUploadToBucket({
       return omitSearchParams ? cutSearchParams(urls[idx]) : urls[idx];
     });
   } catch (error) {
-    console.error("Failed to upload image to S3", error);
-    return Array.from({ length: urls.length }, () => null);
+    console.error("Failed to upload image to S3", JSON.stringify(error));
+    return [null];
   }
 }

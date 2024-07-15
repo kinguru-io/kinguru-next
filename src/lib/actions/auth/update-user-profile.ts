@@ -1,9 +1,10 @@
 "use server";
 
 import { toDate } from "date-fns";
+import { z } from "zod";
 import { prepareSocialLinks } from "./prepare-social-links";
-import { revalidateAll } from "./revalidate-all";
 import { getSession } from "@/auth";
+import { revalidateAll } from "@/lib/actions";
 import type { FormActionState } from "@/lib/utils";
 import type { UserProfileInput } from "@/lib/validations/auth/user-profile";
 import prisma from "@/server/prisma";
@@ -31,7 +32,7 @@ export async function updateUserProfile({
       ...restInput,
       name: name.trim(),
       birthdate: toDate(birthdate),
-      image: image || "",
+      image: z.string().url().safeParse(image).success ? image : "",
       socialLinks: {
         deleteMany: {},
         createMany: { data: prepareSocialLinks(socialLinks) },

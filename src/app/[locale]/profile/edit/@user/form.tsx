@@ -31,7 +31,7 @@ import {
   userProfileSchema,
   type UserProfileInput,
 } from "@/lib/validations/auth/user-profile";
-import { Flex, Stack } from "~/styled-system/jsx";
+import { Grid, Stack } from "~/styled-system/jsx";
 
 export function EditUserProfileForm({
   userData: {
@@ -65,7 +65,9 @@ export function EditUserProfileForm({
       phoneNumber: phoneNumber || "",
       country: country || "",
       city,
-      birthdate: birthdate ? birthdate.toISOString() : "",
+      birthdate: birthdate
+        ? formatISO(birthdate, { representation: "date" })
+        : "",
       description,
       socialLinks,
     },
@@ -101,18 +103,13 @@ function EditUserProfileFormInner() {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Flex
+        <Grid
           css={{
-            flexDirection: "column",
             gap: "4",
-            lg: { gap: "8", flexDirection: "row" },
+            gridTemplateColumns: { base: "1fr", md: "{sizes.32} 1fr" },
           }}
         >
-          <ImagePickerForm
-            groupKey="user-profile"
-            name="image"
-            type="profile"
-          />
+          <ImagePickerForm groupKey="user-profile" name="image" />
           <Stack gap="2" flexGrow="1">
             <BaseForm<UserProfileInput>
               config={formConfig.main}
@@ -122,7 +119,7 @@ function EditUserProfileFormInner() {
             />
             <DateDropdown name="birthdate" placeholder={t("birthdate")} />
           </Stack>
-        </Flex>
+        </Grid>
       </SubSection>
 
       <SubSection>

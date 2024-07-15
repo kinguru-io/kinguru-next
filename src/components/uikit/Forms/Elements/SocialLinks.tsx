@@ -56,7 +56,7 @@ export function SocialLinks({
     <SubSection>
       <h2 className="title">{t("social_links_title")}</h2>
       <span className="helper">{t("social_links_helper")}</span>
-      <Stack gap="4">
+      <Stack gap="2">
         {socialNetworkList.map(({ network, social, iconName }, idx) => (
           <React.Fragment key={network}>
             <HStack gap="3">

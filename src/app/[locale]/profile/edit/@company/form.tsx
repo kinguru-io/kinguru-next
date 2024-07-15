@@ -105,29 +105,22 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
     <Stack css={{ md: { gap: "6" } }}>
       <SubSection>
         <h2 className="title">{t("group.main")}</h2>
-        <Stack gap="4">
-          <Flex
-            css={{
-              flexDirection: "column",
-              gap: "4",
-              lg: { gap: "8", flexDirection: "row" },
-            }}
-          >
-            <ImagePickerForm
-              groupKey="company"
-              name="logotype"
-              type="profile"
+        <Grid
+          css={{
+            gap: "4",
+            gridTemplateColumns: { base: "1fr", md: "{sizes.32} 1fr" },
+          }}
+        >
+          <ImagePickerForm groupKey="company" name="logotype" />
+          <Stack gap="2" justifyContent="center">
+            <BaseForm<OrgRegisterInput>
+              config={formFieldsConfig.main}
+              // @ts-expect-error
+              schema={orgRegisterSchema(t)}
+              translationsKey="organization.basic_info_form"
             />
-            <Stack gap="2" flexGrow="1">
-              <BaseForm<OrgRegisterInput>
-                config={formFieldsConfig.main}
-                // @ts-expect-error
-                schema={orgRegisterSchema(t)}
-                translationsKey="organization.basic_info_form"
-              />
-            </Stack>
-          </Flex>
-        </Stack>
+          </Stack>
+        </Grid>
       </SubSection>
 
       <SubSection>
@@ -140,7 +133,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
           }}
         >
           <FormColumn>
-            {t("column.business")}
+            <span className="subtitle">{t("column.business")}</span>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.business}
               // @ts-expect-error
@@ -149,7 +142,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             />
           </FormColumn>
           <FormColumn>
-            {t("column.bank")}
+            <span className="subtitle">{t("column.bank")}</span>
             <BaseForm<OrgRegisterInput>
               config={formFieldsConfig.credentials.bank}
               // @ts-expect-error
@@ -158,11 +151,11 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
             />
           </FormColumn>
           <FormColumn>
-            {t("column.postAddress")}
+            <span className="subtitle">{t("column.postAddress")}</span>
             <AddressGroup type="post" />
           </FormColumn>
           <FormColumn>
-            {t("column.billingAddress")}
+            <span className="subtitle">{t("column.billingAddress")}</span>
             <AddressGroup type="billing" />
           </FormColumn>
         </Grid>
@@ -207,7 +200,14 @@ function AddressGroup({ type }: { type: "post" | "billing" }) {
 
 function FormColumn({ children }: { children: React.ReactNode }) {
   return (
-    <Flex direction="column" gap="3" fontSize="px15">
+    <Flex
+      css={{
+        flexDirection: "column",
+        gap: "2",
+        fontSize: "px15",
+        "& > .subtitle": { marginBlockEnd: "2" },
+      }}
+    >
       {children}
     </Flex>
   );

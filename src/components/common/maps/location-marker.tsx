@@ -77,7 +77,7 @@ export function LocationCard({
           width="64"
           height="64"
           sizes="128px"
-          style={{ height: "100%" }}
+          style={{ height: "100%", objectFit: "cover" }}
         />
       </InlineBox>
       <Stack gap="1" color="secondary" fontSize="xs" lineHeight="1.25">

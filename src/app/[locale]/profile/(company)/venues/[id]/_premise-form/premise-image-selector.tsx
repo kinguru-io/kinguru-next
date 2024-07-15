@@ -8,12 +8,11 @@ import { useCallback, type PropsWithChildren } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { ImageDropZone } from "@/components/common/form/image-drop-zone";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
-import { ArrowIcon, Button, ErrorField, Icon } from "@/components/uikit";
+import { Button, ErrorField, Icon } from "@/components/uikit";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
 import { css, cx } from "~/styled-system/css";
 import { Box, Grid } from "~/styled-system/jsx";
 import { aspectRatio } from "~/styled-system/patterns";
-import { button } from "~/styled-system/recipes";
 
 // pregenerate ratio
 aspectRatio.raw({ ratio: { base: 1, md: 16 / 9 } });
@@ -153,19 +152,25 @@ function Sortable({ id, children }: PropsWithChildren<{ id: number }>) {
           ref={setActivatorNodeRef}
           {...listeners}
           className={cx(
-            button({ colorPalette: "secondary", rounded: false }),
             css({
               touchAction: "none",
+              cursor: "grab",
               position: "absolute",
               insetInlineEnd: "0",
               insetBlockStart: "0",
               padding: "1",
-              "& > svg": { fontSize: "xl" },
-              md: { padding: "1.5" },
+              "&[data-dragging]": { cursor: "grabbing" },
+              "& > svg": {
+                fontSize: "2xl",
+                padding: "2",
+                bgColor: "primary.lighter",
+                borderRadius: "sm",
+              },
             }),
           )}
+          data-dragging={isDragging || undefined}
         >
-          <ArrowIcon direction="up" />
+          <Icon name="action/move" />
         </button>
       )}
     </Box>

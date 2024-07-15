@@ -33,9 +33,13 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
             <Flex
               key={`${field.name}_${index}`}
               css={{
-                gap: "4",
-                flexDirection: "column",
-                lg: { gap: "8", flexDirection: "row" },
+                gap: "2",
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                "& > *": {
+                  flexBasis: field.row.length > 2 ? "34" : "44",
+                  flexGrow: "1",
+                },
               }}
             >
               {field.row.map(

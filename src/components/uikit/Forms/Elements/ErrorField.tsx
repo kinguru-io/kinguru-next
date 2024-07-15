@@ -8,7 +8,7 @@ export function ErrorField({ error }: { error: any }) {
       <span
         className={css({
           flexGrow: "1",
-          fontSize: "sm",
+          fontSize: "xs",
           color: "danger",
           animation: "fade-in",
         })}
