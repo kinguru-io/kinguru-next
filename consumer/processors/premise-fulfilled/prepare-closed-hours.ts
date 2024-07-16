@@ -16,7 +16,8 @@ export function prepareClosedHours({
   openHours: Array<Pick<PremiseOpenHours, "day" | "openTime" | "closeTime">>;
   timeZone: string;
 }) {
-  const _hoursOffset = getTimezoneOffset(timeZone) / millisecondsInHour;
+  const _hoursOffset =
+    getTimezoneOffset(timeZone, new Date(0)) / millisecondsInHour;
   const mappedOpenHours = openHours.map(({ day, openTime, closeTime }) => ({
     day,
     // TODO adding offset is a temporary solution

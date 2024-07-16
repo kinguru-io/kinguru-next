@@ -57,6 +57,7 @@ export function WeekView({
   const { selectedSlots, toggleSlot } = useBookingView();
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
+  console.log("timeZone", timeZone);
   useEffect(() => {
     if (!calendarRef.current) return;
 
@@ -147,6 +148,7 @@ export function WeekView({
                   {formatInTimeZone(weekdayInfo.day, timeZone, "d")}
                 </time>
               </Box>
+              {/* {console.log("weekDayTimeSlots", weekDayTimeSlots)} */}
               {weekDayTimeSlots.map(({ day, timeSlots }) => {
                 return timeSlots.flatMap(({ price, time }) => {
                   const slotTime = set(weekdayInfo.day, {

@@ -142,7 +142,9 @@ function TimeSelectOptions({
     const date = new Date(0);
 
     // to avoid timezone offset issues and to leave consistency between all DB records
-    date.setUTCHours(i - getTimezoneOffset(timeZone) / millisecondsInHour);
+    date.setUTCHours(
+      i - getTimezoneOffset(timeZone, new Date(0)) / millisecondsInHour,
+    );
 
     const value = date.toISOString();
     const isDisabled =

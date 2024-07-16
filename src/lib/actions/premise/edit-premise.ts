@@ -100,26 +100,40 @@ export async function editPremiseAction(
         },
       },
     }),
+    prisma.premise.update({
+      where: { id: premise.id },
+      data: {
+        openHours: {
+          deleteMany: {},
+          create: openHours.map(({ day, startTime, endTime, price }) => ({
+            day,
+            openTime: startTime,
+            closeTime: endTime,
+            price,
+          })),
+        },
+      },
+    }),
   ];
 
-  if (changedFields.openHours) {
-    requests.push(
-      prisma.premise.update({
-        where: { id: premise.id },
-        data: {
-          openHours: {
-            deleteMany: {},
-            create: openHours.map(({ day, startTime, endTime, price }) => ({
-              day,
-              openTime: startTime,
-              closeTime: endTime,
-              price,
-            })),
-          },
-        },
-      }),
-    );
-  }
+  // if (changedFields.openHours) {
+  //   requests.push(
+  //     prisma.premise.update({
+  //       where: { id: premise.id },
+  //       data: {
+  //         openHours: {
+  //           deleteMany: {},
+  //           create: openHours.map(({ day, startTime, endTime, price }) => ({
+  //             day,
+  //             openTime: startTime,
+  //             closeTime: endTime,
+  //             price,
+  //           })),
+  //         },
+  //       },
+  //     }),
+  //   );
+  // }
 
   await prisma.$transaction(requests);
   revalidatePath(`[locale]/profile/venues/${venue.id}`, "page");
