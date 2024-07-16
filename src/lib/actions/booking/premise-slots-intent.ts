@@ -5,8 +5,7 @@ import {
   TicketIntentStatus,
   PremiseDiscount,
 } from "@prisma/client";
-import { addHours, compareAsc, startOfDay } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
+import { addHours, compareAsc, format, startOfDay } from "date-fns";
 import Stripe from "stripe";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
@@ -30,14 +29,10 @@ type BookTimeSlotsActionData = {
   premiseOrgId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
-  timeZone: string;
   discountsMap: Record<number, number | undefined>;
 };
 
-type BlockTimeSlotsActionData = Omit<
-  BookTimeSlotsActionData,
-  "timeZone" | "discountMap"
->;
+type BlockTimeSlotsActionData = Omit<BookTimeSlotsActionData, "discountMap">;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
@@ -96,7 +91,6 @@ export async function createPremiseSlotsIntent({
   premiseId,
   premiseOrgId,
   slots,
-  timeZone,
   discountsMap,
 }: BookTimeSlotsActionData): ActionResponse<
   {
@@ -127,7 +121,7 @@ export async function createPremiseSlotsIntent({
     Array.from(editedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
     ),
-    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
+    ({ time }) => format(time, "dd.MM.yyyy"),
   );
   const { totalPrice } = processOrderTotalDiscounts(
     groupedSlots,
@@ -271,10 +265,7 @@ async function validatePaymentIntentData({
       const slotFound = dayTimeInfo
         .flatMap(({ timeSlots }) => timeSlots)
         .find(({ time }) => {
-          return (
-            time.getHours() === slot.time.getHours() &&
-            time.getMinutes() === slot.time.getMinutes()
-          );
+          return time / 100 === slot.time.getHours();
         });
 
       // a premise have such working hours for a given weekday but the doesn't have the slot

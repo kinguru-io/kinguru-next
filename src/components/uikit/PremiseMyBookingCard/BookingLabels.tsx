@@ -1,8 +1,7 @@
 import type { BookingType, TicketIntentStatus } from "@prisma/client";
-import { formatInTimeZone } from "date-fns-tz";
+import { format } from "date-fns";
 import CancelBookingBtn from "@/components/premise/myBookings/CancelBookingBtn";
 import { Icon, Modal, Tag } from "@/components/uikit";
-import { retrieveLocationPropertiesById } from "@/lib/shared/mapbox";
 import { Booking } from "@/lib/utils/premise-booking";
 import { css } from "~/styled-system/css";
 import { Flex, HStack } from "~/styled-system/jsx";
@@ -18,7 +17,7 @@ type LabelKey = keyof LabelProps;
 
 type LabelsType = {
   [K in LabelKey]: {
-    format: (props: LabelProps[K], timeZone?: string) => React.ReactNode;
+    format: (props: LabelProps[K]) => React.ReactNode;
   };
 };
 
@@ -31,8 +30,8 @@ const statusColorPallets: Record<TicketIntentStatus, string> = {
 
 const labels: LabelsType = {
   date: {
-    format: ({ date }, timeZone = "UTC") => {
-      const dateTime = formatInTimeZone(date, timeZone, "dd.MM.yyyy");
+    format: ({ date }) => {
+      const dateTime = format(date, "dd.MM.yyyy");
 
       return (
         <HStack gap="1">
@@ -43,8 +42,8 @@ const labels: LabelsType = {
     },
   },
   time: {
-    format: ({ startTime, endTime }, timeZone = "UTC") =>
-      `${formatInTimeZone(startTime, timeZone, "HH:mm")} - ${formatInTimeZone(endTime, timeZone, "HH:mm")}`,
+    format: ({ startTime, endTime }) =>
+      `${format(startTime, "HH:mm")} - ${format(endTime, "HH:mm")}`,
   },
   status: {
     format: ({ status }) => (
@@ -82,20 +81,6 @@ const labelGroups: Record<BookingType, LabelKey[]> = {
 export async function BookingLabels({ booking }: { booking: Booking }) {
   const labelsForBooking = labelGroups[booking.type as BookingType] || [];
 
-  // TODO temporary solution.
-  //  Should be removed once `PremiseOpenHours` model doesn't not depend on time zone
-  const venue = await prisma.venue.findUnique({
-    where: { id: booking.premise.venueId },
-    select: { locationMapboxId: true },
-  });
-
-  const locationProps = await retrieveLocationPropertiesById(
-    venue ? venue.locationMapboxId : "",
-    true,
-  );
-
-  if (!locationProps || !("TZID" in locationProps)) return null;
-
   return (
     <Flex
       css={{
@@ -112,7 +97,7 @@ export async function BookingLabels({ booking }: { booking: Booking }) {
           justifyContent="space-between"
           fontSize="sm"
         >
-          {labels[label].format(booking as any, locationProps.TZID || "UTC")}
+          {labels[label].format(booking as any)}
         </Flex>
       ))}
     </Flex>

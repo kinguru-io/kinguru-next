@@ -22,13 +22,7 @@ import type { CreatePremiseFormSchemaProps } from "@/lib/actions/premise";
 import { CreatePremiseFormTypeEnum } from "@/lib/actions/premise/validation";
 import { css } from "~/styled-system/css";
 
-export function PremiseFormInner({
-  mapboxId,
-  editMode = false,
-}: {
-  mapboxId: string;
-  editMode?: boolean;
-}) {
+export function PremiseFormInner({ editMode = false }: { editMode?: boolean }) {
   const { setValue } = useFormContext<CreatePremiseFormSchemaProps>();
   const t = useTranslations("profile.premises.add");
 
@@ -54,7 +48,7 @@ export function PremiseFormInner({
     },
     {
       label: t("groups.open_hours"),
-      content: <OpenHoursAndPrices mapboxId={mapboxId} />,
+      content: <OpenHoursAndPrices />,
       formType: CreatePremiseFormTypeEnum.OpenHoursAndPrice,
     },
     {

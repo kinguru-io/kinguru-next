@@ -12,7 +12,6 @@ export async function editPremiseAction(
   {
     venueId,
     premiseId,
-    changedFields,
   }: {
     venueId: string;
     premiseId: string;
@@ -80,60 +79,24 @@ export async function editPremiseAction(
   const requests = [
     prisma.premise.update({
       where: { id: premise.id },
-      data: { ...restPremiseInput, amenities: prepareAmenityList(amenities) },
-    }),
-    prisma.premise.update({
-      where: { id: premise.id },
       data: {
+        ...restPremiseInput,
+        amenities: prepareAmenityList(amenities),
         discounts: {
           deleteMany: {},
           create: discounts,
         },
-      },
-    }),
-    prisma.premise.update({
-      where: { id: premise.id },
-      data: {
         resources: {
           deleteMany: {},
           create: resources,
         },
-      },
-    }),
-    prisma.premise.update({
-      where: { id: premise.id },
-      data: {
         openHours: {
           deleteMany: {},
-          create: openHours.map(({ day, startTime, endTime, price }) => ({
-            day,
-            openTime: startTime,
-            closeTime: endTime,
-            price,
-          })),
+          create: openHours,
         },
       },
     }),
   ];
-
-  // if (changedFields.openHours) {
-  //   requests.push(
-  //     prisma.premise.update({
-  //       where: { id: premise.id },
-  //       data: {
-  //         openHours: {
-  //           deleteMany: {},
-  //           create: openHours.map(({ day, startTime, endTime, price }) => ({
-  //             day,
-  //             openTime: startTime,
-  //             closeTime: endTime,
-  //             price,
-  //           })),
-  //         },
-  //       },
-  //     }),
-  //   );
-  // }
 
   await prisma.$transaction(requests);
   revalidatePath(`[locale]/profile/venues/${venue.id}`, "page");

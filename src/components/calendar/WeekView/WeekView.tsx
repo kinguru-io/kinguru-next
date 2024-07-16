@@ -1,26 +1,19 @@
 "use client";
 
 import type { $Enums } from "@prisma/client";
-import { isEqual, isSameDay, set } from "date-fns";
-import { formatInTimeZone, toZonedTime } from "date-fns-tz";
+import { format, isBefore, isEqual, isSameDay, set } from "date-fns";
 import { useEffect, useRef } from "react";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
 import { WeekControls } from "./WeekControls";
 import { useBookingView } from "../BookingViewContext";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
-  type TimeSlotInfo,
   TimeSlot,
   type AggregatedPrices,
   getTimeSlotCondition,
 } from "@/components/uikit";
 import type { Group } from "@/lib/utils/array";
-import {
-  getWeekViewData,
-  DAYS_OF_WEEK_ORDERED,
-  isBeforeZoned,
-} from "@/lib/utils/datetime";
+import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Box, Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
@@ -37,13 +30,15 @@ export function WeekView({
   nowDate: Date;
   timeSlotsGroup: Group<
     $Enums.DayOfTheWeek,
-    { day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }
+    {
+      day: $Enums.DayOfTheWeek;
+      timeSlots: Array<{ price: number; time: number }>;
+    }
   >;
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
   headingSlot?: React.ReactNode;
 }) {
-  const timeZone = useSearchBoxTimeZone() || "UTC";
   const {
     originDate,
     changeMonth,
@@ -53,11 +48,10 @@ export function WeekView({
     canGoNext,
     currentMonthNumber,
     lastAllowedDate,
-  } = useOriginDate({ initialDate: nowDate, timeZone });
+  } = useOriginDate({ initialDate: nowDate });
   const { selectedSlots, toggleSlot } = useBookingView();
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
-  console.log("timeZone", timeZone);
   useEffect(() => {
     if (!calendarRef.current) return;
 
@@ -106,10 +100,6 @@ export function WeekView({
         {weekViewData.map((weekdayInfo, idx) => {
           const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
           const weekDayTimeSlots = timeSlotsGroup[dayOfWeekGroupKey] || [];
-          const isToday = isSameDay(
-            toZonedTime(nowDate, timeZone),
-            toZonedTime(weekdayInfo.day, timeZone),
-          );
 
           return (
             <VStack
@@ -128,7 +118,7 @@ export function WeekView({
                 borderBlockEnd="{sizes.1} solid {colors.secondary.lighter}"
                 paddingBlockEnd="1"
                 marginBlockEnd="2"
-                aria-selected={isToday}
+                aria-selected={isSameDay(nowDate, weekdayInfo.day)}
                 _selected={{ borderBlockEndColor: "primary" }}
               >
                 <time
@@ -136,30 +126,25 @@ export function WeekView({
                     textTransform: "capitalize",
                     whiteSpace: "pre",
                   })}
-                  dateTime={formatInTimeZone(
-                    weekdayInfo.day,
-                    timeZone,
-                    "yyyy-MM-dd",
-                  )}
+                  dateTime={format(weekdayInfo.day, "yyyy-MM-dd")}
                   suppressHydrationWarning
                 >
                   {weekdayInfo.weekdayShort}
                   {"\n"}
-                  {formatInTimeZone(weekdayInfo.day, timeZone, "d")}
+                  {format(weekdayInfo.day, "d")}
                 </time>
               </Box>
-              {/* {console.log("weekDayTimeSlots", weekDayTimeSlots)} */}
               {weekDayTimeSlots.map(({ day, timeSlots }) => {
                 return timeSlots.flatMap(({ price, time }) => {
                   const slotTime = set(weekdayInfo.day, {
-                    hours: time.getHours(),
-                    minutes: time.getMinutes(),
+                    hours: time / 100,
+                    minutes: 0,
                     seconds: 0,
                     milliseconds: 0,
                   });
                   const slotISOString = slotTime.toISOString();
                   const isDisabled =
-                    isBeforeZoned(slotTime, nowDate, timeZone) ||
+                    isBefore(slotTime, nowDate) ||
                     bookedSlots.has(slotISOString);
 
                   const isSlotSelected = selectedSlots.some(
@@ -171,7 +156,6 @@ export function WeekView({
                       key={slotISOString}
                       price={price}
                       time={slotTime}
-                      timeZone={timeZone}
                       onClick={() =>
                         toggleSlot({
                           day,

@@ -27,7 +27,6 @@ import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
 
 export function EditPremiseForm({
   editPremise,
-  mapboxId,
   premise: {
     id,
     venueId,
@@ -47,7 +46,6 @@ export function EditPremiseForm({
   },
 }: {
   editPremise: EditPremiseAction;
-  mapboxId: string;
   premise: Premise & {
     discounts: PremiseDiscount[];
     openHours: PremiseOpenHours[];
@@ -73,16 +71,8 @@ export function EditPremiseForm({
       amenities: getDefaultFormAmenities(amenities),
     },
     openHoursAndPrice: {
-      openHours: openHours.map(({ day, openTime, closeTime, price }) => ({
-        day,
-        startTime: openTime.toISOString(),
-        endTime: closeTime.toISOString(),
-        price,
-      })),
-      discounts: discounts.map(({ duration, discountPercentage }) => ({
-        duration,
-        discountPercentage,
-      })),
+      openHours,
+      discounts,
     },
     rules: {
       rules: rules || undefined,
@@ -126,7 +116,7 @@ export function EditPremiseForm({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(formSubmitted)}>
-        <PremiseFormInner mapboxId={mapboxId} editMode />
+        <PremiseFormInner editMode />
       </form>
     </FormProvider>
   );

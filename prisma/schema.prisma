@@ -484,8 +484,8 @@ model PremiseOpenHours {
   premiseId String
   pricing   PremisePricing[]
   day       DayOfTheWeek
-  openTime  DateTime
-  closeTime DateTime
+  openTime  Int
+  closeTime Int
   price     Float /// @description currently is used for 1 hour intervals
 }
 

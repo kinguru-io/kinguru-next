@@ -49,7 +49,7 @@ export function MapboxSearchBoxResponseProvider({
   mapboxId,
   children,
   locale: propsLocale,
-  shouldFetchTimeZone = true,
+  shouldFetchTimeZone = false,
 }: {
   mapboxId: string;
   children: React.ReactNode;

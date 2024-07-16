@@ -19,13 +19,11 @@ import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
 interface AddPremiseFormProps {
   createPremiseAction: CreatePremiseAction;
   venueId: string;
-  mapboxId: string;
 }
 
 export function AddPremiseForm({
   createPremiseAction,
   venueId,
-  mapboxId,
 }: AddPremiseFormProps) {
   const { push } = useRouter();
   const t = useTranslations("profile.premises.add");
@@ -75,7 +73,7 @@ export function AddPremiseForm({
         // The form is really complex, so `display: none` isn't used. Btw `next/submit` button requires JS too
         onSubmit={handleSubmit(formSubmit)}
       >
-        <PremiseFormInner mapboxId={mapboxId} />
+        <PremiseFormInner />
       </form>
     </FormProvider>
   );

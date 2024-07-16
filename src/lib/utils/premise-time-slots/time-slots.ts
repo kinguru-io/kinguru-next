@@ -1,23 +1,33 @@
 import type { PremiseOpenHours, PremiseSlot } from "@prisma/client";
 import { eachHourOfInterval, subHours } from "date-fns";
 
+export function eachHourStampOfInterval(
+  start: number,
+  end: number,
+  step?: number,
+) {
+  const hourStep = step || 100;
+
+  return Array.from(
+    { length: (end - start) / hourStep + 1 },
+    (_, i) => start + i * (step || hourStep),
+  );
+}
+
 export function generateTimeSlots({
   day,
   openTime,
   closeTime,
   price,
 }: PremiseOpenHours) {
-  const rawTimeSlots = eachHourOfInterval({
-    start: openTime,
-    end: subHours(closeTime, 1), // do not count the last hour as an interval
-  });
-
   return {
     day,
-    timeSlots: rawTimeSlots.map((time) => ({
-      time,
-      price,
-    })),
+    timeSlots: eachHourStampOfInterval(openTime, closeTime - 100).map(
+      (time) => ({
+        time,
+        price,
+      }),
+    ),
   };
 }
 

@@ -16,7 +16,6 @@ import {
   LocationAddressField,
   MapSection,
 } from "@/components/common/maps";
-import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { PremiseAmenities } from "@/components/premise";
 import {
   AccordionItemToggle,
@@ -283,51 +282,46 @@ export default async function PremisePage({
         id={calendarId}
         className={container({ paddingBlock: { base: "6", md: "8" } })}
       >
-        <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
-          <BookingViewProvider>
-            <Grid
-              gap="10"
-              gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}
+        <BookingViewProvider>
+          <Grid gap="10" gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}>
+            <WeekView
+              locale={locale}
+              nowDate={nowDate}
+              timeSlotsGroup={timeSlotsGroup}
+              bookedSlots={bookedSlots}
+              aggregatedPrices={aggregatedPrices}
+              headingSlot={
+                <h2 className={css({ textStyle: "heading.section" })}>
+                  {t("calendar_heading")}
+                </h2>
+              }
+            />
+            <Stack
+              css={{
+                gap: "4",
+                position: "sticky",
+                top: "2",
+                height: "min-content",
+                md: { gap: "8" },
+              }}
             >
-              <WeekView
-                locale={locale}
-                nowDate={nowDate}
-                timeSlotsGroup={timeSlotsGroup}
-                bookedSlots={bookedSlots}
-                aggregatedPrices={aggregatedPrices}
-                headingSlot={
-                  <h2 className={css({ textStyle: "heading.section" })}>
-                    {t("calendar_heading")}
-                  </h2>
-                }
-              />
-              <Stack
-                css={{
-                  gap: "4",
-                  position: "sticky",
-                  top: "2",
-                  height: "min-content",
-                  md: { gap: "8" },
-                }}
-              >
-                <Modal>
-                  <BookingViewCard
-                    premiseId={premise.id}
-                    premiseOrgId={premise.venue.organizationId}
-                    createIntent={createPremiseSlotsIntent}
-                    cancelIntent={cancelPremiseSlotsIntent}
-                    revalidateFn={revalidatePremisePage}
-                    discountsMap={discountMap}
-                    isOwner={isOwner}
-                    isUserOrg={isUserOrg}
-                  />
-                </Modal>
-                <DiscountViewCard discounts={discounts} locale={locale} />
-                <PriceDescription />
-              </Stack>
-            </Grid>
-          </BookingViewProvider>
-        </MapboxSearchBoxResponseProvider>
+              <Modal>
+                <BookingViewCard
+                  premiseId={premise.id}
+                  premiseOrgId={premise.venue.organizationId}
+                  createIntent={createPremiseSlotsIntent}
+                  cancelIntent={cancelPremiseSlotsIntent}
+                  revalidateFn={revalidatePremisePage}
+                  discountsMap={discountMap}
+                  isOwner={isOwner}
+                  isUserOrg={isUserOrg}
+                />
+              </Modal>
+              <DiscountViewCard discounts={discounts} locale={locale} />
+              <PriceDescription />
+            </Stack>
+          </Grid>
+        </BookingViewProvider>
       </section>
 
       <Container>

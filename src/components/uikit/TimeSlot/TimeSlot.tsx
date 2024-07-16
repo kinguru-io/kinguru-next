@@ -1,4 +1,4 @@
-import { formatInTimeZone } from "date-fns-tz";
+import { format } from "date-fns";
 import { priceFormatter } from "@/lib/utils";
 import { css } from "~/styled-system/css";
 
@@ -17,7 +17,6 @@ export type TimeSlotInfo = {
 };
 
 type TimeSlotProps = TimeSlotInfo & {
-  timeZone?: string;
   onClick: () => void;
   disabled?: boolean;
   condition?: Condition;
@@ -52,7 +51,6 @@ const timeSlotClassName = css({
 export function TimeSlot({
   price,
   time,
-  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
   onClick,
   condition = "regular",
   selected = false,
@@ -68,9 +66,7 @@ export function TimeSlot({
       aria-selected={selected}
       disabled={disabled}
     >
-      <time dateTime={time.toISOString()}>
-        {formatInTimeZone(time, timeZone, "HH:mm")}{" "}
-      </time>
+      <time dateTime={time.toISOString()}>{format(time, "HH:mm")}</time>
       <span
         className={css({
           fontWeight: "normal",

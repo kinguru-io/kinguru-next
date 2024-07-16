@@ -1,8 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { $Enums } from "@prisma/client";
-import { areIntervalsOverlapping, isBefore } from "date-fns";
-import { millisecondsInHour } from "date-fns/constants";
-import { formatInTimeZone, getTimezoneOffset } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import {
   useForm,
@@ -12,7 +9,6 @@ import {
   type UseFormGetValues,
 } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Input, Select, Button } from "@/components/uikit";
 import {
   type OpenHoursSchema,
@@ -46,26 +42,21 @@ export function AddOpenHoursRecord({
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
-  const timeZone = useSearchBoxTimeZone();
 
   const addButtonClicked = (input: OpenHoursSchema) => {
-    if (!timeZone) return;
-
     const openHours = getValues("openHoursAndPrice.openHours");
 
     // checking if a user is trying to add the range intersecting with an existing range
     const foundRecord = openHours.find(
       (field) =>
         field.day === input.day &&
-        areIntervalsOverlapping(
-          { start: input.startTime, end: input.endTime },
-          { start: field.startTime, end: field.endTime },
-        ),
+        input.openTime <= field.closeTime &&
+        field.openTime <= input.closeTime,
     );
     if (foundRecord) {
       const errorMessage = {
-        start: formatInTimeZone(foundRecord.startTime, timeZone, "HH:mm"),
-        end: formatInTimeZone(foundRecord.endTime, timeZone, "HH:mm"),
+        start: foundRecord.openTime / 100 + ":00",
+        end: foundRecord.closeTime / 100 + ":00",
       };
       toast.error(`${t("open_hours_existing_range_error_msg", errorMessage)}`);
 
@@ -88,12 +79,15 @@ export function AddOpenHoursRecord({
       >
         <Select
           placeholder={t("open_hours_from_label")}
-          {...register("startTime")}
+          {...register("openTime", { valueAsNumber: true })}
         >
-          <TimeSelectOptions watchedName="endTime" control={control} />
+          <TimeSelectOptions watchedName="closeTime" control={control} />
         </Select>
-        <Select placeholder={t("open_hours_to_label")} {...register("endTime")}>
-          <TimeSelectOptions watchedName="startTime" control={control} />
+        <Select
+          placeholder={t("open_hours_to_label")}
+          {...register("closeTime", { valueAsNumber: true })}
+        >
+          <TimeSelectOptions watchedName="openTime" control={control} />
         </Select>
         <Input
           type="number"
@@ -112,7 +106,7 @@ export function AddOpenHoursRecord({
         })}
         type="button"
         onClick={handleSubmit(addButtonClicked)}
-        disabled={!isValid || !timeZone}
+        disabled={!isValid}
         rounded={false}
       >
         {t("open_hours_add_record_btn_label")}
@@ -125,38 +119,30 @@ function TimeSelectOptions({
   watchedName,
   control,
 }: {
-  watchedName: Extract<keyof OpenHoursSchema, "startTime" | "endTime">;
+  watchedName: Extract<keyof OpenHoursSchema, "openTime" | "closeTime">;
   control: Control<OpenHoursSchema>;
 }) {
-  const isStartTime = watchedName === "startTime";
+  const isObservingOpenTime = watchedName === "openTime";
   const watchedValue = useWatch({
     control,
     name: watchedName,
-    defaultValue: "",
+    defaultValue: -1,
   });
-  const timeZone = useSearchBoxTimeZone();
-
-  if (!timeZone) return null;
 
   return Array.from({ length: 25 }, (_, i) => {
-    const date = new Date(0);
-
-    // to avoid timezone offset issues and to leave consistency between all DB records
-    date.setUTCHours(
-      i - getTimezoneOffset(timeZone, new Date(0)) / millisecondsInHour,
-    );
-
-    const value = date.toISOString();
-    const isDisabled =
-      watchedValue.length > 0 && isStartTime
-        ? isBefore(value, watchedValue)
-        : isBefore(watchedValue, value);
-
-    const isSameTime =
-      watchedValue.length > 0 && new Date(watchedValue).toISOString() === value;
+    const inputValue = i * 100;
+    const disabled = isObservingOpenTime
+      ? inputValue < watchedValue
+      : inputValue > watchedValue;
 
     return (
-      <option key={value} value={value} disabled={isDisabled || isSameTime}>
+      <option
+        key={inputValue}
+        value={inputValue}
+        disabled={
+          watchedValue !== -1 && (disabled || watchedValue === inputValue)
+        }
+      >
         {String(i).padStart(2, "0")}:00
       </option>
     );

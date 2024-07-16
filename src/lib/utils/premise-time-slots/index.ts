@@ -1,1 +1,1 @@
-export * from "./time-slots";
+export { generateTimeSlots, prepareBookedSlots } from "./time-slots";

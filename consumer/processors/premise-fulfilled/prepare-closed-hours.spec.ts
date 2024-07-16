@@ -1,16 +1,15 @@
 import { expect, it, describe } from "vitest";
 import { prepareClosedHours } from "./prepare-closed-hours";
 
-describe("consumer. prepare ES closed hours", () => {
+describe("[consumer] prepareClosedHours", () => {
   it("any input", () => {
     expect(
       prepareClosedHours({
-        timeZone: "UTC",
         openHours: [
           {
             day: "MONDAY",
-            openTime: new Date("1970-01-01T02:00:00.000Z"),
-            closeTime: new Date("1970-01-01T21:00:00.000Z"),
+            openTime: 200,
+            closeTime: 2100,
           },
         ],
       }),
@@ -19,12 +18,11 @@ describe("consumer. prepare ES closed hours", () => {
 
   it("Sunday key should be '7'", () => {
     const result = prepareClosedHours({
-      timeZone: "UTC",
       openHours: [
         {
           day: "SUNDAY",
-          openTime: new Date("1970-01-01T02:00:00.000Z"),
-          closeTime: new Date("1970-01-01T21:00:00.000Z"),
+          openTime: 200,
+          closeTime: 2100,
         },
       ],
     });

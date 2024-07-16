@@ -46,11 +46,7 @@ export default async function EditPremisePage({
     <>
       <h1 className="main-heading">{premise.name}</h1>
       <section>
-        <EditPremiseForm
-          editPremise={editPremiseAction}
-          mapboxId={venue.locationMapboxId}
-          premise={premise}
-        />
+        <EditPremiseForm editPremise={editPremiseAction} premise={premise} />
       </section>
     </>
   );

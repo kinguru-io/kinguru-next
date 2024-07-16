@@ -20,6 +20,7 @@ export default async function AddPremisePage({
 
   const venue = await prisma.venue.findUnique({
     where: { id: venueId, organizationId: organization?.id },
+    select: { id: true },
   });
 
   if (!venue) {
@@ -34,7 +35,6 @@ export default async function AddPremisePage({
       <AddPremiseForm
         createPremiseAction={createPremiseAction}
         venueId={venue.id}
-        mapboxId={venue.locationMapboxId}
       />
     </>
   );

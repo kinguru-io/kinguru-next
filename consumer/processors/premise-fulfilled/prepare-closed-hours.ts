@@ -1,6 +1,4 @@
 import type { PremiseOpenHours } from "@prisma/client";
-import { millisecondsInHour } from "date-fns/constants";
-import { getTimezoneOffset } from "date-fns-tz";
 import { groupBy } from "../../../src/lib/shared/utils/array";
 import { DAYS_OF_WEEK_ORDERED } from "../../../src/lib/shared/utils/datetime";
 
@@ -11,19 +9,13 @@ export const fullDayHoursList = Array.from({ length: 25 }, (_, i) => i);
  */
 export function prepareClosedHours({
   openHours,
-  timeZone,
 }: {
   openHours: Array<Pick<PremiseOpenHours, "day" | "openTime" | "closeTime">>;
-  timeZone: string;
 }) {
-  const _hoursOffset =
-    getTimezoneOffset(timeZone, new Date(0)) / millisecondsInHour;
   const mappedOpenHours = openHours.map(({ day, openTime, closeTime }) => ({
     day,
-    // TODO adding offset is a temporary solution
-    // Should be reworked once slots booking logic is reviewed to fit raw numbers instead of converting to specific time zone
-    open: openTime.getUTCHours() + _hoursOffset,
-    close: closeTime.getUTCHours() + _hoursOffset,
+    open: openTime / 100,
+    close: closeTime / 100,
   }));
 
   // grouping in form `{ "1": [{}, {}, ...] }` in order to get rid of ES nested fields

@@ -18,11 +18,10 @@ const allAmenities = Object.values(amenitiesTags).flat();
 const prisma = new PrismaClient();
 
 const cafeMapboxIds = [
-  "dXJuOm1ieHBsYzpBbnVvdFE",
-  "dXJuOm1ieHBvaTo0NzNkNzVmMy1kMzM2LTQ1OGYtODgyZi0xZWNmZjg4YTg2OTA",
-  "dXJuOm1ieHBvaTo4YWJkOWY0ZC04MzFjLTQ5ZGItYTMzNy00ZTE5OWU4NTYxNDI",
-  "dXJuOm1ieHBsYzpGVUpvdFE",
-  "dXJuOm1ieHBvaTphMDgyNzgzMi1iYjVjLTQzOTQtOWY1NC0wZDhlZDQ0YTcyMDE",
+  "dXJuOm1ieGFkcjo2ZDczYjM3Ny01NDhiLTRlODEtOGExZC1iZDllOWQyOWFmN2E",
+  "dXJuOm1ieHBvaTowYjJiNTE0OC0zMWM4LTRmY2QtODdkZi1kYzMyMGJkOTRkMTg",
+  "dXJuOm1ieHBvaTpjMmFjYjY4Ni1jMDdmLTRmNDMtOTFlOC0xNDA3YzY3ZGRhOTQ",
+  "dXJuOm1ieHBvaTozOWMyMDQwNi00ZjQ1LTQ3N2ItOWIzOS1mODdkM2I0YTg4ZTM",
 ] as const;
 const ROOM_WORD_SYNONYMS = [
   "room",
@@ -47,7 +46,7 @@ function getImage() {
   return faker.image.urlLoremFlickr({
     width: 1280,
     height: 720,
-    category: "random",
+    category: "hall",
   });
 }
 
@@ -109,22 +108,22 @@ const premiseOpenHoursSchema = (idx: number) => {
     ? ([
         {
           day: dayOfTheWeek[idx],
-          openTime: "1970-01-01T06:00:00.000Z",
-          closeTime: "1970-01-01T20:00:00.000Z",
+          openTime: 600,
+          closeTime: 2000,
           price,
         },
       ] as Prisma.PremiseOpenHoursCreateInput[])
     : ([
         {
           day: dayOfTheWeek[idx],
-          openTime: "1970-01-01T06:00:00.000Z",
-          closeTime: "1970-01-01T11:00:00.000Z",
+          openTime: 600,
+          closeTime: 1100,
           price,
         },
         {
           day: dayOfTheWeek[idx],
-          openTime: "1970-01-01T12:00:00.000Z",
-          closeTime: "1970-01-01T20:00:00.000Z",
+          openTime: 1200,
+          closeTime: 2000,
           price: price + faker.number.int({ min: 10, max: 100 }),
         },
       ] as Prisma.PremiseOpenHoursCreateInput[]);

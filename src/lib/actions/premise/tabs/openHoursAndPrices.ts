@@ -1,16 +1,15 @@
 import { $Enums } from "@prisma/client";
-import { isBefore } from "date-fns";
 import { z } from "zod";
 import { requiredFieldMessage } from "@/utils/forms/validationMessages";
 
 export const openHoursSchema = z
   .object({
     day: z.custom<$Enums.DayOfTheWeek>(),
-    startTime: z.string().datetime(),
-    endTime: z.string().datetime(),
+    openTime: z.number().nonnegative(),
+    closeTime: z.number().nonnegative(),
     price: z.number().nonnegative(),
   })
-  .refine(({ startTime, endTime }) => isBefore(startTime, endTime), {
+  .refine(({ openTime, closeTime }) => openTime < closeTime, {
     message: "Start time should be before end time",
     path: ["startTime"],
   });

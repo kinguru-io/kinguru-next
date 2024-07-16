@@ -1,8 +1,7 @@
-import { formatInTimeZone } from "date-fns-tz";
+import { format } from "date-fns";
 import { useTranslations } from "next-intl";
 import { useBookingView } from "../BookingViewContext";
 import { TagClosable } from "@/components/common";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Icon } from "@/components/uikit";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
@@ -16,9 +15,6 @@ export function BookingSlotsListing({
 }) {
   const t = useTranslations("booking_view");
   const { toggleSlot } = useBookingView();
-  const timeZone = useSearchBoxTimeZone();
-
-  if (!timeZone) return null;
 
   return (
     <Stack
@@ -40,16 +36,8 @@ export function BookingSlotsListing({
             <Stack gap="2">
               {slots &&
                 slots.map((timeSlotInfo) => {
-                  const start = formatInTimeZone(
-                    timeSlotInfo.startTime,
-                    timeZone,
-                    "H:mm",
-                  );
-                  const end = formatInTimeZone(
-                    timeSlotInfo.endTime,
-                    timeZone,
-                    "H:mm",
-                  );
+                  const start = format(timeSlotInfo.startTime, "H:mm");
+                  const end = format(timeSlotInfo.endTime, "H:mm");
 
                   return (
                     <TagClosable

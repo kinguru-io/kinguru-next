@@ -1,12 +1,9 @@
-import { compareAsc } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
 import { useLocale, useTranslations } from "next-intl";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AddOpenHoursRecord } from "./add-open-hours-record";
 import { TagClosable } from "@/components/common";
 import { SubSection } from "@/components/common/cards/sub-section";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
   Accordion,
   AccordionItemContent,
@@ -41,12 +38,10 @@ export function OpenHoursSelector() {
     name: formFieldPath,
   });
 
-  const timeZone = useSearchBoxTimeZone() || "UTC";
-
   const groupedFields = groupBy(
     fields
       .map((field, index) => ({ ...field, index }))
-      .sort((fieldA, fieldB) => compareAsc(fieldA.startTime, fieldB.startTime)),
+      .sort((fieldA, fieldB) => fieldA.openTime - fieldB.openTime),
     (field) => field.day,
   );
 
@@ -83,67 +78,59 @@ export function OpenHoursSelector() {
                   {weekdayFormatter.format(new Date(0).setDate(5 + idx))}
                 </InlineBox>
               </AccordionItemToggle>
-              <AccordionItemContent>
-                <Stack gap={{ base: "4", md: "6" }}>
-                  <AddOpenHoursRecord
-                    day={day}
-                    append={append}
-                    getValues={getValues}
-                  />
-                  {fieldsPerDay && (
-                    <Stack gap="2">
-                      {fieldsPerDay.map((field) => {
-                        const start = formatInTimeZone(
-                          field.startTime,
-                          timeZone,
-                          "H:mm",
-                        );
-                        const end = formatInTimeZone(
-                          field.endTime,
-                          timeZone,
-                          "H:mm",
-                        );
-
-                        return (
-                          <TagClosable
-                            key={field.id}
-                            content={`${start} - ${end}`}
-                            helper={priceFormatter.format(field.price)}
-                            buttonLabel="X"
-                            variant="primaryLighter"
-                            onClick={() => remove(field.index)}
-                          />
-                        );
-                      })}
-                    </Stack>
-                  )}
-                  {day === "MONDAY" && (
-                    <HStack
-                      css={{
-                        gap: "4",
-                        padding: "4",
-                        justifyContent: "space-between",
-                        borderRadius: "md",
-                        bgColor: "secondary.lighter",
-                        flexWrap: "wrap",
-                        fontSize: "px13",
-                      }}
+              <AccordionItemContent
+                className={css({
+                  display: "flex",
+                  flexDirection: "column",
+                  paddingBlockStart: "1",
+                  gap: { base: "4", md: "6" },
+                })}
+              >
+                <AddOpenHoursRecord
+                  day={day}
+                  append={append}
+                  getValues={getValues}
+                />
+                {fieldsPerDay && (
+                  <Stack gap="2">
+                    {fieldsPerDay.map((field) => {
+                      return (
+                        <TagClosable
+                          key={field.id}
+                          content={`${field.openTime / 100}:00 - ${field.closeTime / 100}:00`}
+                          helper={priceFormatter.format(field.price)}
+                          buttonLabel="X"
+                          variant="primaryLighter"
+                          onClick={() => remove(field.index)}
+                        />
+                      );
+                    })}
+                  </Stack>
+                )}
+                {day === "MONDAY" && (
+                  <HStack
+                    css={{
+                      gap: "4",
+                      padding: "4",
+                      justifyContent: "space-between",
+                      borderRadius: "md",
+                      bgColor: "secondary.lighter",
+                      flexWrap: "wrap",
+                      fontSize: "px13",
+                    }}
+                  >
+                    {t("open_hours_spread_mode")}
+                    <Button
+                      className={css({ paddingBlock: "3" })}
+                      type="button"
+                      colorPalette="success"
+                      onClick={spreadButtonClicked}
+                      disabled={fields.every((field) => field.day !== "MONDAY")}
                     >
-                      {t("open_hours_spread_mode")}
-                      <Button
-                        className={css({ paddingBlock: "3" })}
-                        type="button"
-                        colorPalette="success"
-                        onClick={spreadButtonClicked}
-                        disabled={fields.every(
-                          (field) => field.day !== "MONDAY",
-                        )}
-                      >
-                        {t("open_hours_spread_mode_btn_label")}
-                      </Button>
-                    </HStack>
-                  )}
-                </Stack>
+                      {t("open_hours_spread_mode_btn_label")}
+                    </Button>
+                  </HStack>
+                )}
               </AccordionItemContent>
             </Accordion>
             <ErrorField error={errors?.openHoursAndPrice?.openHours} />

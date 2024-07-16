@@ -79,12 +79,7 @@ export async function createPremiseAction(
         },
         openHours: {
           createMany: {
-            data: openHours.map(({ day, startTime, endTime, price }) => ({
-              day,
-              openTime: startTime,
-              closeTime: endTime,
-              price,
-            })),
+            data: openHours,
           },
         },
         discounts: {
