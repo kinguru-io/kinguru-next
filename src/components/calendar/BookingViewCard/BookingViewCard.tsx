@@ -3,8 +3,7 @@
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { addHours, compareAsc, isValid } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
+import { addHours, compareAsc, isValid, format } from "date-fns";
 import { useTranslations } from "next-intl";
 import {
   useCallback,
@@ -19,7 +18,6 @@ import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Timer } from "@/components/common/timer";
 import { Button, ModalWindow, useModal } from "@/components/uikit";
 import {
@@ -64,7 +62,6 @@ export function BookingViewCard({
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
-  const timeZone = useSearchBoxTimeZone() || "UTC";
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
@@ -79,7 +76,6 @@ export function BookingViewCard({
   const newSlots = selectedSlots
     .map(({ time, price }) => {
       if (!isValid(time)) {
-        console.error("Invalid date detected:", time);
         return null; // Skip invalid dates
       }
 
@@ -100,7 +96,7 @@ export function BookingViewCard({
     Array.from(newGroupedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.startTime, slotB.startTime),
     ),
-    ({ startTime }) => formatInTimeZone(startTime, timeZone, "dd.MM.yyyy"),
+    ({ startTime }) => format(startTime, "dd.MM.yyyy"),
   );
 
   const priceGroupedSlots = groupBy(
@@ -109,10 +105,9 @@ export function BookingViewCard({
     ),
     ({ time }) => {
       if (!isValid(time)) {
-        console.error("Invalid date detected during grouping:", time);
         return "Invalid Date"; // Group invalid dates separately
       }
-      return formatInTimeZone(time, timeZone, "dd.MM.yyyy");
+      return format(time, "dd.MM.yyyy");
     },
   );
 
@@ -162,7 +157,6 @@ export function BookingViewCard({
         premiseId,
         premiseOrgId,
         slots: selectedSlots,
-        timeZone,
         discountsMap,
       });
 
@@ -187,22 +181,24 @@ export function BookingViewCard({
     toast.success(t("action_successful_booking"));
   };
 
-  const paymentCancelled = useCallback(async () => {
+  const cancelPayment = useCallback(() => {
     if (!intentResponse?.paymentIntentId) return;
 
-    const { status, messageIntlKey } = await cancelIntent({
-      paymentIntentId: intentResponse?.paymentIntentId,
+    startTransition(async () => {
+      const { status, messageIntlKey } = await cancelIntent({
+        paymentIntentId: intentResponse.paymentIntentId,
+      });
+
+      if (status === "error" && messageIntlKey) {
+        toast.error(t(messageIntlKey));
+      }
+
+      setOpen(false);
+      setClosable(true);
+      setIntentResponse(null);
+
+      void revalidateFn();
     });
-
-    if (status === "error" && messageIntlKey) {
-      toast.error(t(messageIntlKey));
-    }
-
-    setOpen(false);
-    setClosable(true);
-    setIntentResponse(null);
-
-    void revalidateFn();
   }, [intentResponse?.paymentIntentId]);
 
   if (inModal && intentResponse?.clientSecret) {
@@ -212,13 +208,28 @@ export function BookingViewCard({
           <h3 className={css({ fontWeight: "bold" })}>
             {t("booking_modal_heading")}
           </h3>
-          <Timer minutes={10} callback={paymentCancelled} />
+          <Timer minutes={10} callback={cancelPayment} />
         </HStack>
         <Elements
           stripe={stripePromise}
           options={{ clientSecret: intentResponse?.clientSecret }}
         >
-          <CheckoutForm succeedRefetch={paymentSucceed} />
+          <CheckoutForm
+            succeedRefetch={paymentSucceed}
+            total={priceInfo.totalPrice}
+            cancelButton={
+              <Button
+                type="button"
+                onClick={cancelPayment}
+                colorPalette="secondary"
+                rounded={false}
+                isLoading={isPending}
+                className={css({ paddingInline: "3" })}
+              >
+                {t("cancel_payment_btn")}
+              </Button>
+            }
+          />
         </Elements>
       </section>
     );
