@@ -1,3 +1,10 @@
+# [0.56.0](https://github.com/kinguru-io/kinguru-next/compare/v0.55.1...v0.56.0) (2024-07-17)
+
+
+### Features
+
+* added price and cancel button at the payment modal ([d14e732](https://github.com/kinguru-io/kinguru-next/commit/d14e7322168c29358dbbd92fb39cb9cf772258e7))
+
 ## [0.55.1](https://github.com/kinguru-io/kinguru-next/compare/v0.55.0...v0.55.1) (2024-07-12)
 
 
