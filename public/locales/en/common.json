@@ -490,7 +490,9 @@
         "NO_REFUND_desc": "Payment is non-refundable",
         "PARTIAL_REFUND": "Partial Refund",
         "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees"
-      }
+      },
+      "no_organization_link_label": "Go to the section \"Profile\"",
+      "no_organization_warn_msg": "Fill in your details in the \"Profile\" section"
     }
   },
   "amenities": {

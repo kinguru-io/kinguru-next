@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
 import { SubSection } from "@/components/common/cards/sub-section";
 import { PremiseMyBookings } from "@/components/premise/PremiseMyBookings";
+import { NoticeScreen } from "@/components/profile";
 import {
   getBookingsViaWebsite,
   getBookingsByRole,
@@ -18,6 +19,19 @@ export default async function MyBookingsPage() {
   let bookingsViaWebsite: Booking[] = [];
   let bookingsBlockedByAdmin: any[] = [];
   let bookingsCanceled: any[] = [];
+
+  if (isUserOrg && !session?.user?.organizations.at(0)) {
+    return (
+      <SubSection>
+        <h2 className="title">{t("heading")}</h2>
+        <NoticeScreen
+          noticeText={t("no_organization_warn_msg")}
+          href="/profile/edit"
+          linkLabel={t("no_organization_link_label")}
+        />
+      </SubSection>
+    );
+  }
 
   if (isUserOrg) {
     // @ts-ignore

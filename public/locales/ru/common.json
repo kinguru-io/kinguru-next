@@ -468,6 +468,8 @@
     },
     "my_bookings": {
       "heading": "Мои бронирования",
+      "no_organization_warn_msg": "Заполните свои реквизиты в разделе \"Личный профиль\"",
+      "no_organization_link_label": "Перейти в раздел \"Личный профиль\"",
       "no_bookings": "У вас еще нет бронирований",
       "with_discount": "Со скидкой",
       "before": "до",

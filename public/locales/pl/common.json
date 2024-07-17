@@ -487,7 +487,12 @@
         "NO_REFUND_desc": "Płatność nie podlega zwrotowi",
         "PARTIAL_REFUND": "Częściowy zwrot",
         "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat"
-      }
+      },
+      "no_organization_link_label": "Przejdź do sekcji „Profil”",
+      "no_organization_warn_msg": "Wpisz swoje dane w sekcji „Profil”.",
+      "canceled_booking_heading": "Anulowane rezerwacje",
+      "tab_booked_active": "Aktywny",
+      "tab_booked_canceled": "Odwołany"
     }
   },
   "amenities": {
