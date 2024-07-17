@@ -18,52 +18,52 @@ type NavLink = {
 const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
   user: [
     {
-      href: "/profile/mybookings",
-      labelIntlCode: "mybookings",
-      segment: "mybookings",
-    },
-    {
       href: "/profile/edit",
       labelIntlCode: "edit",
       segment: "edit",
     },
     {
-      href: "/profile/notifications",
-      labelIntlCode: "notifications",
-      segment: "notifications",
+      href: "/profile/mybookings",
+      labelIntlCode: "mybookings",
+      segment: "mybookings",
     },
-    {
-      href: "/profile/settings",
-      labelIntlCode: "settings",
-      segment: "settings",
-    },
+    // {
+    //   href: "/profile/notifications",
+    //   labelIntlCode: "notifications",
+    //   segment: "notifications",
+    // },
+    // {
+    //   href: "/profile/settings",
+    //   labelIntlCode: "settings",
+    //   segment: "settings",
+    // },
   ],
   organization: [
     {
-      href: "/profile/mybookings",
-      labelIntlCode: "mybookings",
-      segment: "mybookings",
-    },
-    {
       href: "/profile/edit",
       labelIntlCode: "edit",
       segment: "edit",
+    },
+    {
+      href: "/profile/mybookings",
+      labelIntlCode: "mybookings",
+      segment: "mybookings",
     },
     {
       href: "/profile/venues",
       labelIntlCode: "venues",
       segment: "venues",
     },
-    {
-      href: "/profile/notifications",
-      labelIntlCode: "notifications",
-      segment: "notifications",
-    },
-    {
-      href: "/profile/settings",
-      labelIntlCode: "settings",
-      segment: "settings",
-    },
+    // {
+    //   href: "/profile/notifications",
+    //   labelIntlCode: "notifications",
+    //   segment: "notifications",
+    // },
+    // {
+    //   href: "/profile/settings",
+    //   labelIntlCode: "settings",
+    //   segment: "settings",
+    // },
   ],
   admin: [],
 };
