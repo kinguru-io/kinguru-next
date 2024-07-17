@@ -51,6 +51,9 @@ export function AccordionItemToggle(
       _peerDisabled: {
         cursor: "not-allowed",
       },
+      _peerFocusVisible: {
+        boxShadow: "focus",
+      },
     },
     styleProps,
     cssProp,

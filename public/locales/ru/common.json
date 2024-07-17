@@ -279,7 +279,8 @@
     "action_successfully_blocked_slots": "Слот успешно заблокирован",
     "action_invalid_data": "Некорректные данные",
     "action_payment_cancelled": "Оплата была отменена",
-    "organization_cannot_pay": "Организациям не доступно бронирование залов. Бронировать могут только обычные пользователи."
+    "organization_cannot_pay": "Организациям не доступно бронирование залов. Бронировать могут только обычные пользователи.",
+    "cancel_payment_btn": "Отменить"
   },
   "price": {
     "total": "Итого",
@@ -467,6 +468,8 @@
     },
     "my_bookings": {
       "heading": "Мои бронирования",
+      "no_organization_warn_msg": "Заполните свои реквизиты в разделе \"Личный профиль\"",
+      "no_organization_link_label": "Перейти в раздел \"Личный профиль\"",
       "no_bookings": "У вас еще нет бронирований",
       "with_discount": "Со скидкой",
       "before": "до",

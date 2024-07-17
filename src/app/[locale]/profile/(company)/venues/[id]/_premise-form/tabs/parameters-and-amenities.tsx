@@ -26,8 +26,7 @@ export function ParametersAndAmenities() {
           css={{
             gap: "2",
             flexWrap: "wrap",
-            "& > div": {
-              display: "flex",
+            "& > *": {
               flexGrow: "1",
               flexBasis: "60",
             },

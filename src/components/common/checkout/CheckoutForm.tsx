@@ -8,14 +8,19 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ErrorIcon } from "react-hot-toast";
 import { Button } from "@/components/uikit";
+import { priceFormatter } from "@/lib/utils";
 import { css } from "~/styled-system/css";
-import { HStack } from "~/styled-system/jsx";
+import { Flex, HStack } from "~/styled-system/jsx";
 import { stack } from "~/styled-system/patterns";
 
 export function CheckoutForm({
   succeedRefetch,
+  total,
+  cancelButton,
 }: {
   succeedRefetch: () => void;
+  total?: number;
+  cancelButton?: React.ReactNode;
 }) {
   const t = useTranslations("stripe_checkout_form");
   const stripe = useStripe();
@@ -65,14 +70,18 @@ export function CheckoutForm({
         </HStack>
       )}
       <PaymentElement id="payment-element" />
-      <Button
-        id="submit"
-        type="submit"
-        isLoading={isProcessing || !stripe || !elements}
-        rounded={false}
-      >
-        {t("pay_now")}
-      </Button>
+      <Flex css={{ gap: "2" }}>
+        {cancelButton}
+        <Button
+          id="submit"
+          type="submit"
+          isLoading={isProcessing || !stripe || !elements}
+          rounded={false}
+          className={css({ flexGrow: "1" })}
+        >
+          {t("pay_now")} {total && <b>{priceFormatter.format(total)}</b>}
+        </Button>
+      </Flex>
     </form>
   );
 }
