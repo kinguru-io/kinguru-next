@@ -83,67 +83,70 @@ export function OpenHoursSelector() {
                   {weekdayFormatter.format(new Date(0).setDate(5 + idx))}
                 </InlineBox>
               </AccordionItemToggle>
-              <AccordionItemContent>
-                <Stack gap={{ base: "4", md: "6" }}>
-                  <AddOpenHoursRecord
-                    day={day}
-                    append={append}
-                    getValues={getValues}
-                  />
-                  {fieldsPerDay && (
-                    <Stack gap="2">
-                      {fieldsPerDay.map((field) => {
-                        const start = formatInTimeZone(
-                          field.startTime,
-                          timeZone,
-                          "H:mm",
-                        );
-                        const end = formatInTimeZone(
-                          field.endTime,
-                          timeZone,
-                          "H:mm",
-                        );
+              <AccordionItemContent
+                className={css({
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "1",
+                  gap: { base: "4", md: "6" },
+                })}
+              >
+                <AddOpenHoursRecord
+                  day={day}
+                  append={append}
+                  getValues={getValues}
+                />
+                {fieldsPerDay && (
+                  <Stack gap="2">
+                    {fieldsPerDay.map((field) => {
+                      const start = formatInTimeZone(
+                        field.startTime,
+                        timeZone,
+                        "H:mm",
+                      );
+                      const end = formatInTimeZone(
+                        field.endTime,
+                        timeZone,
+                        "H:mm",
+                      );
 
-                        return (
-                          <TagClosable
-                            key={field.id}
-                            content={`${start} - ${end}`}
-                            helper={priceFormatter.format(field.price)}
-                            buttonLabel="X"
-                            variant="primaryLighter"
-                            onClick={() => remove(field.index)}
-                          />
-                        );
-                      })}
-                    </Stack>
-                  )}
-                  {day === "MONDAY" && (
-                    <HStack
-                      css={{
-                        gap: "4",
-                        padding: "4",
-                        justifyContent: "space-between",
-                        borderRadius: "md",
-                        bgColor: "secondary.lighter",
-                        flexWrap: "wrap",
-                        fontSize: "px13",
-                      }}
+                      return (
+                        <TagClosable
+                          key={field.id}
+                          content={`${start} - ${end}`}
+                          helper={priceFormatter.format(field.price)}
+                          buttonLabel="X"
+                          variant="primaryLighter"
+                          onClick={() => remove(field.index)}
+                        />
+                      );
+                    })}
+                  </Stack>
+                )}
+                {day === "MONDAY" && (
+                  <HStack
+                    css={{
+                      gap: "4",
+                      padding: "4",
+                      justifyContent: "space-between",
+                      borderRadius: "md",
+                      bgColor: "secondary.lighter",
+                      flexWrap: "wrap",
+                      fontSize: "px13",
+                    }}
+                  >
+                    {t("open_hours_spread_mode")}
+                    <Button
+                      className={css({ paddingBlock: "3" })}
+                      type="button"
+                      colorPalette="success"
+                      onClick={spreadButtonClicked}
+                      disabled={fields.every((field) => field.day !== "MONDAY")}
                     >
-                      {t("open_hours_spread_mode")}
-                      <Button
-                        className={css({ paddingBlock: "3" })}
-                        type="button"
-                        colorPalette="success"
-                        onClick={spreadButtonClicked}
-                        disabled={fields.every(
-                          (field) => field.day !== "MONDAY",
-                        )}
-                      >
-                        {t("open_hours_spread_mode_btn_label")}
-                      </Button>
-                    </HStack>
-                  )}
-                </Stack>
+                      {t("open_hours_spread_mode_btn_label")}
+                    </Button>
+                  </HStack>
+                )}
               </AccordionItemContent>
             </Accordion>
             <ErrorField error={errors?.openHoursAndPrice?.openHours} />
