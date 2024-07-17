@@ -279,7 +279,8 @@
     "action_successfully_blocked_slots": "Slots are successfully blocked!",
     "action_invalid_data": "Invalid data",
     "action_payment_cancelled": "Payment was cancelled",
-    "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings."
+    "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings.",
+    "cancel_payment_btn": "Cancel"
   },
   "price": {
     "total": "Total",

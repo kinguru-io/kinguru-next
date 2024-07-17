@@ -187,22 +187,24 @@ export function BookingViewCard({
     toast.success(t("action_successful_booking"));
   };
 
-  const paymentCancelled = useCallback(async () => {
+  const cancelPayment = useCallback(() => {
     if (!intentResponse?.paymentIntentId) return;
 
-    const { status, messageIntlKey } = await cancelIntent({
-      paymentIntentId: intentResponse?.paymentIntentId,
+    startTransition(async () => {
+      const { status, messageIntlKey } = await cancelIntent({
+        paymentIntentId: intentResponse.paymentIntentId,
+      });
+
+      if (status === "error" && messageIntlKey) {
+        toast.error(t(messageIntlKey));
+      }
+
+      setOpen(false);
+      setClosable(true);
+      setIntentResponse(null);
+
+      void revalidateFn();
     });
-
-    if (status === "error" && messageIntlKey) {
-      toast.error(t(messageIntlKey));
-    }
-
-    setOpen(false);
-    setClosable(true);
-    setIntentResponse(null);
-
-    void revalidateFn();
   }, [intentResponse?.paymentIntentId]);
 
   if (inModal && intentResponse?.clientSecret) {
@@ -212,13 +214,28 @@ export function BookingViewCard({
           <h3 className={css({ fontWeight: "bold" })}>
             {t("booking_modal_heading")}
           </h3>
-          <Timer minutes={10} callback={paymentCancelled} />
+          <Timer minutes={10} callback={cancelPayment} />
         </HStack>
         <Elements
           stripe={stripePromise}
           options={{ clientSecret: intentResponse?.clientSecret }}
         >
-          <CheckoutForm succeedRefetch={paymentSucceed} />
+          <CheckoutForm
+            succeedRefetch={paymentSucceed}
+            total={priceInfo.totalPrice}
+            cancelButton={
+              <Button
+                type="button"
+                onClick={cancelPayment}
+                colorPalette="secondary"
+                rounded={false}
+                isLoading={isPending}
+                className={css({ paddingInline: "3" })}
+              >
+                {t("cancel_payment_btn")}
+              </Button>
+            }
+          />
         </Elements>
       </section>
     );

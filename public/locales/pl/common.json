@@ -249,7 +249,8 @@
     "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",
     "action_invalid_data": "Nieprawidłowe dane",
     "action_payment_cancelled": "Płatność została anulowana",
-    "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy."
+    "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy.",
+    "cancel_payment_btn": "Anulować"
   },
   "price": {
     "total": "Całkowity",
