@@ -283,11 +283,11 @@ export default async function PremisePage({
         id={calendarId}
         className={container({ paddingBlock: { base: "6", md: "8" } })}
       >
-        <MapboxSearchBoxResponseProvider mapboxId={venue.locationMapboxId}>
-          <BookingViewProvider>
-            <Grid
-              gap="10"
-              gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}
+        <BookingViewProvider>
+          <Grid gap="10" gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}>
+            <MapboxSearchBoxResponseProvider
+              mapboxId={venue.locationMapboxId}
+              shouldFetchTimeZone
             >
               <WeekView
                 locale={locale}
@@ -301,33 +301,33 @@ export default async function PremisePage({
                   </h2>
                 }
               />
-              <Stack
-                css={{
-                  gap: "4",
-                  position: "sticky",
-                  top: "2",
-                  height: "min-content",
-                  md: { gap: "8" },
-                }}
-              >
-                <Modal>
-                  <BookingViewCard
-                    premiseId={premise.id}
-                    premiseOrgId={premise.venue.organizationId}
-                    createIntent={createPremiseSlotsIntent}
-                    cancelIntent={cancelPremiseSlotsIntent}
-                    revalidateFn={revalidatePremisePage}
-                    discountsMap={discountMap}
-                    isOwner={isOwner}
-                    isUserOrg={isUserOrg}
-                  />
-                </Modal>
-                <DiscountViewCard discounts={discounts} locale={locale} />
-                <PriceDescription />
-              </Stack>
-            </Grid>
-          </BookingViewProvider>
-        </MapboxSearchBoxResponseProvider>
+            </MapboxSearchBoxResponseProvider>
+            <Stack
+              css={{
+                gap: "4",
+                position: "sticky",
+                top: "2",
+                height: "min-content",
+                md: { gap: "8" },
+              }}
+            >
+              <Modal>
+                <BookingViewCard
+                  premiseId={premise.id}
+                  premiseOrgId={premise.venue.organizationId}
+                  createIntent={createPremiseSlotsIntent}
+                  cancelIntent={cancelPremiseSlotsIntent}
+                  revalidateFn={revalidatePremisePage}
+                  discountsMap={discountMap}
+                  isOwner={isOwner}
+                  isUserOrg={isUserOrg}
+                />
+              </Modal>
+              <DiscountViewCard discounts={discounts} locale={locale} />
+              <PriceDescription />
+            </Stack>
+          </Grid>
+        </BookingViewProvider>
       </section>
 
       <Container>

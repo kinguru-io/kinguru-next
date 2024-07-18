@@ -39,10 +39,7 @@ export async function upsertPremiseFulfilledIndex({
   const location = await prepareDocumentLocation({
     mapboxId: venue.locationMapboxId,
   });
-  const closedHours = prepareClosedHours({
-    timeZone: location["location.timeZone"],
-    openHours,
-  });
+  const closedHours = prepareClosedHours({ openHours });
 
   await esClient.index({
     index,

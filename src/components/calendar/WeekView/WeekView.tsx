@@ -1,8 +1,8 @@
 "use client";
 
 import type { $Enums } from "@prisma/client";
-import { isEqual, isSameDay, set } from "date-fns";
-import { formatInTimeZone, toZonedTime } from "date-fns-tz";
+import { isBefore, isEqual, isSameDay } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { useEffect, useRef } from "react";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
@@ -14,13 +14,10 @@ import {
   TimeSlot,
   type AggregatedPrices,
   getTimeSlotCondition,
+  Loader,
 } from "@/components/uikit";
 import type { Group } from "@/lib/utils/array";
-import {
-  getWeekViewData,
-  DAYS_OF_WEEK_ORDERED,
-  isBeforeZoned,
-} from "@/lib/utils/datetime";
+import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Box, Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
@@ -43,7 +40,7 @@ export function WeekView({
   aggregatedPrices: AggregatedPrices;
   headingSlot?: React.ReactNode;
 }) {
-  const timeZone = useSearchBoxTimeZone() || "UTC";
+  const timeZone = useSearchBoxTimeZone();
   const {
     originDate,
     changeMonth,
@@ -53,7 +50,7 @@ export function WeekView({
     canGoNext,
     currentMonthNumber,
     lastAllowedDate,
-  } = useOriginDate({ initialDate: nowDate, timeZone });
+  } = useOriginDate({ initialDate: nowDate });
   const { selectedSlots, toggleSlot } = useBookingView();
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
@@ -74,8 +71,17 @@ export function WeekView({
 
   const weekViewData = getWeekViewData({ locale, originDate });
 
+  // since all time slots represent local hall time, it is okay to get current user time in a hall timezone
+  // converting to UTC only for comparing
+  // ! this is isn't real time because time slots are treated as common strings, not as `Date`
+  const localPremiseTime = formatInTimeZone(
+    nowDate,
+    timeZone || "UTC",
+    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  );
+
   return (
-    <Stack gap="6" overflow="hidden">
+    <Stack gap="6" overflow="hidden" position="relative">
       <HStack gap="6" flexWrap="wrap">
         {headingSlot}
         <HStack gap="1" justifyContent="space-between" flexGrow="1">
@@ -105,10 +111,6 @@ export function WeekView({
         {weekViewData.map((weekdayInfo, idx) => {
           const dayOfWeekGroupKey = DAYS_OF_WEEK_ORDERED[idx];
           const weekDayTimeSlots = timeSlotsGroup[dayOfWeekGroupKey] || [];
-          const isToday = isSameDay(
-            toZonedTime(nowDate, timeZone),
-            toZonedTime(weekdayInfo.day, timeZone),
-          );
 
           return (
             <VStack
@@ -127,7 +129,7 @@ export function WeekView({
                 borderBlockEnd="{sizes.1} solid {colors.secondary.lighter}"
                 paddingBlockEnd="1"
                 marginBlockEnd="2"
-                aria-selected={isToday}
+                aria-selected={isSameDay(localPremiseTime, weekdayInfo.day)}
                 _selected={{ borderBlockEndColor: "primary" }}
               >
                 <time
@@ -137,27 +139,28 @@ export function WeekView({
                   })}
                   dateTime={formatInTimeZone(
                     weekdayInfo.day,
-                    timeZone,
+                    "UTC",
                     "yyyy-MM-dd",
                   )}
                   suppressHydrationWarning
                 >
                   {weekdayInfo.weekdayShort}
                   {"\n"}
-                  {formatInTimeZone(weekdayInfo.day, timeZone, "d")}
+                  {formatInTimeZone(weekdayInfo.day, "UTC", "d")}
                 </time>
               </Box>
               {weekDayTimeSlots.map(({ day, timeSlots }) => {
                 return timeSlots.flatMap(({ price, time }) => {
-                  const slotTime = set(weekdayInfo.day, {
-                    hours: time.getHours(),
-                    minutes: time.getMinutes(),
-                    seconds: 0,
-                    milliseconds: 0,
-                  });
+                  const slotTime = new Date(weekdayInfo.day);
+                  slotTime.setUTCHours(
+                    time.getUTCHours(),
+                    time.getUTCMinutes(),
+                    0,
+                    0,
+                  );
                   const slotISOString = slotTime.toISOString();
                   const isDisabled =
-                    isBeforeZoned(slotTime, nowDate, timeZone) ||
+                    isBefore(slotTime, localPremiseTime) ||
                     bookedSlots.has(slotISOString);
 
                   const isSlotSelected = selectedSlots.some(
@@ -169,7 +172,6 @@ export function WeekView({
                       key={slotISOString}
                       price={price}
                       time={slotTime}
-                      timeZone={timeZone}
                       onClick={() =>
                         toggleSlot({
                           day,
@@ -188,6 +190,15 @@ export function WeekView({
           );
         })}
       </Flex>
+      {!timeZone && (
+        <Loader
+          className={css({
+            position: "absolute",
+            inset: "0",
+            bgColor: "light/80",
+          })}
+        />
+      )}
     </Stack>
   );
 }

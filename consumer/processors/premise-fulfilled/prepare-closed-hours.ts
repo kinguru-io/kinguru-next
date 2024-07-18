@@ -1,6 +1,4 @@
 import type { PremiseOpenHours } from "@prisma/client";
-import { millisecondsInHour } from "date-fns/constants";
-import { getTimezoneOffset } from "date-fns-tz";
 import { groupBy } from "../../../src/lib/shared/utils/array";
 import { DAYS_OF_WEEK_ORDERED } from "../../../src/lib/shared/utils/datetime";
 
@@ -11,22 +9,11 @@ export const fullDayHoursList = Array.from({ length: 25 }, (_, i) => i);
  */
 export function prepareClosedHours({
   openHours,
-  timeZone,
 }: {
   openHours: Array<Pick<PremiseOpenHours, "day" | "openTime" | "closeTime">>;
-  timeZone: string;
 }) {
-  const _hoursOffset = getTimezoneOffset(timeZone) / millisecondsInHour;
-  const mappedOpenHours = openHours.map(({ day, openTime, closeTime }) => ({
-    day,
-    // TODO adding offset is a temporary solution
-    // Should be reworked once slots booking logic is reviewed to fit raw numbers instead of converting to specific time zone
-    open: openTime.getUTCHours() + _hoursOffset,
-    close: closeTime.getUTCHours() + _hoursOffset,
-  }));
-
   // grouping in form `{ "1": [{}, {}, ...] }` in order to get rid of ES nested fields
-  const groupedOpenHours = groupBy(mappedOpenHours, ({ day }) =>
+  const groupedOpenHours = groupBy(openHours, ({ day }) =>
     String(DAYS_OF_WEEK_ORDERED.indexOf(day) + 1),
   );
 
@@ -39,8 +26,11 @@ export function prepareClosedHours({
 
       records.forEach((record) => {
         Array.from(
-          { length: record.close - record.open },
-          (_, i) => i + record.open,
+          {
+            length:
+              record.closeTime.getUTCHours() - record.openTime.getUTCHours(),
+          },
+          (_, i) => i + record.openTime.getUTCHours(),
         ).forEach((hour) => closedHours.delete(hour));
       });
 

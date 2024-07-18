@@ -1,5 +1,6 @@
 import { isValid } from "date-fns";
 import {
+  availableDayResolver,
   closedHoursResolver,
   premiseSlotResolver,
 } from "./resolvers/search-datetime";
@@ -35,6 +36,7 @@ export function buildQueryParts(searchParams: Record<string, any>) {
         const isoRanges: string[] = values.split(",");
         if (isoRanges.some((range) => !isValid(new Date(range)))) return parts;
 
+        parts.must.push(availableDayResolver(isoRanges[0]));
         parts.must_not.push(
           premiseSlotResolver(isoRanges),
           closedHoursResolver(isoRanges),

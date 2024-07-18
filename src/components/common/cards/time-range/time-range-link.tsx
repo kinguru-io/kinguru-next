@@ -51,7 +51,7 @@ export function TimeRangeLink({
     // absence any of these params makes no sense looking for items including such predicates
     if (from !== "" && to !== "") {
       const datetimeParam = prepareDatetimeParam(
-        date || new Date(),
+        format(date || new Date(), "yyyy-MM-dd"),
         Number(from),
         Number(to),
       );

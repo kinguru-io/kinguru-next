@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { $Enums } from "@prisma/client";
 import { areIntervalsOverlapping, isBefore } from "date-fns";
-import { millisecondsInHour } from "date-fns/constants";
-import { formatInTimeZone, getTimezoneOffset } from "date-fns-tz";
+import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import {
   useForm,
@@ -12,7 +11,6 @@ import {
   type UseFormGetValues,
 } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Input, Select, Button } from "@/components/uikit";
 import {
   type OpenHoursSchema,
@@ -46,11 +44,8 @@ export function AddOpenHoursRecord({
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
-  const timeZone = useSearchBoxTimeZone();
 
   const addButtonClicked = (input: OpenHoursSchema) => {
-    if (!timeZone) return;
-
     const openHours = getValues("openHoursAndPrice.openHours");
 
     // checking if a user is trying to add the range intersecting with an existing range
@@ -64,8 +59,8 @@ export function AddOpenHoursRecord({
     );
     if (foundRecord) {
       const errorMessage = {
-        start: formatInTimeZone(foundRecord.startTime, timeZone, "HH:mm"),
-        end: formatInTimeZone(foundRecord.endTime, timeZone, "HH:mm"),
+        start: formatInTimeZone(foundRecord.startTime, "UTC", "HH:mm"),
+        end: formatInTimeZone(foundRecord.endTime, "UTC", "HH:mm"),
       };
       toast.error(`${t("open_hours_existing_range_error_msg", errorMessage)}`);
 
@@ -112,7 +107,7 @@ export function AddOpenHoursRecord({
         })}
         type="button"
         onClick={handleSubmit(addButtonClicked)}
-        disabled={!isValid || !timeZone}
+        disabled={!isValid}
         rounded={false}
       >
         {t("open_hours_add_record_btn_label")}
@@ -134,15 +129,10 @@ function TimeSelectOptions({
     name: watchedName,
     defaultValue: "",
   });
-  const timeZone = useSearchBoxTimeZone();
-
-  if (!timeZone) return null;
-
   return Array.from({ length: 25 }, (_, i) => {
     const date = new Date(0);
-
     // to avoid timezone offset issues and to leave consistency between all DB records
-    date.setUTCHours(i - getTimezoneOffset(timeZone) / millisecondsInHour);
+    date.setUTCHours(i);
 
     const value = date.toISOString();
     const isDisabled =
@@ -155,7 +145,7 @@ function TimeSelectOptions({
 
     return (
       <option key={value} value={value} disabled={isDisabled || isSameTime}>
-        {String(i).padStart(2, "0")}:00
+        {formatInTimeZone(date, "UTC", "HH:mm")}
       </option>
     );
   });
