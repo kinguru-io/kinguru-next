@@ -25,7 +25,7 @@ export const sliderSlot = defineSlotRecipe({
       height: "clamp(3rem, 2.4rem + 2vw, 4rem)", //since container queries feature is almost brand new feature for potential user agents
       width: "clamp(3rem, 2.4rem + 2vw, 4rem)",
       borderRadius: "full",
-      bgColor: "rgba(255, 255, 255, 0.8)",
+      bgColor: "light/80",
       _hoverOrFocusVisible: { color: "dark", bgColor: "light" },
       _focusVisible: {
         outline: "1px solid transparent",
