@@ -1,10 +1,10 @@
-import { differenceInCalendarMonths, eachMonthOfInterval } from "date-fns";
-import { memo } from "react";
+import { eachMonthOfInterval } from "date-fns";
+import { useId } from "react";
 import { Select } from "@/components/uikit";
 import type { Locale } from "@/navigation";
 import { Box } from "~/styled-system/jsx";
 
-export const MonthSelect = memo(function MonthSelect({
+export function MonthSelect({
   locale,
   monthNumber,
   changeMonth,
@@ -17,6 +17,8 @@ export const MonthSelect = memo(function MonthSelect({
   initialDate: Date;
   endDate: Date;
 }) {
+  const id = useId();
+
   // using of `{ year: 'numeric' }` for full year is omitted
   // since there is a literal for some locale (e.g. `ru-*` locale)
   const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
@@ -32,19 +34,16 @@ export const MonthSelect = memo(function MonthSelect({
         "& svg": { color: "inherit" },
       }}
     >
-      <Select value={monthNumber} onChange={optionChanged}>
+      <Select value={monthNumber + id} onChange={optionChanged}>
         {eachMonthOfInterval({
           start: initialDate,
           end: endDate,
-        }).map((interimDate) => (
-          <option
-            key={interimDate.toISOString()}
-            value={differenceInCalendarMonths(interimDate, initialDate)}
-          >
+        }).map((interimDate, idx) => (
+          <option key={interimDate.toISOString()} value={idx + id}>
             {`${monthFormatter.format(interimDate)} ${interimDate.getFullYear()}`}
           </option>
         ))}
       </Select>
     </Box>
   );
-});
+}
