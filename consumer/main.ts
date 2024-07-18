@@ -21,11 +21,13 @@ const premiseSlotTopic =
 
 const prisma = new PrismaClient();
 const kafka = new Kafka({
-  clientId: "my-app",
+  clientId: process.env.KAFKA_CLIENT_ID || "",
   brokers: [process.env.KAFKA_BROKER || ""],
   connectionTimeout: 3000,
 });
-const consumer = kafka.consumer({ groupId: "premise_fulfill" });
+const consumer = kafka.consumer({
+  groupId: process.env.KAFKA_CONSUMER_GROUP_ID || "",
+});
 const logger = consumer.logger();
 const esClient = new Client({
   node: process.env.ES_CLIENT_NODE,
