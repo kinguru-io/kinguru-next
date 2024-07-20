@@ -10,19 +10,9 @@ export function premiseSlotResolver(ranges: string[]) {
       query: {
         bool: {
           must: [
-            {
-              bool: {
-                should: [
-                  { range: { startTime: { gt: ranges[0], lt: ranges[1] } } },
-                  { range: { endTime: { gt: ranges[0], lt: ranges[1] } } },
-                ],
-              },
-            },
-            {
-              terms: {
-                status: ["succeed", "progress"],
-              },
-            },
+            { range: { startTime: { lt: ranges[1] } } },
+            { range: { endTime: { gt: ranges[0] } } },
+            { terms: { status: ["succeed", "progress"] } },
           ],
         },
       },
