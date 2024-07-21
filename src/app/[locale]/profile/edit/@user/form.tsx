@@ -175,7 +175,7 @@ function DateDropdown({
           date={toDate(field.value || new Date())}
           callback={dayChanged}
           disabled={isFuture}
-          captionLayout="dropdown-buttons"
+          captionLayout="dropdown"
         />
       </DropdownMenu>
     </Dropdown>

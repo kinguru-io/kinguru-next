@@ -22,4 +22,5 @@ export const additionalGlobalCss = defineGlobalStyles({
     },
   },
   ".rdp-caption_label": { textTransform: "capitalize" },
+  ".rdp-root": { padding: "2" },
 });

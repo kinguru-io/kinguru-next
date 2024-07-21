@@ -1,16 +1,16 @@
 import { useLocale } from "next-intl";
-import { DayPicker, type CaptionLayout, type Matcher } from "react-day-picker";
+import { DayPicker, type PropsBase } from "react-day-picker";
 import { useDropdown } from "@/components/uikit";
 import { localeMap } from "@/lib/shared/config/date-fns-locale-map";
 import type { Locale } from "@/navigation";
 import { token } from "~/styled-system/tokens";
 
-import "react-day-picker/dist/style.css";
+import "react-day-picker/style.css";
 
 const dayPickerStyles = {
   "--rdp-accent-color": token.var("colors.primary"),
-  "--rdp-selected-color": token.var("colors.dark"),
-  "--rdp-background-color": token.var("colors.primary.lightest"),
+  "--rdp-accent-background-color": token.var("colors.primary"),
+  "--rdp-weekday-text-transform": "capitalize",
 } as React.CSSProperties;
 
 export function SingleDayPicker({
@@ -21,8 +21,8 @@ export function SingleDayPicker({
 }: {
   date: Date;
   callback: (day: Date) => unknown;
-  disabled?: Matcher | Matcher[];
-  captionLayout?: CaptionLayout;
+  disabled?: PropsBase["disabled"];
+  captionLayout?: PropsBase["captionLayout"];
 }) {
   const locale = useLocale() as Locale;
   const { setHidden } = useDropdown();
@@ -32,10 +32,9 @@ export function SingleDayPicker({
     setHidden(true);
   };
 
-  const currentYear = new Date().getFullYear();
-
   return (
     <DayPicker
+      mode="single"
       style={dayPickerStyles}
       weekStartsOn={1} // Monday first
       selected={date}
@@ -43,11 +42,6 @@ export function SingleDayPicker({
       locale={localeMap[locale]}
       disabled={disabled}
       captionLayout={captionLayout}
-      {...(captionLayout && {
-        defaultMonth: date,
-        fromYear: currentYear - 100,
-        toYear: currentYear,
-      })}
     />
   );
 }
