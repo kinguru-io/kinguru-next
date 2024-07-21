@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import formConfig from "./form-config.json";
 import { BaseForm, Button } from "@/components/uikit";
 import type { RevalidateAll } from "@/lib/actions/auth";
+import { checkEmailByRole } from "@/lib/actions/auth/check-email-by-role";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link, useRouter } from "@/navigation";
 import { HStack, Stack } from "~/styled-system/jsx";
@@ -31,6 +32,13 @@ export function SignInForm({
   const t = useTranslations("auth.error");
 
   const onSubmit = async ({ email, password }: SigninFormInput) => {
+    const doExist = await checkEmailByRole(email, isCompany);
+
+    if (!doExist) {
+      toast.error(t("invalid_credentials"));
+      return;
+    }
+
     const response = await signIn("credentials", {
       email,
       password,
