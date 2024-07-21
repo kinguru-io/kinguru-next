@@ -7,13 +7,13 @@ export const dropdownSlot = defineSlotRecipe({
   base: {
     menu: {
       display: "flex",
-      borderRadius: "6px",
+      borderRadius: "sm",
       boxShadow: "dropdown",
       flexDirection: "column",
       position: "absolute",
-      top: "calc(100% + 5px)",
+      insetBlockStart: "full",
       bgColor: "light",
-      minW: "110px",
+      minW: "28",
       color: "dark",
       zIndex: "token(zIndex.dropdown)",
       width: "max-content",
@@ -38,6 +38,5 @@ export const dropdownSlot = defineSlotRecipe({
       start: { menu: { insetInlineStart: "0" } },
     },
   },
-  staticCss: [{ size: ["*"] }],
   defaultVariants: { anchor: "end" },
 });
