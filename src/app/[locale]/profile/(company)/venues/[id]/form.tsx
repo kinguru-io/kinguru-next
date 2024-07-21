@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Manager, Venue } from "@prisma/client";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useTransition } from "react";
-import { useFormState } from "react-dom";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AddVenueFormInner } from "../add/form";
@@ -14,7 +12,6 @@ import {
   type EditVenueAction,
 } from "@/lib/actions/venue";
 import { MergedVenueFormSchemaProps } from "@/lib/actions/venue/validation";
-import type { FormActionState } from "@/lib/utils";
 import { handleFormErrorMsg } from "@/utils/forms/errors";
 import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
 
@@ -36,7 +33,6 @@ export function EditVenueForm({
   editVenue: EditVenueAction;
   venue: Venue & { manager: Manager[] };
 }) {
-  const [_isPending, startTransition] = useTransition();
   const t = useTranslations("profile.venues.add");
   const formT = useTranslations("form.common");
 
@@ -72,14 +68,22 @@ export function EditVenueForm({
     },
   });
 
-  const [response, formAction] = useFormState<FormActionState, FormData>(
-    editVenue,
-    null,
-  );
+  const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> = async () => {
+    if (!(await methods.trigger())) return;
 
-  useEffect(() => {
-    if (!response) return;
-    const { status, message } = response;
+    const formData = {
+      ...methods.getValues(),
+      ids: {
+        venueId: id,
+        managerId: manager.id,
+      },
+    };
+    const multiFormPayload = transformMultiFormPayload<
+      CreateVenueFormSchemaProps,
+      MergedVenueFormSchemaProps
+    >(formData);
+
+    const { status, message } = await editVenue(multiFormPayload);
 
     if (status === "error") {
       // @ts-expect-error
@@ -93,31 +97,11 @@ export function EditVenueForm({
       toast.success(formT("updated"));
       methods.reset(methods.getValues());
     }
-  }, [response]);
-
-  const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> =
-    useCallback(() => {
-      if (!methods.formState.isValid) return;
-
-      const formData = {
-        ...methods.getValues(),
-        ids: {
-          venueId: id,
-          managerId: manager.id,
-        },
-      };
-      const multiFormPayload = transformMultiFormPayload<
-        CreateVenueFormSchemaProps,
-        MergedVenueFormSchemaProps
-      >(formData);
-
-      // @ts-expect-error
-      startTransition(() => formAction(multiFormPayload));
-    }, [formAction]);
+  };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} action={formAction}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
         <AddVenueFormInner isEditing />
       </form>
     </FormProvider>

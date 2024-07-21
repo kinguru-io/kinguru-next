@@ -50,7 +50,7 @@ export function InputSearchLocation<T extends FieldValues>({
 
   return (
     <>
-      <input type="text" {...field} hidden />
+      <input type="text" {...field} hidden readOnly />
       <Input
         type="text"
         placeholder={placeholder}

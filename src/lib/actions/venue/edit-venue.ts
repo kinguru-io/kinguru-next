@@ -6,16 +6,12 @@ import {
   type MergedVenueFormSchemaProps,
 } from "./validation";
 import { getSession } from "@/auth";
-import { type FormActionState, createFormAction } from "@/lib/utils";
+import { type FormActionResponse } from "@/lib/utils";
 import prisma from "@/server/prisma";
 
-async function editVenue({
-  manager,
-  venueId,
-  managerId,
-  name: _unused,
-  ...restVenueInput
-}: MergedVenueFormSchemaProps): Promise<FormActionState> {
+export async function editVenueAction(
+  input: MergedVenueFormSchemaProps,
+): Promise<FormActionResponse> {
   const session = await getSession();
 
   if (!session || !session.user || !session.user.email) {
@@ -32,6 +28,20 @@ async function editVenue({
       message: "Not an organization",
     };
   }
+
+  const parseResult = mergedVenueSchema.safeParse(input);
+
+  if (!parseResult.success) {
+    return { status: "error", message: parseResult.error.message };
+  }
+
+  const {
+    manager,
+    venueId,
+    managerId,
+    name: _unused,
+    ...restVenueInput
+  } = parseResult.data;
 
   const venue = await prisma.venue.findUnique({
     where: { id: venueId, organizationId: organization.id },
@@ -64,8 +74,5 @@ async function editVenue({
     message: "Venue updated successfully",
   };
 }
-
-// @ts-expect-error
-export const editVenueAction = createFormAction(editVenue, mergedVenueSchema);
 
 export type EditVenueAction = typeof editVenueAction;
