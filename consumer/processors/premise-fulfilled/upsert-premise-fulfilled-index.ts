@@ -1,5 +1,5 @@
 import type { Client } from "@elastic/elasticsearch";
-// import type { SearchBoxCore } from "@mapbox/search-js-core";
+import type { SearchBoxCore } from "@mapbox/search-js-core";
 import type { PrismaClient } from "@prisma/client";
 import type { Logger } from "kafkajs";
 import { prepareClosedHours } from "./prepare-closed-hours";
@@ -11,14 +11,14 @@ export async function upsertPremiseFulfilledIndex({
   prisma,
   esClient,
   logger,
-  // searchBox,
+  searchBox,
 }: {
   id: string;
   index: string;
   prisma: PrismaClient;
   esClient: Client;
   logger: Logger;
-  // searchBox: SearchBoxCore;
+  searchBox: SearchBoxCore;
 }) {
   const premise = await prisma.premise.findUnique({
     where: { id },
@@ -38,13 +38,14 @@ export async function upsertPremiseFulfilledIndex({
   const { venue, openHours, ...restPremise } = premise;
   const location = await prepareDocumentLocation({
     mapboxId: venue.locationMapboxId,
+    searchBox,
   });
   const closedHours = prepareClosedHours({ openHours });
 
   await esClient.index({
     index,
     id: restPremise.id,
-    body: {
+    document: {
       ...restPremise,
       ...location,
       minPrice: openHours.at(0)?.price,
