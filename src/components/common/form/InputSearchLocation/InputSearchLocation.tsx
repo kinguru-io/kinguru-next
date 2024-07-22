@@ -2,7 +2,7 @@
 
 import type { SearchBoxSuggestion } from "@mapbox/search-js-core";
 import { useLocale } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useController,
   type FieldValues,
@@ -31,14 +31,32 @@ export function InputSearchLocation<T extends FieldValues>({
   const [places, setPlaces] = useState<SearchBoxSuggestion[]>([]);
   const [textFieldValue, setTextFieldValue] = useState("");
   const locale = useLocale() as Locale;
-  const { fetchSuggestions } = useSearchBoxCore({ language: locale });
+  const { fetchSuggestions, retrieve } = useSearchBoxCore({
+    language: locale,
+    country: "PL",
+  });
   const { setHidden } = useDropdown();
   const { field } = useController<T>({ name, control });
+
+  // TODO refactor
+  useEffect(() => {
+    if (!field.value) return;
+
+    retrieve({ mapbox_id: field.value }, ({ features }) => {
+      const location = features.at(0);
+
+      if (!location) return;
+
+      setTextFieldValue(
+        location.properties.full_address || location.properties.place_formatted,
+      );
+    });
+  }, [setTextFieldValue, retrieve]);
 
   const inputChanged = (searchValue: string) => {
     setHidden(false);
     setTextFieldValue(searchValue);
-    fetchSuggestions(searchValue, setPlaces);
+    fetchSuggestions(searchValue.replaceAll("/", "-"), setPlaces);
   };
 
   const suggestionChosen = (suggestion: SearchBoxSuggestion) => {
@@ -57,6 +75,7 @@ export function InputSearchLocation<T extends FieldValues>({
         value={textFieldValue}
         onChange={(e) => inputChanged(e.target.value)}
         data-invalid={getError(errors, name)}
+        onFocus={inputFocused}
       />
       <DropdownMenu shouldCloseOnClick={false}>
         {places.map((place) => (
@@ -74,3 +93,7 @@ export function InputSearchLocation<T extends FieldValues>({
     </>
   );
 }
+
+const inputFocused = ({ target }: React.FocusEvent<HTMLInputElement>) => {
+  target.select();
+};
