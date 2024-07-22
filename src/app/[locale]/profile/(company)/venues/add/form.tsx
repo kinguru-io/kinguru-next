@@ -3,8 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useTransition } from "react";
-import { useFormState } from "react-dom";
 import {
   useForm,
   FormProvider,
@@ -27,8 +25,8 @@ import {
   type CreateVenueAction,
 } from "@/lib/actions/venue";
 import { MergedVenueFormSchemaProps } from "@/lib/actions/venue/validation";
-import { FormActionState } from "@/lib/utils";
 import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
+import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 
 export function AddVenueForm({
@@ -38,7 +36,6 @@ export function AddVenueForm({
 }) {
   const router = useRouter();
   const t = useTranslations("profile.venues.add");
-  const [_isPending, startTransition] = useTransition();
 
   const methods = useForm<CreateVenueFormSchemaProps>({
     mode: "all",
@@ -46,41 +43,26 @@ export function AddVenueForm({
     resolver: zodResolver(createVenueFormSchema(t)),
   });
 
-  const [response, formAction] = useFormState<FormActionState, FormData>(
-    createVenue,
-    null,
-  );
+  const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> = async (data) => {
+    const formData = {
+      ...data,
+      ...methods.getValues(),
+    };
 
-  useEffect(() => {
-    if (!response) return;
+    const multiFormPayload = transformMultiFormPayload<
+      CreateVenueFormSchemaProps,
+      MergedVenueFormSchemaProps
+    >(formData);
 
-    if (response.status === "success" && response.redirectUrl) {
-      router.push(response.redirectUrl);
+    const { status, message, redirectUrl } =
+      await createVenue(multiFormPayload);
+
+    if (status === "success" && redirectUrl) {
+      return router.push(redirectUrl);
     }
 
-    if (response.status !== "error") return;
-
-    const toastId = toast.error(response.message);
-
-    return () => toast.remove(toastId);
-  }, [response]);
-
-  const onSubmit: SubmitHandler<CreateVenueFormSchemaProps> = useCallback(
-    (data) => {
-      const formData = {
-        ...data,
-        ...methods.getValues(),
-      };
-
-      const multiFormPayload = transformMultiFormPayload<
-        CreateVenueFormSchemaProps,
-        MergedVenueFormSchemaProps
-      >(formData);
-      // @ts-expect-error
-      startTransition(() => formAction(multiFormPayload));
-    },
-    [formAction],
-  );
+    toast.error(message);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -100,7 +82,6 @@ export function AddVenueFormInner({
     control,
     formState: { defaultValues, isSubmitting },
   } = useFormContext<CreateVenueFormSchemaProps>();
-
   const t = useTranslations("profile.venues.add");
 
   const formGroupItems = [
@@ -129,7 +110,10 @@ export function AddVenueFormInner({
   return (
     <Stack css={{ md: { gap: "6" } }}>
       {formGroupItems.map(({ title, content }) => (
-        <SubSection key={title}>
+        <SubSection
+          key={title}
+          className={editMode ? css({ padding: "2" }) : undefined}
+        >
           <h2 className="title">{title}</h2>
           {content}
         </SubSection>

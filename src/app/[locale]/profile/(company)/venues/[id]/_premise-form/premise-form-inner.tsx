@@ -23,7 +23,6 @@ import { CreatePremiseFormTypeEnum } from "@/lib/actions/premise/validation";
 import { css } from "~/styled-system/css";
 
 export function PremiseFormInner({
-  mapboxId,
   editMode = false,
 }: {
   mapboxId: string;
@@ -54,7 +53,7 @@ export function PremiseFormInner({
     },
     {
       label: t("groups.open_hours"),
-      content: <OpenHoursAndPrices mapboxId={mapboxId} />,
+      content: <OpenHoursAndPrices />,
       formType: CreatePremiseFormTypeEnum.OpenHoursAndPrice,
     },
     {

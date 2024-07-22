@@ -148,6 +148,7 @@ export default defineConfig({
           text: { value: "{colors.light}" },
         },
         light: { DEFAULT: { value: "#FFFFFF" } },
+        "light/80": { DEFAULT: { value: "rgba(255, 255, 255, 0.8)" } },
         neutral: { 1: { value: "#FCFCFC" } }, // white darkened by 1%
         danger: {
           DEFAULT: { value: "#DC1414" },

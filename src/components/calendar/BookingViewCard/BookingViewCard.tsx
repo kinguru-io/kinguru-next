@@ -19,7 +19,6 @@ import { NoBookingsNotice } from "./NoBookingsNotice";
 import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import { Timer } from "@/components/common/timer";
 import { Button, ModalWindow, useModal } from "@/components/uikit";
 import {
@@ -64,7 +63,6 @@ export function BookingViewCard({
   inModal?: boolean;
 }) {
   const t = useTranslations("booking_view");
-  const timeZone = useSearchBoxTimeZone() || "UTC";
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
@@ -79,7 +77,6 @@ export function BookingViewCard({
   const newSlots = selectedSlots
     .map(({ time, price }) => {
       if (!isValid(time)) {
-        console.error("Invalid date detected:", time);
         return null; // Skip invalid dates
       }
 
@@ -100,7 +97,7 @@ export function BookingViewCard({
     Array.from(newGroupedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.startTime, slotB.startTime),
     ),
-    ({ startTime }) => formatInTimeZone(startTime, timeZone, "dd.MM.yyyy"),
+    ({ startTime }) => formatInTimeZone(startTime, "UTC", "dd.MM.yyyy"),
   );
 
   const priceGroupedSlots = groupBy(
@@ -109,10 +106,9 @@ export function BookingViewCard({
     ),
     ({ time }) => {
       if (!isValid(time)) {
-        console.error("Invalid date detected during grouping:", time);
         return "Invalid Date"; // Group invalid dates separately
       }
-      return formatInTimeZone(time, timeZone, "dd.MM.yyyy");
+      return formatInTimeZone(time, "UTC", "dd.MM.yyyy");
     },
   );
 
@@ -162,7 +158,6 @@ export function BookingViewCard({
         premiseId,
         premiseOrgId,
         slots: selectedSlots,
-        timeZone,
         discountsMap,
       });
 

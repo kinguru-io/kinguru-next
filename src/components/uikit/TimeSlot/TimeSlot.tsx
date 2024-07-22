@@ -17,7 +17,6 @@ export type TimeSlotInfo = {
 };
 
 type TimeSlotProps = TimeSlotInfo & {
-  timeZone?: string;
   onClick: () => void;
   disabled?: boolean;
   condition?: Condition;
@@ -52,7 +51,6 @@ const timeSlotClassName = css({
 export function TimeSlot({
   price,
   time,
-  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,
   onClick,
   condition = "regular",
   selected = false,
@@ -69,7 +67,7 @@ export function TimeSlot({
       disabled={disabled}
     >
       <time dateTime={time.toISOString()}>
-        {formatInTimeZone(time, timeZone, "HH:mm")}{" "}
+        {formatInTimeZone(time, "UTC", "HH:mm")}
       </time>
       <span
         className={css({

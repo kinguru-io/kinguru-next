@@ -1,12 +1,20 @@
-import { formatISO, getHours, set } from "date-fns";
+import { isValid } from "date-fns";
 import type { ReadonlyURLSearchParams } from "next/navigation";
 
-export function prepareDatetimeParam(date: Date, from: number, to: number) {
-  const fromDate = set(date, { hours: from, minutes: 0, seconds: 0 });
-  const toDate = set(date, { hours: to, minutes: 0, seconds: 0 });
+export function prepareDatetimeParam(date: string, from: number, to: number) {
+  const fromDate = new Date(date);
+  fromDate.setUTCHours(from, 0, 0, 0);
+  const toDate = new Date(date);
+  toDate.setUTCHours(to, 0, 0, 0);
 
-  return `${formatISO(fromDate)},${formatISO(toDate)}`;
+  return `${fromDate.toISOString()},${toDate.toISOString()}`;
 }
+
+const initialValues = {
+  from: "",
+  to: "",
+  date: null,
+};
 
 export function parseInitialDatetimeValues({
   searchParams,
@@ -15,23 +23,19 @@ export function parseInitialDatetimeValues({
   searchParams: ReadonlyURLSearchParams | null;
   name: string;
 }) {
-  const defaultConfig = {
-    from: "",
-    to: "",
-    date: null,
-  };
-
-  if (!searchParams) return defaultConfig;
+  if (!searchParams) return initialValues;
 
   const datetimeParam = searchParams.get(name);
 
-  if (!datetimeParam) return defaultConfig;
+  if (!datetimeParam) return initialValues;
 
-  const [from, to] = datetimeParam.split(",");
+  const [from, to] = datetimeParam.split(",").map((date) => new Date(date));
+
+  if (!isValid(from) || !isValid(to)) return initialValues;
 
   return {
-    from: getHours(from).toString(),
-    to: getHours(to).toString(),
+    from: new Date(from).getUTCHours().toString(),
+    to: new Date(to).getUTCHours().toString(),
     date: new Date(from),
   };
 }

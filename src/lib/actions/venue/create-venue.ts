@@ -8,13 +8,12 @@ import {
   mergedVenueSchema,
 } from "./validation";
 import { getSession } from "@/auth";
-import { type FormActionState, createFormAction } from "@/lib/utils";
+import { type FormActionResponse } from "@/lib/utils";
 import prisma from "@/server/prisma";
 
-async function createVenue({
-  manager,
-  ...restVenueInput
-}: MergedVenueFormSchemaProps): Promise<FormActionState> {
+export async function createVenueAction(
+  input: MergedVenueFormSchemaProps,
+): Promise<FormActionResponse> {
   const t = await getTranslations("profile.venues.add");
   const session = await getSession();
 
@@ -32,6 +31,17 @@ async function createVenue({
       message: "Not an organization",
     };
   }
+
+  const parseResult = mergedVenueSchema.safeParse(input);
+
+  if (!parseResult.success) {
+    return {
+      status: "error",
+      message: "Incorrect input",
+    };
+  }
+
+  const { manager, ...restVenueInput } = parseResult.data;
 
   const potentialSlug = slugify(restVenueInput.name);
 
@@ -72,11 +82,5 @@ async function createVenue({
     };
   }
 }
-
-export const createVenueAction = createFormAction(
-  createVenue,
-  // @ts-expect-error
-  mergedVenueSchema,
-);
 
 export type CreateVenueAction = typeof createVenueAction;

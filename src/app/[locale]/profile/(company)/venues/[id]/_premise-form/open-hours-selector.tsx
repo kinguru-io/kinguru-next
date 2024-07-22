@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { AddOpenHoursRecord } from "./add-open-hours-record";
 import { TagClosable } from "@/components/common";
 import { SubSection } from "@/components/common/cards/sub-section";
-import { useSearchBoxTimeZone } from "@/components/common/maps/MapboxResponseProvider";
 import {
   Accordion,
   AccordionItemContent,
@@ -40,8 +39,6 @@ export function OpenHoursSelector() {
     control,
     name: formFieldPath,
   });
-
-  const timeZone = useSearchBoxTimeZone() || "UTC";
 
   const groupedFields = groupBy(
     fields
@@ -101,12 +98,12 @@ export function OpenHoursSelector() {
                     {fieldsPerDay.map((field) => {
                       const start = formatInTimeZone(
                         field.startTime,
-                        timeZone,
+                        "UTC",
                         "H:mm",
                       );
                       const end = formatInTimeZone(
                         field.endTime,
-                        timeZone,
+                        "UTC",
                         "H:mm",
                       );
 

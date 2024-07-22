@@ -30,7 +30,6 @@ type BookTimeSlotsActionData = {
   premiseOrgId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
-  timeZone: string;
   discountsMap: Record<number, number | undefined>;
 };
 
@@ -96,7 +95,6 @@ export async function createPremiseSlotsIntent({
   premiseId,
   premiseOrgId,
   slots,
-  timeZone,
   discountsMap,
 }: BookTimeSlotsActionData): ActionResponse<
   {
@@ -127,7 +125,7 @@ export async function createPremiseSlotsIntent({
     Array.from(editedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
     ),
-    ({ time }) => formatInTimeZone(time, timeZone, "dd.MM.yyyy"),
+    ({ time }) => formatInTimeZone(time, "UTC", "dd.MM.yyyy"),
   );
   const { totalPrice } = processOrderTotalDiscounts(
     groupedSlots,

@@ -2,10 +2,10 @@ import {
   addDays,
   addMonths,
   differenceInCalendarMonths,
+  isBefore,
   startOfMonth,
 } from "date-fns";
 import { useCallback, useState } from "react";
-import { isBeforeZoned } from "@/lib/utils/datetime";
 
 /**
  * Controls the date origin according to the initial state value for a week view layouts:
@@ -15,11 +15,9 @@ import { isBeforeZoned } from "@/lib/utils/datetime";
  */
 export function useOriginDate({
   initialDate,
-  timeZone,
   maxMonthCount = 12,
 }: {
   initialDate: Date;
-  timeZone: string;
   maxMonthCount?: number;
 }) {
   const [originDate, setOriginDate] = useState(initialDate);
@@ -36,9 +34,7 @@ export function useOriginDate({
     const nextOriginDate = startOfMonth(addMonths(initialDate, monthCount));
 
     setOriginDate(
-      isBeforeZoned(nextOriginDate, initialDate, timeZone)
-        ? initialDate
-        : nextOriginDate,
+      isBefore(nextOriginDate, initialDate) ? initialDate : nextOriginDate,
     );
   }, []);
 
@@ -47,7 +43,7 @@ export function useOriginDate({
     prevWeek,
     nextWeek,
     changeMonth,
-    canGoPrev: isBeforeZoned(addDays(originDate, -7), initialDate, timeZone),
+    canGoPrev: isBefore(addDays(originDate, -7), initialDate),
     canGoNext:
       differenceInCalendarMonths(addDays(originDate, 7), initialDate) >
       maxMonthCount,

@@ -1,7 +1,6 @@
 import { Client } from "@elastic/elasticsearch";
 import { ElasticsearchClientError } from "@elastic/transport/lib/errors.js";
-// ! do not forget to uncomment when using the mapbox service
-// import mapbox, { type SearchBoxSuggestion } from "@mapbox/search-js-core";
+import mapbox from "@mapbox/search-js-core";
 import { PrismaClient } from "@prisma/client";
 
 import * as dotenv from "dotenv";
@@ -21,20 +20,22 @@ const premiseSlotTopic =
 
 const prisma = new PrismaClient();
 const kafka = new Kafka({
-  clientId: "my-app",
+  clientId: process.env.KAFKA_CLIENT_ID || "",
   brokers: [process.env.KAFKA_BROKER || ""],
   connectionTimeout: 3000,
 });
-const consumer = kafka.consumer({ groupId: "premise_fulfill" });
+const consumer = kafka.consumer({
+  groupId: process.env.KAFKA_CONSUMER_GROUP_ID || "",
+});
 const logger = consumer.logger();
 const esClient = new Client({
   node: process.env.ES_CLIENT_NODE,
   ...(esApiKey && { auth: { apiKey: esApiKey } }),
 });
-// ! do not forget to uncomment when using the mapbox service
-// const searchBox = new mapbox.SearchBoxCore({
-//   accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
-// });
+
+const searchBox = new mapbox.SearchBoxCore({
+  accessToken: process.env.MAPBOX_TOKEN,
+});
 
 async function init() {
   await prisma.$connect();
@@ -111,6 +112,7 @@ async function init() {
           prisma,
           esClient,
           logger,
+          searchBox,
         });
       }
 
@@ -139,7 +141,7 @@ async function init() {
           index: premiseFulfilledIndex,
           id,
           routing: premiseId,
-          body: {
+          document: {
             ...restSlot,
             booked_slots: {
               name: "premise_slot",

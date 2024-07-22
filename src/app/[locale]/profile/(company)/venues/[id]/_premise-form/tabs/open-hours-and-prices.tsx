@@ -2,14 +2,13 @@ import { useTranslations, type RichTranslationValues } from "next-intl";
 import { DiscountsSelector } from "../discounts-selector";
 import { OpenHoursSelector } from "../open-hours-selector";
 import { SubSection } from "@/components/common/cards/sub-section";
-import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { css } from "~/styled-system/css";
 
 const richTagMap: RichTranslationValues = {
   bold: (chunks) => <b>{chunks}</b>,
 };
 
-export function OpenHoursAndPrices({ mapboxId }: { mapboxId: string }) {
+export function OpenHoursAndPrices() {
   const t = useTranslations("profile.premises.add");
 
   return (
@@ -25,9 +24,7 @@ export function OpenHoursAndPrices({ mapboxId }: { mapboxId: string }) {
           {t.rich("fields.open_hours_example", richTagMap)}
         </p>
       </SubSection>
-      <MapboxSearchBoxResponseProvider mapboxId={mapboxId}>
-        <OpenHoursSelector />
-      </MapboxSearchBoxResponseProvider>
+      <OpenHoursSelector />
       <DiscountsSelector />
     </>
   );
