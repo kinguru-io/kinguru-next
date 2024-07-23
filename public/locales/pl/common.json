@@ -646,9 +646,9 @@
   },
   "verification": {
     "in_progress": "Weryfikuję e-mail...",
-    "bad_token": "Nie udało się zweryfikować e-mail 😕",
-    "email_verified": "E-mail został zweryfikowany! 👌",
+    "bad_token": "Nie udało się zweryfikować e-mail",
+    "email_verified": "E-mail został zweryfikowany!",
     "main_page_link": "Strona główna",
-    "profile_page_link": "Profil"
+    "profile_page_link": "Przejdź do profilu"
   }
 }
