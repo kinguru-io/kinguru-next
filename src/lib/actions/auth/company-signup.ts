@@ -1,7 +1,9 @@
 "use server";
 
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
+import { transporter } from "@/lib/email";
+import { logger } from "@/lib/logger";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { redirect } from "@/navigation";
@@ -16,6 +18,7 @@ const companySignUpHandler = async ({
     where: { OR: [{ email }, { company: name }] },
   });
   const t = await getTranslations("auth.error");
+  const locale = await getLocale();
 
   if (user) {
     return {
@@ -26,7 +29,7 @@ const companySignUpHandler = async ({
 
   const hashedPassword = await new Argon2id().hash(password);
 
-  await prisma.user.create({
+  const { accounts } = await prisma.user.create({
     data: {
       email,
       role: "organization",
@@ -41,7 +44,22 @@ const companySignUpHandler = async ({
         ],
       },
     },
+    include: { accounts: { select: { emailToken: true } } },
   });
+
+  const token = accounts.at(0)?.emailToken;
+  const url = `https://staging.eventify.today/${locale}/verify?token=${token}`;
+
+  const mailResult = await transporter.sendMail({
+    to: email,
+    subject: "Eventify. Verify your email",
+    text: `For verification visit:\n${url}\n\n`,
+    html: `<body><a href="${url}" target="_blank">Verify</a></body>`,
+  });
+
+  if (mailResult.rejected) {
+    logger.error(mailResult.response);
+  }
 
   redirect(`/auth/signin/company?callbackUrl=/profile/edit`);
 

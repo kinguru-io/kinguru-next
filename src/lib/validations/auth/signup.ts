@@ -4,7 +4,7 @@ import { zfd } from "zod-form-data";
 export const signupFormSchema = zfd
   .formData({
     name: zfd.text(),
-    email: zfd.text(z.string().email()),
+    email: zfd.text(z.string().email().toLowerCase()),
     password: zfd.text(z.string()),
     confirmPassword: zfd.text(z.string()),
   })
@@ -17,7 +17,7 @@ export type SignupFormInput = z.infer<typeof signupFormSchema>;
 
 export const userSignupFormSchema = zfd
   .formData({
-    email: zfd.text(z.string().email()),
+    email: zfd.text(z.string().email().toLowerCase()),
     password: zfd.text(z.string()),
     confirmPassword: zfd.text(z.string()),
   })

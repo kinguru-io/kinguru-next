@@ -226,6 +226,8 @@ const project = new web.NextJsTypeScriptProject({
     "@vitejs/plugin-react",
     "jsdom",
     "@testing-library/react",
+
+    "@types/nodemailer",
   ],
 });
 

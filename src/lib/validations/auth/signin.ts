@@ -2,7 +2,7 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 export const signinFormSchema = zfd.formData({
-  email: zfd.text(z.string().email()),
+  email: zfd.text(z.string().email().toLowerCase()),
   password: zfd.text(z.string()),
 });
 

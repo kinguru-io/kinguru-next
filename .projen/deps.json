@@ -83,6 +83,10 @@
       "type": "build"
     },
     {
+      "name": "@types/nodemailer",
+      "type": "build"
+    },
+    {
       "name": "@types/react",
       "type": "build"
     },

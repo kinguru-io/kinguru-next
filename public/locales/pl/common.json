@@ -643,5 +643,12 @@
       "from_label": "od 18:00",
       "to_label": "do 21:00"
     }
+  },
+  "verification": {
+    "in_progress": "Weryfikuję e-mail...",
+    "bad_token": "Nie udało się zweryfikować e-mail 😕",
+    "email_verified": "E-mail został zweryfikowany! 👌",
+    "main_page_link": "Strona główna",
+    "profile_page_link": "Profil"
   }
 }
