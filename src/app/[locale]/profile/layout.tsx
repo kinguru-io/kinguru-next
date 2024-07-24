@@ -21,6 +21,10 @@ export default async function Layout({
     return redirect("/auth/signin");
   }
 
+  if (!session.user.confirmed) {
+    return redirect("/verify");
+  }
+
   const t = await getTranslations("profile");
   const role = session.user.role;
 

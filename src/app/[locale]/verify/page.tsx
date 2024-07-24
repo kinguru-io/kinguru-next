@@ -1,7 +1,9 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
+import { MailResendScreen } from "./mail-resend-screen";
 import { verifyEmail } from "./verify-email";
+import { getSession } from "@/auth";
 import { Icon, SpinnerIcon } from "@/components/uikit";
 import { Link, redirect } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -15,10 +17,16 @@ export default function VerifyEmailPage({
 }) {
   const t = useTranslations("verification");
 
-  if (!token) return redirect("/");
-
   return (
-    <Center css={{ height: "full" }}>
+    <Center
+      css={{
+        height: "full",
+        gap: "4",
+        paddingBlock: "6",
+        flexDirection: "column",
+        fontSize: "sm",
+      }}
+    >
       <Suspense
         fallback={
           <>
@@ -27,7 +35,7 @@ export default function VerifyEmailPage({
           </>
         }
       >
-        <EmailCheck token={token} />
+        {token ? <EmailCheck token={token} /> : <NoVerification />}
       </Suspense>
     </Center>
   );
@@ -37,11 +45,9 @@ async function EmailCheck({ token }: { token: string }) {
   const t = await getTranslations("verification");
   const { message, ok } = await verifyEmail(token);
 
-  // TODO add email input to resend?
-
   return (
-    <VStack gap="4" paddingBlock="6">
-      <VStack gap="4" textAlign="center" maxWidth="md" fontSize="sm">
+    <>
+      <VStack gap="4" textAlign="center" maxWidth="md">
         <Icon
           className={css({
             padding: "3",
@@ -61,7 +67,6 @@ async function EmailCheck({ token }: { token: string }) {
       </Link>
       <Link
         className={css({
-          fontSize: "sm",
           color: "secondary",
           _hoverOrFocusVisible: { textDecoration: "underline" },
         })}
@@ -69,6 +74,15 @@ async function EmailCheck({ token }: { token: string }) {
       >
         {t("profile_page_link")}
       </Link>
-    </VStack>
+    </>
   );
+}
+
+async function NoVerification() {
+  const session = await getSession();
+  const email = session?.user?.email;
+
+  if (!session || session.user?.confirmed || !email) return redirect("/");
+
+  return <MailResendScreen email={email} />;
 }

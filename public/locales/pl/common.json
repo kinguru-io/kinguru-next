@@ -649,6 +649,11 @@
     "bad_token": "Nie udało się zweryfikować e-mail",
     "email_verified": "E-mail został zweryfikowany!",
     "main_page_link": "Strona główna",
-    "profile_page_link": "Przejdź do profilu"
+    "profile_page_link": "Przejdź do profilu",
+    "email_was_sent": "E-mail weryfikacyjny został wysłany",
+    "email_was_sent_notice": "Twój adres e-mail nie został jeszcze zweryfikowany, dlatego zostałeś przekierowany na tę stronę. Sprawdź folder „Spam”, jeśli nie otrzymałeś powiadomienia",
+    "resend_btn_label": "Wyślij ponownie e-mail",
+    "unknown_error": "Coś poszło nie tak",
+    "too_many_attempts": "Zbyt wiele prób. Spróbuj {minutes}"
   }
 }

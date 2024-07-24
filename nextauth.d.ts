@@ -7,6 +7,7 @@ declare module "next-auth" {
     speaker: Speaker | null;
     organizations: Organization[];
     stripeCustomerId: string | null;
+    confirmed: boolean
   }
   interface Session extends DefaultSession {
     user?: User;
