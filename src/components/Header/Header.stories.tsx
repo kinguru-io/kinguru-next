@@ -77,6 +77,7 @@ export const authHeader: Story = {
                   speaker: null,
                   stripeCustomerId: "123123",
                   organizations: [],
+                  confirmed: true,
                 },
                 expires: "date",
               });
