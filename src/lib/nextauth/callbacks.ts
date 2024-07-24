@@ -32,7 +32,14 @@ export const callbacks = (
         },
       };
     },
-    async signIn({ user }) {
+    async signIn({ user, account }) {
+      if (account && account.type === "oauth" && !user.confirmed) {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { confirmed: true, emailVerified: new Date() },
+        });
+      }
+
       if (isCredentialsCallback(request, params)) {
         if (user) {
           const sessionToken = randomUUID();
