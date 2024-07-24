@@ -228,6 +228,8 @@ const project = new web.NextJsTypeScriptProject({
     "@testing-library/react",
 
     "@types/nodemailer",
+    "@react-email/components",
+    "react-email",
   ],
 });
 
