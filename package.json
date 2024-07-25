@@ -118,7 +118,7 @@
     "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.14",
     "oslo": "^1.2.1",
-    "pino": "^9.3.1",
+    "pino": "^9.3.2",
     "react": "^18.3.1",
     "react-day-picker": "^9.0.4",
     "react-dom": "^18.3.1",
