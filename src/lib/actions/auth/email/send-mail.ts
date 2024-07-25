@@ -37,10 +37,14 @@ export async function sendVerificationEmail({
       html: await renderVerificationEmail({ linkHref }),
     });
 
-    if (mailResult.rejected) {
-      verificationEmailLogger.error(mailResult.response);
+    const failed = mailResult.rejected
+      .concat(mailResult.pending)
+      .filter(Boolean);
 
-      return { ok: false, message: mailResult.response };
+    if (failed.length > 0) {
+      verificationEmailLogger.error(mailResult);
+
+      return { ok: false, message: failed.join(", ") };
     } else {
       await prisma.user.update({
         where: { email },
