@@ -23,6 +23,7 @@ export default function VerifyEmailPage({
         height: "full",
         gap: "4",
         paddingBlock: "6",
+        paddingInline: "4",
         flexDirection: "column",
         fontSize: "sm",
       }}
