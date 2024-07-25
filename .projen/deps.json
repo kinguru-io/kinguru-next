@@ -22,6 +22,10 @@
       "type": "build"
     },
     {
+      "name": "@react-email/components",
+      "type": "build"
+    },
+    {
       "name": "@semantic-release/changelog",
       "type": "build"
     },
@@ -80,6 +84,10 @@
     {
       "name": "@types/node",
       "version": "^20",
+      "type": "build"
+    },
+    {
+      "name": "@types/nodemailer",
       "type": "build"
     },
     {
@@ -161,6 +169,10 @@
     },
     {
       "name": "projen",
+      "type": "build"
+    },
+    {
+      "name": "react-email",
       "type": "build"
     },
     {

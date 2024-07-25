@@ -107,6 +107,7 @@ export async function createPremiseSlotsIntent({
   const userId = session?.user?.id;
 
   if (!userId) return redirect("/auth/signin");
+  if (!session.user?.confirmed) return redirect("/verify");
 
   const { isValid, editedSlots, discounts } = await validatePaymentIntentData({
     premiseId,

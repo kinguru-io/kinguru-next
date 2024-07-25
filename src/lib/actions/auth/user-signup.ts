@@ -2,6 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
+import { sendVerificationEmail } from "./email";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import {
   type UserSignupFormInput,
@@ -26,7 +27,7 @@ const userSignUpHandler = async ({
 
   const hashedPassword = await new Argon2id().hash(password);
 
-  await prisma.user.create({
+  const { accounts } = await prisma.user.create({
     data: {
       email,
       role: "user",
@@ -40,7 +41,11 @@ const userSignUpHandler = async ({
         ],
       },
     },
+    include: { accounts: { select: { emailToken: true } } },
   });
+
+  const token = accounts.at(0)?.emailToken || "";
+  await sendVerificationEmail({ email, token });
 
   redirect(`/auth/signin/user?callbackUrl=/profile/edit`);
 

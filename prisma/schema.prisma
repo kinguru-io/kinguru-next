@@ -13,6 +13,7 @@ model User {
   name                   String?
   email                  String                   @unique
   emailVerified          DateTime?
+  emailSentAt            DateTime?
   stripeCustomerId       String?                  @unique
   image                  String?
   confirmed              Boolean                  @default(false)
@@ -100,6 +101,7 @@ model Account {
   scope             String?
   id_token          String?      @db.Text
   session_state     String?
+  emailToken        String?      @unique @default(cuid())
 
   @@unique([provider, providerAccountId])
 }
@@ -410,8 +412,8 @@ model Address {
 }
 
 model SocialLink {
-  id             String       @id @default(cuid())
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  id             String        @id @default(cuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
   network        SocialNetwork
   url            String
@@ -511,6 +513,7 @@ model PremiseSlot {
   createdAt       DateTime           @default(now())
   organizationId  String
   organization    Organization       @relation(fields: [organizationId], references: [id])
+
   @@index([organizationId])
 }
 

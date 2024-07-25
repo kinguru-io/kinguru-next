@@ -14,7 +14,9 @@ export const adapterOptions: Pick<
         return session;
       }
 
-      const { id, role, speaker, organizations, stripeCustomerId } = user;
+      const { id, role, speaker, organizations, stripeCustomerId, confirmed } =
+        user;
+
       return {
         ...session,
         user: {
@@ -24,6 +26,7 @@ export const adapterOptions: Pick<
           speaker,
           organizations,
           stripeCustomerId,
+          confirmed,
           image:
             role === "organization"
               ? organizations.at(0)?.logotype

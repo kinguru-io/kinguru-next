@@ -13,6 +13,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         email: data.email!,
         name: data.name!,
       });
+
       return p.user.create({
         data: {
           name: data.name,
@@ -20,6 +21,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           emailVerified: data.emailVerified,
           image: data.image,
           stripeCustomerId,
+          confirmed: data.confirmed,
         },
         select: {
           id: true,
@@ -28,6 +30,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           stripeCustomerId: true,
           speaker: true,
           organizations: true,
+          confirmed: true,
         },
       });
     },
