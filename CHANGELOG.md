@@ -1,3 +1,12 @@
+# [0.57.0](https://github.com/kinguru-io/kinguru-next/compare/v0.56.0...v0.57.0) (2024-07-25)
+
+
+### Features
+
+* `[initial, company only]` added email verification ([cb46817](https://github.com/kinguru-io/kinguru-next/commit/cb4681746e524672b2391e56fb185501144b0f3a))
+* added verification email ([12cb694](https://github.com/kinguru-io/kinguru-next/commit/12cb6943b25f6c1cc041c3234c2d1391dad87ebd))
+* added verification email resend ([df714eb](https://github.com/kinguru-io/kinguru-next/commit/df714eb8d7fd6ec6db300075cf6b988e3ef1dbf0))
+
 # [0.56.0](https://github.com/kinguru-io/kinguru-next/compare/v0.55.1...v0.56.0) (2024-07-17)
 
 
