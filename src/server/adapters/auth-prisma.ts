@@ -88,13 +88,25 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         where: { id },
         include: { organizations: true, speaker: true },
       }),
-    linkAccount: (data) =>
-      p.account.create({
+    linkAccount: async (account) => {
+      const user = await p.user.findUnique({
+        where: { id: account.userId },
+        select: { confirmed: true },
+      });
+
+      if (user && !user.confirmed && account.type === "oauth") {
+        await p.user.update({
+          where: { id: account.userId },
+          data: { confirmed: true, emailVerified: new Date() },
+        });
+      }
+
+      return p.account.create({
         data: {
-          userId: data.userId,
-          providerAccountId: data.providerAccountId,
-          provider: data.provider,
-          type: data.type,
+          userId: account.userId,
+          providerAccountId: account.providerAccountId,
+          provider: account.provider,
+          type: account.type,
         },
         select: {
           userId: true,
@@ -102,7 +114,8 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
           provider: true,
           type: true,
         },
-      }),
+      });
+    },
     unlinkAccount: (provider_providerAccountId) =>
       p.account.delete({
         where: { provider_providerAccountId },
