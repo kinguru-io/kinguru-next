@@ -2,7 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
-import { sendVerificationEmail } from "@/lib/actions/auth/email";
+import { sendVerificationEmail } from "./email";
 import { FormActionState, createFormAction } from "@/lib/utils";
 import { SignupFormInput, signupFormSchema } from "@/lib/validations";
 import { redirect } from "@/navigation";
@@ -46,7 +46,6 @@ const companySignUpHandler = async ({
   });
 
   const token = accounts.at(0)?.emailToken || "";
-
   await sendVerificationEmail({ email, token });
 
   redirect(`/auth/signin/company?callbackUrl=/profile/edit`);
