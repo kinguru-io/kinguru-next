@@ -17,9 +17,9 @@ export function MailResendScreen({ email }: { email: string }) {
 
       if (ok) {
         toast.success(message);
+      } else {
+        toast.error(message);
       }
-
-      toast.error(message);
     });
   };
 
