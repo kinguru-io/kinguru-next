@@ -9,7 +9,7 @@ export const mainInformationSchema = (
     description: z
       .string()
       .min(1, { message: requiredFieldMessage(t, "description") }),
-    room: z.string().min(1, { message: requiredFieldMessage(t, "room") }),
+    room: z.string().optional(),
     floor: z.string().min(1, { message: requiredFieldMessage(t, "floor") }),
   });
 

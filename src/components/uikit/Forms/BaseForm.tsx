@@ -10,6 +10,7 @@ interface FieldConfig {
   name?: string;
   type?: string;
   options?: { text: string }[];
+  extraProps?: Record<PropertyKey, string | number | undefined>;
   row?: FieldConfig[];
 }
 
@@ -51,6 +52,7 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
                     name={rowField.name}
                     type={rowField.type}
                     options={rowField.options}
+                    extraProps={rowField.extraProps}
                     customName={
                       props.customFieldName
                         ? props.customFieldName(rowField)
@@ -73,6 +75,7 @@ export function BaseForm<T>(props: BaseFormProps): JSX.Element {
             name={field.name}
             type={field.type}
             options={field.options}
+            extraProps={field.extraProps}
             customName={
               props.customFieldName ? props.customFieldName(field) : undefined
             }

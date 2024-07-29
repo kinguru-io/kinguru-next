@@ -169,6 +169,7 @@
       "fields": {
         "errors": {
           "NIP_required": "NIP must be exactly 10 digits",
+          "IBAN_required": "IBAN is incorrect",
           "socialLinks_required": "At least one social network should be provided",
           "socialLink_required": "Invalid URL format"
         }
@@ -596,7 +597,8 @@
     "garages": "Garages",
     "community_centers": "Community centers (foundations, organizations)",
     "special_events_etc": "Banquet halls, estates for weddings, etc",
-    "commercial_kitchens": "Commercial kitchens"
+    "commercial_kitchens": "Commercial kitchens",
+    "else": "Else"
   },
   "booking_cancel_terms": {
     "very_flexible": "Very Flexible",

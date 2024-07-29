@@ -71,7 +71,7 @@ export async function createVenueAction(
     return {
       status: "success",
       message: "Venue created successfully",
-      redirectUrl: `/profile/venues/created?venueId=${createdVenue.id}`,
+      redirectUrl: `/profile/venues/created?venueId=${createdVenue.id}&hideGoBack=1`,
     };
   } catch (error) {
     // Add catch block to handle errors

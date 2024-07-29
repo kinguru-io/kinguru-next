@@ -115,7 +115,8 @@
         "errors": {
           "NIP_required": "NIP musi mieć dokładnie 10 cyfr",
           "socialLinks_required": "Należy podać przynajmniej jedną sieć społecznościową",
-          "socialLink_required": "Nieprawidłowy format URL"
+          "socialLink_required": "Nieprawidłowy format URL",
+          "IBAN_required": "IBAN jest nieprawidłowy"
         }
       }
     }
@@ -596,7 +597,8 @@
     "garages": "Garaże",
     "community_centers": "Domy kultury (fundacje, organizacje)",
     "special_events_etc": "Sale bankietowe, osiedla na wesela itp",
-    "commercial_kitchens": "Commercial kitchens"
+    "commercial_kitchens": "Commercial kitchens",
+    "else": "W przeciwnym razie"
   },
   "booking_cancel_terms": {
     "very_flexible": "Bardzo elastyczne",

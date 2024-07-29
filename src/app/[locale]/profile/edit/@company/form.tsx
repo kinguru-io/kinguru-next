@@ -11,6 +11,7 @@ import {
   FormProvider,
   useForm,
   useFormContext,
+  type UseFormGetValues,
 } from "react-hook-form";
 import toast from "react-hot-toast";
 import formFieldsConfig from "./form-config.json";
@@ -37,7 +38,15 @@ export function EditProfileForm({
   orgRegister,
 }: EditProfileFormProps) {
   const [isPending, startTransition] = useTransition();
-  const defaultValues = companyData || { name: companyName };
+  const defaultValues = companyData
+    ? {
+        ...companyData,
+        IBAN: companyData.IBAN.replace(
+          /[a-z0-9]{4}/gi,
+          (x) => `${x} `,
+        ).trimEnd(),
+      }
+    : { name: companyName };
   const t = useTranslations("form.common");
   const formT = useTranslations("organization.basic_info_form");
 
@@ -81,13 +90,20 @@ export function EditProfileForm({
   );
 }
 
-const emptyAddressObject: OrgRegisterInput["address"][number] = {
+type InputAddress = OrgRegisterInput["address"][number];
+const emptyAddressObject: InputAddress = {
   country: "",
   city: "",
   street: "",
   building: "",
   room: "",
   zipCode: "",
+};
+
+const areAddressesSame = (get: UseFormGetValues<OrgRegisterInput>) => {
+  return (Object.keys(emptyAddressObject) as (keyof InputAddress)[]).every(
+    (key) => get(`address.0.${key}`) === get(`address.1.${key}`),
+  );
 };
 
 function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
@@ -97,6 +113,8 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
 
   const sameAddressStateChanged = (checked: boolean) => {
     const postAddress = getValues("address.0");
+
+    if (!checked && !areAddressesSame(getValues)) return;
 
     setValue("address.1", checked ? postAddress : emptyAddressObject);
   };
@@ -162,7 +180,7 @@ function OrganizationRegisterFormInner({ isPending }: { isPending: boolean }) {
         <FormFooter>
           <Checkbox
             label={t("same_addresses_label")}
-            defaultChecked={false}
+            defaultChecked={areAddressesSame(getValues)}
             onChange={({ target }) => sameAddressStateChanged(target.checked)}
           />
           <span className="notice">{t("credentials_asterisk_helper")}</span>

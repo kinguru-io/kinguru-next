@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
+  ArrowIcon,
   PremiseCard,
   PremiseContent,
   PremiseDescription,
@@ -92,6 +93,19 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
           ))}
         </Slider>
       </PremiseSlider>
+      {href && (
+        <Link
+          className={css({
+            fontSize: "sm",
+            color: "success.darker",
+            _hoverOrFocusVisible: { textDecoration: "underline" },
+          })}
+          href={`/premises/${slug}`}
+          target="_blank"
+        >
+          {t("go_to_premise_page")} <ArrowIcon direction="right" />
+        </Link>
+      )}
     </PremiseCard>
   );
 }

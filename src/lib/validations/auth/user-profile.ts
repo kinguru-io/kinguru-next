@@ -32,7 +32,7 @@ export const userProfileSchema = (
         message: requiredFieldMessage(t, "email"),
       }),
     ),
-    phoneNumber: zfd.text(z.string()),
+    phoneNumber: zfd.text(z.string().min(8, { message: "+48 XX XXXXXXX" })),
     country: zfd.text(z.string()),
     city: zfd.text(z.string().nullish()),
     birthdate: zfd.text(z.string().date(requiredFieldMessage(t, "birthdate"))),

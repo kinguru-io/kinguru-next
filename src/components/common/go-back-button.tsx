@@ -1,6 +1,6 @@
 "use client";
 
-import { useSelectedLayoutSegments } from "next/navigation";
+import { useSearchParams, useSelectedLayoutSegments } from "next/navigation";
 import { ArrowIcon, Button } from "@/components/uikit";
 import { useRouter } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -15,10 +15,14 @@ export function GoBackButton({
   label = null,
   ...inlineBoxProps
 }: { label?: string | null } & InlineBoxProps) {
+  const searchParams = useSearchParams();
   const segments = useSelectedLayoutSegments();
   const router = useRouter();
 
-  if (segments.filter((part) => actualSegmentRegex.test(part)).length < 2) {
+  if (
+    segments.filter((part) => actualSegmentRegex.test(part)).length < 2 ||
+    searchParams.get("hideGoBack") === "1"
+  ) {
     return null;
   }
 

@@ -47,7 +47,7 @@ const managerSchema = (t: (arg: string) => string = (value) => value) =>
       email: zfd.text(
         z.string().email({ message: requiredFieldMessage(t, "email") }),
       ),
-      phoneNumber: zfd.text(z.string()),
+      phoneNumber: zfd.text(z.string().min(8, { message: "+48 XX XXXXXXX" })),
     }),
   });
 

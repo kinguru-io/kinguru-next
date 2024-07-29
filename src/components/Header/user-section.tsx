@@ -51,12 +51,13 @@ export async function UserSection() {
   return (
     <Dropdown size="auto">
       <DropdownInitiator>
-        <HStack gap="2">
+        <HStack className="group" css={{ gap: "2" }}>
           <Avatar name={name} image={image} size={{ base: "xs", md: "md" }} />
           {name && (
             <InlineBox
               fontSize="xs"
               maxWidth={{ base: "16", md: "20" }}
+              _groupHover={{ textDecoration: "underline" }}
               truncate
             >
               {name}

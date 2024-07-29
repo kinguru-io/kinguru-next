@@ -13,6 +13,9 @@ export const avatarRecipe = defineRecipe({
     borderRadius: "full",
     position: "relative",
     overflow: "hidden",
+    _groupHover: {
+      boxShadow: "ring-primary",
+    },
     "& > img[data-failed=true]": { opacity: "0" },
   },
   variants: {
