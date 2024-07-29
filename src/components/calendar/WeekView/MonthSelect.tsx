@@ -22,8 +22,8 @@ export function MonthSelect({
   // using of `{ year: 'numeric' }` for full year is omitted
   // since there is a literal for some locale (e.g. `ru-*` locale)
   const monthFormatter = new Intl.DateTimeFormat(locale, { month: "long" });
-  const optionChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeMonth(Number(e.target.value));
+  const optionChanged = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    changeMonth(Number(target.value.replace(id, "")));
   };
 
   return (
