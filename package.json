@@ -129,7 +129,7 @@
     "react-snap-carousel": "^0.4.0",
     "sharp": "^0.33.4",
     "stripe": "^16.5.0",
-    "use-debounce": "^10.0.1",
+    "use-debounce": "^10.0.2",
     "uuid": "^10.0.0",
     "zod": "^3.23.8",
     "zod-form-data": "^2.0.2"
