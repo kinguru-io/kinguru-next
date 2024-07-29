@@ -1,6 +1,11 @@
 import { useTranslations } from "next-intl";
 import React, { memo } from "react";
-import { FieldValues, useFormContext } from "react-hook-form";
+import {
+  FieldValues,
+  get,
+  useFormContext,
+  type RegisterOptions,
+} from "react-hook-form";
 import { ZodSchema } from "zod";
 import { CountrySelect } from "@/components/common/form/country-select";
 import {
@@ -28,6 +33,7 @@ interface FormFieldProps {
   customName?: string;
   type: FieldType;
   options?: { text: string }[];
+  extraProps?: Record<PropertyKey, string | number | undefined>;
   schema: ZodSchema<any>;
   variant?: InputVariant["variant"];
   translationsKey?: string;
@@ -42,6 +48,7 @@ export const FormField = memo(
     translationsKey,
     variant,
     options,
+    extraProps,
   }: FormFieldProps): JSX.Element => {
     const {
       register,
@@ -52,31 +59,22 @@ export const FormField = memo(
     const t = useTranslations(translationsKey) as (key: string) => string;
 
     const fieldName = customName || name;
-
-    const getError = () => {
-      if (customName) {
-        const [mainKey, indexStr, secondName] = fieldName.split(".");
-        const index = parseInt(indexStr, 10);
-        if (!isNaN(index)) {
-          // @ts-ignore
-          return errors?.[mainKey]?.[index]?.[secondName];
-        }
-        return errors?.[fieldName];
-      }
-      return errors?.[fieldName];
-    };
-
-    const error = getError();
-
+    const error = get(errors, fieldName);
     const optionalFields = getOptionalFields(schema);
     const markRequiredField = optionalFields.includes(fieldName) ? "" : "*";
-    // @ts-ignore
     const placeholder = `${t(name)}${markRequiredField}`;
+
+    // TODO Refactor. Temporary solution
+    const { _mask, ...restExtraProps } = extraProps || {};
+    const registerOptions = isMaskKey(_mask)
+      ? registerOptionsMap[_mask]
+      : undefined;
 
     const commonProps = {
       placeholder,
+      ...restExtraProps,
       // @ts-ignore
-      ...register(fieldName),
+      ...register(fieldName, registerOptions),
       "data-invalid": error ? true : undefined,
     };
 
@@ -124,3 +122,27 @@ export const FormField = memo(
     );
   },
 );
+
+function makePhoneNumber({ target }: React.ChangeEvent<HTMLInputElement>) {
+  target.value = `+${target.value.replace(/\D/g, "")}`;
+}
+
+function makeIBAN({ target }: React.ChangeEvent<HTMLInputElement>) {
+  const newValue = target.value
+    .replace(/\s/g, "")
+    .replace(/[a-z0-9]{4}/gi, (x) => `${x} `)
+    .toUpperCase()
+    .trimEnd();
+  target.value = newValue;
+}
+
+const registerOptionsMap: Record<"iban" | "phone", RegisterOptions> = {
+  iban: { onBlur: makeIBAN },
+  phone: { onChange: makePhoneNumber },
+};
+
+function isMaskKey(
+  key: string | number | undefined,
+): key is keyof typeof registerOptionsMap {
+  return !!key && key in registerOptionsMap;
+}

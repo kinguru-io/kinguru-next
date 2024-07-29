@@ -30,7 +30,7 @@ const socialNetworkList: Array<SocialNetworkItem> = [
   {
     network: "instagram",
     social: "Instagram",
-    iconName: "linkedin",
+    iconName: "instagram",
   },
 ];
 

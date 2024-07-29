@@ -45,14 +45,14 @@ const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
       segment: "edit",
     },
     {
-      href: "/profile/mybookings",
-      labelIntlCode: "mybookings",
-      segment: "mybookings",
-    },
-    {
       href: "/profile/venues",
       labelIntlCode: "venues",
       segment: "venues",
+    },
+    {
+      href: "/profile/mybookings",
+      labelIntlCode: "mybookings",
+      segment: "mybookings",
     },
     // {
     //   href: "/profile/notifications",

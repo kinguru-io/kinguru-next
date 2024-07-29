@@ -16,11 +16,18 @@
       "row": [
         {
           "name": "email",
-          "type": "email"
+          "type": "email",
+          "extraProps": {
+            "inputMode": "email"
+          }
         },
         {
           "name": "phoneNumber",
-          "type": "text"
+          "type": "text",
+          "extraProps": {
+            "inputMode": "tel",
+            "_mask": "phone"
+          }
         }
       ]
     },

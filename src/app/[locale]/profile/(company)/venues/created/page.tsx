@@ -62,7 +62,8 @@ export default async function CreatedNoticePage({
             fontSize: "sm",
             padding: "1",
             color: "secondary",
-            _hoverOrFocusVisible: { textDecoration: "underline" },
+            textDecoration: "underline",
+            _hoverOrFocusVisible: { textDecoration: "none" },
           })}
           href={`/venues/${venue?.slug}`}
         >

@@ -59,11 +59,17 @@ export function ContactsGroup() {
             inputMode="tel"
             placeholder={t("fields.phoneNumber_placeholder")}
             data-invalid={errors?.manager?.manager?.phoneNumber}
-            {...register(`${formFieldPath}.phoneNumber`)}
+            {...register(`${formFieldPath}.phoneNumber`, {
+              onChange: makePhoneNumber,
+            })}
           />
           <ErrorField error={errors?.manager?.manager?.phoneNumber} />
         </div>
       </Flex>
     </>
   );
+}
+
+function makePhoneNumber({ target }: React.ChangeEvent<HTMLInputElement>) {
+  target.value = `+${target.value.replace(/\D/g, "")}`;
 }

@@ -47,7 +47,13 @@ export const orgRegisterSchema = (
         .max(10),
     ),
     bankName: zfd.text().nullish(),
-    IBAN: zfd.text(z.string().regex(regexIBAN)),
+    IBAN: zfd
+      .text(
+        z
+          .string()
+          .regex(regexIBAN, { message: requiredFieldMessage(t, "IBAN") }),
+      )
+      .transform((x) => x.replace(/\s/g, "")),
     address: zfd.repeatable(z.array(addressSchema).min(2).max(2)),
     logotype: zfd.text(z.string().url().nullish()).nullish(),
     socialLinks: zfd

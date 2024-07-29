@@ -170,7 +170,8 @@
         "errors": {
           "NIP_required": "NIP должен содержать ровно 10 цифр",
           "socialLinks_required": "Необходимо указать хотя бы одну социальную сеть",
-          "socialLink_required": "Неверный формат URL"
+          "socialLink_required": "Неверный формат URL",
+          "IBAN_required": "IBAN неверен"
         }
       }
     }
@@ -596,7 +597,8 @@
     "garages": "Гаражи",
     "community_centers": "Community centers (фонды, организации)",
     "special_events_etc": "Банкетные залы, поместья для свадеб и ДР",
-    "commercial_kitchens": "Сommercial kitchens"
+    "commercial_kitchens": "Сommercial kitchens",
+    "else": "Другое"
   },
   "booking_cancel_terms": {
     "very_flexible": "Очень гибкая",
