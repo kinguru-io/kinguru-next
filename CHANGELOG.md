@@ -1,3 +1,10 @@
+## [0.57.1](https://github.com/kinguru-io/kinguru-next/compare/v0.57.0...v0.57.1) (2024-07-29)
+
+
+### Bug Fixes
+
+* qa changes ([d05dc51](https://github.com/kinguru-io/kinguru-next/commit/d05dc51918d63f3b909e043cd5f73a956491c3b3))
+
 # [0.57.0](https://github.com/kinguru-io/kinguru-next/compare/v0.56.0...v0.57.0) (2024-07-25)
 
 
