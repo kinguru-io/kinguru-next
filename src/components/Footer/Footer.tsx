@@ -30,7 +30,7 @@ export async function Footer() {
           href: "/legal/terms-and-conditions",
         },
         { name: t("cookie_policy"), href: "/legal/cookie-policy" },
-        { name: t("faq"), href: "/#" },
+        { name: t("faq"), href: "/faq/main" },
       ],
     },
   ];
