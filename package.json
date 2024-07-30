@@ -74,7 +74,7 @@
     "msw-storybook-addon": "canary",
     "prettier": "^3.3.3",
     "prisma": "^5.17.0",
-    "projen": "^0.84.12",
+    "projen": "^0.84.13",
     "react-email": "^2.1.6",
     "semantic-release-plus": "^20.0.0",
     "storybook": "^8.2.6",
