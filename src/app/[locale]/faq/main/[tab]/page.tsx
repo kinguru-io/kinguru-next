@@ -4,10 +4,6 @@ import { type FAQLink, faqLinks } from "../faq-links";
 import { Link, type Locale, redirect } from "@/navigation";
 import { aspectRatio } from "~/styled-system/patterns";
 
-export function generateStaticParams() {
-  return faqLinks.map((link) => ({ tab: link.labelIntlCode }));
-}
-
 const doesTabExist = (tab?: string): tab is FAQLink["labelIntlCode"] => {
   return faqLinks.some((link) => link.segment === tab);
 };
