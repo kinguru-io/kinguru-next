@@ -66,6 +66,7 @@ export default async function CreatedNoticePage({
             _hoverOrFocusVisible: { textDecoration: "none" },
           })}
           href={`/venues/${venue?.slug}`}
+          target="_blank"
         >
           {t("check_venue", { name: venue?.name })}
         </Link>

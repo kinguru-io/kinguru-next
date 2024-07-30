@@ -174,12 +174,19 @@ function PickerPlaceholder({
         })}
         data-loaded={Boolean(imageSrc)}
       >
-        <Icon
-          name={isPending ? "common/spinner" : "action/image-add"}
-          className={css({ fontSize: "2rem", _loading: { animation: "spin" } })}
-          aria-busy={isPending}
-        />
-        {!imageSrc && helper}
+        {!imageSrc && (
+          <>
+            <Icon
+              name={isPending ? "common/spinner" : "action/image-add"}
+              className={css({
+                fontSize: "2rem",
+                _loading: { animation: "spin" },
+              })}
+              aria-busy={isPending}
+            />
+            {helper}
+          </>
+        )}
       </span>
       <span className={aspectRatio({ display: "block", ratio })}>
         {imageSrc && !isPending && (

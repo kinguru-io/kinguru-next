@@ -167,11 +167,9 @@ export default async function PremisePage({
   const isOwner = await isUserOwnerOfPremise(premise?.venue?.organizationId);
   const isUserOrg = await isUserOrganization();
 
-  const priceLabel = aggregatedPrices.minPrice
-    ? t("from", {
-        price: priceFormatter.format(aggregatedPrices.minPrice),
-      })
-    : t("free");
+  const priceLabel = t("from", {
+    price: priceFormatter.format(aggregatedPrices.minPrice || 0),
+  });
 
   return (
     <>

@@ -44,10 +44,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
   const { slug, name, description, area, resources, openHours } = premise;
   const minPrice = openHours.at(0)?.price;
 
-  const priceLabel =
-    minPrice && minPrice !== 0
-      ? t("from", { price: priceFormatter.format(minPrice) })
-      : t("free");
+  const priceLabel = t("from", { price: priceFormatter.format(minPrice || 0) });
 
   return (
     <PremiseCard>
@@ -55,11 +52,9 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
         <Tag variant="solid" colorPalette="success">
           {area} {t("area_literal")}
         </Tag>
-        {minPrice && (
-          <Tag variant="solid" colorPalette="primary">
-            {priceLabel}
-          </Tag>
-        )}
+        <Tag variant="solid" colorPalette="primary">
+          {priceLabel}
+        </Tag>
       </PremiseTags>
       <PremiseContent
         href={href || `/premises/${slug}`}
