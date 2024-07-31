@@ -53,9 +53,11 @@ function StepList({
         {content}
         <span
           className={aspectRatio({
-            ratio: 21 / 9,
+            ratio: 16 / 9,
             display: "block",
             marginBlock: "8",
+            maxWidth: "breakpoint-md",
+            marginInline: "auto",
           })}
         >
           <Image
@@ -63,7 +65,7 @@ function StepList({
             alt=""
             src={`https://kinguru-storage.s3.pl-waw.scw.cloud/faq/main/${tab}/${locale}/${stepKey}.jpg`}
             fill
-            sizes="95vw"
+            sizes="100vw"
           />
         </span>
       </li>
