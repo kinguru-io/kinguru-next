@@ -660,6 +660,7 @@
   },
   "faq": {
     "main": {
+      "helper": "We wszystkich kwestiach prawnych oraz procesach rejestracji i płatności zawsze możesz skontaktować się z nami telefonicznie <tel>+48 792 665 092</tel> (dostępne również w <tg>+48792665092</tg>, <wa>48792665092</wa>) lub napisać na adres <mail>support@eventify.today</mail>.",
       "pages": {
         "site-registration": "Rejestracja na platformie",
         "company-registration": "Rejestracja firmy",

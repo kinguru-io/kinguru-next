@@ -660,6 +660,7 @@
   },
   "faq": {
     "main": {
+      "helper": "",
       "pages": {
         "site-registration": "Registration on the platform",
         "company-registration": "Register a company",

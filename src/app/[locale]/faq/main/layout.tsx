@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { type RichTranslationValues, useTranslations } from "next-intl";
 import { type FAQLink, faqLinks } from "./faq-links";
 import { css } from "~/styled-system/css";
 import { Container, Stack } from "~/styled-system/jsx";
@@ -76,7 +76,52 @@ export default function FAQMainLayout({
           {t(segment)}
         </h1>
         <ol className={listClassName}>{children}</ol>
+        <Helper />
       </Stack>
     </Container>
+  );
+}
+
+const helperRich: RichTranslationValues = {
+  tg: (tel) => (
+    <a href={`https://t.me/${tel}`} target="_blank">
+      Telegram
+    </a>
+  ),
+  wa: (tel) => (
+    <a href={`https://wa.me/${tel}`} target="_blank">
+      WhatsApp
+    </a>
+  ),
+  mail: (mail) => <a href={`mailto:${mail}`}>{mail}</a>,
+  tel: (tel) => {
+    const number = tel?.toString().replace(/\s/g, "");
+
+    return <a href={`tel:${number}`}>{tel}</a>;
+  },
+};
+
+function Helper() {
+  const t = useTranslations("faq.main");
+
+  return (
+    <p
+      className={css({
+        fontSize: "xl",
+        lineHeight: "1.4",
+        textAlign: "center",
+        maxWidth: "breakpoint-md",
+        marginInline: "auto",
+        color: "secondary",
+        "& > a": {
+          fontWeight: "bold",
+          _hoverOrFocusVisible: { textDecoration: "underline" },
+        },
+        borderBlockStart: "1px solid {colors.tertiary}",
+        paddingBlock: "4",
+      })}
+    >
+      {t.rich("helper", helperRich)}
+    </p>
   );
 }

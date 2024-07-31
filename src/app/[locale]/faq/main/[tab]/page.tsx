@@ -33,7 +33,13 @@ const contentRich: RichTranslationValues = {
   ),
 };
 
-function StepList({ tab }: { tab: FAQLink["labelIntlCode"]; locale: Locale }) {
+function StepList({
+  tab,
+  locale,
+}: {
+  tab: FAQLink["labelIntlCode"];
+  locale: Locale;
+}) {
   const t = useTranslations(`faq.main.${tab}`);
 
   return Array.from({ length: parseInt(t("count")) }, (_, i) => {
@@ -55,7 +61,7 @@ function StepList({ tab }: { tab: FAQLink["labelIntlCode"]; locale: Locale }) {
           <Image
             className="faq-image"
             alt=""
-            src={`https://kinguru-storage.s3.pl-waw.scw.cloud/faq/main/${tab}/ru/${stepKey}.jpg`}
+            src={`https://kinguru-storage.s3.pl-waw.scw.cloud/faq/main/${tab}/${locale}/${stepKey}.jpg`}
             fill
             sizes="95vw"
           />
