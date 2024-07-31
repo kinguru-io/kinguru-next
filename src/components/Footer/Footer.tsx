@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { SocialMediaLinks, Contacts } from "@/components/brand";
 import { Link } from "@/navigation";
 import footerLogo from "~/public/img/logotypes/footer-logotype.svg";
@@ -9,6 +9,7 @@ import { footer } from "~/styled-system/recipes";
 
 export async function Footer() {
   const t = await getTranslations("footer");
+  const locale = await getLocale();
 
   const classes = footer();
 
@@ -24,13 +25,18 @@ export async function Footer() {
     {
       heading: t("extra"),
       children: [
+        {
+          name: t("about_us_pdf"),
+          href: `https://kinguru-storage.s3.pl-waw.scw.cloud/about/eventify_${locale}.pdf`,
+          asFile: "pdf",
+        },
         { name: t("privacy_policy"), href: "/legal/privacy-policy" },
         {
           name: t("terms_and_conditions"),
           href: "/legal/terms-and-conditions",
         },
         { name: t("cookie_policy"), href: "/legal/cookie-policy" },
-        { name: t("faq"), href: "/#" },
+        { name: t("faq"), href: "/faq/main" },
       ],
     },
   ];
@@ -80,11 +86,28 @@ export async function Footer() {
                       },
                     })}
                   >
-                    {children.map(({ href, name }) => (
-                      <li key={name}>
-                        <Link href={href}>{name}</Link>
-                      </li>
-                    ))}
+                    {children.map(({ href, name, asFile }) => {
+                      return (
+                        <li key={name}>
+                          <Link
+                            href={href}
+                            target={asFile ? "_blank" : undefined}
+                          >
+                            {name}
+                            {asFile && (
+                              <span
+                                className={css({
+                                  color: "secondary",
+                                  marginInlineStart: "1",
+                                })}
+                              >
+                                [{asFile}]
+                              </span>
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </section>
               );

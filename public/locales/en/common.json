@@ -75,7 +75,8 @@
     "places": "Places",
     "price": "Price",
     "follow_us": "Follow us on {social}",
-    "eventify_logotype": "Eventify logotype"
+    "eventify_logotype": "Eventify logotype",
+    "about_us_pdf": "About us"
   },
   "auth": {
     "profile_type": "Who are you?",
@@ -657,5 +658,32 @@
     "resend_btn_label": "Resend the email",
     "unknown_error": "Something went wrong",
     "too_many_attempts": "Too many attempts. Try {minutes}"
+  },
+  "faq": {
+    "main": {
+      "helper": "",
+      "pages": {
+        "site-registration": "Registration on the platform",
+        "company-registration": "Register a company",
+        "add-venues": "Add venues",
+        "add-halls": "Add halls",
+        "bookings-and-payments": "About bookings and payments"
+      },
+      "site-registration": {
+        "count": "0"
+      },
+      "company-registration": {
+        "count": "0"
+      },
+      "add-venues": {
+        "count": "0"
+      },
+      "add-halls": {
+        "count": "0"
+      },
+      "bookings-and-payments": {
+        "count": "0"
+      }
+    }
   }
 }

@@ -75,7 +75,8 @@
     "places": "Places",
     "price": "Price",
     "follow_us": "Follow us on {social}",
-    "eventify_logotype": "Eventify logotype"
+    "eventify_logotype": "Eventify logotype",
+    "about_us_pdf": "O nas"
   },
   "organization": {
     "basic_info_page": {
@@ -657,5 +658,74 @@
     "resend_btn_label": "Wyślij ponownie e-mail",
     "unknown_error": "Coś poszło nie tak",
     "too_many_attempts": "Zbyt wiele prób. Spróbuj {minutes}"
+  },
+  "faq": {
+    "main": {
+      "helper": "We wszystkich kwestiach prawnych oraz procesach rejestracji i płatności zawsze możesz skontaktować się z nami telefonicznie <tel>+48 792 665 092</tel> (dostępne również w <tg>+48792665092</tg>, <wa>48792665092</wa>) lub napisać na adres <mail>support@eventify.today</mail>.",
+      "pages": {
+        "site-registration": "Rejestracja na platformie",
+        "company-registration": "Rejestracja firmy",
+        "add-venues": "Dodawanie lokalizacji",
+        "add-halls": "Dodanie sali",
+        "bookings-and-payments": "Regulamin rezerwacji i płatności"
+      },
+      "site-registration": {
+        "count": "6",
+        "step_1": "Na dowolnej stronie kliknij przycisk \"Logowanie / rejestracja\":",
+        "step_2": "Przejdź na kartę „Osoba prawna” i naciśnij przycisk \"Zarejestruj się\"",
+        "step_3": "Wprowadź nazwę swojego podmiotu prawnego, adres e-mail oraz hasło, a następnie potwierdź hasło:",
+        "step_4": "Otwórz swoją skrzynkę pocztową i znajdź e-mail (wiadomość może trafić do folderu ze spamem):",
+        "step_5": "Przejdź do linku podanego w wiadomości e-mail:",
+        "step_6": "Gratulacje! Zostałeś pomyślnie zarejestrowany! Teraz możesz wrócić na stronę główną, wprowadź swój adres e-mail i hasło"
+      },
+      "company-registration": {
+        "count": "7",
+        "step_1": "Na dowolnej stronie kliknij przycisk \"Logowanie / rejestracja\":",
+        "step_2": "Zaloguj się na platformę, używając swojego adresu e-mail i hasła",
+        "step_3": "Przejdziesz na stronę główną, a następnie przejdź do swojego profilu osobistego:",
+        "step_4": "Zostaniesz przekierowany do panelu zarządzania swojej firmy, gdzie musisz wprowadzić dane dotyczące swojego podmiotu prawnego, abyśmy mogli wypłacać Ci wynagrodzenie za rezerwację Twoich lokalizacji:",
+        "step_5": "(opcjonalnie) Jeśli adres siedziby firmy jest taki sam jak adres korespondencyjny, zaznacz poniższe pole wyboru:",
+        "step_6": "(opcjonalnie) Możesz również, jeśli chcesz, podać profile społecznościowe swojego podmiotu prawnego:",
+        "step_7": "Po wypełnieniu informacji, naciśnij przycisk „Zapisz”:"
+      },
+      "add-venues": {
+        "count": "7",
+        "step_1": "Na dowolnej stronie kliknij przycisk \"Logowanie / rejestracja\":",
+        "step_2": "Zaloguj się na platformę, używając swojego adresu e-mail i hasła",
+        "step_3": "Przejdziesz na stronę główną, a następnie przejdź do swojego profilu osobistego:",
+        "step_4": "Zostaniesz przekierowany do panelu zarządzania swojej firmy, gdzie musisz przejść do zakładki „My venues” i kliknąć „Dodaj lokalizację”/\"Add a venue\":",
+        "step_5": "Wypełnij wszystkie niezbędne informacje o swojej lokalizacji:",
+        "step_6": "Naciśnij przycisk „Zapisz”",
+        "step_7": "Następnie zostaniesz poproszony o wypełnienie informacji o salach (link 1), a także będziesz mógł zobaczyć, jak wygląda Twoja lokalizacja w naszym serwisie (link 2):"
+      },
+      "add-halls": {
+        "count": "18",
+        "step_1": "Na dowolnej stronie kliknij przycisk \"Logowanie / rejestracja\":",
+        "step_2": "Zaloguj się na platformę, używając swojego adresu e-mail i hasła",
+        "step_3": "Przejdziesz na stronę główną, a następnie przejdź do swojego profilu osobistego:",
+        "step_4": "Zostaniesz przeniesiony na konto osobiste swojej firmy, gdzie musisz przejść do zakładki „My venues” i wybrać dodaną venue/miejsce",
+        "step_5": "Jeśli chcesz dokonać zmian w informacjach, które wcześniej wprowadziłeś na temat serwisu, możesz kliknąć na „Edytuj venue/miejsce”/\"Edit pad\".",
+        "step_6": "Jeśli informacje o witrynie są wypełnione poprawnie, kliknij blok „Dodaj halę”:",
+        "step_7": "Następnie zostaniesz poproszony o wypełnienie 7 sekcji dotyczących Twojego miejsca. Sekcja „Podstawowa”:",
+        "step_8": "Po wypełnieniu pierwszej sekcji „Podstawowe” kliknij przycisk „Dalej” i przejdź do następnej sekcji „Zdjęcia”:",
+        "step_9": "Po wypełnieniu drugiej sekcji „Zdjęcie” kliknij przycisk „Dalej” i przejdź do następnej sekcji „Parametry i wyposażenie”:",
+        "step_10": "Po wypełnieniu trzeciej sekcji „Parametry i wyposażenie” kliknij przycisk „Dalej” i przejdź do następnej sekcji „Tryb pracy i koszt”:",
+        "step_11": "Jeśli Twój tryb pracy i koszt są takie same dla wszystkich dni, zwróć uwagę na przycisk „Ustaw ten tryb pracy na pozostałe dni tygodnia”, a następnie edytuj je w razie potrzeby.",
+        "step_12": "Możesz także zastosować zniżki za liczbę godzin rezerwacji, jeśli je posiadasz:",
+        "step_13": "Po wypełnieniu czwartej sekcji „Godziny pracy i koszty” kliknij przycisk „Dalej” i przejdź do następnej sekcji „Zasady dotyczące hali”:",
+        "step_14": "Po wypełnieniu piątej sekcji „Regulamin domu” kliknij przycisk „Dalej” i przejdź do następnej sekcji „Warunki anulowania rezerwacji”:",
+        "step_15": "Kliknij w przycisk „Zapisz salę”, a zobaczysz swoją salę wśród tych dodanych do platformy na Twoim koncie osobistym w zakładce \"My venues\"/„Moje obiekty”.",
+        "step_16": "Możesz także znaleźć swoją salę wśród ostatnio dodanych obiektów, przechodząc do głównego wydarzenia <homeLink>eventify.today</homeLink>:",
+        "step_17": "Gdy wejdziesz do swojego objektu, zobaczysz wszystkie informacje, które wpisałeś na swoim koncie osobistym - tak użytkownicy platformy widzą Twój objekt.",
+        "step_18": "Dostępny jest także kalendarz rezerwacji, o którym więcej powiemy <bookingLink>\"Regulamin rezerwacji i płatności\"</bookingLink>."
+      },
+      "bookings-and-payments": {
+        "count": "4",
+        "step_1": "Wszystkie rezerwacje przychodzą do Ciebie e-mailem, a wszystkie rezerwacje możesz także przeglądać na platformie w sekcji „Profil osobisty” w zakładce „Moje rezerwacje”:",
+        "step_2": "Jeśli masz rezerwację, która NIE jest realizowana przez <homeLink>eventify.today</homeLink>, musisz przejść do swojego profilu i zablokować te godziny w kalendarzu obiektu, aby te godziny nie były dostępne dla użytkowników platformy. W takim przypadku sloty nie będą dostępne dla użytkowników. Boksy zablokowane przez Ciebie jako Administratora będą widoczne na Twoim Koncie Osobistym w sekcji „Moje Rezerwacje”:",
+        "step_3": "Zawsze możesz także anulować blokadę slotu, klikając przycisk „Anuluj rezerwację”.",
+        "step_4": "Płatności odbywają się 2 razy w miesiącu według danych podanych w Profilu Osobistym firmy podczas rejestracji:"
+      }
+    }
   }
 }
