@@ -1,3 +1,11 @@
+# [0.58.0](https://github.com/kinguru-io/kinguru-next/compare/v0.57.1...v0.58.0) (2024-07-31)
+
+
+### Features
+
+* added `About us` link ([aaeb388](https://github.com/kinguru-io/kinguru-next/commit/aaeb388310e3bcf31a9fb3111b7335ce383c02cf))
+* added faq docs [no polish images] ([005d946](https://github.com/kinguru-io/kinguru-next/commit/005d94623dbf437d245de0896fddf7da4354582b))
+
 ## [0.57.1](https://github.com/kinguru-io/kinguru-next/compare/v0.57.0...v0.57.1) (2024-07-29)
 
 
