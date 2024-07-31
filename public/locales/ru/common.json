@@ -75,7 +75,8 @@
     "places": "Площадки",
     "price": "Цены",
     "follow_us": "Следите за нами в {social}",
-    "eventify_logotype": "Логотип Eventify"
+    "eventify_logotype": "Логотип Eventify",
+    "about_us_pdf": "О нас"
   },
   "auth": {
     "profile_type": "Кем Вы являетесь?",

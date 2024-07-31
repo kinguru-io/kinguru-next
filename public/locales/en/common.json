@@ -75,7 +75,8 @@
     "places": "Places",
     "price": "Price",
     "follow_us": "Follow us on {social}",
-    "eventify_logotype": "Eventify logotype"
+    "eventify_logotype": "Eventify logotype",
+    "about_us_pdf": "About us"
   },
   "auth": {
     "profile_type": "Who are you?",
