@@ -3,8 +3,10 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
+import { sendBookingEmail } from "@/lib/actions/booking/email";
 import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import prisma from "@/server/prisma.ts";
+import type { BookingEmailProps } from "~/emails";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;
 const stripe = new Stripe(webhookSecret, {
@@ -37,18 +39,38 @@ async function eventJoinFailedCb(id: string) {
   return userId;
 }
 
-async function premiseSlotsBookingSucceededCb(paymentIntentId: string) {
+async function premiseSlotsBookingSucceededCb(
+  paymentIntentId: string,
+  meta?: Partial<StripeMetadataExtended>,
+) {
   await prisma.premiseSlot.updateMany({
     where: { paymentIntentId },
     data: { status: TicketIntentStatus.succeed },
   });
 
-  const premiseSlot = await prisma.premiseSlot.findFirst({
+  const slotInfo = await prisma.premiseSlot.findMany({
     where: { paymentIntentId },
-    select: { userId: true },
+    include: { user: { select: { id: true, email: true } } },
   });
 
-  return premiseSlot ? premiseSlot.userId : null;
+  const firstSlot = slotInfo.at(0);
+
+  if (!firstSlot) return null;
+
+  const companyUser = await prisma.organization.findUnique({
+    where: { id: firstSlot.organizationId },
+    include: { owner: { select: { email: true } } },
+  });
+  const locale = meta?.user_paid_locale || "en";
+  const name = meta?.premise_name || "";
+  const mailInfo = { locale, name, slotInfo } satisfies BookingEmailProps;
+
+  await Promise.all([
+    sendBookingEmail({ email: companyUser?.owner.email || "", ...mailInfo }),
+    sendBookingEmail({ email: firstSlot.user.email, ...mailInfo }),
+  ]);
+
+  return firstSlot.user.id;
 }
 
 async function premiseSlotsBookingFailedCb(paymentIntentId: string) {
@@ -67,7 +89,10 @@ async function premiseSlotsBookingFailedCb(paymentIntentId: string) {
 
 type CallbackMap = Record<
   StripeMetadataExtended["source"],
-  (paymentIntentId: string) => Promise<User["id"] | null>
+  (
+    paymentIntentId: string,
+    meta?: Partial<StripeMetadataExtended>,
+  ) => Promise<User["id"] | null>
 >;
 
 const paymentSucceededCb: CallbackMap = {
@@ -112,10 +137,13 @@ export async function POST(req: NextRequest) {
     switch (event.type) {
       case "payment_intent.succeeded": {
         const paymentIntentSucceed = event.data.object;
-        const { source } = event.data.object.metadata as StripeMetadataExtended;
+        const { source, user_paid_locale } = event.data.object
+          .metadata as StripeMetadataExtended;
         const callback = paymentSucceededCb[source];
 
-        const userId = await callback(paymentIntentSucceed.id);
+        const userId = await callback(paymentIntentSucceed.id, {
+          user_paid_locale,
+        });
 
         if (userId) {
           await pushNotification(userId, TicketIntentStatus.succeed);

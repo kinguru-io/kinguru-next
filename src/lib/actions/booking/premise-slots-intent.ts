@@ -7,7 +7,10 @@ import {
 } from "@prisma/client";
 import { addHours, compareAsc, startOfDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
+import { getLocale } from "next-intl/server";
 import Stripe from "stripe";
+import { v4 as uuid } from "uuid";
+import { sendBookingEmail } from "./email";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
 import type { StripeMetadataExtended } from "@/lib/shared/stripe";
@@ -24,6 +27,7 @@ import {
   processOrderTotalDiscounts,
 } from "@/lib/utils/price";
 import { redirect } from "@/navigation";
+import type { BookingEmailProps } from "~/emails";
 
 type BookTimeSlotsActionData = {
   premiseId: string;
@@ -98,7 +102,7 @@ export async function createPremiseSlotsIntent({
   discountsMap,
 }: BookTimeSlotsActionData): ActionResponse<
   {
-    clientSecret: string;
+    clientSecret: string | null;
     paymentIntentId: string;
   },
   "booking_view"
@@ -109,7 +113,12 @@ export async function createPremiseSlotsIntent({
   if (!userId) return redirect("/auth/signin");
   if (!session.user?.confirmed) return redirect("/verify");
 
-  const { isValid, editedSlots, discounts } = await validatePaymentIntentData({
+  const {
+    isValid,
+    editedSlots,
+    discounts,
+    name = "",
+  } = await validatePaymentIntentData({
     premiseId,
     slots,
   });
@@ -121,7 +130,7 @@ export async function createPremiseSlotsIntent({
       response: null,
     };
   }
-
+  const locale = await getLocale();
   const groupedSlots = groupBy(
     Array.from(editedSlots).sort((slotA, slotB) =>
       compareAsc(slotA.time, slotB.time),
@@ -133,20 +142,28 @@ export async function createPremiseSlotsIntent({
     prepareDiscountRangeMap(discounts),
   );
 
-  const { id: paymentIntentId, client_secret: clientSecret } =
-    await stripe.paymentIntents.create({
+  const getPaymentIntent = () =>
+    stripe.paymentIntents.create({
       amount: Math.round(totalPrice * 100),
       currency: "PLN",
       customer: session?.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
       metadata: {
         source: "premise-slots-booking",
-        user_name: session?.user?.name,
-        user_email: session?.user?.email,
-      } as StripeMetadataExtended,
+        user_name: session?.user?.name || "not_provided",
+        user_email: session?.user?.email || "not_provided",
+        user_paid_locale: locale,
+        premise_name: name,
+      } satisfies StripeMetadataExtended,
     });
 
-  if (!clientSecret) {
+  // skip stripe payment if total price is 0
+  const { id: paymentIntentId, client_secret: clientSecret } =
+    totalPrice > 0
+      ? await getPaymentIntent()
+      : { id: `free-${uuid()}`, client_secret: null };
+
+  if (!clientSecret && totalPrice > 0) {
     return {
       status: "error",
       messageIntlKey: "action_invalid_data",
@@ -163,22 +180,57 @@ export async function createPremiseSlotsIntent({
     discountAmount: getSlotDiscount(slots, time, discountsMap),
   }));
 
-  await prisma.premiseSlot.createMany({
-    data: groupAndMergeTimeslots(newSlots).map(
-      ({ startTime, endTime, price, discountAmount }) => ({
-        userId,
-        premiseId,
-        paymentIntentId,
-        discountAmount,
-        organizationId: premiseOrgId,
-        date: startTime,
-        amount: Math.round(price * 100),
-        startTime: startTime,
-        endTime: endTime,
-        status: TicketIntentStatus.progress,
+  const mergedSlotsUpdateInput = groupAndMergeTimeslots(newSlots).map(
+    ({ startTime, endTime, price, discountAmount }) => ({
+      userId,
+      premiseId,
+      paymentIntentId,
+      discountAmount,
+      organizationId: premiseOrgId,
+      date: startTime,
+      amount: Math.round(price * 100),
+      startTime: startTime,
+      endTime: endTime,
+      status:
+        totalPrice > 0
+          ? TicketIntentStatus.progress
+          : TicketIntentStatus.succeed,
+    }),
+  );
+
+  const requests = [];
+  requests.push(
+    prisma.premiseSlot.createMany({ data: mergedSlotsUpdateInput }),
+  );
+
+  // send mails right after booking of free slots
+  if (totalPrice === 0) {
+    const mailInfo = {
+      name,
+      locale,
+      slotInfo: mergedSlotsUpdateInput,
+    } satisfies BookingEmailProps;
+
+    requests.push(
+      sendBookingEmail({
+        email: session?.user?.email || "",
+        ...mailInfo,
       }),
-    ),
-  });
+    );
+
+    const companyUser = await prisma.organization.findUnique({
+      where: { id: premiseOrgId },
+      include: { owner: { select: { email: true } } },
+    });
+
+    if (companyUser) {
+      requests.push(
+        sendBookingEmail({ email: companyUser.owner.email, ...mailInfo }),
+      );
+    }
+  }
+
+  await Promise.all(requests);
 
   return {
     status: "success",
@@ -223,6 +275,7 @@ async function validatePaymentIntentData({
   isValid: boolean;
   editedSlots: TimeSlotInfoExtended[];
   discounts: PremiseDiscount[];
+  name?: string;
 }> {
   if (!premiseId || !slots || slots.length === 0) {
     return { isValid: false, editedSlots: [], discounts: [] };
@@ -271,8 +324,8 @@ async function validatePaymentIntentData({
         .flatMap(({ timeSlots }) => timeSlots)
         .find(({ time }) => {
           return (
-            time.getHours() === slot.time.getHours() &&
-            time.getMinutes() === slot.time.getMinutes()
+            time.getUTCHours() === slot.time.getUTCHours() &&
+            time.getUTCMinutes() === slot.time.getUTCMinutes()
           );
         });
 
@@ -292,7 +345,7 @@ async function validatePaymentIntentData({
     { isValid: true, editedSlots: [] as TimeSlotInfoExtended[] },
   );
 
-  return { ...result, discounts: premise.discounts };
+  return { ...result, discounts: premise.discounts, name: premise.name };
 }
 
 export type BlockPremiseSlotsIntent = typeof blockPremiseSlotsIntent;

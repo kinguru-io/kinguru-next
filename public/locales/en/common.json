@@ -491,7 +491,9 @@
         "NO_REFUND": "No Refund",
         "NO_REFUND_desc": "Payment is non-refundable",
         "PARTIAL_REFUND": "Partial Refund",
-        "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees"
+        "PARTIAL_REFUND_desc": "50% refund of the booking cost, excluding applicable fees",
+        "FREE_SLOT": "Free booking",
+        "FREE_SLOT_desc": "Free booking"
       },
       "no_organization_link_label": "Go to the section \"Profile\"",
       "no_organization_warn_msg": "Fill in your details in the \"Profile\" section"

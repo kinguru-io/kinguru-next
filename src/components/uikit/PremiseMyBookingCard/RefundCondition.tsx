@@ -5,7 +5,7 @@ import CancelBookingBtn from "@/components/premise/myBookings/CancelBookingBtn";
 import { RefundType } from "@/lib/shared/config/booking-cancel-terms";
 import { Booking } from "@/lib/utils/premise-booking";
 import { getCancellationDate } from "@/lib/utils/premise-booking/cancel-booking";
-import { Grid, GridItem } from "~/styled-system/jsx";
+import { Grid, GridItem, HStack } from "~/styled-system/jsx";
 
 interface RefundConditionProps {
   title: string;
@@ -26,11 +26,39 @@ const RefundCondition = ({
   premiseSlotIds,
   premiseSlotsPrice,
 }: RefundConditionProps) => {
-  const { cancellationDate, dateLabel } = getCancellationDate(
+  const cancellationInfo = getCancellationDate(
     booking.premise.bookingCancelTerm,
     refundType,
     booking.startTime,
   );
+
+  if (!cancellationInfo) {
+    return (
+      <HStack
+        css={{
+          gap: "6",
+          padding: "4",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+        }}
+      >
+        <strong>{title}</strong>
+        <Modal>
+          <CancelBookingBtn
+            bookingStartTime={booking.startTime}
+            bookingCancelTerm={booking.premise.bookingCancelTerm}
+            premiseSlotIds={premiseSlotIds}
+            paymentIntentId={booking.paymentIntentId}
+            premiseAmount={premiseSlotsPrice}
+            discountAmount={booking.discountAmount}
+            isActive={isActive}
+          />
+        </Modal>
+      </HStack>
+    );
+  }
+
+  const { cancellationDate, dateLabel } = cancellationInfo;
 
   return (
     <Grid
@@ -53,9 +81,7 @@ const RefundCondition = ({
         {dateLabel} {format(cancellationDate, "dd.MM.yyyy")}
       </GridItem>
       <GridItem>{format(cancellationDate, "HH:mm")}</GridItem>
-      <GridItem>
-        <strong>{title}</strong>
-      </GridItem>
+      <strong>{title}</strong>
       <GridItem>{description}</GridItem>
       <GridItem>
         <Modal>

@@ -3,21 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import React from "react";
-import toast, { LoaderIcon } from "react-hot-toast";
-import {
-  Button,
-  Card,
-  CardInner,
-  ModalWindow,
-  useModal,
-} from "@/components/uikit";
+import toast from "react-hot-toast";
+import { Button, Loader, ModalWindow, useModal } from "@/components/uikit";
 import { tagStyles } from "@/components/uikit/Tag/Tag";
 import {
   CancelBookingActionProps,
   cancelBookingAction,
 } from "@/lib/actions/premise/cancel-booking";
 import { css, cx } from "~/styled-system/css";
-import { Flex } from "~/styled-system/jsx";
+import { HStack, Stack } from "~/styled-system/jsx";
 
 export default function CancelBookingBtn({
   bookingStartTime,
@@ -95,25 +89,32 @@ export default function CancelBookingBtn({
     <>
       <CancelBookingButton />
       <ModalWindow>
-        <Flex gap="1rem" minWidth="100px">
+        <Stack
+          css={{
+            padding: "4",
+            alignItems: "center",
+            gap: "6",
+            textAlign: "center",
+            minHeight: "32",
+            justifyContent: "center",
+          }}
+        >
           {isLoading ? (
-            <LoaderIcon />
+            <Loader />
           ) : (
             <>
-              <Card alignSelf="flex-start">
-                <CardInner padding="25px 18px" alignItems="center" gap="0">
-                  <h4>{t("modal_cancel_confirmation_desc")}</h4>
-                  <Flex gap="1rem" padding="1rem 0 0">
-                    <Button onClick={closeModal}>{t("modal_cancel")}</Button>
-                    <Button colorPalette="dark" onClick={onCancelBooking}>
-                      {t("modal_confirm")}
-                    </Button>
-                  </Flex>
-                </CardInner>
-              </Card>
+              <span>{t("modal_cancel_confirmation_desc")}</span>
+              <HStack gap="4">
+                <Button colorPalette="secondary" onClick={closeModal}>
+                  {t("modal_cancel")}
+                </Button>
+                <Button colorPalette="dark" onClick={onCancelBooking}>
+                  {t("modal_confirm")}
+                </Button>
+              </HStack>
             </>
           )}
-        </Flex>
+        </Stack>
       </ModalWindow>
     </>
   );
