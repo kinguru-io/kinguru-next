@@ -87,12 +87,14 @@ async function premiseSlotsBookingFailedCb(paymentIntentId: string) {
   return premiseSlot ? premiseSlot.userId : null;
 }
 
+type CallbackOnEvent = (
+  paymentIntentId: string,
+  meta?: Partial<StripeMetadataExtended>,
+) => Promise<User["id"] | null>;
+
 type CallbackMap = Record<
   StripeMetadataExtended["source"],
-  (
-    paymentIntentId: string,
-    meta?: Partial<StripeMetadataExtended>,
-  ) => Promise<User["id"] | null>
+  CallbackOnEvent | undefined
 >;
 
 const paymentSucceededCb: CallbackMap = {
@@ -137,13 +139,12 @@ export async function POST(req: NextRequest) {
     switch (event.type) {
       case "payment_intent.succeeded": {
         const paymentIntentSucceed = event.data.object;
-        const { source, user_paid_locale } = event.data.object
-          .metadata as StripeMetadataExtended;
-        const callback = paymentSucceededCb[source];
+        const meta = event.data.object.metadata as StripeMetadataExtended;
+        const callback = paymentSucceededCb[meta.source];
 
-        const userId = await callback(paymentIntentSucceed.id, {
-          user_paid_locale,
-        });
+        if (!callback) break;
+
+        const userId = await callback(paymentIntentSucceed.id, meta);
 
         if (userId) {
           await pushNotification(userId, TicketIntentStatus.succeed);
@@ -155,6 +156,8 @@ export async function POST(req: NextRequest) {
         const paymentIntentFailed = event.data.object;
         const { source } = event.data.object.metadata as StripeMetadataExtended;
         const callback = paymentFailedCb[source];
+
+        if (!callback) break;
 
         const userId = await callback(paymentIntentFailed.id);
 

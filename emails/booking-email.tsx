@@ -75,7 +75,7 @@ export default function BookingEmail({
                           <span
                             style={{ fontWeight: "bold", marginLeft: "6px" }}
                           >
-                            - {priceFormatter.format(amount)}
+                            - {priceFormatter.format(amount / 100)}
                           </span>
                         )}
                       </li>
@@ -108,12 +108,12 @@ BookingEmail.PreviewProps = {
     {
       startTime: new Date("2024-07-31T11:00:00Z"),
       endTime: new Date("2024-07-31T12:00:00Z"),
-      amount: 100,
+      amount: 10000,
     },
     {
       startTime: new Date("2024-07-31T15:00:00Z"),
       endTime: new Date("2024-07-31T16:00:00Z"),
-      amount: 100,
+      amount: 10000,
     },
   ],
   name: "Test premise",
