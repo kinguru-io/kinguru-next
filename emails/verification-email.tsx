@@ -59,8 +59,9 @@ export default function VerificationEmail({
   );
 }
 
-export async function renderVerificationEmail({
-  linkHref,
-}: VerificationEmailProps) {
-  return renderAsync(<VerificationEmail linkHref={linkHref} />);
+export async function renderVerificationEmail(
+  { linkHref }: VerificationEmailProps,
+  plainText?: boolean,
+) {
+  return renderAsync(<VerificationEmail linkHref={linkHref} />, { plainText });
 }
