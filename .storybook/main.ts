@@ -7,12 +7,11 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "storybook-addon-turbo-build",
     "@storybook/addon-interactions",
     {
       name: "storybook-addon-module-mock",
       options: {
-        include: ["**/src/lib/actions/**"],
+        include: ["**/src/lib/**"],
         exclude: ["**/node_modules/**"],
       },
     },

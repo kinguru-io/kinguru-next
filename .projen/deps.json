@@ -58,10 +58,6 @@
       "type": "build"
     },
     {
-      "name": "@storybook/jest",
-      "type": "build"
-    },
-    {
       "name": "@storybook/nextjs",
       "type": "build"
     },
@@ -113,10 +109,6 @@
       "type": "build"
     },
     {
-      "name": "classnames",
-      "type": "build"
-    },
-    {
       "name": "constructs",
       "version": "^10.0.0",
       "type": "build"
@@ -156,7 +148,6 @@
     },
     {
       "name": "msw-storybook-addon",
-      "version": "canary",
       "type": "build"
     },
     {
@@ -185,10 +176,6 @@
     },
     {
       "name": "storybook-addon-module-mock",
-      "type": "build"
-    },
-    {
-      "name": "storybook-addon-turbo-build",
       "type": "build"
     },
     {
