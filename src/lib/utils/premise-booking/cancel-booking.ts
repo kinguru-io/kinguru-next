@@ -34,38 +34,42 @@ export const getActiveCancelTerm = (
   }
 };
 
+const cancellationOffsets: Record<
+  BookingCancelTerm,
+  Record<Exclude<RefundType, "FREE_SLOT">, number>
+> = {
+  very_flexible: {
+    [REFUND_TYPES.FULL_REFUND]: 1,
+    [REFUND_TYPES.PARTIAL_REFUND]: 0,
+    [REFUND_TYPES.NO_REFUND]: 1,
+  },
+  flexible: {
+    [REFUND_TYPES.FULL_REFUND]: 7,
+    [REFUND_TYPES.PARTIAL_REFUND]: 1,
+    [REFUND_TYPES.NO_REFUND]: 1,
+  },
+  default_30: {
+    [REFUND_TYPES.FULL_REFUND]: 30,
+    [REFUND_TYPES.PARTIAL_REFUND]: 7,
+    [REFUND_TYPES.NO_REFUND]: 7,
+  },
+  default_90: {
+    [REFUND_TYPES.FULL_REFUND]: 90,
+    [REFUND_TYPES.PARTIAL_REFUND]: 14,
+    [REFUND_TYPES.NO_REFUND]: 14,
+  },
+};
+
 export const getCancellationDate = (
   bookingCancelTerm: BookingCancelTerm,
   refundType: RefundType,
   startTimeDate: Date,
-): { cancellationDate: Date; dateLabel: string } => {
+) => {
   const t = useTranslations("profile.my_bookings");
 
-  const cancellationOffsets: Record<
-    BookingCancelTerm,
-    Record<RefundType, number>
-  > = {
-    very_flexible: {
-      [REFUND_TYPES.FULL_REFUND]: 1,
-      [REFUND_TYPES.PARTIAL_REFUND]: 0,
-      [REFUND_TYPES.NO_REFUND]: 1,
-    },
-    flexible: {
-      [REFUND_TYPES.FULL_REFUND]: 7,
-      [REFUND_TYPES.PARTIAL_REFUND]: 1,
-      [REFUND_TYPES.NO_REFUND]: 1,
-    },
-    default_30: {
-      [REFUND_TYPES.FULL_REFUND]: 30,
-      [REFUND_TYPES.PARTIAL_REFUND]: 7,
-      [REFUND_TYPES.NO_REFUND]: 7,
-    },
-    default_90: {
-      [REFUND_TYPES.FULL_REFUND]: 90,
-      [REFUND_TYPES.PARTIAL_REFUND]: 14,
-      [REFUND_TYPES.NO_REFUND]: 14,
-    },
-  };
+  if (refundType === "FREE_SLOT") {
+    return null;
+  }
 
   const offset = cancellationOffsets[bookingCancelTerm][refundType];
   const cancellationDate = subDays(startTimeDate, offset);

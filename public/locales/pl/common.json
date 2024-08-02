@@ -488,7 +488,9 @@
         "NO_REFUND": "Bez zwrotu",
         "NO_REFUND_desc": "Płatność nie podlega zwrotowi",
         "PARTIAL_REFUND": "Częściowy zwrot",
-        "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat"
+        "PARTIAL_REFUND_desc": "Zwrot w wysokości 50% kosztów rezerwacji, z wyłączeniem obowiązujących opłat",
+        "FREE_SLOT": "Bezpłatna rezerwacja",
+        "FREE_SLOT_desc": "Bezpłatna rezerwacja"
       },
       "no_organization_link_label": "Przejdź do sekcji „Profil”",
       "no_organization_warn_msg": "Wpisz swoje dane w sekcji „Profil”.",

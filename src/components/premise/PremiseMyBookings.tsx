@@ -6,7 +6,7 @@ import BookingsSection from "../uikit/PremiseMyBookingCard/BookingsSection";
 import { getSession } from "@/auth";
 import { fetchImageSrc } from "@/lib/utils/fetch-image-src";
 import { bookingsGroupedByDateAndPremiseAndPayment } from "@/lib/utils/groupBy-bookings";
-import { Booking, ORGANIZATION_ROLE } from "@/lib/utils/premise-booking";
+import type { Booking } from "@/lib/utils/premise-booking";
 
 export async function PremiseMyBookings({
   bookingsViaWebsite,
@@ -52,7 +52,7 @@ export async function PremiseMyBookings({
     ));
 
   const OrganizationBookings = () =>
-    bookingsBlockedByAdmin.map((booking: Booking) => (
+    bookingsBlockedByAdmin.map((booking) => (
       <div key={booking.id}>
         <BookingCard
           booking={booking}
@@ -103,12 +103,13 @@ export async function PremiseMyBookings({
     },
   ];
 
-  const renderBookings = () => {
-    if (session?.user?.role === ORGANIZATION_ROLE) {
-      return <Tabs tabs={tabsOrgBooking} />;
-    }
-    return <Tabs tabs={tabsUserBooking} />;
-  };
-
-  return renderBookings();
+  return (
+    <Tabs
+      tabs={
+        session?.user?.role === "organization"
+          ? tabsOrgBooking
+          : tabsUserBooking
+      }
+    />
+  );
 }

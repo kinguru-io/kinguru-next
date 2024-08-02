@@ -161,11 +161,16 @@ export function BookingViewCard({
         discountsMap,
       });
 
-      if (response) {
+      if (response && response.clientSecret !== null) {
         setClosable(false);
-        setIntentResponse(response);
+        setIntentResponse({
+          clientSecret: response.clientSecret,
+          paymentIntentId: response.paymentIntentId,
+        });
 
         void revalidateFn();
+      } else {
+        paymentSucceed();
       }
 
       if (status === "error" && messageIntlKey) {

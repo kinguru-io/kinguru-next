@@ -29,6 +29,14 @@ interface BookingsSectionProps {
   imageSrcs: Record<string, string>;
 }
 
+const paidRefund = [
+  REFUND_TYPES.FULL_REFUND,
+  REFUND_TYPES.PARTIAL_REFUND,
+  REFUND_TYPES.NO_REFUND,
+];
+
+const freeSlot = [REFUND_TYPES.FREE_SLOT];
+
 const BookingsSection = async ({
   date,
   premises,
@@ -65,16 +73,14 @@ const BookingsSection = async ({
             ? index === bookings.length - 1
             : true;
 
-          const refundConditions = [
-            REFUND_TYPES.FULL_REFUND,
-            REFUND_TYPES.PARTIAL_REFUND,
-            REFUND_TYPES.NO_REFUND,
-          ].map((refundType) => (
+          const refundConditions = (
+            premiseSlotsPrice === 0 ? freeSlot : paidRefund
+          ).map((refundType) => (
             <RefundCondition
               key={refundType}
               title={t(`conditions.${refundType}`)}
               description={t(`conditions.${refundType}_desc`)}
-              isActive={refundType === activeTerm}
+              isActive={["FREE_SLOT", activeTerm].includes(refundType)}
               refundType={refundType}
               booking={booking}
               premiseSlotIds={premiseSlotIds}

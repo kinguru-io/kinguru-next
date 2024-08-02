@@ -33,7 +33,7 @@ export async function sendVerificationEmail({
     const mailResult = await transporter.sendMail({
       to: email,
       subject: "Email verification | Eventify",
-      text: `For verification visit:\n${linkHref}\n\n`,
+      text: await renderVerificationEmail({ linkHref }, true),
       html: await renderVerificationEmail({ linkHref }),
     });
 

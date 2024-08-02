@@ -14,6 +14,7 @@ export const REFUND_TYPES = {
   FULL_REFUND: "FULL_REFUND",
   PARTIAL_REFUND: "PARTIAL_REFUND",
   NO_REFUND: "NO_REFUND",
+  FREE_SLOT: "FREE_SLOT",
 } as const;
 
 export type RefundType = (typeof REFUND_TYPES)[keyof typeof REFUND_TYPES];

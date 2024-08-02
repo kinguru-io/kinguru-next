@@ -201,9 +201,13 @@ export async function cancelBookingAction({
 
   const isUserOrg = await isUserOrganization();
 
-  if (isUserOrg && !paymentIntentId) {
+  if (
+    (isUserOrg && !paymentIntentId) ||
+    (premiseAmount === 0 && paymentIntentId.startsWith("free"))
+  ) {
     try {
-      // ONLY for premise owners, No paymentIntentId means no payment was made
+      // * for premise owners, no `paymentIntentId` means no payment was made
+      // * for users, `amount === 0` and `paymentIntentId` starts with `free` means no payment was made
       await deleteCompaniesPremiseSlots(premiseSlotIds);
 
       return {
