@@ -1,3 +1,10 @@
+# [0.59.0](https://github.com/kinguru-io/kinguru-next/compare/v0.58.0...v0.59.0) (2024-08-02)
+
+
+### Features
+
+* added free bookings feature ([e683c4b](https://github.com/kinguru-io/kinguru-next/commit/e683c4b11d9781f3123ac14002a8284800ec8e2d))
+
 # [0.58.0](https://github.com/kinguru-io/kinguru-next/compare/v0.57.1...v0.58.0) (2024-07-31)
 
 
