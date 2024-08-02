@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
 import * as nextIntl from "next-intl/server";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createMock } from "storybook-addon-module-mock";
 import { Footer } from "./Footer";
 import englishLocale from "../../../public/locales/en/common.json";
@@ -25,10 +24,21 @@ export const FooterStory: Story = {
   parameters: {
     moduleMock: {
       mock: () => {
-        const mock = createMock(nextIntl, "getTranslations");
-        // @ts-ignore
-        mock.mockReturnValue((key) => englishLocale.footer[key]);
-        return [mock];
+        const getTranslationsMock = createMock(nextIntl, "getTranslations");
+        const getLocaleMock = createMock(nextIntl, "getLocale");
+
+        getTranslationsMock.mockReturnValue(
+          // @ts-expect-error
+          Promise.resolve((key: keyof typeof englishLocale.footer) =>
+            englishLocale.footer[key].replace(
+              "{year}",
+              new Date().getFullYear().toString(),
+            ),
+          ),
+        );
+        getLocaleMock.mockReturnValue(Promise.resolve("en"));
+
+        return [getTranslationsMock, getLocaleMock];
       },
     },
     nextjs: {
