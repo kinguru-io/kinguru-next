@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
+import { GoogleAnalytics } from "./_ga";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Toaster } from "@/components/notifications/hot-toast-toaster";
@@ -49,6 +50,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale} className={`${NotoSans.variable}`}>
+      <GoogleAnalytics />
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
           <Grid
