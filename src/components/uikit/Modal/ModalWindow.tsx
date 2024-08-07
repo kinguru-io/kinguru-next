@@ -4,18 +4,24 @@ import Image from "next/image";
 import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useModal } from "./Modal";
+import { modalRecipe } from "./modal-recipes";
 import { Button, Icon } from "@/components/uikit";
 import headerLogotype from "~/public/img/logotypes/header-logotype.svg";
-import { css } from "~/styled-system/css";
+import { css, type RecipeVariantProps } from "~/styled-system/css";
 import { Box, HStack } from "~/styled-system/jsx";
+
+type ModalWindowProps = {
+  children: React.ReactNode;
+  headerSlot?: React.ReactNode;
+  hideCloseButton?: boolean;
+} & RecipeVariantProps<typeof modalRecipe>;
 
 export function _ModalWindow({
   children,
   headerSlot,
-}: {
-  children: React.ReactNode;
-  headerSlot?: React.ReactNode;
-}) {
+  hideCloseButton,
+  type,
+}: ModalWindowProps) {
   const { open, setOpen, closable } = useModal();
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -59,27 +65,11 @@ export function _ModalWindow({
       ref={dialogRef}
       onClick={dialogBackdropClicked}
       onCancel={modalCancelled}
-      className={css({
-        position: "fixed",
-        inset: "0",
-        bgColor: "light",
-        maxWidth: "100vw",
-        maxHeight: "full",
-        width: "full",
-        mdDown: { height: "full" },
-        md: {
-          minWidth: "80",
-          maxWidth: "breakpoint-md",
-          maxHeight: "90vh",
-          borderRadius: "sm",
-          margin: "auto",
-          width: "max-content",
-        },
-      })}
+      className={modalRecipe({ type })}
     >
-      <ModalHeader>
+      <ModalHeader noLogo={type !== "default"}>
         {headerSlot}
-        {closable && (
+        {closable && !hideCloseButton && (
           <Button
             className={css({
               padding: "2",
@@ -105,23 +95,33 @@ export function _ModalWindow({
   );
 }
 
-function ModalHeader({ children }: { children: React.ReactNode }) {
+function ModalHeader({
+  noLogo,
+  children,
+}: {
+  noLogo?: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <HStack
-      gap="2"
-      padding="4"
-      position="sticky"
-      top="0"
-      bgColor="light"
-      boxShadow="header"
-      zIndex="1"
-      md={{
-        position: "absolute",
-        right: "0",
-        bgColor: "unset",
-        padding: "1",
-        "& > img": { display: "none" },
+      css={{
+        gap: "2",
+        padding: "4",
+        position: "sticky",
+        top: "0",
+        bgColor: "light",
+        boxShadow: "header",
+        zIndex: "1",
+        md: {
+          position: "absolute",
+          right: "0",
+          bgColor: "unset",
+          padding: "1",
+          "& > img": { display: "none" },
+        },
+        "&[data-hide-logo]": { "& > img": { display: "none" }, padding: "1" },
       }}
+      data-hide-logo={noLogo}
     >
       <Image
         src={headerLogotype.src}

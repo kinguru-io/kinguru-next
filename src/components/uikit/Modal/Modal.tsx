@@ -39,8 +39,11 @@ export function useModal() {
   return context;
 }
 
-export function Modal({ children }: ModalProps) {
-  const [open, setOpen] = useState(false);
+export function Modal({
+  children,
+  initialOpenState = false,
+}: ModalProps & { initialOpenState?: boolean }) {
+  const [open, setOpen] = useState(initialOpenState);
   const [closable, setClosable] = useState(true);
 
   return (

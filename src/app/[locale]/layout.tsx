@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
-import { GoogleAnalytics } from "./_ga";
 import { Footer } from "@/components/Footer";
+import {
+  GoogleAnalytics,
+  GoogleAnalyticsConsent,
+} from "@/components/google-analytics";
 import { Header } from "@/components/Header";
 import { Toaster } from "@/components/notifications/hot-toast-toaster";
 import { NotoSans } from "@/fontLoader.ts";
@@ -66,6 +69,7 @@ export default function RootLayout({
             <Footer />
           </Grid>
           <Toaster />
+          <GoogleAnalyticsConsent />
         </body>
       </NextIntlClientProvider>
     </html>

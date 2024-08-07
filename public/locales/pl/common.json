@@ -729,5 +729,10 @@
         "step_4": "Płatności odbywają się 2 razy w miesiącu według danych podanych w Profilu Osobistym firmy podczas rejestracji:"
       }
     }
+  },
+  "cookie_consent": {
+    "accept": "Akceptuj",
+    "decline": "Spadek",
+    "info": "Używamy plików cookie 🍪, aby zapewnić najlepszą jakość korzystania z <bold>Eventify</bold>, świadczyć nasze usługi i prowadzić analizy.\n Aby wyrazić zgodę na używanie plików cookie, kliknij <bold>Akceptuj</bold>"
   }
 }
