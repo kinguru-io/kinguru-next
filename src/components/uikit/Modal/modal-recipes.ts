@@ -23,6 +23,7 @@ export const modalRecipe = cva({
       },
       "drawer-bottom": {
         marginBlockStart: "auto",
+        mdDown: { minHeight: "30%" },
       },
     },
   },
