@@ -687,5 +687,10 @@
         "count": "0"
       }
     }
+  },
+  "cookie_consent": {
+    "info": "We use cookies 🍪 to deliver the best experience on <bold>Eventify</bold>, to provide our services, and analytics.\n To agree to the use of cookies, click <bold>Accept</bold>",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }
