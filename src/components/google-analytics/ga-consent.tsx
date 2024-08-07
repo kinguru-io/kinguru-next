@@ -63,7 +63,7 @@ function ConsentInner({
 
   return (
     <ModalWindow type="drawer-bottom" hideCloseButton>
-      <HStack gap="5" justifyContent="space-between">
+      <HStack gap="5" flexWrap="wrap">
         <span className={css({ whiteSpace: "pre-line", fontSize: "sm" })}>
           {t.rich("info", consentRich)}
         </span>
@@ -71,6 +71,7 @@ function ConsentInner({
           css={{
             gap: "2",
             flexDirection: "row-reverse",
+            marginInlineStart: "auto",
             "& > .button": { padding: "3" },
           }}
         >
