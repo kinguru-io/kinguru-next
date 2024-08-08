@@ -44,7 +44,7 @@
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/release-notes-generator": "^14.0.1",
-    "@storybook/addon-essentials": "^8.2.7",
+    "@storybook/addon-essentials": "^8.2.8",
     "@storybook/addon-interactions": "^8.2.7",
     "@storybook/addon-links": "^8.2.7",
     "@storybook/blocks": "^8.2.7",
