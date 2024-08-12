@@ -73,6 +73,7 @@ export async function editPremiseAction(
     discounts,
     resources,
     amenities,
+    information,
     ...restPremiseInput
   } = parseResult.data;
 
@@ -83,6 +84,7 @@ export async function editPremiseAction(
       amenities: prepareAmenityList(amenities),
       discounts: { deleteMany: {}, create: discounts },
       resources: { deleteMany: {}, create: resources },
+      information: { deleteMany: {}, create: information },
       openHours: {
         deleteMany: {},
         create: openHours.map(({ day, startTime, endTime, price }) => ({
