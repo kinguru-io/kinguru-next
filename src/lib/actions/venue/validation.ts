@@ -15,7 +15,9 @@ z.setErrorMap(customErrorMap);
 
 const mainInfoSchema = z.object({
   name: zfd.text(z.string()),
-  description: zfd.text(z.string()),
+  information: z.array(
+    z.object({ description: zfd.text(z.string()), locale: zfd.text() }),
+  ),
 });
 
 const imageSchema = (t: (arg: string) => string = (value) => value) =>

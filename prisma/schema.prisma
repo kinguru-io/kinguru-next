@@ -438,12 +438,12 @@ model OrganizationResourse {
 }
 
 model Venue {
-  id               String       @id @default(cuid())
-  slug             String       @unique
+  id               String             @id @default(cuid())
+  slug             String             @unique
   name             String
   image            String
-  description      String
-  organization     Organization @relation(fields: [organizationId], references: [id])
+  description      String?            @default("")
+  organization     Organization       @relation(fields: [organizationId], references: [id])
   organizationId   String
   premises         Premise[]
   locationMapboxId String
@@ -452,32 +452,50 @@ model Venue {
   featureParking   Boolean
   featureAge       Int
   manager          Manager[]
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
+  information      VenueInformation[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+model VenueInformation {
+  id          String @id @default(cuid())
+  venue       Venue  @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  venueId     String
+  locale      String @unique
+  description String
 }
 
 model Premise {
-  id                String             @id @default(cuid())
-  slug              String             @unique
-  venue             Venue              @relation(fields: [venueId], references: [id])
+  id                String               @id @default(cuid())
+  slug              String               @unique
+  venue             Venue                @relation(fields: [venueId], references: [id])
   venueId           String
   name              String
-  description       String
+  description       String?              @default("")
   room              String?
   floor             String?
-  type              String?            @default("")
+  type              String?              @default("")
   area              Float?
   capacity          Int?
   slots             PremiseSlot[]
   openHours         PremiseOpenHours[]
   resources         PremiseResource[]
   discounts         PremiseDiscount[]
-  rules             String?            @default("Rules")
+  rules             String?              @default("Rules")
   amenities         String[]
-  direction         String?            @default("Direction")
-  bookingCancelTerm String?            @default("Booking cancel term")
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+  direction         String?              @default("Direction")
+  bookingCancelTerm String?              @default("Booking cancel term")
+  information       PremiseInformation[]
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+model PremiseInformation {
+  id          String  @id @default(cuid())
+  premise     Premise @relation(fields: [premiseId], references: [id], onDelete: Cascade)
+  premiseId   String
+  locale      String  @unique
+  description String
 }
 
 model PremiseOpenHours {

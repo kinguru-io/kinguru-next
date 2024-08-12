@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type {
   Premise,
   PremiseDiscount,
+  PremiseInformation,
   PremiseOpenHours,
   PremiseResource,
 } from "@prisma/client";
@@ -32,7 +33,6 @@ export function EditPremiseForm({
     id,
     venueId,
     name,
-    description,
     room,
     floor,
     type,
@@ -41,6 +41,7 @@ export function EditPremiseForm({
     amenities,
     discounts,
     resources,
+    information,
     openHours,
     rules,
     bookingCancelTerm,
@@ -52,6 +53,7 @@ export function EditPremiseForm({
     discounts: PremiseDiscount[];
     openHours: PremiseOpenHours[];
     resources: PremiseResource[];
+    information: PremiseInformation[];
   };
 }) {
   const t = useTranslations("form.common");
@@ -61,7 +63,7 @@ export function EditPremiseForm({
     formType: CreatePremiseFormTypeEnum.MainInformation,
     mainInformation: {
       name,
-      description,
+      information,
       room: room || undefined,
       floor: floor || undefined,
     },

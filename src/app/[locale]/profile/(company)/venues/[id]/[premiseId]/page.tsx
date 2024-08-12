@@ -27,6 +27,7 @@ export default async function EditPremisePage({
           discounts: true,
           openHours: true,
           resources: true,
+          information: true,
         },
       },
     },
