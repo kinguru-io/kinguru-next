@@ -14,31 +14,31 @@ environment: {}
 resources:
   requests:
     cpu: 200m
-    memory: 256Mi
+    memory: 386Mi
   limits:
-    cpu: 500m
-    memory: 768Mi
+    cpu: 300m
+    memory: 512Mi
 
 schedulerResources:
   requests:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 300m
+    memory: 768Mi
   limits:
     cpu: 500m
-    memory: 768Mi
+    memory: 896Mi
 
 consumerResources:
   requests:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 300m
+    memory: 386Mi
   limits:
     cpu: 500m
-    memory: 768Mi
+    memory: 512Mi
 
 redisResources:
   requests:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 50m
+    memory: 48Mi
   limits:
-    cpu: 500m
-    memory: 768Mi
+    cpu: 100m
+    memory: 128Mi
