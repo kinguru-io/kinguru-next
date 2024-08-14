@@ -22,7 +22,6 @@ export default async function ProfileVenuePage({
   const venue = await prisma.venue.findUnique({
     where: { id },
     include: {
-      information: true,
       premises: { orderBy: { updatedAt: "desc" }, select: { id: true } },
       manager: true,
     },

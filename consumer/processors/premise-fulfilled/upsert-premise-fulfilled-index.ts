@@ -23,14 +23,9 @@ export async function upsertPremiseFulfilledIndex({
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
-      information: { select: { locale: true, description: true } },
       openHours: { orderBy: { price: "asc" } },
       venue: {
-        select: {
-          name: true,
-          information: { select: { locale: true, description: true } },
-          locationMapboxId: true,
-        },
+        select: { name: true, description: true, locationMapboxId: true },
       },
     },
   });
@@ -40,7 +35,7 @@ export async function upsertPremiseFulfilledIndex({
     return;
   }
 
-  const { venue, openHours, information, ...restPremise } = premise;
+  const { venue, openHours, ...restPremise } = premise;
   const location = await prepareDocumentLocation({
     mapboxId: venue.locationMapboxId,
     searchBox,
@@ -53,24 +48,12 @@ export async function upsertPremiseFulfilledIndex({
     document: {
       ...restPremise,
       ...location,
-      description: getPlainDescription(information),
       minPrice: openHours.at(0)?.price,
       maxPrice: openHours.at(-1)?.price,
       closedHours,
       "venue.name": venue.name,
-      "venue.description": getPlainDescription(venue.information),
+      "venue.description": venue.description,
       booked_slots: { name: "premise" },
     },
   });
-}
-
-function getPlainDescription(
-  list: Array<{ locale: string; description: string }>,
-) {
-  return list
-    .reduce((str, { description }) => {
-      str += `${description} `;
-      return str;
-    }, "")
-    .trimEnd();
 }

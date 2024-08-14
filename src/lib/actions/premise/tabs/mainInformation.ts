@@ -6,14 +6,9 @@ export const mainInformationSchema = (
 ) =>
   z.object({
     name: z.string().min(1, { message: requiredFieldMessage(t, "name") }),
-    information: z.array(
-      z.object({
-        description: z
-          .string()
-          .min(1, { message: requiredFieldMessage(t, "description") }),
-        locale: z.string(),
-      }),
-    ),
+    description: z
+      .string()
+      .min(1, { message: requiredFieldMessage(t, "description") }),
     room: z.string().optional(),
     floor: z.string().min(1, { message: requiredFieldMessage(t, "floor") }),
   });

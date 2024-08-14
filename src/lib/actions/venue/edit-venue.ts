@@ -40,7 +40,6 @@ export async function editVenueAction(
     venueId,
     managerId,
     name: _unused,
-    information,
     ...restVenueInput
   } = parseResult.data;
 
@@ -64,13 +63,7 @@ export async function editVenueAction(
   }
 
   await prisma.$transaction([
-    prisma.venue.update({
-      where: { id: venueId },
-      data: {
-        ...restVenueInput,
-        information: { deleteMany: {}, createMany: { data: information } },
-      },
-    }),
+    prisma.venue.update({ where: { id: venueId }, data: restVenueInput }),
     prisma.manager.update({ where: { id: managerId }, data: manager }),
   ]);
 

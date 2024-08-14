@@ -19,16 +19,15 @@ import { Box, Container, Stack } from "~/styled-system/jsx";
 import { container } from "~/styled-system/patterns";
 
 export default async function VenuePage({
-  params: { slug, locale },
+  params: { slug },
 }: {
-  params: { slug: string; locale: string };
+  params: { slug: string };
 }) {
   const mapId = useId();
   const t = await getTranslations("venue.public_page");
   const venue = await prisma.venue.findUnique({
     where: { slug },
     include: {
-      information: { where: { locale }, select: { description: true } },
       premises: {
         orderBy: { updatedAt: "desc" },
         select: { id: true },
@@ -40,7 +39,7 @@ export default async function VenuePage({
     return notFound();
   }
 
-  const { image, name, premises, information } = venue;
+  const { image, name, premises, description } = venue;
 
   return (
     <>
@@ -63,7 +62,7 @@ export default async function VenuePage({
       <Box paddingBlock="8" borderBlockEnd="1px solid {colors.tertiary}">
         <Container>
           <Description
-            description={information.at(0)?.description || ""}
+            description={description}
             showLessLabel={t("show_less")}
             showMoreLabel={t("show_more")}
           />
