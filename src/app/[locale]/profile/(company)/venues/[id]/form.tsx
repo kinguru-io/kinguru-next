@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Manager, Venue } from "@prisma/client";
+import type { Manager, Venue, VenueInformation } from "@prisma/client";
 import { useTranslations } from "next-intl";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -20,7 +20,7 @@ export function EditVenueForm({
   venue: {
     id,
     name,
-    description,
+    information,
     image,
     locationMapboxId,
     locationTutorial,
@@ -31,7 +31,7 @@ export function EditVenueForm({
   },
 }: {
   editVenue: EditVenueAction;
-  venue: Venue & { manager: Manager[] };
+  venue: Venue & { manager: Manager[]; information: VenueInformation[] };
 }) {
   const t = useTranslations("profile.venues.add");
   const formT = useTranslations("form.common");
@@ -43,7 +43,7 @@ export function EditVenueForm({
     defaultValues: {
       mainInfo: {
         name,
-        description,
+        information,
       },
       image: {
         image,
