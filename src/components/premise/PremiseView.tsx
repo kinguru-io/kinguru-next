@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
   ArrowIcon,
@@ -20,12 +20,10 @@ import { AspectRatio } from "~/styled-system/jsx";
 import { linkOverlay } from "~/styled-system/patterns";
 
 export async function PremiseView({ id, href }: { id: string; href?: string }) {
-  const locale = await getLocale();
   const t = await getTranslations("premise");
   const premise = await prisma.premise.findUnique({
     where: { id },
     include: {
-      information: { where: { locale }, select: { description: true } },
       resources: {
         select: {
           id: true,
@@ -43,7 +41,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
     return null;
   }
 
-  const { slug, name, information, area, resources, openHours } = premise;
+  const { slug, name, description, area, resources, openHours } = premise;
   const minPrice = openHours.at(0)?.price;
 
   const priceLabel = t("from", { price: priceFormatter.format(minPrice || 0) });
@@ -63,9 +61,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
         label={t("go_to_premise_page")}
       >
         <PremiseTitle>{name}</PremiseTitle>
-        <PremiseDescription>
-          {information.at(0)?.description}
-        </PremiseDescription>
+        <PremiseDescription>{description}</PremiseDescription>
       </PremiseContent>
       <PremiseSlider>
         <Slider slidesCount={resources.length}>

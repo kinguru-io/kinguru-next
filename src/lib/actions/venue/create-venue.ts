@@ -41,7 +41,7 @@ export async function createVenueAction(
     };
   }
 
-  const { manager, information, ...restVenueInput } = parseResult.data;
+  const { manager, ...restVenueInput } = parseResult.data;
 
   const potentialSlug = slugify(restVenueInput.name);
 
@@ -59,11 +59,6 @@ export async function createVenueAction(
         ...restVenueInput,
         slug,
         organizationId: organization.id,
-        information: {
-          createMany: {
-            data: information,
-          },
-        },
         manager: {
           createMany: {
             data: [manager],

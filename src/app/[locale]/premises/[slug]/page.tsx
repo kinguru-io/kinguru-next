@@ -72,7 +72,6 @@ export default async function PremisePage({
     include: {
       venue: true,
       resources: true,
-      information: { where: { locale }, select: { description: true } },
       slots: {
         where: {
           date: { gte: nowDate.toISOString() },
@@ -232,7 +231,7 @@ export default async function PremisePage({
               </Suspense>
             </LinkToMap>
             <Description
-              description={premise.information.at(0)?.description || ""}
+              description={premise.description}
               showMoreLabel={t("show_more")}
               showLessLabel={t("show_less")}
             />
@@ -355,7 +354,6 @@ export default async function PremisePage({
                   padding: "4",
                   fontSize: "sm",
                   md: { paddingInline: "6", fontSize: "px15" },
-                  whiteSpace: "pre-line",
                 })}
               >
                 {description}
