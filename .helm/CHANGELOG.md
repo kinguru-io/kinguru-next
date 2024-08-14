@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.0...chart-v1.6.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* requests and limits for pods ([91bed9c](https://github.com/kinguru-io/kinguru-next/commit/91bed9c49f986f125b6a16113b87165025dc585d))
+
 # [1.6.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.5.0...chart-v1.6.0) (2024-06-12)
 
 
