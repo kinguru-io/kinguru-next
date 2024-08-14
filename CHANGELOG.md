@@ -1,3 +1,10 @@
+# [0.62.0](https://github.com/kinguru-io/kinguru-next/compare/v0.61.0...v0.62.0) (2024-08-14)
+
+
+### Features
+
+* split descriptions filling by locales ([92088cb](https://github.com/kinguru-io/kinguru-next/commit/92088cb1c5153f1c875b3eca7d83d4bde6b83d32))
+
 # [0.61.0](https://github.com/kinguru-io/kinguru-next/compare/v0.60.0...v0.61.0) (2024-08-14)
 
 
