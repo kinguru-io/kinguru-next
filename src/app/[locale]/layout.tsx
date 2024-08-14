@@ -27,7 +27,6 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: {
         en: "/en",
         pl: "/pl",
-        ru: "/ru",
       },
     },
     title,
