@@ -282,7 +282,8 @@
     "action_invalid_data": "Invalid data",
     "action_payment_cancelled": "Payment was cancelled",
     "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings.",
-    "cancel_payment_btn": "Cancel"
+    "cancel_payment_btn": "Cancel",
+    "leave_comment_label": "Leave a comment:"
   },
   "price": {
     "total": "Total",
@@ -496,7 +497,8 @@
         "FREE_SLOT_desc": "Free booking"
       },
       "no_organization_link_label": "Go to the section \"Profile\"",
-      "no_organization_warn_msg": "Fill in your details in the \"Profile\" section"
+      "no_organization_warn_msg": "Fill in your details in the \"Profile\" section",
+      "comment_label": "Comment"
     }
   },
   "amenities": {

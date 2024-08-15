@@ -7,7 +7,7 @@ import {
 } from "@/lib/shared/config/booking-cancel-terms";
 
 export const getActiveCancelTerm = (
-  bookingCancelTerm: BookingCancelTerm,
+  bookingCancelTerm: string | null,
   daysUntilEvent: number,
   hoursUntilEvent: number,
 ): RefundType => {

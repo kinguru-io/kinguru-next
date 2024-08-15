@@ -67,7 +67,7 @@ export function _ModalWindow({
       onCancel={modalCancelled}
       className={modalRecipe({ type })}
     >
-      <ModalHeader noLogo={type !== "default"}>
+      <ModalHeader noLogo={type && type !== "default"}>
         {headerSlot}
         {closable && !hideCloseButton && (
           <Button

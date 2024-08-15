@@ -34,12 +34,13 @@ type BookTimeSlotsActionData = {
   premiseOrgId: string;
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
+  comment: string;
   discountsMap: Record<number, number | undefined>;
 };
 
 type BlockTimeSlotsActionData = Omit<
   BookTimeSlotsActionData,
-  "timeZone" | "discountMap"
+  "timeZone" | "discountMap" | "comment"
 >;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -100,6 +101,7 @@ export async function createPremiseSlotsIntent({
   premiseOrgId,
   slots,
   discountsMap,
+  comment,
 }: BookTimeSlotsActionData): ActionResponse<
   {
     clientSecret: string | null;
@@ -153,6 +155,7 @@ export async function createPremiseSlotsIntent({
         user_name: session?.user?.name || "not_provided",
         user_email: session?.user?.email || "not_provided",
         user_paid_locale: locale,
+        user_comment: comment,
         premise_name: name,
       } satisfies StripeMetadataExtended,
     });
@@ -195,6 +198,7 @@ export async function createPremiseSlotsIntent({
         totalPrice > 0
           ? TicketIntentStatus.progress
           : TicketIntentStatus.succeed,
+      comment,
     }),
   );
 
@@ -209,6 +213,7 @@ export async function createPremiseSlotsIntent({
       name,
       locale,
       slotInfo: mergedSlotsUpdateInput,
+      comment,
     } satisfies BookingEmailProps;
 
     requests.push(

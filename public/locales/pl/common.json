@@ -252,7 +252,8 @@
     "action_invalid_data": "Nieprawidłowe dane",
     "action_payment_cancelled": "Płatność została anulowana",
     "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy.",
-    "cancel_payment_btn": "Anulować"
+    "cancel_payment_btn": "Anulować",
+    "leave_comment_label": "Zostaw komentarz:"
   },
   "price": {
     "total": "Całkowity",
@@ -496,7 +497,8 @@
       "no_organization_warn_msg": "Wpisz swoje dane w sekcji „Profil”.",
       "canceled_booking_heading": "Anulowane rezerwacje",
       "tab_booked_active": "Aktywny",
-      "tab_booked_canceled": "Odwołany"
+      "tab_booked_canceled": "Odwołany",
+      "comment_label": "Komentarz"
     }
   },
   "amenities": {

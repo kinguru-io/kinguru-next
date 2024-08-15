@@ -531,6 +531,7 @@ model PremiseSlot {
   createdAt       DateTime           @default(now())
   organizationId  String
   organization    Organization       @relation(fields: [organizationId], references: [id])
+  comment         String?            @default("")
 
   @@index([organizationId])
 }
