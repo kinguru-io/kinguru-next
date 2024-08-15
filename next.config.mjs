@@ -77,7 +77,7 @@ const nextConfig = {
   },
   experimental: {
     instrumentationHook: true,
-    serverComponentsExternalPackages: ["oslo"],
+    serverComponentsExternalPackages: ["oslo", "@aws-sdk/middleware-sdk-s3"],
   },
 };
 
