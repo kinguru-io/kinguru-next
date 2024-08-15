@@ -30,10 +30,10 @@ schedulerResources:
 consumerResources:
   requests:
     cpu: 300m
-    memory: 512Mi
+    memory: 768Mi
   limits:
     cpu: 500m
-    memory: 768Mi
+    memory: 896Mi
 
 redisResources:
   requests:
