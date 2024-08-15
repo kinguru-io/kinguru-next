@@ -4,12 +4,11 @@ import { TicketIntentStatus } from "@prisma/client";
 import { differenceInHours, differenceInDays } from "date-fns";
 import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
-import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 import { isUserOrganization } from "@/lib/utils/premise-booking";
 
 export interface CancelBookingActionProps {
   bookingStartTime: Date;
-  bookingCancelTerm: BookingCancelTerm;
+  bookingCancelTerm: string | null;
   premiseSlotIds: string[];
   premiseAmount: number;
   paymentIntentId: string;
@@ -83,7 +82,7 @@ function calculateRefundAmount({
   amountPaid: number;
   hoursUntilEvent: number;
   daysUntilEvent: number;
-  bookingCancelTerm: BookingCancelTerm;
+  bookingCancelTerm: string | null;
 }): number {
   switch (bookingCancelTerm) {
     case "very_flexible":
