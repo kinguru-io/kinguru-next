@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.2...chart-v1.6.3) (2024-08-15)
+
+
+### Bug Fixes
+
+* increase consumer limits and requests ([#802](https://github.com/kinguru-io/kinguru-next/issues/802)) ([faaffb7](https://github.com/kinguru-io/kinguru-next/commit/faaffb75db50b13dfa4028ba16d22a3bbcc57542))
+
 ## [1.6.2](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.1...chart-v1.6.2) (2024-08-15)
 
 
