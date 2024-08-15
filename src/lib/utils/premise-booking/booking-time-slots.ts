@@ -1,6 +1,5 @@
-import { BookingType } from "@prisma/client";
+import type { Premise, PremiseSlot } from "@prisma/client";
 import { getSession } from "@/auth";
-import { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
 
 export async function isUserOwnerOfPremise(
   premiseOrgId: string,
@@ -27,40 +26,10 @@ export async function getUserRole() {
 export async function isUserOrganization() {
   return (await getUserRole()) === ORGANIZATION_ROLE;
 }
-
-export interface Booking {
-  id: string;
-  type: BookingType;
+export type Booking = PremiseSlot & {
   ids?: string[];
-  premiseId: string;
-  userId: string;
-  paymentIntentId: string;
-  amount: number;
-  discountAmount: number;
-  date: Date;
-  startTime: Date;
-  endTime: Date;
-  status: string;
-  createdAt: Date;
-  premise: {
-    id: string;
-    slug: string;
-    venueId: string;
-    name: string;
-    description: string;
-    room: string | null;
-    floor: string | null;
-    type: string | null;
-    area: number | null;
-    capacity: number | null;
-    rules: string | null;
-    amenities: any[];
-    direction: string | null;
-    bookingCancelTerm: BookingCancelTerm;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-}
+  premise: Premise;
+};
 
 export type MergedTimeSlots = {
   premiseId: string;

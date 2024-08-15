@@ -8,6 +8,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
 import {
   useCallback,
+  useRef,
   useState,
   useTransition,
   type ComponentProps,
@@ -20,7 +21,7 @@ import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
 import { Timer } from "@/components/common/timer";
-import { Button, ModalWindow, useModal } from "@/components/uikit";
+import { Button, ModalWindow, Textarea, useModal } from "@/components/uikit";
 import {
   blockPremiseSlotsIntent,
   CancelPremiseSlotsIntent,
@@ -70,6 +71,7 @@ export function BookingViewCard({
     clientSecret: string;
     paymentIntentId: string;
   } | null>(null);
+  const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
   const areThereNoSlots = selectedSlots.length === 0;
   const isOutsideModal = open && !inModal;
@@ -159,6 +161,7 @@ export function BookingViewCard({
         premiseOrgId,
         slots: selectedSlots,
         discountsMap,
+        comment: commentRef.current?.value || "",
       });
 
       if (response && response.clientSecret !== null) {
@@ -277,6 +280,12 @@ export function BookingViewCard({
 
         <Stack gap="6">
           {isPriceInfoShown && <PriceBlock priceInfo={priceInfo} />}
+          {inModal && !isOwner && (
+            <Stack gap="2">
+              <span>{t("leave_comment_label")}</span>
+              <Textarea ref={commentRef} rows={5} />
+            </Stack>
+          )}
           <Button {...submitButtonProps}>
             {t(isOwner ? "block_slot_btn" : "pay_btn")}
           </Button>

@@ -33,12 +33,14 @@ export type BookingEmailProps = {
   locale: string;
   slotInfo: { startTime: Date; endTime: Date; amount: number }[];
   name: string;
+  comment?: string;
 };
 
 export default function BookingEmail({
   locale,
   name,
   slotInfo,
+  comment,
 }: BookingEmailProps) {
   return (
     <Html>
@@ -84,6 +86,13 @@ export default function BookingEmail({
                   );
                 })}
               </ul>
+              {comment && (
+                <Container style={{ marginBottom: "24px", fontSize: "14px" }}>
+                  <span style={{ fontWeight: "500" }}>Comment:</span>
+                  <br />
+                  <span>{comment}</span>
+                </Container>
+              )}
               <Link href={`${baseUrl}/${locale}/profile/mybookings`}>
                 👉 Check your reservations here 👈
               </Link>
@@ -117,6 +126,7 @@ BookingEmail.PreviewProps = {
     },
   ],
   name: "Test premise",
+  comment: "The quick brown fox jumps over the lazy dog",
 } satisfies BookingEmailProps;
 
 export async function renderBookingEmail(
