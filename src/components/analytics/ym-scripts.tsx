@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import Script from "next/script";
 
 export const counterYM = 98083142;
@@ -38,12 +38,13 @@ export function YandexAnalytics() {
       </Script>
       <noscript>
         <div>
-          <Image
+          <img
             src={`https://mc.yandex.ru/watch/${counterYM}`}
             style={{ position: "absolute", left: "-9999px" }}
             width={1}
             height={1}
             fetchPriority="low"
+            loading="lazy"
             alt=""
           />
         </div>
