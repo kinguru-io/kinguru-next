@@ -41,6 +41,8 @@ export function YandexAnalytics() {
           <Image
             src={`https://mc.yandex.ru/watch/${counterYM}`}
             style={{ position: "absolute", left: "-9999px" }}
+            width={1}
+            height={1}
             fetchPriority="low"
             alt=""
           />
