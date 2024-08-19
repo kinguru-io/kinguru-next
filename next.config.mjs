@@ -72,6 +72,12 @@ const nextConfig = {
         hostname: "cloudflare-ipfs.com",
         port: "",
         pathname: "/**"
+      },
+      {
+        protocol: 'https',
+        hostname: 'mc.yandex.ru',
+        port: '',
+        pathname: '/watch/**'
       }
     ],
   },

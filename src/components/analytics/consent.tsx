@@ -3,12 +3,16 @@
 import { differenceInDays } from "date-fns";
 import { useTranslations, type RichTranslationValues } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
+import { counterYM } from "./ym-scripts";
 import { Button, Modal, ModalWindow } from "@/components/uikit";
+import { usePathname } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { HStack } from "~/styled-system/jsx";
 
-export function GoogleAnalyticsConsent() {
-  const [didUserChose, setUserOption] = useState<boolean | null>(null);
+export function AnalyticsConsent() {
+  const [userOption, setUserOption] = useState<"granted" | "denied" | null>(
+    null,
+  );
 
   const consentButtonClicked = useCallback(
     (agreed: boolean) => {
@@ -18,8 +22,10 @@ export function GoogleAnalyticsConsent() {
       localStorage.setItem("ga_consent.analytics_storage", flag);
 
       window.gtag("consent", "update", { analytics_storage: flag });
+      // @ts-expect-error
+      window[`disableYaCounter${counterYM}`] = !agreed;
 
-      setUserOption(true);
+      setUserOption(flag);
     },
     [setUserOption],
   );
@@ -34,6 +40,8 @@ export function GoogleAnalyticsConsent() {
       localStorage.removeItem("ga_consent.analytics_storage");
 
       window.gtag("consent", "update", { analytics_storage: "denied" });
+      // @ts-expect-error
+      window[`disableYaCounter${counterYM}`] = true; // yandex.metrika
 
       return;
     }
@@ -42,7 +50,7 @@ export function GoogleAnalyticsConsent() {
     consentButtonClicked(storageFlag === "granted");
   }, [consentButtonClicked]);
 
-  if (didUserChose) return null;
+  if (userOption !== null) return userOption === "granted" ? <YMHit /> : null;
 
   return (
     <Modal initialOpenState={true}>
@@ -89,4 +97,15 @@ function ConsentInner({
       </HStack>
     </ModalWindow>
   );
+}
+
+function YMHit() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // @ts-expect-error
+    window.ym(counterYM, "hit", window.location.href);
+  }, [pathname]);
+
+  return null;
 }
