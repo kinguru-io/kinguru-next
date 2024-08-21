@@ -55,7 +55,7 @@
     "@types/gtag.js": "^0.0.20",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.15",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7",
     "@typescript-eslint/parser": "^7",
@@ -83,8 +83,8 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.633.0",
-    "@aws-sdk/s3-request-presigner": "^3.633.0",
+    "@aws-sdk/client-s3": "^3.635.0",
+    "@aws-sdk/s3-request-presigner": "^3.635.0",
     "@dnd-kit/core": "^6.1.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@elastic/elasticsearch": "8.13.1",
@@ -111,7 +111,7 @@
     "mapbox-gl": "3.4.0",
     "next": "^14.2.5",
     "next-auth": "^4.24.7",
-    "next-intl": "^3.17.3",
+    "next-intl": "^3.17.4",
     "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.14",
     "oslo": "^1.2.1",
