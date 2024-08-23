@@ -14,8 +14,9 @@ import {
   uploadImageAction,
   type ImageActionData,
 } from "@/lib/actions/file-upload";
-import { imageSchema } from "@/lib/actions/file-upload/validation";
+import { imageSchema, videoSchema } from "@/lib/actions/file-upload/validation";
 import { safeUploadToBucket } from "@/lib/shared/utils/aws";
+import { videoExtensions, videoRegex } from "@/lib/shared/utils/regex";
 import { css } from "~/styled-system/css";
 import { aspectRatio } from "~/styled-system/patterns";
 import type { ConditionalValue } from "~/styled-system/types";
@@ -26,6 +27,7 @@ type ProfileImagePickerProps = InputFileProps & {
   groupKey?: string;
   ratio?: ConditionalValue<number>;
   sizes?: string;
+  allowVideo?: boolean;
 };
 
 /**
@@ -40,12 +42,13 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     ratio,
     sizes,
     onChange,
+    allowVideo,
     ...restProps
   }: ProfileImagePickerProps,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const t = useTranslations("form.common");
-  const [imageSrc, setImageSrc] = useState(propsImageSrc);
+  const [resourceSrc, setResourceSrc] = useState(propsImageSrc);
   const [isPending, startTransition] = useTransition();
 
   const handleFileChange = ({
@@ -55,11 +58,14 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
       return;
     }
 
-    const image = target.files[0];
-    const { name, size, type } = image;
+    const file = target.files[0];
+    const { name, size, type } = file;
     const uploadImageData: ImageActionData = { name, size, type };
 
-    const parseResult = imageSchema.safeParse(uploadImageData);
+    const parseResult =
+      allowVideo && videoRegex.test(file.name)
+        ? videoSchema.safeParse(uploadImageData)
+        : imageSchema.safeParse(uploadImageData);
 
     if (!parseResult.success) {
       parseResult.error.errors.forEach(({ message }) =>
@@ -81,7 +87,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
 
       const [url] = await safeUploadToBucket({
         urls: actionResponse.urls,
-        files: [image],
+        files: [file],
       });
 
       if (url === null) {
@@ -89,7 +95,7 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
         return;
       }
 
-      setImageSrc(url);
+      setResourceSrc(url);
       onChange?.({
         target: {
           value: url,
@@ -103,21 +109,24 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
     <>
       <InputFile
         onChange={handleFileChange}
-        accept={ACCEPTED_IMAGE_MIME_TYPES.join(",")}
+        accept={ACCEPTED_IMAGE_MIME_TYPES.concat(
+          allowVideo ? videoExtensions : [],
+        ).join(", ")}
         disabled={isPending}
       >
         <PickerPlaceholder
-          imageSrc={imageSrc}
+          resourceSrc={resourceSrc}
           isPending={isPending}
           ratio={ratio}
           sizes={sizes}
+          allowVideo={allowVideo}
         />
       </InputFile>
       <input
         ref={ref}
         type="text"
         name={propsName}
-        defaultValue={imageSrc}
+        defaultValue={resourceSrc}
         required={restProps.required}
         readOnly
         hidden
@@ -128,18 +137,21 @@ export const ProfileImagePicker = forwardRef(function ProfileImagePicker(
 });
 
 function PickerPlaceholder({
-  imageSrc,
+  resourceSrc,
   isPending,
   ratio = 16 / 9,
   sizes = "50vw",
+  allowVideo,
 }: {
-  imageSrc: string;
+  resourceSrc: string;
   isPending: boolean;
   ratio?: ConditionalValue<number>;
   sizes?: string;
+  allowVideo?: boolean;
 }) {
   const t = useTranslations("form.common");
-  const helper = t(isPending ? "uploading_photo" : "upload_photo");
+  const helperLabel = t(allowVideo ? "upload_item" : "upload_photo");
+  const helper = isPending ? t("uploading_photo") : helperLabel;
 
   return (
     <span
@@ -155,7 +167,7 @@ function PickerPlaceholder({
         position: "relative",
         overflow: "hidden",
       })}
-      style={{ backgroundImage: `url(${imageSrc})` }}
+      style={{ backgroundImage: `url(${resourceSrc})` }}
     >
       <span
         className={css({
@@ -172,9 +184,9 @@ function PickerPlaceholder({
           textAlign: "center",
           "&[data-loaded=true]": { backdropFilter: "blur(10px)" },
         })}
-        data-loaded={Boolean(imageSrc)}
+        data-loaded={Boolean(resourceSrc)}
       >
-        {!imageSrc && (
+        {!resourceSrc && (
           <>
             <Icon
               name={isPending ? "common/spinner" : "action/image-add"}
@@ -189,9 +201,20 @@ function PickerPlaceholder({
         )}
       </span>
       <span className={aspectRatio({ display: "block", ratio })}>
-        {imageSrc && !isPending && (
-          <Image src={imageSrc} alt="" sizes={sizes} fill />
-        )}
+        {resourceSrc &&
+          !isPending &&
+          (videoRegex.test(resourceSrc) ? (
+            <Icon
+              name="common/play-icon"
+              className={css({
+                color: "secondary",
+                height: { base: "16!", md: "24!" },
+                marginBlock: "auto",
+              })}
+            />
+          ) : (
+            <Image src={resourceSrc} alt="" sizes={sizes} fill />
+          ))}
       </span>
     </span>
   );

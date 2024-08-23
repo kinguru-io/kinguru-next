@@ -205,7 +205,12 @@
       "upload_failed": "Błąd przesyłania pliku",
       "upload_chunks_failed": "Błąd ładowania niektórych plików",
       "drop_zone_upload_photo": "Kliknij, aby wybrać lub przeciągnij i upuść zdjęcie",
-      "max_file_count_label": "Możesz przesłać jeszcze {count}"
+      "max_file_count_label": "Możesz przesłać jeszcze {count}",
+      "video_not_supported": "Twoja przeglądarka nie obsługuje osadzonych filmów.",
+      "change_video_play_state": "Rozpocznij/zatrzymaj wideo",
+      "drop_zone_upload_item": "Kliknij, aby wybrać lub przeciągnij i upuść zdjęcia/filmy",
+      "upload_item": "Prześlij zdjęcie lub film",
+      "uploaded_item": "Przesłana treść"
     },
     "multi_step": {
       "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."
@@ -418,8 +423,8 @@
           "floor_placeholder": "Piętro",
           "photo": "Zdjęcie",
           "photo_tip": "Dodaj zdjęcia swojej sali",
-          "photo_gallery_tip_1": "Pierwsze przesłane zdjęcie będzie głównym zdjęciem profilowym",
-          "photo_gallery_tip_2": "Rozmiar zdjęcia nie powinien przekraczać {size} mb",
+          "photo_gallery_tip_1": "Pierwszym przesłanym obiektem będzie zdjęcie główne",
+          "photo_gallery_tip_2": "Rozmiar zdjęcia nie może przekraczać {size} mb.\nRozmiar filmu nie może przekraczać {sizeVideo} mb",
           "photo_gallery_tip_3": "Dozwolone rozszerzenia: {extensions}",
           "premise_parameters": "Parametry sali",
           "type_placeholder": "Rodzaj pomieszczenia",

@@ -119,15 +119,20 @@
   "form": {
     "common": {
       "upload_photo": "Upload a photo",
+      "upload_item": "Upload a photo or a video",
       "uploading_photo": "Uploading...",
       "uploaded_photo": "Uploaded photo",
+      "uploaded_item": "Uploaded content",
       "updated": "Updated",
       "incorrect_file_type": "Incorrect file type",
       "incorrect_file_size": "File size exceeded",
       "upload_failed": "File upload error",
       "upload_chunks_failed": "Error uploading some files",
       "drop_zone_upload_photo": "Click to select or drag and drop photos",
-      "max_file_count_label": "You can upload {count} more"
+      "drop_zone_upload_item": "Click to select or drag and drop photos/videos",
+      "max_file_count_label": "You can upload {count} more",
+      "video_not_supported": "Your browser does not support embedded videos.",
+      "change_video_play_state": "Start/stop video"
     },
     "multi_step": {
       "complete_current_step": "Please complete the current step to unlock access to the next steps."
@@ -418,8 +423,8 @@
           "floor_placeholder": "Floor",
           "photo": "Photo",
           "photo_tip": "Add photos of your premise",
-          "photo_gallery_tip_1": "The first photo you upload will be the main picture",
-          "photo_gallery_tip_2": "The size of the photo must not exceed {size} mb",
+          "photo_gallery_tip_1": "The first object you upload will be the main picture",
+          "photo_gallery_tip_2": "The size of a photo must not exceed {size} mb.\nThe size of a video must not exceed {sizeVideo} mb",
           "photo_gallery_tip_3": "Allowed extensions: {extensions}",
           "premise_parameters": "Premise parameters and amenities",
           "type_placeholder": "Select premise type",
