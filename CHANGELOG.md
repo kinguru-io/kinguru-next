@@ -1,3 +1,10 @@
+# [0.63.0](https://github.com/kinguru-io/kinguru-next/compare/v0.62.0...v0.63.0) (2024-08-26)
+
+
+### Features
+
+* video feature for cards/listing ([17f85d3](https://github.com/kinguru-io/kinguru-next/commit/17f85d37e9602baa7699249bb4250e0eeea41a9f))
+
 # [0.62.0](https://github.com/kinguru-io/kinguru-next/compare/v0.61.0...v0.62.0) (2024-08-14)
 
 
