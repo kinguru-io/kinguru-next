@@ -6,11 +6,7 @@ import {
   type InputFileProps,
 } from "@/components/common/form/InputFile";
 import { Icon } from "@/components/uikit";
-import {
-  ACCEPTED_IMAGE_MIME_TYPES,
-  uploadImageAction,
-} from "@/lib/actions/file-upload";
-import { imageSchema } from "@/lib/actions/file-upload/validation";
+import { preprocessFiles, uploadImageAction } from "@/lib/actions/file-upload";
 import { safeUploadToBucket } from "@/lib/shared/utils/aws";
 import { css } from "~/styled-system/css";
 
@@ -27,16 +23,6 @@ const draggedOverDropZone = (e: React.DragEvent<HTMLSpanElement>) => {
 const dropZoneLeft = (e: React.DragEvent<HTMLSpanElement>) => {
   preventFileOpen(e);
   e.currentTarget.removeAttribute("data-over");
-};
-
-const preprocessFiles = (fileList: FileList | null, left: number) => {
-  if (!fileList) return;
-
-  const images = Array.from(fileList).filter(
-    (file) => imageSchema.safeParse(file).success,
-  );
-
-  return images.slice(0, left);
 };
 
 const placeholderClassName = css({
@@ -88,7 +74,7 @@ export function ImageDropZone({
   const t = useTranslations("form.common");
   const [srcList, setSrcList] = useState<string[]>(initialSrcList);
 
-  const uploadFiles = (files: File[] | undefined) => {
+  const uploadFiles = (files: File[]) => {
     if (!files || files.length === 0) return;
 
     startTransition(async () => {
@@ -125,13 +111,15 @@ export function ImageDropZone({
 
   const leftCount = maxCount - srcList.length;
 
-  const filesChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    uploadFiles(preprocessFiles(e.target.files, leftCount));
+  const filesChanged = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    uploadFiles(
+      preprocessFiles(target.files ? Array.from(target.files) : [], leftCount),
+    );
   };
 
   const filesDropped = (e: React.DragEvent<HTMLSpanElement>) => {
     dropZoneLeft(e);
-    uploadFiles(preprocessFiles(e.dataTransfer.files, leftCount));
+    uploadFiles(preprocessFiles(Array.from(e.dataTransfer.files), leftCount));
   };
 
   const removeAt = useCallback(
@@ -142,12 +130,7 @@ export function ImageDropZone({
   return (
     <>
       {leftCount > 0 && (
-        <InputFile
-          multiple={maxCount > 1}
-          accept={ACCEPTED_IMAGE_MIME_TYPES.join(",")}
-          onChange={filesChanged}
-          {...props}
-        >
+        <InputFile multiple={maxCount > 1} onChange={filesChanged} {...props}>
           <span
             className={placeholderClassName}
             onDrop={filesDropped}
@@ -164,7 +147,7 @@ export function ImageDropZone({
               data-loading={isPending || undefined}
             />
             <span>
-              {t(isPending ? "uploading_photo" : "drop_zone_upload_photo")}
+              {t(isPending ? "uploading_photo" : "drop_zone_upload_item")}
             </span>
             <span>{t("max_file_count_label", { count: leftCount })}</span>
           </span>

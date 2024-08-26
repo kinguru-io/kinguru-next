@@ -15,6 +15,7 @@ export interface SpritesMap {
     | "cards"
     | "location-star"
     | "phone"
+    | "play-icon"
     | "search"
     | "settings"
     | "spinner"
@@ -101,7 +102,7 @@ export const SPRITES_META: {
     },
   },
   common: {
-    filePath: "common.969eaced.svg",
+    filePath: "common.e92fc012.svg",
     items: {
       calendar: {
         viewBox: "0 0 20 20",
@@ -122,6 +123,11 @@ export const SPRITES_META: {
         viewBox: "0 0 24 25",
         width: 24,
         height: 25,
+      },
+      "play-icon": {
+        viewBox: "0 0 1280 1280",
+        width: 1706.667,
+        height: 1706.667,
       },
       search: {
         viewBox: "0 0 21 20",
