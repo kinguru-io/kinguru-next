@@ -9,7 +9,9 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { ImageDropZone } from "@/components/common/form/image-drop-zone";
 import { ProfileImagePicker } from "@/components/common/form/ProfileImagePicker";
 import { Button, ErrorField, Icon } from "@/components/uikit";
+import { ACCEPTED_IMAGE_MIME_TYPES } from "@/lib/actions/file-upload";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
+import { videoExtensions } from "@/lib/shared/utils/regex";
 import { css, cx } from "~/styled-system/css";
 import { Box, Grid } from "~/styled-system/jsx";
 import { aspectRatio } from "~/styled-system/patterns";
@@ -50,6 +52,7 @@ export function PremiseImageSelector() {
       groupKey="premises"
       initialSrcList={fields.map(({ url }) => url)}
       filesAddedCallback={filesAddedCallback}
+      accept={ACCEPTED_IMAGE_MIME_TYPES.concat(videoExtensions).join(",")}
       renderFiles={({ removeAt }) => {
         return (
           <DndContext onDragEnd={imagePositionChanged}>
@@ -82,6 +85,7 @@ export function PremiseImageSelector() {
                         imageSrc={url}
                         ratio={{ base: 1, md: 16 / 9 }} // pregenerated at the top of the module
                         groupKey="premises"
+                        allowVideo
                       />
                       {url && (
                         <Button
