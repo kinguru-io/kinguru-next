@@ -1,3 +1,10 @@
+## [0.63.1](https://github.com/kinguru-io/kinguru-next/compare/v0.63.0...v0.63.1) (2024-08-26)
+
+
+### Bug Fixes
+
+* removed unique index for localized descriptions ([bf640a6](https://github.com/kinguru-io/kinguru-next/commit/bf640a6a980697332430c720b6412c43aa7ac40e))
+
 # [0.63.0](https://github.com/kinguru-io/kinguru-next/compare/v0.62.0...v0.63.0) (2024-08-26)
 
 
