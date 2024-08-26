@@ -4,7 +4,7 @@ import { videoRegex } from "@/lib/shared/utils/regex";
 const oneMegabyte = 1024 * 1024;
 
 export const maxFileSizeMB = 5;
-export const maxVideoFileSizeMB = 20;
+export const maxVideoFileSizeMB = 25;
 export const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/jpg",
