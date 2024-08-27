@@ -107,8 +107,18 @@ const BookingsSection = async ({
               }}
             >
               <BookingCard booking={booking} imageSrc={imageSrc} />
-              {showCancelBooking && showCancelBtn && (
-                <Accordion marginBlockEnd="3.5">
+              <Accordion marginBlockEnd="3.5">
+                <AccordionItem>
+                  <AccordionItemToggle>
+                    {t("comment_label")}
+                  </AccordionItemToggle>
+                  <AccordionItemContent
+                    className={css({ paddingInline: "4", paddingBlock: "2" })}
+                  >
+                    {booking.comment}
+                  </AccordionItemContent>
+                </AccordionItem>
+                {showCancelBooking && showCancelBtn && (
                   <AccordionItem>
                     <AccordionItemToggle textStyle="heading.3">
                       {t("cancel_btn_accordion_label")}
@@ -117,8 +127,8 @@ const BookingsSection = async ({
                       {refundConditions}
                     </AccordionItemContent>
                   </AccordionItem>
-                </Accordion>
-              )}
+                )}
+              </Accordion>
             </Box>
           );
         }),

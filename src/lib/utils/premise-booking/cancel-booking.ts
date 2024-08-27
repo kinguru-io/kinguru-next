@@ -7,7 +7,7 @@ import {
 } from "@/lib/shared/config/booking-cancel-terms";
 
 export const getActiveCancelTerm = (
-  bookingCancelTerm: BookingCancelTerm,
+  bookingCancelTerm: string | null,
   daysUntilEvent: number,
   hoursUntilEvent: number,
 ): RefundType => {
@@ -61,7 +61,7 @@ const cancellationOffsets: Record<
 };
 
 export const getCancellationDate = (
-  bookingCancelTerm: BookingCancelTerm,
+  bookingCancelTerm: string | null,
   refundType: RefundType,
   startTimeDate: Date,
 ) => {
@@ -71,7 +71,13 @@ export const getCancellationDate = (
     return null;
   }
 
-  const offset = cancellationOffsets[bookingCancelTerm][refundType];
+  if (bookingCancelTerm === null) {
+    return null;
+  }
+
+  const offsetMap =
+    cancellationOffsets[bookingCancelTerm as keyof typeof cancellationOffsets];
+  const offset = offsetMap[refundType];
   const cancellationDate = subDays(startTimeDate, offset);
   const dateLabel =
     refundType === REFUND_TYPES.NO_REFUND ? t("after") : t("before");

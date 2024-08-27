@@ -3,5 +3,6 @@ export type StripeMetadataExtended = {
   user_name?: string;
   user_email?: string;
   user_paid_locale?: string;
+  user_comment?: string;
   premise_name?: string;
 };

@@ -63,7 +63,12 @@ async function premiseSlotsBookingSucceededCb(
   });
   const locale = meta?.user_paid_locale || "en";
   const name = meta?.premise_name || "";
-  const mailInfo = { locale, name, slotInfo } satisfies BookingEmailProps;
+  const mailInfo = {
+    locale,
+    name,
+    slotInfo,
+    comment: meta?.user_comment,
+  } satisfies BookingEmailProps;
 
   await Promise.all([
     sendBookingEmail({ email: companyUser?.owner.email || "", ...mailInfo }),
