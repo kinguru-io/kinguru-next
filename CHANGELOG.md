@@ -1,3 +1,10 @@
+# [0.64.0](https://github.com/kinguru-io/kinguru-next/compare/v0.63.1...v0.64.0) (2024-08-27)
+
+
+### Features
+
+* added booking comment ([3a242b9](https://github.com/kinguru-io/kinguru-next/commit/3a242b9d6be29fa311c28e5f1b486a0fbb477dd1))
+
 ## [0.63.1](https://github.com/kinguru-io/kinguru-next/compare/v0.63.0...v0.63.1) (2024-08-26)
 
 
