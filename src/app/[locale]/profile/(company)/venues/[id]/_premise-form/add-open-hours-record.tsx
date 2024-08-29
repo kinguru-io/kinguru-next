@@ -1,10 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { $Enums } from "@prisma/client";
+import type { DayOfTheWeek } from "@prisma/client";
 import { areIntervalsOverlapping, isBefore } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import {
   useForm,
+  useFormContext,
   useWatch,
   type Control,
   type UseFieldArrayAppend,
@@ -17,33 +19,54 @@ import {
   openHoursSchema,
 } from "@/lib/actions/premise/tabs/openHoursAndPrices";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
+import { minimalDonation } from "@/lib/shared/config/donation";
 import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
-export function AddOpenHoursRecord({
-  day,
-  append,
-  getValues,
-}: {
-  day: $Enums.DayOfTheWeek;
+type AddOpenHoursRecordProps = {
+  day: DayOfTheWeek;
   append: UseFieldArrayAppend<
     CreatePremiseFormSchemaProps,
     "openHoursAndPrice.openHours"
   >;
   getValues: UseFormGetValues<CreatePremiseFormSchemaProps>;
-}) {
+};
+
+export function AddOpenHoursRecord({
+  day,
+  append,
+  getValues,
+}: AddOpenHoursRecordProps) {
   const t = useTranslations("profile.premises.add.fields");
+  const baseForm = useFormContext<CreatePremiseFormSchemaProps>();
+  const priceMode = useWatch({
+    control: baseForm.control,
+    name: "openHoursAndPrice.priceMode",
+  });
   const {
     register,
     handleSubmit,
     reset,
     control,
+    setValue,
+    resetField,
     formState: { isValid },
   } = useForm<OpenHoursSchema>({
     mode: "onChange",
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
+
+  useEffect(() => {
+    if (priceMode === "donation") {
+      setValue(
+        "price",
+        Number(getValues("openHoursAndPrice.minimalPrice")) || minimalDonation,
+      );
+    } else {
+      resetField("price");
+    }
+  }, [priceMode, setValue, getValues, resetField]);
 
   const addButtonClicked = (input: OpenHoursSchema) => {
     const openHours = getValues("openHoursAndPrice.openHours");
@@ -68,7 +91,14 @@ export function AddOpenHoursRecord({
     }
 
     append(input);
-    reset();
+    reset(undefined, { keepDefaultValues: true });
+
+    if (priceMode === "donation") {
+      setValue(
+        "price",
+        Number(getValues("openHoursAndPrice.minimalPrice")) || minimalDonation,
+      );
+    }
   };
 
   return (
@@ -91,6 +121,7 @@ export function AddOpenHoursRecord({
           <TimeSelectOptions watchedName="startTime" control={control} />
         </Select>
         <Input
+          hidden={priceMode === "donation"}
           type="number"
           inputMode="decimal"
           step="0.1"

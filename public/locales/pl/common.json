@@ -258,7 +258,11 @@
     "action_payment_cancelled": "Płatność została anulowana",
     "organization_cannot_pay": "Organizacje nie mogą rezerwować sal. Rezerwacji mogą dokonywać tylko zwykli użytkownicy.",
     "cancel_payment_btn": "Anulować",
-    "leave_comment_label": "Zostaw komentarz:"
+    "leave_comment_label": "Zostaw komentarz:",
+    "donation_amount_input_label": "Darowizna, zł",
+    "donation_amount_input_notice": "Możesz zwiększyć kwotę darowizny:",
+    "donation_from_label": "od",
+    "donation_slot_price_label": "Darowizna \nod {price}"
   },
   "price": {
     "total": "Całkowity",
@@ -266,7 +270,8 @@
     "discount": "Rabat {percentage}%",
     "min": "Niska cena",
     "max": "Wysoka cena",
-    "regular": "Normalna cena"
+    "regular": "Normalna cena",
+    "donation_from_label": "od"
   },
   "venue": {
     "public_page": {
@@ -411,7 +416,8 @@
           "amenities": "Parametry i wyposażenie",
           "open_hours": "Godziny otwarcia i ceny",
           "rules": "Zasady sali",
-          "booking_cancel_terms": "Warunki anulowania rezerwacji"
+          "booking_cancel_terms": "Warunki anulowania rezerwacji",
+          "price_mode": "Tryb cenowy"
         },
         "fields": {
           "name_and_description": "Nazwa i opis",
@@ -470,7 +476,13 @@
             "amenities_required": "Należy wybrać co najmniej 5 udogodnień",
             "rulesMin_required": "Liczba znaków dla zasad musi być co najmniej 10",
             "bookingCancelTerm_required": "Warunki anulacji rezerwacji są wymagane"
-          }
+          },
+          "donation_minimal_price": "Cena minimalna za godzinę, zł",
+          "donation_price_notice": "W przypadku wybrania trybu „Darowizna” wymagana jest minimalna cena (od {price}) za godzinę"
+        },
+        "price_modes": {
+          "donation": "Darowizna",
+          "arbitrary": "Arbitralny"
         }
       }
     },

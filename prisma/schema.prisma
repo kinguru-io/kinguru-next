@@ -486,8 +486,15 @@ model Premise {
   direction         String?              @default("Direction")
   bookingCancelTerm String?              @default("Booking cancel term")
   information       PremiseInformation[]
+  priceMode         PremisePriceMode     @default(arbitrary)
+  minimalPrice      Float?
   createdAt         DateTime             @default(now())
   updatedAt         DateTime             @updatedAt
+}
+
+enum PremisePriceMode {
+  arbitrary
+  donation
 }
 
 model PremiseInformation {

@@ -69,8 +69,11 @@ export function CheckoutForm({
           {message}
         </HStack>
       )}
-      <PaymentElement id="payment-element" />
-      <Flex css={{ gap: "2" }}>
+      <PaymentElement
+        id="payment-element"
+        className={css({ minHeight: "96", minWidth: "80" })}
+      />
+      <Flex css={{ gap: "2", marginBlockStart: "auto" }}>
         {cancelButton}
         <Button
           id="submit"

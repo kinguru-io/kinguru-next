@@ -288,7 +288,11 @@
     "action_payment_cancelled": "Payment was cancelled",
     "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings.",
     "cancel_payment_btn": "Cancel",
-    "leave_comment_label": "Leave a comment:"
+    "leave_comment_label": "Leave a comment:",
+    "donation_slot_price_label": "Donation \nfrom {price}",
+    "donation_from_label": "from",
+    "donation_amount_input_notice": "You can increase the amount of donation:",
+    "donation_amount_input_label": "Donation, zł"
   },
   "price": {
     "total": "Total",
@@ -296,7 +300,8 @@
     "discount": "Discount {percentage}%",
     "min": "Low price",
     "max": "High price",
-    "regular": "Regular price"
+    "regular": "Regular price",
+    "donation_from_label": "from"
   },
   "discount_info": {
     "card_heading": "There are discounts*",
@@ -411,7 +416,12 @@
           "amenities": "Parameters and amenities",
           "open_hours": "Opening hours and pricing",
           "rules": "Premise rules",
-          "booking_cancel_terms": "Booking Cancellation Terms"
+          "booking_cancel_terms": "Booking Cancellation Terms",
+          "price_mode": "Price mode"
+        },
+        "price_modes": {
+          "arbitrary": "Arbitrary",
+          "donation": "Donation"
         },
         "fields": {
           "name_and_description": "Name and description",
@@ -453,6 +463,8 @@
           "rules_placeholder": "e.g. No alcohol is allowed.",
           "booking_cancel_terms": "Booking Cancellation Terms",
           "booking_cancel_terms_tip": "Choose one cancellation term",
+          "donation_minimal_price": "Minimal price per hour, zł",
+          "donation_price_notice": "Minimal price (from {price}) per hour is required when \"Donation\" mode is chosen",
           "errors": {
             "name_required": "Name is required",
             "description_required": "Description is required",

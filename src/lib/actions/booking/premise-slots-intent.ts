@@ -35,12 +35,13 @@ type BookTimeSlotsActionData = {
   slots: TimeSlotInfoExtended[];
   paymentIntentId?: PremiseSlot["paymentIntentId"];
   comment: string;
+  donationAmount?: string;
   discountsMap: Record<number, number | undefined>;
 };
 
 type BlockTimeSlotsActionData = Omit<
   BookTimeSlotsActionData,
-  "timeZone" | "discountMap" | "comment"
+  "timeZone" | "discountMap" | "comment" | "donationAmount"
 >;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -102,10 +103,12 @@ export async function createPremiseSlotsIntent({
   slots,
   discountsMap,
   comment,
+  donationAmount,
 }: BookTimeSlotsActionData): ActionResponse<
   {
     clientSecret: string | null;
     paymentIntentId: string;
+    amountToBeCharged: number;
   },
   "booking_view"
 > {
@@ -144,27 +147,40 @@ export async function createPremiseSlotsIntent({
     prepareDiscountRangeMap(discounts),
   );
 
-  const getPaymentIntent = () =>
-    stripe.paymentIntents.create({
-      amount: Math.round(totalPrice * 100),
+  const getPaymentIntent = ({ donation }: { donation: number }) => {
+    const amount = Math.round((totalPrice + donation) * 100);
+
+    const metadata: StripeMetadataExtended = {
+      source: "premise-slots-booking",
+      user_name: session?.user?.name || "not_provided",
+      user_email: session?.user?.email || "not_provided",
+      user_paid_locale: locale,
+      user_comment: comment,
+      premise_name: name,
+    };
+
+    if (donation > 0) {
+      metadata.user_donation = donation;
+    }
+
+    return stripe.paymentIntents.create({
+      amount,
       currency: "PLN",
       customer: session?.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
-      metadata: {
-        source: "premise-slots-booking",
-        user_name: session?.user?.name || "not_provided",
-        user_email: session?.user?.email || "not_provided",
-        user_paid_locale: locale,
-        user_comment: comment,
-        premise_name: name,
-      } satisfies StripeMetadataExtended,
+      metadata,
     });
+  };
 
   // skip stripe payment if total price is 0
-  const { id: paymentIntentId, client_secret: clientSecret } =
-    totalPrice > 0
-      ? await getPaymentIntent()
-      : { id: `free-${uuid()}`, client_secret: null };
+  const donation = Math.abs(parseFloat(donationAmount || "0"));
+  const {
+    id: paymentIntentId,
+    client_secret: clientSecret,
+    amount,
+  } = totalPrice > 0
+    ? await getPaymentIntent({ donation })
+    : { id: `free-${uuid()}`, client_secret: null, amount: 0 };
 
   if (!clientSecret && totalPrice > 0) {
     return {
@@ -242,6 +258,7 @@ export async function createPremiseSlotsIntent({
     response: {
       clientSecret,
       paymentIntentId,
+      amountToBeCharged: amount / 100,
     },
   };
 }

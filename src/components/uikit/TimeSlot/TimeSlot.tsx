@@ -55,7 +55,8 @@ export function TimeSlot({
   condition = "regular",
   selected = false,
   disabled,
-}: TimeSlotProps) {
+  renderPrice = (value) => priceFormatter.format(value),
+}: TimeSlotProps & { renderPrice?: (price: number) => React.ReactNode }) {
   const colorPalette = timeSlotCondition[condition];
 
   return (
@@ -75,9 +76,10 @@ export function TimeSlot({
           fontSize: "sm",
           colorPalette,
           color: "colorPalette",
+          whiteSpace: "pre-line",
         })}
       >
-        {priceFormatter.format(price)}
+        {renderPrice(price)}
       </span>
     </button>
   );
