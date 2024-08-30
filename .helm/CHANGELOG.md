@@ -1,3 +1,10 @@
+## [1.6.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.5...chart-v1.6.6) (2024-08-30)
+
+
+### Bug Fixes
+
+* increase limits for next.js app ([53f324d](https://github.com/kinguru-io/kinguru-next/commit/53f324ded27a1bf736c1f8fe4456bcb3ed61de5e))
+
 ## [1.6.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.4...chart-v1.6.5) (2024-08-30)
 
 
