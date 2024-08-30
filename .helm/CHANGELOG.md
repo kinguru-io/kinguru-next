@@ -1,3 +1,10 @@
+## [1.6.5](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.4...chart-v1.6.5) (2024-08-30)
+
+
+### Bug Fixes
+
+* kinguru app throttling ([e708975](https://github.com/kinguru-io/kinguru-next/commit/e708975e6c3f1ea851970d38583b25f3621e2f85))
+
 ## [1.6.4](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.3...chart-v1.6.4) (2024-08-30)
 
 
