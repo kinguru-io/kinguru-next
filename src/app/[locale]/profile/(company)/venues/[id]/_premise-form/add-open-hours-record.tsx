@@ -39,6 +39,10 @@ export function AddOpenHoursRecord({
 }: AddOpenHoursRecordProps) {
   const t = useTranslations("profile.premises.add.fields");
   const baseForm = useFormContext<CreatePremiseFormSchemaProps>();
+  const minimalPrice = useWatch({
+    control: baseForm.control,
+    name: "openHoursAndPrice.minimalPrice",
+  });
   const priceMode = useWatch({
     control: baseForm.control,
     name: "openHoursAndPrice.priceMode",
@@ -46,10 +50,10 @@ export function AddOpenHoursRecord({
   const {
     register,
     handleSubmit,
-    reset,
+    resetField,
     control,
     setValue,
-    resetField,
+
     formState: { isValid },
   } = useForm<OpenHoursSchema>({
     mode: "onChange",
@@ -58,15 +62,16 @@ export function AddOpenHoursRecord({
   });
 
   useEffect(() => {
-    if (priceMode === "donation") {
-      setValue(
-        "price",
-        Number(getValues("openHoursAndPrice.minimalPrice")) || minimalDonation,
-      );
-    } else {
+    if (getValues("openHoursAndPrice.priceMode") === "donation") {
+      setValue("price", minimalPrice || minimalDonation);
+    }
+  }, [minimalPrice, setValue, getValues]);
+
+  useEffect(() => {
+    if (priceMode === "arbitrary") {
       resetField("price");
     }
-  }, [priceMode, setValue, getValues, resetField]);
+  }, [priceMode, resetField]);
 
   const addButtonClicked = (input: OpenHoursSchema) => {
     const openHours = getValues("openHoursAndPrice.openHours");
@@ -91,13 +96,11 @@ export function AddOpenHoursRecord({
     }
 
     append(input);
-    reset(undefined, { keepDefaultValues: true });
+    resetField("startTime");
+    resetField("endTime");
 
-    if (priceMode === "donation") {
-      setValue(
-        "price",
-        Number(getValues("openHoursAndPrice.minimalPrice")) || minimalDonation,
-      );
+    if (getValues("openHoursAndPrice.priceMode") === "arbitrary") {
+      resetField("price");
     }
   };
 
@@ -121,7 +124,7 @@ export function AddOpenHoursRecord({
           <TimeSelectOptions watchedName="startTime" control={control} />
         </Select>
         <Input
-          hidden={priceMode === "donation"}
+          hidden={getValues("openHoursAndPrice.priceMode") === "donation"}
           type="number"
           inputMode="decimal"
           step="0.1"

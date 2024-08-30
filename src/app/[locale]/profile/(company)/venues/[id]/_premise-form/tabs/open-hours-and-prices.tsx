@@ -90,6 +90,9 @@ function DonationPriceSelector() {
         render={({ field }) => (
           <Input
             {...field}
+            onChange={({ target }) => {
+              field.onChange(Number(target.value) || undefined);
+            }}
             className={css({ maxWidth: "60" })}
             type="number"
             inputMode="decimal"
