@@ -13,15 +13,17 @@ const actualSegmentRegex = /^[^\(_]/m;
 
 export function GoBackButton({
   label = null,
+  renderAlways,
   ...inlineBoxProps
-}: { label?: string | null } & InlineBoxProps) {
+}: { label?: string | null; renderAlways?: boolean } & InlineBoxProps) {
   const searchParams = useSearchParams();
   const segments = useSelectedLayoutSegments();
   const router = useRouter();
 
   if (
-    segments.filter((part) => actualSegmentRegex.test(part)).length < 2 ||
-    searchParams.get("hideGoBack") === "1"
+    !renderAlways &&
+    (segments.filter((part) => actualSegmentRegex.test(part)).length < 2 ||
+      searchParams.get("hideGoBack") === "1")
   ) {
     return null;
   }

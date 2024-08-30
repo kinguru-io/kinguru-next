@@ -741,5 +741,12 @@
     "accept": "Akceptuj",
     "decline": "Spadek",
     "info": "Używamy plików cookie 🍪, aby zapewnić najlepszą jakość korzystania z <bold>Eventify</bold>, świadczyć nasze usługi i prowadzić analizy.\n Aby wyrazić zgodę na używanie plików cookie, kliknij <bold>Akceptuj</bold>"
+  },
+  "error_page": {
+    "heading": "Coś poszło nie tak 😕",
+    "helper": "Wystąpił błąd i jesteśmy w trakcie jego rozwiązywania. Jeśli czegoś potrzebujesz, skontaktuj się z nami: <mail>support@eventify.today</mail>",
+    "homepage_label": "Przejdź do strony głównej",
+    "retry_label": "Spróbować ponownie",
+    "go_back": "Wracać"
   }
 }
