@@ -1,3 +1,10 @@
+# [0.65.0](https://github.com/kinguru-io/kinguru-next/compare/v0.64.0...v0.65.0) (2024-09-02)
+
+
+### Features
+
+* donation price mode for premises ([54fbcdc](https://github.com/kinguru-io/kinguru-next/commit/54fbcdcaca5e7c3390b5229e4f4d8251d6b90a20))
+
 # [0.64.0](https://github.com/kinguru-io/kinguru-next/compare/v0.63.1...v0.64.0) (2024-08-27)
 
 
