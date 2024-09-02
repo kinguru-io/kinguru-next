@@ -711,5 +711,12 @@
     "info": "We use cookies 🍪 to deliver the best experience on <bold>Eventify</bold>, to provide our services, and analytics.\n To agree to the use of cookies, click <bold>Accept</bold>",
     "accept": "Accept",
     "decline": "Decline"
+  },
+  "error_page": {
+    "heading": "Something went wrong 😕",
+    "retry_label": "Retry",
+    "homepage_label": "Go to homepage",
+    "helper": "There's a mistake and we're in the process of resolving it. If you need anything, please get in touch: <mail>support@eventify.today</mail>",
+    "go_back": "Go back"
   }
 }
