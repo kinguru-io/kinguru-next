@@ -225,12 +225,13 @@ export async function createPremiseSlotsIntent({
 
   // send mails right after booking of free slots
   if (totalPrice === 0) {
-    const mailInfo = {
+    const mailInfo: BookingEmailProps = {
       name,
       locale,
       slotInfo: mergedSlotsUpdateInput,
       comment,
-    } satisfies BookingEmailProps;
+      donation,
+    };
 
     requests.push(
       sendBookingEmail({

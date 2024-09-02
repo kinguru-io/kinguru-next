@@ -34,6 +34,7 @@ export type BookingEmailProps = {
   slotInfo: { startTime: Date; endTime: Date; amount: number }[];
   name: string;
   comment?: string;
+  donation: number;
 };
 
 export default function BookingEmail({
@@ -41,6 +42,7 @@ export default function BookingEmail({
   name,
   slotInfo,
   comment,
+  donation,
 }: BookingEmailProps) {
   return (
     <Html>
@@ -85,6 +87,11 @@ export default function BookingEmail({
                     </React.Fragment>
                   );
                 })}
+                {donation > 0 && (
+                  <li style={{ fontSize: "14px" }}>
+                    Donation - <b>{priceFormatter.format(donation)}</b>
+                  </li>
+                )}
               </ul>
               {comment && (
                 <Container style={{ marginBottom: "24px", fontSize: "14px" }}>
@@ -125,6 +132,7 @@ BookingEmail.PreviewProps = {
       amount: 10000,
     },
   ],
+  donation: 50,
   name: "Test premise",
   comment: "The quick brown fox jumps over the lazy dog",
 } satisfies BookingEmailProps;
