@@ -40,6 +40,7 @@ export function AddPremiseForm({
         amenities: getDefaultFormAmenities(),
       },
       openHoursAndPrice: {
+        priceMode: "arbitrary",
         discounts: [],
       },
     },

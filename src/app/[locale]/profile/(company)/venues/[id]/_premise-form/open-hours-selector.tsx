@@ -23,13 +23,6 @@ import { HStack, InlineBox, Stack } from "~/styled-system/jsx";
 export function OpenHoursSelector() {
   const locale = useLocale();
   const t = useTranslations("profile.premises.add.fields");
-
-  const formFieldPath = "openHoursAndPrice.openHours";
-
-  const weekdayFormatter = new Intl.DateTimeFormat(locale, {
-    weekday: "long",
-  });
-
   const {
     control,
     getValues,
@@ -37,7 +30,11 @@ export function OpenHoursSelector() {
   } = useFormContext<CreatePremiseFormSchemaProps>();
   const { fields, append, remove, replace } = useFieldArray({
     control,
-    name: formFieldPath,
+    name: "openHoursAndPrice.openHours",
+  });
+
+  const weekdayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: "long",
   });
 
   const groupedFields = groupBy(
@@ -62,6 +59,10 @@ export function OpenHoursSelector() {
     replace(mondayOpenHours.concat(copiedHoursToSunday));
     toast.success(t("open_hours_spread_mode_success"));
   };
+
+  const isDonationMode =
+    getValues("openHoursAndPrice.priceMode") === "donation";
+  const helperPrefix = isDonationMode ? `${t("open_hours_from_label")} ` : "";
 
   return (
     <Stack gap={{ base: "0", md: "4" }}>
@@ -111,7 +112,7 @@ export function OpenHoursSelector() {
                         <TagClosable
                           key={field.id}
                           content={`${start} - ${end}`}
-                          helper={priceFormatter.format(field.price)}
+                          helper={`${helperPrefix}${priceFormatter.format(field.price)}`}
                           buttonLabel="X"
                           variant="primaryLighter"
                           onClick={() => remove(field.index)}

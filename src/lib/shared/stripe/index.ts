@@ -5,4 +5,5 @@ export type StripeMetadataExtended = {
   user_paid_locale?: string;
   user_comment?: string;
   premise_name?: string;
+  user_donation?: number | string;
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import type { $Enums } from "@prisma/client";
+import type { $Enums, Premise } from "@prisma/client";
 import { isEqual, isWithinInterval, parseISO } from "date-fns";
 import { createContext, useCallback, useContext, useState } from "react";
 import type { TimeSlotInfo } from "@/components/uikit";
@@ -11,18 +11,27 @@ export type TimeSlotInfoExtended = TimeSlotInfo & {
   endTime?: Date;
 };
 
-const BookingViewContext = createContext<{
+type SlotsControls = {
   selectedSlots: TimeSlotInfoExtended[];
   toggleSlot: (timeSlotInfo: TimeSlotInfoExtended) => void;
   resetSlots: () => void;
-}>({
-  selectedSlots: [],
-  toggleSlot: () => {},
-  resetSlots: () => {},
-});
+};
+
+type PremiseOptions = Pick<Premise, "priceMode" | "minimalPrice">;
+
+const BookingViewContext = createContext<
+  (SlotsControls & PremiseOptions) | null
+>(null);
 
 export function useBookingView() {
   const context = useContext(BookingViewContext);
+
+  if (context === null) {
+    throw new Error(
+      "useBookingView() must be used within a <BookingViewProvider />",
+    );
+  }
+
   return context;
 }
 
@@ -47,11 +56,14 @@ const filterSlots = (
   predicate: (time: Date) => boolean,
 ) => slots.filter(({ time }) => !predicate(time));
 
+type BookingViewProviderProps = PremiseOptions & {
+  children: React.ReactNode;
+};
+
 export function BookingViewProvider({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  ...restOptions
+}: BookingViewProviderProps) {
   const [selectedSlots, setSlots] = useState<TimeSlotInfoExtended[]>([]);
 
   const toggleSlot = useCallback((timeSlotInfo: TimeSlotInfoExtended) => {
@@ -87,7 +99,7 @@ export function BookingViewProvider({
 
   return (
     <BookingViewContext.Provider
-      value={{ selectedSlots, toggleSlot, resetSlots }}
+      value={{ selectedSlots, toggleSlot, resetSlots, ...restOptions }}
     >
       {children}
     </BookingViewContext.Provider>

@@ -1,10 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { $Enums } from "@prisma/client";
+import type { DayOfTheWeek } from "@prisma/client";
 import { areIntervalsOverlapping, isBefore } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import {
   useForm,
+  useFormContext,
   useWatch,
   type Control,
   type UseFieldArrayAppend,
@@ -17,33 +19,59 @@ import {
   openHoursSchema,
 } from "@/lib/actions/premise/tabs/openHoursAndPrices";
 import { CreatePremiseFormSchemaProps } from "@/lib/actions/premise/validation";
+import { minimalDonation } from "@/lib/shared/config/donation";
 import { css } from "~/styled-system/css";
 import { Flex } from "~/styled-system/jsx";
 
-export function AddOpenHoursRecord({
-  day,
-  append,
-  getValues,
-}: {
-  day: $Enums.DayOfTheWeek;
+type AddOpenHoursRecordProps = {
+  day: DayOfTheWeek;
   append: UseFieldArrayAppend<
     CreatePremiseFormSchemaProps,
     "openHoursAndPrice.openHours"
   >;
   getValues: UseFormGetValues<CreatePremiseFormSchemaProps>;
-}) {
+};
+
+export function AddOpenHoursRecord({
+  day,
+  append,
+  getValues,
+}: AddOpenHoursRecordProps) {
   const t = useTranslations("profile.premises.add.fields");
+  const baseForm = useFormContext<CreatePremiseFormSchemaProps>();
+  const minimalPrice = useWatch({
+    control: baseForm.control,
+    name: "openHoursAndPrice.minimalPrice",
+  });
+  const priceMode = useWatch({
+    control: baseForm.control,
+    name: "openHoursAndPrice.priceMode",
+  });
   const {
     register,
     handleSubmit,
-    reset,
+    resetField,
     control,
+    setValue,
+
     formState: { isValid },
   } = useForm<OpenHoursSchema>({
     mode: "onChange",
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
+
+  useEffect(() => {
+    if (getValues("openHoursAndPrice.priceMode") === "donation") {
+      setValue("price", minimalPrice || minimalDonation);
+    }
+  }, [minimalPrice, setValue, getValues]);
+
+  useEffect(() => {
+    if (priceMode === "arbitrary") {
+      resetField("price");
+    }
+  }, [priceMode, resetField]);
 
   const addButtonClicked = (input: OpenHoursSchema) => {
     const openHours = getValues("openHoursAndPrice.openHours");
@@ -68,7 +96,12 @@ export function AddOpenHoursRecord({
     }
 
     append(input);
-    reset();
+    resetField("startTime");
+    resetField("endTime");
+
+    if (getValues("openHoursAndPrice.priceMode") === "arbitrary") {
+      resetField("price");
+    }
   };
 
   return (
@@ -91,6 +124,7 @@ export function AddOpenHoursRecord({
           <TimeSelectOptions watchedName="startTime" control={control} />
         </Select>
         <Input
+          hidden={getValues("openHoursAndPrice.priceMode") === "donation"}
           type="number"
           inputMode="decimal"
           step="0.1"

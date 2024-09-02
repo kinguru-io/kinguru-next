@@ -282,7 +282,10 @@ export default async function PremisePage({
         id={calendarId}
         className={container({ paddingBlock: { base: "6", md: "8" } })}
       >
-        <BookingViewProvider>
+        <BookingViewProvider
+          priceMode={premise.priceMode}
+          minimalPrice={premise.minimalPrice}
+        >
           <Grid gap="10" gridTemplateColumns={{ base: "1fr", md: "1fr 19rem" }}>
             <MapboxSearchBoxResponseProvider
               mapboxId={venue.locationMapboxId}

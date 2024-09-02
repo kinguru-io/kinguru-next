@@ -3,6 +3,7 @@
 import type { $Enums } from "@prisma/client";
 import { isBefore, isEqual, isSameDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import { MonthSelect } from "./MonthSelect";
 import { useOriginDate } from "./use-origin-date";
@@ -16,6 +17,7 @@ import {
   getTimeSlotCondition,
   Loader,
 } from "@/components/uikit";
+import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
 import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
 import type { Locale } from "@/navigation";
@@ -40,6 +42,7 @@ export function WeekView({
   aggregatedPrices: AggregatedPrices;
   headingSlot?: React.ReactNode;
 }) {
+  const t = useTranslations("booking_view");
   const timeZone = useSearchBoxTimeZone();
   const {
     originDate,
@@ -51,7 +54,7 @@ export function WeekView({
     currentMonthNumber,
     lastAllowedDate,
   } = useOriginDate({ initialDate: nowDate });
-  const { selectedSlots, toggleSlot } = useBookingView();
+  const { selectedSlots, toggleSlot, priceMode } = useBookingView();
   const calendarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -79,6 +82,16 @@ export function WeekView({
     timeZone || "UTC",
     "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   );
+
+  const renderPrice = (value: number) => {
+    const price = priceFormatter.format(value);
+
+    if (priceMode === "donation") {
+      return t("donation_slot_price_label", { price });
+    }
+
+    return price;
+  };
 
   return (
     <Stack gap="6" overflow="hidden" position="relative">
@@ -171,6 +184,7 @@ export function WeekView({
                     <TimeSlot
                       key={slotISOString}
                       price={price}
+                      renderPrice={renderPrice}
                       time={slotTime}
                       onClick={() =>
                         toggleSlot({

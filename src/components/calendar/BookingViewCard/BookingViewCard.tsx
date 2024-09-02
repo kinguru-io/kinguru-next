@@ -2,10 +2,10 @@
 
 import type { Premise } from "@prisma/client";
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe, type StripeElementLocale } from "@stripe/stripe-js";
 import { addHours, compareAsc, isValid } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   useCallback,
   useRef,
@@ -21,7 +21,13 @@ import { PriceBlock } from "./PriceBlock";
 import { useBookingView } from "../BookingViewContext";
 import { CheckoutForm } from "@/components/common/checkout";
 import { Timer } from "@/components/common/timer";
-import { Button, ModalWindow, Textarea, useModal } from "@/components/uikit";
+import {
+  Button,
+  Input,
+  ModalWindow,
+  Textarea,
+  useModal,
+} from "@/components/uikit";
 import {
   blockPremiseSlotsIntent,
   CancelPremiseSlotsIntent,
@@ -63,15 +69,18 @@ export function BookingViewCard({
   isUserOrg: boolean;
   inModal?: boolean;
 }) {
+  const locale = useLocale() as StripeElementLocale;
   const t = useTranslations("booking_view");
   const [isPending, startTransition] = useTransition();
-  const { selectedSlots, resetSlots } = useBookingView();
+  const { selectedSlots, resetSlots, priceMode } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
   const [intentResponse, setIntentResponse] = useState<{
     clientSecret: string;
     paymentIntentId: string;
+    amountToBeCharged: number;
   } | null>(null);
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
+  const donationRef = useRef<HTMLInputElement | null>(null);
 
   const areThereNoSlots = selectedSlots.length === 0;
   const isOutsideModal = open && !inModal;
@@ -162,13 +171,14 @@ export function BookingViewCard({
         slots: selectedSlots,
         discountsMap,
         comment: commentRef.current?.value || "",
+        donationAmount: donationRef.current?.value,
       });
 
       if (response && response.clientSecret !== null) {
         setClosable(false);
         setIntentResponse({
+          ...response,
           clientSecret: response.clientSecret,
-          paymentIntentId: response.paymentIntentId,
         });
 
         void revalidateFn();
@@ -221,11 +231,11 @@ export function BookingViewCard({
         </HStack>
         <Elements
           stripe={stripePromise}
-          options={{ clientSecret: intentResponse?.clientSecret }}
+          options={{ clientSecret: intentResponse?.clientSecret, locale }}
         >
           <CheckoutForm
             succeedRefetch={paymentSucceed}
-            total={priceInfo.totalPrice}
+            total={intentResponse.amountToBeCharged}
             cancelButton={
               <Button
                 type="button"
@@ -280,10 +290,24 @@ export function BookingViewCard({
 
         <Stack gap="6">
           {isPriceInfoShown && <PriceBlock priceInfo={priceInfo} />}
+          {inModal && !isOwner && priceMode === "donation" && (
+            <Stack gap="2">
+              <span>{t("donation_amount_input_notice")}</span>
+              <Input
+                ref={donationRef}
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step="1"
+                placeholder={t("donation_amount_input_label")}
+                onInput={preventNonDigit}
+              />
+            </Stack>
+          )}
           {inModal && !isOwner && (
             <Stack gap="2">
               <span>{t("leave_comment_label")}</span>
-              <Textarea ref={commentRef} rows={5} />
+              <Textarea ref={commentRef} rows={4} placeholder="..." />
             </Stack>
           )}
           <Button {...submitButtonProps}>
@@ -319,4 +343,8 @@ export function BookingViewCard({
       )}
     </>
   );
+}
+
+function preventNonDigit({ target }: React.ChangeEvent<HTMLInputElement>) {
+  target.value = target.value.replace(/\D/g, "");
 }
