@@ -1,3 +1,10 @@
+# [0.66.0](https://github.com/kinguru-io/kinguru-next/compare/v0.65.0...v0.66.0) (2024-09-02)
+
+
+### Features
+
+* added error page ([e8f9b04](https://github.com/kinguru-io/kinguru-next/commit/e8f9b04e5a2b3b94335ad61255bf4bf575a0e91f))
+
 # [0.65.0](https://github.com/kinguru-io/kinguru-next/compare/v0.64.0...v0.65.0) (2024-09-02)
 
 
