@@ -65,7 +65,13 @@ const profileLinksMap: Record<$Enums.UserRole, readonly NavLink[]> = {
     //   segment: "settings",
     // },
   ],
-  admin: [],
+  admin: [
+    {
+      href: "/profile/admin",
+      labelIntlCode: "main",
+      segment: "admin",
+    },
+  ],
 };
 
 const navigationClassName = css({
