@@ -7,7 +7,10 @@ export async function checkEmailByRole(
   isCompany: boolean | undefined,
 ) {
   const user = await prisma.user.findUnique({
-    where: { email, role: isCompany ? "organization" : "user" },
+    where: {
+      email,
+      role: { in: [isCompany ? "organization" : "user", "admin"] },
+    },
   });
 
   return user !== null;
