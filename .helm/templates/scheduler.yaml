@@ -35,8 +35,5 @@ spec:
           env:
             - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
               value: "http://tempo.observability.svc.cluster.local:4318/"
-          envFrom:
-            - secretRef:
-                name: kr-prod-environment-vars
           resources:
             {{- toYaml .Values.schedulerResources | nindent 12 }}
