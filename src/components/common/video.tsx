@@ -30,7 +30,7 @@ export function Video({ src, stateControlOnly, ...props }: VideoProps) {
       {...props}
       controls={!stateControlOnly}
     >
-      <source src={src} />
+      <source src={`${src}#t=0.1`} />
       {t("video_not_supported")}
     </video>
   );
