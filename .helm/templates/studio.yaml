@@ -77,7 +77,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+        - name: {{ .Release.Name }}-regcred
       containers:
         - name: {{ .Release.Name }}-studio
           image: {{ .Values.werf.image.kinguru }}

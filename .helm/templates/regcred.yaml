@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-regcred
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+    vault.security.banzaicloud.io/vault-role: "common"
+    vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+    vault.security.banzaicloud.io/vault-env-from-path: "apps/data/common/regcred"
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: vault:apps/data/common/regcred
