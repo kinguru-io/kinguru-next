@@ -18,6 +18,11 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Chart.Name }}-consumer
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+        vault.security.banzaicloud.io/vault-role: "apps"
+        vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+        vault.security.banzaicloud.io/vault-env-from-path: "apps/data/{{ .Release.Namespace }}/app"
     spec:
       imagePullSecrets:
         - name: {{ .Release.Name }}-regcred
