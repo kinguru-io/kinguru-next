@@ -14,4 +14,4 @@ metadata:
     vault.security.banzaicloud.io/vault-env-from-path: "apps/data/common/regcred"
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: {{ "vault:apps/data/common/regcred" | b64enc }}
+  .dockerconfigjson: {{ "vault:apps/data/common/regcred#dockerconfig" | b64enc }}
