@@ -4,6 +4,8 @@ import { FilterCollapse } from "./filter-collapse";
 import { FilterGroupWrapper } from "./filter-group-wrapper";
 import type { GlobalAgg, TermsAgg } from "@/lib/actions/premise-filter";
 import { filterDefaults } from "@/lib/shared/config/filters";
+import { groupBy } from "@/lib/shared/utils/array";
+import { css } from "~/styled-system/css";
 import { InlineBox, Stack } from "~/styled-system/jsx";
 
 type RangedType = "range";
@@ -13,17 +15,12 @@ type RangedMeta = { helper: keyof IntlMessages["filters"]["helpers"] };
 type GroupedMeta = {
   intl: "native" | "custom";
   intlKey?: Extract<keyof IntlMessages, "amenities" | "premise_types">;
+  tagKeyMap?: Record<string, string>;
 };
 
 type FilterMeta =
-  | {
-      behavior: RangedType;
-      meta: RangedMeta;
-    }
-  | {
-      behavior: GroupedType;
-      meta?: GroupedMeta;
-    };
+  | { behavior: RangedType; meta: RangedMeta }
+  | { behavior: GroupedType; meta?: GroupedMeta };
 
 export type FilterConfig<T> = {
   aggKey: keyof T;
@@ -97,6 +94,52 @@ export async function FilterElement({
   const formatKey = await getKeyFormatter(meta);
   const isRadio = behavior === "radio";
 
+  if (isMetaGrouped(meta) && meta.tagKeyMap) {
+    const groupedTags = groupBy(data.buckets, ({ key }) =>
+      meta.tagKeyMap ? meta.tagKeyMap[key] : "not_defined",
+    );
+
+    return (
+      <FilterGroupWrapper shouldReplace={isRadio}>
+        {Object.keys(groupedTags).map((groupKey) => {
+          const terms = groupedTags[groupKey];
+
+          if (!terms) return null;
+
+          // @ts-expect-error
+          const groupLabel = formatKey(`group.${groupKey}`);
+          const allTerms = terms.map(({ key }) => (
+            <TermsItem
+              key={key}
+              termName={aggName}
+              inputName={key}
+              // @ts-expect-error
+              label={formatKey(key) || key}
+              isRadio={isRadio}
+            />
+          ));
+
+          return (
+            <Stack key={groupKey} gap="2">
+              <span className={css({ fontWeight: "bold", fontSize: "xs" })}>
+                {groupLabel}
+              </span>
+              <Stack gap="2">
+                <CollapsibleTagList
+                  terms={allTerms}
+                  take={take - 1}
+                  handleFrom={take}
+                  showLabel={t("show_all_btn_label")}
+                  hideLabel={t("hide_btn_label")}
+                />
+              </Stack>
+            </Stack>
+          );
+        })}
+      </FilterGroupWrapper>
+    );
+  }
+
   const allTerms = data.buckets.map(({ key }) => (
     <TermsItem
       key={key}
@@ -108,22 +151,48 @@ export async function FilterElement({
     />
   ));
 
-  const sliceTo = allTerms.length >= handleFrom ? take : allTerms.length;
-
   return (
     <FilterGroupWrapper shouldReplace={isRadio}>
-      <Stack gap="2">{allTerms.slice(0, sliceTo)}</Stack>
-      {allTerms.length >= handleFrom && (
+      <CollapsibleTagList
+        terms={allTerms}
+        take={take}
+        handleFrom={handleFrom}
+        showLabel={t("show_all_btn_label")}
+        hideLabel={t("hide_btn_label")}
+      />
+    </FilterGroupWrapper>
+  );
+}
+
+function CollapsibleTagList({
+  terms,
+  take,
+  handleFrom,
+  showLabel,
+  hideLabel,
+}: {
+  terms: React.ReactNode[];
+  take: number;
+  handleFrom: number;
+  showLabel: string;
+  hideLabel: string;
+}) {
+  const sliceTo = terms.length >= handleFrom ? take : terms.length;
+
+  return (
+    <>
+      <Stack gap="2">{terms.slice(0, sliceTo)}</Stack>
+      {terms.length >= handleFrom && (
         <FilterCollapse
-          count={allTerms.length}
-          showLabel={t("show_all_btn_label")}
-          hideLabel={t("hide_btn_label")}
+          count={terms.length}
+          showLabel={showLabel}
+          hideLabel={hideLabel}
         >
           <Stack gap="2" alignItems="flex-start">
-            {allTerms.slice(take)}
+            {terms.slice(take)}
           </Stack>
         </FilterCollapse>
       )}
-    </FilterGroupWrapper>
+    </>
   );
 }

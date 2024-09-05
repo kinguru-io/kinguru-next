@@ -78,3 +78,14 @@ export const amenitiesTags: Record<AmenityGroup, Amenity[]> = {
     "mansard_windows",
   ],
 };
+
+export const amenityTagKeyMap = Object.entries(amenitiesTags).reduce(
+  (record, [key, tags]) => {
+    tags.forEach((tag) => {
+      record[tag] = key as AmenityGroup;
+    });
+
+    return record;
+  },
+  {} as Record<Amenity, AmenityGroup>,
+);
