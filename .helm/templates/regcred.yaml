@@ -14,4 +14,4 @@ metadata:
     vault.security.banzaicloud.io/vault-env-from-path: "apps/data/common/regcred"
 type: kubernetes.io/dockerconfigjson
 data:
-  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2doY3IuaW8iOnsidXNlcm5hbWUiOiAidmF1bHQ6YXBwcy9kYXRhL2NvbW1vbi9yZWdjcmVkI0RPQ0tFUl9SRVBPX1VTRVIiLCBlbWFpbCI6InZhdWx0OmFwcHMvZGF0YS9jb21tb24vcmVnY3JlZCNET0NLRVJfUkVQT19FTUFJTCIsInBhc3N3b3JkIjoidmF1bHQ6YXBwcy9kYXRhL2NvbW1vbi9yZWdjcmVkI0RPQ0tFUl9SRVBPX1BBU1NXT1JEIiwiYXV0aCI6InZhdWx0OmFwcHMvZGF0YS9jb21tb24vcmVnY3JlZCNET0NLRVJfUkVQT19BVVRIIn19fQ==
+  .dockerconfigjson: "vault:apps/data/common/regcred#dockerconfig"
