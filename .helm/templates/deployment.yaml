@@ -35,8 +35,6 @@ spec:
           env:
             - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
               value: "http://tempo.observability.svc.cluster.local:4318/"
-            - name: "I18NEXT_DEFAULT_CONFIG_PATH"
-              value: "./next-i18next.config.cjs"
           ports:
             - containerPort: 3000
               protocol: TCP
