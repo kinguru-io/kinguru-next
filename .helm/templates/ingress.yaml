@@ -5,8 +5,8 @@ metadata:
   labels:
     helm.sh/chart: {{ $.Chart.Name }}-{{ $.Chart.Version }}
     app.kubernetes.io/name: {{ .Release.Name }}
-    app.kubernetes.io/instance: {{ $.Release.Name }}
-    app.kubernetes.io/managed-by: {{ $.Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-tls
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
