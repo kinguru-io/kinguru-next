@@ -132,7 +132,7 @@ jobs:
       url: https://staging.eventify.today
     env:
       CI: "true"
-    if: "! needs.build.outputs.self_mutation_happened"
+    if: ${{ !needs.build.outputs.self_mutation_happened }}
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
