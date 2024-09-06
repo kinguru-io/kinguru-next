@@ -18,9 +18,14 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Chart.Name }}-scheduler
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        vault.security.banzaicloud.io/vault-addr: "https://vault.vault:8200"
+        vault.security.banzaicloud.io/vault-role: "apps"
+        vault.security.banzaicloud.io/vault-tls-secret: "vault-tls"
+        vault.security.banzaicloud.io/vault-env-from-path: "apps/data/{{ .Release.Namespace }}/app"
     spec:
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+        - name: {{ .Release.Name }}-regcred
       containers:
         - name: {{ .Release.Name }}-scheduler
           image: {{ .Values.werf.image.kinguru }}
@@ -30,8 +35,5 @@ spec:
           env:
             - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
               value: "http://tempo.observability.svc.cluster.local:4318/"
-          envFrom:
-            - secretRef:
-                name: kr-prod-environment-vars
           resources:
             {{- toYaml .Values.schedulerResources | nindent 12 }}
