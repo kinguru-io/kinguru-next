@@ -6,6 +6,7 @@ import {
   getPremiseAggregations,
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
+import { amenityTagKeyMap } from "@/lib/shared/config/amenities";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
@@ -44,7 +45,7 @@ const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
     aggKey: "amenities",
     behavior: "checkbox",
-    meta: { intl: "custom", intlKey: "amenities" },
+    meta: { intl: "custom", intlKey: "amenities", tagKeyMap: amenityTagKeyMap },
   },
 ];
 

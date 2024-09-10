@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.6...chart-v1.7.0) (2024-09-06)
+
+
+### Features
+
+* vault integration ([#849](https://github.com/kinguru-io/kinguru-next/issues/849)) ([49677b0](https://github.com/kinguru-io/kinguru-next/commit/49677b0f4949822633242c8d63283b4f332c5314))
+
 ## [1.6.6](https://github.com/kinguru-io/kinguru-next/compare/chart-v1.6.5...chart-v1.6.6) (2024-08-30)
 
 

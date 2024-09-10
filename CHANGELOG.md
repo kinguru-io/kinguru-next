@@ -1,3 +1,10 @@
+# [0.67.0](https://github.com/kinguru-io/kinguru-next/compare/v0.66.0...v0.67.0) (2024-09-06)
+
+
+### Features
+
+* vault integration ([#849](https://github.com/kinguru-io/kinguru-next/issues/849)) ([49677b0](https://github.com/kinguru-io/kinguru-next/commit/49677b0f4949822633242c8d63283b4f332c5314))
+
 # [0.66.0](https://github.com/kinguru-io/kinguru-next/compare/v0.65.0...v0.66.0) (2024-09-02)
 
 
