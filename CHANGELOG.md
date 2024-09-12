@@ -1,3 +1,10 @@
+## [0.67.2](https://github.com/kinguru-io/kinguru-next/compare/v0.67.1...v0.67.2) (2024-09-12)
+
+
+### Bug Fixes
+
+* nextjs custom source dir ([12f5678](https://github.com/kinguru-io/kinguru-next/commit/12f5678d5617a54c636a68b189e7d0749acadfa0))
+
 ## [0.67.1](https://github.com/kinguru-io/kinguru-next/compare/v0.67.0...v0.67.1) (2024-09-12)
 
 
