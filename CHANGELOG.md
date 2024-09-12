@@ -1,3 +1,10 @@
+## [0.67.1](https://github.com/kinguru-io/kinguru-next/compare/v0.67.0...v0.67.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* upgrading dependencies ([c47e4a2](https://github.com/kinguru-io/kinguru-next/commit/c47e4a2dff9cb842848104fc1dcf3dbffa51cedd))
+
 # [0.67.0](https://github.com/kinguru-io/kinguru-next/compare/v0.66.0...v0.67.0) (2024-09-06)
 
 
