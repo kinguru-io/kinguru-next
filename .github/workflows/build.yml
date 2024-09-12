@@ -66,7 +66,7 @@ jobs:
         working-directory: ./
       - name: Upload patch
         if: steps.self_mutation.outputs.self_mutation_happened
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: repo.patch
           path: repo.patch
@@ -78,13 +78,13 @@ jobs:
           cat repo.patch
           exit 1
       - name: Backup artifact permissions
-        run: cd .next && getfacl -R . > permissions-backup.acl
+        run: cd dist && getfacl -R . > permissions-backup.acl
         continue-on-error: true
       - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: build-artifact
-          path: .next
+          path: dist
           overwrite: true
   self-mutation:
     needs: build
@@ -138,9 +138,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-          path: .next
+          path: dist
       - name: Restore build artifact permissions
-        run: cd .next && setfacl --restore=permissions-backup.acl
+        run: cd dist && setfacl --restore=permissions-backup.acl
         continue-on-error: true
       - name: Checkout
         uses: actions/checkout@v4

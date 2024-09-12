@@ -25,8 +25,6 @@ const project = new web.NextJsTypeScriptProject({
     target: "latest",
   },
 
-  artifactsDirectory: ".next",
-
   workflowBootstrapSteps: [
     {
       run: `echo "NEXT_PUBLIC_ELASTICSEARCH_API_KEY=testing" >> $GITHUB_ENV`,

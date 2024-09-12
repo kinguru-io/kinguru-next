@@ -1,29 +1,29 @@
 import withNextIntl from "next-intl/plugin";
-import svg from '@neodx/svg/webpack';
-
+import svg from "@neodx/svg/webpack";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: "dist",
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.plugins.push(
         svg({
-          root: 'assets',
+          root: "assets",
           group: true,
-          output: 'public/sprites',
-          fileName: '{name}.{hash:8}.svg',
+          output: "public/sprites",
+          fileName: "{name}.{hash:8}.svg",
           metadata: {
-            path: 'src/components/uikit/icon/sprite.gen.ts',
+            path: "src/components/uikit/icon/sprite.gen.ts",
             runtime: {
               size: true,
-              viewBox: true
-            }
+              viewBox: true,
+            },
           },
           resetColors: {
             exclude: [/[a-z]*-colored\.svg$/],
-            replaceUnknown: 'currentColor'
-          }
-        })
+            replaceUnknown: "currentColor",
+          },
+        }),
       );
     }
     return config;
@@ -71,14 +71,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "cloudflare-ipfs.com",
         port: "",
-        pathname: "/**"
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'mc.yandex.ru',
-        port: '',
-        pathname: '/watch/**'
-      }
+        protocol: "https",
+        hostname: "mc.yandex.ru",
+        port: "",
+        pathname: "/watch/**",
+      },
     ],
   },
   experimental: {
