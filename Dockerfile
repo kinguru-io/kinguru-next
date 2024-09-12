@@ -43,6 +43,6 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/scheduler ./scheduler
 COPY --from=builder /app/consumer ./consumer
-COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000

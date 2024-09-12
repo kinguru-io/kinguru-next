@@ -77,15 +77,6 @@ const project = new web.NextJsTypeScriptProject({
         mappings: "9200:9200",
       },
     },
-    {
-      uses: "actions/cache@v3",
-      with: {
-        path: "~/.npm\n${{ github.workspace }}/.next/cache",
-        key: "${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}",
-        "restore-keys":
-          "${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-",
-      },
-    },
   ],
 
   projenrcTs: true,
@@ -121,12 +112,13 @@ const project = new web.NextJsTypeScriptProject({
       "next-auth.d.ts",
       "**/*.ts",
       "**/*.tsx",
-      ".next/types/**/*.ts",
+      "dist/types/**/*.ts",
     ],
     exclude: ["server/generated"],
   },
   gitignore: [
     ".env",
+    "dist",
     "prisma/sqlite",
     "public/robots.txt",
     "public/sitemap*",

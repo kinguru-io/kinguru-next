@@ -1,7 +1,7 @@
 .docker
 .github
 .helm
-.next
+dist
 node_modules
 styled-system
 .env
