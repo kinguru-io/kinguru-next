@@ -21,9 +21,16 @@ export const filterKeysResolverMap = {
       },
     },
   }),
-  type: (type: MaybeArray<string>) => ({
-    terms: { type: Array.isArray(type) ? type : [type] },
-  }),
+  type: (type: MaybeArray<string>) => {
+    const typesList = Array.isArray(type) ? type : [type];
+
+    // halls with such type should be shown always
+    if (!typesList.includes("else")) {
+      typesList.push("else");
+    }
+
+    return { terms: { type: typesList } };
+  },
   city: plainStringResolver("location.city.keyword"),
   countryCode: plainStringResolver("location.countryCode.keyword"),
   price: numericResolver("minPrice"),
