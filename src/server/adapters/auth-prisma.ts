@@ -8,6 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export function PrismaAdapter(p: PrismaClient): Adapter {
   return {
+    // @ts-expect-error no types provided in next-auth@4.24.8
     createUser: async (data) => {
       const { id: stripeCustomerId } = await stripe.customers.create({
         email: data.email!,
@@ -88,6 +89,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         where: { id },
         include: { organizations: true, speaker: true },
       }),
+    // @ts-expect-error no types provided in next-auth@4.24.8
     linkAccount: async (account) => {
       const user = await p.user.findUnique({
         where: { id: account.userId },
@@ -116,6 +118,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
         },
       });
     },
+    // @ts-expect-error no types provided in next-auth@4.24.8
     unlinkAccount: (provider_providerAccountId) =>
       p.account.delete({
         where: { provider_providerAccountId },
