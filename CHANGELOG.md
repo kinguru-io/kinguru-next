@@ -1,3 +1,10 @@
+# [0.68.0](https://github.com/kinguru-io/kinguru-next/compare/v0.67.2...v0.68.0) (2024-10-02)
+
+
+### Features
+
+* added min edge of slots to book ([87249e9](https://github.com/kinguru-io/kinguru-next/commit/87249e989d11a5bc7d326d246131126305b8059e))
+
 ## [0.67.2](https://github.com/kinguru-io/kinguru-next/compare/v0.67.1...v0.67.2) (2024-09-12)
 
 
