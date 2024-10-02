@@ -104,6 +104,7 @@ export default async function PremisePage({
     bookingCancelTerm,
     area,
     capacity,
+    minimalSlotsToBook,
   } = premise;
 
   const aggregatedPrices = openHours.reduce((borders, { price }) => {
@@ -302,6 +303,27 @@ export default async function PremisePage({
                     {t("calendar_heading")}
                   </h2>
                 }
+                subheadingSlot={
+                  (minimalSlotsToBook || 0) > 0 && (
+                    <span
+                      className={css({
+                        fontSize: "sm",
+                        textAlign: "center",
+                        bgColor: "danger.lighter",
+                        color: "dark",
+                        borderRadius: "sm",
+                        padding: "4",
+                        position: "sticky",
+                        top: "2",
+                        zIndex: "1",
+                      })}
+                    >
+                      {t("minimum_slots_to_book", {
+                        amount: minimalSlotsToBook,
+                      })}
+                    </span>
+                  )
+                }
               />
             </MapboxSearchBoxResponseProvider>
             <Stack
@@ -323,6 +345,7 @@ export default async function PremisePage({
                   discountsMap={discountMap}
                   isOwner={isOwner}
                   isUserOrg={isUserOrg}
+                  minimalSlotsToBook={minimalSlotsToBook}
                 />
               </Modal>
               <DiscountViewCard discounts={discounts} locale={locale} />

@@ -324,6 +324,10 @@ async function validatePaymentIntentData({
 
   if (!premise) return { isValid: false, editedSlots: [], discounts: [] };
 
+  if ((premise.minimalSlotsToBook || 0) > slots.length) {
+    return { isValid: false, editedSlots: [], discounts: [] };
+  }
+
   const bookedSlots = prepareBookedSlots(premise.slots);
   const timeSlotsGroup = groupBy(
     premise.openHours.map((record) => generateTimeSlots(record)),

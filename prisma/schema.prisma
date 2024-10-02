@@ -466,30 +466,31 @@ model VenueInformation {
 }
 
 model Premise {
-  id                String               @id @default(cuid())
-  slug              String               @unique
-  venue             Venue                @relation(fields: [venueId], references: [id])
-  venueId           String
-  name              String
-  description       String?              @default("")
-  room              String?
-  floor             String?
-  type              String?              @default("")
-  area              Float?
-  capacity          Int?
-  slots             PremiseSlot[]
-  openHours         PremiseOpenHours[]
-  resources         PremiseResource[]
-  discounts         PremiseDiscount[]
-  rules             String?              @default("Rules")
-  amenities         String[]
-  direction         String?              @default("Direction")
-  bookingCancelTerm String?              @default("Booking cancel term")
-  information       PremiseInformation[]
-  priceMode         PremisePriceMode     @default(arbitrary)
-  minimalPrice      Float?
-  createdAt         DateTime             @default(now())
-  updatedAt         DateTime             @updatedAt
+  id                 String               @id @default(cuid())
+  slug               String               @unique
+  venue              Venue                @relation(fields: [venueId], references: [id])
+  venueId            String
+  name               String
+  description        String?              @default("")
+  room               String?
+  floor              String?
+  type               String?              @default("")
+  area               Float?
+  capacity           Int?
+  slots              PremiseSlot[]
+  openHours          PremiseOpenHours[]
+  resources          PremiseResource[]
+  discounts          PremiseDiscount[]
+  rules              String?              @default("Rules")
+  amenities          String[]
+  direction          String?              @default("Direction")
+  bookingCancelTerm  String?              @default("Booking cancel term")
+  information        PremiseInformation[]
+  priceMode          PremisePriceMode     @default(arbitrary)
+  minimalPrice       Float?
+  minimalSlotsToBook Int?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
 }
 
 enum PremisePriceMode {

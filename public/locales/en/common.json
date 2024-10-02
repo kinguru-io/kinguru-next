@@ -244,7 +244,8 @@
     "show_less": "Less",
     "go_to_premise_page": "Go to the premise page",
     "cannot_load_location": "Unable to load location",
-    "bookings_link": "Book the hall"
+    "bookings_link": "Book the hall",
+    "minimum_slots_to_book": "Minimal number of slots to book: {amount}"
   },
   "event": {
     "future_event_page": {
@@ -410,6 +411,8 @@
         "submit_btn_label": "Save premise",
         "edit_btn_label": "Save changes",
         "next_group_btn_label": "Next",
+        "booking_amount": "Minimum slots to book",
+        "booking_amount_input_label": "Number of slots",
         "groups": {
           "main_info": "Main",
           "photo": "Photo",
@@ -417,6 +420,7 @@
           "open_hours": "Opening hours and pricing",
           "rules": "Premise rules",
           "booking_cancel_terms": "Booking Cancellation Terms",
+          "options": "Options",
           "price_mode": "Price mode"
         },
         "price_modes": {
