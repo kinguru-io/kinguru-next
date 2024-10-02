@@ -153,6 +153,7 @@ export default defineConfig({
         danger: {
           DEFAULT: { value: "#DC1414" },
           darker: { value: "#c51010" },
+          lighter: { value: "#ff9e9e" },
           text: { value: "{colors.light}" },
         },
         success: {

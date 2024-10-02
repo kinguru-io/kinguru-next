@@ -24,14 +24,7 @@ import type { Locale } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Box, Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
 
-export function WeekView({
-  locale,
-  nowDate,
-  timeSlotsGroup,
-  bookedSlots,
-  aggregatedPrices,
-  headingSlot,
-}: {
+type WeekViewProps = {
   locale: Locale;
   nowDate: Date;
   timeSlotsGroup: Group<
@@ -41,7 +34,18 @@ export function WeekView({
   bookedSlots: Set<string>;
   aggregatedPrices: AggregatedPrices;
   headingSlot?: React.ReactNode;
-}) {
+  subheadingSlot?: React.ReactNode;
+};
+
+export function WeekView({
+  locale,
+  nowDate,
+  timeSlotsGroup,
+  bookedSlots,
+  aggregatedPrices,
+  headingSlot,
+  subheadingSlot,
+}: WeekViewProps) {
   const t = useTranslations("booking_view");
   const timeZone = useSearchBoxTimeZone();
   const {
@@ -70,13 +74,13 @@ export function WeekView({
       left: todayColumn.offsetLeft,
       behavior: "instant",
     });
-  }, [calendarRef]);
+  }, []);
 
   const weekViewData = getWeekViewData({ locale, originDate });
 
   // since all time slots represent local hall time, it is okay to get current user time in a hall timezone
   // converting to UTC only for comparing
-  // ! this is isn't real time because time slots are treated as common strings, not as `Date`
+  // ! this isn't real time because time slots are treated as common strings, not as `Date`
   const localPremiseTime = formatInTimeZone(
     nowDate,
     timeZone || "UTC",
@@ -94,7 +98,7 @@ export function WeekView({
   };
 
   return (
-    <Stack gap="6" overflow="hidden" position="relative">
+    <Stack gap="6" position="relative" maxWidth="92vw">
       <HStack gap="6" flexWrap="wrap">
         {headingSlot}
         <HStack gap="1" justifyContent="space-between" flexGrow="1">
@@ -113,6 +117,7 @@ export function WeekView({
           />
         </HStack>
       </HStack>
+      {subheadingSlot}
       <Flex
         ref={calendarRef}
         css={{

@@ -48,6 +48,19 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 
+type BookingViewCardProps = {
+  premiseId: Premise["id"];
+  premiseOrgId: string;
+  createIntent: CreatePremiseSlotsIntent;
+  cancelIntent: CancelPremiseSlotsIntent;
+  revalidateFn: RevalidatePremisePage;
+  discountsMap: Record<number, number | undefined>;
+  isOwner: boolean;
+  isUserOrg: boolean;
+  inModal?: boolean;
+  minimalSlotsToBook?: Premise["minimalSlotsToBook"];
+};
+
 export function BookingViewCard({
   premiseId,
   premiseOrgId,
@@ -58,17 +71,8 @@ export function BookingViewCard({
   isOwner,
   isUserOrg,
   inModal = false,
-}: {
-  premiseId: Premise["id"];
-  premiseOrgId: string;
-  createIntent: CreatePremiseSlotsIntent;
-  cancelIntent: CancelPremiseSlotsIntent;
-  revalidateFn: RevalidatePremisePage;
-  discountsMap: Record<number, number | undefined>;
-  isOwner: boolean;
-  isUserOrg: boolean;
-  inModal?: boolean;
-}) {
+  minimalSlotsToBook,
+}: BookingViewCardProps) {
   const locale = useLocale() as StripeElementLocale;
   const t = useTranslations("booking_view");
   const [isPending, startTransition] = useTransition();
@@ -254,10 +258,14 @@ export function BookingViewCard({
     );
   }
 
+  const minSlotsReached =
+    typeof minimalSlotsToBook !== "number" ||
+    minimalSlotsToBook <= selectedSlots.length;
   const submitButtonProps: ComponentProps<typeof Button> = {
     type: "button",
     isLoading: isPending,
-    disabled: isOutsideModal || areThereNoSlots,
+    disabled:
+      isOutsideModal || areThereNoSlots || !(isOwner || minSlotsReached),
     onClick: isOwner ? blockSlotsBtnClicked : payBtnClicked,
     centered: true,
     size: "lg",
@@ -335,9 +343,10 @@ export function BookingViewCard({
             cancelIntent={cancelIntent}
             revalidateFn={revalidateFn}
             discountsMap={discountsMap}
-            inModal={true}
             isOwner={isOwner}
             isUserOrg={isUserOrg}
+            minimalSlotsToBook={minimalSlotsToBook}
+            inModal
           />
         </ModalWindow>
       )}

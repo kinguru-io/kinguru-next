@@ -301,7 +301,8 @@
     "show_less": "Less",
     "go_to_premise_page": "Przejdź do strony lokalu",
     "cannot_load_location": "Nie można załadować lokalizacji",
-    "bookings_link": "Zarezerwuj salę"
+    "bookings_link": "Zarezerwuj salę",
+    "minimum_slots_to_book": "Minimalna liczba slotów do rezerwacji: {amount}"
   },
   "discount_info": {
     "card_heading": "Istnieją zniżki*",
@@ -417,7 +418,8 @@
           "open_hours": "Godziny otwarcia i ceny",
           "rules": "Zasady sali",
           "booking_cancel_terms": "Warunki anulowania rezerwacji",
-          "price_mode": "Tryb cenowy"
+          "price_mode": "Tryb cenowy",
+          "options": "Opcje"
         },
         "fields": {
           "name_and_description": "Nazwa i opis",
@@ -483,7 +485,9 @@
         "price_modes": {
           "donation": "Darowizna",
           "arbitrary": "Arbitralny"
-        }
+        },
+        "booking_amount": "Minimalna liczba slotów do rezerwacji",
+        "booking_amount_input_label": "Liczba slotów"
       }
     },
     "my_bookings": {

@@ -47,6 +47,7 @@ export function EditPremiseForm({
     bookingCancelTerm,
     priceMode,
     minimalPrice,
+    minimalSlotsToBook,
   },
 }: {
   editPremise: EditPremiseAction;
@@ -79,6 +80,7 @@ export function EditPremiseForm({
     openHoursAndPrice: {
       priceMode,
       minimalPrice: minimalPrice || undefined,
+      minimalSlotsToBook: minimalSlotsToBook || undefined,
       openHours: openHours.map(({ day, openTime, closeTime, price }) => ({
         day,
         startTime: openTime.toISOString(),
