@@ -136,14 +136,14 @@ export default async function PremisePage({
     {
       title: t("area_and_capacity"),
       tagsList: (
-        <>
+        <Flex gap="1" flexWrap="wrap">
           <Tag colorPalette="tertiary" fontSize="sm">
             {area} {t("area_literal")}
           </Tag>
           <Tag colorPalette="tertiary" fontSize="sm">
             {t("capacity", { capacity })}
           </Tag>
-        </>
+        </Flex>
       ),
     },
   ];
@@ -270,9 +270,7 @@ export default async function PremisePage({
                 <InlineBox css={{ fontWeight: "bold", md: { fontSize: "lg" } }}>
                   {title}
                 </InlineBox>
-                <Flex gap="1" flexWrap="wrap">
-                  {tagsList}
-                </Flex>
+                {tagsList}
               </Stack>
             ))}
           </Flex>

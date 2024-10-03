@@ -89,3 +89,9 @@ export const amenityTagKeyMap = Object.entries(amenitiesTags).reduce(
   },
   {} as Record<Amenity, AmenityGroup>,
 );
+
+export function isAmenityHandled(
+  amenity: string,
+): amenity is keyof typeof amenityTagKeyMap {
+  return amenity in amenityTagKeyMap;
+}
