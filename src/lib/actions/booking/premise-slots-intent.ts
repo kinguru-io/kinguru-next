@@ -45,7 +45,7 @@ type BlockTimeSlotsActionData = Omit<
 >;
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2024-09-30.acacia",
 });
 
 export async function blockPremiseSlotsIntent({
@@ -174,13 +174,16 @@ export async function createPremiseSlotsIntent({
 
   // skip stripe payment if total price is 0
   const donation = Math.abs(parseFloat(donationAmount || "0"));
+  const paymentIntentData =
+    totalPrice > 0
+      ? await getPaymentIntent({ donation })
+      : { id: `free-${uuid()}`, client_secret: null, amount: 0 };
+
   const {
     id: paymentIntentId,
     client_secret: clientSecret,
     amount,
-  } = totalPrice > 0
-    ? await getPaymentIntent({ donation })
-    : { id: `free-${uuid()}`, client_secret: null, amount: 0 };
+  } = paymentIntentData;
 
   if (!clientSecret && totalPrice > 0) {
     return {
