@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import prisma from "@/server/prisma";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2024-09-30.acacia",
 });
 
 export async function verifyEmail(token: string) {
@@ -25,10 +25,7 @@ export async function verifyEmail(token: string) {
 
   const customer =
     role === "user"
-      ? await stripe.customers.create({
-          email,
-          name: name || "",
-        })
+      ? await stripe.customers.create({ email, name: name || "" })
       : null;
 
   await prisma.user.update({

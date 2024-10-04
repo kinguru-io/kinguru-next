@@ -10,7 +10,7 @@ import type { BookingEmailProps } from "~/emails";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;
 const stripe = new Stripe(webhookSecret, {
-  apiVersion: "2024-06-20",
+  apiVersion: "2024-09-30.acacia",
   typescript: true,
 });
 
