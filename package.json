@@ -57,7 +57,7 @@
     "@types/nodemailer": "^6.4.16",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^7",
     "@vitejs/plugin-react": "^4.3.2",
     "constructs": "^10.0.0",
