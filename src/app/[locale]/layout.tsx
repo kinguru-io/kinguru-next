@@ -6,6 +6,7 @@ import {
   GoogleAnalytics,
   AnalyticsConsent,
   YandexAnalytics,
+  MetaPixel,
 } from "@/components/analytics";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -70,6 +71,7 @@ export default function RootLayout({
           </Grid>
           <Toaster />
           <YandexAnalytics />
+          <MetaPixel />
           <AnalyticsConsent />
         </body>
       </NextIntlClientProvider>
