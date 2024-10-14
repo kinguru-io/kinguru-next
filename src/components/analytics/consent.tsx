@@ -22,8 +22,10 @@ export function AnalyticsConsent() {
       localStorage.setItem("ga_consent.analytics_storage", flag);
 
       window.gtag("consent", "update", { analytics_storage: flag });
-      // @ts-expect-error
+      // @ts-expect-error yandex.metrika
       window[`disableYaCounter${counterYM}`] = !agreed;
+      // @ts-expect-error meta pixel
+      window.fbq("consent", agreed ? "grant" : "revoke");
 
       setUserOption(flag);
     },
@@ -40,8 +42,10 @@ export function AnalyticsConsent() {
       localStorage.removeItem("ga_consent.analytics_storage");
 
       window.gtag("consent", "update", { analytics_storage: "denied" });
-      // @ts-expect-error
-      window[`disableYaCounter${counterYM}`] = true; // yandex.metrika
+      // @ts-expect-error yandex.metrika
+      window[`disableYaCounter${counterYM}`] = true;
+      // @ts-expect-error meta pixel
+      window.fbq("consent", "revoke");
 
       return;
     }
@@ -50,7 +54,8 @@ export function AnalyticsConsent() {
     consentButtonClicked(storageFlag === "granted");
   }, [consentButtonClicked]);
 
-  if (userOption !== null) return userOption === "granted" ? <YMHit /> : null;
+  if (userOption !== null)
+    return userOption === "granted" ? <AnalyticsHits /> : null;
 
   return (
     <Modal initialOpenState={true}>
@@ -99,12 +104,14 @@ function ConsentInner({
   );
 }
 
-function YMHit() {
+function AnalyticsHits() {
   const pathname = usePathname();
 
   useEffect(() => {
     // @ts-expect-error
     window.ym(counterYM, "hit", window.location.href);
+    // @ts-expect-error
+    window.fbq("track", "PageView");
   }, [pathname]);
 
   return null;
