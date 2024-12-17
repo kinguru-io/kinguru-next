@@ -8,12 +8,6 @@ import type { StripeMetadataExtended } from "@/lib/shared/stripe";
 import prisma from "@/server/prisma.ts";
 import type { BookingEmailProps } from "~/emails";
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;
-const stripe = new Stripe(webhookSecret, {
-  apiVersion: "2024-09-30.acacia",
-  typescript: true,
-});
-
 async function eventJoinSucceededCb(id: string) {
   const { eventId, userId } = await prisma.ticketIntent.update({
     where: { id },
@@ -138,6 +132,12 @@ export async function POST(req: NextRequest) {
       },
     );
   }
+
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY!;
+  const stripe = new Stripe(webhookSecret, {
+    apiVersion: "2024-09-30.acacia",
+    typescript: true,
+  });
 
   try {
     const event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
