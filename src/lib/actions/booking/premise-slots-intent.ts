@@ -8,12 +8,12 @@ import {
 import { addHours, compareAsc, startOfDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { getLocale } from "next-intl/server";
-import Stripe from "stripe";
+import type Stripe from "stripe";
 import { v4 as uuid } from "uuid";
 import { sendBookingEmail } from "./email";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
-import type { StripeMetadataExtended } from "@/lib/shared/stripe";
+import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
 import type { ActionResponse } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import { groupAndMergeTimeslots } from "@/lib/utils/premise-booking";
@@ -43,10 +43,6 @@ type BlockTimeSlotsActionData = Omit<
   BookTimeSlotsActionData,
   "timeZone" | "discountMap" | "comment" | "donationAmount"
 >;
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-09-30.acacia",
-});
 
 export async function blockPremiseSlotsIntent({
   premiseId,
@@ -147,7 +143,13 @@ export async function createPremiseSlotsIntent({
     prepareDiscountRangeMap(discounts),
   );
 
-  const getPaymentIntent = ({ donation }: { donation: number }) => {
+  const getPaymentIntent = ({
+    donation,
+    stripe,
+  }: {
+    donation: number;
+    stripe: Stripe;
+  }) => {
     const amount = Math.round((totalPrice + donation) * 100);
 
     const metadata: StripeMetadataExtended = {
@@ -176,7 +178,7 @@ export async function createPremiseSlotsIntent({
   const donation = Math.abs(parseFloat(donationAmount || "0"));
   const paymentIntentData =
     totalPrice > 0
-      ? await getPaymentIntent({ donation })
+      ? await getPaymentIntent({ donation, stripe: getStripe() })
       : { id: `free-${uuid()}`, client_secret: null, amount: 0 };
 
   const {
