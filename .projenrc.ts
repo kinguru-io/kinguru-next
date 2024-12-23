@@ -22,7 +22,13 @@ const project = new web.NextJsTypeScriptProject({
   },
   autoApproveUpgrades: true,
   depsUpgradeOptions: {
-    include: ["next", "stripe", "@next/eslint-plugin-next"],
+    include: [
+      "next",
+      "stripe",
+      "@next/eslint-plugin-next",
+      "@stripe/react-stripe-js",
+      "@stripe/stripe-js",
+    ],
     target: "minor",
   },
 
