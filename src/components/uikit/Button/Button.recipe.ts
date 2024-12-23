@@ -75,6 +75,7 @@ export const buttonRecipe = defineRecipe({
     },
     centered: { true: { marginInline: "auto" } },
     rounded: { false: { borderRadius: "sm" } },
+    contentCentered: { true: { justifyContent: "center" } },
   },
   defaultVariants: {
     colorPalette: "primary",
