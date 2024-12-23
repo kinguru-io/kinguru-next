@@ -47,7 +47,7 @@ const userSignUpHandler = async ({
   const token = accounts.at(0)?.emailToken || "";
   await sendVerificationEmail({ email, token });
 
-  redirect(`/auth/signin/user?callbackUrl=/profile/edit`);
+  redirect(`/auth/signin?callbackUrl=/profile/edit`);
 
   return null;
 };

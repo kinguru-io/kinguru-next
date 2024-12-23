@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
+import { CompanyRegisterLink } from "./company-register-link";
 import { HeaderModal } from "./header-modal";
 import { LanguageSelector } from "./language-selector";
 import { SignOutButton } from "./sign-out-button";
@@ -48,7 +49,9 @@ export async function Header() {
               <ModalContent
                 signOutLabel={t("sign_out")}
                 localeLabel={t("lang_menu")}
-              />
+              >
+                <CompanyRegisterLink />
+              </ModalContent>
             }
           >
             <Suspense
@@ -68,14 +71,17 @@ export async function Header() {
 async function ModalContent({
   signOutLabel,
   localeLabel,
+  children,
 }: {
   signOutLabel: string;
   localeLabel: string;
+  children?: React.ReactNode;
 }) {
   const session = await getSession();
 
   return (
-    <Stack flexDirection="column" gap="10" height="full">
+    <Stack css={{ flexDirection: "column", gap: 4, height: "full" }}>
+      {children}
       <LanguageSelector label={localeLabel} />
       <Stack marginBlockStart="auto" gap="6">
         <SocialMediaLinks />

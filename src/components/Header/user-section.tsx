@@ -22,13 +22,22 @@ export async function UserSection() {
     return (
       <>
         <Link
-          href="/auth/signin/user"
-          className={cx(button(), css({ mdDown: { display: "none" } }))}
+          href="/auth/signin"
+          className={css({
+            mdDown: { display: "none" },
+            _hoverOrFocusVisible: { textDecoration: "underline" },
+          })}
         >
-          {t("sign_in_and_sign_up")}
+          {t("sign_in")}
         </Link>
         <Link
-          href="/auth/signin/user"
+          href="/auth/signup/company"
+          className={cx(button(), css({ mdDown: { display: "none" } }))}
+        >
+          {t("add_venue")}
+        </Link>
+        <Link
+          href="/auth/signin"
           className={css({
             display: "flex",
             gap: "1.5",

@@ -51,7 +51,7 @@ export default async function AuthLayout({
             paddingInline: "10",
             width: "full",
             maxWidth: "32.5rem",
-            minHeight: "26rem",
+            minHeight: "24rem",
             flexBasis: "unset",
             "& h1": { fontSize: "2xl" },
           },
