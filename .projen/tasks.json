@@ -199,13 +199,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=next,stripe"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=next,stripe,@next/eslint-plugin-next"
         },
         {
           "exec": "npm install"
         },
         {
-          "exec": "npm update next stripe"
+          "exec": "npm update next stripe @next/eslint-plugin-next"
         },
         {
           "exec": "npx projen"
