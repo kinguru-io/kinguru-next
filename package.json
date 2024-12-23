@@ -103,7 +103,7 @@
     "@sindresorhus/slugify": "^2.2.1",
     "@stripe/react-stripe-js": "^2.9.0",
     "@stripe/stripe-js": "^4.10.0",
-    "bullmq": "^5.14.0",
+    "bullmq": "^5.34.4",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^v3.2.0",
     "dotenv": "^16.4.5",
