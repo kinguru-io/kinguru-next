@@ -1,10 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import Stripe from "stripe";
+import { getStripe } from "@/lib/shared/stripe";
 import prisma from "@/server/prisma";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-});
 
 export async function verifyEmail(token: string) {
   const t = await getTranslations("verification");
@@ -23,12 +19,11 @@ export async function verifyEmail(token: string) {
     return { ok: true, message: t("email_verified") };
   }
 
+  const stripe = getStripe();
+
   const customer =
     role === "user"
-      ? await stripe.customers.create({
-          email,
-          name: name || "",
-        })
+      ? await stripe.customers.create({ email, name: name || "" })
       : null;
 
   await prisma.user.update({

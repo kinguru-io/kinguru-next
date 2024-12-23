@@ -1,14 +1,9 @@
 "use server";
 
-import Stripe from "stripe";
 import { getSession } from "@/auth";
-import type { StripeMetadataExtended } from "@/lib/shared/stripe";
+import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
 import { redirect } from "@/navigation.ts";
 import prisma from "@/server/prisma.ts";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-});
 
 export async function getTicketIntentAction(eventId: string) {
   const session = await getSession();
@@ -24,6 +19,8 @@ export async function getTicketIntentAction(eventId: string) {
   if (!event || !event.price) {
     throw new Error("BAD_REQUEST");
   }
+
+  const stripe = getStripe();
 
   const { id, client_secret: clientSecret } =
     await stripe.paymentIntents.create({

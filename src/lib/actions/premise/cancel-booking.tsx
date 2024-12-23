@@ -3,7 +3,7 @@
 import { TicketIntentStatus } from "@prisma/client";
 import { differenceInHours, differenceInDays } from "date-fns";
 import { getTranslations } from "next-intl/server";
-import Stripe from "stripe";
+import { getStripe } from "@/lib/shared/stripe";
 import { isUserOrganization } from "@/lib/utils/premise-booking";
 
 export interface CancelBookingActionProps {
@@ -24,10 +24,6 @@ type ProcessRefundProps = Omit<
 > & {
   cancellationDate: Date;
 };
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-});
 
 function calculateAmountPaid(
   premiseAmount: number,
@@ -60,6 +56,7 @@ async function processRefund({
 
   if (refundAmount > 0) {
     try {
+      const stripe = getStripe();
       const refund = await stripe.refunds.create({
         payment_intent: paymentIntentId,
         amount: Math.round(refundAmount * 100), // Convert to cents

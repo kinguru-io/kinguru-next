@@ -1,15 +1,12 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { Adapter } from "next-auth/adapters";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
-});
+import { getStripe } from "@/lib/shared/stripe";
 
 export function PrismaAdapter(p: PrismaClient): Adapter {
   return {
     // @ts-expect-error no types provided in next-auth@4.24.8
     createUser: async (data) => {
+      const stripe = getStripe();
       const { id: stripeCustomerId } = await stripe.customers.create({
         email: data.email!,
         name: data.name!,
@@ -59,6 +56,7 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
       });
       if (!account) return null;
       if (!account.user.stripeCustomerId) {
+        const stripe = getStripe();
         const { id: stripeCustomerId } = await stripe.customers.create({
           email: account.user.email,
           name: account.user.name || "",

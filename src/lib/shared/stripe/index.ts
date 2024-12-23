@@ -1,3 +1,5 @@
+import Stripe from "stripe";
+
 export type StripeMetadataExtended = {
   source: "event-join" | "premise-slots-booking";
   user_name?: string;
@@ -7,3 +9,9 @@ export type StripeMetadataExtended = {
   premise_name?: string;
   user_donation?: number | string;
 };
+
+export function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2024-09-30.acacia",
+  });
+}
