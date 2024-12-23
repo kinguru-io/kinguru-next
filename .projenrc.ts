@@ -22,7 +22,8 @@ const project = new web.NextJsTypeScriptProject({
   },
   autoApproveUpgrades: true,
   depsUpgradeOptions: {
-    target: "latest",
+    include: ["next", "stripe"],
+    target: "minor",
   },
 
   workflowBootstrapSteps: [
