@@ -211,7 +211,8 @@
       "change_video_play_state": "Rozpocznij/zatrzymaj wideo",
       "drop_zone_upload_item": "Kliknij, aby wybrać lub przeciągnij i upuść zdjęcia/filmy",
       "upload_item": "Prześlij zdjęcie lub film",
-      "uploaded_item": "Przesłana treść"
+      "uploaded_item": "Przesłana treść",
+      "company_info_saved": "Informacje zostały zapisane"
     },
     "multi_step": {
       "complete_current_step": "Proszę ukończyć bieżący krok, aby odblokować dostęp do następnych kroków."
