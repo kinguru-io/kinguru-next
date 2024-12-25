@@ -1,3 +1,12 @@
+# [0.69.0](https://github.com/kinguru-io/kinguru-next/compare/v0.68.0...v0.69.0) (2024-12-25)
+
+
+### Features
+
+* added quick sign up; added code verification feature; translated existing emails ([a055883](https://github.com/kinguru-io/kinguru-next/commit/a0558834033a3e62173c82a1d6feb0e98807e8cb))
+* adjusted company info saving wording; changed notification position ([ae85ce2](https://github.com/kinguru-io/kinguru-next/commit/ae85ce276d42fd21175605286c46dd2cdd112161))
+* split user accounts creation ([f1df758](https://github.com/kinguru-io/kinguru-next/commit/f1df7585cc817621e33ed647a1cd0945cb936907))
+
 # [0.68.0](https://github.com/kinguru-io/kinguru-next/compare/v0.67.2...v0.68.0) (2024-10-02)
 
 
