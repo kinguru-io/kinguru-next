@@ -22,7 +22,6 @@ services:
       - zookeeper
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_HOST_NAME=192.168.1.2
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.13.1
     ports:
