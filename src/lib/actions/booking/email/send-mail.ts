@@ -11,7 +11,7 @@ export async function sendBookingEmail({
   try {
     await transporter.sendMail({
       to: email,
-      subject: `Reservation at ${mailProps.name} | Eventify`,
+      subject: `${mailProps.t("booking.reservation_at_label")} ${mailProps.name} | Eventify`,
       text: await renderBookingEmail(mailProps, true),
       html: await renderBookingEmail(mailProps),
     });

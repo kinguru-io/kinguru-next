@@ -7,7 +7,7 @@ import {
 } from "@prisma/client";
 import { addHours, compareAsc, startOfDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import type Stripe from "stripe";
 import { v4 as uuid } from "uuid";
 import { sendBookingEmail } from "./email";
@@ -236,6 +236,7 @@ export async function createPremiseSlotsIntent({
       slotInfo: mergedSlotsUpdateInput,
       comment,
       donation,
+      t: await getTranslations("emails"),
     };
 
     requests.push(

@@ -254,6 +254,8 @@
     "rules_agreement": "Klikając przycisk \"Zapłać\", akceptujesz regulamin hali.",
     "remove_timeslot_btn": "Usuń czas rezerwacji",
     "booking_modal_heading": "Rezerwacja terminów",
+    "booking_modal_register_heading": "Utwórz konto",
+    "booking_modal_verify_heading": "Zweryfikuj konto",
     "action_successful_booking": "Pomyślnie zarezerwowane!",
     "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",
     "action_invalid_data": "Nieprawidłowe dane",
@@ -684,7 +686,14 @@
     "email_was_sent_notice": "Twój adres e-mail nie został jeszcze zweryfikowany, dlatego zostałeś przekierowany na tę stronę. Sprawdź folder „Spam”, jeśli nie otrzymałeś powiadomienia",
     "resend_btn_label": "Wyślij ponownie e-mail",
     "unknown_error": "Coś poszło nie tak",
-    "too_many_attempts": "Zbyt wiele prób. Spróbuj {minutes}"
+    "too_many_attempts": "Zbyt wiele prób. Spróbuj {minutes}",
+    "code_expired": "Kod weryfikacyjny wygasł",
+    "code_placeholder": "6-cyfrowy kod",
+    "code_was_not_sent_notice": "Nie otrzymałeś kodu?",
+    "code_was_sent_notice": "Na Twój e-mail został wysłany 6-cyfrowy kod.",
+    "incorrect_code": "Nieprawidłowy kod",
+    "resend_label": "Wyślij ponownie",
+    "verify_label": "Zweryfikować"
   },
   "faq": {
     "main": {
@@ -766,5 +775,30 @@
     "homepage_label": "Przejdź do strony głównej",
     "retry_label": "Spróbować ponownie",
     "go_back": "Wracać"
+  },
+  "emails": {
+    "author_remark": "Najlepsze życzenia,",
+    "booking": {
+      "check_link_label": "👉 Sprawdź swoje rezerwacje tutaj 👈",
+      "heading": "Gratulacje!",
+      "preview": "Masz rezerwację w",
+      "reservation_at_label": "Rezerwacje w"
+    },
+    "brand_label": "Zespół Eventify",
+    "comment_label": "Komentarz",
+    "donation_label": "Darowizna",
+    "from_label": "z",
+    "ignore_notice": "Jeśli nie prosiłeś o to, zignoruj ​​tę wiadomość e-mail.",
+    "to_label": "do",
+    "verify": {
+      "heading": "Weryfikacja e-mailowa",
+      "preview": "Kliknij link, aby zweryfikować swój adres e-mail",
+      "verification_link_label": "👉 Kliknij tutaj, aby zweryfikować swój adres e-mail 👈"
+    },
+    "verify_code": {
+      "code_label": "Kod weryfikacyjny",
+      "heading": "Weryfikacja e-mailowa",
+      "preview": "Kod do weryfikacji e-mailowej"
+    }
   }
 }

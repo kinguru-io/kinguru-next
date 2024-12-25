@@ -35,6 +35,7 @@ export type BookingEmailProps = {
   name: string;
   comment?: string;
   donation: number;
+  t: (...args: any[]) => string;
 };
 
 export default function BookingEmail({
@@ -43,19 +44,22 @@ export default function BookingEmail({
   slotInfo,
   comment,
   donation,
+  t,
 }: BookingEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>You have your reservation at {name}.</Preview>
+      <Preview>
+        {t("booking.preview")} {name}.
+      </Preview>
       <Body style={main}>
         <Container style={container}>
           <HeaderLogo />
-          <Heading style={heading}>Congratulations!</Heading>
+          <Heading style={heading}>{t("booking.heading")}</Heading>
           <Section style={body}>
             <Text style={paragraph}>
               <Text style={paragraph}>
-                You have your reservation at{" "}
+                {t("booking.preview")}{" "}
                 <span
                   style={{ fontWeight: "bold" }}
                   dangerouslySetInnerHTML={{
@@ -74,7 +78,7 @@ export default function BookingEmail({
                       <li style={{ fontSize: "14px" }}>
                         <span style={{ fontWeight: "700" }}>{day}</span>
                         <br />
-                        from {from} to {to}
+                        {t("from_label")} {from} {t("to_label")} {to}
                         {amount !== 0 && (
                           <span
                             style={{ fontWeight: "bold", marginLeft: "6px" }}
@@ -89,25 +93,28 @@ export default function BookingEmail({
                 })}
                 {donation > 0 && (
                   <li style={{ fontSize: "14px" }}>
-                    Donation - <b>{priceFormatter.format(donation)}</b>
+                    {t("donation_label")} -{" "}
+                    <b>{priceFormatter.format(donation)}</b>
                   </li>
                 )}
               </ul>
               {comment && (
                 <Container style={{ marginBottom: "24px", fontSize: "14px" }}>
-                  <span style={{ fontWeight: "500" }}>Comment:</span>
+                  <span style={{ fontWeight: "500" }}>
+                    {t("comment_label")}:
+                  </span>
                   <br />
                   <span>{comment}</span>
                 </Container>
               )}
               <Link href={`${baseUrl}/${locale}/profile/mybookings`}>
-                👉 Check your reservations here 👈
+                {t("booking.check_link_label")}
               </Link>
             </Text>
           </Section>
           <Text style={paragraph}>
-            Best,
-            <br />- Eventify Team
+            {t("author_remark")}
+            <br />— {t("brand_label")}
           </Text>
           <Hr style={hr} />
           <FooterLogo />
@@ -135,6 +142,7 @@ BookingEmail.PreviewProps = {
   donation: 50,
   name: "Test premise",
   comment: "The quick brown fox jumps over the lazy dog",
+  t: (key: string) => `[${key}]`,
 } satisfies BookingEmailProps;
 
 export async function renderBookingEmail(

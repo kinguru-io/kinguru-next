@@ -1,6 +1,7 @@
 import { TicketIntentStatus, type User } from "@prisma/client";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import { getTranslations } from "next-intl/server";
 import Stripe from "stripe";
 
 import { sendBookingEmail } from "@/lib/actions/booking/email";
@@ -63,6 +64,7 @@ async function premiseSlotsBookingSucceededCb(
     slotInfo,
     comment: meta?.user_comment,
     donation: Number(meta?.user_donation) || 0,
+    t: await getTranslations({ locale, namespace: "emails" }),
   };
 
   await Promise.all([

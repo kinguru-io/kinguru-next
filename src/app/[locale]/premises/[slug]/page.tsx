@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
 import { PremiseGallery } from "./_gallery";
+import { getSession } from "@/auth";
 import {
   BookingViewCard,
   BookingViewProvider,
@@ -19,6 +20,10 @@ import {
 import { MapboxSearchBoxResponseProvider } from "@/components/common/maps/MapboxResponseProvider";
 import { PremiseAmenities } from "@/components/premise";
 import {
+  PersonVerificationForm,
+  QuickAccountCreation,
+} from "@/components/quick-account-creation";
+import {
   AccordionItemToggle,
   Accordion,
   AccordionItem,
@@ -29,6 +34,7 @@ import {
   Loader,
   SpinnerIcon,
 } from "@/components/uikit";
+import { quickUserSignUp } from "@/lib/actions";
 import {
   cancelPremiseSlotsIntent,
   createPremiseSlotsIntent,
@@ -90,6 +96,7 @@ export default async function PremisePage({
     return notFound();
   }
 
+  const session = await getSession();
   const t = await getTranslations("premise");
   const translationsBCT = await getTranslations("booking_cancel_terms");
   const {
@@ -344,6 +351,11 @@ export default async function PremisePage({
                   isOwner={isOwner}
                   isUserOrg={isUserOrg}
                   minimalSlotsToBook={minimalSlotsToBook}
+                  session={session}
+                  accountCreationSlot={
+                    <QuickAccountCreation quickSignUp={quickUserSignUp} />
+                  }
+                  personConfirmationSlot={<PersonVerificationForm />}
                 />
               </Modal>
               <DiscountViewCard discounts={discounts} locale={locale} />
