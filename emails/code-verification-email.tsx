@@ -6,7 +6,6 @@ import {
   Heading,
   Hr,
   Html,
-  Link,
   Preview,
   Section,
   Text,
@@ -24,25 +23,25 @@ import {
 } from "./base-styles";
 import { FooterLogo, HeaderLogo } from "./logos";
 
-type VerificationEmailProps = {
-  linkHref: string;
+type CodeVerificationEmailProps = {
+  code: string;
   t: (...args: any[]) => string;
 };
-export default function VerificationEmail({
-  linkHref,
+export default function CodeVerificationEmail({
+  code,
   t,
-}: VerificationEmailProps) {
+}: CodeVerificationEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>{t("verify.preview")}</Preview>
+      <Preview>{t("verify_code.preview")}</Preview>
       <Body style={main}>
         <Container style={container}>
           <HeaderLogo />
-          <Heading style={heading}>{t("verify.heading")}</Heading>
+          <Heading style={heading}>{t("verify_code.heading")}</Heading>
           <Section style={body}>
             <Text style={paragraph}>
-              <Link href={linkHref}>{t("verify.verification_link_label")}</Link>
+              {t("verify_code.code_label")}: <b>{code}</b>
             </Text>
             <Text style={paragraph}>{t("ignore_notice")}</Text>
           </Section>
@@ -59,14 +58,16 @@ export default function VerificationEmail({
   );
 }
 
-VerificationEmail.PreviewProps = {
-  linkHref: "https://example.com/verify",
+CodeVerificationEmail.PreviewProps = {
+  code: String(Math.random()).slice(2, 8),
   t: (key: string) => `[${key}]`,
-} satisfies VerificationEmailProps;
+} satisfies CodeVerificationEmailProps;
 
-export async function renderVerificationEmail(
-  props: VerificationEmailProps,
+export async function renderCodeVerificationEmail(
+  props: CodeVerificationEmailProps,
   plainText?: boolean,
 ) {
-  return renderAsync(<VerificationEmail {...props} />, { plainText });
+  return renderAsync(<CodeVerificationEmail {...props} />, {
+    plainText,
+  });
 }

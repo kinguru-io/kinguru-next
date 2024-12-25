@@ -4,12 +4,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import formConfig from "./form-config.json";
 import { BaseForm, Button } from "@/components/uikit";
 import type { RevalidateAll } from "@/lib/actions/auth";
-import { checkEmailByRole } from "@/lib/actions/auth/check-email-by-role";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
 import { Link, useRouter } from "@/navigation";
 import { HStack, Stack } from "~/styled-system/jsx";
@@ -32,13 +32,6 @@ export function SignInForm({
   const t = useTranslations("auth.error");
 
   const onSubmit = async ({ email, password }: SigninFormInput) => {
-    const doExist = await checkEmailByRole(email, isCompany);
-
-    if (!doExist) {
-      toast.error(t("invalid_credentials"));
-      return;
-    }
-
     const response = await signIn("credentials", {
       email,
       password,
@@ -55,6 +48,18 @@ export function SignInForm({
       t(response?.status === 401 ? "invalid_credentials" : "unknown_error"),
     );
   };
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+
+    if (!error || error.length === 0) return;
+
+    const id = toast.error(
+      t(error === "OAuthAccountNotLinked" ? "email_exists" : "unknown_error"),
+    );
+
+    return () => toast.remove(id);
+  }, [searchParams]);
 
   return (
     <FormProvider {...methods}>
@@ -86,17 +91,22 @@ function SigninFormInner({ isCompany }: { isCompany?: boolean }) {
         css={{
           gap: "2",
           flexWrap: "wrap-reverse",
-          "& > *": {
-            justifyContent: "center",
+          "& > .button": {
             flexBasis: "44",
             flexGrow: "1",
           },
         }}
       >
-        <Link href={href} className={button({ colorPalette: "secondary" })}>
+        <Link
+          href={href}
+          className={button({
+            colorPalette: "secondary",
+            contentCentered: true,
+          })}
+        >
           {t("sign_up_label")}
         </Link>
-        <Button type="submit" isLoading={isSubmitting}>
+        <Button contentCentered type="submit" isLoading={isSubmitting}>
           {t("sign_in_label")}
         </Button>
       </HStack>

@@ -16,12 +16,11 @@ export function SignInProvidersForm({
 }) {
   const [pending, startTransition] = useTransition();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || undefined;
 
   const signInButtonClicked = (providerId: string) => {
     startTransition(async () => {
       const response = await signIn(providerId, {
-        callbackUrl,
+        callbackUrl: searchParams.get("callbackUrl") || undefined,
         redirect: true,
       });
 

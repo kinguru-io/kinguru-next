@@ -21,6 +21,7 @@ import { BaseForm, Button, Checkbox, SocialLinks } from "@/components/uikit";
 import { OrgRegisterAction } from "@/lib/actions/auth";
 import { OrgRegisterInput, orgRegisterSchema } from "@/lib/validations";
 
+import { css } from "~/styled-system/css";
 import { Flex, Grid, Stack } from "~/styled-system/jsx";
 
 interface EditProfileFormProps {
@@ -39,14 +40,9 @@ export function EditProfileForm({
 }: EditProfileFormProps) {
   const [isPending, startTransition] = useTransition();
   const defaultValues = companyData
-    ? {
-        ...companyData,
-        IBAN: companyData.IBAN.replace(
-          /[a-z0-9]{4}/gi,
-          (x) => `${x} `,
-        ).trimEnd(),
-      }
+    ? { ...companyData, IBAN: formatIBAN(companyData.IBAN) }
     : { name: companyName };
+
   const t = useTranslations("form.common");
   const formT = useTranslations("organization.basic_info_form");
 
@@ -77,7 +73,12 @@ export function EditProfileForm({
     }
 
     if (status === "success") {
-      toast.success(t("updated"));
+      toast.success(t("company_info_saved"), {
+        className: css({
+          fontSize: "xl",
+          md: { marginInlineStart: "20.75rem" }, // to be located at the visual center of the dashboard content
+        }),
+      });
     }
   }, [response]);
 
@@ -237,4 +238,8 @@ function FormFooter({ children }: { children: React.ReactNode }) {
       {children}
     </Flex>
   );
+}
+
+function formatIBAN(iban: string) {
+  return iban.replace(/[a-z0-9]{4}/gi, (x) => `${x} `).trimEnd();
 }

@@ -3,18 +3,14 @@
 import { getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
 import { sendVerificationEmail } from "./email";
-import { FormActionState, createFormAction } from "@/lib/utils";
-import {
-  type UserSignupFormInput,
-  userSignupFormSchema,
-} from "@/lib/validations";
-import { redirect } from "@/navigation";
+import { randomNumbers } from "@/lib/shared/utils";
+import type { UserSignupFormInput } from "@/lib/validations";
 import prisma from "@/server/prisma";
 
-const userSignUpHandler = async ({
+export async function quickUserSignUp({
   email,
   password,
-}: UserSignupFormInput): Promise<FormActionState> => {
+}: UserSignupFormInput) {
   const user = await prisma.user.findUnique({ where: { email } });
   const t = await getTranslations("auth.error");
 
@@ -27,7 +23,7 @@ const userSignUpHandler = async ({
 
   const hashedPassword = await new Argon2id().hash(password);
 
-  const { accounts } = await prisma.user.create({
+  const { email: userEmail } = await prisma.user.create({
     data: {
       email,
       role: "user",
@@ -41,19 +37,24 @@ const userSignUpHandler = async ({
         ],
       },
     },
-    include: { accounts: { select: { emailToken: true } } },
   });
 
-  const token = accounts.at(0)?.emailToken || "";
-  await sendVerificationEmail({ email, token });
+  const date = new Date();
+  date.setMinutes(date.getMinutes() + 30);
 
-  redirect(`/auth/signin?callbackUrl=/profile/edit`);
+  const request = await prisma.verificationRequest.create({
+    data: {
+      identifier: userEmail,
+      token: randomNumbers(6),
+      expires: date,
+    },
+  });
+
+  await sendVerificationEmail({
+    email: request.identifier,
+    token: request.token,
+    isCode: true,
+  });
 
   return null;
-};
-
-export const userSignUp = createFormAction(
-  userSignUpHandler,
-  userSignupFormSchema,
-);
-export type UserSignUpAction = typeof userSignUp;
+}

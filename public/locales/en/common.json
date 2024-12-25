@@ -39,6 +39,7 @@
     "open_main_menu": "Open main menu",
     "close_menu": "Close menu",
     "sign_in": "Sign in",
+    "add_venue": "Add your venue",
     "your_profile": "Profile",
     "mybookings": "My bookings",
     "sign_out": "Sign out",
@@ -124,6 +125,7 @@
       "uploaded_photo": "Uploaded photo",
       "uploaded_item": "Uploaded content",
       "updated": "Updated",
+      "company_info_saved": "Information was saved",
       "incorrect_file_type": "Incorrect file type",
       "incorrect_file_size": "File size exceeded",
       "upload_failed": "File upload error",
@@ -283,6 +285,8 @@
     "rules_agreement": "By clicking on the \"Pay\" button, you accept the rules of the hall.",
     "remove_timeslot_btn": "Delete booking time",
     "booking_modal_heading": "Time slots booking",
+    "booking_modal_register_heading": "Create an account",
+    "booking_modal_verify_heading": "Verify the account",
     "action_successful_booking": "Successfully booked!",
     "action_successfully_blocked_slots": "Slots are successfully blocked!",
     "action_invalid_data": "Invalid data",
@@ -675,6 +679,8 @@
   "verification": {
     "in_progress": "Verifying your email...",
     "bad_token": "Could not verify your email",
+    "incorrect_code": "Incorrect code",
+    "code_expired": "Verification code is expired",
     "email_verified": "Email is verified!",
     "main_page_link": "Main page",
     "profile_page_link": "Go to profile",
@@ -682,7 +688,12 @@
     "email_was_sent_notice": "Your email is not verified yet, so you were redirected on this page. Check your \"Spam\" folder if you didn't receive the notification",
     "resend_btn_label": "Resend the email",
     "unknown_error": "Something went wrong",
-    "too_many_attempts": "Too many attempts. Try {minutes}"
+    "too_many_attempts": "Too many attempts. Try {minutes}",
+    "resend_label": "Resend",
+    "verify_label": "Verify",
+    "code_placeholder": "6-digit code",
+    "code_was_sent_notice": "6-digit code was sent to your email.",
+    "code_was_not_sent_notice": "Didn't receive the code?"
   },
   "faq": {
     "main": {
@@ -722,5 +733,30 @@
     "homepage_label": "Go to homepage",
     "helper": "There's a mistake and we're in the process of resolving it. If you need anything, please get in touch: <mail>support@eventify.today</mail>",
     "go_back": "Go back"
+  },
+  "emails": {
+    "author_remark": "Best,",
+    "brand_label": "Eventify Team",
+    "ignore_notice": "If you didn't request this, please ignore this email.",
+    "from_label": "from",
+    "to_label": "to",
+    "donation_label": "Donation",
+    "comment_label": "Comment",
+    "verify": {
+      "preview": "Visit a link to verify your email",
+      "heading": "Email verification",
+      "verification_link_label": "👉 Click here to verify your email 👈"
+    },
+    "verify_code": {
+      "preview": "Code for email verification",
+      "heading": "Email verification",
+      "code_label": "Verification code"
+    },
+    "booking": {
+      "reservation_at_label": "Reservation at",
+      "preview": "You have your reservation at",
+      "heading": "Congratulations!",
+      "check_link_label": "👉 Check your reservations here 👈"
+    }
   }
 }

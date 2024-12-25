@@ -5,36 +5,52 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { getSession } from "@/auth";
 import { transporter } from "@/lib/email";
 import { logger } from "@/lib/logger";
-import { renderVerificationEmail } from "~/emails/verification-email";
+import { renderCodeVerificationEmail, renderVerificationEmail } from "~/emails";
 
 const verificationEmailLogger = logger.child({ name: "sendVerificationEmail" });
 
 export async function sendVerificationEmail({
   email,
   token,
+  isCode,
 }: {
   email: string;
   token?: string;
+  isCode?: boolean;
 }) {
-  const locale = await getLocale();
-  const t = await getTranslations("verification");
-
+  const [locale, t, mailT] = await Promise.all([
+    getLocale(),
+    getTranslations("verification"),
+    getTranslations("emails"),
+  ]);
   const verificationURL = new URL(`${process.env.SITE_URL}/${locale}/verify`);
-
   const tokenBlob = await obtainToken(token);
 
   if (!tokenBlob.ok) return tokenBlob;
 
-  verificationURL.searchParams.set("token", tokenBlob.token);
+  if (!isCode) {
+    verificationURL.searchParams.set("token", tokenBlob.token);
+  }
 
   const linkHref = verificationURL.toString();
+
+  const emailPromise = isCode
+    ? renderCodeVerificationEmail({ code: tokenBlob.token, t: mailT })
+    : renderVerificationEmail({ linkHref, t: mailT });
+  const textEmailPromise = isCode
+    ? renderCodeVerificationEmail({ code: tokenBlob.token, t: mailT }, true)
+    : renderVerificationEmail({ linkHref, t: mailT }, true);
+
+  const subject = isCode
+    ? mailT("verify_code.heading")
+    : mailT("verify.heading");
 
   try {
     const mailResult = await transporter.sendMail({
       to: email,
-      subject: "Email verification | Eventify",
-      text: await renderVerificationEmail({ linkHref }, true),
-      html: await renderVerificationEmail({ linkHref }),
+      subject: `${subject} | Eventify`,
+      html: await emailPromise,
+      text: await textEmailPromise,
     });
 
     const failed = mailResult.rejected

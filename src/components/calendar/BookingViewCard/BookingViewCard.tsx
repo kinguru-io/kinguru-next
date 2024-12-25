@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, type StripeElementLocale } from "@stripe/stripe-js";
 import { addHours, compareAsc, isValid } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
+import type { Session } from "next-auth";
 import { useLocale, useTranslations } from "next-intl";
 import {
   useCallback,
@@ -59,6 +60,9 @@ type BookingViewCardProps = {
   isUserOrg: boolean;
   inModal?: boolean;
   minimalSlotsToBook?: Premise["minimalSlotsToBook"];
+  session: Session | null;
+  accountCreationSlot: React.ReactNode;
+  personConfirmationSlot: React.ReactNode;
 };
 
 export function BookingViewCard({
@@ -72,6 +76,9 @@ export function BookingViewCard({
   isUserOrg,
   inModal = false,
   minimalSlotsToBook,
+  session,
+  accountCreationSlot,
+  personConfirmationSlot,
 }: BookingViewCardProps) {
   const locale = useLocale() as StripeElementLocale;
   const t = useTranslations("booking_view");
@@ -224,6 +231,28 @@ export function BookingViewCard({
     });
   }, [intentResponse?.paymentIntentId]);
 
+  if (inModal && session === null) {
+    return (
+      <section className={stack({ gap: "4", minHeight: "80" })}>
+        <h3 className={css({ fontWeight: "bold" })}>
+          {t("booking_modal_register_heading")}
+        </h3>
+        {accountCreationSlot}
+      </section>
+    );
+  }
+
+  if (inModal && session && !session.user?.confirmed) {
+    return (
+      <section className={stack({ gap: "4", minHeight: "80" })}>
+        <h3 className={css({ fontWeight: "bold" })}>
+          {t("booking_modal_verify_heading")}
+        </h3>
+        {personConfirmationSlot}
+      </section>
+    );
+  }
+
   if (inModal && intentResponse?.clientSecret) {
     return (
       <section className={stack({ gap: "4", minHeight: "80" })}>
@@ -346,6 +375,9 @@ export function BookingViewCard({
             isOwner={isOwner}
             isUserOrg={isUserOrg}
             minimalSlotsToBook={minimalSlotsToBook}
+            session={session}
+            accountCreationSlot={accountCreationSlot}
+            personConfirmationSlot={personConfirmationSlot}
             inModal
           />
         </ModalWindow>

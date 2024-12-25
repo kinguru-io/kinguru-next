@@ -21,11 +21,12 @@ export function Button({
   disabled = false,
   className,
   rounded,
+  contentCentered,
   ...restProps
 }: ButtonProps) {
   const buttonClassName = cx(
     className,
-    button({ colorPalette, size, centered, rounded }),
+    button({ colorPalette, size, centered, rounded, contentCentered }),
   );
 
   return (

@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { getStripe } from "@/lib/shared/stripe";
+import { updateUserConfirmation } from "@/lib/actions";
 import prisma from "@/server/prisma";
 
 export async function verifyEmail(token: string) {
@@ -13,27 +13,11 @@ export async function verifyEmail(token: string) {
     return { ok: false, message: t("bad_token") };
   }
 
-  const { name, email, confirmed, role } = account.user;
-
-  if (confirmed) {
+  if (account.user.confirmed) {
     return { ok: true, message: t("email_verified") };
   }
 
-  const stripe = getStripe();
-
-  const customer =
-    role === "user"
-      ? await stripe.customers.create({ email, name: name || "" })
-      : null;
-
-  await prisma.user.update({
-    where: { id: account.userId },
-    data: {
-      emailVerified: new Date(),
-      confirmed: true,
-      stripeCustomerId: customer?.id || null,
-    },
-  });
+  await updateUserConfirmation(account.user);
 
   return { ok: true, message: t("email_verified") };
 }
