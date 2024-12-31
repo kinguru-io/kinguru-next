@@ -170,7 +170,8 @@
       "heading": "Forgot your password?",
       "email_placeholder": "Enter email",
       "submit": "Submit",
-      "helper": "Enter the email address used for login. We will send you an email with a link to create a new password"
+      "helper": "Wpisz adres e-mail użyty do logowania. \nWyślemy do Ciebie e-mail z linkiem umożliwiającym utworzenie nowego hasła",
+      "email_not_found": "Użytkownik nie istnieje"
     },
     "signin_form": {
       "email": "Email",
@@ -193,7 +194,16 @@
       "invalid_credentials": "Adres e-mail lub hasło są nieprawidłowe",
       "unknown_error": "Coś poszło nie tak"
     },
-    "alternative_sign_in_label": "Lub zaloguj się za pomocą"
+    "alternative_sign_in_label": "Lub zaloguj się za pomocą",
+    "change_password": {
+      "confirmPassword": "Potwierdź hasło",
+      "do_not_match": "Hasła nie pasują",
+      "password": "Hasło",
+      "password_changed": "Hasło zmienione!",
+      "submit": "Zmiana",
+      "unknown_error": "Coś poszło nie tak"
+    },
+    "email_sent": "E-mail wysłany!"
   },
   "form": {
     "common": {
@@ -799,6 +809,17 @@
       "code_label": "Kod weryfikacyjny",
       "heading": "Weryfikacja e-mailowa",
       "preview": "Kod do weryfikacji e-mailowej"
+    },
+    "reset_password": {
+      "heading": "Resetowanie hasła",
+      "preliminary": "Otrzymaliśmy prośbę o zmianę hasła. \nMożesz zmienić swoje hasło klikając w poniższy link (dostępny przez 1 godzinę):",
+      "preview": "Odwiedź link, aby zresetować hasło",
+      "reset_link_label": "Kliknij, aby zmienić hasło"
     }
+  },
+  "reset_process": {
+    "bad_token": "Nie udało się zweryfikować Twojej prośby",
+    "expired_link": "Twoje żądanie wygasło",
+    "request_again": "Poproś ponownie"
   }
 }

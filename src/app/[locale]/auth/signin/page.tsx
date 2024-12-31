@@ -3,6 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { SignInForm } from "./_sign-in-form/form";
 import { SignInProvidersForm } from "./sign-in-providers-form";
 import { revalidateAll } from "@/lib/actions";
+import { Link } from "@/navigation";
+import { css } from "~/styled-system/css";
 import { InlineBox } from "~/styled-system/jsx";
 
 export default async function SignInUser() {
@@ -29,6 +31,15 @@ export default async function SignInUser() {
           />
         </>
       )}
+      <Link
+        href="/auth/reset"
+        className={css({
+          textAlign: "center",
+          _hoverOrFocusVisible: { textDecoration: "underline" },
+        })}
+      >
+        {t("signin_form.forgot_password")}
+      </Link>
     </>
   );
 }

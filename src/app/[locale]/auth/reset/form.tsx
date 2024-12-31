@@ -2,62 +2,64 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
-import { useForm, type UseFormRegister } from "react-hook-form";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import toast from "react-hot-toast";
+import { z } from "zod";
 import { Button, Input } from "@/components/uikit";
-import { type ResetPasswordAction } from "@/lib/actions";
-import { FormActionState } from "@/lib/utils";
-import { resetFormSchema, type ResetFormInput } from "@/lib/validations";
+import { requestPasswordReset } from "@/lib/actions/auth/reset";
+import { useRouter } from "@/navigation";
+import { stack } from "~/styled-system/patterns";
 
-export function ResetForm({
-  resetPassword,
-}: {
-  resetPassword: ResetPasswordAction;
-}) {
-  const {
-    register,
-    formState: { isValid },
-  } = useForm<ResetFormInput>({
-    mode: "onBlur",
-    resolver: zodResolver(resetFormSchema),
+const emailSchema = z.object({
+  email: z.string().email(),
+});
+
+type EmailSchema = z.infer<typeof emailSchema>;
+
+export function ResetForm() {
+  const router = useRouter();
+  const methods = useForm<EmailSchema>({
+    mode: "all",
+    resolver: zodResolver(emailSchema),
   });
-  const [state, formAction] = useFormState<FormActionState, FormData>(
-    resetPassword,
-    null,
-  );
 
-  useEffect(() => {
-    console.log(state?.message);
-  }, [state]);
+  const onSubmit = async (input: EmailSchema) => {
+    const result = await requestPasswordReset(input);
+
+    if (result.ok) {
+      toast.success(result.message);
+      return router.replace("/auth/signin");
+    }
+
+    if (!result.ok) {
+      toast.error(result.message);
+    }
+  };
 
   return (
-    <form action={formAction}>
-      <ResetFormInner register={register} isValid={isValid} />
-    </form>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <ResetFormInner />
+      </form>
+    </FormProvider>
   );
 }
 
-function ResetFormInner({
-  register,
-  isValid,
-}: {
-  register: UseFormRegister<ResetFormInput>;
-  isValid: boolean;
-}) {
+function ResetFormInner() {
   const t = useTranslations("auth.reset_form");
-  const { pending } = useFormStatus();
+  const { formState, register } = useFormContext<EmailSchema>();
 
   return (
-    <>
+    <fieldset className={stack({ gap: "4" })} disabled={formState.isSubmitting}>
       <Input
+        type="email"
+        inputMode="email"
         placeholder={t("email_placeholder")}
-        disabled={pending}
         {...register("email")}
       />
-      <Button type="submit" isLoading={pending} disabled={!isValid}>
+      <Button type="submit" isLoading={formState.isSubmitting} contentCentered>
         {t("submit")}
       </Button>
-    </>
+    </fieldset>
   );
 }
