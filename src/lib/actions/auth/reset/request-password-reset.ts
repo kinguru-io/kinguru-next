@@ -3,6 +3,7 @@
 import { addHours, isBefore } from "date-fns";
 import { getLocale, getTranslations } from "next-intl/server";
 import { v4 as uuid } from "uuid";
+import { verificationRequestPostfix } from "../config";
 import { transporter } from "@/lib/email";
 import { logger } from "@/lib/logger";
 import prisma from "@/server/prisma";
@@ -18,7 +19,7 @@ export async function requestPasswordReset({ email }: { email: string }) {
     return { ok: false, message: t("reset_form.email_not_found") };
   }
 
-  const identifier = `${user.email}_password_reset`;
+  const identifier = `${user.email}${verificationRequestPostfix.passwordChange}`;
 
   const request = await prisma.verificationRequest.findFirst({
     where: { identifier },
