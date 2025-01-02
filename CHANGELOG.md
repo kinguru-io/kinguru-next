@@ -1,3 +1,11 @@
+# [0.70.0](https://github.com/kinguru-io/kinguru-next/compare/v0.69.0...v0.70.0) (2025-01-02)
+
+
+### Features
+
+* reset password feature ([c3c0bd7](https://github.com/kinguru-io/kinguru-next/commit/c3c0bd76593857de6bb994c29bf5970bdbd90576))
+* static routes for filtered premises by type ([ed91a0a](https://github.com/kinguru-io/kinguru-next/commit/ed91a0ab13e53d88085a6dbf44d319d30f8d60ae))
+
 # [0.69.0](https://github.com/kinguru-io/kinguru-next/compare/v0.68.0...v0.69.0) (2024-12-25)
 
 
