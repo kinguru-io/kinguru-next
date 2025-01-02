@@ -1,5 +1,3 @@
-"use server";
-
 import type { ElasticAggs } from "./es-types";
 import { esClient } from "@/esClient";
 

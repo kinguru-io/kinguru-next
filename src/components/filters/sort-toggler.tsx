@@ -1,33 +1,35 @@
+"use client";
+
 import {
   ArrowIcon,
   Dropdown,
   DropdownInitiator,
   DropdownMenu,
 } from "@/components/uikit";
-import { Link } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import { css, cx } from "~/styled-system/css";
 import { input } from "~/styled-system/recipes";
 
-export function SortToggler<T extends { value: string; label: string }>({
-  pathname,
+const buttonClassName = cx(
+  input().label,
+  css({ whiteSpace: "nowrap", justifyContent: "space-between" }),
+);
+
+export function SortToggler({
   searchParams,
   items,
   defaultLabel,
 }: {
-  pathname: string;
   searchParams: Record<string, any>;
-  items: T[];
+  items: Array<{ value: string; label: string }>;
   defaultLabel: string;
 }) {
-  const btnClassName = cx(
-    input().label,
-    css({ whiteSpace: "nowrap", justifyContent: "space-between" }),
-  );
+  const pathname = usePathname();
 
   return (
     <Dropdown size="auto" className={css({ flexGrow: "1" })}>
       <DropdownInitiator>
-        <button className={btnClassName} type="button">
+        <button className={buttonClassName} type="button">
           {defaultLabel}
           <ArrowIcon direction="down" className={css({ fontSize: "xs" })} />
         </button>

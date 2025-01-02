@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import { FilterControlWrapper } from "./_filter-client-entry";
+import { FilterControlWrapper } from "./filter-entry";
+import { ResetFilterButton } from "./reset-filter-button";
 import { FilterElement, type FilterConfig } from "@/components/filters";
 import { Button, Filter, FilterGroup } from "@/components/uikit";
 import {
@@ -7,10 +8,8 @@ import {
   type PremiseAggregations,
 } from "@/lib/actions/premise-filter";
 import { amenityTagKeyMap } from "@/lib/shared/config/amenities";
-import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
-import { button } from "~/styled-system/recipes";
 
 const filters: Array<FilterConfig<PremiseAggregations>> = [
   {
@@ -74,14 +73,7 @@ export async function PremiseFilter() {
         })}
       </Filter>
       <FilterControlWrapper>
-        <Link
-          className={button({ colorPalette: "dark" })}
-          href="/premises"
-          prefetch={false}
-          replace
-        >
-          {t("reset_btn_label")}
-        </Link>
+        <ResetFilterButton label={t("reset_btn_label")} />
         <Button className={css({ md: { display: "none" } })}>
           {t("show_result_btn_label")}
         </Button>

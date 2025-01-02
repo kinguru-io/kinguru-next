@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { PremiseTypeListing } from "./_widgets/premise-type-listing/premise-type-listing";
 import {
   TimeRangeHero,
   TimeRangeLink,
@@ -26,6 +27,7 @@ export default async function RootPage() {
           name="search_datetime"
         />
       </TimeRangeHero>
+      <PremiseTypeListing />
       <section className={container({ marginBlock: "8" })}>
         <h2
           className={css({

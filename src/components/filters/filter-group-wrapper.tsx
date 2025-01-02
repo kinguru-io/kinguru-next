@@ -26,7 +26,13 @@ export function FilterGroupWrapper({
       wrapperRef.current.querySelectorAll<HTMLInputElement>("input");
 
     inputs.forEach((input) => {
-      input.checked = searchParams.has(input.name, input.value);
+      // to sync at /premises/[type]
+      const isStaticPath =
+        input.name === "type" &&
+        pathname.replace("/premises/", "") === input.value;
+
+      input.checked = searchParams.has(input.name, input.value) || isStaticPath;
+      input.disabled = isStaticPath;
     });
   }, [wrapperRef, searchParams]);
 

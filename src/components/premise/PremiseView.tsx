@@ -61,7 +61,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
         </Tag>
       </PremiseTags>
       <PremiseContent
-        href={href || `/premises/${slug}`}
+        href={href || `/premise/${slug}`}
         label={t("go_to_premise_page")}
       >
         <PremiseTitle>{name}</PremiseTitle>
@@ -88,7 +88,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
                         fill
                       />
                       <Link
-                        href={href || `/premises/${slug}`}
+                        href={href || `/premise/${slug}`}
                         className={linkOverlay()}
                         tabIndex={-1}
                       >
@@ -111,7 +111,7 @@ export async function PremiseView({ id, href }: { id: string; href?: string }) {
             color: "success.darker",
             _hoverOrFocusVisible: { textDecoration: "underline" },
           })}
-          href={`/premises/${slug}`}
+          href={`/premise/${slug}`}
           target="_blank"
         >
           {t("go_to_premise_page")} <ArrowIcon direction="right" />

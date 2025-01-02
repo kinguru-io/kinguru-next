@@ -90,6 +90,10 @@ export default defineConfig({
             value:
               "linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.38) 100%)",
           },
+          "darken-to-bottom-darker": {
+            value:
+              "linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.9) 100%)",
+          },
         },
         shadows: {
           cardShadow: { value: "7px 7px 20px 6px rgba(0, 0, 0, 0.08)" },

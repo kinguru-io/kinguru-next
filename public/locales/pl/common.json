@@ -56,7 +56,9 @@
   "main": {
     "heading": "Znajdź idealną lokalizację",
     "heading_popular": "Popularne oferty",
-    "show_more": "Show more"
+    "show_more": "Pokaż więcej",
+    "heading_premise_types": "Zbiór sal",
+    "hide_shown": "Ukrywać"
   },
   "footer": {
     "upcoming_events": "Upcoming events",
@@ -638,7 +640,11 @@
     "community_centers": "Domy kultury (fundacje, organizacje)",
     "special_events_etc": "Sale bankietowe, osiedla na wesela itp",
     "commercial_kitchens": "Commercial kitchens",
-    "else": "W przeciwnym razie"
+    "else": "W przeciwnym razie",
+    "birthday": "Sale urodzinowe",
+    "group_meetings": "Sale do spotkań grupowych",
+    "sport_hall": "Hala Sportowa",
+    "yoga_hall": "Hala Jogi"
   },
   "booking_cancel_terms": {
     "very_flexible": "Bardzo elastyczne",

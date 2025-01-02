@@ -37,7 +37,6 @@ export async function Listing({
           {t("variants_found", { total })}
         </InlineBox>
         <SortToggler
-          pathname="/premises"
           searchParams={searchParams}
           items={sortItems}
           defaultLabel={t(`sorting.${sort}`)}
@@ -48,7 +47,6 @@ export async function Listing({
         take={defaultSizings.size}
         initialSize={defaultSizings.size}
         total={total}
-        pathname="/premises"
         searchParams={searchParams}
         label={t("show_more")}
       />

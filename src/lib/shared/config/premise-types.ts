@@ -1,6 +1,6 @@
 export type PremiseType = keyof IntlMessages["premise_types"];
 
-export const premiseTypes: Array<PremiseType> = [
+export const premiseTypes: PremiseType[] = [
   "dance_halls",
   "gyms",
   "photo_studios",
@@ -20,5 +20,16 @@ export const premiseTypes: Array<PremiseType> = [
   "community_centers",
   "special_events_etc",
   "commercial_kitchens",
+  "sport_hall",
+  "yoga_hall",
+  "group_meetings",
+  "birthday",
   "else",
 ];
+
+/**
+ * @description Should be updated if bucket is changed. `kinguru-storage` is used. Extension `.jpg` is default
+ */
+export function getPremiseTypePreviewLink(type: string, extension?: "jpg") {
+  return `https://kinguru-storage.s3.pl-waw.scw.cloud/premises/static/types/${type}.${extension || "jpg"}`;
+}

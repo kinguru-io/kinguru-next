@@ -56,7 +56,9 @@
   "main": {
     "heading": "Find your ideal event space",
     "heading_popular": "Popular offers",
-    "show_more": "Show more"
+    "heading_premise_types": "Collection of halls",
+    "show_more": "Show more",
+    "hide_shown": "Hide"
   },
   "footer": {
     "upcoming_events": "Upcoming events",
@@ -638,6 +640,10 @@
     "community_centers": "Community centers (foundations, organizations)",
     "special_events_etc": "Banquet halls, estates for weddings, etc",
     "commercial_kitchens": "Commercial kitchens",
+    "sport_hall": "Sport Hall",
+    "yoga_hall": "Yoga Hall",
+    "group_meetings": "Halls for group meetings",
+    "birthday": "Birthday halls",
     "else": "Else"
   },
   "booking_cancel_terms": {
