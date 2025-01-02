@@ -2,6 +2,7 @@
 
 import { getTranslations } from "next-intl/server";
 import { Argon2id } from "oslo/password";
+import { verificationRequestPostfix } from "./config";
 import { sendVerificationEmail } from "./email";
 import { randomNumbers } from "@/lib/shared/utils";
 import type { UserSignupFormInput } from "@/lib/validations";
@@ -44,14 +45,14 @@ export async function quickUserSignUp({
 
   const request = await prisma.verificationRequest.create({
     data: {
-      identifier: userEmail,
+      identifier: `${userEmail}${verificationRequestPostfix.emailVerification}`,
       token: randomNumbers(6),
       expires: date,
     },
   });
 
   await sendVerificationEmail({
-    email: request.identifier,
+    email: userEmail,
     token: request.token,
     isCode: true,
   });

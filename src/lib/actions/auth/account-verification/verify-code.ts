@@ -2,6 +2,7 @@
 
 import { isBefore } from "date-fns";
 import { getTranslations } from "next-intl/server";
+import { verificationRequestPostfix } from "../config";
 import { getSession } from "@/auth";
 import { updateUserConfirmation } from "@/lib/actions/auth";
 import prisma from "@/server/prisma";
@@ -21,10 +22,12 @@ export async function verifyCode(token: string) {
   if (Number.isNaN(Number(token)))
     return { ok: false, message: t("incorrect_code") };
 
+  const identifier = `${session.user.email}${verificationRequestPostfix.emailVerification}`;
+
   const request = await prisma.verificationRequest.findUnique({
     where: {
       identifier_token: {
-        identifier: session.user.email,
+        identifier,
         token,
       },
     },
@@ -35,7 +38,7 @@ export async function verifyCode(token: string) {
   }
 
   const deleteTokensPromise = prisma.verificationRequest.deleteMany({
-    where: { identifier: session.user.email },
+    where: { identifier },
   });
 
   if (isBefore(request.expires, new Date())) {

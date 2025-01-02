@@ -56,7 +56,9 @@
   "main": {
     "heading": "Find your ideal event space",
     "heading_popular": "Popular offers",
-    "show_more": "Show more"
+    "heading_premise_types": "Collection of halls",
+    "show_more": "Show more",
+    "hide_shown": "Hide"
   },
   "footer": {
     "upcoming_events": "Upcoming events",
@@ -88,7 +90,9 @@
     "sign_in_label": "Sign in",
     "sign_up_label": "Register",
     "reset_password_label": "Forgot password?",
+    "email_sent": "Email sent!",
     "reset_form": {
+      "email_not_found": "User does not exist",
       "heading": "Forgot your password?",
       "email_placeholder": "Enter email",
       "submit": "Submit",
@@ -114,6 +118,14 @@
       "email_or_name_exist": "Email or company name is already registered",
       "invalid_credentials": "Email or password is invalid",
       "unknown_error": "Something went wrong"
+    },
+    "change_password": {
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Change",
+      "do_not_match": "Passwords do not match",
+      "unknown_error": "Something went wrong",
+      "password_changed": "Password changed!"
     },
     "alternative_sign_in_label": "Or sign in with"
   },
@@ -628,6 +640,10 @@
     "community_centers": "Community centers (foundations, organizations)",
     "special_events_etc": "Banquet halls, estates for weddings, etc",
     "commercial_kitchens": "Commercial kitchens",
+    "sport_hall": "Sport Hall",
+    "yoga_hall": "Yoga Hall",
+    "group_meetings": "Halls for group meetings",
+    "birthday": "Birthday halls",
     "else": "Else"
   },
   "booking_cancel_terms": {
@@ -677,7 +693,7 @@
     }
   },
   "verification": {
-    "in_progress": "Verifying your email...",
+    "in_progress": "Verifying...",
     "bad_token": "Could not verify your email",
     "incorrect_code": "Incorrect code",
     "code_expired": "Verification code is expired",
@@ -694,6 +710,11 @@
     "code_placeholder": "6-digit code",
     "code_was_sent_notice": "6-digit code was sent to your email.",
     "code_was_not_sent_notice": "Didn't receive the code?"
+  },
+  "reset_process": {
+    "bad_token": "Could not verify your request",
+    "expired_link": "Your request is expired",
+    "request_again": "Request again"
   },
   "faq": {
     "main": {
@@ -757,6 +778,12 @@
       "preview": "You have your reservation at",
       "heading": "Congratulations!",
       "check_link_label": "👉 Check your reservations here 👈"
+    },
+    "reset_password": {
+      "preview": "Visit a link to reset the password",
+      "heading": "Password reset",
+      "preliminary": "We've receive the request for the password change. You may change your password by visiting the link below (available for 1 hour):",
+      "reset_link_label": "Click to change your password"
     }
   }
 }

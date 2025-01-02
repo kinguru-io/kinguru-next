@@ -102,7 +102,7 @@ function Slot({ slot }: SlotProps) {
       <Flex justifyContent="space-between" alignItems="baseline">
         <Link
           className="title"
-          href={`/premises/${slot.premise.slug}`}
+          href={`/premise/${slot.premise.slug}`}
           target="_blank"
           prefetch={false}
         >

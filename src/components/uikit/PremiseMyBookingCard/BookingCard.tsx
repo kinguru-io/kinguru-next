@@ -29,7 +29,7 @@ const BookingCard = ({ booking, imageSrc }: BookingCardProps) => {
         <Image src={imageSrc} fill alt={booking.premise.name} />
       </AspectRatio>
       <PremiseMyBookingCardContent
-        href={`/premises/${booking.premise.slug}`}
+        href={`/premise/${booking.premise.slug}`}
         label={booking.premise.name}
       >
         <div>

@@ -49,9 +49,8 @@ export async function Header() {
               <ModalContent
                 signOutLabel={t("sign_out")}
                 localeLabel={t("lang_menu")}
-              >
-                <CompanyRegisterLink />
-              </ModalContent>
+                marketingSlot={<CompanyRegisterLink />}
+              />
             }
           >
             <Suspense
@@ -71,17 +70,17 @@ export async function Header() {
 async function ModalContent({
   signOutLabel,
   localeLabel,
-  children,
+  marketingSlot,
 }: {
   signOutLabel: string;
   localeLabel: string;
-  children?: React.ReactNode;
+  marketingSlot?: React.ReactNode;
 }) {
   const session = await getSession();
 
   return (
     <Stack css={{ flexDirection: "column", gap: 4, height: "full" }}>
-      {children}
+      {!session && marketingSlot}
       <LanguageSelector label={localeLabel} />
       <Stack marginBlockStart="auto" gap="6">
         <SocialMediaLinks />

@@ -1,15 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import { ResetForm } from "./form";
-import { resetPassword } from "@/lib/actions";
+import { BackToSignIn } from "../_widgets/back-to-signin";
 
 export default async function Page() {
-  const t = await getTranslations("auth.reset_form");
+  const t = await getTranslations("auth");
 
   return (
     <>
-      <h1>{t("heading")}</h1>
-      <ResetForm resetPassword={resetPassword} />
-      <p>{t("helper")}</p>
+      <BackToSignIn label={t("sign_in_heading")} />
+      <h1>{t("reset_form.heading")}</h1>
+      <ResetForm />
+      <p>{t("reset_form.helper")}</p>
     </>
   );
 }

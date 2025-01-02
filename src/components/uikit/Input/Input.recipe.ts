@@ -7,7 +7,7 @@ export const inputSlot = defineSlotRecipe({
   base: {
     label: {
       position: "relative",
-      display: "inline-flex",
+      display: "flex",
       gap: "2",
       width: "full",
       fontSize: "px15",
