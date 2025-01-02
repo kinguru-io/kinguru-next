@@ -5,10 +5,6 @@ import {
 } from "@/lib/shared/config/premise-types";
 import { redirect } from "@/navigation";
 
-export function generateStaticParams() {
-  return premiseTypes.map((type) => ({ type }));
-}
-
 export default function PremiseByTypeListingPage({
   params: { type },
   searchParams,
