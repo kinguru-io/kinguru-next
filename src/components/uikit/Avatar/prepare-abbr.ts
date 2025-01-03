@@ -1,4 +1,4 @@
-const firstLetterRegex = /(?<=\s|^)[\w\d]/gm;
+const firstLetterRegex = /\b[\w\d]/g;
 
 export function prepareAbbreviation(name: string) {
   const matches = name.match(firstLetterRegex);
