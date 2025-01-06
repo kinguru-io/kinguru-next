@@ -45,6 +45,18 @@ Content-Type: application/json
   }
 }
 
+### Get es content
+GET https://localhost:9202/kinguru.public.premise_fulfilled/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": []
+    }
+  }
+}
+
 ### Update PSQL connector
 PUT http://localhost:8083/connectors/inventory-connector/config
 Content-Type: application/json

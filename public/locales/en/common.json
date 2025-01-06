@@ -503,7 +503,8 @@
             "rulesMin_required": "The amount of symbols for rules should be at least 10",
             "bookingCancelTerm_required": "Booking Cancellation Terms are required"
           }
-        }
+        },
+        "booking_confirmation": "With confirmation (each booking should be confirmed)"
       }
     },
     "my_bookings": {

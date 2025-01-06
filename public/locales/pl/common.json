@@ -503,7 +503,8 @@
           "arbitrary": "Arbitralny"
         },
         "booking_amount": "Minimalna liczba slotów do rezerwacji",
-        "booking_amount_input_label": "Liczba slotów"
+        "booking_amount_input_label": "Liczba slotów",
+        "booking_confirmation": "Z potwierdzeniem (każda rezerwacja powinna zostać potwierdzona)"
       }
     },
     "my_bookings": {
