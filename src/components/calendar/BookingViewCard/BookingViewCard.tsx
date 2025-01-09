@@ -42,7 +42,7 @@ import {
 } from "@/lib/utils/premise-booking";
 import { getSlotDiscount, processOrderTotalDiscounts } from "@/lib/utils/price";
 import { css } from "~/styled-system/css";
-import { HStack, Stack } from "~/styled-system/jsx";
+import { Flex, HStack, Stack } from "~/styled-system/jsx";
 import { stack } from "~/styled-system/patterns";
 
 const stripePromise = loadStripe(
@@ -203,12 +203,15 @@ export function BookingViewCard({
     });
   };
 
-  const paymentSucceed = () => {
+  const paymentSucceed = (notify = true) => {
     setOpen(false);
     resetSlots();
 
     void revalidateFn();
-    toast.success(t("action_successful_booking"));
+
+    if (notify) {
+      toast.success(t("action_successful_booking"));
+    }
   };
 
   const cancelPayment = useCallback(() => {
@@ -249,6 +252,42 @@ export function BookingViewCard({
           {t("booking_modal_verify_heading")}
         </h3>
         {personConfirmationSlot}
+      </section>
+    );
+  }
+
+  if (inModal && intentResponse?.clientSecret === "not_approved") {
+    return (
+      <section className={stack({ gap: "4" })}>
+        <HStack gap="4" justifyContent="space-between">
+          <h3 className={css({ fontWeight: "bold" })}>
+            {t("booking_modal_confirmation_heading")}
+          </h3>
+        </HStack>
+        <p className={css({ maxWidth: "sm" })}>{t("booking_request_sent")}</p>
+        <Flex css={{ gap: "2", marginBlockStart: "auto" }}>
+          <Button
+            type="button"
+            onClick={cancelPayment}
+            colorPalette="secondary"
+            rounded={false}
+            isLoading={isPending}
+            className={css({ paddingInline: "3", flexShrink: "0" })}
+          >
+            {t("cancel_payment_btn")}
+          </Button>
+          <Button
+            type="button"
+            onClick={() => paymentSucceed(false)}
+            colorPalette="primary"
+            contentCentered
+            rounded={false}
+            isLoading={isPending}
+            className={css({ flexBasis: "full" })}
+          >
+            {t("close_btn")}
+          </Button>
+        </Flex>
       </section>
     );
   }

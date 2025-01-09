@@ -106,7 +106,11 @@ const BookingsSection = async ({
                 },
               }}
             >
-              <BookingCard booking={booking} imageSrc={imageSrc} />
+              <BookingCard
+                booking={booking}
+                imageSrc={imageSrc}
+                isCompany={isUserOrg}
+              />
               <Accordion marginBlockEnd="3.5">
                 {booking.comment && (
                   <AccordionItem>

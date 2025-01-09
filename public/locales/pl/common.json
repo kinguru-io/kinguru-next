@@ -278,7 +278,10 @@
     "donation_amount_input_label": "Darowizna, zł",
     "donation_amount_input_notice": "Możesz zwiększyć kwotę darowizny:",
     "donation_from_label": "od",
-    "donation_slot_price_label": "Darowizna \nod {price}"
+    "donation_slot_price_label": "Darowizna \nod {price}",
+    "booking_modal_confirmation_heading": "Zapytanie o rezerwację",
+    "booking_request_sent": "Twoja prośba musi zostać zatwierdzona przez właściciela lokalu. \nGdy proces płatności będzie mógł być kontynuowany, otrzymasz wiadomość e-mail",
+    "close_btn": "OK"
   },
   "price": {
     "total": "Całkowity",
@@ -536,7 +539,15 @@
       "canceled_booking_heading": "Anulowane rezerwacje",
       "tab_booked_active": "Aktywny",
       "tab_booked_canceled": "Odwołany",
-      "comment_label": "Komentarz"
+      "comment_label": "Komentarz",
+      "action_successful_booking": "Pomyślnie zarezerwowano!",
+      "booking_approved": "Zatwierdzony",
+      "confirm_booking_btn_label": "Potwierdź rezerwację",
+      "confirmation_not_received": "Nie otrzymano potwierdzenia",
+      "confirmed": "Pomyślnie potwierdzono!",
+      "pay_button_label": "Płacić",
+      "payment_not_received": "Płatność nie została otrzymana",
+      "unknown_error": "Coś poszło nie tak"
     }
   },
   "amenities": {
@@ -799,7 +810,9 @@
       "check_link_label": "👉 Sprawdź swoje rezerwacje tutaj 👈",
       "heading": "Gratulacje!",
       "preview": "Masz rezerwację w",
-      "reservation_at_label": "Rezerwacje w"
+      "reservation_at_label": "Rezerwacje w",
+      "confirmation_company_label": "⚠️ Regulamin Twojego lokalu wymaga potwierdzenia w przypadku każdej rezerwacji. \nPrzejrzyj rezerwację, korzystając z linku powyżej",
+      "confirmation_user_label": "⚠️ Twoja rezerwacja musi zostać zatwierdzona przez właściciela lokalu. \nGdy proces płatności będzie mógł być kontynuowany, otrzymasz wiadomość e-mail"
     },
     "brand_label": "Zespół Eventify",
     "comment_label": "Komentarz",
@@ -822,6 +835,11 @@
       "preliminary": "Otrzymaliśmy prośbę o zmianę hasła. \nMożesz zmienić swoje hasło klikając w poniższy link (dostępny przez 1 godzinę):",
       "preview": "Odwiedź link, aby zresetować hasło",
       "reset_link_label": "Kliknij, aby zmienić hasło"
+    },
+    "booking_confirmed": {
+      "check_link_label": "👉 Kontynuuj płatność tutaj 👈",
+      "heading": "Twoja prośba o rezerwację została zatwierdzona",
+      "preview": "Twoja prośba o rezerwację została zatwierdzona"
     }
   },
   "reset_process": {

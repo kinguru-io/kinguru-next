@@ -20,3 +20,6 @@ export {
   type GetBookingsViaWebsite,
   type GetCanceledBookingsByRole,
 } from "./get-data";
+
+export { restoreStripeIntent } from "./restore-stripe-intent";
+export { confirmBooking } from "./confirm-booking";

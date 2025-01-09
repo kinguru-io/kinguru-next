@@ -65,6 +65,13 @@ import {
 import { container } from "~/styled-system/patterns";
 import { button } from "~/styled-system/recipes";
 
+const alertBaseClasses = css.raw({
+  fontSize: "sm",
+  color: "dark",
+  borderRadius: "sm",
+  padding: "4",
+});
+
 export default async function PremisePage({
   params: { slug, locale },
 }: {
@@ -96,9 +103,13 @@ export default async function PremisePage({
     return notFound();
   }
 
-  const session = await getSession();
-  const t = await getTranslations("premise");
-  const translationsBCT = await getTranslations("booking_cancel_terms");
+  const [session, t, translationsBCT, translationsBookingView] =
+    await Promise.all([
+      getSession(),
+      getTranslations("premise"),
+      getTranslations("booking_cancel_terms"),
+      getTranslations("booking_view"),
+    ]);
   const {
     name,
     venue,
@@ -112,6 +123,7 @@ export default async function PremisePage({
     area,
     capacity,
     minimalSlotsToBook,
+    withConfirmation,
   } = premise;
 
   const aggregatedPrices = openHours.reduce((borders, { price }) => {
@@ -309,25 +321,32 @@ export default async function PremisePage({
                   </h2>
                 }
                 subheadingSlot={
-                  (minimalSlotsToBook || 0) > 0 && (
-                    <span
-                      className={css({
-                        fontSize: "sm",
-                        textAlign: "center",
-                        bgColor: "danger.lighter",
-                        color: "dark",
-                        borderRadius: "sm",
-                        padding: "4",
-                        position: "sticky",
-                        top: "2",
-                        zIndex: "1",
-                      })}
-                    >
-                      {t("minimum_slots_to_book", {
-                        amount: minimalSlotsToBook,
-                      })}
-                    </span>
-                  )
+                  <>
+                    {withConfirmation && (
+                      <span
+                        className={css(alertBaseClasses, {
+                          bgColor: "secondary.lighter",
+                        })}
+                      >
+                        ⚠️ {translationsBookingView("booking_request_sent")}
+                      </span>
+                    )}
+                    {(minimalSlotsToBook || 0) > 0 && (
+                      <span
+                        className={css(alertBaseClasses, {
+                          textAlign: "center",
+                          bgColor: "danger.lighter",
+                          position: "sticky",
+                          top: "2",
+                          zIndex: "1",
+                        })}
+                      >
+                        {t("minimum_slots_to_book", {
+                          amount: minimalSlotsToBook,
+                        })}
+                      </span>
+                    )}
+                  </>
                 }
               />
             </MapboxSearchBoxResponseProvider>

@@ -3,7 +3,7 @@ import {
   type PrismaClient,
   TicketIntentStatus,
 } from "@prisma/client";
-import { subMinutes } from "date-fns";
+import { subHours, subMinutes } from "date-fns";
 
 export async function removeSlots(prisma: PrismaClient) {
   const { count } = await prisma.premiseSlot.deleteMany({
@@ -17,11 +17,11 @@ export async function removeSlots(prisma: PrismaClient) {
             lte: subMinutes(new Date(), 10),
           },
         },
-        // removes slots that have not been confirmed in 1 hour
+        // removes slots that have not been confirmed in 24 hours
         {
           type: BookingType.needs_confirmation,
           createdAt: {
-            lte: subMinutes(new Date(), 60),
+            lte: subHours(new Date(), 24),
           },
         },
       ],

@@ -304,12 +304,15 @@
     "action_invalid_data": "Invalid data",
     "action_payment_cancelled": "Payment was cancelled",
     "organization_cannot_pay": "Organizations are not allowed to book halls. Only regular users can make bookings.",
-    "cancel_payment_btn": "Cancel",
+    "cancel_payment_btn": "Cancel request",
+    "close_btn": "Ok",
     "leave_comment_label": "Leave a comment:",
     "donation_slot_price_label": "Donation \nfrom {price}",
     "donation_from_label": "from",
     "donation_amount_input_notice": "You can increase the amount of donation:",
-    "donation_amount_input_label": "Donation, zł"
+    "donation_amount_input_label": "Donation, zł",
+    "booking_modal_confirmation_heading": "Booking request",
+    "booking_request_sent": "Your request is need to be approved by a premise keeper. You'll get an email once the payment process can be continued"
   },
   "price": {
     "total": "Total",
@@ -536,7 +539,15 @@
       },
       "no_organization_link_label": "Go to the section \"Profile\"",
       "no_organization_warn_msg": "Fill in your details in the \"Profile\" section",
-      "comment_label": "Comment"
+      "comment_label": "Comment",
+      "confirm_booking_btn_label": "Confirm booking",
+      "confirmation_not_received": "Confirmation not received",
+      "payment_not_received": "Payment wasn't received",
+      "pay_button_label": "Pay",
+      "booking_approved": "Approved",
+      "unknown_error": "Something went wrong",
+      "action_successful_booking": "Successfully booked!",
+      "confirmed": "Successfully confirmed!"
     }
   },
   "amenities": {
@@ -778,7 +789,14 @@
       "reservation_at_label": "Reservation at",
       "preview": "You have your reservation at",
       "heading": "Congratulations!",
-      "check_link_label": "👉 Check your reservations here 👈"
+      "check_link_label": "👉 Check your reservations here 👈",
+      "confirmation_user_label": "⚠️ Your booking is need to be approved by a premise keeper. You'll get an email once the payment process can be continued",
+      "confirmation_company_label": "⚠️ Your premies rules require confirmation for any bookings. Review the booking by the link above"
+    },
+    "booking_confirmed": {
+      "preview": "Your booking request was approved",
+      "heading": "Your booking request was approved",
+      "check_link_label": "👉 Continue payment here 👈"
     },
     "reset_password": {
       "preview": "Visit a link to reset the password",
