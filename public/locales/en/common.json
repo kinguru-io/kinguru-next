@@ -127,7 +127,11 @@
       "unknown_error": "Something went wrong",
       "password_changed": "Password changed!"
     },
-    "alternative_sign_in_label": "Or sign in with"
+    "alternative_sign_in_label": "Or sign in with",
+    "quick_signin_label": "Have an account? Sign in",
+    "quick_signup_label": "Back to registration",
+    "quick_signup_title": "Create an account",
+    "quick_signin_title": "Sign in"
   },
   "form": {
     "common": {
@@ -297,7 +301,6 @@
     "rules_agreement": "By clicking on the \"Pay\" button, you accept the rules of the hall.",
     "remove_timeslot_btn": "Delete booking time",
     "booking_modal_heading": "Time slots booking",
-    "booking_modal_register_heading": "Create an account",
     "booking_modal_verify_heading": "Verify the account",
     "action_successful_booking": "Successfully booked!",
     "action_successfully_blocked_slots": "Slots are successfully blocked!",

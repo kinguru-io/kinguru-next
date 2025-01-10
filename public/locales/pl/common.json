@@ -205,7 +205,11 @@
       "submit": "Zmiana",
       "unknown_error": "Coś poszło nie tak"
     },
-    "email_sent": "E-mail wysłany!"
+    "email_sent": "E-mail wysłany!",
+    "quick_signin_label": "Masz konto? Zalogować się",
+    "quick_signin_title": "Zalogować się",
+    "quick_signup_label": "Powrót do rejestracji",
+    "quick_signup_title": "Utwórz konto"
   },
   "form": {
     "common": {
@@ -266,7 +270,6 @@
     "rules_agreement": "Klikając przycisk \"Zapłać\", akceptujesz regulamin hali.",
     "remove_timeslot_btn": "Usuń czas rezerwacji",
     "booking_modal_heading": "Rezerwacja terminów",
-    "booking_modal_register_heading": "Utwórz konto",
     "booking_modal_verify_heading": "Zweryfikuj konto",
     "action_successful_booking": "Pomyślnie zarezerwowane!",
     "action_successfully_blocked_slots": "Slot został pomyślnie zablokowany",

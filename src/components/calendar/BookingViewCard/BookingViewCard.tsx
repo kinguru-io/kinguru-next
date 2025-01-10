@@ -237,9 +237,6 @@ export function BookingViewCard({
   if (inModal && session === null) {
     return (
       <section className={stack({ gap: "4", minHeight: "80" })}>
-        <h3 className={css({ fontWeight: "bold" })}>
-          {t("booking_modal_register_heading")}
-        </h3>
         {accountCreationSlot}
       </section>
     );

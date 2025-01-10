@@ -22,6 +22,8 @@ import { PremiseAmenities } from "@/components/premise";
 import {
   PersonVerificationForm,
   QuickAccountCreation,
+  QuickAuth,
+  QuickSignIn,
 } from "@/components/quick-account-creation";
 import {
   AccordionItemToggle,
@@ -372,7 +374,12 @@ export default async function PremisePage({
                   minimalSlotsToBook={minimalSlotsToBook}
                   session={session}
                   accountCreationSlot={
-                    <QuickAccountCreation quickSignUp={quickUserSignUp} />
+                    <QuickAuth
+                      signUpSlot={
+                        <QuickAccountCreation quickSignUp={quickUserSignUp} />
+                      }
+                      signInSlot={<QuickSignIn />}
+                    />
                   }
                   personConfirmationSlot={<PersonVerificationForm />}
                 />
