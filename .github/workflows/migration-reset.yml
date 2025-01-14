@@ -31,6 +31,7 @@ jobs:
           WERF_SET_4: replicas.min=1
           WERF_SET_5: replicas.max=2
           SITE_URL: https://staging.eventify.today
+          MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
           DATABASE_URL: ${{ secrets.DB_URL }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
           NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
