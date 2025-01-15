@@ -1,26 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { SigninFormInner } from "@/components/sign-in";
-import type { RevalidateAll } from "@/lib/actions/auth";
+import { revalidateAll } from "@/lib/actions";
 import { type SigninFormInput, signinFormSchema } from "@/lib/validations";
-import { useRouter } from "@/navigation";
 
-export function SignInForm({
-  revalidateAll,
-  isCompany,
-}: {
-  revalidateAll: RevalidateAll;
-  isCompany?: boolean;
-}) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+export function QuickSignIn() {
   const methods = useForm<SigninFormInput>({
     mode: "onBlur",
     resolver: zodResolver(signinFormSchema),
@@ -36,7 +25,6 @@ export function SignInForm({
 
     if (response && response.ok) {
       await revalidateAll();
-      router.replace(searchParams.get("callbackUrl") || "/");
       return;
     }
 
@@ -45,22 +33,10 @@ export function SignInForm({
     );
   };
 
-  useEffect(() => {
-    const error = searchParams.get("error");
-
-    if (!error || error.length === 0) return;
-
-    const id = toast.error(
-      t(error === "OAuthAccountNotLinked" ? "email_exists" : "unknown_error"),
-    );
-
-    return () => toast.remove(id);
-  }, [searchParams]);
-
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
-        <SigninFormInner isCompany={isCompany} />
+        <SigninFormInner hideRegister />
       </form>
     </FormProvider>
   );

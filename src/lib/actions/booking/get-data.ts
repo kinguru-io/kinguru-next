@@ -2,13 +2,13 @@ import { BookingType, TicketIntentStatus, User } from "@prisma/client";
 
 export async function getBookingsByRole(
   userId: User["id"],
-  bookingType: BookingType = "via_website",
+  bookingType?: BookingType,
 ) {
   try {
     const bookings = await prisma.premiseSlot.findMany({
       where: {
         userId: userId,
-        type: bookingType,
+        type: bookingType ? bookingType : { not: "blocked_by_admin" },
         status: {
           not: TicketIntentStatus.canceled,
         },
@@ -85,7 +85,7 @@ export async function getBookingsViaWebsite(
         organizationId: {
           in: organizationIds,
         },
-        type: BookingType.via_website,
+        type: { not: "blocked_by_admin" },
         ...withCanceledStatus,
       },
       include: {

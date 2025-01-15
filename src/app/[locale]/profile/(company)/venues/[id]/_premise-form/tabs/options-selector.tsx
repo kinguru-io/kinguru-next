@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { SubSection } from "@/components/common/cards/sub-section";
 import { Checkbox, Input } from "@/components/uikit";
 import type { CreatePremiseFormSchemaProps } from "@/lib/actions/premise";
@@ -13,6 +13,7 @@ export function OptionsSelector() {
     <SubSection>
       <h2 className="title">{t("options")}</h2>
       <MinimalBookingSlotsNumber />
+      <ConfirmationCheckbox />
     </SubSection>
   );
 }
@@ -53,5 +54,24 @@ function MinimalBookingSlotsNumber() {
         })}
       />
     </Flex>
+  );
+}
+
+function ConfirmationCheckbox() {
+  const t = useTranslations("profile.premises.add");
+  const { control } = useFormContext<CreatePremiseFormSchemaProps>();
+
+  return (
+    <Controller
+      control={control}
+      name="openHoursAndPrice.withConfirmation"
+      render={({ field }) => (
+        <Checkbox
+          checked={!!field.value}
+          onChange={({ target }) => field.onChange(target.checked)}
+          label={t("booking_confirmation")}
+        />
+      )}
+    />
   );
 }

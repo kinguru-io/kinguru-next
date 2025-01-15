@@ -488,6 +488,7 @@ model Premise {
   priceMode          PremisePriceMode     @default(arbitrary)
   minimalPrice       Float?
   minimalSlotsToBook Int?
+  withConfirmation   Boolean?
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
 }
@@ -519,6 +520,8 @@ model PremiseOpenHours {
 enum BookingType {
   blocked_by_admin
   via_website
+  needs_confirmation
+  ready_for_payment
 }
 
 model PremiseSlot {

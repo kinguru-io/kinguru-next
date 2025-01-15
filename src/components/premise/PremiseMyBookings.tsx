@@ -57,6 +57,7 @@ export async function PremiseMyBookings({
         <BookingCard
           booking={booking}
           imageSrc={imageSrcs[booking.premiseId]}
+          isCompany={session?.user?.role === "organization"}
         />
       </div>
     ));

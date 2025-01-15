@@ -16,6 +16,7 @@ import { renderAsync } from "@react-email/render";
 import { formatInTimeZone } from "date-fns-tz";
 import React from "react";
 import {
+  alert,
   body,
   container,
   footer,
@@ -35,6 +36,8 @@ export type BookingEmailProps = {
   name: string;
   comment?: string;
   donation: number;
+  withConfirmation?: boolean;
+  isCompany?: boolean;
   t: (...args: any[]) => string;
 };
 
@@ -44,6 +47,8 @@ export default function BookingEmail({
   slotInfo,
   comment,
   donation,
+  withConfirmation,
+  isCompany,
   t,
 }: BookingEmailProps) {
   return (
@@ -110,6 +115,13 @@ export default function BookingEmail({
               <Link href={`${baseUrl}/${locale}/profile/mybookings`}>
                 {t("booking.check_link_label")}
               </Link>
+              {withConfirmation && (
+                <Text style={alert}>
+                  {isCompany
+                    ? t("booking.confirmation_company_label")
+                    : t("booking.confirmation_user_label")}
+                </Text>
+              )}
             </Text>
           </Section>
           <Text style={paragraph}>
@@ -142,6 +154,7 @@ BookingEmail.PreviewProps = {
   donation: 50,
   name: "Test premise",
   comment: "The quick brown fox jumps over the lazy dog",
+  // withConfirmation: true,
   t: (key: string) => `[${key}]`,
 } satisfies BookingEmailProps;
 

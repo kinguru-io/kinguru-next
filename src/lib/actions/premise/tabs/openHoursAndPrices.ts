@@ -27,6 +27,7 @@ export const openHoursAndPriceSchema = (
     priceMode: z.custom<$Enums.PremisePriceMode>().optional(),
     minimalPrice: z.number().optional(),
     minimalSlotsToBook: z.number().optional(),
+    withConfirmation: z.boolean().optional(),
     openHours: z
       .array(openHoursSchema)
       .min(1, { message: requiredFieldMessage(t, "openHours") }),

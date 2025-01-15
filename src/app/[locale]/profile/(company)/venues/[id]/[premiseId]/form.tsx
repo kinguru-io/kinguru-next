@@ -48,6 +48,7 @@ export function EditPremiseForm({
     priceMode,
     minimalPrice,
     minimalSlotsToBook,
+    withConfirmation,
   },
 }: {
   editPremise: EditPremiseAction;
@@ -79,6 +80,7 @@ export function EditPremiseForm({
     },
     openHoursAndPrice: {
       priceMode,
+      withConfirmation: withConfirmation || false,
       minimalPrice: minimalPrice || undefined,
       minimalSlotsToBook: minimalSlotsToBook || undefined,
       openHours: openHours.map(({ day, openTime, closeTime, price }) => ({

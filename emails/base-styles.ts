@@ -35,3 +35,11 @@ export const footer = {
   fontSize: "12px",
   marginLeft: "4px",
 };
+
+export const alert = {
+  backgroundColor: "#F5F5F5", // colors.secondary.lighter
+  padding: "8px",
+  borderRadius: "4px",
+  fontSize: "14px",
+  lineHeight: "1.1",
+};
