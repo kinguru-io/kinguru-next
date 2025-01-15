@@ -18,12 +18,15 @@ const allAmenities = Object.values(amenitiesTags).flat();
 const prisma = new PrismaClient();
 
 const cafeMapboxIds = [
-  "dXJuOm1ieHBsYzpBbnVvdFE",
-  "dXJuOm1ieHBvaTo0NzNkNzVmMy1kMzM2LTQ1OGYtODgyZi0xZWNmZjg4YTg2OTA",
-  "dXJuOm1ieHBvaTo4YWJkOWY0ZC04MzFjLTQ5ZGItYTMzNy00ZTE5OWU4NTYxNDI",
-  "dXJuOm1ieHBsYzpGVUpvdFE",
-  "dXJuOm1ieHBvaTphMDgyNzgzMi1iYjVjLTQzOTQtOWY1NC0wZDhlZDQ0YTcyMDE",
-] as const;
+  "dXJuOm1ieGFkcjo5YTMyOTg2Yy0yZmUwLTQwMWYtODA5My0wYTdlMDA4MjZmODc",
+  "dXJuOm1ieGFkcjo0MGQ3N2UyMS04NTQ0LTRhNGEtYmFiMy1mYmQ3ZDFiOWQyY2I",
+  "dXJuOm1ieGFkcjo2ZjJlZDgwMi1kMjI3LTRhMWQtOWYzZS1hNzFjYTU4YTk0OTA",
+  "dXJuOm1ieGFkcjozY2Q0N2JhYS03ODQzLTRlZTEtODI3My1hN2ZmMmRjOTFjNjM",
+  "dXJuOm1ieGFkcjo2N2I3ZmIxOC02MjczLTRkMzAtOGYyZC1kMDY0NzY4MDZmZDE",
+  "dXJuOm1ieGFkcjozOTFiNDljMy1mOGFhLTQ5NjktOGYzZC0wNWFlOWNkZGQ1MDA",
+  "dXJuOm1ieGFkcjozNTc0ODYwMC02Y2UwLTQ0MmYtYWIyMS1mMDFiYzAyMzk5OTg",
+  "dXJuOm1ieGFkcjowMjJmODA0Yi0xNTMxLTRkMzMtYWU4Yi1lZmM0N2YwY2IzZjY",
+];
 const ROOM_WORD_SYNONYMS = [
   "room",
   "hall",

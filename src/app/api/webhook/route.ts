@@ -40,7 +40,7 @@ async function premiseSlotsBookingSucceededCb(
 ) {
   await prisma.premiseSlot.updateMany({
     where: { paymentIntentId },
-    data: { status: TicketIntentStatus.succeed },
+    data: { status: TicketIntentStatus.succeed, type: "via_website" },
   });
 
   const slotInfo = await prisma.premiseSlot.findMany({

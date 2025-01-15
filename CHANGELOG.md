@@ -1,3 +1,12 @@
+# [0.71.0](https://github.com/kinguru-io/kinguru-next/compare/v0.70.0...v0.71.0) (2025-01-15)
+
+
+### Features
+
+* added confirmation flow base for bookings ([3a956d4](https://github.com/kinguru-io/kinguru-next/commit/3a956d4560a1dd428cf05be8ce5616f9c6a62195))
+* added signin in to quick auth ([b9cbf58](https://github.com/kinguru-io/kinguru-next/commit/b9cbf581b68932f78198186f24033084ca8042b0))
+* booking confirmation; payments from `profile` ([de8bcdf](https://github.com/kinguru-io/kinguru-next/commit/de8bcdfe6dc2e87b8bf02bbcc04b0ad87d1db28d))
+
 # [0.70.0](https://github.com/kinguru-io/kinguru-next/compare/v0.69.0...v0.70.0) (2025-01-02)
 
 

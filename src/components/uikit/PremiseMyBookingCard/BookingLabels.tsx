@@ -1,23 +1,24 @@
 import type { BookingType, TicketIntentStatus } from "@prisma/client";
 import { formatInTimeZone } from "date-fns-tz";
+import { BookingPaymentActions } from "./booking-payment-actions";
+import { ConfirmBookingActions } from "./confirm-booking-actions";
 import CancelBookingBtn from "@/components/premise/myBookings/CancelBookingBtn";
 import { Icon, Modal, Tag } from "@/components/uikit";
 import { Booking } from "@/lib/utils/premise-booking";
 import { css } from "~/styled-system/css";
 import { Flex, HStack } from "~/styled-system/jsx";
 
-interface LabelProps {
-  date: { date: Date };
-  time: { startTime: Date; endTime: Date };
-  status: { status: TicketIntentStatus };
-  cancelBtn: Booking;
-}
-
-type LabelKey = keyof LabelProps;
+type LabelKey =
+  | "date"
+  | "time"
+  | "status"
+  | "cancelButton"
+  | "confirmButton"
+  | "payButton";
 
 type LabelsType = {
   [K in LabelKey]: {
-    format: (props: LabelProps[K]) => React.ReactNode;
+    format: (booking: Booking, isCompany: boolean) => React.ReactNode;
   };
 };
 
@@ -52,8 +53,8 @@ const labels: LabelsType = {
       </Tag>
     ),
   },
-  cancelBtn: {
-    format: (booking: Booking) => (
+  cancelButton: {
+    format: (booking) => (
       <Modal>
         <CancelBookingBtn
           bookingStartTime={booking.startTime}
@@ -68,18 +69,47 @@ const labels: LabelsType = {
       </Modal>
     ),
   },
+  confirmButton: {
+    format: (booking, isCompany) => {
+      if (booking.status === "canceled") return null;
+
+      return (
+        <ConfirmBookingActions
+          isCompany={isCompany}
+          intentId={booking.paymentIntentId}
+        />
+      );
+    },
+  },
+  payButton: {
+    format: (booking, isCompany) => {
+      if (booking.status === "canceled") return null;
+
+      return (
+        <BookingPaymentActions
+          isCompany={isCompany}
+          intentId={booking.paymentIntentId}
+        />
+      );
+    },
+  },
 };
 
-const labelsForBookedViaWebsite: LabelKey[] = ["date", "time", "status"];
-const labelsForBookedByAdmin: LabelKey[] = ["date", "time", "cancelBtn"];
+const labelGroups: Record<BookingType, LabelKey[]> = {
+  blocked_by_admin: ["date", "time", "cancelButton"],
+  via_website: ["date", "time", "status"],
+  needs_confirmation: ["date", "time", "confirmButton"],
+  ready_for_payment: ["date", "time", "payButton"],
+};
 
-const labelGroups = {
-  blocked_by_admin: labelsForBookedByAdmin,
-  via_website: labelsForBookedViaWebsite,
-} satisfies Record<BookingType, LabelKey[]>;
-
-export async function BookingLabels({ booking }: { booking: Booking }) {
-  const labelsForBooking = labelGroups[booking.type as BookingType] || [];
+export async function BookingLabels({
+  booking,
+  isCompany,
+}: {
+  booking: Booking;
+  isCompany: boolean;
+}) {
+  const labelsForBooking = labelGroups[booking.type] || [];
 
   return (
     <Flex
@@ -93,11 +123,14 @@ export async function BookingLabels({ booking }: { booking: Booking }) {
       {labelsForBooking.map((label) => (
         <Flex
           key={label}
-          flexDirection="column"
-          justifyContent="space-between"
-          fontSize="sm"
+          css={{
+            zIndex: "1",
+            gap: "2",
+            alignItems: "center",
+            fontSize: "sm",
+          }}
         >
-          {labels[label].format(booking as any)}
+          {labels[label].format(booking, isCompany)}
         </Flex>
       ))}
     </Flex>

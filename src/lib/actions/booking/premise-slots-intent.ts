@@ -3,24 +3,22 @@
 import {
   type PremiseSlot,
   TicketIntentStatus,
-  PremiseDiscount,
+  BookingType,
 } from "@prisma/client";
-import { addHours, compareAsc, startOfDay } from "date-fns";
+import { addHours, compareAsc } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { getLocale, getTranslations } from "next-intl/server";
 import type Stripe from "stripe";
 import { v4 as uuid } from "uuid";
 import { sendBookingEmail } from "./email";
+import { validatePaymentIntentData } from "./validate-payment-intent-data";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
 import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
 import type { ActionResponse } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import { groupAndMergeTimeslots } from "@/lib/utils/premise-booking";
-import {
-  prepareBookedSlots,
-  generateTimeSlots,
-} from "@/lib/utils/premise-time-slots";
+
 import {
   getSlotDiscount,
   prepareDiscountRangeMap,
@@ -114,23 +112,20 @@ export async function createPremiseSlotsIntent({
   if (!userId) return redirect("/auth/signin");
   if (!session.user?.confirmed) return redirect("/verify");
 
-  const {
-    isValid,
-    editedSlots,
-    discounts,
-    name = "",
-  } = await validatePaymentIntentData({
+  const validationResult = await validatePaymentIntentData({
     premiseId,
     slots,
   });
 
-  if (!isValid || editedSlots.length === 0) {
+  if (!validationResult.isValid || validationResult.editedSlots.length === 0) {
     return {
       status: "error",
       messageIntlKey: "action_invalid_data",
       response: null,
     };
   }
+
+  const { discounts, editedSlots, premiseMeta } = validationResult;
   const locale = await getLocale();
   const groupedSlots = groupBy(
     Array.from(editedSlots).sort((slotA, slotB) =>
@@ -158,7 +153,7 @@ export async function createPremiseSlotsIntent({
       user_email: session?.user?.email || "not_provided",
       user_paid_locale: locale,
       user_comment: comment,
-      premise_name: name,
+      premise_name: premiseMeta.name,
     };
 
     if (donation > 0) {
@@ -206,6 +201,9 @@ export async function createPremiseSlotsIntent({
 
   const mergedSlotsUpdateInput = groupAndMergeTimeslots(newSlots).map(
     ({ startTime, endTime, price, discountAmount }) => ({
+      type: premiseMeta.withConfirmation
+        ? BookingType.needs_confirmation
+        : BookingType.via_website,
       userId,
       premiseId,
       paymentIntentId,
@@ -216,7 +214,7 @@ export async function createPremiseSlotsIntent({
       startTime: startTime,
       endTime: endTime,
       status:
-        totalPrice > 0
+        totalPrice > 0 || premiseMeta.withConfirmation
           ? TicketIntentStatus.progress
           : TicketIntentStatus.succeed,
       comment,
@@ -229,13 +227,15 @@ export async function createPremiseSlotsIntent({
   );
 
   // send mails right after booking of free slots
-  if (totalPrice === 0) {
+  // or if the booking should be reviewed
+  if (totalPrice === 0 || premiseMeta.withConfirmation) {
     const mailInfo: BookingEmailProps = {
-      name,
+      name: premiseMeta.name,
       locale,
       slotInfo: mergedSlotsUpdateInput,
       comment,
       donation,
+      withConfirmation: !!premiseMeta.withConfirmation,
       t: await getTranslations("emails"),
     };
 
@@ -253,7 +253,11 @@ export async function createPremiseSlotsIntent({
 
     if (companyUser) {
       requests.push(
-        sendBookingEmail({ email: companyUser.owner.email, ...mailInfo }),
+        sendBookingEmail({
+          email: companyUser.owner.email,
+          isCompany: true,
+          ...mailInfo,
+        }),
       );
     }
   }
@@ -263,7 +267,9 @@ export async function createPremiseSlotsIntent({
   return {
     status: "success",
     response: {
-      clientSecret,
+      clientSecret: premiseMeta.withConfirmation
+        ? "not_approved"
+        : clientSecret,
       paymentIntentId,
       amountToBeCharged: amount / 100,
     },
@@ -295,90 +301,6 @@ export async function cancelPremiseSlotsIntent({
       count > 0 ? "action_payment_cancelled" : "action_invalid_data",
     response: null,
   };
-}
-
-async function validatePaymentIntentData({
-  premiseId,
-  slots,
-}: Partial<BookTimeSlotsActionData>): Promise<{
-  isValid: boolean;
-  editedSlots: TimeSlotInfoExtended[];
-  discounts: PremiseDiscount[];
-  name?: string;
-}> {
-  if (!premiseId || !slots || slots.length === 0) {
-    return { isValid: false, editedSlots: [], discounts: [] };
-  }
-
-  const premise = await prisma.premise.findUnique({
-    where: { id: premiseId },
-    include: {
-      slots: {
-        where: {
-          date: { gte: startOfDay(new Date()).toISOString() },
-          status: { not: "canceled" },
-        },
-      },
-      discounts: {
-        orderBy: {
-          duration: "asc",
-        },
-      },
-      openHours: true,
-    },
-  });
-
-  if (!premise) return { isValid: false, editedSlots: [], discounts: [] };
-
-  if ((premise.minimalSlotsToBook || 0) > slots.length) {
-    return { isValid: false, editedSlots: [], discounts: [] };
-  }
-
-  const bookedSlots = prepareBookedSlots(premise.slots);
-  const timeSlotsGroup = groupBy(
-    premise.openHours.map((record) => generateTimeSlots(record)),
-    ({ day }) => day,
-  );
-
-  const result = slots.reduce(
-    (aggregations, slot) => {
-      if (!aggregations.isValid) return aggregations;
-      // the slot is booked already or is under payment process
-      if (bookedSlots.has(slot.time.toISOString())) {
-        return { isValid: false, editedSlots: [] };
-      }
-
-      const dayTimeInfo = timeSlotsGroup[slot.day];
-
-      // a premise doesn't have open hours for that weekday
-      if (!dayTimeInfo) return { isValid: false, editedSlots: [] };
-
-      const slotFound = dayTimeInfo
-        .flatMap(({ timeSlots }) => timeSlots)
-        .find(({ time }) => {
-          return (
-            time.getUTCHours() === slot.time.getUTCHours() &&
-            time.getUTCMinutes() === slot.time.getUTCMinutes()
-          );
-        });
-
-      // a premise have such working hours for a given weekday but the doesn't have the slot
-      if (!slotFound) return { isValid: false, editedSlots: [] };
-
-      // edited slots are basically same slots as given ones but with the price from the server
-      const editedSlot: TimeSlotInfoExtended = {
-        ...slot,
-        price: slotFound.price,
-      };
-
-      aggregations.editedSlots.push(editedSlot);
-
-      return aggregations;
-    },
-    { isValid: true, editedSlots: [] as TimeSlotInfoExtended[] },
-  );
-
-  return { ...result, discounts: premise.discounts, name: premise.name };
 }
 
 export type BlockPremiseSlotsIntent = typeof blockPremiseSlotsIntent;

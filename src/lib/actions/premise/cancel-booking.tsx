@@ -63,10 +63,15 @@ async function processRefund({
       });
       console.log("Refund successful:", refund);
     } catch (error) {
-      console.error("Error processing refund:", error);
+      console.error(
+        `[paymentIntentId: ${paymentIntentId}] Error processing refund:`,
+        error,
+      );
     }
   } else {
-    console.log("No refund applicable based on cancellation policy");
+    console.log(
+      `[paymentIntentId: ${paymentIntentId}] No refund applicable based on cancellation policy. No refund processed. Seems, the payment was not received`,
+    );
   }
 }
 
