@@ -46,7 +46,12 @@ export function AccordionItemToggle(
       alignItems: "center",
       justifyContent: "space-between",
       fontSize: "md",
-      "& > svg": { rotate: "-90deg", color: "secondary" },
+      "& > svg": {
+        rotate: "-90deg",
+        color: "secondary",
+        flexShrink: "0",
+        marginInlineStart: "2",
+      },
       _peerChecked: { "& > svg": { rotate: "90deg" } },
       _peerDisabled: {
         cursor: "not-allowed",

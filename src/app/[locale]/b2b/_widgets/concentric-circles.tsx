@@ -1,0 +1,48 @@
+export function ConcentricCircles({ color }: { color: string }) {
+  return (
+    <svg viewBox="0 0 500 500">
+      <circle
+        cx="50%"
+        cy="50%"
+        r="49%"
+        strokeWidth="1"
+        stroke={color}
+        fill="transparent"
+      />
+      <circle
+        cx="50%"
+        cy="50%"
+        r="41%"
+        strokeWidth="1"
+        strokeDasharray="6"
+        stroke={color}
+        fill="transparent"
+      />
+      <circle
+        cx="50%"
+        cy="50%"
+        r="33%"
+        strokeWidth="1"
+        stroke={color}
+        fill="transparent"
+      />
+      <circle
+        cx="50%"
+        cy="50%"
+        r="26%"
+        strokeWidth="1"
+        strokeDasharray="6"
+        stroke={color}
+        fill="transparent"
+      />
+      <circle
+        cx="50%"
+        cy="50%"
+        r="19%"
+        strokeWidth="1"
+        stroke={color}
+        fill="transparent"
+      />
+    </svg>
+  );
+}

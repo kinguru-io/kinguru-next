@@ -73,10 +73,10 @@ const labels: LabelsType = {
 const labelsForBookedViaWebsite: LabelKey[] = ["date", "time", "status"];
 const labelsForBookedByAdmin: LabelKey[] = ["date", "time", "cancelBtn"];
 
-const labelGroups: Record<BookingType, LabelKey[]> = {
+const labelGroups = {
   blocked_by_admin: labelsForBookedByAdmin,
   via_website: labelsForBookedViaWebsite,
-};
+} satisfies Record<BookingType, LabelKey[]>;
 
 export async function BookingLabels({ booking }: { booking: Booking }) {
   const labelsForBooking = labelGroups[booking.type as BookingType] || [];

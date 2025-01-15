@@ -827,5 +827,85 @@
     "bad_token": "Nie udało się zweryfikować Twojej prośby",
     "expired_link": "Twoje żądanie wygasło",
     "request_again": "Poproś ponownie"
+  },
+  "b2b": {
+    "advantages": {
+      "new-clients": "Pozyskiwać nowych klientów na stałe",
+      "bookings-management": "Zarządzać rezerwacjami w wygodny sposób",
+      "dead-hours": "Rozwiązać problem “martwych godzin”"
+    },
+    "advantages_title": "Eventify to unikalna usługa szybkiej i wygodnej rezerwacji obiektów",
+    "premise_type_section_title": "Współpracujemy z głównymi typami obiektów:",
+    "companies_title": "Firmy z którymi już współpracujemy:",
+    "faq": {
+      "count": "8",
+      "questions": {
+        "1": {
+          "content": "Zamieszczenie ogłoszenia o Twoim obiekcie jest proste. \nUtwórz konto, podaj szczegóły miejsca (adres, udogodnienia, zdjęcia, ceny) i opublikuj je. \nPrzed zatwierdzeniem nasz zespół może sprawdzić ofertę, aby upewnić się, że spełnia ona standardy jakości.",
+          "title": "Jak dodać obiekt na platformie?"
+        },
+        "2": {
+          "content": "Akceptujemy różnego rodzaju obiekty, w tym studia fotograficzne, studia tańca, przestrzenie do jogi, sale konferencyjne, sale bankietowe, przestrzenie coworkingowe, hale sportowe i inne. \nPrzestrzeń powinna być bezpieczna, dobrze utrzymana i dostępna do wynajmu na godziny.",
+          "title": "Jakie rodzaje obiektów są akceptowane?"
+        },
+        "3": {
+          "content": "Ogłoszenie obiektu jest zazwyczaj bezpłatne. \nPlatforma pobiera opłatę serwisową w wysokości 15% od potwierdzonych rezerwacji, która jest pobierana automatycznie. \nSzczegółowe struktury opłat są dostępne w panelu Twojego konta.",
+          "title": "Czy za ogłoszenie mojego obiektu pobierana jest opłata?"
+        },
+        "4": {
+          "content": "Za pomocą panelu możesz zarządzać rezerwacjami, zatwierdzać lub odrzucać prośby oraz ustalać zasady anulowania. \nAutomatyczne powiadomienia będą na bieżąco informować Cię o nadchodzących rezerwacjach i zapytaniach klientów.",
+          "title": "Jak zarządzać rezerwacjami i anulowaniami?"
+        },
+        "5": {
+          "content": "Tak, masz pełną kontrolę nad cenami, dostępnością i warunkami rezerwacji. \nMożesz ustawić specjalne ceny na godziny szczytu, święta i wydarzenia.",
+          "title": "Czy mogę ustawić ceny i dostępność?"
+        },
+        "6": {
+          "content": "Płatności realizowane są poprzez bezpieczny system płatności Stripe i przekazywane dwa razy w miesiącu na konto bankowe podane w profilu Twojej firmy.",
+          "title": "Jak otrzymywać płatności za rezerwacje?"
+        },
+        "7": {
+          "content": "Za pomocą panelu możesz zarządzać rezerwacjami, zatwierdzać lub odrzucać prośby oraz ustalać zasady anulowania. \nJednakże, gdy rezerwacja zostanie potwierdzona i opłacona, właściciel obiektu ani klient nie mogą jej anulować, aby zapewnić niezawodność obu stron. \nAby uniknąć konfliktów, ważne jest, aby aktualizować swoją dostępność.",
+          "title": "Jak zarządzać anulowaniami?"
+        },
+        "8": {
+          "content": "Jeśli martwisz się o swój lokal, zalecamy obecność Ciebie lub upoważnionego przedstawiciela w okresie wynajmu. \nDzięki temu możesz nadzorować wykorzystanie Twojej przestrzeni i mieć pewność, że proces akceptacji przebiega zgodnie z Twoimi zasadami.\n\nJeśli posiadasz kamery bezpieczeństwa i zauważysz jakiekolwiek uszkodzenia w swoim obiekcie, zgłoś nam to zdarzenie e-mailem (eventify.scaleway@gmail.com), załączając odpowiednie nagrania wideo lub dowody. \nPrzekażemy Ci dane kontaktowe osoby, która dokonała rezerwacji, abyś mógł bezpośrednio zająć się problemem – kontaktując się z nią w celu rozwiązania problemu, omawiając go osobiście lub, jeśli to konieczne, składając formalne zgłoszenie.",
+          "title": "Co mogę zrobić, jeśli podczas rezerwacji obawiam się o bezpieczeństwo swojego lokalu?"
+        }
+      }
+    },
+    "faq_title": "Popularne pytania",
+    "register_bonuses": {
+      "bonus": {
+        "1": "Pierwsze 5 rezerwacji Twojej lokalizacji z 0% prowizją",
+        "2": "Poradnik jak skutecznie zaprojektować swoją stronę na naszej platformie pod kątem wysokiej konwersji"
+      },
+      "count": "2"
+    },
+    "register_title": "Zarejestruj się już teraz za darmo na naszej platformie i otrzymaj:",
+    "registration_guide_steps": {
+      "1": "Naciśnij przycisk „Dodaj swoje miejsce”",
+      "2": "Wypełnij formularz „Zarejestruj swoją firmę”",
+      "3": "Otwórz weryfikację e-mailową i kliknij link",
+      "4": "Wejdź na swoje konto osobiste i wypełnij wymagane pola informacjami biznesowymi"
+    },
+    "registration_guide_title": "Zarejestruj się w 5 minut!",
+    "required_time_time": "Wymagany czas",
+    "step_label": "Krok {step}",
+    "subtitle": "Zdobądź z nami więcej rezerwacji",
+    "title": "Czy masz miejsce na wydarzenia?",
+    "why_section_title": "Dlaczego <brand>Eventify</brand>?"
+  },
+  "company_logo": {
+    "count": "7",
+    "urls": {
+      "1": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/ateitis_vr.jpg",
+      "2": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/dalia.jpg",
+      "3": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/hit_studio.png",
+      "4": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/jakby_luksusowo.jpg",
+      "5": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/prastora_bel.jpg",
+      "6": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/sala_like.svg",
+      "7": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/standup_lokal.jpg"
+    }
   }
 }
