@@ -35,8 +35,6 @@ export function MainInformation({ editMode = false }: { editMode?: boolean }) {
         <Stack gap="2">
           <Input
             placeholder={t("fields.name_placeholder")}
-            readOnly={editMode}
-            hidden={editMode}
             data-invalid={getError(errors, `${formFieldPath}.name`)}
             {...register(`${formFieldPath}.name`)}
           />
