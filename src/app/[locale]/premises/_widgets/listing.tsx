@@ -1,7 +1,9 @@
 import { getTranslations } from "next-intl/server";
+import { MapSearchLink } from "./map-search-link";
 import { LoadMoreLink, SortToggler } from "@/components/filters";
 import { PremiseStack } from "@/components/premise";
-import { getPremises, defaultSizings } from "@/lib/actions/premise-filter";
+import { defaultSizings } from "@/lib/actions/premise-filter";
+import { getPremises } from "@/lib/actions/premise-filter/listing";
 import { Flex, InlineBox, Stack } from "~/styled-system/jsx";
 
 export async function Listing({
@@ -12,21 +14,9 @@ export async function Listing({
   const { total, hits } = await getPremises(searchParams);
   const t = await getTranslations("filters");
 
-  const sort: keyof IntlMessages["filters"]["sorting"] =
-    searchParams.sort || "label";
-  const sortItems = [
-    {
-      value: "asc",
-      label: t("sorting.asc"),
-    },
-    {
-      value: "desc",
-      label: t("sorting.desc"),
-    },
-  ];
-
   return (
     <Stack gap="3">
+      <MapSearchLink />
       <Flex
         gap="2"
         justifyContent="space-between"
@@ -36,11 +26,7 @@ export async function Listing({
         <InlineBox fontSize="sm" fontWeight="bold" flexGrow="5">
           {t("variants_found", { total })}
         </InlineBox>
-        <SortToggler
-          searchParams={searchParams}
-          items={sortItems}
-          defaultLabel={t(`sorting.${sort}`)}
-        />
+        <SortToggler />
       </Flex>
       <PremiseStack premiseIdList={hits} />
       <LoadMoreLink

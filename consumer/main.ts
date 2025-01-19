@@ -57,6 +57,9 @@ async function init() {
         body: {
           mappings: {
             properties: {
+              coordinates: {
+                type: "geo_point",
+              },
               booked_slots: {
                 type: "join",
                 eager_global_ordinals: true,

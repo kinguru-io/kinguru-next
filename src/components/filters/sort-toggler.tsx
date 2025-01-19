@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   ArrowIcon,
   Dropdown,
@@ -15,35 +17,42 @@ const buttonClassName = cx(
   css({ whiteSpace: "nowrap", justifyContent: "space-between" }),
 );
 
-export function SortToggler({
-  searchParams,
-  items,
-  defaultLabel,
-}: {
-  searchParams: Record<string, any>;
-  items: Array<{ value: string; label: string }>;
-  defaultLabel: string;
-}) {
+const sortItems = ["asc", "desc"] satisfies Array<
+  keyof IntlMessages["filters"]["sorting"]
+>;
+
+export function SortToggler({ replace }: { replace?: boolean }) {
+  const t = useTranslations("filters");
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const sortKey =
+    (searchParams.get("sort") as keyof IntlMessages["filters"]["sorting"]) ||
+    ("label" as const);
+  const searchRecord = Object.fromEntries(searchParams.entries());
 
   return (
     <Dropdown size="auto" className={css({ flexGrow: "1" })}>
       <DropdownInitiator>
         <button className={buttonClassName} type="button">
-          {defaultLabel}
+          {t(`sorting.${sortKey}`)}
           <ArrowIcon direction="down" className={css({ fontSize: "xs" })} />
         </button>
       </DropdownInitiator>
       <DropdownMenu>
-        {items.map(({ value, label }) => (
+        {sortItems.map((key) => (
           <Link
-            key={value}
+            key={key}
             href={{
               pathname,
-              query: { ...searchParams, sort: value },
+              query: {
+                ...searchRecord,
+                sort: key,
+              },
             }}
+            replace={replace}
           >
-            {label}
+            {t(`sorting.${key}`)}
           </Link>
         ))}
       </DropdownMenu>

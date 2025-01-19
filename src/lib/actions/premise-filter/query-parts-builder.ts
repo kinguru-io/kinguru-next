@@ -1,4 +1,5 @@
 import { isValid } from "date-fns";
+import { boundingBoxResolver } from "./resolvers/bbox-resolver";
 import {
   availableDayResolver,
   closedHoursResolver,
@@ -41,6 +42,23 @@ export function buildQueryParts(searchParams: Record<string, any>) {
           premiseSlotResolver(isoRanges),
           closedHoursResolver(isoRanges),
         );
+      }
+
+      if (key === "bbox") {
+        if (typeof values !== "string") return parts;
+
+        const points = values
+          .split(",")
+          .map((stringPoint) => Number(stringPoint));
+
+        if (
+          points.length !== 4 ||
+          points.some((point) => Number.isNaN(point))
+        ) {
+          return parts;
+        }
+
+        parts.must.push(boundingBoxResolver(points));
       }
 
       return parts;

@@ -61,8 +61,11 @@ export default function RootLayout({
             css={{
               gridTemplateRows: "auto 1fr 0",
               gap: "0",
-              minHeight: "100vh",
-              sm: { gridTemplateRows: "auto 1fr" },
+              minHeight: "var(--100dvh)",
+              sm: {
+                gridTemplateRows: "auto 1fr",
+                "&:has([data-hide-footer])": { gridTemplateRows: "auto 1fr 0" },
+              },
             }}
           >
             <Header />
