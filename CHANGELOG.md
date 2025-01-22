@@ -1,3 +1,15 @@
+# [0.72.0](https://github.com/kinguru-io/kinguru-next/compare/v0.71.0...v0.72.0) (2025-01-22)
+
+
+### Bug Fixes
+
+* staging certificate generation ([baf6014](https://github.com/kinguru-io/kinguru-next/commit/baf60141f117ac0f697f53e7c78d75279422cf18))
+
+
+### Features
+
+* b2b landing page ([dab2575](https://github.com/kinguru-io/kinguru-next/commit/dab2575d24315ea6de623824a7389411ac28a57d))
+
 # [0.71.0](https://github.com/kinguru-io/kinguru-next/compare/v0.70.0...v0.71.0) (2025-01-15)
 
 
