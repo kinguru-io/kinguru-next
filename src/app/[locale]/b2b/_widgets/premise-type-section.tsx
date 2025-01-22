@@ -74,7 +74,7 @@ function PremiseTypesGrid() {
         gridTemplateRows: "repeat(3, 1fr)",
         maxWidth: "sm",
         gap: "2",
-        md: { gap: "3" },
+        md: { gap: "3", height: "fit-content" },
       }}
     >
       {premiseTypePreviewUrls.map((src) => (
@@ -96,8 +96,8 @@ function PremiseTypeCircle({ src }: { src: string }) {
       })}
       alt=""
       src={src}
-      width={256}
-      height={256}
+      width={172}
+      height={172}
       unoptimized={src.endsWith(".svg")}
     />
   );
