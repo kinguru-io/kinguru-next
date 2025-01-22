@@ -65,6 +65,9 @@ export default defineConfig({
         premiseMyBookingCard: premiseMyBookingCardSlot,
         toggle: toggleSlot,
       },
+      breakpoints: {
+        "3xl": "1920px",
+      },
       tokens: {
         animations: {
           "fade-in": { value: "fadein 150ms linear" },
@@ -105,6 +108,7 @@ export default defineConfig({
             value: "0px 14px 45px rgba(255, 255, 255, 0.45)",
           },
           cardLightShadow: { value: "0px 24px 90px 0px rgba(0, 0, 0, 0.08)" },
+          "map-link": { value: "0px 12px 32px 0px rgba(0, 0, 0, 0.08)" },
         },
         fonts: {
           noto: { value: "var(--font-noto-sans), sans-serif" },

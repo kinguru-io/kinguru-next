@@ -1,7 +1,7 @@
 "use server";
 
-import slugify from "@sindresorhus/slugify";
 import { revalidatePath } from "next/cache";
+import { getPremiseSlug } from "./get-premise-slug";
 import { prepareAmenityList } from "./prepare-amenity-list";
 import { MergedFormSchemaProps, mergedSchema } from "./validation";
 import { getSession } from "@/auth";
@@ -61,17 +61,8 @@ export async function createPremiseAction(
     ...restPremiseInput
   } = parseResult.data;
 
-  const potentialSlug = slugify(restPremiseInput.name);
-
-  const foundPremise = await prisma.premise.findUnique({
-    where: { slug: potentialSlug },
-  });
-
-  const slug = foundPremise
-    ? `${parentVenue.slug}-${potentialSlug}`
-    : potentialSlug;
-
   try {
+    const slug = await getPremiseSlug(restPremiseInput.name);
     const createdPremise = await prisma.premise.create({
       data: {
         ...restPremiseInput,

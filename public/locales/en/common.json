@@ -243,6 +243,12 @@
       "cannot_load_location": "Unable to load venue location"
     }
   },
+  "search_map": {
+    "show_map": "Show on the map",
+    "close_map": "Close map",
+    "existing_object": "Existing premises",
+    "move_map_tip": "Move map to search for premises"
+  },
   "premise": {
     "more": "More",
     "from": "from {price}",

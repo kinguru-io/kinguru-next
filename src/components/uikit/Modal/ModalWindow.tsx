@@ -84,9 +84,12 @@ export function _ModalWindow({
         )}
       </ModalHeader>
       <Box
-        padding="4"
-        mdDown={{ height: "full" }}
-        maxHeight={{ base: "calc(100% - {spacing.16})", md: "unset" }}
+        css={{
+          padding: "4",
+          height: type === "fullscreen" ? "full" : undefined,
+          maxHeight: { base: "calc(100% - {spacing.16})", md: "unset" },
+          mdDown: { height: "full" },
+        }}
       >
         {children}
       </Box>

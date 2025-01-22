@@ -41,7 +41,6 @@ export async function prepareDocumentLocation({
     "location.countryCode": locationContext.country?.country_code,
     "location.city": locationContext.place?.name,
     "location.timeZone": timeZone,
-    "location.longitude": longitude,
-    "location.latitude": latitude,
+    coordinates: [longitude, latitude],
   };
 }

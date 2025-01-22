@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import type { UseFormReturn } from "react-hook-form";
+import { getPremiseSlug } from "./get-premise-slug";
 import { prepareAmenityList } from "./prepare-amenity-list";
 import { mergedSchema, type MergedFormSchemaProps } from "./validation";
 import { getSession } from "@/auth";
@@ -68,7 +69,7 @@ export async function editPremiseAction(
     };
   }
   const {
-    name: _unused,
+    name,
     openHours,
     discounts,
     resources,
@@ -77,10 +78,15 @@ export async function editPremiseAction(
     ...restPremiseInput
   } = parseResult.data;
 
+  const slug =
+    name === premise.name ? premise.slug : await getPremiseSlug(name);
+
   await prisma.premise.update({
     where: { id: premise.id },
     data: {
       ...restPremiseInput,
+      name,
+      slug,
       amenities: prepareAmenityList(amenities),
       discounts: { deleteMany: {}, create: discounts },
       resources: { deleteMany: {}, create: resources },

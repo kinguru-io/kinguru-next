@@ -23,7 +23,15 @@ export const modalRecipe = cva({
       },
       "drawer-bottom": {
         marginBlockStart: "auto",
-        mdDown: { minHeight: "30%" },
+        lgDown: { minHeight: "72" },
+      },
+      fullscreen: {
+        height: "full",
+        md: {
+          minWidth: "80",
+          maxHeight: "100vh",
+          borderRadius: "unset",
+        },
       },
     },
   },

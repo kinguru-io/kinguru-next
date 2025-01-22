@@ -304,6 +304,12 @@
       "cannot_load_location": "Nie można załadować lokalizacji hali"
     }
   },
+  "search_map": {
+    "show_map": "Pokaż na mapie",
+    "close_map": "Zamknij mapę",
+    "existing_object": "Istniejący lokal",
+    "move_map_tip": "Przesuń mapę, aby wyszukać lokal"
+  },
   "premise": {
     "more": "More",
     "from": "from {price}",

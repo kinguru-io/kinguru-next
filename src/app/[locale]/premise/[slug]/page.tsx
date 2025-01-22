@@ -101,6 +101,8 @@ export default async function PremisePage({
     },
   });
 
+  // TODO add `old slugs` field to `Premise` (or something like that) model to handle links with old slugs
+
   if (!premise) {
     return notFound();
   }
