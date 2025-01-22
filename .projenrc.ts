@@ -279,7 +279,7 @@ project.buildWorkflow?.addPostBuildJob("staging-deploy", {
   runsOn: ["ubuntu-latest"],
   environment: {
     name: "staging",
-    url: "https://staging.eventify.today",
+    url: "https://stage.eventify.today",
   },
   permissions: {
     contents: JobPermission.WRITE,
@@ -335,11 +335,11 @@ werf cr login -u \${{ github.actor }} -p \${{ secrets.GITHUB_TOKEN }} ghcr.io
 werf converge --atomic`,
       env: {
         WERF_ENV: "staging",
-        WERF_SET_1: "ingress.hostname=staging.eventify.today",
+        WERF_SET_1: "ingress.hostname=stage.eventify.today",
         WERF_SET_2: "replicas.default=1",
         WERF_SET_3: "replicas.min=1",
         WERF_SET_4: "replicas.max=2",
-        SITE_URL: "https://staging.eventify.today",
+        SITE_URL: "https://stage.eventify.today",
         DATABASE_URL: "${{ secrets.DB_URL }}",
         MAPBOX_TOKEN: "${{ secrets.MAPBOX_TOKEN }}",
         ES_CLIENT_NODE: "http://172.17.0.1:9200/",
@@ -360,7 +360,7 @@ werf converge --atomic`,
       uses: "peter-evans/create-or-update-comment@v4",
       with: {
         "issue-number": "${{ github.event.number }}",
-        body: "Staging deployed successfully: https://staging.eventify.today",
+        body: "Staging deployed successfully: https://stage.eventify.today",
       },
     },
   ],
