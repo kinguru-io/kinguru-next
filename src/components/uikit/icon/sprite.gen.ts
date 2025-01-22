@@ -1,11 +1,13 @@
 export interface SpritesMap {
   action:
+    | "arrow-tail"
     | "arrow"
     | "cross"
     | "image-add"
     | "menu"
     | "move"
     | "tick-double"
+    | "tick"
     | "trash-can"
     | "view-off"
     | "view";
@@ -37,8 +39,13 @@ export const SPRITES_META: {
   };
 } = {
   action: {
-    filePath: "action.df2d0198.svg",
+    filePath: "action.9b441eab.svg",
     items: {
+      "arrow-tail": {
+        viewBox: "0 0 20 20",
+        width: 20,
+        height: 20,
+      },
       arrow: {
         viewBox: "0 0 20 20",
         width: 20,
@@ -68,6 +75,11 @@ export const SPRITES_META: {
         viewBox: "0 0 41 40",
         width: 41,
         height: 40,
+      },
+      tick: {
+        viewBox: "0 0 24 24",
+        width: 24,
+        height: 24,
       },
       "trash-can": {
         viewBox: "0 0 24 24",

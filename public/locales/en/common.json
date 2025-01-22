@@ -807,5 +807,85 @@
       "preliminary": "We've receive the request for the password change. You may change your password by visiting the link below (available for 1 hour):",
       "reset_link_label": "Click to change your password"
     }
+  },
+  "b2b": {
+    "advantages": {
+      "new-clients": "Gain new clients regularly",
+      "bookings-management": "Manage bookings seamlessly",
+      "dead-hours": "Solve the issue of “dead hours”"
+    },
+    "title": "Do you have a venue for events?",
+    "subtitle": "Get more bookings with us",
+    "advantages_title": "Eventify is a unique service for fast and convenient venue bookings",
+    "premise_type_section_title": "We work with the main types of venues:",
+    "registration_guide_title": "Register in 5 minutes!",
+    "step_label": "Step {step}",
+    "required_time_time": "Required time",
+    "registration_guide_steps": {
+      "1": "Push the button \"Add your venue\"",
+      "2": "Fill in the form \"Register your company\"",
+      "3": "Open your email verification and click the link",
+      "4": "Go into your personal account and fill in the required fields with business information"
+    },
+    "why_section_title": "Why <brand>Eventify</brand>?",
+    "companies_title": "Companies we already work with:",
+    "register_title": "Register for free on our platform now and receive:",
+    "register_bonuses": {
+      "count": "2",
+      "bonus": {
+        "1": "The first 5 bookings of your location with a 0% commission",
+        "2": "A guide on how to effectively design your page on our platform for high conversion"
+      }
+    },
+    "faq_title": "Popular questions",
+    "faq": {
+      "count": "8",
+      "questions": {
+        "1": {
+          "title": "How do I list my venue on the platform?",
+          "content": "Listing your venue is simple. Create an account, fill in your venue details (address, amenities, photos, pricing), and publish it. Our team may review the listing to ensure it meets quality standards before approval."
+        },
+        "2": {
+          "title": "What types of venues are accepted?  ",
+          "content": "We accept various types of venues, including photo studios, dance studios, yoga spaces, conference halls, banquet halls, co-working spaces, sports halls, and more. The space should be safe, well-maintained, and accessible for hourly rentals."
+        },
+        "3": {
+          "title": "Is there a fee to list my venue?",
+          "content": "Listing your venue is typically free. The platform takes a service fee of 15% from confirmed bookings, which is deducted automatically. Detailed fee structures are available in your account dashboard."
+        },
+        "4": {
+          "title": "How do I manage bookings and cancellations?",
+          "content": "You can manage bookings, choose to approve or decline requests, and set cancellation policies through your dashboard. Automated notifications will keep you updated on upcoming bookings and customer inquiries."
+        },
+        "5": {
+          "title": "Can I set my pricing and availability?",
+          "content": "Yes, you have full control over your pricing, availability, and booking conditions. You can set special prices for peak hours, holidays, or events."
+        },
+        "6": {
+          "title": "How do I receive payments for bookings?",
+          "content": "Payments are processed through a secure Stripe payment system and transferred twice a month to the bank account you put down in your company profile."
+        },
+        "7": {
+          "title": "How do I manage cancellations?",
+          "content": "Through your dashboard, you can manage bookings, approve or decline requests, and set cancellation policies. However, once a booking is confirmed and paid, it cannot be canceled by the venue owner or the customer to ensure reliability for both parties. It’s important to keep your availability updated to avoid conflicts."
+        },
+        "8": {
+          "title": "What can I do if I'm concerned about the safety of my premises during a booking?",
+          "content": "If you are concerned about your premises, we recommend that you or an authorized representative be present during the rental period. This allows you to oversee the use of your space and ensure that the acceptance process is carried out according to your rules.\n\nIf you have security cameras and notice any damage to your premises, please report the incident to us via email (eventify.scaleway@gmail.com), attaching relevant video clips or evidence. We will provide you with the contact information of the person who made the booking so you can address the issue directly—whether by contacting them to resolve it, discussing it in person, or filing a formal report if necessary."
+        }
+      }
+    }
+  },
+  "company_logo": {
+    "count": "7",
+    "urls": {
+      "1": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/ateitis_vr.jpg",
+      "2": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/dalia.jpg",
+      "3": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/hit_studio.png",
+      "4": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/jakby_luksusowo.jpg",
+      "5": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/prastora_bel.jpg",
+      "6": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/sala_like.svg",
+      "7": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/standup_lokal.jpg"
+    }
   }
 }
