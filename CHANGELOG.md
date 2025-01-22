@@ -1,3 +1,10 @@
+# [0.73.0](https://github.com/kinguru-io/kinguru-next/compare/v0.72.0...v0.73.0) (2025-01-22)
+
+
+### Features
+
+* search on map feature ([0351edb](https://github.com/kinguru-io/kinguru-next/commit/0351edb744a05500f8572467468a5cae6bf97818))
+
 # [0.72.0](https://github.com/kinguru-io/kinguru-next/compare/v0.71.0...v0.72.0) (2025-01-22)
 
 
