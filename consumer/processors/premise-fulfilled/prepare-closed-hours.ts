@@ -25,16 +25,20 @@ export function prepareClosedHours({
       if (!records) return group;
 
       records.forEach((record) => {
+        const openHour = record.openTime.getUTCHours();
+        const lastClosedHour =
+          record.closeTime.getUTCDate() > 1 // since 1970-01-01T24:00:00.000Z -> 1970-01-02T00:00:00.000Z
+            ? 25
+            : record.closeTime.getUTCHours();
+
         Array.from(
-          {
-            length:
-              record.closeTime.getUTCHours() - record.openTime.getUTCHours(),
-          },
-          (_, i) => i + record.openTime.getUTCHours(),
+          { length: lastClosedHour - openHour },
+          (_, i) => i + openHour,
         ).forEach((hour) => closedHours.delete(hour));
       });
 
-      group[dayNumber] = Array.from(closedHours);
+      group[dayNumber] = closedHours.size > 0 ? Array.from(closedHours) : [-1];
+      // [-1] stands for index to be looked up in case of 24/7 working hours
       return group;
     },
     {},
