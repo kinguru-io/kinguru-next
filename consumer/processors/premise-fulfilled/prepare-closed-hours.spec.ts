@@ -48,4 +48,32 @@ describe("[consumer] prepareClosedHours", () => {
 
     expect(result).toHaveProperty("7");
   });
+
+  it("Working hours 24/7", () => {
+    const result = prepareClosedHours({
+      openHours: [
+        {
+          day: "MONDAY",
+          openTime: new Date("1970-01-01T00:00:00.000Z"),
+          closeTime: new Date("1970-01-01T24:00:00.000Z"),
+        },
+      ],
+    });
+
+    expect(result["1"]).toEqual([-1]);
+  });
+
+  it("Working hours till 00:00", () => {
+    const result = prepareClosedHours({
+      openHours: [
+        {
+          day: "MONDAY",
+          openTime: new Date("1970-01-01T06:00:00.000Z"),
+          closeTime: new Date("1970-01-01T24:00:00.000Z"),
+        },
+      ],
+    });
+
+    expect(result["1"]).toEqual([0, 1, 2, 3, 4, 5]);
+  });
 });

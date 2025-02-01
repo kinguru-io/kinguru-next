@@ -143,7 +143,7 @@ function TimeSelect({
       rounded
       hideLabel
     >
-      {Array.from({ length: 24 }, (_, i) => (
+      {Array.from({ length: 25 }, (_, i) => (
         <option key={i} value={i}>
           {String(i).padStart(2, "0")}:00
         </option>
