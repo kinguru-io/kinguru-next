@@ -7,6 +7,12 @@ export const BlogMain = async () => {
     orderBy: { createdAt: "desc" },
     take: 6,
   });
-  return <BlogMainInteraction initialBlogs={blogs} />;
+  const totalBlogs = await prisma.blog.count();
+  return (
+    <BlogMainInteraction
+      initialBlogs={blogs}
+      initialHasMore={blogs.length < totalBlogs}
+    />
+  );
 };
 export default BlogMain;

@@ -12,31 +12,30 @@ import { Container, HStack } from "~/styled-system/jsx";
 
 export const BlogMainInteraction = ({
   initialBlogs,
+  initialHasMore,
 }: {
   initialBlogs: Blog[];
+  initialHasMore: boolean;
 }) => {
   const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(initialHasMore);
+  const [, setPage] = useState(1);
   const t = useTranslations("blog");
-  console.log(page);
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      const response = await fetch(`/api/blogs?page=${page}`);
-      const data = await response.json();
+  const handleShowMore = async () => {
+    setPage((prevPage) => {
+      const nextPage = prevPage + 1;
 
-      const newBlogs = data.blogs;
-      setBlogs((prev) => [...prev, ...newBlogs]);
-      setHasMore(data.hasMore);
-    };
-
-    if (page > 1) {
-      void fetchBlogs();
-    }
-  }, [page]);
-
-  const handleShowMore = () => {
-    setPage((prevPage) => prevPage + 1);
+      const fetchBlogs = async () => {
+        const response = await fetch(`/api/blogs?page=${nextPage}`);
+        const data = await response.json();
+        console.log(data.hasMore);
+        const newBlogs = data.blogs;
+        setBlogs((prev) => [...prev, ...newBlogs]);
+        setHasMore(data.hasMore);
+      };
+      hasMore && void fetchBlogs();
+      return nextPage;
+    });
   };
 
   return (
