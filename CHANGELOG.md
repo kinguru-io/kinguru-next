@@ -1,3 +1,15 @@
+# [0.74.0](https://github.com/kinguru-io/kinguru-next/compare/v0.73.0...v0.74.0) (2025-02-10)
+
+
+### Bug Fixes
+
+* type of window build error ([1a4158e](https://github.com/kinguru-io/kinguru-next/commit/1a4158ed677eb575230fbd8f1290e842dcefbccb))
+
+
+### Features
+
+* blog page detail of blog page and changed to real blog page b2b section ([be3e08b](https://github.com/kinguru-io/kinguru-next/commit/be3e08b2e87be226002f1daf0609e9244039dff0))
+
 # [0.73.0](https://github.com/kinguru-io/kinguru-next/compare/v0.72.0...v0.73.0) (2025-01-22)
 
 
