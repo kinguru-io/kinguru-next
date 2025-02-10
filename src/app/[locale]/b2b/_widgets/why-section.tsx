@@ -1,81 +1,20 @@
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { BlogLinkCard } from "./blog-link-card";
+import { BLOG_DETAIL } from "@/lib/routes/constants";
 import { css } from "~/styled-system/css";
 import { container } from "~/styled-system/patterns";
 
-/* TODO should be generated dynamically once blog functionality is done */
-const blogPages = {
-  en: [
-    {
-      title: "More new customers",
-      subtitle:
-        "Our site has over 5,000 monthly users who are ready to book a location! We have high-quality traffic thanks to our SEO and targeted advertising.",
-    },
-    {
-      title: "Free registration",
-      subtitle: "Join at no cost and start earning on your location today!",
-    },
-    {
-      title: "The commission is paid upon booking",
-      subtitle: "A minimum commission of 15% is charged. Registration is free.",
-    },
-    {
-      title: "We will turn your clients into loyal customers!",
-      subtitle:
-        "Thanks to our unique booking automation system and discount program. Register on the platform for free!",
-    },
-    {
-      title: "You no longer need a sales manager or advertising!",
-      subtitle:
-        "Our platform will handle everything related to finding, selling, and retaining clients for your venue!",
-    },
-    {
-      title: "You maintain full control",
-      subtitle: "You decide which bookings to approve and which to decline.",
-    },
-  ],
-  pl: [
-    {
-      title: "Wi cej klient w",
-      subtitle:
-        "Nasz portal ma ponad 5 000 miesi cznych u ytkownik w, gotowych do rezerwacji lokalu! Posiadamy wysokiej jako ci ruch dzi ki naszym wysi ukom SEO i celowanym reklamom.",
-    },
-    {
-      title: "Rejestracja jest za darmo",
-      subtitle:
-        "Do aduj za darmo i zaczyna zarabia  na swoim lokalu ju dzisiaj!",
-    },
-    {
-      title: "Wynagrodzenie jest wyp acane przy rezerwacji",
-      subtitle: "Minimalna prowizja to 15%. Rejestracja jest za darmo.",
-    },
-    {
-      title: "Przekszta limy twoich klient w w lojalnych klient w!",
-      subtitle:
-        "Dzi ki naszemu systemowi automatyzacji rezerwacji i programowi rabatowemu. Do aduj na portalu za darmo!",
-    },
-    {
-      title: "Nie potrzebujesz ju mened era sprzeda y ani reklam!",
-      subtitle:
-        "Nasz portal zajmie si wszystkim, co wi ze si z poszukiwaniem, sprzeda  i utrzymaniem klient w w Twoim lokalu!",
-    },
-    {
-      title: "Zachowujesz pe n  kontrol ",
-      subtitle:
-        "Ty decydujesz, kt re rezerwacje zaakceptowa  i kt re odrzuci .",
-    },
-  ],
-};
-
-export function WhySection({
+export const WhySection = async ({
   anchorSlot,
-  locale,
 }: {
   anchorSlot: React.ReactNode;
-  locale: string; // TODO locale is used to provide mockup for blog pages for different language. remove once blog functionality is done
-}) {
-  const t = useTranslations("b2b");
-
+}) => {
+  const t = await getTranslations("b2b");
+  const blogs = await prisma.blog.findMany({
+    take: 6,
+    orderBy: { createdAt: "desc" },
+  });
   return (
     <section className={container()}>
       <h2
@@ -134,9 +73,12 @@ export function WhySection({
           },
         })}
       >
-        {/* TODO should be generated dynamically once blog functionality is done */}
-        {blogPages[locale as keyof typeof blogPages].map((info, idx) => (
-          <BlogLinkCard key={info.title} step={idx + 1} {...info} href="#" />
+        {blogs.map((info, idx) => (
+          <li key={info.id}>
+            <Link href={BLOG_DETAIL(info.slug)}>
+              <BlogLinkCard step={idx + 1} {...info} />
+            </Link>
+          </li>
         ))}
       </ul>
       <div className={css({ marginInline: "auto", width: "fit-content" })}>
@@ -144,4 +86,4 @@ export function WhySection({
       </div>
     </section>
   );
-}
+};

@@ -12,8 +12,6 @@ model User {
   name                   String?
   email                  String                   @unique
   emailVerified          DateTime?
-  emailSentAt            DateTime?
-  stripeCustomerId       String?                  @unique
   image                  String?
   confirmed              Boolean                  @default(false)
   firstname              String?
@@ -27,32 +25,512 @@ model User {
   position               String?
   company                String?
   interests              String[]
-  socialLinks            UserSocialLink[]
   vk                     String?
   facebook               String?
   instagram              String?
   linkedin               String?
-  telegram               String?
   website                String?
   role                   UserRole                 @default(user)
   createdAt              DateTime                 @default(now())
   updatedAt              DateTime                 @updatedAt
-  events                 Event[]
-  participant            UsersOnEvent[]
-  places                 Place[]
-  speaker                Speaker?
+  telegram               String?
+  stripeCustomerId       String?                  @unique
+  emailSentAt            DateTime?
   accounts               Account[]
-  sessions               Session[]
+  events                 Event[]
   eventComments          EventComment[]
+  moderationNotification ModerationNotification[]
+  organizations          Organization[]
+  places                 Place[]
   placeComments          PlaceComment[]
+  slots                  PremiseSlot[]
+  purchaseNotification   PurchaseNotification[]
+  sessions               Session[]
+  speaker                Speaker?
   speakerComments        SpeakerComment[]
   following              SpeakerFollower[]
   ticketIntents          TicketIntent[]
+  likedEvents            UserLikedEvents[]
+  socialLinks            UserSocialLink[]
+  participant            UsersOnEvent[]
+}
+
+model UserLikedEvents {
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, eventId])
+}
+
+model UserSocialLink {
+  id      String        @id @default(cuid())
+  userId  String
+  network SocialNetwork
+  url     String
+  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String       @id @unique @default(cuid())
+  userId            String
+  type              ProviderType
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  emailToken        String?      @unique @default(cuid())
+  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  sessionToken String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationRequest {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Speaker {
+  id          String            @id @default(cuid())
+  userId      String            @unique
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  user        User              @relation(fields: [userId], references: [id])
+  comments    SpeakerComment[]
+  followers   SpeakerFollower[]
+  participant SpeakersOnEvent[]
+}
+
+model SpeakerComment {
+  id        String   @id @default(cuid())
+  speakerId String
+  userId    String
+  rating    Float    @default(0.00)
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  speaker   Speaker  @relation(fields: [speakerId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model SpeakerFollower {
+  speakerId  String
+  userId     String
+  followedAt DateTime @default(now())
+  speaker    Speaker  @relation(fields: [speakerId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@id([speakerId, userId])
+}
+
+model PurchaseNotification {
+  id        String             @id @default(cuid())
+  viewed    Boolean            @default(false)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  eventId   String?
+  status    TicketIntentStatus @default(progress)
+  userId    String?
+  event     Event?             @relation(fields: [eventId], references: [id])
+  user      User?              @relation(fields: [userId], references: [id])
+}
+
+model ModerationNotification {
+  id        String                       @id @default(cuid())
+  userId    String
+  eventId   String
+  viewed    Boolean                      @default(false)
+  status    ModerationNotificationStatus @default(sent)
+  createdAt DateTime                     @default(now())
+  updatedAt DateTime                     @updatedAt
+  event     Event                        @relation(fields: [eventId], references: [id])
+  user      User                         @relation(fields: [userId], references: [id])
+}
+
+model Event {
+  id                     String                   @id @default(cuid())
+  topic                  String
+  description            String
+  status                 EventStatus              @default(unmoderated)
+  initiatorId            String
+  placeId                String
+  starts                 DateTime                 @db.Timestamp(6)
+  duration               DateTime?                @db.Time(6)
+  poster                 String?
+  price                  Float?
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  tags                   String[]
+  slug                   String                   @default("")
+  initiator              User                     @relation(fields: [initiatorId], references: [id])
+  place                  Place                    @relation(fields: [placeId], references: [id])
+  comments               EventComment[]
+  resources              EventResource[]
   moderationNotification ModerationNotification[]
   purchaseNotification   PurchaseNotification[]
-  organizations          Organization[]
-  likedEvents            UserLikedEvents[]
-  slots                  PremiseSlot[]
+  speakersOnEvent        SpeakersOnEvent[]
+  ticketIntents          TicketIntent[]
+  usersLiked             UserLikedEvents[]
+  usersOnEvent           UsersOnEvent[]
+}
+
+model EventComment {
+  id        String   @id @default(cuid())
+  eventId   String
+  userId    String
+  rating    Float    @default(0.00)
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model EventResource {
+  id        String   @id @default(cuid())
+  eventId   String
+  height    Int      @default(200)
+  width     Int      @default(100)
+  url       String
+  isPoster  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id])
+}
+
+model TicketIntent {
+  id        String             @id
+  eventId   String
+  userId    String
+  status    TicketIntentStatus
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  event     Event              @relation(fields: [eventId], references: [id])
+  user      User               @relation(fields: [userId], references: [id])
+}
+
+model UsersOnEvent {
+  eventId  String
+  userId   String
+  joinedAt DateTime @default(now())
+  event    Event    @relation(fields: [eventId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@id([userId, eventId])
+}
+
+model SpeakersOnEvent {
+  eventId   String
+  speakerId String
+  joinedAt  DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id])
+  speaker   Speaker  @relation(fields: [speakerId], references: [id])
+
+  @@id([speakerId, eventId])
+}
+
+/// @deprecated Use `Premise` instead
+model Place {
+  id                     String              @id @default(cuid())
+  ownerId                String
+  private                Boolean?            @default(true)
+  tel                    String?             @db.VarChar(255)
+  location               String              @db.VarChar(255)
+  coordsLat              Float               @db.Real
+  coordsLng              Float               @db.Real
+  organizationId         String?
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  capacity               Int?
+  name                   String              @default("Place")
+  ageRestrictions        String              @default("+4")
+  amenities              String[]
+  area                   Float               @default(0)
+  billingMapboxId        String              @default("")
+  cameraOrAudioRecording Boolean?
+  cleaningFeePrice       Float               @default(0)
+  description            String              @default("Description")
+  hasWifi                Boolean             @default(false)
+  locationMapboxId       String              @default("")
+  maxCapacity            Int?
+  minCapacity            Int?
+  parkingArea            String[]
+  rentalPriceByHour      Float               @default(0)
+  routeToPremises        String?
+  rules                  String?             @default("Rules")
+  title                  String              @default("Place")
+  wifiLogin              String?
+  wifiPassword           String?
+  typeOfPremises         String[]
+  Event                  Event[]
+  organization           Organization?       @relation(fields: [organizationId], references: [id])
+  owner                  User                @relation(fields: [ownerId], references: [id])
+  comments               PlaceComment[]
+  openingHours           PlaceOpeningHours[]
+  resources              PlaceResource[]
+}
+
+model PlaceOpeningHours {
+  id        String       @id @default(cuid())
+  placeId   String
+  day       DayOfTheWeek
+  openTime  DateTime
+  closeTime DateTime
+  place     Place        @relation(fields: [placeId], references: [id])
+}
+
+model PlaceComment {
+  id        String   @id @default(cuid())
+  placeId   String
+  userId    String
+  rating    Float    @default(0.00)
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  place     Place    @relation(fields: [placeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model PlaceResource {
+  id        String   @id @default(cuid())
+  placeId   String
+  height    Int      @default(200)
+  width     Int      @default(100)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  place     Place    @relation(fields: [placeId], references: [id])
+}
+
+model Organization {
+  id             String                 @id @default(cuid())
+  name           String
+  logotype       String?
+  ownerId        String
+  IBAN           String
+  NIP            String
+  bankName       String
+  businessName   String
+  /// @description Currently only `EMEA` region is used.
+  businessRegion BusinessRegion?        @default(EMEA)
+  city           String
+  country        String
+  foundationDate Int
+  address        Address[]
+  owner          User                   @relation(fields: [ownerId], references: [id])
+  resources      OrganizationResourse[]
+  places         Place[]
+  slots          PremiseSlot[]
+  socialLinks    SocialLink[]
+  venues         Venue[]
+}
+
+model Address {
+  id             String       @id @default(cuid())
+  organizationId String
+  country        String
+  city           String
+  street         String
+  building       String
+  room           String?
+  zipCode        String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model SocialLink {
+  id             String        @id @default(cuid())
+  organizationId String
+  network        SocialNetwork
+  url            String
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+model OrganizationResourse {
+  id             String       @id @default(cuid())
+  organizationId String
+  height         Int          @default(720)
+  width          Int          @default(405)
+  url            String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id])
+}
+
+model Venue {
+  id               String             @id @default(cuid())
+  name             String
+  description      String?            @default("")
+  image            String
+  locationMapboxId String
+  slug             String             @unique
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  organizationId   String
+  featureAge       Int
+  featureCCTV      Boolean
+  featureParking   Boolean
+  locationTutorial String
+  manager          Manager[]
+  premises         Premise[]
+  organization     Organization       @relation(fields: [organizationId], references: [id])
+  information      VenueInformation[]
+}
+
+model VenueInformation {
+  id          String @id @default(cuid())
+  venueId     String
+  locale      String
+  description String
+  venue       Venue  @relation(fields: [venueId], references: [id], onDelete: Cascade)
+}
+
+model Premise {
+  id                 String               @id @default(cuid())
+  venueId            String
+  name               String
+  description        String?              @default("")
+  area               Float?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  slug               String               @unique
+  amenities          String[]
+  bookingCancelTerm  String?              @default("Booking cancel term")
+  direction          String?              @default("Direction")
+  rules              String?              @default("Rules")
+  capacity           Int?
+  floor              String?
+  room               String?
+  type               String?              @default("")
+  minimalPrice       Float?
+  priceMode          PremisePriceMode     @default(arbitrary)
+  minimalSlotsToBook Int?
+  withConfirmation   Boolean?
+  venue              Venue                @relation(fields: [venueId], references: [id])
+  discounts          PremiseDiscount[]
+  information        PremiseInformation[]
+  openHours          PremiseOpenHours[]
+  resources          PremiseResource[]
+  slots              PremiseSlot[]
+}
+
+model PremiseInformation {
+  id          String  @id @default(cuid())
+  premiseId   String
+  locale      String
+  description String
+  premise     Premise @relation(fields: [premiseId], references: [id], onDelete: Cascade)
+}
+
+model PremiseOpenHours {
+  id        String           @id @default(cuid())
+  premiseId String
+  day       DayOfTheWeek
+  openTime  DateTime
+  closeTime DateTime
+  /// @description currently is used for 1 hour intervals
+  price     Float
+  premise   Premise          @relation(fields: [premiseId], references: [id])
+  pricing   PremisePricing[]
+}
+
+model PremiseSlot {
+  id              String             @id @default(cuid())
+  premiseId       String
+  date            DateTime
+  startTime       DateTime
+  endTime         DateTime
+  paymentIntentId String
+  status          TicketIntentStatus
+  userId          String
+  createdAt       DateTime           @default(now())
+  amount          Float              @default(0)
+  discountAmount  Float              @default(0)
+  organizationId  String
+  type            BookingType        @default(via_website)
+  comment         String?            @default("")
+  organization    Organization       @relation(fields: [organizationId], references: [id])
+  premise         Premise            @relation(fields: [premiseId], references: [id])
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+}
+
+/// @deprecated pricing is set directly to the `PremiseOpenHours` model
+model PremisePricing {
+  id                 String           @id @default(cuid())
+  premiseOpenHoursId String
+  priceForHour       Float
+  startTime          DateTime
+  endTime            DateTime
+  premiseOpenHours   PremiseOpenHours @relation(fields: [premiseOpenHoursId], references: [id])
+}
+
+model PremiseResource {
+  id        String   @id @default(cuid())
+  premiseId String
+  height    Int      @default(720)
+  width     Int      @default(405)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  premise   Premise  @relation(fields: [premiseId], references: [id])
+}
+
+model PremiseDiscount {
+  id                 String  @id @default(cuid())
+  premiseId          String
+  duration           Int
+  discountPercentage Float
+  premise            Premise @relation(fields: [premiseId], references: [id])
+}
+
+model Manager {
+  id          String @id @default(cuid())
+  firstname   String
+  lastname    String
+  email       String
+  phoneNumber String
+  venueId     String
+  venue       Venue  @relation(fields: [venueId], references: [id])
+}
+
+model Blog {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String     @unique
+  description String
+  createdAt   DateTime    @default(now())
+  blogDetail  BlogDetail? @relation("BlogToDetail")
+}
+
+model BlogDetail {
+  id          String   @id @default(cuid())
+  blogId      String   @unique
+  title       String
+  description String
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  blog        Blog     @relation("BlogToDetail", fields: [blogId], references: [id], onDelete: Cascade)
 }
 
 enum UserRole {
@@ -67,122 +545,10 @@ enum UserGender {
   notSpecified
 }
 
-model UserLikedEvents {
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  eventId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@id([userId, eventId])
-}
-
-model UserSocialLink {
-  id      String        @id @default(cuid())
-  user    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  network SocialNetwork
-  url     String
-}
-
-model Account {
-  id                String       @id @unique @default(cuid())
-  user              User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String
-  type              ProviderType
-  provider          String
-  providerAccountId String
-  refresh_token     String?      @db.Text
-  access_token      String?      @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?      @db.Text
-  session_state     String?
-  emailToken        String?      @unique @default(cuid())
-
-  @@unique([provider, providerAccountId])
-}
-
 enum ProviderType {
   oauth
   email
   credentials
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String
-  sessionToken String   @unique
-  expires      DateTime
-}
-
-model VerificationRequest {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
-model Speaker {
-  id          String            @id @default(cuid())
-  user        User              @relation(fields: [userId], references: [id])
-  userId      String            @unique
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  participant SpeakersOnEvent[]
-  comments    SpeakerComment[]
-  followers   SpeakerFollower[]
-}
-
-model SpeakerComment {
-  id        String   @id @default(cuid())
-  speaker   Speaker  @relation(fields: [speakerId], references: [id])
-  speakerId String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  rating    Float    @default(0.00)
-  message   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model SpeakerFollower {
-  speaker    Speaker  @relation(fields: [speakerId], references: [id])
-  speakerId  String
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String
-  followedAt DateTime @default(now())
-
-  @@id([speakerId, userId])
-}
-
-model PurchaseNotification {
-  id        String             @id @default(cuid())
-  user      User?              @relation(fields: [userId], references: [id])
-  userId    String?
-  event     Event?             @relation(fields: [eventId], references: [id])
-  eventId   String?
-  viewed    Boolean            @default(false)
-  status    TicketIntentStatus @default(progress)
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
-}
-
-model ModerationNotification {
-  id      String                       @id @default(cuid())
-  user    User                         @relation(fields: [userId], references: [id])
-  userId  String
-  event   Event                        @relation(fields: [eventId], references: [id])
-  eventId String
-  viewed  Boolean                      @default(false)
-  status  ModerationNotificationStatus @default(sent)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 enum ModerationNotificationStatus {
@@ -191,72 +557,10 @@ enum ModerationNotificationStatus {
   failed
 }
 
-model Event {
-  id                     String                   @id @default(cuid())
-  slug                   String                   @default("")
-  topic                  String
-  description            String
-  status                 EventStatus              @default(unmoderated)
-  initiator              User                     @relation(fields: [initiatorId], references: [id])
-  initiatorId            String
-  place                  Place                    @relation(fields: [placeId], references: [id])
-  placeId                String
-  starts                 DateTime                 @db.Timestamp
-  duration               DateTime?                @db.Time
-  poster                 String?
-  price                  Float?
-  createdAt              DateTime                 @default(now())
-  updatedAt              DateTime                 @updatedAt
-  tags                   String[]
-  resources              EventResource[]
-  comments               EventComment[]
-  usersOnEvent           UsersOnEvent[]
-  speakersOnEvent        SpeakersOnEvent[]
-  ticketIntents          TicketIntent[]
-  moderationNotification ModerationNotification[]
-  purchaseNotification   PurchaseNotification[]
-  usersLiked             UserLikedEvents[]
-}
-
 enum EventStatus {
   unmoderated
   active
   private
-}
-
-model EventComment {
-  id        String   @id @default(cuid())
-  event     Event    @relation(fields: [eventId], references: [id])
-  eventId   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  rating    Float    @default(0.00)
-  message   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model EventResource {
-  id        String   @id @default(cuid())
-  event     Event    @relation(fields: [eventId], references: [id])
-  eventId   String
-  height    Int      @default(200)
-  width     Int      @default(100)
-  url       String
-  isPoster  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model TicketIntent {
-  id        String             @id
-  event     Event              @relation(fields: [eventId], references: [id])
-  eventId   String
-  user      User               @relation(fields: [userId], references: [id])
-  userId    String
-  status    TicketIntentStatus
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
 }
 
 enum TicketIntentStatus {
@@ -264,76 +568,6 @@ enum TicketIntentStatus {
   progress
   succeed
   canceled
-}
-
-model UsersOnEvent {
-  event    Event    @relation(fields: [eventId], references: [id])
-  eventId  String
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String
-  joinedAt DateTime @default(now())
-
-  @@id([userId, eventId])
-}
-
-model SpeakersOnEvent {
-  event     Event    @relation(fields: [eventId], references: [id])
-  eventId   String
-  speaker   Speaker  @relation(fields: [speakerId], references: [id])
-  speakerId String
-  joinedAt  DateTime @default(now())
-
-  @@id([speakerId, eventId])
-}
-
-/// @deprecated Use `Premise` instead
-model Place {
-  id                     String              @id @default(cuid())
-  name                   String              @default("Place")
-  title                  String              @default("Place")
-  description            String              @default("Description")
-  typeOfPremises         String[]
-  rules                  String?             @default("Rules")
-  area                   Float               @default(0)
-  owner                  User                @relation(fields: [ownerId], references: [id])
-  ownerId                String
-  private                Boolean?            @default(true)
-  tel                    String?             @db.VarChar(255)
-  location               String              @db.VarChar(255)
-  coordsLat              Float               @db.Real
-  coordsLng              Float               @db.Real
-  Event                  Event[]
-  organization           Organization?       @relation(fields: [organizationId], references: [id])
-  organizationId         String?
-  capacity               Int?
-  minCapacity            Int?
-  maxCapacity            Int?
-  ageRestrictions        String              @default("+4")
-  parkingArea            String[]
-  cameraOrAudioRecording Boolean?
-  hasWifi                Boolean             @default(false)
-  wifiLogin              String?
-  wifiPassword           String?
-  amenities              String[]
-  locationMapboxId       String              @default("")
-  billingMapboxId        String              @default("")
-  routeToPremises        String?
-  rentalPriceByHour      Float               @default(0)
-  cleaningFeePrice       Float               @default(0)
-  openingHours           PlaceOpeningHours[]
-  resources              PlaceResource[]
-  comments               PlaceComment[]
-  createdAt              DateTime            @default(now())
-  updatedAt              DateTime            @updatedAt
-}
-
-model PlaceOpeningHours {
-  id        String       @id @default(cuid())
-  place     Place        @relation(fields: [placeId], references: [id])
-  placeId   String
-  day       DayOfTheWeek
-  openTime  DateTime
-  closeTime DateTime
 }
 
 enum DayOfTheWeek {
@@ -346,76 +580,11 @@ enum DayOfTheWeek {
   SUNDAY
 }
 
-model PlaceComment {
-  id        String   @id @default(cuid())
-  place     Place    @relation(fields: [placeId], references: [id])
-  placeId   String
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  rating    Float    @default(0.00)
-  message   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model PlaceResource {
-  id        String   @id @default(cuid())
-  place     Place    @relation(fields: [placeId], references: [id])
-  placeId   String
-  height    Int      @default(200)
-  width     Int      @default(100)
-  url       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Organization {
-  id             String                 @id @default(cuid())
-  name           String
-  owner          User                   @relation(fields: [ownerId], references: [id])
-  ownerId        String
-  foundationDate Int
-  country        String
-  city           String
-  businessName   String
-  NIP            String
-  businessRegion BusinessRegion?        @default(EMEA) /// @description Currently only `EMEA` region is used.
-  bankName       String
-  IBAN           String
-  address        Address[] /// @description This is a tuple. Consists of both post and billing addresses. `address[0]` - post, `address[1]` - billing.
-  logotype       String?
-  socialLinks    SocialLink[]
-  places         Place[]
-  venues         Venue[]
-  resources      OrganizationResourse[]
-  slots          PremiseSlot[] // Add this relation to Organization
-}
-
 /// @description Currently only `EMEA` region is used.
 enum BusinessRegion {
   AMER
   APAC
   EMEA
-}
-
-model Address {
-  id             String       @id @default(cuid())
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  organizationId String
-  country        String
-  city           String
-  street         String
-  building       String
-  room           String?
-  zipCode        String
-}
-
-model SocialLink {
-  id             String        @id @default(cuid())
-  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  organizationId String
-  network        SocialNetwork
-  url            String
 }
 
 enum SocialNetwork {
@@ -425,96 +594,9 @@ enum SocialNetwork {
   threads
 }
 
-model OrganizationResourse {
-  id             String       @id @default(cuid())
-  organization   Organization @relation(fields: [organizationId], references: [id])
-  organizationId String
-  height         Int          @default(720)
-  width          Int          @default(405)
-  url            String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
-model Venue {
-  id               String             @id @default(cuid())
-  slug             String             @unique
-  name             String
-  image            String
-  description      String?            @default("")
-  organization     Organization       @relation(fields: [organizationId], references: [id])
-  organizationId   String
-  premises         Premise[]
-  locationMapboxId String
-  locationTutorial String
-  featureCCTV      Boolean
-  featureParking   Boolean
-  featureAge       Int
-  manager          Manager[]
-  information      VenueInformation[]
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-}
-
-model VenueInformation {
-  id          String @id @default(cuid())
-  venue       Venue  @relation(fields: [venueId], references: [id], onDelete: Cascade)
-  venueId     String
-  locale      String
-  description String
-}
-
-model Premise {
-  id                 String               @id @default(cuid())
-  slug               String               @unique
-  venue              Venue                @relation(fields: [venueId], references: [id])
-  venueId            String
-  name               String
-  description        String?              @default("")
-  room               String?
-  floor              String?
-  type               String?              @default("")
-  area               Float?
-  capacity           Int?
-  slots              PremiseSlot[]
-  openHours          PremiseOpenHours[]
-  resources          PremiseResource[]
-  discounts          PremiseDiscount[]
-  rules              String?              @default("Rules")
-  amenities          String[]
-  direction          String?              @default("Direction")
-  bookingCancelTerm  String?              @default("Booking cancel term")
-  information        PremiseInformation[]
-  priceMode          PremisePriceMode     @default(arbitrary)
-  minimalPrice       Float?
-  minimalSlotsToBook Int?
-  withConfirmation   Boolean?
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-}
-
 enum PremisePriceMode {
   arbitrary
   donation
-}
-
-model PremiseInformation {
-  id          String  @id @default(cuid())
-  premise     Premise @relation(fields: [premiseId], references: [id], onDelete: Cascade)
-  premiseId   String
-  locale      String
-  description String
-}
-
-model PremiseOpenHours {
-  id        String           @id @default(cuid())
-  premise   Premise          @relation(fields: [premiseId], references: [id])
-  premiseId String
-  pricing   PremisePricing[]
-  day       DayOfTheWeek
-  openTime  DateTime
-  closeTime DateTime
-  price     Float /// @description currently is used for 1 hour intervals
 }
 
 enum BookingType {
@@ -522,65 +604,4 @@ enum BookingType {
   via_website
   needs_confirmation
   ready_for_payment
-}
-
-model PremiseSlot {
-  id              String             @id @default(cuid())
-  type            BookingType        @default(via_website)
-  premise         Premise            @relation(fields: [premiseId], references: [id])
-  premiseId       String
-  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String
-  paymentIntentId String
-  amount          Float              @default(0)
-  discountAmount  Float              @default(0)
-  date            DateTime
-  startTime       DateTime
-  endTime         DateTime
-  status          TicketIntentStatus
-  createdAt       DateTime           @default(now())
-  organizationId  String
-  organization    Organization       @relation(fields: [organizationId], references: [id])
-  comment         String?            @default("")
-
-  @@index([organizationId])
-}
-
-/// @deprecated pricing is set directly to the `PremiseOpenHours` model
-model PremisePricing {
-  id                 String           @id @default(cuid())
-  premiseOpenHours   PremiseOpenHours @relation(fields: [premiseOpenHoursId], references: [id])
-  premiseOpenHoursId String
-  priceForHour       Float
-  startTime          DateTime
-  endTime            DateTime
-}
-
-model PremiseResource {
-  id        String   @id @default(cuid())
-  premise   Premise  @relation(fields: [premiseId], references: [id])
-  premiseId String
-  height    Int      @default(720)
-  width     Int      @default(405)
-  url       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model PremiseDiscount {
-  id                 String  @id @default(cuid())
-  premise            Premise @relation(fields: [premiseId], references: [id])
-  premiseId          String
-  duration           Int
-  discountPercentage Float
-}
-
-model Manager {
-  id          String @id @default(cuid())
-  firstname   String
-  lastname    String
-  email       String
-  phoneNumber String
-  venue       Venue  @relation(fields: [venueId], references: [id])
-  venueId     String
 }

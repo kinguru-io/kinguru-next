@@ -8,6 +8,7 @@ import { LanguageSelector } from "./language-selector";
 import { SignOutButton } from "./sign-out-button";
 import { UserSection, UserSectionSkeleton } from "./user-section";
 
+import { GoogleTranslateMenu } from "../google-translate/GoogleTranslateMenu";
 import { getSession } from "@/auth";
 import { Contacts, SocialMediaLinks } from "@/components/brand";
 import { Link } from "@/navigation";
@@ -39,18 +40,22 @@ export async function Header() {
             priority
             unoptimized
           />
+
           <Link href="/" className={linkOverlay()}>
             <span className={css({ srOnly: true })}>{t("home_link")}</span>
           </Link>
         </InlineBox>
+
         <HStack gap="3">
           <HeaderModal
             content={
-              <ModalContent
-                signOutLabel={t("sign_out")}
-                localeLabel={t("lang_menu")}
-                marketingSlot={<CompanyRegisterLink />}
-              />
+              <>
+                <ModalContent
+                  signOutLabel={t("sign_out")}
+                  localeLabel={t("lang_menu")}
+                  marketingSlot={<CompanyRegisterLink />}
+                />
+              </>
             }
           >
             <Suspense
@@ -61,6 +66,7 @@ export async function Header() {
               <UserSection />
             </Suspense>
           </HeaderModal>
+          <GoogleTranslateMenu />
         </HStack>
       </Container>
     </header>
@@ -69,7 +75,6 @@ export async function Header() {
 
 async function ModalContent({
   signOutLabel,
-  localeLabel,
   marketingSlot,
 }: {
   signOutLabel: string;
@@ -81,7 +86,8 @@ async function ModalContent({
   return (
     <Stack css={{ flexDirection: "column", gap: 4, height: "full" }}>
       {!session && marketingSlot}
-      <LanguageSelector label={localeLabel} />
+      <LanguageSelector />
+
       <Stack marginBlockStart="auto" gap="6">
         <SocialMediaLinks />
         <Contacts />
