@@ -30,10 +30,14 @@ export function closedHoursResolver(ranges: string[]) {
 
   // since `0` is Sunday (elastic docs has numbers 1-7)
   const docNumber = dayNumber === 0 ? 7 : dayNumber;
+  const fromHour = from.getUTCHours();
+  const lastHour =
+    // handles the case when a user chooses 24:00 as the border
+    to.getUTCDate() === from.getUTCDate() + 1 ? 25 : to.getUTCHours();
 
   const hoursRange = Array.from(
-    { length: to.getUTCHours() - from.getUTCHours() },
-    (_, i) => i + from.getUTCHours(),
+    { length: lastHour - fromHour },
+    (_, i) => i + fromHour,
   );
 
   return { terms: { [`closedHours.${docNumber}`]: hoursRange } };
