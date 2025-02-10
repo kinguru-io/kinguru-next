@@ -3,7 +3,7 @@
 import { Blog } from "@prisma/client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BlogCard } from "./blog-card";
 import { Button } from "@/components/uikit";
 import { BLOG_DETAIL } from "@/lib/routes/constants";
@@ -28,7 +28,6 @@ export const BlogMainInteraction = ({
       const fetchBlogs = async () => {
         const response = await fetch(`/api/blogs?page=${nextPage}`);
         const data = await response.json();
-        console.log(data.hasMore);
         const newBlogs = data.blogs;
         setBlogs((prev) => [...prev, ...newBlogs]);
         setHasMore(data.hasMore);
