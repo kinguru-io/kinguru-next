@@ -13,6 +13,7 @@ export function LanguageSelector({ label }: { label?: string }) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const isBlogPage = pathname.includes("/blog");
   const [isPending, startTransition] = useTransition();
 
   const localeChanged = (node: EventTarget) => {
@@ -26,7 +27,7 @@ export function LanguageSelector({ label }: { label?: string }) {
       });
     }
   };
-
+  if (isBlogPage) return;
   return (
     <fieldset
       className={cx("group", css({ display: "flex", gap: "1" }))}

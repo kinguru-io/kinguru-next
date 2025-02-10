@@ -56,7 +56,7 @@ export default function B2BPage({
           overflow: "hidden",
         })}
       >
-        <WhySection anchorSlot={anchorNode} locale={locale} />
+        <WhySection anchorSlot={anchorNode} />
         <Float
           css={{
             display: "none",

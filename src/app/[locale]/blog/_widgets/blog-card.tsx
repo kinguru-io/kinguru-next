@@ -1,21 +1,20 @@
 import { Blog } from "@prisma/client";
+import { format } from "date-fns";
 import { FC } from "react";
-import { Icon } from "@/components/uikit";
+import { Card, Icon } from "@/components/uikit";
 import { truncateText } from "@/lib/utils";
 import { css } from "~/styled-system/css";
-import { stack } from "~/styled-system/patterns";
-interface Props extends Blog {
-  step?: number | string;
-}
-export const BlogLinkCard: FC<Props> = ({ step, title, description }) => {
+
+export const BlogCard: FC<Blog> = ({ createdAt, description, title }) => {
+  const formattedCreatedDate = format(new Date(createdAt), "dd.MM.yyyy");
   return (
-    <article
-      className={stack({
+    <Card
+      variant="profile-venue"
+      className={css({
         gap: "2",
         pt: "10",
         padding: "6",
         paddingTop: "10",
-        backgroundColor: "light",
         borderRadius: "xl",
         position: "relative",
         zIndex: "1",
@@ -32,28 +31,20 @@ export const BlogLinkCard: FC<Props> = ({ step, title, description }) => {
         },
       })}
     >
-      {typeof step !== "undefined" && (
-        <span
-          className={css({
-            zIndex: "-1",
-            position: "absolute",
-            color: "primary.lighter",
-            fontWeight: "700",
-            transform: "scale(6)",
-            lineHeight: "0",
-            insetInlineStart: "5",
-            md: {
-              insetBlockStart: "7",
-              transform: "scale(7)",
-            },
-          })}
-          aria-hidden
-        >
-          {step}
-        </span>
-      )}
+      <span
+        className={css({
+          position: "absolute",
+          zIndex: "-1",
+          top: "2",
+          color: "lightslategrey",
+          right: "2",
+        })}
+      >
+        {formattedCreatedDate}
+      </span>
       <h3
         className={css({
+          marginTop: "1",
           fontWeight: "700",
           fontSize: "px17",
           md: {
@@ -83,6 +74,6 @@ export const BlogLinkCard: FC<Props> = ({ step, title, description }) => {
           name="action/arrow-tail"
         />
       </div>
-    </article>
+    </Card>
   );
 };

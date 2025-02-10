@@ -75,6 +75,7 @@
     "all_rights_reserved": "© {year} Eventify. All rights reserved",
     "events": "Events",
     "speakers": "Speakers",
+    "blog": "Blog",
     "places": "Places",
     "price": "Price",
     "follow_us": "Follow us on {social}",
@@ -893,5 +894,9 @@
       "6": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/sala_like.svg",
       "7": "https://kinguru-storage.s3.pl-waw.scw.cloud/company_logos/standup_lokal.jpg"
     }
+  },
+  "blog": {
+    "title": "Blog",
+    "show_more": "Show more"
   }
 }

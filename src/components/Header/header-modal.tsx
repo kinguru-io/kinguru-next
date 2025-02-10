@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type React from "react";
 import { LanguageDropdown } from "./language-dropdown";
@@ -24,7 +25,8 @@ export function HeaderModal({
   content?: React.ReactNode;
 }) {
   const isAboveMd = useMediaQuery(mdMediaQuery);
-
+  const pathname = usePathname();
+  const isNotBlogPage = !pathname?.includes("/blog");
   if (isAboveMd === null) {
     return (
       <>
@@ -38,7 +40,7 @@ export function HeaderModal({
     return (
       <>
         {children}
-        <LanguageDropdown />
+        {isNotBlogPage && <LanguageDropdown />}
       </>
     );
   }

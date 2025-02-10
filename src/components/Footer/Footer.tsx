@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SocialMediaLinks, Contacts } from "@/components/brand";
+import { BLOG } from "@/lib/routes/constants";
 import { Link } from "@/navigation";
 import footerLogo from "~/public/img/logotypes/footer-logotype.svg";
 import { css } from "~/styled-system/css";
@@ -37,6 +38,7 @@ export async function Footer() {
         },
         { name: t("cookie_policy"), href: "/legal/cookie-policy" },
         { name: t("faq"), href: "/faq/main" },
+        { name: t("blog"), href: BLOG },
       ],
     },
   ];
