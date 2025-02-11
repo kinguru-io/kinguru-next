@@ -3,10 +3,13 @@ import { format } from "date-fns";
 import { FC } from "react";
 import { Card, Icon } from "@/components/uikit";
 import { truncateText } from "@/lib/utils";
+import { formattedText } from "@/lib/utils/formatted-text";
 import { css } from "~/styled-system/css";
 
 export const BlogCard: FC<Blog> = ({ createdAt, description, title }) => {
   const formattedCreatedDate = format(new Date(createdAt), "dd.MM.yyyy");
+  const formattedDescription = formattedText(description);
+  const formattedTitle = formattedText(title);
   return (
     <Card
       variant="profile-venue"
@@ -51,12 +54,17 @@ export const BlogCard: FC<Blog> = ({ createdAt, description, title }) => {
             fontSize: "lg",
           },
         })}
-      >
-        {truncateText(title, 60, false)}
-      </h3>
-      <p className={css({ fontSize: "sm", lineHeight: "1.6" })}>
-        {truncateText(description, 150, true)}
-      </p>
+        dangerouslySetInnerHTML={{
+          __html: truncateText(formattedTitle, 60, false),
+        }}
+      />
+      <p
+        className={css({ fontSize: "sm", lineHeight: "1.6" })}
+        dangerouslySetInnerHTML={{
+          __html: truncateText(formattedDescription, 150, true),
+        }}
+      />
+
       <div
         className={css({
           position: "absolute",

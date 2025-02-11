@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { InnerBlogProps } from "../../interfaces";
+import { formattedText } from "@/lib/utils/formatted-text";
 import { css } from "~/styled-system/css";
 import { VStack } from "~/styled-system/jsx";
 
 export const InnerBlogMain: FC<InnerBlogProps> = ({ detailBlog }) => {
-  const formattedDescription = detailBlog.description.replace(/\\n/g, "\n");
+  const formattedDescription = formattedText(detailBlog.description);
+
   return (
     <VStack
       className={css({
@@ -29,9 +31,8 @@ export const InnerBlogMain: FC<InnerBlogProps> = ({ detailBlog }) => {
           fontWeight: "400",
           whiteSpace: "pre-line",
         })}
-      >
-        {formattedDescription}
-      </p>
+        dangerouslySetInnerHTML={{ __html: formattedDescription }}
+      />
     </VStack>
   );
 };

@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { FC } from "react";
 import { InnerBlogProps } from "../../interfaces";
+import { formattedText } from "@/lib/utils/formatted-text";
 import { css } from "~/styled-system/css";
 import { VStack } from "~/styled-system/jsx";
 
@@ -10,6 +11,7 @@ export const InnerBlogHeader: FC<InnerBlogProps> = ({ detailBlog }) => {
     new Date(detailBlog.createdAt),
     "dd.MM.yyyy",
   );
+  const formattedTitle = formattedText(detailBlog.title);
   return (
     <VStack
       className={css({
@@ -45,9 +47,9 @@ export const InnerBlogHeader: FC<InnerBlogProps> = ({ detailBlog }) => {
           maxWidth: "1000px",
           textWrap: "pretty",
         })}
-      >
-        <strong>{detailBlog.title}</strong>
-      </h2>
+        dangerouslySetInnerHTML={{ __html: formattedTitle }}
+      />
+
       {detailBlog.image && (
         <Image
           className={css({
