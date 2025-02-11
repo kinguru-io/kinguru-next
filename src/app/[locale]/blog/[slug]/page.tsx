@@ -37,7 +37,6 @@ export const generateMetadata = async ({
       title: updatedBlogDetail?.title,
       description: updatedBlogDetail?.description,
       type: "article",
-      url: `https://yourwebsite.com/blog/${slug}`,
       images: [
         {
           url: updatedBlogDetail?.image ?? "img/blog/blog.webp",
@@ -83,9 +82,7 @@ const BlogPageDetail = async ({ params }: { params: BlogPageProps }) => {
   });
 
   return (
-    <section
-      className={css({ boxShadow: "--shadows-header", background: "#FFFFFF" })}
-    >
+    <section className={css({ background: "#FFFFFF" })}>
       <Container>
         <InnerBlogHeader detailBlog={updatedBlogDetail} />
         <InnerBlogMain detailBlog={updatedBlogDetail} />
