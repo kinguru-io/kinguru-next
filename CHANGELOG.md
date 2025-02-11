@@ -1,3 +1,10 @@
+## [0.74.1](https://github.com/kinguru-io/kinguru-next/compare/v0.74.0...v0.74.1) (2025-02-11)
+
+
+### Bug Fixes
+
+* blog page app error feat: b2b link into footer ([a6f765b](https://github.com/kinguru-io/kinguru-next/commit/a6f765b587d79f665e1da72eb8b598eafbe92d32))
+
 # [0.74.0](https://github.com/kinguru-io/kinguru-next/compare/v0.73.0...v0.74.0) (2025-02-10)
 
 
