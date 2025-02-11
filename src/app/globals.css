@@ -1,11 +1,115 @@
 :root {
-  --100dvh: 100vh
+  --100dvh: 100vh;
+}
+#google-select {
+  width: 130px;
+  border-radius: 20px;
+  font-size: 0 !important;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
 }
 
-@supports (height: 100dvh){
- :root {
-    --100dvh: 100dvh
- }
+/* Default Select Styles */
+#google-select select {
+  text-align: center;
+  width: 130px;
+  border-radius: 20px;
+  background: #ffd800;
+  color: black;
+  padding: 8px 0px;
+  margin: 0;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effects */
+#google-select select:hover {
+  background: #ffe300;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus & Active Effects */
+#google-select select:focus,
+#google-select select:active {
+  outline: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Option Styling */
+#google-select option {
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  background: white;
+  padding: 10px;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Option Hover */
+#google-select option:hover {
+  background: #ffcc00;
+  color: white;
+  cursor: pointer;
+}
+
+/* Hide Unwanted Text */
+#google-select span {
+  display: none;
+}
+
+/* Remove Default Google Translate Styling */
+#google-select .goog-te-gadget {
+  font-size: 0px !important;
+}
+
+/* 🔹 Responsive Adjustments for Mobile */
+@media (max-width: 768px) {
+  #google-select {
+    width: 135px;
+  }
+
+  #google-select select {
+    width: 135px;
+    font-size: 14px;
+    padding: 10px 0px;
+  }
+
+  #google-select option {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+
+/* 🔹 For Extra Small Screens (Phones) */
+@media (max-width: 480px) {
+  #google-select {
+    width: 125px;
+  }
+
+  #google-select select {
+    width: 125px;
+    font-size: 13px;
+    padding: 12px 0px;
+    border-radius: 15px;
+  }
+
+  #google-select option {
+    font-size: 13px;
+    padding: 7px;
+  }
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --100dvh: 100dvh;
+  }
 }
 
 @layer reset, base, tokens, recipes, utilities;

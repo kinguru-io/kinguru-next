@@ -1,12 +1,10 @@
 "use client";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
-import "./GoogleTranslateMenu.css";
 
 export const GoogleTranslateMenu = () => {
   const pathname = usePathname();
   const isBlogPage = pathname.includes("blog");
-
   useEffect(() => {
     if (!isBlogPage) return;
     const script = document.createElement("script");
