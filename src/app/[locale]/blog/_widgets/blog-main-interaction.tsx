@@ -1,12 +1,15 @@
 "use client";
 
 import { Blog } from "@prisma/client";
+import { format } from "date-fns";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { BlogCard } from "./blog-card";
 import { Button } from "@/components/uikit";
 import { BLOG_DETAIL } from "@/lib/routes/constants";
+import { truncateText } from "@/lib/utils";
+import { formatText } from "@/lib/utils/format-text";
 import { css } from "~/styled-system/css";
 import { Container, HStack } from "~/styled-system/jsx";
 
@@ -21,6 +24,7 @@ export const BlogMainInteraction = ({
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [, setPage] = useState(1);
   const t = useTranslations("blog");
+
   const handleShowMore = async () => {
     setPage((prevPage) => {
       const nextPage = prevPage + 1;
@@ -54,11 +58,25 @@ export const BlogMainInteraction = ({
             flexWrap: "wrap",
           })}
         >
-          {blogs.map((blog) => (
-            <Link href={BLOG_DETAIL(blog.slug)} key={blog.id}>
-              <BlogCard {...blog} />
-            </Link>
-          ))}
+          {blogs?.map((blog) => {
+            const formattedCreatedDate = format(blog.createdAt, "dd.MM.yyyy");
+            const formattedDescription = truncateText(
+              formatText(blog.description),
+              150,
+              true,
+            );
+            const formattedTitle = truncateText(blog.title, 150, true);
+
+            return (
+              <Link href={BLOG_DETAIL(blog.slug)} key={blog.id}>
+                <BlogCard
+                  formattedCreatedDate={formattedCreatedDate}
+                  formattedTitle={formattedTitle}
+                  formattedDescription={formattedDescription}
+                />
+              </Link>
+            );
+          })}
         </HStack>
 
         {hasMore && (

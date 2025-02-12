@@ -2,15 +2,15 @@ import { Blog } from "@prisma/client";
 import { FC } from "react";
 import { Icon } from "@/components/uikit";
 import { truncateText } from "@/lib/utils";
-import { formattedText } from "@/lib/utils/formatted-text";
+import { formatText } from "@/lib/utils/format-text";
 import { css } from "~/styled-system/css";
 import { stack } from "~/styled-system/patterns";
 interface Props extends Blog {
   step?: number | string;
 }
 export const BlogLinkCard: FC<Props> = ({ step, title, description }) => {
-  const formattedTitle = formattedText(title);
-  const formattedDescription = formattedText(description);
+  const formattedTitle = formatText(title);
+  const formattedDescription = formatText(description);
   return (
     <article
       className={stack({

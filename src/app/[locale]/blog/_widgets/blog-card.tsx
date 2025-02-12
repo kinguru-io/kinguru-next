@@ -1,15 +1,13 @@
-import { Blog } from "@prisma/client";
-import { format } from "date-fns";
 import { FC } from "react";
+import { BlogPageProps } from "../interfaces";
 import { Card, Icon } from "@/components/uikit";
-import { truncateText } from "@/lib/utils";
-import { formattedText } from "@/lib/utils/formatted-text";
 import { css } from "~/styled-system/css";
 
-export const BlogCard: FC<Blog> = ({ createdAt, description, title }) => {
-  const formattedCreatedDate = format(new Date(createdAt), "dd.MM.yyyy");
-  const formattedDescription = formattedText(description);
-  const formattedTitle = formattedText(title);
+export const BlogCard: FC<BlogPageProps> = ({
+  formattedCreatedDate,
+  formattedDescription,
+  formattedTitle,
+}) => {
   return (
     <Card
       variant="profile-venue"
@@ -55,13 +53,13 @@ export const BlogCard: FC<Blog> = ({ createdAt, description, title }) => {
           },
         })}
         dangerouslySetInnerHTML={{
-          __html: truncateText(formattedTitle, 60, false),
+          __html: formattedTitle ?? "",
         }}
       />
       <p
         className={css({ fontSize: "sm", lineHeight: "1.6" })}
         dangerouslySetInnerHTML={{
-          __html: truncateText(formattedDescription, 150, true),
+          __html: formattedDescription ?? "",
         }}
       />
 
