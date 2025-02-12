@@ -1,18 +1,15 @@
-import dynamic from "next/dynamic";
-
-const BlogHeader = dynamic(() => import("./_widgets/blog-header"), {
-  ssr: true,
-});
-
-const BlogMain = dynamic(() => import("./_widgets/blog-main"), {
-  ssr: true,
-});
+import { Suspense } from "react";
+import BlogHeader from "./_widgets/blog-header";
+import BlogMain from "./_widgets/blog-main";
+import { Loader } from "@/components/uikit";
 
 export default function BlogPage() {
   return (
     <>
       <BlogHeader />
-      <BlogMain />
+      <Suspense fallback={<Loader />}>
+        <BlogMain />
+      </Suspense>
     </>
   );
 }
