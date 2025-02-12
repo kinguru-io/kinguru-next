@@ -65,7 +65,7 @@ export const BlogMainInteraction = ({
               150,
               true,
             );
-            const formattedTitle = truncateText(blog.title, 150, true);
+            const formattedTitle = truncateText(blog.title, 60, false);
 
             return (
               <Link href={BLOG_DETAIL(blog.slug)} key={blog.id}>
