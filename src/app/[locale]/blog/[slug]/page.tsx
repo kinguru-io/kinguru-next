@@ -1,7 +1,9 @@
+import { format } from "date-fns";
 import { Metadata } from "next";
 import { InnerBlogFooter } from "../_widgets/innerPage/inner-blog-footer";
 import { InnerBlogHeader } from "../_widgets/innerPage/inner-blog-header";
 import { InnerBlogMain } from "../_widgets/innerPage/inner-blog-main";
+import { formatText } from "@/lib/utils/format-text";
 import { css } from "~/styled-system/css";
 import { Container } from "~/styled-system/jsx";
 
@@ -80,12 +82,24 @@ const BlogPageDetail = async ({ params }: { params: BlogPageProps }) => {
       description: post.description,
     },
   });
-
+  const formattedCreatedDate = format(
+    updatedBlogDetail.createdAt,
+    "dd.MM.yyyy",
+  );
+  const formattedDescription = formatText(updatedBlogDetail.description);
+  const formattedTitle = formatText(updatedBlogDetail.title);
   return (
     <section className={css({ background: "#FFFFFF" })}>
       <Container>
-        <InnerBlogHeader detailBlog={updatedBlogDetail} />
-        <InnerBlogMain detailBlog={updatedBlogDetail} />
+        <InnerBlogHeader
+          detailBlog={{ ...updatedBlogDetail }}
+          formattedCreatedDate={formattedCreatedDate}
+          formattedTitle={formattedTitle}
+        />
+        <InnerBlogMain
+          detailBlog={updatedBlogDetail}
+          formattedDescription={formattedDescription}
+        />
         <InnerBlogFooter detailBlog={updatedBlogDetail} />
       </Container>
     </section>

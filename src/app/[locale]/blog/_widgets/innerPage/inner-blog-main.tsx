@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { InnerBlogProps } from "../../interfaces";
-import { formattedText } from "@/lib/utils/formatted-text";
+import { formatText } from "@/lib/utils/format-text";
 import { css } from "~/styled-system/css";
 import { VStack } from "~/styled-system/jsx";
 
 export const InnerBlogMain: FC<InnerBlogProps> = ({ detailBlog }) => {
-  const formattedDescription = formattedText(detailBlog.description);
+  const formattedDescription = formatText(detailBlog.description);
 
   return (
     <VStack
