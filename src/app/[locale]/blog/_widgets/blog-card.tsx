@@ -21,10 +21,11 @@ export const BlogCard: FC<BlogPageProps> = ({
         zIndex: "1",
         cursor: "pointer",
         overflow: "hidden",
-        minW: "400px",
+        minW: "340px",
         minH: "215px",
         transition: "transform 0.3s ease",
         md: {
+          minW: "400px",
           padding: "8",
         },
         "&:hover": {
