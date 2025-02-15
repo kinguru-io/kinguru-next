@@ -46,7 +46,12 @@ export default function BlogMain() {
       })}
     >
       <Container>
-        <HStack className={css({ flexWrap: "wrap" })}>
+        <HStack
+          className={css({
+            flexWrap: "wrap",
+            justifyContent: "center",
+          })}
+        >
           {blogs.map((blog) => {
             const formattedCreatedDate = format(blog.createdAt, "dd.MM.yyyy");
             const formattedDescription = truncateText(
