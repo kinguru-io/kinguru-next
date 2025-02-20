@@ -166,10 +166,6 @@ export function BookingViewCard({
   };
 
   const payBtnClicked = async () => {
-    if (isUserOrg && !isOwner) {
-      toast.error(t("organization_cannot_pay"));
-      return;
-    }
     if (!open) {
       setOpen(true);
       return;
