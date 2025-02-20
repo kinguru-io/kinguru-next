@@ -1,3 +1,10 @@
+## [0.74.2](https://github.com/kinguru-io/kinguru-next/compare/v0.74.1...v0.74.2) (2025-02-20)
+
+
+### Bug Fixes
+
+* added required metadata and handled gateway error also added instance to user modal ([9479099](https://github.com/kinguru-io/kinguru-next/commit/947909987e5c53bfec266fc413fe3569e5a69a3d))
+
 ## [0.74.1](https://github.com/kinguru-io/kinguru-next/compare/v0.74.0...v0.74.1) (2025-02-11)
 
 
