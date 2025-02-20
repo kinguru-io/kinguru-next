@@ -2,7 +2,8 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { B2BRegisterForm } from "./b2b-register-form";
 import { Icon } from "@/components/uikit";
-import { companySignUp } from "@/lib/actions";
+import { companySignUpFromUntaxed } from "@/lib/actions";
+
 import footerLogo from "~/public/img/logotypes/footer-logotype.svg";
 import { css } from "~/styled-system/css";
 import { Flex, Stack } from "~/styled-system/jsx";
@@ -47,7 +48,7 @@ export function B2BRegisterSection({ sectionId }: { sectionId: string }) {
           {t("register_title")}
         </h2>
         <Bonuses />
-        <B2BRegisterForm signUp={companySignUp} />
+        <B2BRegisterForm signUp={companySignUpFromUntaxed} />
       </Stack>
     </section>
   );

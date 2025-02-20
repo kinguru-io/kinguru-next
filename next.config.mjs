@@ -4,6 +4,7 @@ import svg from "@neodx/svg/webpack";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: "dist",
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.plugins.push(
@@ -81,6 +82,7 @@ const nextConfig = {
       },
     ],
   },
+
   experimental: {
     instrumentationHook: true,
     serverComponentsExternalPackages: ["oslo", "@aws-sdk/middleware-sdk-s3"],
