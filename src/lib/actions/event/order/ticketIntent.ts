@@ -28,7 +28,9 @@ export async function getTicketIntentAction(eventId: string) {
       currency: "PLN",
       customer: session.user?.stripeCustomerId || undefined,
       automatic_payment_methods: { enabled: true },
-      metadata: { source: "event-join" } as StripeMetadataExtended,
+      metadata: {
+        source: "event-join",
+      } as StripeMetadataExtended,
     });
 
   if (!clientSecret) {
