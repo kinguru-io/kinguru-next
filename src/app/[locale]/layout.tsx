@@ -12,10 +12,12 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Toaster } from "@/components/notifications/hot-toast-toaster";
 import { NotoSans } from "@/fontLoader.ts";
+import { keywordsEN, keywordsPL } from "@/lib/metadata/constants";
 import { css } from "~/styled-system/css";
 import { Grid } from "~/styled-system/jsx";
 
 import "../globals.css";
+import { GatewayHandling } from "@/components/error-handling/gateway";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("metadata.home");
@@ -38,6 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: "/img/logotypes/footer-logotype-512x512.png",
     },
+    keywords: [...keywordsPL, ...keywordsEN],
   };
 }
 
@@ -55,6 +58,7 @@ export default function RootLayout({
   return (
     <html lang={locale} className={`${NotoSans.variable}`}>
       <GoogleAnalytics />
+      <GatewayHandling />
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
           <Grid

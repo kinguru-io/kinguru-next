@@ -8,51 +8,52 @@ datasource db {
 }
 
 model User {
-  id                     String                   @id @default(cuid())
-  name                   String?
-  email                  String                   @unique
-  emailVerified          DateTime?
-  image                  String?
-  confirmed              Boolean                  @default(false)
-  firstname              String?
-  lastname               String?
-  phoneNumber            String?
-  description            String?
-  gender                 UserGender?              @default(notSpecified)
-  birthdate              DateTime?                @db.Date
-  country                String?
-  city                   String?
-  position               String?
-  company                String?
-  interests              String[]
-  vk                     String?
-  facebook               String?
-  instagram              String?
-  linkedin               String?
-  website                String?
-  role                   UserRole                 @default(user)
-  createdAt              DateTime                 @default(now())
-  updatedAt              DateTime                 @updatedAt
-  telegram               String?
-  stripeCustomerId       String?                  @unique
-  emailSentAt            DateTime?
-  accounts               Account[]
-  events                 Event[]
-  eventComments          EventComment[]
-  moderationNotification ModerationNotification[]
-  organizations          Organization[]
-  places                 Place[]
-  placeComments          PlaceComment[]
-  slots                  PremiseSlot[]
-  purchaseNotification   PurchaseNotification[]
-  sessions               Session[]
-  speaker                Speaker?
-  speakerComments        SpeakerComment[]
-  following              SpeakerFollower[]
-  ticketIntents          TicketIntent[]
-  likedEvents            UserLikedEvents[]
-  socialLinks            UserSocialLink[]
-  participant            UsersOnEvent[]
+  id                          String                   @id @default(cuid())
+  name                        String?
+  email                       String                   @unique
+  emailVerified               DateTime?
+  image                       String?
+  confirmed                   Boolean                  @default(false)
+  isRegisteredFromUntaxedForm Boolean?                 @default(false)
+  firstname                   String?
+  lastname                    String?
+  phoneNumber                 String?
+  description                 String?
+  gender                      UserGender?              @default(notSpecified)
+  birthdate                   DateTime?                @db.Date
+  country                     String?
+  city                        String?
+  position                    String?
+  company                     String?
+  interests                   String[]
+  vk                          String?
+  facebook                    String?
+  instagram                   String?
+  linkedin                    String?
+  website                     String?
+  role                        UserRole                 @default(user)
+  createdAt                   DateTime                 @default(now())
+  updatedAt                   DateTime                 @updatedAt
+  telegram                    String?
+  stripeCustomerId            String?                  @unique
+  emailSentAt                 DateTime?
+  accounts                    Account[]
+  events                      Event[]
+  eventComments               EventComment[]
+  moderationNotification      ModerationNotification[]
+  organizations               Organization[]
+  places                      Place[]
+  placeComments               PlaceComment[]
+  slots                       PremiseSlot[]
+  purchaseNotification        PurchaseNotification[]
+  sessions                    Session[]
+  speaker                     Speaker?
+  speakerComments             SpeakerComment[]
+  following                   SpeakerFollower[]
+  ticketIntents               TicketIntent[]
+  likedEvents                 UserLikedEvents[]
+  socialLinks                 UserSocialLink[]
+  participant                 UsersOnEvent[]
 }
 
 model UserLikedEvents {
@@ -516,7 +517,7 @@ model Manager {
 model Blog {
   id          String      @id @default(cuid())
   title       String
-  slug        String     @unique
+  slug        String      @unique
   description String
   createdAt   DateTime    @default(now())
   blogDetail  BlogDetail? @relation("BlogToDetail")
