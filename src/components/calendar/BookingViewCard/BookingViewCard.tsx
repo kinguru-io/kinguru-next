@@ -1,10 +1,12 @@
 "use client";
 
-import type { Premise } from "@prisma/client";
+import type { Premise, User } from "@prisma/client";
+
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, type StripeElementLocale } from "@stripe/stripe-js";
 import { addHours, compareAsc, isValid } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
+import { useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -35,12 +37,17 @@ import {
   CreatePremiseSlotsIntent,
   RevalidatePremisePage,
 } from "@/lib/actions/booking";
+import { updateTransactionCount } from "@/lib/actions/booking/update-transaction-count";
 import { groupBy } from "@/lib/utils/array";
 import {
   MergedTimeSlots,
   groupAndMergeTimeslots,
 } from "@/lib/utils/premise-booking";
-import { getSlotDiscount, processOrderTotalDiscounts } from "@/lib/utils/price";
+import {
+  applyTax,
+  getSlotDiscount,
+  processOrderTotalDiscounts,
+} from "@/lib/utils/price";
 import { css } from "~/styled-system/css";
 import { Flex, HStack, Stack } from "~/styled-system/jsx";
 import { stack } from "~/styled-system/patterns";
@@ -57,6 +64,7 @@ type BookingViewCardProps = {
   revalidateFn: RevalidatePremisePage;
   discountsMap: Record<number, number | undefined>;
   isOwner: boolean;
+  user?: User | undefined;
   isUserOrg: boolean;
   inModal?: boolean;
   minimalSlotsToBook?: Premise["minimalSlotsToBook"];
@@ -73,6 +81,7 @@ export function BookingViewCard({
   revalidateFn,
   discountsMap,
   isOwner,
+  user,
   isUserOrg,
   inModal = false,
   minimalSlotsToBook,
@@ -82,14 +91,18 @@ export function BookingViewCard({
 }: BookingViewCardProps) {
   const locale = useLocale() as StripeElementLocale;
   const t = useTranslations("booking_view");
+  const router = useRouter();
+
   const [isPending, startTransition] = useTransition();
   const { selectedSlots, resetSlots, priceMode } = useBookingView();
   const { open, setOpen, setClosable } = useModal();
+
   const [intentResponse, setIntentResponse] = useState<{
     clientSecret: string;
     paymentIntentId: string;
     amountToBeCharged: number;
   } | null>(null);
+
   const commentRef = useRef<HTMLTextAreaElement | null>(null);
   const donationRef = useRef<HTMLInputElement | null>(null);
 
@@ -99,7 +112,7 @@ export function BookingViewCard({
   const newSlots = selectedSlots
     .map(({ time, price }) => {
       if (!isValid(time)) {
-        return null; // Skip invalid dates
+        return null;
       }
 
       return {
@@ -111,7 +124,7 @@ export function BookingViewCard({
         discountAmount: getSlotDiscount(selectedSlots, time, discountsMap),
       };
     })
-    .filter(Boolean) as MergedTimeSlots[]; // Remove null values
+    .filter(Boolean) as MergedTimeSlots[];
 
   const newGroupedSlots = groupAndMergeTimeslots(newSlots);
 
@@ -128,14 +141,16 @@ export function BookingViewCard({
     ),
     ({ time }) => {
       if (!isValid(time)) {
-        return "Invalid Date"; // Group invalid dates separately
+        return "Invalid Date";
       }
       return formatInTimeZone(time, "UTC", "dd.MM.yyyy");
     },
   );
+  const isTaxed =
+    user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5;
 
   const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);
-
+  const priceInfoWithTaxes = isTaxed ? applyTax(priceInfo) : priceInfo;
   const blockSlotsBtnClicked = () => {
     if (!open) {
       setOpen(true);
@@ -172,13 +187,18 @@ export function BookingViewCard({
     }
 
     startTransition(async () => {
+      // Get the donation value from the input
+      const donationValue = donationRef.current?.value; // e.g., "100"
+      const donationAmount = donationValue ? parseFloat(donationValue) : 0; // Becomes 100 (number)
+      const finalDonationAmount = isNaN(donationAmount) ? 0 : donationAmount;
+
       const { status, messageIntlKey, response } = await createIntent({
         premiseId,
         premiseOrgId,
         slots: selectedSlots,
         discountsMap,
         comment: commentRef.current?.value || "",
-        donationAmount: donationRef.current?.value,
+        donationAmount: finalDonationAmount.toString(),
       });
 
       if (response && response.clientSecret !== null) {
@@ -190,7 +210,7 @@ export function BookingViewCard({
 
         void revalidateFn();
       } else {
-        paymentSucceed();
+        void paymentSucceed();
       }
 
       if (status === "error" && messageIntlKey) {
@@ -199,12 +219,14 @@ export function BookingViewCard({
     });
   };
 
-  const paymentSucceed = (notify = true) => {
+  const paymentSucceed = async (notify = true) => {
     setOpen(false);
     resetSlots();
-
-    void revalidateFn();
-
+    await revalidateFn();
+    if (session?.user?.id) {
+      await updateTransactionCount(session.user.id);
+    }
+    router.refresh();
     if (notify) {
       toast.success(t("action_successful_booking"));
     }
@@ -358,7 +380,7 @@ export function BookingViewCard({
         )}
 
         <Stack gap="6">
-          {isPriceInfoShown && <PriceBlock priceInfo={priceInfo} />}
+          {isPriceInfoShown && <PriceBlock priceInfo={priceInfoWithTaxes} />}
           {inModal && !isOwner && priceMode === "donation" && (
             <Stack gap="2">
               <span>{t("donation_amount_input_notice")}</span>
@@ -411,6 +433,7 @@ export function BookingViewCard({
             accountCreationSlot={accountCreationSlot}
             personConfirmationSlot={personConfirmationSlot}
             inModal
+            user={user}
           />
         </ModalWindow>
       )}

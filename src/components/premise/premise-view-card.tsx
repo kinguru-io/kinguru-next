@@ -5,7 +5,7 @@ import type {
   PremiseResource,
 } from "@prisma/client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server"; // Server-side translations
 import { Video } from "../common";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
@@ -19,8 +19,8 @@ import {
   SliderItem,
   Tag,
 } from "@/components/uikit";
+import { formatPriceWithTax } from "@/lib/actions";
 import { videoRegex } from "@/lib/shared/utils/regex";
-import { priceFormatter } from "@/lib/utils";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
 import { AspectRatio } from "~/styled-system/jsx";
@@ -35,13 +35,15 @@ export type PremiseViewCardProps = {
   };
 };
 
-export function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
-  const t = useTranslations("premise");
+export async function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
+  const t = await getTranslations("premise"); // Server-side translation
 
   const { slug, name, information, area, resources, openHours } = premise;
-  const minPrice = openHours.at(0)?.price;
+  const minPrice = openHours.at(0)?.price ?? 0;
 
-  const priceLabel = t("from", { price: priceFormatter.format(minPrice || 0) });
+  const priceLabel = t("from", {
+    price: await formatPriceWithTax(minPrice || 0).then((value) => value),
+  });
 
   return (
     <PremiseCard>

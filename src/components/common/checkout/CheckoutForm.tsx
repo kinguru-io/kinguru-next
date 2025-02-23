@@ -47,6 +47,11 @@ export function CheckoutForm({
       setTimeout(succeedRefetch, 1000);
       return;
     }
+    if (!error) {
+      setIsProcessing(false);
+      setTimeout(succeedRefetch, 1000);
+      return;
+    }
 
     const errorMessage =
       error.type === "card_error" || error.type === "validation_error"

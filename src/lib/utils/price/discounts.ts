@@ -114,3 +114,12 @@ export function processOrderTotalDiscounts<T extends TimeSlotInfo>(
 }
 
 export type PriceInfo = ReturnType<typeof processOrderTotalDiscounts>;
+export function applyTax(priceInfo: PriceInfo, taxRate: number = 15) {
+  const taxAmount = priceInfo.totalPrice * (taxRate / 100);
+  return {
+    ...priceInfo,
+    taxAmount,
+    totalPrice: priceInfo.totalPrice + taxAmount,
+  };
+}
+export type PriceInfoWithTax = ReturnType<typeof applyTax>;

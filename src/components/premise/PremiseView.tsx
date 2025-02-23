@@ -3,7 +3,7 @@ import { PremiseViewCard } from "./premise-view-card";
 
 export async function PremiseView({ id, href }: { id: string; href?: string }) {
   const premise = await getPremiseViewData(id);
-
+  premise?.minimalPrice;
   if (!premise) {
     return null;
   }

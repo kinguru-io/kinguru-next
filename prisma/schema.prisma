@@ -54,7 +54,9 @@ model User {
   likedEvents                 UserLikedEvents[]
   socialLinks                 UserSocialLink[]
   participant                 UsersOnEvent[]
+  transactionCount            Int                      @default(0)
 }
+
 
 model UserLikedEvents {
   userId    String

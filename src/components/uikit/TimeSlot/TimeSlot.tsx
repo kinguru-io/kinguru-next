@@ -1,4 +1,5 @@
 import { formatInTimeZone } from "date-fns-tz";
+import { formatPriceWithTax } from "@/lib/actions";
 import { priceFormatter } from "@/lib/utils";
 import { css } from "~/styled-system/css";
 
@@ -58,7 +59,6 @@ export function TimeSlot({
   renderPrice = (value) => priceFormatter.format(value),
 }: TimeSlotProps & { renderPrice?: (price: number) => React.ReactNode }) {
   const colorPalette = timeSlotCondition[condition];
-
   return (
     <button
       type="button"
