@@ -12,6 +12,7 @@ import type Stripe from "stripe";
 import { v4 as uuid } from "uuid";
 import { sendBookingEmail } from "./email";
 import { validatePaymentIntentData } from "./validate-payment-intent-data";
+import { calculatePriceWithTax, formatPriceWithTax } from "../tax";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
 import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
@@ -138,14 +139,15 @@ export async function createPremiseSlotsIntent({
     prepareDiscountRangeMap(discounts),
   );
 
-  const getPaymentIntent = ({
+  const getPaymentIntent = async ({
     donation,
     stripe,
   }: {
     donation: number;
     stripe: Stripe;
   }) => {
-    const amount = Math.round((totalPrice + donation) * 100);
+    const totalWithTax = await calculatePriceWithTax(totalPrice + donation);
+    const amount = Math.round(totalWithTax * 100);
 
     const metadata: StripeMetadataExtended = {
       source: "premise-slots-booking",

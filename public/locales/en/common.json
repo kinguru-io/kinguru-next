@@ -327,6 +327,7 @@
   },
   "price": {
     "total": "Total",
+    "tax": "Tax",
     "full_price": "Full price",
     "discount": "Discount {percentage}%",
     "min": "Low price",

@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
@@ -36,14 +37,13 @@ import {
   Loader,
   SpinnerIcon,
 } from "@/components/uikit";
-import { quickUserSignUp } from "@/lib/actions";
+import { formatPriceWithTax, quickUserSignUp } from "@/lib/actions";
 import {
   cancelPremiseSlotsIntent,
   createPremiseSlotsIntent,
   revalidatePremisePage,
 } from "@/lib/actions/booking";
 import type { BookingCancelTerm } from "@/lib/shared/config/booking-cancel-terms";
-import { priceFormatter } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
 import {
   isUserOrganization,
@@ -129,7 +129,9 @@ export default async function PremisePage({
     minimalSlotsToBook,
     withConfirmation,
   } = premise;
-
+  const user = await prisma.user.findUnique({
+    where: { id: session?.user?.id },
+  });
   const aggregatedPrices = openHours.reduce((borders, { price }) => {
     if (borders.minPrice === undefined || borders.maxPrice === undefined) {
       return { minPrice: price, maxPrice: price };
@@ -151,6 +153,8 @@ export default async function PremisePage({
   const bookedSlots = prepareBookedSlots(slots);
   const discountMap = prepareDiscountRangeMap(discounts);
 
+  const isTaxedPrice =
+    user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5;
   const parametersLine = [
     {
       title: t("amenities_and_facilities"),
@@ -193,7 +197,7 @@ export default async function PremisePage({
   const isUserOrg = await isUserOrganization();
 
   const priceLabel = t("from", {
-    price: priceFormatter.format(aggregatedPrices.minPrice || 0),
+    price: await formatPriceWithTax(aggregatedPrices.minPrice || 0),
   });
 
   return (
@@ -318,6 +322,7 @@ export default async function PremisePage({
                 nowDate={nowDate}
                 timeSlotsGroup={timeSlotsGroup}
                 bookedSlots={bookedSlots}
+                isTaxedPrice={isTaxedPrice ?? false}
                 aggregatedPrices={aggregatedPrices}
                 headingSlot={
                   <h2 className={css({ textStyle: "heading.section" })}>
@@ -373,6 +378,7 @@ export default async function PremisePage({
                   discountsMap={discountMap}
                   isOwner={isOwner}
                   isUserOrg={isUserOrg}
+                  user={user as User}
                   minimalSlotsToBook={minimalSlotsToBook}
                   session={session}
                   accountCreationSlot={

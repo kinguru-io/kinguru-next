@@ -11,7 +11,6 @@ export function Rules() {
     formState: { errors },
   } = useFormContext<CreatePremiseFormSchemaProps>();
   const t = useTranslations("profile.premises.add");
-
   return (
     <SubSection>
       <h2 className="title">{t("fields.rules")}</h2>

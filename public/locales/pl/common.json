@@ -290,6 +290,7 @@
   },
   "price": {
     "total": "Całkowity",
+    "tax": "Podatek",
     "full_price": "Pełna cena",
     "discount": "Rabat {percentage}%",
     "min": "Niska cena",

@@ -41,7 +41,7 @@ export const GatewayHandling = () => {
 
         if (errorMessage.includes("ERR_ABORTED")) {
           console.debug("Handling ERR_ABORTED for:", errorSource);
-          console.log("no_sales_managers:1 GET");
+          console.debug("no_sales_managers:1 GET");
         }
 
         handleRetry(errorSource, errorMessage);

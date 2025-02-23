@@ -17,6 +17,7 @@ import {
   getTimeSlotCondition,
   Loader,
 } from "@/components/uikit";
+import { DEFAULT_TAX } from "@/lib/shared/constants";
 import { priceFormatter } from "@/lib/utils";
 import type { Group } from "@/lib/utils/array";
 import { getWeekViewData, DAYS_OF_WEEK_ORDERED } from "@/lib/utils/datetime";
@@ -27,6 +28,7 @@ import { Box, Flex, HStack, Stack, VStack } from "~/styled-system/jsx";
 type WeekViewProps = {
   locale: Locale;
   nowDate: Date;
+  isTaxedPrice?: boolean;
   timeSlotsGroup: Group<
     $Enums.DayOfTheWeek,
     { day: $Enums.DayOfTheWeek; timeSlots: TimeSlotInfo[] }
@@ -45,6 +47,7 @@ export function WeekView({
   aggregatedPrices,
   headingSlot,
   subheadingSlot,
+  isTaxedPrice,
 }: WeekViewProps) {
   const t = useTranslations("booking_view");
   const timeZone = useSearchBoxTimeZone();
@@ -88,7 +91,9 @@ export function WeekView({
   );
 
   const renderPrice = (value: number) => {
-    const price = priceFormatter.format(value);
+    const price = isTaxedPrice
+      ? priceFormatter.format(value * DEFAULT_TAX)
+      : priceFormatter.format(value);
 
     if (priceMode === "donation") {
       return t("donation_slot_price_label", { price });
