@@ -12,7 +12,7 @@ import type Stripe from "stripe";
 import { v4 as uuid } from "uuid";
 import { sendBookingEmail } from "./email";
 import { validatePaymentIntentData } from "./validate-payment-intent-data";
-import { calculatePriceWithTax, formatPriceWithTax } from "../tax";
+import { calculatePriceWithTax } from "../tax";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
 import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
