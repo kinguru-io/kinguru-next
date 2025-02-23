@@ -150,7 +150,7 @@ export function BookingViewCard({
     user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5;
 
   const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);
-  const priceInfoWithTaxes = isTaxed ? applyTax(priceInfo) : priceInfo;
+  const priceInfoWithTaxes = isTaxed ? priceInfo : applyTax(priceInfo);
   const blockSlotsBtnClicked = () => {
     if (!open) {
       setOpen(true);
