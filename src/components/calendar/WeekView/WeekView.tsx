@@ -92,8 +92,8 @@ export function WeekView({
 
   const renderPrice = (value: number) => {
     const price = isTaxedPrice
-      ? priceFormatter.format(value * DEFAULT_TAX)
-      : priceFormatter.format(value);
+      ? priceFormatter.format(value)
+      : priceFormatter.format(value * DEFAULT_TAX);
 
     if (priceMode === "donation") {
       return t("donation_slot_price_label", { price });

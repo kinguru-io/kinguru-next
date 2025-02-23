@@ -26,11 +26,10 @@ export const formatPriceWithTax = async (
     });
 
     if (user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5) {
-      const valueWithTax = numericValue * DEFAULT_TAX;
-      return priceFormatter.format(valueWithTax);
+      return priceFormatter.format(numericValue);
     }
-
-    return priceFormatter.format(numericValue);
+    const valueWithTax = numericValue * DEFAULT_TAX;
+    return priceFormatter.format(valueWithTax);
   } catch (error) {
     console.error("Error in formatPriceWithTax:", error);
     return priceFormatter.format(0); // Fallback
@@ -60,10 +59,10 @@ export const calculatePriceWithTax = async (
     });
 
     if (user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5) {
-      return numericValue * DEFAULT_TAX;
+      return numericValue;
     }
 
-    return numericValue;
+    return numericValue * DEFAULT_TAX;
   } catch (error) {
     console.error("Error in calculatePriceWithTax:", error);
     return numericValue; // No need for ?? since it's always defined
