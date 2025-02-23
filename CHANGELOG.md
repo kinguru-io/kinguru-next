@@ -1,3 +1,10 @@
+# [0.75.0](https://github.com/kinguru-io/kinguru-next/compare/v0.74.2...v0.75.0) (2025-02-23)
+
+
+### Features
+
+* tax logic to all system with new field to user and validation ([d6963b4](https://github.com/kinguru-io/kinguru-next/commit/d6963b4a550bb0ada1d59589d6ad0cff26289fc0))
+
 ## [0.74.2](https://github.com/kinguru-io/kinguru-next/compare/v0.74.1...v0.74.2) (2025-02-20)
 
 
