@@ -1,3 +1,10 @@
+# [0.76.0](https://github.com/kinguru-io/kinguru-next/compare/v0.75.0...v0.76.0) (2025-02-28)
+
+
+### Features
+
+* seo optimization/removed extra logic and fixed previous logic ([ed62732](https://github.com/kinguru-io/kinguru-next/commit/ed627324844022749b8dfccee591d3243f5b8c8f))
+
 # [0.75.0](https://github.com/kinguru-io/kinguru-next/compare/v0.74.2...v0.75.0) (2025-02-23)
 
 
