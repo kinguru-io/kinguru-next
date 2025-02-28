@@ -4,7 +4,13 @@ import Image from "next/image";
 
 export function AvatarImage({ src }: { src: string }) {
   return (
-    <Image src={src} onError={addFailedAttribute} alt="" sizes="40px" fill />
+    <Image
+      src={src}
+      onError={addFailedAttribute}
+      alt="Avatar"
+      sizes="40px"
+      fill
+    />
   );
 }
 

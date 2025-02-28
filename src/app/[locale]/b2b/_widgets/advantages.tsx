@@ -7,7 +7,6 @@ import { container } from "~/styled-system/patterns";
 
 export function Advantages() {
   const t = useTranslations("b2b");
-
   return (
     <section className={container()}>
       <Image
@@ -17,7 +16,7 @@ export function Advantages() {
           md: { maxWidth: "40" },
         })}
         src={headerLogotype.src}
-        alt=""
+        alt="Logotype"
         width="163"
         height="60"
         priority

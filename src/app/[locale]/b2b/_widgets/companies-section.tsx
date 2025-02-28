@@ -26,7 +26,7 @@ export function CompaniesSection() {
 
 function CompaniesList() {
   const t = useTranslations("company_logo");
-
+  const alt = useTranslations("alt_images");
   const count = parseInt(t("count"));
 
   if (!count) return null;
@@ -70,7 +70,7 @@ function CompaniesList() {
                 width: "full",
                 height: "full",
               })}
-              alt=""
+              alt={alt("companies")}
               src={src}
               width={112}
               height={112}

@@ -37,7 +37,7 @@ export type PremiseViewCardProps = {
 
 export async function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
   const t = await getTranslations("premise"); // Server-side translation
-
+  const alt = await getTranslations("alt_images");
   const { slug, name, information, area, resources, openHours } = premise;
   const minPrice = openHours.at(0)?.price ?? 0;
 
@@ -78,7 +78,7 @@ export async function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
                     <>
                       <Image
                         src={item.url}
-                        alt=""
+                        alt={alt("premise_view")}
                         sizes="(max-width: 712px) 100vw, (max-width: 1056px) 50vw, 33vw"
                         fill
                       />

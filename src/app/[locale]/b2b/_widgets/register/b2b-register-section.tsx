@@ -11,7 +11,7 @@ import { container, hstack } from "~/styled-system/patterns";
 
 export function B2BRegisterSection({ sectionId }: { sectionId: string }) {
   const t = useTranslations("b2b");
-
+  const alt = useTranslations("alt_images");
   return (
     <section id={sectionId} className={container()}>
       <Stack
@@ -40,7 +40,7 @@ export function B2BRegisterSection({ sectionId }: { sectionId: string }) {
         >
           <Image
             className={css({ display: "none", md: { display: "block" } })}
-            alt=""
+            alt={alt("b2b_register")}
             src={footerLogo.src}
             width={52}
             height={52}

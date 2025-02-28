@@ -286,6 +286,7 @@
     "donation_slot_price_label": "Darowizna \nod {price}",
     "booking_modal_confirmation_heading": "Zapytanie o rezerwację",
     "booking_request_sent": "Twoja prośba musi zostać zatwierdzona przez właściciela lokalu. \nGdy proces płatności będzie mógł być kontynuowany, otrzymasz wiadomość e-mail",
+    "booking_request_sent_client": "Najpierw właściciel obiektu musi zatwierdzić ten obiekt. Po jego zatwierdzeniu możesz zarezerwować miejsca",
     "close_btn": "OK"
   },
   "price": {
@@ -942,5 +943,17 @@
   "blog": {
     "title": "Blog",
     "show_more": "Pokaż więcej"
+  },
+  "alt_images": {
+    "companies": "Logotyp firmy",
+    "premise_type": "Typ lokalu",
+    "b2b_register": "Zarejestruj się b2b",
+    "faq": "Często zadawane pytania",
+    "premise_gallery": "Galeria Lokali",
+    "premise": "Lokal Detail",
+    "premise_view": "Lokal View",
+    "facebook": "Piksel śledzący Facebooka",
+    "venue": "Lokal",
+    "premise_card": "Local card"
   }
 }

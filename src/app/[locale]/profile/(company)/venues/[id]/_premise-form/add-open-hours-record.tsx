@@ -53,14 +53,13 @@ export function AddOpenHoursRecord({
     resetField,
     control,
     setValue,
-
     formState: { isValid },
   } = useForm<OpenHoursSchema>({
     mode: "onChange",
     resolver: zodResolver(openHoursSchema),
     defaultValues: { day },
   });
-
+  console.log(isValid);
   useEffect(() => {
     if (getValues("openHoursAndPrice.priceMode") === "donation") {
       setValue("price", minimalPrice || minimalDonation);
@@ -72,7 +71,7 @@ export function AddOpenHoursRecord({
       resetField("price");
     }
   }, [priceMode, resetField]);
-
+  console.log(getValues("openHoursAndPrice.minimalPrice"));
   const addButtonClicked = (input: OpenHoursSchema) => {
     const openHours = getValues("openHoursAndPrice.openHours");
 

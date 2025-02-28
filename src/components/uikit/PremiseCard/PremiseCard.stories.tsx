@@ -67,7 +67,7 @@ export const PremiseCardTemplate: StoryObj = {
             {items.map((item) => (
               <SliderItem key={item.id}>
                 <AspectRatio ratio={16 / 9}>
-                  <Image src={item.src} fill alt="" />
+                  <Image src={item.src} fill alt="Premise Card" />
                   <Link href="#" className={linkOverlay()}>
                     <span className={css({ srOnly: true })}>
                       Go to premise page

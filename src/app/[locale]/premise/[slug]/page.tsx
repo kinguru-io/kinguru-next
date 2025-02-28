@@ -337,7 +337,12 @@ export default async function PremisePage({
                           bgColor: "secondary.lighter",
                         })}
                       >
-                        ⚠️ {translationsBookingView("booking_request_sent")}
+                        ⚠️{" "}
+                        {isOwner
+                          ? translationsBookingView("booking_request_sent")
+                          : translationsBookingView(
+                              "booking_request_sent_client",
+                            )}
                       </span>
                     )}
                     {(minimalSlotsToBook || 0) > 0 && (

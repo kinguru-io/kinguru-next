@@ -1,5 +1,6 @@
 import type { PremiseResource } from "@prisma/client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Video } from "@/components/common";
 import { PreviewTrack, Slider, SliderItem } from "@/components/uikit";
 import { videoRegex } from "@/lib/shared/utils/regex";
@@ -10,6 +11,7 @@ export function PremiseGallery({
 }: {
   resources: PremiseResource[];
 }) {
+  const alt = useTranslations("alt_images");
   return (
     <Stack gap="2">
       <Slider
@@ -37,7 +39,7 @@ export function PremiseGallery({
                 <Image
                   src={resource.url}
                   fill
-                  alt=""
+                  alt={alt("premise_gallery")}
                   priority={idx === 0}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />

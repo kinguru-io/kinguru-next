@@ -45,7 +45,7 @@ export function YandexAnalytics() {
             height={1}
             fetchPriority="low"
             loading="lazy"
-            alt=""
+            alt="yandex analytics"
           />
         </div>
       </noscript>

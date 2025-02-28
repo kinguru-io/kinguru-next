@@ -85,6 +85,7 @@ function PremiseTypesGrid() {
 }
 
 function PremiseTypeCircle({ src }: { src: string }) {
+  const alt = useTranslations("alt_images");
   return (
     <Image
       className={css({
@@ -94,7 +95,7 @@ function PremiseTypeCircle({ src }: { src: string }) {
         height: "full",
         borderRadius: "4xl",
       })}
-      alt=""
+      alt={alt("premise_type")}
       src={src}
       width={172}
       height={172}

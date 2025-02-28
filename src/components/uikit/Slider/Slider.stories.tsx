@@ -37,7 +37,12 @@ export const DefaultSlider: Story = {
       {items.map((item, idx) => (
         <SliderItem key={item.id} buttonPosition={buttonPosition}>
           <AspectRatio ratio={16 / 9}>
-            <Image src={item.src} fill alt="" priority={idx === 0} />
+            <Image
+              src={item.src}
+              fill
+              alt="Default Slider"
+              priority={idx === 0}
+            />
           </AspectRatio>
         </SliderItem>
       ))}
@@ -60,7 +65,7 @@ export const SlidesPerView: Story = {
           className={css({ flexGrow: "1", flexBasis: "32", width: "unset" })}
         >
           <AspectRatio ratio={16 / 9}>
-            <Image src={item.src} fill alt="" priority={idx <= 5} />
+            <Image src={item.src} fill alt="Slider" priority={idx <= 5} />
           </AspectRatio>
         </SliderItem>
       ))}
