@@ -28,18 +28,11 @@ export const GoogleTranslateMenu = () => {
     };
 
     return () => {
-      if (!sessionStorage.getItem("reloaded")) {
-        sessionStorage.setItem("reloaded", "true");
+      window.location.reload();
 
-        window.location.reload();
-
-        script.remove();
-
-        const widget = document.getElementById("google-select");
-        if (widget) widget.innerHTML = "";
-      } else {
-        sessionStorage.removeItem("reloaded");
-      }
+      script.remove();
+      const widget = document.getElementById("google-select");
+      if (widget) widget.innerHTML = "";
     };
   }, [pathname]);
 

@@ -1,5 +1,6 @@
 import type { Premise, Venue } from "@prisma/client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Tag } from "@/components/uikit";
 import { Link } from "@/navigation";
 import { css } from "~/styled-system/css";
@@ -17,7 +18,7 @@ export function VenueCardView({
   addressSlot: React.ReactNode;
 }) {
   const isInactive = venue.premises.length === 0;
-
+  const alt = useTranslations("alt_images");
   return (
     <Stack
       css={{
@@ -51,7 +52,7 @@ export function VenueCardView({
         }}
         data-disabled={isInactive || undefined}
       >
-        <Image src={venue.image} width={425} height={240} alt="" />
+        <Image src={venue.image} width={425} height={240} alt={alt("venue")} />
       </AspectRatio>
       <Stack gap="1">
         <InlineBox css={{ fontSize: "xl", fontWeight: "bold" }}>

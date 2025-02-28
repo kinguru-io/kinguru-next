@@ -17,17 +17,22 @@ import { css } from "~/styled-system/css";
 import { Grid } from "~/styled-system/jsx";
 
 import "../globals.css";
-import { GatewayHandling } from "@/components/error-handling/gateway";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params?: { locale: string };
+}): Promise<Metadata> {
+  const locale = params?.locale || "en";
   const t = await getTranslations("metadata.home");
   const title = t("title");
   const description = t("description");
-
+  const baseUrl = "https://eventify.today";
+  const currentPath = locale === "en" && !params?.locale ? "/" : `/${locale}`;
   return {
-    metadataBase: new URL("https://eventify.today"),
+    metadataBase: new URL(baseUrl),
     alternates: {
-      canonical: "/",
+      canonical: currentPath,
       languages: {
         en: "/en",
         pl: "/pl",
@@ -41,6 +46,12 @@ export async function generateMetadata(): Promise<Metadata> {
       images: "/img/logotypes/footer-logotype-512x512.png",
     },
     keywords: [...keywordsPL, ...keywordsEN],
+    viewport: {
+      width: "device-width",
+      initialScale: 1.0,
+      maximumScale: 1.0,
+      userScalable: false,
+    },
   };
 }
 
@@ -58,7 +69,6 @@ export default function RootLayout({
   return (
     <html lang={locale} className={`${NotoSans.variable}`}>
       <GoogleAnalytics />
-      <GatewayHandling />
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body className={css({ fontFamily: "noto" })}>
           <Grid

@@ -323,7 +323,8 @@
     "donation_amount_input_notice": "You can increase the amount of donation:",
     "donation_amount_input_label": "Donation, zł",
     "booking_modal_confirmation_heading": "Booking request",
-    "booking_request_sent": "Your request is need to be approved by a premise keeper. You'll get an email once the payment process can be continued"
+    "booking_request_sent": "Your request is need to be approved by a premise keeper. You'll get an email once the payment process can be continued",
+    "booking_request_sent_client": "The premise keeper needs to approve this premise first. Once that’s done, you can book slots"
   },
   "price": {
     "total": "Total",
@@ -900,5 +901,17 @@
   "blog": {
     "title": "Blog",
     "show_more": "Show more"
+  },
+  "alt_images": {
+    "companies": "Company Logotype",
+    "premise_type": "Premise type",
+    "b2b_register": "Register b2b ",
+    "faq": "FAQ",
+    "premise_gallery": "Premise Gallery",
+    "premise": "Premise-detail",
+    "facebook": "Facebook Pixel tracking pixel",
+    "premise_view": "Premise View",
+    "venue": "Venue",
+    "premise_card": "Premise card"
   }
 }

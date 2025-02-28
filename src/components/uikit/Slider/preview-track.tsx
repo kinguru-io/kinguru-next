@@ -58,7 +58,7 @@ export function PreviewTrack({
               <Image
                 src={item.url}
                 fill
-                alt=""
+                alt="Preview truck"
                 priority={false}
                 sizes="128px"
               />

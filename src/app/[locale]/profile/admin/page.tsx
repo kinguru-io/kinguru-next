@@ -10,6 +10,7 @@ import type {
 } from "@prisma/client";
 import { formatInTimeZone } from "date-fns-tz";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { SlotsSearch } from "./_search";
 import { SubSection } from "@/components/common/cards/sub-section";
 import { ArrowIcon, Tag } from "@/components/uikit";
@@ -96,7 +97,7 @@ const tagColorMap: Record<PremiseSlot["status"], string | undefined> = {
 
 function Slot({ slot }: SlotProps) {
   const manager = slot.premise.venue.manager[0];
-
+  const alt = useTranslations("alt_images");
   return (
     <SubSection>
       <Flex justifyContent="space-between" alignItems="baseline">
@@ -133,7 +134,7 @@ function Slot({ slot }: SlotProps) {
       >
         <Image
           src={slot.premise.resources[0].url}
-          alt=""
+          alt={alt("premise")}
           width={128}
           height={72}
         />

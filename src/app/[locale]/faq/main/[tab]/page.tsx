@@ -41,7 +41,7 @@ function StepList({
   locale: Locale;
 }) {
   const t = useTranslations(`faq.main.${tab}`);
-
+  const alt = useTranslations("alt_images");
   return Array.from({ length: parseInt(t("count")) }, (_, i) => {
     const stepKey = `step_${i + 1}`;
     // due to different steps amount
@@ -62,7 +62,7 @@ function StepList({
         >
           <Image
             className="faq-image"
-            alt=""
+            alt={alt("faq")}
             src={`https://kinguru-storage.s3.pl-waw.scw.cloud/faq/main/${tab}/${locale}/${stepKey}.jpg`}
             fill
             sizes="100vw"

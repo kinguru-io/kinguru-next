@@ -48,9 +48,9 @@ export function PriceModeSelector() {
 
 function DonationPriceSelector() {
   const t = useTranslations("profile.premises.add");
-  const { control } = useFormContext<CreatePremiseFormSchemaProps>();
+  const { control, watch } = useFormContext<CreatePremiseFormSchemaProps>();
   const priceMode = useWatch({ control, name: "openHoursAndPrice.priceMode" });
-
+  console.log(watch("openHoursAndPrice.minimalPrice"));
   if (priceMode !== "donation") return null;
 
   return (

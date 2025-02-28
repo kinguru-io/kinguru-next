@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Script from "next/script";
+import { useTranslations } from "next-intl";
 
 const metaPixelId = 422859080830645;
 
 export function MetaPixel() {
+  const alt = useTranslations("alt_images");
   return (
     <>
       <Script id="meta-pixel">
@@ -27,7 +29,7 @@ export function MetaPixel() {
           src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`}
           height={1}
           width={1}
-          alt=""
+          alt={alt("facebook")}
           fetchPriority="low"
           loading="lazy"
         />

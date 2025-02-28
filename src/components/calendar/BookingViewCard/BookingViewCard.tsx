@@ -280,6 +280,7 @@ export function BookingViewCard({
           </h3>
         </HStack>
         <p className={css({ maxWidth: "sm" })}>{t("booking_request_sent")}</p>
+
         <Flex css={{ gap: "2", marginBlockStart: "auto" }}>
           <Button
             type="button"
