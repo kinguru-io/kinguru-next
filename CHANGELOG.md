@@ -1,3 +1,24 @@
+# [0.76.0](https://github.com/kinguru-io/kinguru-next/compare/v0.75.0...v0.76.0) (2025-02-28)
+
+
+### Features
+
+* seo optimization/removed extra logic and fixed previous logic ([ed62732](https://github.com/kinguru-io/kinguru-next/commit/ed627324844022749b8dfccee591d3243f5b8c8f))
+
+# [0.75.0](https://github.com/kinguru-io/kinguru-next/compare/v0.74.2...v0.75.0) (2025-02-23)
+
+
+### Features
+
+* tax logic to all system with new field to user and validation ([d6963b4](https://github.com/kinguru-io/kinguru-next/commit/d6963b4a550bb0ada1d59589d6ad0cff26289fc0))
+
+## [0.74.2](https://github.com/kinguru-io/kinguru-next/compare/v0.74.1...v0.74.2) (2025-02-20)
+
+
+### Bug Fixes
+
+* added required metadata and handled gateway error also added instance to user modal ([9479099](https://github.com/kinguru-io/kinguru-next/commit/947909987e5c53bfec266fc413fe3569e5a69a3d))
+
 ## [0.74.1](https://github.com/kinguru-io/kinguru-next/compare/v0.74.0...v0.74.1) (2025-02-11)
 
 
