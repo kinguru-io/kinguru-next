@@ -6,7 +6,7 @@ export const counterYM = 98083142;
 export function YandexAnalytics() {
   return (
     <>
-      <Script id="yandex-analytics">
+      <Script async id="yandex-analytics">
         {`
           (function (m, e, t, r, i, k, a) {
             m[i] =

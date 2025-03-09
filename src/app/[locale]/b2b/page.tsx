@@ -47,6 +47,9 @@ export default function B2BPage({
       <div className={css(wrapperLayerStyle)}>
         <RegistrationGuideSection anchorSlot={anchorNode} locale={locale} />
       </div>
+      <div className={css({ mb: "50px" })}>
+        <B2BRegisterSection sectionId={id} />
+      </div>
       <div
         style={{
           backgroundImage: "linear-gradient(0deg, #FFFFFF 0%, #EFEFEF 100%)",

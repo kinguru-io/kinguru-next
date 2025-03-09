@@ -8,7 +8,7 @@ export const openHoursSchema = z
     day: z.custom<$Enums.DayOfTheWeek>(),
     startTime: z.string().datetime(),
     endTime: z.string().datetime(),
-    price: z.number().nonnegative(),
+    price: z.number().nonnegative().optional(),
   })
   .refine(({ startTime, endTime }) => isBefore(startTime, endTime), {
     message: "Start time should be before end time",
@@ -23,22 +23,36 @@ export const discountsSchema = z.object({
 export const openHoursAndPriceSchema = (
   t: (arg: string) => string = (value) => value,
 ) =>
-  z.object({
-    priceMode: z.custom<$Enums.PremisePriceMode>().optional(),
-    minimalPrice: z.number().optional(),
-    minimalSlotsToBook: z.number().optional(),
-    withConfirmation: z.boolean().optional(),
-    openHours: z
-      .array(openHoursSchema)
-      .min(1, { message: requiredFieldMessage(t, "openHours") }),
-    discounts: z
-      .array(discountsSchema)
-      .refine(
-        (fields) =>
-          new Set(fields.map(({ duration }) => duration)).size ===
-          fields.length,
-      ),
-  });
+  z
+    .object({
+      priceMode: z.custom<$Enums.PremisePriceMode>().optional(),
+      minimalPrice: z.number().optional(),
+      minimalSlotsToBook: z.number().optional(),
+      withConfirmation: z.boolean().optional(),
+      openHours: z
+        .array(openHoursSchema)
+        .min(1, { message: requiredFieldMessage(t, "openHours") }),
+      discounts: z
+        .array(discountsSchema)
+        .refine(
+          (fields) =>
+            new Set(fields.map(({ duration }) => duration)).size ===
+            fields.length,
+        ),
+    })
+    .superRefine(({ openHours, minimalPrice }, ctx) => {
+      if (!minimalPrice) {
+        openHours.forEach((openHour, index) => {
+          if (openHour.price === undefined) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: "Price is required when minimalPrice is not set",
+              path: ["openHours", index, "price"],
+            });
+          }
+        });
+      }
+    });
 
 export type OpenHoursSchema = z.infer<typeof openHoursSchema>;
 export type DiscountsSchema = z.infer<typeof discountsSchema>;
