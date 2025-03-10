@@ -3,6 +3,11 @@ import { isBefore } from "date-fns";
 import { z } from "zod";
 import { requiredFieldMessage } from "@/utils/forms/validationMessages";
 
+export const discountsSchema = z.object({
+  duration: z.number().step(1).min(1).max(23),
+  discountPercentage: z.number().step(0.1).min(0.1).max(100),
+});
+
 export const openHoursSchema = z
   .object({
     day: z.custom<$Enums.DayOfTheWeek>(),
@@ -14,11 +19,6 @@ export const openHoursSchema = z
     message: "Start time should be before end time",
     path: ["startTime"],
   });
-
-export const discountsSchema = z.object({
-  duration: z.number().step(1).min(1).max(23),
-  discountPercentage: z.number().step(0.1).min(0.1).max(100),
-});
 
 export const openHoursAndPriceSchema = (
   t: (arg: string) => string = (value) => value,
@@ -40,13 +40,13 @@ export const openHoursAndPriceSchema = (
             fields.length,
         ),
     })
-    .superRefine(({ openHours, minimalPrice }, ctx) => {
+    .superRefine(({ minimalPrice, openHours }, ctx) => {
       if (!minimalPrice) {
-        openHours.forEach((openHour, index) => {
-          if (openHour.price === undefined) {
+        openHours.forEach((hour, index) => {
+          if (hour.price === undefined) {
             ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Price is required when minimalPrice is not set",
+              code: "custom",
+              message: "Price is required when minimal price is not set",
               path: ["openHours", index, "price"],
             });
           }

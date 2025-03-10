@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import type { UseFormReturn } from "react-hook-form";
 import { getPremiseSlug } from "./get-premise-slug";
 import { prepareAmenityList } from "./prepare-amenity-list";
+import { OpenHoursSchema } from "./tabs/openHoursAndPrices";
 import { mergedSchema, type MergedFormSchemaProps } from "./validation";
 import { getSession } from "@/auth";
 import type { FormActionState } from "@/lib/utils";
@@ -93,12 +94,14 @@ export async function editPremiseAction(
       information: { deleteMany: {}, create: information },
       openHours: {
         deleteMany: {},
-        create: openHours.map(({ day, startTime, endTime, price }) => ({
-          day,
-          openTime: startTime,
-          closeTime: endTime,
-          price,
-        })),
+        create: openHours.map(
+          ({ day, startTime, endTime, price }: OpenHoursSchema) => ({
+            day,
+            openTime: startTime,
+            closeTime: endTime,
+            price: price ?? 0,
+          }),
+        ),
       },
     },
   });

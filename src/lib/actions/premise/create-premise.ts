@@ -80,7 +80,7 @@ export async function createPremiseAction(
               day,
               openTime: startTime,
               closeTime: endTime,
-              price,
+              price: price ?? 0,
             })),
           },
         },

@@ -66,10 +66,10 @@ export type CreatePremiseFormSchemaProps = {
 };
 
 export const mergedSchema = mainInformationSchema()
-  .extend(resourcesSchema().shape)
-  .extend(parametersAndAmenitiesSchema().shape)
-  .extend(openHoursAndPriceSchema().shape)
-  .extend(rulesSchema().shape)
-  .extend(bookingCancelTermSchema().shape);
+  .merge(resourcesSchema()) // Use merge instead of shape
+  .merge(parametersAndAmenitiesSchema()) // Merge schemas
+  .merge(openHoursAndPriceSchema().innerType()) // Merge openHoursAndPrice schema
+  .merge(rulesSchema()) // Merge rules schema
+  .merge(bookingCancelTermSchema()); // Merge bookingCancelTerm schema
 
 export type MergedFormSchemaProps = z.infer<typeof mergedSchema>;
