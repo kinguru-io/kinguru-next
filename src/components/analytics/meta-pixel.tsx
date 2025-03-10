@@ -8,7 +8,7 @@ export function MetaPixel() {
   const alt = useTranslations("alt_images");
   return (
     <>
-      <Script id="meta-pixel">
+      <Script async id="meta-pixel">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

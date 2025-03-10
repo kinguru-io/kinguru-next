@@ -112,7 +112,7 @@ export function OpenHoursSelector() {
                         <TagClosable
                           key={field.id}
                           content={`${start} - ${end}`}
-                          helper={`${helperPrefix}${priceFormatter.format(field.price)}`}
+                          helper={`${helperPrefix}${priceFormatter.format(field.price ?? 0)}`}
                           buttonLabel="X"
                           variant="primaryLighter"
                           onClick={() => remove(field.index)}
