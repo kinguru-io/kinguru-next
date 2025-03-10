@@ -15,6 +15,7 @@ import { validatePaymentIntentData } from "./validate-payment-intent-data";
 import { calculatePriceWithTax } from "../tax";
 import { getSession } from "@/auth";
 import type { TimeSlotInfoExtended } from "@/components/calendar";
+import { DEFAULT_TAX } from "@/lib/shared/constants";
 import { getStripe, type StripeMetadataExtended } from "@/lib/shared/stripe";
 import type { ActionResponse } from "@/lib/utils";
 import { groupBy } from "@/lib/utils/array";
@@ -146,8 +147,21 @@ export async function createPremiseSlotsIntent({
     donation: number;
     stripe: Stripe;
   }) => {
-    const totalWithTax = await calculatePriceWithTax(totalPrice + donation);
+    const basePrice = totalPrice + donation;
+    const totalWithTax = await calculatePriceWithTax(basePrice);
     const amount = Math.round(totalWithTax * 100);
+    const user = await prisma.user.findUnique({
+      where: { id: session?.user?.id },
+      select: { isRegisteredFromUntaxedForm: true, transactionCount: true },
+    });
+
+    const isTaxExempt =
+      user?.isRegisteredFromUntaxedForm && user.transactionCount <= 5;
+
+    const taxAmount = isTaxExempt ? 0 : totalWithTax - basePrice;
+    const taxRate = isTaxExempt
+      ? "0%"
+      : `${Math.round((DEFAULT_TAX - 1) * 100)}%`;
 
     const metadata: StripeMetadataExtended = {
       source: "premise-slots-booking",
@@ -156,6 +170,8 @@ export async function createPremiseSlotsIntent({
       user_paid_locale: locale,
       user_comment: comment,
       premise_name: premiseMeta.name,
+      tax: taxAmount.toFixed(2),
+      taxRate,
     };
 
     if (donation > 0) {

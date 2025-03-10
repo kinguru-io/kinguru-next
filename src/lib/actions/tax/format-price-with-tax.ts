@@ -25,21 +25,21 @@ export const formatPriceWithTax = async (
       select: { isRegisteredFromUntaxedForm: true, transactionCount: true },
     });
 
-    if (user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5) {
+    if (user?.isRegisteredFromUntaxedForm && user.transactionCount <= 5) {
       return priceFormatter.format(numericValue);
     }
     const valueWithTax = numericValue * DEFAULT_TAX;
     return priceFormatter.format(valueWithTax);
   } catch (error) {
     console.error("Error in formatPriceWithTax:", error);
-    return priceFormatter.format(0); // Fallback
+    return priceFormatter.format(0);
   }
 };
 export const calculatePriceWithTax = async (
   value: number | bigint | string,
 ): Promise<number> => {
   const session = await getSession();
-  let numericValue: number = 0; // Initialize with 0
+  let numericValue: number = 0;
 
   try {
     numericValue =
@@ -58,13 +58,13 @@ export const calculatePriceWithTax = async (
       select: { isRegisteredFromUntaxedForm: true, transactionCount: true },
     });
 
-    if (user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5) {
+    if (user?.isRegisteredFromUntaxedForm && user.transactionCount <= 5) {
       return numericValue;
     }
 
     return numericValue * DEFAULT_TAX;
   } catch (error) {
     console.error("Error in calculatePriceWithTax:", error);
-    return numericValue; // No need for ?? since it's always defined
+    return numericValue;
   }
 };

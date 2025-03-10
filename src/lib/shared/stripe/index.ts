@@ -8,6 +8,8 @@ export type StripeMetadataExtended = {
   user_comment?: string;
   premise_name?: string;
   user_donation?: number | string;
+  tax?: number | string;
+  taxRate?: string;
 };
 
 export function getStripe() {

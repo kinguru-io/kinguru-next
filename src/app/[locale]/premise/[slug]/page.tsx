@@ -154,7 +154,7 @@ export default async function PremisePage({
   const discountMap = prepareDiscountRangeMap(discounts);
 
   const isTaxedPrice =
-    user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5;
+    user?.isRegisteredFromUntaxedForm && user.transactionCount <= 5;
   const parametersLine = [
     {
       title: t("amenities_and_facilities"),

@@ -27,6 +27,7 @@ export async function getTicketIntentAction(eventId: string) {
       amount: Math.round(event.price * 100),
       currency: "PLN",
       customer: session.user?.stripeCustomerId || undefined,
+
       automatic_payment_methods: { enabled: true },
       metadata: {
         source: "event-join",
