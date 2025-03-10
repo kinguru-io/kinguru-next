@@ -1,3 +1,10 @@
+## [0.76.1](https://github.com/kinguru-io/kinguru-next/compare/v0.76.0...v0.76.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* b2b-changes/vendor donation mode ([1ef5139](https://github.com/kinguru-io/kinguru-next/commit/1ef5139a307d3be93af1778285806b64985a81d4))
+
 # [0.76.0](https://github.com/kinguru-io/kinguru-next/compare/v0.75.0...v0.76.0) (2025-02-28)
 
 
