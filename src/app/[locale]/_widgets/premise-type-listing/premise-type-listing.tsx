@@ -37,7 +37,7 @@ export function PremiseTypeListing() {
 
 async function PremiseTypeCards({ take }: { take: number }) {
   const typeAggregations = await getPremiseAggregationsByType({
-    omitMap: { else: true, birthday: true, special_events_etc: true },
+    omitMap: { else: true, birthday: true },
   });
 
   const cardsNodes = typeAggregations
