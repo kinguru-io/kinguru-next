@@ -147,7 +147,7 @@ export function BookingViewCard({
     },
   );
   const isTaxed =
-    user?.isRegisteredFromUntaxedForm && user.transactionCount >= 5;
+    user?.isRegisteredFromUntaxedForm && user.transactionCount <= 5;
 
   const priceInfo = processOrderTotalDiscounts(priceGroupedSlots, discountsMap);
   const priceInfoWithTaxes = isTaxed ? priceInfo : applyTax(priceInfo);
