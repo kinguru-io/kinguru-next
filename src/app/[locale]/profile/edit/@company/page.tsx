@@ -8,7 +8,7 @@ export default async function EditCompanyPage() {
   if (session?.user?.role !== "organization") {
     redirect("/");
   }
-  const user = await prisma.user.findUnique({
+  const user = await prisma?.user?.findUnique({
     where: { id: session?.user?.id },
     include: {
       organizations: { include: { socialLinks: true, address: true } },
