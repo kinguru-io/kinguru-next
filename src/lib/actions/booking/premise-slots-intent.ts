@@ -150,7 +150,7 @@ export async function createPremiseSlotsIntent({
     const basePrice = totalPrice + donation;
     const totalWithTax = await calculatePriceWithTax(basePrice);
     const amount = Math.round(totalWithTax * 100);
-    const user = await prisma.user.findUnique({
+    const user = await prisma?.user?.findUnique({
       where: { id: session?.user?.id },
       select: { isRegisteredFromUntaxedForm: true, transactionCount: true },
     });

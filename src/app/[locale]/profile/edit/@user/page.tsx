@@ -7,7 +7,7 @@ import prisma from "@/server/prisma";
 export default async function EditUserPage() {
   const session = await getSession();
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma?.user?.findUnique({
     where: { id: session?.user?.id || "" },
     include: { socialLinks: { select: { network: true, url: true } } },
   });

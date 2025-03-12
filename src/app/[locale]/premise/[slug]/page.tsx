@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
 import { PremiseGallery } from "./_gallery";
@@ -129,9 +129,11 @@ export default async function PremisePage({
     minimalSlotsToBook,
     withConfirmation,
   } = premise;
-  const user = await prisma.user.findUnique({
+  if (!session) redirect("/auth/signin");
+  const user = await prisma?.user?.findUnique({
     where: { id: session?.user?.id },
   });
+
   const aggregatedPrices = openHours.reduce((borders, { price }) => {
     if (borders.minPrice === undefined || borders.maxPrice === undefined) {
       return { minPrice: price, maxPrice: price };
