@@ -35,14 +35,8 @@ export async function editVenueAction(
     return { status: "error", message: parseResult.error.message };
   }
 
-  const {
-    manager,
-    venueId,
-    managerId,
-    name: _unused,
-    information,
-    ...restVenueInput
-  } = parseResult.data;
+  const { manager, venueId, managerId, information, ...restVenueInput } =
+    parseResult.data;
 
   const venue = await prisma.venue.findUnique({
     where: { id: venueId, organizationId: organization.id },

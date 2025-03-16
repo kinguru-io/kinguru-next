@@ -78,6 +78,7 @@ export function EditVenueForm({
         managerId: manager.id,
       },
     };
+
     const multiFormPayload = transformMultiFormPayload<
       CreateVenueFormSchemaProps,
       MergedVenueFormSchemaProps
