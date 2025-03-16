@@ -26,7 +26,6 @@ import {
 } from "@/lib/actions/venue";
 import { MergedVenueFormSchemaProps } from "@/lib/actions/venue/validation";
 import { transformMultiFormPayload } from "@/utils/forms/multiFormHandlers";
-import { css } from "~/styled-system/css";
 import { Stack } from "~/styled-system/jsx";
 
 export function AddVenueForm({
@@ -87,7 +86,7 @@ export function AddVenueFormInner({
   const formGroupItems = [
     {
       title: t("groups.main_info"),
-      content: <MainInfoGroup isEditing={editMode} />,
+      content: <MainInfoGroup />,
     },
     {
       title: t("groups.photo"),
@@ -110,10 +109,7 @@ export function AddVenueFormInner({
   return (
     <Stack css={{ md: { gap: "6" } }}>
       {formGroupItems.map(({ title, content }) => (
-        <SubSection
-          key={title}
-          className={editMode ? css({ padding: "2" }) : undefined}
-        >
+        <SubSection key={title}>
           <h2 className="title">{title}</h2>
           {content}
         </SubSection>

@@ -14,7 +14,7 @@ import { getError } from "@/utils/forms/errors";
 import { css } from "~/styled-system/css";
 import { Box, Stack } from "~/styled-system/jsx";
 
-export function MainInfoGroup({ isEditing }: { isEditing: boolean }) {
+export function MainInfoGroup() {
   const {
     register,
     formState: { errors },
@@ -28,8 +28,6 @@ export function MainInfoGroup({ isEditing }: { isEditing: boolean }) {
       <Box width="full">
         <Input
           placeholder={t("fields.name_placeholder")}
-          readOnly={isEditing}
-          hidden={isEditing}
           data-invalid={getError(errors, `${formFieldPath}.name`)}
           {...register(`${formFieldPath}.name`)}
         />
