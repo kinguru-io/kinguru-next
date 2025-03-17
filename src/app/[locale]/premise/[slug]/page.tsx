@@ -129,10 +129,12 @@ export default async function PremisePage({
     minimalSlotsToBook,
     withConfirmation,
   } = premise;
-  if (!session) redirect("/auth/signin");
-  const user = await prisma?.user?.findUnique({
-    where: { id: session?.user?.id },
-  });
+  let user = null;
+  if (session?.user?.id) {
+    user = await prisma?.user?.findUnique({
+      where: { id: session?.user?.id },
+    });
+  }
 
   const aggregatedPrices = openHours.reduce((borders, { price }) => {
     if (borders.minPrice === undefined || borders.maxPrice === undefined) {
