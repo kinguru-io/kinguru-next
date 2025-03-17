@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense, useId } from "react";
 import { PremiseGallery } from "./_gallery";
