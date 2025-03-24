@@ -1,3 +1,4 @@
+"use client";
 import type {
   Premise,
   PremiseInformation,
@@ -5,7 +6,8 @@ import type {
   PremiseResource,
 } from "@prisma/client";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server"; // Server-side translations
+import { useTranslations } from "next-intl";
+import { useState, useEffect } from "react";
 import { Video } from "../common";
 import { PremiseTags } from "../uikit/PremiseCard/PremiseCard";
 import {
@@ -35,15 +37,23 @@ export type PremiseViewCardProps = {
   };
 };
 
-export async function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
-  const t = await getTranslations("premise"); // Server-side translation
-  const alt = await getTranslations("alt_images");
+export function PremiseViewCard({ href, premise }: PremiseViewCardProps) {
+  const t = useTranslations("premise");
+  const alt = useTranslations("alt_images");
   const { slug, name, information, area, resources, openHours } = premise;
   const minPrice = openHours.at(0)?.price ?? 0;
 
-  const priceLabel = t("from", {
-    price: await formatPriceWithTax(minPrice || 0).then((value) => value),
-  });
+  const [priceLabel, setPriceLabel] = useState("Loading...");
+
+  useEffect(() => {
+    formatPriceWithTax(minPrice || 0)
+      .then((value) => {
+        setPriceLabel(t("from", { price: value }));
+      })
+      .catch(() => {
+        setPriceLabel(t("from", { price: "N/A" }));
+      });
+  }, [minPrice, t]);
 
   return (
     <PremiseCard>
