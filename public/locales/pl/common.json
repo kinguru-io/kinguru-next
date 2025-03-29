@@ -6,52 +6,52 @@
       "description": "Unikalna platforma umożliwiającą szybkie i łatwe rezerwowanie sal i lokali, zarówno płatnych, jak i bezpłatnych."
     },
     "events": {
-      "title": "Upcoming Events - Eventify",
-      "description": "Browse through upcoming thematic meetings and events. Join us for insightful sessions with expert speakers in cozy locations.",
+      "title": "Nadchodzące wydarzenia - Eventify",
+      "description": "Przeglądaj nadchodzące spotkania tematyczne i wydarzenia. Dołącz do nas na wnikliwe sesje z ekspertami w przytulnych lokalizacjach.",
       "create": {
-        "title": "Create Your Event - Eventify",
-        "description": "Step into Eventify’s intuitive event creation page. In just a few clicks, set up and customize your event, reach a wider audience, and make an impact. Your journey from idea to a fully organized thematic meeting starts here!"
+        "title": "Utwórz swoje wydarzenie - Eventify",
+        "description": "Wejdź na intuicyjną stronę tworzenia wydarzeń Eventify. Za pomocą kilku kliknięć skonfiguruj i dostosuj swoje wydarzenie, dotrzyj do szerszej publiczności i zrób wrażenie. Twoja podróż od pomysłu do w pełni zorganizowanego spotkania tematycznego zaczyna się tutaj!"
       }
     },
     "privacy": {
-      "title": "Privacy Policy - Your Data is Safe with Eventify",
-      "description": "At Eventify, we value your privacy and are committed to protecting your personal information. Read our detailed privacy policy to understand how we collect, use, and safeguard your data, ensuring a secure and transparent experience."
+      "title": "Polityka prywatności - Twoje dane są bezpieczne dzięki Eventify",
+      "description": "W Eventify cenimy Twoją prywatność i zobowiązujemy się do ochrony Twoich danych osobowych. Przeczytaj naszą szczegółową politykę prywatności, aby zrozumieć, w jaki sposób zbieramy, wykorzystujemy i chronimy Twoje dane, zapewniając bezpieczne i przejrzyste doświadczenie."
     },
     "terms": {
-      "title": "Terms & Conditions: Your Guide to Eventify's Policies",
-      "description": "Get acquainted with Eventify's Terms & Conditions. This page outlines our policies, ensuring transparency and clarity for all users. Read more to understand our guidelines."
+      "title": "Warunki korzystania: Twój przewodnik po zasadach Eventify",
+      "description": "Zapoznaj się z Warunkami i Postanowieniami Eventify. Ta strona przedstawia nasze zasady, zapewniając przejrzystość i jasność dla wszystkich użytkowników. Przeczytaj więcej, aby zrozumieć nasze wytyczne."
     },
     "cookie": {
-      "title": "Your Data, Your Control: Eventify's Cookie Policy",
-      "description": "Discover how Eventify utilizes cookies to enhance your browsing experience. Our Cookie Policy page details their use, ensuring transparency and control over your data."
+      "title": "Twoje dane, Twoja kontrola: Polityka plików cookie Eventify",
+      "description": "Odkryj, jak Eventify wykorzystuje pliki cookie, aby ulepszyć Twoje wrażenia z przeglądania. Nasza strona Polityka plików cookie szczegółowo opisuje ich wykorzystanie, zapewniając przejrzystość i kontrolę nad Twoimi danymi."
     },
     "price": {
-      "title": "Speaker Subscriptions: Choose Your Plan with Eventify",
-      "description": "Amplify your impact with Eventify's speaker subscription plans. From basic to pro, find the perfect tier for your speaking journey. Join us and expand your influence today!"
+      "title": "Subskrypcje dla mówców: Wybierz swój plan z Eventify",
+      "description": "Zwiększ swój wpływ dzięki planom subskrypcji mówców Eventify. Od podstawowego do profesjonalnego, znajdź idealny poziom dla swojej podróży mówcy. Dołącz do nas i zwiększ swój wpływ już dziś!"
     }
   },
   "navbar": {
-    "events": "Events",
-    "speakers": "Speakers",
-    "venues": "Venues",
-    "price": "Price",
-    "how_it_works": "How it works",
-    "open_main_menu": "Open main menu",
-    "close_menu": "Close menu",
-    "sign_in": "Sign in",
+    "events": "Wydarzenia",
+    "speakers": "Głośniki",
+    "venues": "Miejsca",
+    "price": "Cena",
+    "how_it_works": "Jak to działa",
+    "open_main_menu": "Otwórz menu główne",
+    "close_menu": "Zamknij menu",
+    "sign_in": "Zalogować się",
     "add_venue": "Dodaj swoje miejsce",
-    "your_profile": "Profile",
-    "mybookings": "My bookings",
-    "sign_out": "Sign out",
-    "settings": "Settings",
+    "your_profile": "Profil",
+    "mybookings": "Moje rezerwacje",
+    "sign_out": "Wyloguj się",
+    "settings": "Ustawienia",
     "search_placeholder": "...",
     "lang_menu": "Wybierz język",
-    "sign_up": "Sign up",
+    "sign_up": "Zapisać się",
     "add_organization": "Dodaj konto organizacji",
-    "sign_in_and_sign_up": "Sign in / sign up",
-    "eventify_logotype": "Eventify logotype",
-    "toggle_nav": "Open/close navigation menu",
-    "home_link": "Go to home page"
+    "sign_in_and_sign_up": "Zaloguj się / zarejestruj",
+    "eventify_logotype": "Eventify logotyp",
+    "toggle_nav": "Otwórz/zamknij menu nawigacyjne",
+    "home_link": "Przejdź do strony głównej"
   },
   "main": {
     "heading": "Znajdź idealną lokalizację",
@@ -61,62 +61,62 @@
     "hide_shown": "Ukrywać"
   },
   "footer": {
-    "upcoming_events": "Upcoming events",
-    "how_it_works": "How it works",
-    "reviews": "Reviews",
-    "photo_reports": "Photo reports",
-    "contacts": "Contacts",
-    "user_links": "For users",
-    "extra": "Extra",
-    "privacy_policy": "Privacy policy",
-    "terms_and_conditions": "Terms & Conditions",
-    "cookie_policy": "Cookie Policy",
+    "upcoming_events": "Nadchodzące wydarzenia",
+    "how_it_works": "Jak to działa",
+    "reviews": "Recenzje",
+    "photo_reports": "Raporty fotograficzne",
+    "contacts": "Łączność",
+    "user_links": "Dla użytkowników",
+    "extra": "Dodatkowy",
+    "privacy_policy": "Polityka prywatności",
+    "terms_and_conditions": "Warunki i postanowienia",
+    "cookie_policy": "Polityka plików cookie",
     "faq": "FAQ",
-    "all_rights_reserved": "© {year} Eventify. All rights reserved",
-    "events": "Events",
-    "speakers": "Speakers",
+    "all_rights_reserved": "© {year} Eventify. Wszelkie prawa zastrzeżone.",
+    "events": "Wydarzenia",
+    "speakers": "Głośniki",
     "blog": "Blog",
-    "places": "Places",
-    "price": "Price",
+    "places": "Miejsca",
+    "price": "Cena",
     "b2b": "B2B",
-    "follow_us": "Follow us on {social}",
-    "eventify_logotype": "Eventify logotype",
+    "follow_us": "Obserwuj nas na {social}",
+    "eventify_logotype": "Eventify logotyp",
     "about_us_pdf": "O nas"
   },
   "organization": {
     "basic_info_page": {
-      "heading": "Profile"
+      "heading": "Profil"
     },
     "basic_info_form": {
       "group": {
-        "main": "Main",
-        "credentials": "Credentials*",
-        "social": "Social networks"
+        "main": "Główny",
+        "credentials": "Referencje*",
+        "social": "Sieci społecznościowe"
       },
       "column": {
-        "business": "Company information:",
-        "bank": "Bank details:",
-        "postAddress": "Post address:",
-        "billingAddress": "Billing address:"
+        "business": "Informacje o firmie:",
+        "bank": "Dane bankowe:",
+        "postAddress": "Adres pocztowy:",
+        "billingAddress": "Adres rozliczeniowy:"
       },
-      "country": "Country",
-      "city": "City",
-      "name": "Company name",
-      "street": "Street",
-      "building": "Building number",
-      "room": "Room",
-      "zipCode": "Zip code",
-      "foundationDate": "Year founded",
+      "country": "Kraj",
+      "city": "Miasto",
+      "name": "Nazwa firmy",
+      "street": "Ulica",
+      "building": "Numer budynku",
+      "room": "Pokój",
+      "zipCode": "Kod pocztowy",
+      "foundationDate": "Rok założenia",
       "businessName": "Business name",
       "NIP": "NIP(XXXXXXXXX)",
       "IBAN": "IBAN",
-      "bankName": "Bank name",
-      "same_addresses_label": "Billing address matches post address",
+      "bankName": "Nazwa banku",
+      "same_addresses_label": "Adres rozliczeniowy jest taki sam jak adres pocztowy",
       "social_links_title": "Media społecznościowe",
       "social_links_helper": "Wprowadź swoje konta w mediach społecznościowych, abyśmy mogli zweryfikować Twoje konto.",
       "social_link_placeholder": "Określ łącze",
       "submit": "Save",
-      "credentials_asterisk_helper": "* all information provided will be used solely for internal workflows.",
+      "credentials_asterisk_helper": "* wszystkie podane informacje będą wykorzystane wyłącznie do wewnętrznych procesów roboczych.",
       "fields": {
         "errors": {
           "NIP_required": "NIP musi mieć dokładnie 10 cyfr",
@@ -129,13 +129,13 @@
   },
   "user": {
     "basic_info_page": {
-      "heading": "Profile"
+      "heading": "Profil"
     },
     "basic_info_form": {
       "group": {
-        "main": "Main",
+        "main": "Główny",
         "about_me": "O mnie",
-        "social": "Social networks"
+        "social": "Sieci społecznościowe"
       },
       "firstname": "Imię",
       "lastname": "Nazwisko",
@@ -171,9 +171,9 @@
     "sign_up_label": "Zarejestruj się",
     "reset_password_label": "Zapomniałeś hasła?",
     "reset_form": {
-      "heading": "Forgot your password?",
-      "email_placeholder": "Enter email",
-      "submit": "Submit",
+      "heading": "Zapomniałeś hasła?",
+      "email_placeholder": "Wprowadź adres e-mail",
+      "submit": "Składać",
       "helper": "Wpisz adres e-mail użyty do logowania. \nWyślemy do Ciebie e-mail z linkiem umożliwiającym utworzenie nowego hasła",
       "email_not_found": "Użytkownik nie istnieje"
     },
@@ -238,30 +238,30 @@
   },
   "event": {
     "future_event_page": {
-      "event_guests": "Guests of the event:",
-      "join": "Join",
-      "event_speakers": "Speakers of the event:",
-      "map": "Map",
-      "popular_event_this_week": "Popular events for this week",
-      "event_description": "Description of the event:",
-      "show_more": "More",
-      "show_less": "Less",
-      "main_info": "Main information:",
-      "free": "Free",
-      "like_event": "Like",
-      "dislike_event": "Dislike",
-      "buy_a_ticket": "Buying a ticket to the event",
-      "leave": "Leave"
+      "event_guests": "Goście wydarzenia:",
+      "join": "Dołączyć",
+      "event_speakers": "Prelegenci wydarzenia:",
+      "map": "Mapa",
+      "popular_event_this_week": "Popularne wydarzenia w tym tygodniu",
+      "event_description": "Opis wydarzenia:",
+      "show_more": "Więcej",
+      "show_less": "Mniej",
+      "main_info": "Informacje główne:",
+      "free": "Bezpłatny",
+      "like_event": "Tak jak",
+      "dislike_event": "Nie lubić",
+      "buy_a_ticket": "Kupno biletu na wydarzenie",
+      "leave": "Wyjechać"
     },
     "event_card": {
-      "already_join": "Already join",
-      "copy_link": "Copy link"
+      "already_join": "Już dołączyłeś",
+      "copy_link": "Kopiuj link"
     }
   },
   "calendar": {
-    "prev_week_btn_label": "Previous week",
-    "next_week_btn_label": "Next week",
-    "select_choose_month": "Choose month",
+    "prev_week_btn_label": "Poprzedni tydzień",
+    "next_week_btn_label": "Przyszły tydzień",
+    "select_choose_month": "Wybierz miesiąc",
     "rules_agreement": "Zgadzam się z regulaminem lokalu"
   },
   "booking_view": {
@@ -315,22 +315,22 @@
     "move_map_tip": "Przesuń mapę, aby wyszukać lokal"
   },
   "premise": {
-    "more": "More",
-    "from": "from {price}",
-    "free": "free",
-    "see_all": "See all",
-    "hide": "Hide",
-    "map": "Map",
-    "amenities_and_facilities": "Amenities and facilities",
-    "area_and_capacity": "Area and capacity",
+    "more": "Więcej",
+    "from": "od {price}",
+    "free": "bezpłatny",
+    "see_all": "Zobacz wszystko",
+    "hide": "Ukrywać",
+    "map": "Mapa",
+    "amenities_and_facilities": "Udogodnienia i wyposażenie",
+    "area_and_capacity": "Powierzchnia i pojemność",
     "area_literal": "m²",
-    "capacity": "Do {capacity} osób",
-    "booking_cancellation_terms": "Booking cancellation terms",
-    "premise_rules": "Premise rules",
-    "how_to_get_there": "How to get there",
-    "calendar_heading": "Premise calendar",
-    "show_more": "More",
-    "show_less": "Less",
+    "capacity": "Czy {capacity} osób",
+    "booking_cancellation_terms": "Warunki anulowania rezerwacji",
+    "premise_rules": "Zasady obowiązujące w obiekcie",
+    "how_to_get_there": "Jak tam dotrzeć",
+    "calendar_heading": "Kalendarz lokalowy",
+    "show_more": "Więcej",
+    "show_less": "Mniej",
     "go_to_premise_page": "Przejdź do strony lokalu",
     "cannot_load_location": "Nie można załadować lokalizacji",
     "bookings_link": "Zarezerwuj salę",
@@ -350,33 +350,33 @@
       "menu_label": "Menu nawigacji",
       "find_premise_label": "Znajdź salę"
     },
-    "go_back_btn_label": "Back",
+    "go_back_btn_label": "Z powrotem",
     "link_labels": {
-      "main": "Home",
-      "edit": "Profile",
-      "events": "My events",
-      "venues": "My venues",
-      "notifications": "My notifications",
-      "settings": "Settings",
+      "main": "Dom",
+      "edit": "Profil",
+      "events": "Moje wydarzenia",
+      "venues": "Moje miejsca",
+      "notifications": "Moje powiadomienia",
+      "settings": "Ustawienia",
       "mybookings": "Moje rezerwacje"
     },
     "faq_link_labels": {
-      "add_venue": "How to add a venue to the platform",
-      "add_event": "How to organize an event in your location",
-      "change_profile_photo": "How to change profile photo",
-      "cooperation": "What are the terms of cooperation",
-      "see_more": "See more",
-      "ask": "Ask a question"
+      "add_venue": "Jak dodać miejsce do platformy",
+      "add_event": "Jak zorganizować wydarzenie w swojej lokalizacji",
+      "change_profile_photo": "Jak zmienić zdjęcie profilowe",
+      "cooperation": "Jakie są warunki współpracy",
+      "see_more": "Zobacz więcej",
+      "ask": "Zadaj pytanie"
     },
-    "user_greeting": "Hello!",
-    "page_tip": "On this page, we've collected all the most important things for you.",
-    "add_venue_btn_label": "Add venue",
-    "faq_heading": "Do you have any questions? Let's figure it out!",
-    "notifications_heading": "Notifications",
-    "profile_completeness_label": "Information about profile completeness will be displayed here shortly",
-    "calendar_label": "Your premises calendar will be displayed here shortly",
+    "user_greeting": "Cześć!",
+    "page_tip": "Na tej stronie zebraliśmy dla Ciebie wszystkie najważniejsze rzeczy.",
+    "add_venue_btn_label": "Dodaj miejsce",
+    "faq_heading": "Masz jakieś pytania? Rozwiążmy to!",
+    "notifications_heading": "Powiadomienia",
+    "profile_completeness_label": "Informacje o kompletności profilu zostaną wkrótce wyświetlone w tym miejscu",
+    "calendar_label": "Twój kalendarz lokalowy zostanie wkrótce wyświetlony tutaj",
     "notifications": {
-      "heading": "My notifications"
+      "heading": "Moje powiadomienia"
     },
     "venues": {
       "heading": "Moje miejsca",
@@ -487,7 +487,7 @@
           "open_hours_discounts_label_time": "Czas",
           "open_hours_discounts_label": "Rabat, %",
           "open_hours_discounts_tip": "Jeśli planujesz rabat, wypełnij warunki jego zastosowania. Rabat dotyczy tylko kilku godzin i jest ważny tylko w ramach jednego dnia.",
-          "open_hours_discounts_helper": "Przy rezerwacji na {duration, plural, =1 {# godzinę} =21 {# godzinę} other {# godzin}} lub więcej",
+          "open_hours_discounts_helper": "Dla rezerwacji {duration, plural, =1 {# hour} inny {# hours}} lub więcej",
           "rules": "Zasady sali",
           "rules_tip": "Opisz wszystkie zasady obowiązujące w twojej sali",
           "rules_placeholder": "Na przykład: spożywanie alkoholu jest zabronione.",
@@ -682,23 +682,23 @@
     "default_90_desc": "Goście mogą anulować swoją rezerwację do 90 dni przed rozpoczęciem wydarzenia i otrzymać pełny zwrot kosztów, w tym wszystkie obowiązujące opłaty. W przypadku anulowania rezerwacji w okresie od 90 dni do 14 dni przed rozpoczęciem wydarzenia, goście mają prawo do zwrotu 50% kosztów rezerwacji (z wyłączeniem opłat). Wnioski o anulowanie złożone mniej niż 14 dni przed rozpoczęciem wydarzenia nie podlegają zwrotowi kosztów."
   },
   "filters": {
-    "all": "All filters",
-    "show_more": "Show more",
-    "reset_btn_label": "Reset filter",
-    "show_result_btn_label": "Show results",
-    "variants_found": "By your request {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
-    "range_from_label": "ad",
+    "all": "Wszystkie filtry",
+    "show_more": "Pokaż więcej",
+    "reset_btn_label": "Zresetuj filtr",
+    "show_result_btn_label": "Pokaż wyniki",
+    "variants_found": "Na Twoje żądanie {total, plural, =0 {nothing has found} =1 {found one variant} other {found # variants}}",
+    "range_from_label": "od",
     "range_to_label": "do",
-    "show_all_btn_label": "Show more",
-    "hide_btn_label": "Show less",
+    "show_all_btn_label": "Pokaż więcej",
+    "hide_btn_label": "Pokaż mniej",
     "group": {
-      "countryCode": "Country",
-      "city": "City",
-      "price": "Price, zł",
-      "type": "Premise type",
-      "capacity": "Capacity, ppl.",
-      "area": "Area, m²",
-      "amenities": "Amenities and facilities"
+      "countryCode": "Kraj",
+      "city": "Miasto",
+      "price": "Cena, zł",
+      "type": "Typ lokalu",
+      "capacity": "Pojemność, ppl.",
+      "area": "Obszar, m²",
+      "amenities": "Udogodnienia i wyposażenie"
     },
     "helpers": {
       "price": "Podaj zakres cenowy",
@@ -712,7 +712,7 @@
     },
     "time_range": {
       "search_btn_label": "Szukaj obiektów",
-      "date_label": "Data",
+      "date_label": "Dane",
       "from_label": "od 18:00",
       "to_label": "do 21:00"
     }
