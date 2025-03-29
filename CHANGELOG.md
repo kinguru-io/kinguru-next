@@ -1,3 +1,10 @@
+# [0.77.0](https://github.com/kinguru-io/kinguru-next/compare/v0.76.1...v0.77.0) (2025-03-29)
+
+
+### Features
+
+* translated all json into the polish ([7143167](https://github.com/kinguru-io/kinguru-next/commit/7143167d2f39c11ee582fa27f1a591edad530557))
+
 ## [0.76.1](https://github.com/kinguru-io/kinguru-next/compare/v0.76.0...v0.76.1) (2025-03-10)
 
 
