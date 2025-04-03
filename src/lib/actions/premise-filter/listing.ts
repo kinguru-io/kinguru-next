@@ -63,9 +63,9 @@ export async function getPremises(searchParams: Record<string, any>) {
       index: process.env.ES_INDEX_PREMISE_FULFILLED,
       _source_includes: ["id", "coordinates"],
       filter_path: "hits.total.value,hits.hits._source",
-      size: size || defaultSizings.size,
+      size: size,
       from: defaultSizings.from,
-      query: { match_all: {} },
+      query: { bool: { must, must_not } },
       sort,
     })
     .catch(() => null);
