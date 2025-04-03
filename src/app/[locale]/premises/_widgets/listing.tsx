@@ -3,7 +3,10 @@ import { MapSearchLink } from "./map-search-link";
 import { LoadMoreLink, SortToggler } from "@/components/filters";
 import { PremiseStack } from "@/components/premise";
 import { defaultSizings } from "@/lib/actions/premise-filter";
-import { getPremises } from "@/lib/actions/premise-filter/listing";
+import {
+  getPremises,
+  syncPremisesWithElastic,
+} from "@/lib/actions/premise-filter/listing";
 import { Flex, InlineBox, Stack } from "~/styled-system/jsx";
 
 export async function Listing({
@@ -11,6 +14,7 @@ export async function Listing({
 }: {
   searchParams: Record<string, any>;
 }) {
+  await syncPremisesWithElastic();
   const { total, hits } = await getPremises(searchParams);
   const t = await getTranslations("filters");
 
